@@ -1,0 +1,20 @@
+/*
+ * 1QG UI Component barrel
+ * ─────────────────────────────────────────────────────────────────
+ * Import all shared components from this single entry point:
+ *
+ *   import { GlassCard, PageSection, SectionHeading, ProofBar, InfoBox } from "@/components/ui/1qg"
+ *
+ * This keeps import paths clean and makes refactoring easier —
+ * component file moves only require an update here, not across every consumer.
+ */
+
+export { GlassCard }       from "./glass-card";
+export { PageSection }     from "./page-section";
+export { SectionHeading }  from "./section-heading";
+export { ProofBar }        from "./proof-bar";
+export type { ProofBarItem } from "./proof-bar";
+export { InfoBox }         from "./info-box";
+
+export { Button, buttonVariants } from "./button";
+export type { ButtonProps }       from "./button";

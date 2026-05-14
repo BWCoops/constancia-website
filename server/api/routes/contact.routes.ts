@@ -1,0 +1,297 @@
+import { Router, Request, Response } from "express";
+import { storage, generateVerificationToken, getVerificationTokenExpiry } from "../../storage";
+import { insertContactSubmissionSchema, isBusinessEmail } from "@shared/schema";
+import { getServerFeatureFlags } from "@shared/feature-flags";
+import { requireContact } from "../../middleware/feature-flags";
+import { getClientIp } from "../../middleware/security";
+import { createChildLogger } from "../../lib/logger";
+import { redactEmail } from "../../utils/log-privacy";
+
+const log = createChildLogger("contact-routes");
+import { 
+  validateContactForm, 
+  isDisposableEmail
+} from "../../services/content-validation";
+import { verifyTurnstileToken, isTurnstileConfigured } from "../../services/turnstile";
+import { logSecurityEvent as logSecurityEventConsole } from "../../index";
+import { sendContactFormNotification, sendContactVerificationEmail, syncLeadToHubSpot } from "../routes/shared/email-helpers";
+
+const router = Router();
+
+router.post("/", requireContact, async (req: Request, res: Response) => {
+  try {
+    const clientIp = getClientIp(req);
+    
+    if (isTurnstileConfigured()) {
+      const turnstileToken = req.body.turnstileToken;
+      const verification = await verifyTurnstileToken(turnstileToken, clientIp);
+      
+      if (!verification.success) {
+        logSecurityEventConsole({
+          type: "SUSPICIOUS_ACTIVITY",
+          timestamp: new Date().toISOString(),
+          ip: clientIp,
+          details: `Turnstile verification failed for contact form`,
+          severity: "WARN",
+        });
+        return res.status(400).json({ 
+          success: false, 
+          error: verification.error || "Bot verification failed. Please try again."
+        });
+      }
+    }
+
+    const { turnstileToken: _, ...contactData } = req.body;
+    
+    const rawMessage = contactData.message;
+    const messageValue = typeof rawMessage === 'string' ? rawMessage.trim() : "";
+    if (!messageValue || messageValue.length < 10) {
+      logSecurityEventConsole({
+        type: "SUSPICIOUS_ACTIVITY",
+        timestamp: new Date().toISOString(),
+        ip: clientIp,
+        details: `Contact form missing or short message field`,
+        severity: "INFO",
+      });
+      
+      return res.status(400).json({ 
+        success: false, 
+        error: "Message is required and must be at least 10 characters.",
+        details: { message: ["Message is required and must be at least 10 characters"] }
+      });
+    }
+    
+    const contentValidation = validateContactForm({
+      firstName: contactData.firstName || "",
+      lastName: contactData.lastName || "",
+      email: contactData.email || "",
+      company: contactData.company,
+      jobTitle: contactData.jobTitle,
+      message: messageValue,
+      phone: contactData.phone,
+    });
+    
+    if (!contentValidation.isValid) {
+      const errorMessages = Object.entries(contentValidation.errors)
+        .map(([field, errors]) => `${field}: ${errors.join(", ")}`)
+        .join("; ");
+      
+      logSecurityEventConsole({
+        type: "SUSPICIOUS_ACTIVITY",
+        timestamp: new Date().toISOString(),
+        ip: clientIp,
+        details: `Contact form validation failed: ${errorMessages}`,
+        severity: "INFO",
+      });
+      
+      return res.status(400).json({ 
+        success: false, 
+        error: "Please check your submission and try again.",
+        details: contentValidation.errors
+      });
+    }
+    
+    const email = contactData.email?.trim().toLowerCase() || "";
+    
+    // Check if business email is required (can be toggled via admin)
+    const featureFlags = await getServerFeatureFlags();
+    if (featureFlags.requireBusinessEmail && !isBusinessEmail(email)) {
+      logSecurityEventConsole({
+        type: "SUSPICIOUS_ACTIVITY",
+        timestamp: new Date().toISOString(),
+        ip: clientIp,
+        details: `Contact form blocked personal email domain: ${email.split("@")[1]}`,
+        severity: "INFO",
+      });
+      
+      return res.status(400).json({ 
+        success: false, 
+        error: "Please use a business email address. Personal email providers (Gmail, Yahoo, Hotmail, etc.) are not accepted."
+      });
+    }
+    
+    if (isDisposableEmail(email)) {
+      logSecurityEventConsole({
+        type: "SUSPICIOUS_ACTIVITY",
+        timestamp: new Date().toISOString(),
+        ip: clientIp,
+        details: `Contact form blocked disposable email: ${email.split("@")[1]}`,
+        severity: "WARN",
+      });
+      
+      return res.status(400).json({ 
+        success: false, 
+        error: "Temporary or disposable email addresses are not accepted. Please use your business email."
+      });
+    }
+    
+    const sanitizedContactData = {
+      ...contactData,
+      firstName: contentValidation.sanitizedData.firstName,
+      lastName: contentValidation.sanitizedData.lastName,
+      email: email,
+      company: contentValidation.sanitizedData.company,
+      jobTitle: contentValidation.sanitizedData.jobTitle,
+      message: contentValidation.sanitizedData.message,
+      phone: contentValidation.sanitizedData.phone,
+    };
+    
+    const validatedData = insertContactSubmissionSchema.parse(sanitizedContactData);
+    const submission = await storage.createContactSubmission(validatedData);
+    
+    const integrationPromises: Promise<any>[] = [];
+    
+    integrationPromises.push(
+      sendContactFormNotification({
+        firstName: validatedData.firstName,
+        lastName: validatedData.lastName,
+        email: validatedData.email,
+        company: validatedData.company || "Not provided",
+        jobTitle: validatedData.jobTitle || "Not provided",
+        message: validatedData.message,
+        phone: validatedData.phone || undefined,
+      }).then(async (emailSent) => {
+        if (emailSent) {
+          await storage.updateContactSubmissionStatus(submission.id, { emailSent: true });
+        }
+        return { type: "email", success: emailSent };
+      }).catch((err) => {
+        log.error({ err }, "Email notification error");
+        return { type: "email", success: false, error: err };
+      })
+    );
+    
+    integrationPromises.push(
+      syncLeadToHubSpot({
+        firstName: validatedData.firstName,
+        lastName: validatedData.lastName,
+        email: validatedData.email,
+        company: validatedData.company || "",
+        jobTitle: validatedData.jobTitle || "",
+      }).then(async (result) => {
+        if (result.success) {
+          await storage.updateContactSubmissionStatus(submission.id, { hubspotSynced: true });
+        }
+        return { type: "hubspot", ...result };
+      }).catch((err) => {
+        log.error({ err }, "HubSpot sync error");
+        return { type: "hubspot", success: false, error: err };
+      })
+    );
+    
+    Promise.allSettled(integrationPromises).then((results) => {
+      log.info({ results: results.map(r => r.status === "fulfilled" ? r.value : r.reason) }, "Contact form integrations completed");
+    });
+    
+    integrationPromises.push(
+      (async () => {
+        try {
+          const token = generateVerificationToken();
+          const expiresAt = getVerificationTokenExpiry();
+          
+          await storage.createEmailVerificationToken({
+            contactSubmissionId: submission.id,
+            token,
+            expiresAt,
+          });
+          
+          const emailSent = await sendContactVerificationEmail(
+            validatedData.email,
+            validatedData.firstName,
+            token
+          );
+          
+          if (emailSent) {
+            log.info({ email: redactEmail(validatedData.email) }, "Contact verification email sent");
+          } else {
+            log.error({ email: redactEmail(validatedData.email) }, "Failed to send contact verification email");
+          }
+          
+          return { type: "verification-email", success: emailSent };
+        } catch (err) {
+          log.error({ err }, "Contact verification email error");
+          return { type: "verification-email", success: false, error: err };
+        }
+      })()
+    );
+    
+    res.json({ 
+      success: true, 
+      data: submission,
+      message: "Thank you for your enquiry. Please check your email to verify your email address."
+    });
+  } catch (error) {
+    log.error({ err: error }, "Contact form error");
+    res.status(400).json({ success: false, error: "Invalid submission data" });
+  }
+});
+
+router.post("/verify", requireContact, async (req: Request, res: Response) => {
+  try {
+    const token = req.body.token || req.query.token;
+    
+    if (!token || typeof token !== "string") {
+      return res.status(400).json({ 
+        success: false, 
+        error: "Verification token is required" 
+      });
+    }
+    
+    const tokenRecord = await storage.getEmailVerificationToken(token);
+    
+    if (!tokenRecord) {
+      return res.status(400).json({ 
+        success: false, 
+        error: "Invalid or expired verification token" 
+      });
+    }
+    
+    if (!tokenRecord.contactSubmissionId || tokenRecord.leadId) {
+      return res.status(400).json({ 
+        success: false, 
+        error: "Invalid token type" 
+      });
+    }
+    
+    await storage.markEmailVerificationTokenUsed(tokenRecord.id);
+    await storage.verifyContactSubmission(tokenRecord.contactSubmissionId);
+    
+    res.json({ 
+      success: true, 
+      message: "Email verified successfully. Thank you for confirming your enquiry." 
+    });
+  } catch (error) {
+    log.error({ err: error }, "Contact verification error");
+    res.status(500).json({ success: false, error: "Verification failed. Please try again." });
+  }
+});
+
+router.get("/verify", requireContact, async (req: Request, res: Response) => {
+  try {
+    const token = req.query.token;
+    
+    if (!token || typeof token !== "string") {
+      return res.redirect("/?verified=error&message=missing-token");
+    }
+    
+    const tokenRecord = await storage.getEmailVerificationToken(token);
+    
+    if (!tokenRecord) {
+      return res.redirect("/?verified=error&message=invalid-token");
+    }
+    
+    if (!tokenRecord.contactSubmissionId || tokenRecord.leadId) {
+      return res.redirect("/?verified=error&message=invalid-token-type");
+    }
+    
+    await storage.markEmailVerificationTokenUsed(tokenRecord.id);
+    await storage.verifyContactSubmission(tokenRecord.contactSubmissionId);
+    
+    res.redirect("/?verified=success");
+  } catch (error) {
+    log.error({ err: error }, "Contact verification error");
+    res.redirect("/?verified=error&message=verification-failed");
+  }
+});
+
+export default router;

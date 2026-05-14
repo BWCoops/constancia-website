@@ -1,0 +1,640 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * ════════════════════════════════════════════════════════════════════
+ *  1QG DESIGN SYSTEM — index.css
+ *
+ *  All values here correspond 1:1 with /src/lib/tokens.ts.
+ *  To change a colour, update tokens.ts AND the matching var below.
+ *  Never hardcode hex or rgba values in component files.
+ * ════════════════════════════════════════════════════════════════════
+ */
+
+/* ── 1. Brand tokens (always available, every context) ─────────────── */
+:root {
+  /* Backgrounds */
+  --brand-bg-primary:       #0C1E3B;
+  --brand-bg-secondary:     #011630;
+  --brand-bg-surface:       rgba(255,255,255,0.025);
+  --brand-bg-surface-hover: rgba(8,132,170,0.05);
+
+  /* Borders */
+  --brand-border:           rgba(255,255,255,0.07);
+  --brand-border-hover:     rgba(8,132,170,0.28);
+  --brand-border-muted:     rgba(255,255,255,0.05);
+  --brand-border-strong:    rgba(255,255,255,0.14);
+
+  /* Text */
+  --brand-text-primary:     #FEFFF3;
+  --brand-text-secondary:   rgba(254,255,243,0.55);
+  --brand-text-muted:       rgba(254,255,243,0.28);
+  --brand-text-tertiary:    rgba(254,255,243,0.22);
+
+  /* Accent colours */
+  --brand-teal:             #0884AA;
+  --brand-teal-accessible:  #0A6688;   /* darker teal — 4.6:1 on white, WCAG AA for light backgrounds */
+  --brand-cyan:             #12EBFC;
+  --brand-navy:             #02205B;
+  --brand-cream:            #FEFFF3;
+
+  /* Gradient shorthands */
+  --brand-gradient-banner:  linear-gradient(135deg, #02205B 0%, #0070C0 60%, #0884AA 100%);
+  --brand-gradient-hero:    linear-gradient(135deg, #010E2A 0%, #02205B 100%);
+
+  /* Info box (cyan tint) */
+  --brand-info-bg:          rgba(18,235,252,0.05);
+  --brand-info-border:      rgba(18,235,252,0.12);
+
+  /* Typography */
+  --brand-font-sans:        'DM Sans', system-ui, sans-serif;
+  --brand-font-mono:        'IBM Plex Mono', monospace;
+
+  /* Spacing */
+  --brand-section-py:       72px;
+  --brand-section-py-sm:    40px;
+  --brand-nav-height:       64px;
+  --brand-max-width:        80rem;
+
+  /* Border radius */
+  --brand-radius-sm:        3px;
+  --brand-radius-md:        8px;
+  --brand-radius-lg:        12px;
+  --brand-radius-btn:       0px;
+
+  /* Button — brand variant (Option D style) */
+  --brand-btn-border:           1px solid var(--brand-border-strong);
+  --brand-btn-accent-primary:   var(--brand-cyan);
+  --brand-btn-accent-secondary: rgba(255,255,255,0.12);
+  --brand-btn-font:             var(--brand-font-mono);
+  --brand-btn-tracking:         0.08em;
+  --brand-btn-size:             13px;
+
+  /* Legacy aliases — kept so existing --hp-* references still resolve */
+  --hp-bg-primary:          var(--brand-bg-primary);
+  --hp-bg-secondary:        var(--brand-bg-secondary);
+  --hp-bg-surface:          var(--brand-bg-surface);
+  --hp-bg-surface-hover:    var(--brand-bg-surface-hover);
+  --hp-border:              var(--brand-border);
+  --hp-border-hover:        var(--brand-border-hover);
+  --hp-text-primary:        var(--brand-text-primary);
+  --hp-text-secondary:      var(--brand-text-secondary);
+  --hp-text-muted:          var(--brand-text-muted);
+  --hp-text-tertiary:       var(--brand-text-tertiary);
+  --hp-teal:                var(--brand-teal);
+  --hp-cyan:                var(--brand-cyan);
+  --hp-navy:                var(--brand-navy);
+  --hp-font-sans:           var(--brand-font-sans);
+  --hp-font-mono:           var(--brand-font-mono);
+  --hp-card-bg:             var(--brand-bg-surface);
+  --hp-card-border:         var(--brand-border);
+  --hp-card-border-hover:   var(--brand-border-hover);
+  --hp-card-radius:         var(--brand-radius-lg);
+  --hp-section-py:          var(--brand-section-py);
+}
+
+/* ── 2. shadcn tokens — light mode ────────────────────────────────── */
+:root {
+  --button-outline:                  rgba(0,0,0,0.10);
+  --badge-outline:                   rgba(0,0,0,0.05);
+  --opaque-button-border-intensity:  -8;
+  --elevate-1:                       rgba(0,0,0,0.03);
+  --elevate-2:                       rgba(0,0,0,0.08);
+
+  --background:         60 33% 99%;
+  --foreground:         220 5% 14%;
+  --border:             200 20% 90%;
+  --card:               0 0% 100%;
+  --card-foreground:    220 5% 14%;
+  --card-border:        200 20% 90%;
+  --popover:            0 0% 100%;
+  --popover-foreground: 220 5% 14%;
+  --popover-border:     200 20% 90%;
+  --primary:            215 97% 19%;
+  --primary-foreground: 60 33% 99%;
+  --secondary:          197 100% 52%;
+  --secondary-foreground: 220 5% 14%;
+  --muted:              200 20% 96%;
+  --muted-foreground:   200 10% 35%;
+  --accent:             193 93% 35%;
+  --accent-foreground:  60 33% 99%;
+  --destructive:        0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --input:              200 20% 90%;
+  --ring:               197 100% 52%;
+  --sidebar:            200 20% 97%;
+  --sidebar-foreground: 220 5% 14%;
+  --sidebar-border:     200 20% 90%;
+  --sidebar-primary:    197 100% 52%;
+  --sidebar-primary-foreground: 220 5% 14%;
+  --sidebar-accent:     197 80% 92%;
+  --sidebar-accent-foreground: 220 5% 14%;
+  --sidebar-ring:       197 100% 52%;
+  --chart-1: 215 97% 19%;
+  --chart-2: 197 100% 52%;
+  --chart-3: 193 93% 35%;
+  --chart-4: 204 100% 38%;
+  --chart-5: 197 95% 45%;
+
+  --font-sans:   'DM Sans', Inter, system-ui, sans-serif;
+  --font-serif:  Georgia, serif;
+  --font-mono:   'IBM Plex Mono', ui-monospace, monospace;
+  --radius:      0.5rem;
+
+  --shadow-2xs: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
+  --shadow-xs:  0px 2px 0px 0px hsl(0 0% 0% / 0.00);
+  --shadow-sm:  0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 1px 2px -1px hsl(0 0% 0% / 0.00);
+  --shadow:     0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 1px 2px -1px hsl(0 0% 0% / 0.00);
+  --shadow-md:  0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 2px 4px -1px hsl(0 0% 0% / 0.00);
+  --shadow-lg:  0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 4px 6px -1px hsl(0 0% 0% / 0.00);
+  --shadow-xl:  0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 8px 10px -1px hsl(0 0% 0% / 0.00);
+  --shadow-2xl: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
+
+  --sidebar-primary-border: hsl(var(--sidebar-primary));
+  --sidebar-primary-border: hsl(from hsl(var(--sidebar-primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --sidebar-accent-border:  hsl(var(--sidebar-accent));
+  --sidebar-accent-border:  hsl(from hsl(var(--sidebar-accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --primary-border:         hsl(var(--primary));
+  --primary-border:         hsl(from hsl(var(--primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --secondary-border:       hsl(var(--secondary));
+  --secondary-border:       hsl(from hsl(var(--secondary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --muted-border:           hsl(var(--muted));
+  --muted-border:           hsl(from hsl(var(--muted)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --accent-border:          hsl(var(--accent));
+  --accent-border:          hsl(from hsl(var(--accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --destructive-border:     hsl(var(--destructive));
+  --destructive-border:     hsl(from hsl(var(--destructive)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+}
+
+/* ── 3. shadcn tokens — dark mode ─────────────────────────────────── */
+.dark {
+  --button-outline:                  rgba(255,255,255,0.10);
+  --badge-outline:                   rgba(255,255,255,0.05);
+  --opaque-button-border-intensity:  9;
+  --elevate-1:                       rgba(255,255,255,0.04);
+  --elevate-2:                       rgba(255,255,255,0.09);
+
+  --background:         220 5% 8%;
+  --foreground:         60 33% 97%;
+  --border:             220 5% 18%;
+  --card:               220 5% 10%;
+  --card-foreground:    60 33% 97%;
+  --card-border:        220 5% 15%;
+  --popover:            220 5% 12%;
+  --popover-foreground: 60 33% 97%;
+  --popover-border:     220 5% 18%;
+  --primary:            197 100% 52%;
+  --primary-foreground: 220 5% 8%;
+  --secondary:          220 5% 18%;
+  --secondary-foreground: 60 33% 97%;
+  --muted:              220 5% 18%;
+  --muted-foreground:   200 10% 65%;
+  --accent:             193 93% 40%;
+  --accent-foreground:  60 33% 97%;
+  --destructive:        0 63% 50%;
+  --destructive-foreground: 0 0% 98%;
+  --input:              220 5% 25%;
+  --ring:               197 100% 52%;
+  --sidebar:            220 5% 9%;
+  --sidebar-foreground: 60 33% 97%;
+  --sidebar-border:     220 5% 15%;
+  --sidebar-primary:    197 100% 52%;
+  --sidebar-primary-foreground: 220 5% 8%;
+  --sidebar-accent:     220 5% 18%;
+  --sidebar-accent-foreground: 60 33% 97%;
+  --sidebar-ring:       197 100% 52%;
+  --chart-1: 197 100% 52%;
+  --chart-2: 193 93% 45%;
+  --chart-3: 204 100% 45%;
+  --chart-4: 215 97% 40%;
+  --chart-5: 197 95% 55%;
+
+  --shadow-2xs: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
+  --shadow-xs:  0px 2px 0px 0px hsl(0 0% 0% / 0.00);
+  --shadow-sm:  0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 1px 2px -1px hsl(0 0% 0% / 0.00);
+  --shadow:     0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 1px 2px -1px hsl(0 0% 0% / 0.00);
+  --shadow-md:  0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 2px 4px -1px hsl(0 0% 0% / 0.00);
+  --shadow-lg:  0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 4px 6px -1px hsl(0 0% 0% / 0.00);
+  --shadow-xl:  0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 8px 10px -1px hsl(0 0% 0% / 0.00);
+  --shadow-2xl: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
+
+  --sidebar-primary-border: hsl(var(--sidebar-primary));
+  --sidebar-primary-border: hsl(from hsl(var(--sidebar-primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --sidebar-accent-border:  hsl(var(--sidebar-accent));
+  --sidebar-accent-border:  hsl(from hsl(var(--sidebar-accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --primary-border:         hsl(var(--primary));
+  --primary-border:         hsl(from hsl(var(--primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --secondary-border:       hsl(var(--secondary));
+  --secondary-border:       hsl(from hsl(var(--secondary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --muted-border:           hsl(var(--muted));
+  --muted-border:           hsl(from hsl(var(--muted)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --accent-border:          hsl(var(--accent));
+  --accent-border:          hsl(from hsl(var(--accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --destructive-border:     hsl(var(--destructive));
+  --destructive-border:     hsl(from hsl(var(--destructive)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+}
+
+/* ── 4. Base layer ─────────────────────────────────────────────────── */
+@layer base {
+  * { @apply border-border; }
+  body { @apply font-sans antialiased bg-background text-foreground; }
+}
+
+/* ── 5. page-dark — applies brand dark system to any public page ────── */
+.page-dark {
+  --background:           220 96% 5%;
+  --foreground:           60  33% 97%;
+  --border:               220 30% 16%;
+  --input:                220 30% 14%;
+  --ring:                 197 100% 52%;
+  --card:                 220 60% 8%;
+  --card-foreground:      60  33% 97%;
+  --card-border:          220 30% 16%;
+  --popover:              220 60% 8%;
+  --popover-foreground:   60  33% 97%;
+  --popover-border:       220 30% 16%;
+  --muted:                220 30% 14%;
+  --muted-foreground:     200 12% 52%;
+  --secondary:            220 30% 14%;
+  --secondary-foreground: 60 33% 97%;
+  --accent:               193 93% 35%;
+  --accent-foreground:    60  33% 97%;
+
+  background:  var(--brand-bg-primary);
+  color:       var(--brand-text-primary);
+  font-family: var(--brand-font-sans);
+}
+
+.page-dark .prose {
+  --tw-prose-body:       rgba(254,255,243,0.65);
+  --tw-prose-headings:   rgba(254,255,243,0.95);
+  --tw-prose-links:      var(--brand-cyan);
+  --tw-prose-bold:       rgba(254,255,243,0.9);
+  --tw-prose-counters:   rgba(254,255,243,0.5);
+  --tw-prose-bullets:    rgba(254,255,243,0.4);
+  --tw-prose-hr:         rgba(255,255,255,0.1);
+  --tw-prose-quotes:     rgba(254,255,243,0.7);
+  --tw-prose-code:       var(--brand-cyan);
+  --tw-prose-th-borders: rgba(255,255,255,0.1);
+  --tw-prose-td-borders: rgba(255,255,255,0.06);
+}
+
+/* ── 6. Reusable layout utility classes ────────────────────────────── */
+@layer utilities {
+  .section-primary   { background: var(--brand-bg-primary);    padding: var(--brand-section-py) 0; color: var(--brand-text-primary); }
+  .section-secondary { background: var(--brand-bg-secondary);   padding: var(--brand-section-py) 0; color: var(--brand-text-primary); }
+  .section-banner    { background: var(--brand-gradient-banner); padding: var(--brand-section-py) 0; color: var(--brand-text-primary); }
+
+  /* Background-only tokens (pages manage their own responsive padding) */
+  .bg-hp-primary   { background: var(--brand-bg-primary); }
+  .bg-hp-secondary { background: var(--brand-bg-secondary); }
+
+  /* Glass card surface */
+  .glass-card {
+    background:    var(--brand-bg-surface);
+    border:        1px solid var(--brand-border);
+    border-radius: var(--brand-radius-lg);
+    transition:    border-color 0.2s ease, background 0.2s ease;
+  }
+  .glass-card:hover {
+    border-color: var(--brand-border-hover);
+    background:   var(--brand-bg-surface-hover);
+  }
+
+  /* Cyan info / callout box */
+  .info-box {
+    background:    var(--brand-info-bg);
+    border:        1px solid var(--brand-info-border);
+    border-radius: var(--brand-radius-md);
+    padding:       1rem;
+  }
+
+  /* Section tag pill (e.g. "What We Do") */
+  .section-tag {
+    display:        inline-block;
+    padding:        0.375rem 1rem;
+    border-radius:  9999px;
+    background:     rgba(18,235,252,0.08);
+    color:          var(--brand-cyan);
+    font-size:      0.75rem;
+    font-weight:    600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-family:    var(--brand-font-mono);
+  }
+
+  /* Teal CTA button — replaces repeated inline style={{ background: 'var(--hp-teal)' }} */
+  .btn-cta {
+    background: var(--brand-teal) !important;
+    color:      var(--brand-text-primary) !important;
+    border:     none !important;
+  }
+
+  /* Brand button base (Option D — zero radius, mono, left accent bar) */
+  .btn-brand-base {
+    display:         inline-flex;
+    align-items:     center;
+    gap:             0.75rem;
+    padding:         0.875rem 1.75rem;
+    border-radius:   var(--brand-radius-btn);
+    background:      transparent;
+    font-size:       var(--brand-btn-size);
+    font-weight:     500;
+    font-family:     var(--brand-font-mono);
+    letter-spacing:  var(--brand-btn-tracking);
+    text-transform:  uppercase;
+    cursor:          pointer;
+    transition:      background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    white-space:     nowrap;
+    text-decoration: none;
+  }
+
+  .btn-brand {
+    color:       var(--brand-cream);
+    border:      1px solid var(--brand-border-strong);
+    border-left: 3px solid var(--brand-cyan);
+  }
+  .btn-brand:hover {
+    background:        rgba(18,235,252,0.06);
+    border-color:      rgba(255,255,255,0.22);
+    border-left-color: var(--brand-cyan);
+    color:             #fff;
+  }
+  .btn-brand:active { background: rgba(18,235,252,0.10); }
+
+  .btn-brand-secondary {
+    color:       rgba(254,255,243,0.55);
+    border:      1px solid rgba(255,255,255,0.08);
+    border-left: 3px solid var(--brand-btn-accent-secondary);
+  }
+  .btn-brand-secondary:hover {
+    background:        rgba(255,255,255,0.03);
+    border-color:      rgba(255,255,255,0.16);
+    border-left-color: rgba(255,255,255,0.25);
+    color:             rgba(254,255,243,0.80);
+  }
+
+  .btn-brand-ghost {
+    font-size:       0.8125rem;
+    color:           rgba(254,255,243,0.38);
+    background:      none;
+    border:          none;
+    cursor:          pointer;
+    font-family:     var(--brand-font-sans);
+    letter-spacing:  0.01em;
+    transition:      color 0.15s ease;
+    text-decoration: none;
+  }
+  .btn-brand-ghost:hover { color: rgba(254,255,243,0.65); }
+
+  /* Nav link hover effects — source of truth for nav underline / glow */
+  .nav-link-glow {
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(18,235,252,0.10),
+      transparent
+    );
+  }
+  .nav-link-underline {
+    background: linear-gradient(to right, var(--brand-cyan), var(--brand-teal));
+  }
+
+  /* hp-gradient-banner — used by existing hero / banner sections */
+  .hp-gradient-banner { background: var(--brand-gradient-banner); }
+
+  /* Switch brand colour — data-attribute selectors need a real class, not arbitrary Tailwind */
+  .switch-brand[data-state="checked"] { background: var(--brand-teal); }
+
+  /* Icon gradient wrappers (replaces inline linear-gradient styles) */
+  .icon-gradient {
+    background: linear-gradient(135deg, var(--brand-navy), var(--brand-teal));
+  }
+  .icon-gradient-teal-cyan {
+    background: linear-gradient(135deg, var(--brand-teal), var(--brand-cyan));
+  }
+  .icon-gradient-navy-cyan {
+    background: linear-gradient(135deg, var(--brand-navy), var(--brand-cyan));
+  }
+
+  /* Stat icon wrapper — cyan-tinted circle used in stats section */
+  .stat-icon-wrapper {
+    background: rgba(18,235,252,0.2);
+  }
+
+  /* Stats banner section */
+  .section-stats-banner {
+    background: linear-gradient(to right, var(--brand-navy), #0070C0, var(--brand-teal));
+    color:       var(--brand-cream);
+    padding:     var(--brand-section-py) 0;
+  }
+
+  /* Partners strip */
+  .partners-strip {
+    background:    var(--brand-bg-primary);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    padding:       28px 0;
+  }
+  .partners-strip-label {
+    text-align:     center;
+    font-size:      9px;
+    font-family:    var(--brand-font-mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color:          var(--brand-text-tertiary);
+    margin-bottom:  20px;
+  }
+  .partners-strip-name {
+    font-family:    var(--brand-font-sans);
+    font-size:      clamp(18px, 2vw, 26px);
+    font-weight:    700;
+    letter-spacing: -0.03em;
+    color:          var(--brand-text-secondary);
+    line-height:    1;
+    margin-bottom:  4px;
+  }
+  .partners-strip-category {
+    font-family:    var(--brand-font-mono);
+    font-size:      8px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color:          var(--brand-text-muted);
+  }
+
+  /* Banner overlay icon wrapper */
+  .banner-icon-wrapper {
+    background:        rgba(255,255,255,0.1);
+    backdrop-filter:   blur(4px);
+  }
+}
+
+/* ── 7. Elevation system ───────────────────────────────────────────── */
+@layer utilities {
+  input[type="search"]::-webkit-search-cancel-button { @apply hidden; }
+
+  [contenteditable][data-placeholder]:empty::before {
+    content:        attr(data-placeholder);
+    color:          hsl(var(--muted-foreground));
+    pointer-events: none;
+  }
+
+  .no-default-hover-elevate  {}
+  .no-default-active-elevate {}
+
+  .toggle-elevate::before,
+  .toggle-elevate-2::before {
+    content:        "";
+    pointer-events: none;
+    position:       absolute;
+    inset:          0px;
+    border-radius:  inherit;
+    z-index:        -1;
+  }
+  .toggle-elevate.toggle-elevated::before { background-color: var(--elevate-2); }
+  .border.toggle-elevate::before          { inset: -1px; }
+
+  .hover-elevate:not(.no-default-hover-elevate),
+  .active-elevate:not(.no-default-active-elevate),
+  .hover-elevate-2:not(.no-default-hover-elevate),
+  .active-elevate-2:not(.no-default-active-elevate) {
+    position: relative;
+    z-index:  0;
+  }
+
+  .hover-elevate:not(.no-default-hover-elevate)::after,
+  .active-elevate:not(.no-default-active-elevate)::after,
+  .hover-elevate-2:not(.no-default-hover-elevate)::after,
+  .active-elevate-2:not(.no-default-active-elevate)::after {
+    content:        "";
+    pointer-events: none;
+    position:       absolute;
+    inset:          0px;
+    border-radius:  inherit;
+    z-index:        999;
+  }
+
+  .hover-elevate:hover:not(.no-default-hover-elevate)::after,
+  .active-elevate:active:not(.no-default-active-elevate)::after {
+    background-color: var(--elevate-1);
+  }
+
+  .hover-elevate-2:hover:not(.no-default-hover-elevate)::after,
+  .active-elevate-2:active:not(.no-default-active-elevate)::after {
+    background-color: var(--elevate-2);
+  }
+
+  .border.hover-elevate:not(.no-default-hover-elevate)::after,
+  .border.active-elevate:not(.no-default-active-elevate)::after,
+  .border.hover-elevate-2:not(.no-default-hover-elevate)::after,
+  .border.active-elevate-2:not(.no-default-active-elevate)::after {
+    inset: -1px;
+  }
+}
+
+/* ── 8. Keyframe animations ─────────────────────────────────────────── */
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 4s ease-in-out infinite;
+}
+
+@keyframes hp-fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes hp-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes hp-blink {
+  0%, 100% { opacity: 0.35; }
+  50%       { opacity: 1; }
+}
+@keyframes hp-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes nav-slide-down {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hp-anim-fade-up { opacity: 0; animation: hp-fade-up  0.6s ease forwards; }
+.hp-anim-fade-in { opacity: 0; animation: hp-fade-in  0.8s ease forwards; }
+.nav-slide-down  { animation: nav-slide-down 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+/* ── 9. Mobile proof bar ─────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .proof-bar-item {
+    border-right:  none !important;
+    border-bottom: 1px solid var(--brand-border-muted);
+  }
+}
+
+/* ── 10. Performance / content-visibility hints ─────────────────────── */
+.chart-section-lazy      { content-visibility: auto; contain-intrinsic-size: 0 400px; }
+.comparison-section-lazy { content-visibility: auto; contain-intrinsic-size: 0 800px; }
+
+@layer utilities {
+  .touch-target          { min-height: 44px; min-width: 44px; touch-action: manipulation; }
+  .touch-manipulation    { touch-action: manipulation; }
+  .will-change-transform { will-change: transform; }
+  .will-change-opacity   { will-change: opacity; }
+  .will-change-auto      { will-change: auto; }
+  .chart-container       { contain: layout style; isolation: isolate; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .hover-elevate:hover::after,
+  .hover-elevate-2:hover::after { background-color: transparent !important; }
+  button, a, [role="button"] { transition-duration: 100ms !important; }
+}
+
+@media (max-width: 768px) {
+  .backdrop-blur-md,
+  .backdrop-blur-lg,
+  .backdrop-blur-xl {
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+  }
+  .blur-3xl { filter: blur(32px) !important; }
+  .animate-pulse { animation-duration: 2s !important; }
+  a, button, input, select, textarea, [role="button"], [role="checkbox"], [role="slider"] {
+    touch-action: manipulation;
+  }
+  @keyframes hp-marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+}
+
+@media (prefers-reduced-data: reduce) {
+  .hero-skeleton { background: var(--brand-bg-primary) !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chart-section-lazy, .comparison-section-lazy { content-visibility: visible; }
+  .will-change-transform, .will-change-opacity   { will-change: auto; }
+  * {
+    animation-duration:        0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration:       0.01ms !important;
+  }
+}
+
+/* ── 11. Third-party overrides ───────────────────────────────────────── */
+#hubspot-messages-iframe-container,
+[data-testid="hs-chat-widget"],
+.hs-chat-open,
+.hs-chat-trigger,
+iframe[src*="hubspot"],
+.HubSpotConversationsRoot,
+div[class*="hs-chat"] {
+  display: none !important;
+}
