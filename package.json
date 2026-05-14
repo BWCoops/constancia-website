@@ -8,7 +8,9 @@
     "build": "tsx script/build.ts",
     "start": "NODE_ENV=production node dist/index.cjs",
     "check": "tsc",
-    "db:push": "drizzle-kit push"
+    "db:push": "drizzle-kit push",
+    "knip": "knip",
+    "knip:production": "knip --production"
   },
   "dependencies": {
     "@adobe/pdfservices-node-sdk": "^4.1.0",

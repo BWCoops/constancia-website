@@ -1,0 +1,42 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": [
+    "client/src/main.tsx",
+    "client/src/App.tsx",
+    "server/index.ts",
+    "server/scripts/**/*.ts",
+    "shared/**/*.ts"
+  ],
+  "project": [
+    "client/src/**/*.{ts,tsx}",
+    "server/**/*.ts",
+    "shared/**/*.ts"
+  ],
+  "ignore": [
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/__tests__/**",
+    "client/src/components/ui/**"
+  ],
+  "ignoreDependencies": [
+    "@replit/vite-plugin-cartographer",
+    "@replit/vite-plugin-dev-banner",
+    "@replit/vite-plugin-runtime-error-modal",
+    "tailwindcss-animate",
+    "tw-animate-css",
+    "autoprefixer",
+    "postcss"
+  ],
+  "ignoreBinaries": [
+    "drizzle-kit",
+    "tsc"
+  ],
+  "rules": {
+    "files": "warn",
+    "dependencies": "warn",
+    "devDependencies": "warn",
+    "exports": "warn",
+    "types": "warn",
+    "duplicates": "warn"
+  }
+}

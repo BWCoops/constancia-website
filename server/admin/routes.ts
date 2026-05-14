@@ -30,6 +30,7 @@ import {
 import { eq, desc, count, gte, sql, and, inArray } from "drizzle-orm";
 import rateLimit from "express-rate-limit";
 import { isAuthenticated } from "../replitAuth";
+import { requireAdminOrFallback } from "../middleware/clerk-auth";
 import { scanBlogPost, getAllScans, getScanHistory } from "../services/winston-ai";
 import { 
   runScheduledScan, 
@@ -229,7 +230,11 @@ router.get("/auth/session", (req: any, res: Response) => {
   });
 });
 
-router.use(isAuthenticated);
+// Auth gate: prefers Clerk admin role check when CLERK_SECRET_KEY is set,
+// otherwise falls back to the legacy Replit OIDC isAuthenticated middleware.
+// Once Clerk is fully configured (publicMetadata.role='admin' on admin users),
+// the legacy auth path can be deleted along with replitAuth.ts.
+router.use(requireAdminOrFallback(isAuthenticated));
 
 // Dashboard Stats
 router.get("/dashboard/stats", async (req: Request, res: Response) => {

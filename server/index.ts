@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import compression from "compression";
 import fileUpload from "express-fileupload";
 import { registerRoutes } from "./routes";
+import { clerkSessionMiddleware, CLERK_ENABLED } from "./middleware/clerk-auth";
 import { serveStatic } from "./static";
 import { createServer } from "http";
 import { correlationIdMiddleware, requestLoggingMiddleware, getSystemHealth } from "./services/operations";
@@ -478,6 +479,19 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 // Cookie parser for session management
 app.use(cookieParser());
+
+// ============================================
+// CLERK SESSION MIDDLEWARE
+// ============================================
+// Resolves Clerk session if any (no-op if CLERK_SECRET_KEY not set).
+// Must run BEFORE any route that uses requireAuth / requireAdmin / getUserId.
+// See server/middleware/clerk-auth.ts and docs/AUTH_MIGRATION.md.
+app.use(clerkSessionMiddleware);
+if (CLERK_ENABLED) {
+  log.info("Clerk auth enabled — using Clerk session for FC users + admin");
+} else {
+  log.info("Clerk auth NOT enabled (CLERK_SECRET_KEY missing) — falling back to legacy Replit OIDC + admin-security");
+}
 
 // CSRF Protection (double-submit cookie pattern)
 import { csrfProtection, csrfTokenEndpoint } from "./middleware/csrf";

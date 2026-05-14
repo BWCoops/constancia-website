@@ -71,3 +71,36 @@ export function getUserId(req: Request): string | null {
   if (!CLERK_ENABLED) return null;
   return getAuth(req).userId ?? null;
 }
+
+/**
+ * Adapter middleware for the migration period:
+ *   - If Clerk is configured: use Clerk's requireAdmin
+ *   - Else: fall through to the legacy auth middleware passed in
+ *
+ * Use in admin route files so the cutover happens automatically once
+ * CLERK_SECRET_KEY is set, without redeploying.
+ *
+ *   router.use(requireAdminOrFallback(isAuthenticated));
+ *   router.use(requireAdminOrFallback(legacyRequireAdmin));
+ */
+export function requireAdminOrFallback(legacy: RequestHandler): RequestHandler {
+  return (req, res, next) => {
+    if (CLERK_ENABLED) {
+      return requireAdmin(req, res, next);
+    }
+    return legacy(req, res, next);
+  };
+}
+
+/**
+ * Same pattern for any-auth (FC users):
+ *   router.use(requireAuthOrFallback(isAuthenticated));
+ */
+export function requireAuthOrFallback(legacy: RequestHandler): RequestHandler {
+  return (req, res, next) => {
+    if (CLERK_ENABLED) {
+      return requireAuth(req, res, next);
+    }
+    return legacy(req, res, next);
+  };
+}

@@ -1,10 +1,15 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import { ArrowRight, Compass, Settings, Brain, FileCheck, Briefcase, BarChart3, TrendingUp, CheckCircle2, Target, Users, Zap } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { ProofBar, GlassCard } from "@/components/ui/constancia";
 import type { ProofBarItem } from "@/components/ui/constancia";
 import { useFeatureFlags } from "@/lib/feature-flags";
+
+// 3D section accent — single floating sphere between sections
+const SectionAccent3D = lazy(() =>
+  import("@/components/3d/SectionAccent3D").then((m) => ({ default: m.SectionAccent3D })),
+);
 
 const proofBarItems: ProofBarItem[] = [
   { stat: 'AI',        label: 'Delivery, augmented',     body: 'Our tools standardise process, output, and outcome across every engagement. Faster delivery, lower cost, no loss of quality.' },
@@ -131,8 +136,15 @@ export function BelowFoldSections() {
       </div>
 
       {/* ── Services ── */}
-      <section className="section-primary">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section className="section-primary relative">
+        {/* 3D accent — small berry sphere top-right of section */}
+        <Suspense fallback={null}>
+          <div className="absolute top-12 right-8 lg:right-20 opacity-50 pointer-events-none">
+            <SectionAccent3D variant="berry" size={140} />
+          </div>
+        </Suspense>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="text-center mb-12">
             <span className="section-tag mb-4">What We Do</span>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
