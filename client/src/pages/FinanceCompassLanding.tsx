@@ -24,6 +24,11 @@ import { Turnstile, useTurnstileToken } from "@/components/turnstile";
 import { InstantPreview } from "@/components/finance-compass/InstantPreview";
 import { SampleResultsPreview } from "@/components/finance-compass/SampleResultsPreview";
 import { HeroResultsVisual } from "@/components/finance-compass/HeroResultsVisual";
+import { lazy, Suspense as ReactSuspense } from "react";
+
+const AmbientScene3D = lazy(() =>
+  import("@/components/3d/AmbientScene3D").then((m) => ({ default: m.AmbientScene3D })),
+);
 
 import {
   CompassIcon,
@@ -988,7 +993,14 @@ export default function FinanceCompassLanding() {
       <main className="pt-16 sm:pt-20">
         {/* Hero Section */}
         <section className="relative min-h-[500px] sm:min-h-[600px] flex items-center overflow-hidden bg-gradient-to-br from-[#12161D] via-[#1E2630] to-[#7FB8A3]">
-          <div className="absolute inset-0 opacity-10">
+          {/* WebGL ambient scene — subtle drifting Constancia spheres */}
+          <div className="absolute inset-0 opacity-60 pointer-events-none">
+            <ReactSuspense fallback={null}>
+              <AmbientScene3D intensity={0.5} variant="rose-mint" />
+            </ReactSuspense>
+          </div>
+          {/* Faint colour wash on top of 3D scene for extra depth */}
+          <div className="absolute inset-0 opacity-10 pointer-events-none">
             <div className="absolute top-20 left-10 w-48 sm:w-72 h-48 sm:h-72 bg-[#C77A93] rounded-full blur-3xl" />
             <div className="absolute bottom-20 right-10 w-64 sm:w-96 h-64 sm:h-96 bg-[#7FB8A3] rounded-full blur-3xl" />
           </div>

@@ -1,7 +1,12 @@
-import { memo, useRef } from "react";
+import { memo, useRef, lazy, Suspense } from "react";
 import { m, useScroll, useTransform } from "framer-motion";
 import { CutIcon } from "@/components/ui/cut-icon";
 import { ConstanciaMark } from "@/components/ui/constancia-mark";
+
+// Lazy-load WebGL scene only when this hero mounts
+const AmbientScene3D = lazy(() =>
+  import("@/components/3d/AmbientScene3D").then((m) => ({ default: m.AmbientScene3D })),
+);
 
 interface PageHeroProps {
   badge: string;
@@ -49,7 +54,17 @@ const PageHeroComponent = ({
           aria-hidden="true"
         />
 
-        {/* Cut Icon decoration — Constancia circles drift + scroll-parallax */}
+        {/* Ambient 3D scene — subtle drifting spheres in WebGL */}
+        <m.div
+          style={{ opacity: opacityFade }}
+          className="absolute inset-0 pointer-events-none opacity-70"
+        >
+          <Suspense fallback={null}>
+            <AmbientScene3D intensity={0.55} variant="rose-mint" />
+          </Suspense>
+        </m.div>
+
+        {/* Cut Icon decoration — additional 2D circles for depth + scroll-parallax */}
         <m.div
           style={{ y: yRose, opacity: opacityFade }}
           className="hidden md:block absolute -top-40 -right-40 pointer-events-none"
