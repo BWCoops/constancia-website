@@ -26,10 +26,11 @@ interface AmbientSceneProps {
   className?: string;
 }
 
-const ROSE = "#C77A93";
-const MINT = "#7FB8A3";
-const BERRY = "#8E4F67";
+// Editorial palette — deeper variants of the brand accents (the "grounded" tones
+// from the brand sheet). Avoids the soft-pastel "bubble gum" look.
+const BERRY     = "#8E4F67";
 const DEEP_MINT = "#5E8D7A";
+const STONE     = "#D8D0C6";
 
 interface SphereCfg {
   pos: [number, number, number];
@@ -44,48 +45,60 @@ function configFor(variant: AmbientSceneProps["variant"]): SphereCfg[] {
   switch (variant) {
     case "rose-only":
       return [
-        { pos: [-1.6, 0.4, 0],  r: 1.4, color: ROSE,  speed: 0.5, rot: 0.3, float: 0.8 },
-        { pos: [1.4, -0.3, 0.5], r: 1.1, color: BERRY, speed: 0.4, rot: 0.2, float: 0.6 },
+        { pos: [-1.6, 0.4, 0],  r: 1.4, color: BERRY, speed: 0.32, rot: 0.18, float: 0.55 },
+        { pos: [1.4, -0.3, 0.5], r: 1.1, color: BERRY, speed: 0.28, rot: 0.14, float: 0.45 },
       ];
     case "mint-only":
       return [
-        { pos: [-1.5, -0.4, 0],  r: 1.3, color: MINT,      speed: 0.5, rot: 0.3, float: 0.8 },
-        { pos: [1.4,  0.3, 0.4], r: 1.1, color: DEEP_MINT, speed: 0.4, rot: 0.2, float: 0.6 },
+        { pos: [-1.5, -0.4, 0],  r: 1.3, color: DEEP_MINT, speed: 0.32, rot: 0.18, float: 0.55 },
+        { pos: [1.4,  0.3, 0.4], r: 1.1, color: DEEP_MINT, speed: 0.28, rot: 0.14, float: 0.45 },
       ];
     case "rose-mint":
     default:
       return [
-        { pos: [-1.4, 0.5, 0],   r: 1.3, color: ROSE, speed: 0.5, rot: 0.3, float: 0.8 },
-        { pos: [1.2, -0.4, 0.3], r: 1.3, color: MINT, speed: 0.4, rot: 0.25, float: 0.7 },
-        { pos: [0.2, 1.2, -0.6], r: 0.6, color: BERRY, speed: 0.6, rot: 0.4, float: 1.0 },
+        { pos: [-1.4, 0.5, 0],   r: 1.3, color: BERRY,     speed: 0.32, rot: 0.18, float: 0.55 },
+        { pos: [1.2, -0.4, 0.3], r: 1.3, color: DEEP_MINT, speed: 0.28, rot: 0.16, float: 0.5 },
+        { pos: [0.2, 1.2, -0.6], r: 0.55, color: STONE,    speed: 0.42, rot: 0.25, float: 0.7 },
       ];
   }
 }
 
 function SphereField({ spheres, intensity }: { spheres: SphereCfg[]; intensity: number }) {
-  const opacity = Math.max(0.3, Math.min(0.85, 0.55 + intensity * 0.3));
+  // Material opacity tuned UP (more solid, less translucent) to avoid bubble-gum
+  const opacity = Math.max(0.55, Math.min(0.95, 0.7 + intensity * 0.25));
   return (
     <>
-      <ambientLight intensity={0.3 + intensity * 0.2} />
-      <directionalLight position={[5, 8, 5]} intensity={0.7 + intensity * 0.4} color="#F6F3EE" />
-      <pointLight position={[-3, -2, -3]} intensity={0.3 + intensity * 0.3} color={ROSE} />
-      <pointLight position={[3, 2, 3]} intensity={0.25 + intensity * 0.25} color={MINT} />
+      <ambientLight intensity={0.22 + intensity * 0.15} />
+      <directionalLight position={[5, 8, 5]} intensity={0.6 + intensity * 0.3} color="#F6F3EE" />
+      <directionalLight position={[-3, 3, -2]} intensity={0.25 + intensity * 0.15} color="#D8D0C6" />
+      <pointLight position={[-3, -2, -3]} intensity={0.2 + intensity * 0.2} color={BERRY} />
+      <pointLight position={[3, 2, 3]} intensity={0.18 + intensity * 0.18} color={DEEP_MINT} />
 
       {spheres.map((s, i) => (
         <Float key={i} speed={s.speed} rotationIntensity={s.rot} floatIntensity={s.float}>
           <mesh position={s.pos}>
-            <sphereGeometry args={[s.r, 48, 48]} />
+            <sphereGeometry args={[s.r, 64, 64]} />
+            {/*
+              Matte editorial material:
+              - low transmission (0.06) — solid pigment, not glass candy
+              - higher roughness (0.55) — diffuse highlights
+              - subtle metalness (0.18) — sophisticated sculpted feel
+              - subtle sheen — luxe but not shiny
+            */}
             <meshPhysicalMaterial
               color={s.color}
-              roughness={0.35}
-              metalness={0.04}
-              transmission={0.35}
-              thickness={1.1}
-              ior={1.32}
+              roughness={0.55}
+              metalness={0.18}
+              transmission={0.06}
+              thickness={0.6}
+              ior={1.08}
               opacity={opacity}
               transparent
-              clearcoat={0.5}
-              clearcoatRoughness={0.22}
+              clearcoat={0.18}
+              clearcoatRoughness={0.55}
+              sheen={0.2}
+              sheenColor="#F6F3EE"
+              sheenRoughness={0.6}
             />
           </mesh>
         </Float>

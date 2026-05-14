@@ -24,27 +24,37 @@ interface SphereProps {
   rotateSpeed?: number;
 }
 
-function BrandSphere({ position, color, radius = 1.6, rotateSpeed = 0.12 }: SphereProps) {
+function BrandSphere({ position, color, radius = 1.6, rotateSpeed = 0.08 }: SphereProps) {
   const ref = useRef<Mesh>(null);
   useFrame((_, delta) => {
     if (!ref.current) return;
     ref.current.rotation.x += delta * rotateSpeed;
-    ref.current.rotation.y += delta * rotateSpeed * 0.7;
+    ref.current.rotation.y += delta * rotateSpeed * 0.65;
   });
   return (
     <mesh ref={ref} position={position}>
-      <sphereGeometry args={[radius, 64, 64]} />
+      <sphereGeometry args={[radius, 96, 96]} />
+      {/*
+        Material tuned for editorial feel — NOT bubble-gum:
+        - low transmission so it reads as solid pigment, not glass candy
+        - subtle metalness for sophistication (think gallery sculpture)
+        - matte clearcoat for understated sheen
+        - higher roughness so highlights are diffused
+      */}
       <meshPhysicalMaterial
         color={color}
-        roughness={0.32}
-        metalness={0.05}
-        transmission={0.4}
-        thickness={1.4}
-        ior={1.35}
-        opacity={0.78}
+        roughness={0.55}
+        metalness={0.18}
+        transmission={0.06}
+        thickness={0.6}
+        ior={1.08}
+        opacity={0.92}
         transparent
-        clearcoat={0.6}
-        clearcoatRoughness={0.18}
+        clearcoat={0.18}
+        clearcoatRoughness={0.55}
+        sheen={0.25}
+        sheenColor="#F6F3EE"
+        sheenRoughness={0.6}
       />
     </mesh>
   );
@@ -53,20 +63,21 @@ function BrandSphere({ position, color, radius = 1.6, rotateSpeed = 0.12 }: Sphe
 function Scene() {
   return (
     <>
-      {/* Soft key light + rim — premium glass-sphere feel */}
-      <ambientLight intensity={0.35} />
-      <directionalLight position={[5, 8, 5]} intensity={1.1} color="#F6F3EE" />
-      <pointLight position={[-4, -3, -4]} intensity={0.6} color="#C77A93" />
-      <pointLight position={[4, 3, 4]} intensity={0.5} color="#7FB8A3" />
+      {/* Editorial lighting — restrained, museum-quality */}
+      <ambientLight intensity={0.28} />
+      <directionalLight position={[6, 10, 6]} intensity={0.85} color="#F6F3EE" />
+      <directionalLight position={[-4, 4, -2]} intensity={0.35} color="#D8D0C6" />
+      <pointLight position={[-5, -2, -3]} intensity={0.32} color="#8E4F67" />
+      <pointLight position={[5, 2, 3]} intensity={0.26} color="#5E8D7A" />
 
-      {/* Rose sphere — upper-left in screen space */}
-      <Float speed={0.6} rotationIntensity={0.4} floatIntensity={1.1}>
-        <BrandSphere position={[-1.0, 0.6, 0]} color="#C77A93" radius={1.7} />
+      {/* Deep berry sphere — upper-left, the grounded primary */}
+      <Float speed={0.4} rotationIntensity={0.25} floatIntensity={0.7}>
+        <BrandSphere position={[-1.0, 0.6, 0]} color="#8E4F67" radius={1.75} />
       </Float>
 
-      {/* Mint sphere — lower-right, overlapping */}
-      <Float speed={0.5} rotationIntensity={0.3} floatIntensity={0.9}>
-        <BrandSphere position={[0.9, -0.5, 0.4]} color="#7FB8A3" radius={1.7} rotateSpeed={0.09} />
+      {/* Deep mint sphere — lower-right, overlapping */}
+      <Float speed={0.35} rotationIntensity={0.2} floatIntensity={0.6}>
+        <BrandSphere position={[0.9, -0.5, 0.35]} color="#5E8D7A" radius={1.75} rotateSpeed={0.06} />
       </Float>
     </>
   );
