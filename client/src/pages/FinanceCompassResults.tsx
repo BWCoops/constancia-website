@@ -803,7 +803,7 @@ export default function FinanceCompassResults() {
             <Button 
               variant="ghost" 
               size="sm" 
-              className="text-brand-teal hover:text-[#02205B] -ml-2 text-xs sm:text-sm"
+              className="text-brand-teal hover:text-[#12161D] -ml-2 text-xs sm:text-sm"
               data-testid="button-back-dashboard"
             >
               <ArrowLeft className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5 sm:mr-2" />
@@ -817,7 +817,7 @@ export default function FinanceCompassResults() {
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-gradient-to-r from-[#0884AA] to-[#02205B] text-white py-2 sm:py-3 px-4 sm:px-6"
+            className="bg-gradient-to-r from-[#7FB8A3] to-[#12161D] text-white py-2 sm:py-3 px-4 sm:px-6"
             data-testid="banner-processing"
           >
             <div className="max-w-6xl mx-auto flex items-center justify-center gap-2 sm:gap-3">
@@ -830,14 +830,14 @@ export default function FinanceCompassResults() {
           </motion.div>
         )}
         
-        <section className="bg-gradient-to-r from-[#02205B] via-[#0070C0] to-[#0884AA] py-8 sm:py-12 md:py-16">
+        <section className="bg-gradient-to-r from-[#12161D] via-[#1E2630] to-[#7FB8A3] py-8 sm:py-12 md:py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="text-center text-white"
             >
-              <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#12EBFC]/20 mb-4 sm:mb-6">
+              <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#C77A93]/20 mb-4 sm:mb-6">
                 <CheckCircle2 className="h-6 w-6 sm:h-8 sm:w-8 text-brand-cyan" />
               </div>
               <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-4">
@@ -952,7 +952,7 @@ export default function FinanceCompassResults() {
                       transition={{ duration: 0.4, delay: 0.3 }}
                     >
                       <Card 
-                        className="bg-gradient-to-br from-[#02205B]/5 via-[#0884AA]/5 to-cyan-100/30 dark:from-[#02205B]/20 dark:via-[#0884AA]/20 dark:to-cyan-900/20 border-[#0884AA]/30"
+                        className="bg-gradient-to-br from-[#12161D]/5 via-[#7FB8A3]/5 to-cyan-100/30 dark:from-[#12161D]/20 dark:via-[#7FB8A3]/20 dark:to-cyan-900/20 border-[#7FB8A3]/30"
                         data-testid="card-roi-overview-cta"
                       >
                         <CardContent className="py-6">
@@ -965,11 +965,11 @@ export default function FinanceCompassResults() {
                             <div className="space-y-5">
                               {/* Header with icon and title */}
                               <div className="flex items-start gap-4">
-                                <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center shadow-lg">
+                                <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center shadow-lg">
                                   <Calculator className="h-7 w-7 text-white" />
                                 </div>
                                 <div className="flex-1">
-                                  <h4 className="font-bold text-lg text-[#02205B] dark:text-blue-100">
+                                  <h4 className="font-bold text-lg text-[#12161D] dark:text-blue-100">
                                     Return on Investment Analysis
                                   </h4>
                                   <p className="text-sm text-muted-foreground mt-1">
@@ -980,12 +980,12 @@ export default function FinanceCompassResults() {
                               
                               {/* Key metrics grid */}
                               <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
-                                <div className="bg-white/80 dark:bg-white/5 rounded-xl p-3 sm:p-4 border border-[#0884AA]/20 hover:border-[#0884AA]/40 transition-colors">
+                                <div className="bg-white/80 dark:bg-white/5 rounded-xl p-3 sm:p-4 border border-[#7FB8A3]/20 hover:border-[#7FB8A3]/40 transition-colors">
                                   <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
                                     <TrendingUp className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-green-600 dark:text-green-400 flex-shrink-0" />
                                     <span className="text-[10px] sm:text-xs font-medium text-muted-foreground truncate">ROI</span>
                                   </div>
-                                  <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#02205B] to-[#0884AA] bg-clip-text text-transparent">
+                                  <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#12161D] to-[#7FB8A3] bg-clip-text text-transparent">
                                     {roiData.data.metrics.roiPercent.toFixed(0)}%
                                   </div>
                                   <p className="text-[10px] sm:text-xs text-muted-foreground mt-0.5 sm:mt-1 line-clamp-2">
@@ -993,12 +993,12 @@ export default function FinanceCompassResults() {
                                   </p>
                                 </div>
                                 
-                                <div className="bg-white/80 dark:bg-white/5 rounded-xl p-3 sm:p-4 border border-[#0884AA]/20 hover:border-[#0884AA]/40 transition-colors">
+                                <div className="bg-white/80 dark:bg-white/5 rounded-xl p-3 sm:p-4 border border-[#7FB8A3]/20 hover:border-[#7FB8A3]/40 transition-colors">
                                   <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
                                     <Clock className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-amber-600 dark:text-amber-400 flex-shrink-0" />
                                     <span className="text-[10px] sm:text-xs font-medium text-muted-foreground truncate">Payback</span>
                                   </div>
-                                  <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#02205B] to-[#0884AA] bg-clip-text text-transparent">
+                                  <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#12161D] to-[#7FB8A3] bg-clip-text text-transparent">
                                     {roiData.data.metrics.paybackMonths < 24 
                                       ? `${roiData.data.metrics.paybackMonths.toFixed(1)} mo`
                                       : `${(roiData.data.metrics.paybackMonths / 12).toFixed(1)} yr`}
@@ -1008,12 +1008,12 @@ export default function FinanceCompassResults() {
                                   </p>
                                 </div>
                                 
-                                <div className="bg-white/80 dark:bg-white/5 rounded-xl p-3 sm:p-4 border border-[#0884AA]/20 hover:border-[#0884AA]/40 transition-colors">
+                                <div className="bg-white/80 dark:bg-white/5 rounded-xl p-3 sm:p-4 border border-[#7FB8A3]/20 hover:border-[#7FB8A3]/40 transition-colors">
                                   <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
                                     <BarChart3 className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-blue-600 dark:text-blue-400 flex-shrink-0" />
                                     <span className="text-[10px] sm:text-xs font-medium text-muted-foreground truncate">NPV</span>
                                   </div>
-                                  <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#02205B] to-[#0884AA] bg-clip-text text-transparent">
+                                  <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#12161D] to-[#7FB8A3] bg-clip-text text-transparent">
                                     {roiData.data.metrics.npvValue >= 1000 
                                       ? `£${(roiData.data.metrics.npvValue / 1000).toFixed(1)}M`
                                       : `£${roiData.data.metrics.npvValue.toFixed(0)}k`}
@@ -1023,12 +1023,12 @@ export default function FinanceCompassResults() {
                                   </p>
                                 </div>
                                 
-                                <div className="bg-white/80 dark:bg-white/5 rounded-xl p-3 sm:p-4 border border-[#0884AA]/20 hover:border-[#0884AA]/40 transition-colors">
+                                <div className="bg-white/80 dark:bg-white/5 rounded-xl p-3 sm:p-4 border border-[#7FB8A3]/20 hover:border-[#7FB8A3]/40 transition-colors">
                                   <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
                                     <Scale className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-purple-600 dark:text-purple-400 flex-shrink-0" />
                                     <span className="text-[10px] sm:text-xs font-medium text-muted-foreground truncate">BCR</span>
                                   </div>
-                                  <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#02205B] to-[#0884AA] bg-clip-text text-transparent">
+                                  <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#12161D] to-[#7FB8A3] bg-clip-text text-transparent">
                                     {roiData.data.metrics.benefitCostRatio.toFixed(2)}x
                                   </div>
                                   <p className="text-[10px] sm:text-xs text-muted-foreground mt-0.5 sm:mt-1 line-clamp-2">
@@ -1038,7 +1038,7 @@ export default function FinanceCompassResults() {
                               </div>
                               
                               {/* Additional context row */}
-                              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 pt-3 border-t border-[#0884AA]/10">
+                              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 pt-3 border-t border-[#7FB8A3]/10">
                                 <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-xs sm:text-sm">
                                   <div className="flex items-center gap-1.5 sm:gap-2">
                                     <div className="w-2 h-2 rounded-full bg-green-500 flex-shrink-0"></div>
@@ -1062,7 +1062,7 @@ export default function FinanceCompassResults() {
                                 <Link href={`/finance-compass/roi/${assessmentId}`}>
                                   <Button 
                                     variant="default" 
-                                    className="bg-gradient-to-r from-[#02205B] to-[#0884AA] hover:from-[#02205B]/90 hover:to-[#0884AA]/90 shadow-md"
+                                    className="bg-gradient-to-r from-[#12161D] to-[#7FB8A3] hover:from-[#12161D]/90 hover:to-[#7FB8A3]/90 shadow-md"
                                     data-testid="button-view-roi-details"
                                   >
                                     View Full Analysis
@@ -1073,11 +1073,11 @@ export default function FinanceCompassResults() {
                             </div>
                           ) : (
                             <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
-                              <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center shadow-lg">
+                              <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center shadow-lg">
                                 <Calculator className="h-7 w-7 text-white" />
                               </div>
                               <div className="flex-1">
-                                <h4 className="font-bold text-lg text-[#02205B] dark:text-blue-100">
+                                <h4 className="font-bold text-lg text-[#12161D] dark:text-blue-100">
                                   Return on Investment Analysis
                                 </h4>
                                 <p className="text-sm text-muted-foreground mt-1">
@@ -1087,7 +1087,7 @@ export default function FinanceCompassResults() {
                               <Link href={`/finance-compass/roi/${assessmentId}`}>
                                 <Button 
                                   variant="outline" 
-                                  className="border-[#0884AA] text-brand-teal hover:bg-[#0884AA]/10"
+                                  className="border-[#7FB8A3] text-brand-teal hover:bg-[#7FB8A3]/10"
                                   data-testid="button-complete-roi"
                                 >
                                   Complete ROI Profile
@@ -1136,7 +1136,7 @@ export default function FinanceCompassResults() {
                         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4" data-testid="benchmark-summary-cards">
                           <Card className="p-3 sm:p-4" data-testid="card-overall-percentile">
                             <div className="flex flex-col items-center text-center">
-                              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center mb-1.5 sm:mb-2">
+                              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center mb-1.5 sm:mb-2">
                                 <Award className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                               </div>
                               <div className="text-xl sm:text-2xl font-bold text-foreground">
@@ -1184,11 +1184,11 @@ export default function FinanceCompassResults() {
                           <CardContent className="py-5">
                             <div className="space-y-4">
                               <div className="flex items-start gap-3">
-                                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center">
+                                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center">
                                   <Scale className="h-5 w-5 text-white" />
                                 </div>
                                 <div className="flex-1">
-                                  <h4 className="font-semibold text-[#02205B] dark:text-blue-100 mb-1">
+                                  <h4 className="font-semibold text-[#12161D] dark:text-blue-100 mb-1">
                                     How are your scores calculated?
                                   </h4>
                                   <p className="text-sm text-blue-700 dark:text-blue-300">
@@ -1202,7 +1202,7 @@ export default function FinanceCompassResults() {
                                 <div className="p-3 bg-white/60 dark:bg-white/5 rounded-lg border border-blue-200 dark:border-blue-700">
                                   <div className="flex items-center gap-2 mb-2">
                                     <BarChart3 className="h-4 w-4 text-brand-teal" />
-                                    <span className="text-sm font-medium text-[#02205B] dark:text-blue-100">
+                                    <span className="text-sm font-medium text-[#12161D] dark:text-blue-100">
                                       {scoreBreakdownData?.data?.methodology?.benchmarkSource || "Constancia Benchmark Database"}
                                     </span>
                                   </div>
@@ -1216,7 +1216,7 @@ export default function FinanceCompassResults() {
                                 {/* 6-Layer AI Validation Pipeline */}
                                 {scoreBreakdownData?.data?.methodology?.validationPipeline && (
                                   <AccordionItem value="validation-pipeline" className="border-blue-200 dark:border-blue-700">
-                                    <AccordionTrigger className="text-sm font-medium text-[#02205B] dark:text-blue-100 hover:no-underline py-2">
+                                    <AccordionTrigger className="text-sm font-medium text-[#12161D] dark:text-blue-100 hover:no-underline py-2">
                                       <div className="flex items-center gap-2">
                                         <Layers className="h-4 w-4 text-brand-teal" />
                                         {scoreBreakdownData.data.methodology.validationPipeline.name}
@@ -1261,7 +1261,7 @@ export default function FinanceCompassResults() {
                                 {/* Assessment Structure - Pre + Full */}
                                 {scoreBreakdownData?.data?.methodology?.assessmentStructure && (
                                   <AccordionItem value="assessment-structure" className="border-blue-200 dark:border-blue-700">
-                                    <AccordionTrigger className="text-sm font-medium text-[#02205B] dark:text-blue-100 hover:no-underline py-2">
+                                    <AccordionTrigger className="text-sm font-medium text-[#12161D] dark:text-blue-100 hover:no-underline py-2">
                                       <div className="flex items-center gap-2">
                                         <FileText className="h-4 w-4 text-brand-teal" />
                                         Assessment Structure
@@ -1280,7 +1280,7 @@ export default function FinanceCompassResults() {
                                           >
                                             <div className="flex items-center justify-between mb-2">
                                               <span className="font-medium text-foreground">{tier.tier}</span>
-                                              <Badge variant="outline" className="bg-[#0884AA]/10 border-[#0884AA]/30 text-brand-teal">
+                                              <Badge variant="outline" className="bg-[#7FB8A3]/10 border-[#7FB8A3]/30 text-brand-teal">
                                                 {tier.questionCount} questions
                                               </Badge>
                                             </div>
@@ -1291,8 +1291,8 @@ export default function FinanceCompassResults() {
                                           </div>
                                         ))}
                                       </div>
-                                      <div className="p-3 bg-gradient-to-r from-[#02205B]/5 to-[#0884AA]/5 rounded-lg border border-[#0884AA]/20">
-                                        <p className="text-xs text-[#02205B] dark:text-blue-200">
+                                      <div className="p-3 bg-gradient-to-r from-[#12161D]/5 to-[#7FB8A3]/5 rounded-lg border border-[#7FB8A3]/20">
+                                        <p className="text-xs text-[#12161D] dark:text-blue-200">
                                           {scoreBreakdownData.data.methodology.assessmentStructure.combined}
                                         </p>
                                       </div>
@@ -1302,7 +1302,7 @@ export default function FinanceCompassResults() {
 
                                 {scoreBreakdownData?.data?.methodology?.framework && (
                                   <AccordionItem value="framework" className="border-blue-200 dark:border-blue-700">
-                                    <AccordionTrigger className="text-sm font-medium text-[#02205B] dark:text-blue-100 hover:no-underline py-2">
+                                    <AccordionTrigger className="text-sm font-medium text-[#12161D] dark:text-blue-100 hover:no-underline py-2">
                                       <div className="flex items-center gap-2">
                                         <Target className="h-4 w-4 text-brand-teal" />
                                         {scoreBreakdownData.data.methodology.framework.name}
@@ -1390,7 +1390,7 @@ export default function FinanceCompassResults() {
                                 )}
                                 
                                 <AccordionItem value="scoring-methods" className="border-blue-200 dark:border-blue-700">
-                                  <AccordionTrigger className="text-sm font-medium text-[#02205B] dark:text-blue-100 hover:no-underline py-2">
+                                  <AccordionTrigger className="text-sm font-medium text-[#12161D] dark:text-blue-100 hover:no-underline py-2">
                                     <div className="flex items-center gap-2">
                                       <Calculator className="h-4 w-4 text-brand-teal" />
                                       Scoring Methods Explained
@@ -1407,7 +1407,7 @@ export default function FinanceCompassResults() {
                                           <div className="flex items-center gap-2 mb-1">
                                             <Badge 
                                               variant="outline" 
-                                              className="bg-[#0884AA]/10 border-[#0884AA]/30 text-brand-teal dark:text-cyan-400 text-xs font-medium"
+                                              className="bg-[#7FB8A3]/10 border-[#7FB8A3]/30 text-brand-teal dark:text-cyan-400 text-xs font-medium"
                                             >
                                               {type.type}
                                             </Badge>
@@ -1417,7 +1417,7 @@ export default function FinanceCompassResults() {
                                             <p className="text-xs text-muted-foreground italic mb-1">{type.example}</p>
                                           )}
                                           {type.calculation && (
-                                            <code className="text-xs bg-muted px-2 py-1 rounded text-[#02205B] dark:text-cyan-300 font-mono">
+                                            <code className="text-xs bg-muted px-2 py-1 rounded text-[#12161D] dark:text-cyan-300 font-mono">
                                               {type.calculation}
                                             </code>
                                           )}
@@ -1432,7 +1432,7 @@ export default function FinanceCompassResults() {
                                 <div className="pt-2 border-t border-blue-200 dark:border-blue-700">
                                   <div className="flex items-center gap-2 mb-2">
                                     <Shield className="h-4 w-4 text-brand-teal" />
-                                    <span className="text-xs font-medium text-[#02205B] dark:text-blue-100">
+                                    <span className="text-xs font-medium text-[#12161D] dark:text-blue-100">
                                       Methodology Credentials
                                     </span>
                                   </div>
@@ -1544,7 +1544,7 @@ export default function FinanceCompassResults() {
                                         </div>
                                       ) : breakdownDimension ? (
                                         <div className="space-y-4">
-                                          <div className="flex items-center justify-between p-3 bg-gradient-to-r from-[#02205B]/5 to-[#0884AA]/5 rounded-lg border border-[#0884AA]/20">
+                                          <div className="flex items-center justify-between p-3 bg-gradient-to-r from-[#12161D]/5 to-[#7FB8A3]/5 rounded-lg border border-[#7FB8A3]/20">
                                             <div className="flex items-center gap-2">
                                               <Info className="h-4 w-4 text-brand-teal" />
                                               <span className="text-sm font-medium text-foreground">Score Calculation</span>
@@ -1610,7 +1610,7 @@ export default function FinanceCompassResults() {
                                                 <div className="flex items-center gap-2">
                                                   <div className="flex-1 bg-muted rounded-full h-2 overflow-hidden">
                                                     <div 
-                                                      className="h-full bg-gradient-to-r from-[#02205B] to-[#0884AA] rounded-full transition-all duration-300"
+                                                      className="h-full bg-gradient-to-r from-[#12161D] to-[#7FB8A3] rounded-full transition-all duration-300"
                                                       style={{ width: `${question.maxPossible > 0 ? ((question.rawScore ?? question.scoreEarned ?? 0) / question.maxPossible) * 100 : 0}%` }}
                                                       data-testid={`progress-question-${index}-${qIndex}`}
                                                     />
@@ -1668,14 +1668,14 @@ export default function FinanceCompassResults() {
                                         </div>
                                       ) : (
                                         <div className="space-y-4" data-testid="dimension-summary">
-                                          <div className="p-4 bg-gradient-to-r from-[#02205B]/5 to-[#0884AA]/5 rounded-lg border border-[#0884AA]/20">
+                                          <div className="p-4 bg-gradient-to-r from-[#12161D]/5 to-[#7FB8A3]/5 rounded-lg border border-[#7FB8A3]/20">
                                             <h5 className="text-sm font-medium text-foreground mb-3 flex items-center gap-2">
                                               <BarChart3 className="h-4 w-4 text-brand-teal" />
                                               Dimension Performance Summary
                                             </h5>
                                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                                               <div className="text-center">
-                                                <div className="text-2xl font-bold text-[#02205B] dark:text-blue-100">
+                                                <div className="text-2xl font-bold text-[#12161D] dark:text-blue-100">
                                                   {(comparison.yourScore ?? 0).toFixed(0)}
                                                 </div>
                                                 <div className="text-xs text-muted-foreground">Your Score</div>
@@ -1719,7 +1719,7 @@ export default function FinanceCompassResults() {
                                           </div>
                                           
                                           {comparison.recommendation && (
-                                            <div className="p-3 border-l-4 border-[#0884AA] bg-[#0884AA]/5 rounded-r-lg">
+                                            <div className="p-3 border-l-4 border-[#7FB8A3] bg-[#7FB8A3]/5 rounded-r-lg">
                                               <div className="flex items-start gap-2">
                                                 <Lightbulb className="h-4 w-4 text-brand-teal mt-0.5 flex-shrink-0" />
                                                 <div className="text-sm text-foreground">
@@ -1761,7 +1761,7 @@ export default function FinanceCompassResults() {
                                   >
                                     <AccordionTrigger className="px-4 py-3 hover:bg-muted/50">
                                       <div className="flex items-center gap-3 w-full">
-                                        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center text-white font-bold text-sm">
+                                        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center text-white font-bold text-sm">
                                           {priority.priority}
                                         </div>
                                         <div className="flex-1 text-left">
@@ -1794,7 +1794,7 @@ export default function FinanceCompassResults() {
                                     <AccordionContent className="px-4 pb-4">
                                       <div className="space-y-4 ml-11">
                                         {priority.workshopRecommendation && (
-                                          <div className="p-3 bg-gradient-to-r from-[#02205B]/5 to-[#0884AA]/5 rounded-lg border border-[#0884AA]/20">
+                                          <div className="p-3 bg-gradient-to-r from-[#12161D]/5 to-[#7FB8A3]/5 rounded-lg border border-[#7FB8A3]/20">
                                             <div className="flex items-center gap-2 text-brand-teal font-medium text-sm">
                                               <Lightbulb className="h-4 w-4" />
                                               Recommended: {priority.workshopRecommendation}
@@ -1916,7 +1916,7 @@ export default function FinanceCompassResults() {
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.1 }}
                         >
-                          <Card className="shadow-lg border-[#0884AA]/20" data-testid="card-roi-summary">
+                          <Card className="shadow-lg border-[#7FB8A3]/20" data-testid="card-roi-summary">
                           <CardHeader>
                             <div className="flex items-center justify-between gap-4 flex-wrap">
                               <div className="flex items-center gap-3">
@@ -2086,7 +2086,7 @@ export default function FinanceCompassResults() {
                             </p>
                             <Button
                               onClick={handleNavigateToROI}
-                              className="bg-[#0884AA]"
+                              className="bg-[#7FB8A3]"
                               data-testid="button-start-roi"
                             >
                               <Calculator className="h-4 w-4 mr-2" />
@@ -2112,7 +2112,7 @@ export default function FinanceCompassResults() {
                       <Card className="shadow-lg" data-testid="card-workshop-schedule">
                         <CardHeader>
                           <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center">
+                            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center">
                               <GraduationCap className="h-5 w-5 text-white" />
                             </div>
                             <div>
@@ -2171,7 +2171,7 @@ export default function FinanceCompassResults() {
 
                               {/* Insight Text */}
                               {workshopData.data.insight && (
-                                <div className="p-4 bg-gradient-to-r from-[#02205B]/5 to-[#0884AA]/5 rounded-lg border border-[#0884AA]/20" data-testid="workshop-insight">
+                                <div className="p-4 bg-gradient-to-r from-[#12161D]/5 to-[#7FB8A3]/5 rounded-lg border border-[#7FB8A3]/20" data-testid="workshop-insight">
                                   <p className="text-sm text-muted-foreground italic">
                                     {workshopData.data.insight}
                                   </p>
@@ -2225,7 +2225,7 @@ export default function FinanceCompassResults() {
                                           />
                                           {/* Industry median marker */}
                                           <div 
-                                            className="absolute h-full w-0.5 bg-[#0884AA] z-10"
+                                            className="absolute h-full w-0.5 bg-[#7FB8A3] z-10"
                                             style={{ left: `${Math.min((workshopData.data.financeCostBenchmark.industryMedianPct / 5) * 100, 100)}%` }}
                                           />
                                           {/* Your position */}
@@ -2234,7 +2234,7 @@ export default function FinanceCompassResults() {
                                               workshopData.data.financeCostBenchmark.performanceVsMedian === 'below' 
                                                 ? 'bg-green-500' 
                                                 : workshopData.data.financeCostBenchmark.performanceVsMedian === 'at'
-                                                  ? 'bg-[#0884AA]'
+                                                  ? 'bg-[#7FB8A3]'
                                                   : 'bg-amber-500'
                                             }`}
                                             style={{ width: `${Math.min((workshopData.data.financeCostBenchmark.companyFinanceCostPct / 5) * 100, 100)}%` }}
@@ -2255,7 +2255,7 @@ export default function FinanceCompassResults() {
                                           workshopData.data.financeCostBenchmark.performanceVsMedian === 'below'
                                             ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400'
                                             : workshopData.data.financeCostBenchmark.performanceVsMedian === 'at'
-                                              ? 'bg-[#0884AA]/10 text-brand-teal'
+                                              ? 'bg-[#7FB8A3]/10 text-brand-teal'
                                               : workshopData.data.financeCostBenchmark.performanceVsMedian === 'above'
                                                 ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400'
                                                 : 'bg-muted text-muted-foreground'
@@ -2516,7 +2516,7 @@ export default function FinanceCompassResults() {
                           transition={{ duration: 0.3 }}
                         >
                           <div className="w-16 h-16 mx-auto mb-6 relative">
-                            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#02205B] to-[#0884AA] opacity-20 animate-pulse" />
+                            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#12161D] to-[#7FB8A3] opacity-20 animate-pulse" />
                             <div className="absolute inset-2 rounded-full bg-background flex items-center justify-center">
                               <Loader2 className="h-8 w-8 text-brand-teal animate-spin" />
                             </div>
@@ -2581,7 +2581,7 @@ export default function FinanceCompassResults() {
                         <Card data-testid="card-executive-brief">
                           <CardHeader className="px-3 sm:px-6 py-3 sm:py-4">
                             <div className="flex items-center gap-2 sm:gap-3">
-                              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center flex-shrink-0">
+                              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center flex-shrink-0">
                                 <FileText className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                               </div>
                               <div>
@@ -2593,7 +2593,7 @@ export default function FinanceCompassResults() {
                             </div>
                           </CardHeader>
                           <CardContent className="space-y-4 sm:space-y-6 px-3 sm:px-6">
-                            <div className="p-3 sm:p-4 bg-gradient-to-r from-[#02205B]/5 to-[#0884AA]/5 rounded-lg border border-[#0884AA]/20">
+                            <div className="p-3 sm:p-4 bg-gradient-to-r from-[#12161D]/5 to-[#7FB8A3]/5 rounded-lg border border-[#7FB8A3]/20">
                               <p className="text-sm sm:text-lg font-medium text-foreground" data-testid="text-executive-headline">
                                 {narrativesData.data.executiveBrief.headline}
                               </p>
@@ -2617,7 +2617,7 @@ export default function FinanceCompassResults() {
                               <ul className="space-y-2 pl-6" data-testid="list-key-findings">
                                 {narrativesData.data.executiveBrief.keyFindings.map((finding, index) => (
                                   <li key={index} className="flex items-start gap-2 text-muted-foreground">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-[#0884AA] mt-2 flex-shrink-0" />
+                                    <span className="w-1.5 h-1.5 rounded-full bg-[#7FB8A3] mt-2 flex-shrink-0" />
                                     {finding}
                                   </li>
                                 ))}
@@ -2660,8 +2660,8 @@ export default function FinanceCompassResults() {
                               </div>
                             </div>
 
-                            <div className="p-3 sm:p-4 bg-brand-navy/5 dark:bg-brand-navy/20 rounded-lg border border-[#02205B]/20">
-                              <h5 className="font-medium text-[#02205B] dark:text-brand-cyan mb-1.5 sm:mb-2 text-sm sm:text-base">Call to Action</h5>
+                            <div className="p-3 sm:p-4 bg-brand-navy/5 dark:bg-brand-navy/20 rounded-lg border border-[#12161D]/20">
+                              <h5 className="font-medium text-[#12161D] dark:text-brand-cyan mb-1.5 sm:mb-2 text-sm sm:text-base">Call to Action</h5>
                               <p className="text-sm sm:text-base text-foreground" data-testid="text-call-to-action">
                                 {narrativesData.data.executiveBrief.callToAction}
                               </p>
@@ -2672,7 +2672,7 @@ export default function FinanceCompassResults() {
                         <Card data-testid="card-implementation-roadmap">
                           <CardHeader className="px-3 sm:px-6 py-3 sm:py-4">
                             <div className="flex items-center gap-2 sm:gap-3">
-                              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center flex-shrink-0">
+                              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center flex-shrink-0">
                                 <Map className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                               </div>
                               <div>
@@ -2693,7 +2693,7 @@ export default function FinanceCompassResults() {
                                 <AccordionItem key={phase.phase} value={`phase-${phase.phase}`} data-testid={`accordion-item-phase-${phase.phase}`}>
                                   <AccordionTrigger className="hover:no-underline py-2 sm:py-4">
                                     <div className="flex items-center gap-2 sm:gap-3">
-                                      <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center text-white text-xs sm:text-sm font-bold flex-shrink-0">
+                                      <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center text-white text-xs sm:text-sm font-bold flex-shrink-0">
                                         {phase.phase}
                                       </div>
                                       <div className="text-left">
@@ -2798,7 +2798,7 @@ export default function FinanceCompassResults() {
                             <Card data-testid="card-stakeholder-cfo">
                               <CardHeader className="px-3 sm:px-6 py-3 sm:py-4">
                                 <div className="flex items-center gap-2 sm:gap-3">
-                                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center flex-shrink-0">
+                                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center flex-shrink-0">
                                     <Briefcase className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                                   </div>
                                   <div>
@@ -2810,7 +2810,7 @@ export default function FinanceCompassResults() {
                               <CardContent className="space-y-3 sm:space-y-4 px-3 sm:px-6">
                                 {/* Headline */}
                                 {narrativesData.data.stakeholderNarratives.cfo.headline && (
-                                  <p className="font-medium text-foreground text-sm border-l-4 border-[#0884AA] pl-3" data-testid="text-cfo-headline">
+                                  <p className="font-medium text-foreground text-sm border-l-4 border-[#7FB8A3] pl-3" data-testid="text-cfo-headline">
                                     {narrativesData.data.stakeholderNarratives.cfo.headline}
                                   </p>
                                 )}
@@ -2884,7 +2884,7 @@ export default function FinanceCompassResults() {
 
                                 {/* Call to Action */}
                                 {narrativesData.data.stakeholderNarratives.cfo.callToAction && (
-                                  <div className="p-3 bg-gradient-to-r from-[#02205B]/10 to-[#0884AA]/10 rounded-lg border border-[#0884AA]/20">
+                                  <div className="p-3 bg-gradient-to-r from-[#12161D]/10 to-[#7FB8A3]/10 rounded-lg border border-[#7FB8A3]/20">
                                     <p className="text-xs font-medium text-brand-teal">Next Step</p>
                                     <p className="text-sm text-foreground">{narrativesData.data.stakeholderNarratives.cfo.callToAction}</p>
                                   </div>
@@ -2896,7 +2896,7 @@ export default function FinanceCompassResults() {
                             <Card data-testid="card-stakeholder-fpa">
                               <CardHeader className="px-3 sm:px-6 py-3 sm:py-4">
                                 <div className="flex items-center gap-2 sm:gap-3">
-                                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center flex-shrink-0">
+                                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center flex-shrink-0">
                                     <BarChart3 className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                                   </div>
                                   <div>
@@ -2908,7 +2908,7 @@ export default function FinanceCompassResults() {
                               <CardContent className="space-y-3 sm:space-y-4 px-3 sm:px-6">
                                 {/* Headline */}
                                 {narrativesData.data.stakeholderNarratives.fpaDirector.headline && (
-                                  <p className="font-medium text-foreground text-sm border-l-4 border-[#0884AA] pl-3" data-testid="text-fpa-headline">
+                                  <p className="font-medium text-foreground text-sm border-l-4 border-[#7FB8A3] pl-3" data-testid="text-fpa-headline">
                                     {narrativesData.data.stakeholderNarratives.fpaDirector.headline}
                                   </p>
                                 )}
@@ -2982,7 +2982,7 @@ export default function FinanceCompassResults() {
 
                                 {/* Call to Action */}
                                 {narrativesData.data.stakeholderNarratives.fpaDirector.callToAction && (
-                                  <div className="p-3 bg-gradient-to-r from-[#02205B]/10 to-[#0884AA]/10 rounded-lg border border-[#0884AA]/20">
+                                  <div className="p-3 bg-gradient-to-r from-[#12161D]/10 to-[#7FB8A3]/10 rounded-lg border border-[#7FB8A3]/20">
                                     <p className="text-xs font-medium text-brand-teal">Next Step</p>
                                     <p className="text-sm text-foreground">{narrativesData.data.stakeholderNarratives.fpaDirector.callToAction}</p>
                                   </div>
@@ -2995,7 +2995,7 @@ export default function FinanceCompassResults() {
                               <Card data-testid="card-stakeholder-it">
                                 <CardHeader className="px-3 sm:px-6 py-3 sm:py-4">
                                   <div className="flex items-center gap-2 sm:gap-3">
-                                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center flex-shrink-0">
+                                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center flex-shrink-0">
                                       <Monitor className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                                     </div>
                                     <div>
@@ -3007,7 +3007,7 @@ export default function FinanceCompassResults() {
                                 <CardContent className="space-y-3 sm:space-y-4 px-3 sm:px-6">
                                   {/* Headline */}
                                   {narrativesData.data.stakeholderNarratives.itDirector.headline && (
-                                    <p className="font-medium text-foreground text-sm border-l-4 border-[#0884AA] pl-3" data-testid="text-it-headline">
+                                    <p className="font-medium text-foreground text-sm border-l-4 border-[#7FB8A3] pl-3" data-testid="text-it-headline">
                                       {narrativesData.data.stakeholderNarratives.itDirector.headline}
                                     </p>
                                   )}
@@ -3081,7 +3081,7 @@ export default function FinanceCompassResults() {
 
                                   {/* Call to Action */}
                                   {narrativesData.data.stakeholderNarratives.itDirector.callToAction && (
-                                    <div className="p-3 bg-gradient-to-r from-[#02205B]/10 to-[#0884AA]/10 rounded-lg border border-[#0884AA]/20">
+                                    <div className="p-3 bg-gradient-to-r from-[#12161D]/10 to-[#7FB8A3]/10 rounded-lg border border-[#7FB8A3]/20">
                                       <p className="text-xs font-medium text-brand-teal">Next Step</p>
                                       <p className="text-sm text-foreground">{narrativesData.data.stakeholderNarratives.itDirector.callToAction}</p>
                                     </div>
@@ -3105,7 +3105,7 @@ export default function FinanceCompassResults() {
                               <Card data-testid="card-respondent-confidence">
                                 <CardHeader className="pb-1 sm:pb-2 px-3 sm:px-6">
                                   <div className="flex items-center gap-2">
-                                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center flex-shrink-0">
+                                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center flex-shrink-0">
                                       <Award className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-white" />
                                     </div>
                                     <div>
@@ -3116,7 +3116,7 @@ export default function FinanceCompassResults() {
                                 </CardHeader>
                                 <CardContent className="space-y-2 sm:space-y-3 px-3 sm:px-6">
                                   <div className="flex items-center justify-between">
-                                    <span className="text-xl sm:text-2xl font-bold text-[#02205B] dark:text-brand-cyan">
+                                    <span className="text-xl sm:text-2xl font-bold text-[#12161D] dark:text-brand-cyan">
                                       {narrativesData.data.phase14Intelligence.respondentConfidence.overall}%
                                     </span>
                                     <Badge variant="outline" className={`${
@@ -3162,7 +3162,7 @@ export default function FinanceCompassResults() {
                               <Card data-testid="card-confidence-legend">
                                 <CardHeader className="pb-2">
                                   <div className="flex items-center gap-2">
-                                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center">
+                                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center">
                                       <Info className="h-4 w-4 text-white" />
                                     </div>
                                     <div>
@@ -3196,7 +3196,7 @@ export default function FinanceCompassResults() {
                             <Card data-testid="card-root-causes">
                               <CardHeader className="pb-2">
                                 <div className="flex items-center gap-2">
-                                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center">
+                                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center">
                                     <AlertTriangle className="h-4 w-4 text-white" />
                                   </div>
                                   <div>
@@ -3371,7 +3371,7 @@ export default function FinanceCompassResults() {
                     <Card className="shadow-lg" data-testid="card-what-scores-mean">
                       <CardHeader>
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center">
+                          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center">
                             <Lightbulb className="h-5 w-5 text-white" />
                           </div>
                           <div>
@@ -3776,7 +3776,7 @@ export default function FinanceCompassResults() {
                                                 </div>
                                               </div>
                                               
-                                              <div className="flex items-start gap-3 p-3 rounded-lg bg-[#0884AA]/5 border border-[#0884AA]/20">
+                                              <div className="flex items-start gap-3 p-3 rounded-lg bg-[#7FB8A3]/5 border border-[#7FB8A3]/20">
                                                 <Lightbulb className="h-4 w-4 text-brand-teal mt-0.5 flex-shrink-0" />
                                                 <div>
                                                   <span className="text-sm font-medium text-brand-teal">Recommended Action: </span>
@@ -3870,11 +3870,11 @@ export default function FinanceCompassResults() {
               transition={{ delay: 0.3 }}
               className="mb-8"
             >
-              <Card className="bg-gradient-to-r from-[#02205B]/5 to-[#0884AA]/5 border-[#0884AA]/20" data-testid="card-upgrade">
+              <Card className="bg-gradient-to-r from-[#12161D]/5 to-[#7FB8A3]/5 border-[#7FB8A3]/20" data-testid="card-upgrade">
                 <CardContent className="py-8">
                   <div className="flex flex-col md:flex-row items-center gap-6">
                     <div className="flex-shrink-0">
-                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center">
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center">
                         <Target className="h-8 w-8 text-white" />
                       </div>
                     </div>
@@ -3888,7 +3888,7 @@ export default function FinanceCompassResults() {
                       <Button
                         onClick={() => handleUpgrade(upgrade.nextTier)}
                         disabled={upgradeMutation.isPending}
-                        className="bg-gradient-to-r from-[#02205B] to-[#0884AA] hover:from-[#0884AA] hover:to-[#12EBFC]"
+                        className="bg-gradient-to-r from-[#12161D] to-[#7FB8A3] hover:from-[#7FB8A3] hover:to-[#C77A93]"
                         data-testid="button-upgrade"
                       >
                         {upgradeMutation.isPending ? (
@@ -3932,7 +3932,7 @@ export default function FinanceCompassResults() {
                     className="flex items-center gap-4 p-4 rounded-lg border hover-elevate transition-all"
                     data-testid="link-email-contact"
                   >
-                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center flex-shrink-0">
+                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center flex-shrink-0">
                       <Mail className="h-5 w-5 text-white" />
                     </div>
                     <div>
@@ -3945,7 +3945,7 @@ export default function FinanceCompassResults() {
                       className="flex items-center gap-4 p-4 rounded-lg border hover-elevate transition-all cursor-pointer"
                       data-testid="link-contact-page"
                     >
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center flex-shrink-0">
+                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center flex-shrink-0">
                         <Phone className="h-5 w-5 text-white" />
                       </div>
                       <div>

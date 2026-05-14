@@ -69,8 +69,8 @@ import {
 import type { RoiInputs } from "@shared/roi-calculator";
 
 const BRAND = {
-  navy: "#02205B",
-  cyan: "#12EBFC",
+  navy: "#12161D",
+  cyan: "#C77A93",
   teal: "#0891B2",
   darkGrey: "#374151",
   lightGrey: "#F3F4F6",

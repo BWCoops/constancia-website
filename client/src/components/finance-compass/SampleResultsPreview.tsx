@@ -59,7 +59,7 @@ export function SampleResultsPreview({ onStartAssessment, className }: SampleRes
             <h3 className="text-lg font-semibold text-white">7-Dimension Analysis</h3>
           </div>
           <div className="text-right">
-            <p className="text-3xl font-bold text-[#12EBFC]">{overallScore}</p>
+            <p className="text-3xl font-bold text-[#C77A93]">{overallScore}</p>
             <p className="text-xs text-white/60">/ 100</p>
           </div>
         </div>
@@ -108,7 +108,7 @@ export function SampleResultsPreview({ onStartAssessment, className }: SampleRes
           className="mt-4 p-3 rounded-lg bg-white/5 border border-white/10"
         >
           <div className="flex items-center gap-2 mb-2">
-            <Sparkles className="h-4 w-4 text-[#12EBFC]" />
+            <Sparkles className="h-4 w-4 text-[#C77A93]" />
             <p className="text-xs font-medium text-white">AI Recommendation</p>
           </div>
           <p className="text-xs text-white/70">
@@ -118,7 +118,7 @@ export function SampleResultsPreview({ onStartAssessment, className }: SampleRes
 
         <Button
           onClick={onStartAssessment}
-          className="w-full mt-4 bg-white text-[#02205B] hover:bg-white/90"
+          className="w-full mt-4 bg-white text-[#12161D] hover:bg-white/90"
           data-testid="button-get-your-results"
         >
           Get Your Results

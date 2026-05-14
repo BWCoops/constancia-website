@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { preloadRoute } from "@/lib/preload";
 import { useFeatureFlags } from "@/lib/feature-flags";
 import type { FeatureFlags } from "@shared/feature-flags";
-import constanciaLogo from "@assets/brand/Constancia-Logo-ML-Transparent.png";
+import { ConstanciaMark } from "@/components/ui/constancia-mark";
 
 interface NavLink {
   href: string;
@@ -138,12 +138,23 @@ export function Navigation() {
         role="navigation"
         aria-label="Main navigation"
       >
-        <Link href="/" className="flex items-center" data-testid="link-logo">
-          <img
-            src={constanciaLogo}
-            alt="Constancia"
-            className="h-9 md:h-10 w-auto"
+        <Link href="/" className="flex items-center gap-3 group" data-testid="link-logo">
+          <ConstanciaMark
+            size={42}
+            aria-label="Constancia"
+            className="transition-transform duration-300 group-hover:scale-110"
           />
+          <span
+            className="hidden sm:inline-block text-[#F6F3EE] font-semibold tracking-tight"
+            style={{
+              fontFamily: 'var(--brand-font-sans)',
+              fontSize: '20px',
+              letterSpacing: '-0.01em',
+              fontWeight: 600,
+            }}
+          >
+            constancia<span style={{ color: 'var(--brand-mineral-green)' }}>.</span>
+          </span>
         </Link>
 
         <div className="hidden lg:flex items-center gap-1">

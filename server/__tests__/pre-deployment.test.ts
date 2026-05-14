@@ -1958,7 +1958,7 @@ describe('Google Lighthouse Performance Checks', () => {
     it('should have theme color matching brand', () => {
       const manifestPath = join(process.cwd(), 'client/public/manifest.json');
       const manifest = JSON.parse(readFileSync(manifestPath, 'utf-8'));
-      expect(manifest.theme_color).toBe('#02205B'); // Constancia Navy
+      expect(manifest.theme_color).toBe('#12161D'); // Constancia Navy
     });
   });
 

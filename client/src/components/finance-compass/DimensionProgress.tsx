@@ -47,9 +47,9 @@ const iconMap: Record<string, typeof TrendingUp> = {
 };
 
 const colorMap: Record<string, string> = {
-  "#0884AA": "text-[#0A6688] bg-[#0884AA]/10",
-  "#12EBFC": "text-[#12EBFC] bg-[#12EBFC]/10",
-  "#02205B": "text-[#02205B] bg-[#02205B]/10",
+  "#7FB8A3": "text-[#5E8D7A] bg-[#7FB8A3]/10",
+  "#C77A93": "text-[#C77A93] bg-[#C77A93]/10",
+  "#12161D": "text-[#12161D] bg-[#12161D]/10",
   "#6366F1": "text-indigo-500 bg-indigo-500/10",
   "#10B981": "text-emerald-500 bg-emerald-500/10",
   "#F59E0B": "text-amber-500 bg-amber-500/10",
@@ -72,7 +72,7 @@ export function DimensionProgress({
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <h3 className="font-semibold text-foreground">Your Progress</h3>
-          <Badge variant="outline" className="text-[#0A6688]">
+          <Badge variant="outline" className="text-[#5E8D7A]">
             {Math.round(overallProgress)}%
           </Badge>
         </div>
@@ -105,7 +105,7 @@ export function DimensionProgress({
                 onClick={() => onDimensionClick?.(dimension.id)}
                 className={cn(
                   "w-full flex items-center gap-3 p-3 rounded-lg transition-all text-left",
-                  isCurrent && "bg-[#0884AA]/10 border border-[#0884AA]/30",
+                  isCurrent && "bg-[#7FB8A3]/10 border border-[#7FB8A3]/30",
                   !isCurrent && "hover-elevate",
                   dimension.isCompleted && "opacity-80"
                 )}
@@ -139,7 +139,7 @@ export function DimensionProgress({
                   <div className="flex items-center justify-between gap-2">
                     <span className={cn(
                       "text-sm font-medium truncate",
-                      isCurrent ? "text-[#0A6688]" : "text-foreground"
+                      isCurrent ? "text-[#5E8D7A]" : "text-foreground"
                     )}>
                       {dimension.shortName}
                     </span>
@@ -154,14 +154,14 @@ export function DimensionProgress({
                       transition={{ duration: 0.5, ease: "easeOut" }}
                       className={cn(
                         "h-full rounded-full",
-                        dimension.isCompleted ? "bg-emerald-500" : "bg-[#0884AA]"
+                        dimension.isCompleted ? "bg-emerald-500" : "bg-[#7FB8A3]"
                       )}
                     />
                   </div>
                 </div>
 
                 {isCurrent && (
-                  <ChevronRight className="h-4 w-4 text-[#0A6688] flex-shrink-0" />
+                  <ChevronRight className="h-4 w-4 text-[#5E8D7A] flex-shrink-0" />
                 )}
               </motion.button>
             );
@@ -177,7 +177,7 @@ export function DimensionProgress({
             exit={{ opacity: 0, y: -20 }}
             className="border-t pt-4"
           >
-            <div className="bg-gradient-to-r from-emerald-500/10 to-[#0884AA]/10 rounded-lg p-4 text-center">
+            <div className="bg-gradient-to-r from-emerald-500/10 to-[#7FB8A3]/10 rounded-lg p-4 text-center">
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
@@ -213,7 +213,7 @@ export function DimensionProgressMobile({
         <span className="text-sm font-medium text-foreground">
           Progress: {totalAnswered}/{totalQuestions}
         </span>
-        <Badge variant="outline" className="text-[#0A6688]">
+        <Badge variant="outline" className="text-[#5E8D7A]">
           {Math.round(overallProgress)}%
         </Badge>
       </div>
@@ -229,7 +229,7 @@ export function DimensionProgressMobile({
               key={dimension.id}
               className={cn(
                 "flex items-center gap-1.5 px-2 py-1 rounded-full text-xs whitespace-nowrap",
-                isCurrent && "bg-[#0A6688]/10 text-[#0A6688] font-medium",
+                isCurrent && "bg-[#5E8D7A]/10 text-[#5E8D7A] font-medium",
                 dimension.isCompleted && "bg-emerald-500/10 text-emerald-500",
                 !isCurrent && !dimension.isCompleted && "text-muted-foreground"
               )}

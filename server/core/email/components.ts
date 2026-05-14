@@ -8,10 +8,10 @@
 import { TYPE_LOGO_TURQUOISE_SMALL_BASE64, TYPE_LOGO_WHITE_SMALL_BASE64 } from '../../pdf-logo-base64';
 
 export const EMAIL_BRAND = {
-  navy: '#02205B',
-  cyan: '#12EBFC',
-  teal: '#0884AA',
-  cream: '#FEFFF3',
+  navy: '#12161D',
+  cyan: '#C77A93',
+  teal: '#7FB8A3',
+  cream: '#F6F3EE',
   white: '#FFFFFF',
   lightGray: '#f8f9fa',
   mediumGray: '#e5e7eb',

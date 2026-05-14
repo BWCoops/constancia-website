@@ -45,14 +45,14 @@ export default function AdminLogin() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#02205B] via-[#0070C0] to-[#0884AA]">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#12161D] via-[#1E2630] to-[#7FB8A3]">
         <div className="animate-pulse text-white text-lg">Loading...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#02205B] via-[#0070C0] to-[#0884AA] p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#12161D] via-[#1E2630] to-[#7FB8A3] p-4">
       <Card className="w-full max-w-md" data-testid="login-card">
         <CardHeader className="text-center space-y-4">
           <div className="flex justify-center">
@@ -82,7 +82,7 @@ export default function AdminLogin() {
           
           <Button 
             onClick={handleLogin}
-            className="w-full h-12 gap-3 bg-brand-navy text-white border-[#02205B]"
+            className="w-full h-12 gap-3 bg-brand-navy text-white border-[#12161D]"
             data-testid="button-login"
           >
             <LogIn className="h-5 w-5" />

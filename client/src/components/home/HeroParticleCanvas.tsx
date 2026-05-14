@@ -105,7 +105,7 @@ export function HeroParticleCanvas() {
         const rp = ripples[i];
         ctx.beginPath();
         ctx.arc(rp.x, rp.y, rp.r, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(18,235,252,${rp.a})`;
+        ctx.strokeStyle = `rgba(199,122,147,${rp.a})`;
         ctx.lineWidth   = 1.5;
         ctx.stroke();
         rp.r += 6;
@@ -132,8 +132,8 @@ export function HeroParticleCanvas() {
             ctx.moveTo(pts[i].x, pts[i].y);
             ctx.lineTo(pts[j].x, pts[j].y);
             ctx.strokeStyle = isCyan
-              ? `rgba(18,235,252,${Math.min(a * 0.85, 0.95)})`
-              : `rgba(8,132,170,${Math.min(a, 0.95)})`;
+              ? `rgba(199,122,147,${Math.min(a * 0.85, 0.95)})`
+              : `rgba(127,184,163,${Math.min(a, 0.95)})`;
             ctx.lineWidth = d < 80 ? 1.4 : 0.9;
             ctx.stroke();
           }
@@ -149,7 +149,7 @@ export function HeroParticleCanvas() {
         if (pd < 38) {
           ctx.beginPath();
           ctx.arc(p.x, p.y, pr + 3.5, 0, Math.PI * 2);
-          ctx.strokeStyle = `rgba(18,235,252,${0.32 * (1 - pd / 38)})`;
+          ctx.strokeStyle = `rgba(199,122,147,${0.32 * (1 - pd / 38)})`;
           ctx.lineWidth   = 0.8;
           ctx.stroke();
         }
@@ -163,7 +163,7 @@ export function HeroParticleCanvas() {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, Math.max(pr, 0.4), 0, Math.PI * 2);
-        ctx.fillStyle = p.cyan ? 'rgba(18,235,252,0.84)' : 'rgba(8,132,170,0.8)';
+        ctx.fillStyle = p.cyan ? 'rgba(199,122,147,0.84)' : 'rgba(127,184,163,0.8)';
         ctx.fill();
 
         // Slowly rotate each particle's drift direction — prevents wall lock-in

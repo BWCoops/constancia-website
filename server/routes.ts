@@ -193,13 +193,13 @@ async function sendLeadVerificationNotification(lead: {
       `New Verified Lead: ${lead.firstName} ${lead.lastName} from ${lead.company}`,
       `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, #02205B 0%, #0884AA 100%); border-radius: 8px;">
-            <h1 style="color: #12EBFC; margin: 0;">New Verified Lead</h1>
+          <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, #12161D 0%, #7FB8A3 100%); border-radius: 8px;">
+            <h1 style="color: #C77A93; margin: 0;">New Verified Lead</h1>
             <p style="color: #fff; margin: 5px 0;">Resource Download</p>
           </div>
           
           <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-            <h2 style="color: #02205B; margin-top: 0;">Lead Details</h2>
+            <h2 style="color: #12161D; margin-top: 0;">Lead Details</h2>
             <table style="width: 100%; border-collapse: collapse;">
               <tr>
                 <td style="padding: 8px 0; color: #666; width: 120px;"><strong>Name:</strong></td>
@@ -207,7 +207,7 @@ async function sendLeadVerificationNotification(lead: {
               </tr>
               <tr>
                 <td style="padding: 8px 0; color: #666;"><strong>Email:</strong></td>
-                <td style="padding: 8px 0;"><a href="mailto:${lead.email}" style="color: #0884AA;">${lead.email}</a></td>
+                <td style="padding: 8px 0;"><a href="mailto:${lead.email}" style="color: #7FB8A3;">${lead.email}</a></td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; color: #666;"><strong>Company:</strong></td>
@@ -269,13 +269,13 @@ async function sendContactFormNotification(submission: {
       `New Contact Form Submission from ${submission.firstName} ${submission.lastName}`,
       `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, #02205B 0%, #0884AA 100%); border-radius: 8px;">
-            <h1 style="color: #12EBFC; margin: 0;">New Contact Form Submission</h1>
+          <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, #12161D 0%, #7FB8A3 100%); border-radius: 8px;">
+            <h1 style="color: #C77A93; margin: 0;">New Contact Form Submission</h1>
             <p style="color: #fff; margin: 5px 0;">Constancia Website</p>
           </div>
           
           <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-            <h2 style="color: #02205B; margin-top: 0;">Contact Details</h2>
+            <h2 style="color: #12161D; margin-top: 0;">Contact Details</h2>
             <table style="width: 100%; border-collapse: collapse;">
               <tr>
                 <td style="padding: 8px 0; color: #666; width: 120px;"><strong>Name:</strong></td>
@@ -283,7 +283,7 @@ async function sendContactFormNotification(submission: {
               </tr>
               <tr>
                 <td style="padding: 8px 0; color: #666;"><strong>Email:</strong></td>
-                <td style="padding: 8px 0;"><a href="mailto:${submission.email}" style="color: #0884AA;">${submission.email}</a></td>
+                <td style="padding: 8px 0;"><a href="mailto:${submission.email}" style="color: #7FB8A3;">${submission.email}</a></td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; color: #666;"><strong>Company:</strong></td>
@@ -303,7 +303,7 @@ async function sendContactFormNotification(submission: {
           </div>
           
           <div style="background: #fff; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px;">
-            <h2 style="color: #02205B; margin-top: 0;">Message</h2>
+            <h2 style="color: #12161D; margin-top: 0;">Message</h2>
             <p style="color: #333; line-height: 1.6; white-space: pre-wrap;">${submission.message}</p>
           </div>
           
@@ -338,16 +338,16 @@ async function sendOtpEmail(email: string, firstName: string, otp: string): Prom
       `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
           <div style="text-align: center; margin-bottom: 30px;">
-            <h1 style="color: #02205B; margin: 0;">Constancia</h1>
-            <p style="color: #0884AA; margin: 5px 0;">Enterprise Performance Management Advisory</p>
+            <h1 style="color: #12161D; margin: 0;">Constancia</h1>
+            <p style="color: #7FB8A3; margin: 5px 0;">Enterprise Performance Management Advisory</p>
           </div>
           
           <p style="color: #333;">Hi ${firstName},</p>
           
           <p style="color: #333;">Thank you for your interest in Constancia resources. Please use the following code to access your download:</p>
           
-          <div style="background: linear-gradient(135deg, #02205B 0%, #0884AA 100%); padding: 20px; border-radius: 8px; text-align: center; margin: 30px 0;">
-            <span style="font-size: 32px; font-weight: bold; letter-spacing: 8px; color: #12EBFC;">${otp}</span>
+          <div style="background: linear-gradient(135deg, #12161D 0%, #7FB8A3 100%); padding: 20px; border-radius: 8px; text-align: center; margin: 30px 0;">
+            <span style="font-size: 32px; font-weight: bold; letter-spacing: 8px; color: #C77A93;">${otp}</span>
           </div>
           
           <p style="color: #666; font-size: 14px;">This code expires in ${OTP_EXPIRY_MINUTES} minutes.</p>
@@ -359,7 +359,7 @@ async function sendOtpEmail(email: string, firstName: string, otp: string): Prom
             <br><br>
             86-90 Paul Street, London EC2A 4NE
             <br>
-            <a href="https://constancia.io" style="color: #0884AA;">constancia.io</a>
+            <a href="https://constancia.io" style="color: #7FB8A3;">constancia.io</a>
           </p>
         </div>
       `
@@ -391,7 +391,7 @@ async function sendContactVerificationEmail(to: string, firstName: string, token
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 0; background-color: #f5f5f5;">
           <!-- Header with Constancia branding -->
           <div style="background-color: #0A2540; padding: 30px 20px; text-align: center;">
-            <h1 style="color: #12EBFC; margin: 0; font-size: 28px; font-weight: bold;">Constancia</h1>
+            <h1 style="color: #C77A93; margin: 0; font-size: 28px; font-weight: bold;">Constancia</h1>
             <p style="color: #ffffff; margin: 8px 0 0 0; font-size: 14px;">Enterprise Performance Management Advisory</p>
           </div>
           
@@ -405,7 +405,7 @@ async function sendContactVerificationEmail(to: string, firstName: string, token
             
             <!-- CTA Button -->
             <div style="text-align: center; margin: 35px 0;">
-              <a href="${verificationLink}" style="display: inline-block; background-color: #12EBFC; color: #0A2540; padding: 16px 40px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 16px;">
+              <a href="${verificationLink}" style="display: inline-block; background-color: #C77A93; color: #0A2540; padding: 16px 40px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 16px;">
                 Verify Email Address
               </a>
             </div>
@@ -414,7 +414,7 @@ async function sendContactVerificationEmail(to: string, firstName: string, token
             <p style="color: #666666; font-size: 14px; margin: 25px 0 10px 0;">
               If the button above doesn't work, copy and paste this link into your browser:
             </p>
-            <p style="color: #12EBFC; font-size: 13px; word-break: break-all; background-color: #f8f9fa; padding: 12px; border-radius: 4px; margin: 0 0 25px 0;">
+            <p style="color: #C77A93; font-size: 13px; word-break: break-all; background-color: #f8f9fa; padding: 12px; border-radius: 4px; margin: 0 0 25px 0;">
               ${verificationLink}
             </p>
             
@@ -438,7 +438,7 @@ async function sendContactVerificationEmail(to: string, firstName: string, token
             <p style="color: #aaaaaa; font-size: 12px; margin: 0 0 10px 0;">
               86-90 Paul Street, London EC2A 4NE
             </p>
-            <a href="https://constancia.io" style="color: #12EBFC; font-size: 12px; text-decoration: none;">constancia.io</a>
+            <a href="https://constancia.io" style="color: #C77A93; font-size: 12px; text-decoration: none;">constancia.io</a>
           </div>
         </div>
       `
@@ -896,12 +896,12 @@ export async function registerRoutes(
           `New Talent Community Submission: ${parsed.firstName} ${parsed.lastName}`,
           `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-              <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, #02205B 0%, #0884AA 100%); border-radius: 8px;">
-                <h1 style="color: #12EBFC; margin: 0;">Talent Community Submission</h1>
+              <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, #12161D 0%, #7FB8A3 100%); border-radius: 8px;">
+                <h1 style="color: #C77A93; margin: 0;">Talent Community Submission</h1>
                 <p style="color: #fff; margin: 5px 0;">Constancia Careers</p>
               </div>
               <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                <h2 style="color: #02205B; margin-top: 0;">Candidate Details</h2>
+                <h2 style="color: #12161D; margin-top: 0;">Candidate Details</h2>
                 <table style="width: 100%; border-collapse: collapse;">
                   <tr>
                     <td style="padding: 8px 0; color: #666; width: 140px;"><strong>Name:</strong></td>
@@ -909,12 +909,12 @@ export async function registerRoutes(
                   </tr>
                   <tr>
                     <td style="padding: 8px 0; color: #666;"><strong>Email:</strong></td>
-                    <td style="padding: 8px 0;"><a href="mailto:${parsed.email}" style="color: #0884AA;">${parsed.email}</a></td>
+                    <td style="padding: 8px 0;"><a href="mailto:${parsed.email}" style="color: #7FB8A3;">${parsed.email}</a></td>
                   </tr>
                   ${parsed.linkedIn ? `
                   <tr>
                     <td style="padding: 8px 0; color: #666;"><strong>LinkedIn:</strong></td>
-                    <td style="padding: 8px 0;"><a href="${parsed.linkedIn}" style="color: #0884AA;">${parsed.linkedIn}</a></td>
+                    <td style="padding: 8px 0;"><a href="${parsed.linkedIn}" style="color: #7FB8A3;">${parsed.linkedIn}</a></td>
                   </tr>` : ""}
                   <tr>
                     <td style="padding: 8px 0; color: #666;"><strong>Area of Interest:</strong></td>
@@ -923,7 +923,7 @@ export async function registerRoutes(
                 </table>
               </div>
               <div style="background: #fff; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px;">
-                <h2 style="color: #02205B; margin-top: 0;">Message</h2>
+                <h2 style="color: #12161D; margin-top: 0;">Message</h2>
                 <p style="color: #333; line-height: 1.6; white-space: pre-wrap;">${parsed.message}</p>
               </div>
               <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
@@ -2239,7 +2239,7 @@ function generateWordPressHTML(): string {
   <meta name="twitter:description" content="Independent ERP and EPM consultancy delivering AI-powered finance transformation across the UK and Ireland.">
   <meta name="twitter:image" content="https://constancia.io/og-image.png">
   
-  <meta name="theme-color" content="#02205B">
+  <meta name="theme-color" content="#12161D">
   
   <link rel="stylesheet" href="style.css">
   
@@ -2520,12 +2520,12 @@ function generateWordPressHTML(): string {
 function generateWordPressCSS(): string {
   return `/* Constancia WordPress Theme Styles */
 :root {
-  --dark-navy: #02205B;
-  --bright-cyan: #12EBFC;
-  --teal: #0884AA;
-  --primary: #02205B;
+  --dark-navy: #12161D;
+  --bright-cyan: #C77A93;
+  --teal: #7FB8A3;
+  --primary: #12161D;
   --primary-foreground: #ffffff;
-  --accent: #12EBFC;
+  --accent: #C77A93;
   --background: #f8fafc;
   --foreground: #0f172a;
   --muted: #f1f5f9;
@@ -3075,7 +3075,7 @@ section h2 {
 
 /* Blog Styles */
 .blog-hero {
-  background: linear-gradient(135deg, var(--primary) 0%, #0884AA 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, #7FB8A3 100%);
   color: white;
   padding: 4rem 0;
   text-align: center;
@@ -3131,7 +3131,7 @@ section h2 {
 }
 
 .article-header {
-  background: linear-gradient(135deg, var(--primary) 0%, #0884AA 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, #7FB8A3 100%);
   color: white;
   padding: 4rem 0 6rem;
   text-align: center;
@@ -3147,13 +3147,13 @@ section h2 {
 }
 
 .article-content h1 { font-size: 2rem; margin-top: 2rem; margin-bottom: 1rem; color: var(--primary); }
-.article-content h2 { font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; color: var(--primary); border-bottom: 2px solid #12EBFC; padding-bottom: 0.5rem; }
-.article-content h3 { font-size: 1.25rem; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #0884AA; }
+.article-content h2 { font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; color: var(--primary); border-bottom: 2px solid #C77A93; padding-bottom: 0.5rem; }
+.article-content h3 { font-size: 1.25rem; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #7FB8A3; }
 .article-content h4 { font-size: 1.1rem; margin-top: 1rem; margin-bottom: 0.5rem; }
 .article-content p { margin-bottom: 1rem; line-height: 1.8; }
 .article-content ul, .article-content ol { margin-bottom: 1rem; padding-left: 2rem; }
 .article-content li { margin-bottom: 0.5rem; line-height: 1.6; }
-.article-content blockquote { border-left: 4px solid #12EBFC; padding-left: 1rem; margin: 1.5rem 0; background: rgba(18, 235, 252, 0.05); padding: 1rem; border-radius: 0 8px 8px 0; }
+.article-content blockquote { border-left: 4px solid #C77A93; padding-left: 1rem; margin: 1.5rem 0; background: rgba(18, 235, 252, 0.05); padding: 1rem; border-radius: 0 8px 8px 0; }
 .article-content table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
 .article-content th { background: var(--primary); color: white; padding: 1rem; text-align: left; }
 .article-content td { padding: 1rem; border: 1px solid var(--border); }
@@ -3162,7 +3162,7 @@ section h2 {
 
 .callout-box {
   background: linear-gradient(135deg, rgba(18, 235, 252, 0.1) 0%, rgba(8, 132, 170, 0.1) 100%);
-  border-left: 4px solid #12EBFC;
+  border-left: 4px solid #C77A93;
   padding: 1.5rem;
   margin: 1.5rem 0;
   border-radius: 0 8px 8px 0;
@@ -3176,7 +3176,7 @@ section h2 {
 }
 
 .stat-box {
-  background: linear-gradient(135deg, var(--primary) 0%, #0884AA 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, #7FB8A3 100%);
   color: white;
   padding: 1.5rem;
   border-radius: var(--radius);
@@ -3186,7 +3186,7 @@ section h2 {
 .stat-box .stat-value {
   font-size: 2rem;
   font-weight: bold;
-  color: #12EBFC;
+  color: #C77A93;
 }
 
 .stat-box .stat-label {
@@ -3205,7 +3205,7 @@ section h2 {
 
 .tag {
   background: rgba(18, 235, 252, 0.1);
-  color: #0884AA;
+  color: #7FB8A3;
   padding: 0.25rem 0.75rem;
   border-radius: 999px;
   font-size: 0.875rem;
@@ -3502,7 +3502,7 @@ function generateResourcesIndexHTML(resources: Array<{ title: string; slug: stri
     </section>
     ${categories.map(category => `
       <section class="container" style="padding: 2rem 0;">
-        <h2 style="color: #02205B; margin-bottom: 1.5rem; border-bottom: 2px solid #12EBFC; padding-bottom: 0.5rem;">${category}</h2>
+        <h2 style="color: #12161D; margin-bottom: 1.5rem; border-bottom: 2px solid #C77A93; padding-bottom: 0.5rem;">${category}</h2>
         <div class="blog-grid">
           ${resources.filter(r => r.category === category).map(resource => `
             <article class="blog-card">
@@ -3675,11 +3675,11 @@ function generateWordPressWXR(
     <guid isPermaLink="false">https://constancia.io/?p=${id}</guid>
     <description><![CDATA[${resource.description}]]></description>
     <content:encoded><![CDATA[
-      <div style="background: linear-gradient(135deg, rgba(18, 235, 252, 0.1) 0%, rgba(8, 132, 170, 0.1) 100%); border-left: 4px solid #12EBFC; padding: 2rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0; text-align: center;">
-        <h3 style="margin-top: 0; color: #02205B;">Download This Resource</h3>
+      <div style="background: linear-gradient(135deg, rgba(18, 235, 252, 0.1) 0%, rgba(8, 132, 170, 0.1) 100%); border-left: 4px solid #C77A93; padding: 2rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0; text-align: center;">
+        <h3 style="margin-top: 0; color: #12161D;">Download This Resource</h3>
         <p>${resource.description}</p>
         <p><strong>File Type:</strong> ${resource.fileType.toUpperCase()} | <strong>Size:</strong> ${resource.fileSize}</p>
-        <a href="${resource.fileUrl}" style="display: inline-block; background: #02205B; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 600;">Download ${resource.fileType.toUpperCase()}</a>
+        <a href="${resource.fileUrl}" style="display: inline-block; background: #12161D; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 600;">Download ${resource.fileType.toUpperCase()}</a>
       </div>
     ]]></content:encoded>
     <excerpt:encoded><![CDATA[${resource.description}]]></excerpt:encoded>
@@ -3699,15 +3699,15 @@ function generateWordPressWXR(
 function convertMarkdownToEnrichedHTML(content: string): string {
   let html = content;
   
-  html = html.replace(/^#### (.+)$/gm, '<h4 style="font-size: 1.1rem; margin-top: 1rem; margin-bottom: 0.5rem; color: #02205B;">$1</h4>');
-  html = html.replace(/^### (.+)$/gm, '<h3 style="font-size: 1.25rem; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #0884AA;">$1</h3>');
-  html = html.replace(/^## (.+)$/gm, '<h2 style="font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; color: #02205B; border-bottom: 2px solid #12EBFC; padding-bottom: 0.5rem;">$1</h2>');
-  html = html.replace(/^# (.+)$/gm, '<h1 style="font-size: 2rem; margin-top: 2rem; margin-bottom: 1rem; color: #02205B;">$1</h1>');
+  html = html.replace(/^#### (.+)$/gm, '<h4 style="font-size: 1.1rem; margin-top: 1rem; margin-bottom: 0.5rem; color: #12161D;">$1</h4>');
+  html = html.replace(/^### (.+)$/gm, '<h3 style="font-size: 1.25rem; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #7FB8A3;">$1</h3>');
+  html = html.replace(/^## (.+)$/gm, '<h2 style="font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; color: #12161D; border-bottom: 2px solid #C77A93; padding-bottom: 0.5rem;">$1</h2>');
+  html = html.replace(/^# (.+)$/gm, '<h1 style="font-size: 2rem; margin-top: 2rem; margin-bottom: 1rem; color: #12161D;">$1</h1>');
   
   html = html.replace(/\*\*Potential Impact\*\*:(.+)$/gm, '<div style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%); border-left: 4px solid #22c55e; padding: 1rem; margin: 1rem 0; border-radius: 0 8px 8px 0;"><strong style="color: #22c55e;">Potential Impact:</strong>$1</div>');
-  html = html.replace(/\*\*Key Takeaway\*\*:(.+)$/gm, '<div style="background: linear-gradient(135deg, rgba(2, 32, 91, 0.05) 0%, rgba(8, 132, 170, 0.1) 100%); border-left: 4px solid #12EBFC; padding: 1.5rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0;"><strong style="color: #12EBFC;">Key Takeaway:</strong>$1</div>');
+  html = html.replace(/\*\*Key Takeaway\*\*:(.+)$/gm, '<div style="background: linear-gradient(135deg, rgba(2, 32, 91, 0.05) 0%, rgba(8, 132, 170, 0.1) 100%); border-left: 4px solid #C77A93; padding: 1.5rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0;"><strong style="color: #C77A93;">Key Takeaway:</strong>$1</div>');
   
-  html = html.replace(/\*\*([^*]+)\*\*/g, '<strong style="color: #02205B;">$1</strong>');
+  html = html.replace(/\*\*([^*]+)\*\*/g, '<strong style="color: #12161D;">$1</strong>');
   html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
   
   html = html.replace(/^\| (.+) \|$/gm, (match, rowContent) => {
@@ -3721,7 +3721,7 @@ function convertMarkdownToEnrichedHTML(content: string): string {
   html = html.replace(new RegExp('(<li[^>]*>.*</li>\\s*)+', 'gm'), '<ul style="margin-bottom: 1rem; padding-left: 2rem;">$&</ul>');
   
   html = html.replace(/^\d+\. (.+)$/gm, '<li style="margin-bottom: 0.5rem;">$1</li>');
-  html = html.replace(/^> (.+)$/gm, '<blockquote style="border-left: 4px solid #12EBFC; padding: 1rem; margin: 1.5rem 0; background: rgba(18, 235, 252, 0.05); border-radius: 0 8px 8px 0; font-style: italic;">$1</blockquote>');
+  html = html.replace(/^> (.+)$/gm, '<blockquote style="border-left: 4px solid #C77A93; padding: 1rem; margin: 1.5rem 0; background: rgba(18, 235, 252, 0.05); border-radius: 0 8px 8px 0; font-style: italic;">$1</blockquote>');
   
   const lines = html.split('\n');
   const result: string[] = [];

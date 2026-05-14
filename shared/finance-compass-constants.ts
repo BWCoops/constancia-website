@@ -6,10 +6,10 @@
  */
 
 export const BRAND_COLORS = {
-  darkNavy: "#02205B",
-  teal: "#0884AA",
-  brightCyan: "#12EBFC",
-  offWhite: "#FEFFF3",
+  darkNavy: "#12161D",
+  teal: "#7FB8A3",
+  brightCyan: "#C77A93",
+  offWhite: "#F6F3EE",
   darkGray: "#212124",
   white: "#FFFFFF",
   statusGreen: "#16A34A",

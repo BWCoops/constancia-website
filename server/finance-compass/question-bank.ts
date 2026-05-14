@@ -2751,21 +2751,21 @@ export const DIMENSION_CONFIG = {
     name: "Financial Planning & Analysis",
     shortName: "FP&A",
     icon: "TrendingUp",
-    color: "#0884AA",
+    color: "#7FB8A3",
     description: "Budgeting, forecasting, scenario planning, and strategic finance"
   },
   management_reporting: {
     name: "Management Reporting",
     shortName: "Reporting",
     icon: "BarChart3",
-    color: "#12EBFC",
+    color: "#C77A93",
     description: "Dashboards, analytics, KPIs, and insight delivery"
   },
   consolidation_close: {
     name: "Consolidation & Close",
     shortName: "Close",
     icon: "RefreshCw",
-    color: "#02205B",
+    color: "#12161D",
     description: "Financial close, consolidation, intercompany, and period-end processes"
   },
   financial_controls_compliance: {

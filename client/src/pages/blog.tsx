@@ -96,7 +96,7 @@ export default function BlogPage() {
                     )}
                     <CardHeader className="pb-2">
                       <div className="flex items-center gap-2 mb-2">
-                        <Badge variant="secondary" className="bg-[#12EBFC]/10 text-brand-teal">
+                        <Badge variant="secondary" className="bg-[#C77A93]/10 text-brand-teal">
                           {getCategoryName(post.categoryId)}
                         </Badge>
                         <Badge variant="outline">Featured</Badge>
@@ -189,7 +189,7 @@ export default function BlogPage() {
                     )}
                     <CardHeader className="pb-2 flex-grow">
                       <div className="flex items-center gap-2 mb-2">
-                        <Badge variant="secondary" className="bg-[#12EBFC]/10 text-brand-teal">
+                        <Badge variant="secondary" className="bg-[#C77A93]/10 text-brand-teal">
                           {getCategoryName(post.categoryId)}
                         </Badge>
                       </div>

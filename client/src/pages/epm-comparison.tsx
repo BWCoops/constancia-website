@@ -1884,9 +1884,9 @@ interface PlatformGanttData {
 
 function getImplementationGanttData(platforms: Platform[]): PlatformGanttData[] {
   const phaseColors = {
-    discovery: '#12EBFC',
-    design: '#0884AA',
-    build: '#02205B',
+    discovery: '#C77A93',
+    design: '#7FB8A3',
+    build: '#12161D',
     testing: '#6366f1',
     deployment: '#22c55e',
     training: '#f59e0b'
@@ -2242,7 +2242,7 @@ function PriceTierBadge({ tier, priceRange, isHighlighted = false }: { tier: num
       <UITooltip>
         <TooltipTrigger asChild>
           <Badge 
-            className={`${colour} ${textColour} text-xs cursor-help flex items-center gap-1.5 ${isHighlighted ? 'ring-2 ring-[#12EBFC] ring-offset-1' : ''}`} 
+            className={`${colour} ${textColour} text-xs cursor-help flex items-center gap-1.5 ${isHighlighted ? 'ring-2 ring-[#C77A93] ring-offset-1' : ''}`} 
             data-testid={`badge-price-tier-${tier}`}
           >
             <motion.span
@@ -2311,7 +2311,7 @@ function ROIPotentialBadge({ potential, isHighlighted = false }: { potential: "h
       <UITooltip>
         <TooltipTrigger asChild>
           <Badge 
-            className={`${colour} ${textColour} text-xs cursor-help flex items-center gap-1.5 ${isHighlighted ? 'ring-2 ring-[#12EBFC] ring-offset-1' : ''}`} 
+            className={`${colour} ${textColour} text-xs cursor-help flex items-center gap-1.5 ${isHighlighted ? 'ring-2 ring-[#C77A93] ring-offset-1' : ''}`} 
             data-testid={`badge-roi-${potential}`}
           >
             <motion.span
@@ -2537,10 +2537,10 @@ function FeatureCell({ value }: { value: boolean | string }) {
 }
 
 const IMPLEMENTATION_PHASES_TEMPLATE: { name: string; startPct: number; endPct: number; color: string }[] = [
-  { name: "Discovery & Planning", startPct: 0, endPct: 0.17, color: "#02205B" },
-  { name: "Design & Configuration", startPct: 0.17, endPct: 0.50, color: "#0070C0" },
-  { name: "Data Migration", startPct: 0.33, endPct: 0.67, color: "#0884AA" },
-  { name: "Testing & UAT", startPct: 0.50, endPct: 0.75, color: "#12EBFC" },
+  { name: "Discovery & Planning", startPct: 0, endPct: 0.17, color: "#12161D" },
+  { name: "Design & Configuration", startPct: 0.17, endPct: 0.50, color: "#1E2630" },
+  { name: "Data Migration", startPct: 0.33, endPct: 0.67, color: "#7FB8A3" },
+  { name: "Testing & UAT", startPct: 0.50, endPct: 0.75, color: "#C77A93" },
   { name: "Training", startPct: 0.58, endPct: 0.83, color: "#6366f1" },
   { name: "Go-Live & Hypercare", startPct: 0.75, endPct: 1.0, color: "#8b5cf6" },
 ];
@@ -2643,7 +2643,7 @@ function TimelineVisualization({
       <CardHeader className="pb-3 sm:pb-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
           <div className="flex items-center gap-2 sm:gap-3">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center flex-shrink-0">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center flex-shrink-0">
               <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-brand-cream" />
             </div>
             <div>
@@ -2668,7 +2668,7 @@ function TimelineVisualization({
                 onClick={() => handleTimelinePlatformToggle(platform.id)}
                 disabled={!selectedTimelinePlatforms.includes(platform.id) && selectedTimelinePlatforms.length >= 4}
                 className={selectedTimelinePlatforms.includes(platform.id) 
-                  ? "bg-[#12EBFC] text-[#02205B] hover:bg-[#12EBFC]/90" 
+                  ? "bg-[#C77A93] text-[#12161D] hover:bg-[#C77A93]/90" 
                   : ""
                 }
                 data-testid={`button-timeline-platform-${platform.id}`}
@@ -2937,7 +2937,7 @@ function MobilePlatformCarousel({
                   <Card
                     className={`h-full transition-all ${
                       isSelected
-                        ? "ring-2 ring-[#12EBFC] bg-[#12EBFC]/5 shadow-lg"
+                        ? "ring-2 ring-[#C77A93] bg-[#C77A93]/5 shadow-lg"
                         : "shadow-md"
                     } ${selectedIndex === index ? 'scale-100' : 'scale-[0.98] opacity-90'}`}
                   >
@@ -2965,8 +2965,8 @@ function MobilePlatformCarousel({
                           }}
                           className={`min-h-[44px] min-w-[44px] ${
                             isSelected 
-                              ? "bg-[#12EBFC] text-[#02205B] hover:bg-[#12EBFC]/90" 
-                              : "border-[#0A6688] text-[#0A6688]"
+                              ? "bg-[#C77A93] text-[#12161D] hover:bg-[#C77A93]/90" 
+                              : "border-[#5E8D7A] text-[#5E8D7A]"
                           }`}
                         >
                           {isSelected ? (
@@ -2986,7 +2986,7 @@ function MobilePlatformCarousel({
                         </div>
                         <div className="h-2 bg-muted rounded-full overflow-hidden">
                           <motion.div
-                            className="h-full bg-gradient-to-r from-[#02205B] to-[#12EBFC] rounded-full"
+                            className="h-full bg-gradient-to-r from-[#12161D] to-[#C77A93] rounded-full"
                             initial={{ width: 0 }}
                             animate={{ width: getScoreBarWidth(displayScore) }}
                             transition={{ duration: 0.5, ease: "easeOut" }}
@@ -3022,7 +3022,7 @@ function MobilePlatformCarousel({
                           <Badge 
                             className={`text-xs w-full justify-center py-1 ${
                               isBestFit 
-                                ? 'bg-[#12EBFC]/20 text-brand-teal ring-1 ring-[#12EBFC]' 
+                                ? 'bg-[#C77A93]/20 text-brand-teal ring-1 ring-[#C77A93]' 
                                 : 'bg-muted'
                             }`}
                           >
@@ -3034,7 +3034,7 @@ function MobilePlatformCarousel({
 
                       <Button
                         variant="outline"
-                        className="w-full min-h-[44px] border-[#0A6688] text-[#0A6688] hover:bg-[#0A6688] hover:text-white"
+                        className="w-full min-h-[44px] border-[#5E8D7A] text-[#5E8D7A] hover:bg-[#5E8D7A] hover:text-white"
                         onClick={(e) => {
                           e.stopPropagation();
                           onViewDetails(platform.id);
@@ -3069,8 +3069,8 @@ function MobilePlatformCarousel({
         <Button
           variant="outline"
           size="icon"
-          className={`absolute left-0 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-background/90 backdrop-blur-sm shadow-md border-[#0884AA]/30 ${
-            !canScrollPrev ? 'opacity-30 cursor-not-allowed' : 'hover:bg-[#12EBFC]/10'
+          className={`absolute left-0 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-background/90 backdrop-blur-sm shadow-md border-[#7FB8A3]/30 ${
+            !canScrollPrev ? 'opacity-30 cursor-not-allowed' : 'hover:bg-[#C77A93]/10'
           }`}
           onClick={scrollPrev}
           disabled={!canScrollPrev}
@@ -3082,8 +3082,8 @@ function MobilePlatformCarousel({
         <Button
           variant="outline"
           size="icon"
-          className={`absolute right-0 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-background/90 backdrop-blur-sm shadow-md border-[#0884AA]/30 ${
-            !canScrollNext ? 'opacity-30 cursor-not-allowed' : 'hover:bg-[#12EBFC]/10'
+          className={`absolute right-0 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-background/90 backdrop-blur-sm shadow-md border-[#7FB8A3]/30 ${
+            !canScrollNext ? 'opacity-30 cursor-not-allowed' : 'hover:bg-[#C77A93]/10'
           }`}
           onClick={scrollNext}
           disabled={!canScrollNext}
@@ -3100,8 +3100,8 @@ function MobilePlatformCarousel({
             onClick={() => scrollTo(index)}
             className={`w-2 h-2 rounded-full transition-all ${
               selectedIndex === index 
-                ? 'bg-[#12EBFC] w-6' 
-                : 'bg-muted hover:bg-[#0884AA]/50'
+                ? 'bg-[#C77A93] w-6' 
+                : 'bg-muted hover:bg-[#7FB8A3]/50'
             }`}
             aria-label={`Go to ${platform.shortName}`}
             data-testid={`indicator-carousel-dot-${index}`}
@@ -3665,7 +3665,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
     score: usesFitScoring ? platform.fitAdjustedScore : platform.calculatedScore,
     baseScore: platform.calculatedScore,
     fitModifier: platform.fitModifier,
-    fill: platform.id === recommendedPlatform?.id ? "#12EBFC" : "#0884AA",
+    fill: platform.id === recommendedPlatform?.id ? "#C77A93" : "#7FB8A3",
   })), [sortedScores, usesFitScoring, recommendedPlatform?.id]);
 
   // Create unique short labels for radar chart categories to avoid duplicates
@@ -3974,7 +3974,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
     <div className="space-y-12">
       {/* Wizard Step 1: Industry Selection (all categories) */}
       {wizardStep === 'industry' && (
-        <Card className="mb-8 border-[#0884AA]/30">
+        <Card className="mb-8 border-[#7FB8A3]/30">
           <CardHeader className="text-center pb-2">
             <CardTitle className="text-2xl md:text-3xl">Select Your Industry</CardTitle>
             <CardDescription className="text-base">
@@ -3991,10 +3991,10 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => handleIndustrySelect(industry.id)}
-                    className="cursor-pointer p-3 sm:p-5 rounded-lg border border-border hover:border-[#12EBFC] hover:bg-[#12EBFC]/5 transition-all text-center"
+                    className="cursor-pointer p-3 sm:p-5 rounded-lg border border-border hover:border-[#C77A93] hover:bg-[#C77A93]/5 transition-all text-center"
                     data-testid={`button-industry-${industry.id}`}
                   >
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-2 sm:mb-3 rounded-full bg-[#0884AA]/10 flex items-center justify-center">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-2 sm:mb-3 rounded-full bg-[#7FB8A3]/10 flex items-center justify-center">
                       <IconComponent className="w-5 h-5 sm:w-6 sm:h-6 text-brand-teal" />
                     </div>
                     <span className="font-medium text-xs sm:text-sm md:text-base leading-tight block">{industry.label}</span>
@@ -4008,7 +4008,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
 
       {/* Wizard Step 2: Preset Selection (all categories) */}
       {wizardStep === 'preset' && (
-        <Card className="mb-8 border-[#0884AA]/30">
+        <Card className="mb-8 border-[#7FB8A3]/30">
           <CardHeader>
             <div className="flex items-center gap-3">
               <Button 
@@ -4042,16 +4042,16 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                     onClick={() => handlePresetSelect(preset.id)}
                     className={`cursor-pointer p-4 sm:p-6 rounded-lg border transition-all ${
                       isSelected
-                        ? 'border-[#12EBFC] bg-[#12EBFC]/10 ring-2 ring-[#12EBFC]/50'
+                        ? 'border-[#C77A93] bg-[#C77A93]/10 ring-2 ring-[#C77A93]/50'
                         : isRecommended 
-                          ? 'border-[#12EBFC]/50 bg-[#12EBFC]/5 hover:ring-2 hover:ring-[#12EBFC]/30' 
-                          : 'border-border hover:border-[#12EBFC] hover:bg-[#12EBFC]/5'
+                          ? 'border-[#C77A93]/50 bg-[#C77A93]/5 hover:ring-2 hover:ring-[#C77A93]/30' 
+                          : 'border-border hover:border-[#C77A93] hover:bg-[#C77A93]/5'
                     }`}
                     data-testid={`button-preset-${preset.id}`}
                   >
                     <div className="flex items-start gap-3 sm:gap-4">
                       <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center flex-shrink-0 ${
-                        isSelected ? 'bg-[#12EBFC]/30' : isRecommended ? 'bg-[#12EBFC]/20' : 'bg-[#0884AA]/10'
+                        isSelected ? 'bg-[#C77A93]/30' : isRecommended ? 'bg-[#C77A93]/20' : 'bg-[#7FB8A3]/10'
                       }`}>
                         <IconComponent className={`w-5 h-5 sm:w-6 sm:h-6 ${
                           isSelected ? 'text-brand-cyan' : isRecommended ? 'text-brand-cyan' : 'text-brand-teal'
@@ -4061,12 +4061,12 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                         <div className="flex items-center gap-2 mb-1 flex-wrap">
                           <span className="font-semibold text-sm sm:text-base">{preset.label}</span>
                           {isSelected && (
-                            <Badge variant="secondary" className="text-[10px] sm:text-xs bg-[#12EBFC] text-[#02205B]">
+                            <Badge variant="secondary" className="text-[10px] sm:text-xs bg-[#C77A93] text-[#12161D]">
                               Selected
                             </Badge>
                           )}
                           {isRecommended && !isSelected && (
-                            <Badge variant="secondary" className="text-[10px] sm:text-xs bg-[#12EBFC]/20 text-brand-teal">
+                            <Badge variant="secondary" className="text-[10px] sm:text-xs bg-[#C77A93]/20 text-brand-teal">
                               Recommended
                             </Badge>
                           )}
@@ -4084,7 +4084,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
 
       {/* Wizard Step 3: Company Profile (all categories) */}
       {wizardStep === 'profile' && (
-        <Card className="mb-8 border-[#0884AA]/30">
+        <Card className="mb-8 border-[#7FB8A3]/30">
           <CardHeader>
             <div className="flex items-center gap-3">
               <Button 
@@ -4104,7 +4104,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
           </CardHeader>
           <CardContent className="space-y-4 sm:space-y-6 px-3 sm:px-6">
             {/* Fit Modifier Explanation */}
-            <div className="bg-brand-navy/5 dark:bg-brand-navy/20 rounded-lg p-4 mb-4 border border-[#0884AA]/20">
+            <div className="bg-brand-navy/5 dark:bg-brand-navy/20 rounded-lg p-4 mb-4 border border-[#7FB8A3]/20">
               <div className="flex items-start gap-3">
                 <Info className="w-5 h-5 text-brand-teal flex-shrink-0 mt-0.5" />
                 <div className="text-sm text-muted-foreground">
@@ -4191,7 +4191,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
             </div>
             <Button 
               onClick={handleViewRecommendations} 
-              className="w-full bg-[#12EBFC] text-[#02205B]"
+              className="w-full bg-[#C77A93] text-[#12161D]"
               data-testid="button-view-recommendations"
             >
               View Tailored Recommendations
@@ -4206,11 +4206,11 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
         <>
           {/* Selected Configuration Display for wizard results */}
           {wizardStep === 'results' && (
-            <Card className="mb-6 border-[#12EBFC]/30 bg-gradient-to-r from-[#02205B]/5 to-[#0884AA]/5 dark:from-[#02205B]/20 dark:to-[#0884AA]/20">
+            <Card className="mb-6 border-[#C77A93]/30 bg-gradient-to-r from-[#12161D]/5 to-[#7FB8A3]/5 dark:from-[#12161D]/20 dark:to-[#7FB8A3]/20">
               <CardHeader className="pb-3">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[#12EBFC]/20 flex items-center justify-center flex-shrink-0">
+                    <div className="w-10 h-10 rounded-full bg-[#C77A93]/20 flex items-center justify-center flex-shrink-0">
                       <Sliders className="w-5 h-5 text-brand-cyan" />
                     </div>
                     <div>
@@ -4224,7 +4224,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                     variant="outline"
                     size="sm"
                     onClick={handleBackToIndustry}
-                    className="border-[#0884AA]/30"
+                    className="border-[#7FB8A3]/30"
                     data-testid="button-restart-wizard"
                   >
                     <ChevronLeft className="w-4 h-4 mr-1" />
@@ -4365,9 +4365,9 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                       <ul className="space-y-4">
                         {rankingSources.map((source, idx) => (
                           <li key={idx} className="flex items-start gap-2">
-                            <div className={`w-4 h-4 mt-0.5 flex-shrink-0 rounded-full flex items-center justify-center ${(source as any).isPrimary ? 'bg-[#12EBFC]' : 'bg-[#0884AA]/20'}`}>
+                            <div className={`w-4 h-4 mt-0.5 flex-shrink-0 rounded-full flex items-center justify-center ${(source as any).isPrimary ? 'bg-[#C77A93]' : 'bg-[#7FB8A3]/20'}`}>
                               {(source as any).isPrimary ? (
-                                <Star className="w-2.5 h-2.5 text-[#02205B]" />
+                                <Star className="w-2.5 h-2.5 text-[#12161D]" />
                               ) : (
                                 <ExternalLink className="w-2.5 h-2.5 text-brand-teal" />
                               )}
@@ -4432,10 +4432,10 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
       {/* Recommendations Summary Card */}
       {wizardStep === 'results' && calculatedScores && calculatedScores.length > 0 && (
         <section className="py-4 sm:py-6">
-          <Card className="border-[#0884AA]/30">
+          <Card className="border-[#7FB8A3]/30">
             <CardHeader className="pb-3 sm:pb-4">
               <div className="flex items-center gap-2 sm:gap-3">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#12EBFC]/20 flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#C77A93]/20 flex items-center justify-center flex-shrink-0">
                   <Award className="w-4 h-4 sm:w-5 sm:h-5 text-brand-cyan" />
                 </div>
                 <div>
@@ -4478,11 +4478,11 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                   return (
                     <div 
                       key={platformScore.id}
-                      className={`p-3 sm:p-4 rounded-lg border ${index === 0 ? 'border-[#12EBFC]/50 bg-[#12EBFC]/5' : 'border-border'}`}
+                      className={`p-3 sm:p-4 rounded-lg border ${index === 0 ? 'border-[#C77A93]/50 bg-[#C77A93]/5' : 'border-border'}`}
                     >
                       <div className="flex items-start gap-3">
                         <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
-                          index === 0 ? 'bg-[#12EBFC] text-[#02205B]' : index === 1 ? 'bg-[#0884AA]/20 text-brand-teal' : 'bg-muted text-muted-foreground'
+                          index === 0 ? 'bg-[#C77A93] text-[#12161D]' : index === 1 ? 'bg-[#7FB8A3]/20 text-brand-teal' : 'bg-muted text-muted-foreground'
                         }`}>
                           <span className="text-sm sm:text-base font-bold">{index + 1}</span>
                         </div>
@@ -4491,7 +4491,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                             <div className="flex items-center gap-2 flex-wrap">
                               <span className="font-semibold text-sm sm:text-base">{platform.shortName}</span>
                               {index === 0 && (
-                                <Badge className="bg-[#12EBFC]/20 text-brand-teal text-[10px] sm:text-xs">
+                                <Badge className="bg-[#C77A93]/20 text-brand-teal text-[10px] sm:text-xs">
                                   Best Match
                                 </Badge>
                               )}
@@ -4508,7 +4508,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                           {/* Score bar */}
                           <div className="w-full h-1.5 sm:h-2 bg-muted rounded-full mb-2 overflow-hidden">
                             <div 
-                              className={`h-full rounded-full transition-all ${index === 0 ? 'bg-[#12EBFC]' : index === 1 ? 'bg-[#0884AA]' : 'bg-muted-foreground'}`}
+                              className={`h-full rounded-full transition-all ${index === 0 ? 'bg-[#C77A93]' : index === 1 ? 'bg-[#7FB8A3]' : 'bg-muted-foreground'}`}
                               style={{ width: `${scorePercentage}%` }}
                             />
                           </div>
@@ -4529,7 +4529,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                           {fitResult?.matchReasons && fitResult.matchReasons.length > 0 && (
                             <div className="flex flex-wrap gap-1 sm:gap-1.5">
                               {fitResult.matchReasons.slice(0, 2).map((reason: string, i: number) => (
-                                <span key={i} className="inline-flex items-center gap-1 text-[10px] sm:text-xs text-brand-teal bg-[#0884AA]/10 px-1.5 sm:px-2 py-0.5 rounded">
+                                <span key={i} className="inline-flex items-center gap-1 text-[10px] sm:text-xs text-brand-teal bg-[#7FB8A3]/10 px-1.5 sm:px-2 py-0.5 rounded">
                                   <CheckCircle2 className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                                   {reason.length > 40 ? reason.substring(0, 37) + '...' : reason}
                                 </span>
@@ -4598,12 +4598,12 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
 
       {selectedPlatforms.length > 0 && (
         <section className="py-4 sm:py-6">
-          <Card className="border-[#12EBFC]/30 bg-gradient-to-r from-[#02205B]/5 to-[#0884AA]/5 dark:from-[#02205B]/20 dark:to-[#0884AA]/20">
+          <Card className="border-[#C77A93]/30 bg-gradient-to-r from-[#12161D]/5 to-[#7FB8A3]/5 dark:from-[#12161D]/20 dark:to-[#7FB8A3]/20">
             <CardContent className="py-4 sm:py-6">
               <div className="flex flex-col lg:flex-row lg:items-center gap-4 sm:gap-6">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
-                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#12EBFC]/20 flex items-center justify-center flex-shrink-0">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#C77A93]/20 flex items-center justify-center flex-shrink-0">
                       <Download className="w-4 h-4 sm:w-5 sm:h-5 text-brand-cyan" />
                     </div>
                     <div>
@@ -4640,7 +4640,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                   <Button
                     onClick={handleExportPDF}
                     disabled={isExportingPDF || selectedPlatforms.length === 0}
-                    className="bg-brand-navy hover:bg-brand-navy/90 text-white dark:bg-[#12EBFC] dark:text-[#02205B] dark:hover:bg-[#12EBFC]/90"
+                    className="bg-brand-navy hover:bg-brand-navy/90 text-white dark:bg-[#C77A93] dark:text-[#12161D] dark:hover:bg-[#C77A93]/90"
                     data-testid={`button-export-pdf-cta-${categoryType}`}
                   >
                     {isExportingPDF ? (
@@ -4654,7 +4654,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                     variant="outline"
                     onClick={handleExportExcel}
                     disabled={isExportingExcel || selectedPlatforms.length === 0}
-                    className="border-[#0884AA] text-brand-teal hover:bg-[#0884AA] hover:text-white dark:border-[#12EBFC] dark:text-brand-cyan dark:hover:bg-[#12EBFC] dark:hover:text-[#02205B]"
+                    className="border-[#7FB8A3] text-brand-teal hover:bg-[#7FB8A3] hover:text-white dark:border-[#C77A93] dark:text-brand-cyan dark:hover:bg-[#C77A93] dark:hover:text-[#12161D]"
                     data-testid={`button-export-excel-cta-${categoryType}`}
                   >
                     {isExportingExcel ? (
@@ -4701,7 +4701,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                     <Card
                       className={`cursor-pointer transition-all hover-elevate ${
                         isSelected
-                          ? "ring-2 ring-[#12EBFC] bg-[#12EBFC]/5"
+                          ? "ring-2 ring-[#C77A93] bg-[#C77A93]/5"
                           : ""
                       }`}
                       onClick={() => handlePlatformToggle(platform.id)}
@@ -4730,7 +4730,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                           </Badge>
                           {fitResult && (
                             <Badge 
-                              className={`text-[10px] px-1.5 py-0.5 ${getFitLevelColor(fitResult.fitLevel)} ${isBestFit ? 'ring-1 ring-[#12EBFC]' : ''}`}
+                              className={`text-[10px] px-1.5 py-0.5 ${getFitLevelColor(fitResult.fitLevel)} ${isBestFit ? 'ring-1 ring-[#C77A93]' : ''}`}
                               data-testid={`badge-fit-level-${platform.id}`}
                             >
                               {isBestFit && <Trophy className="w-2.5 h-2.5 mr-0.5" />}
@@ -4757,7 +4757,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
 
       <section className="py-6 sm:py-8">
         <div className="flex items-center gap-2 sm:gap-3 mb-6 sm:mb-8">
-          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center flex-shrink-0">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center flex-shrink-0">
             <Scale className="w-5 h-5 sm:w-6 sm:h-6 text-brand-cream" />
           </div>
           <div>
@@ -4777,7 +4777,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                       variant="outline"
                       size="sm"
                       onClick={() => setCategoryWeights(preset.weights)}
-                      className="border-[#0884AA]/30 hover:border-[#12EBFC] hover:bg-[#12EBFC]/10"
+                      className="border-[#7FB8A3]/30 hover:border-[#C77A93] hover:bg-[#C77A93]/10"
                       data-testid={`button-preset-${preset.id}`}
                     >
                       {preset.name}
@@ -4803,7 +4803,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                       variant="outline"
                       size="sm"
                       onClick={() => setCategoryWeights(preset.weights)}
-                      className="border-[#0884AA]/30 hover:border-[#12EBFC] hover:bg-[#12EBFC]/10"
+                      className="border-[#7FB8A3]/30 hover:border-[#C77A93] hover:bg-[#C77A93]/10"
                       data-testid={`button-erp-preset-${preset.id}`}
                     >
                       {preset.name}
@@ -4820,7 +4820,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
 
         {/* Organisation Profile Card for EPM/ERP */}
         {(categoryType === 'epm' || categoryType === 'erp') && (
-          <Card className="mb-6 sm:mb-8 border-[#0884AA]/30">
+          <Card className="mb-6 sm:mb-8 border-[#7FB8A3]/30">
             <CardHeader className="pb-3 sm:pb-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-2 sm:gap-3">
@@ -4942,7 +4942,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                 <motion.div
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
-                  className="mt-4 p-3 bg-[#12EBFC]/10 rounded-lg border border-[#12EBFC]/30"
+                  className="mt-4 p-3 bg-[#C77A93]/10 rounded-lg border border-[#C77A93]/30"
                 >
                   <div className="flex items-center gap-2 text-sm">
                     <Sparkles className="w-4 h-4 text-brand-cyan" />
@@ -4957,7 +4957,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
 
         {/* AI Company Profile Card */}
         {categoryType === 'ai' && (
-          <Card className="mb-6 sm:mb-8 border-[#0884AA]/30">
+          <Card className="mb-6 sm:mb-8 border-[#7FB8A3]/30">
             <CardHeader className="pb-3 sm:pb-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-2 sm:gap-3">
@@ -5089,7 +5089,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                 <motion.div
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
-                  className="mt-4 p-3 bg-[#12EBFC]/10 rounded-lg border border-[#12EBFC]/30"
+                  className="mt-4 p-3 bg-[#C77A93]/10 rounded-lg border border-[#C77A93]/30"
                 >
                   <div className="flex items-center gap-2 text-sm">
                     <Sparkles className="w-4 h-4 text-brand-cyan" />
@@ -5162,7 +5162,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
 
           <div className="space-y-6">
             {recommendedPlatform && (
-              <Card className="border-[#12EBFC] bg-gradient-to-br from-[#12EBFC]/5 to-transparent">
+              <Card className="border-[#C77A93] bg-gradient-to-br from-[#C77A93]/5 to-transparent">
                 <CardHeader className="pb-2">
                   <div className="flex flex-wrap items-center gap-2">
                     <Trophy className="w-4 h-4 sm:w-5 sm:h-5 text-brand-cyan" />
@@ -5170,7 +5170,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                       {usesFitScoring ? 'Best Fit Platform' : 'Recommended Platform'}
                     </CardTitle>
                     {usesFitScoring && (
-                      <Badge className="bg-[#12EBFC]/20 text-brand-teal border-[#12EBFC]/50">
+                      <Badge className="bg-[#C77A93]/20 text-brand-teal border-[#C77A93]/50">
                         <Target className="w-3 h-3 mr-1" />
                         Profile Match
                       </Badge>
@@ -5212,7 +5212,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
 
                   {/* Scoring Breakdown Section */}
                   {usesFitScoring && categoryType === 'ai' && recommendedPlatform.aiModifiers && recommendedPlatform.aiModifiers.length > 0 && (
-                    <div className="pt-4 border-t border-[#12EBFC]/20">
+                    <div className="pt-4 border-t border-[#C77A93]/20">
                       <h4 className="text-sm font-semibold mb-3 flex items-center gap-2">
                         <Calculator className="w-4 h-4 text-brand-cyan" />
                         Scoring Breakdown
@@ -5285,7 +5285,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                               <Badge 
                                 className={`text-xs cursor-help ${
                                   mod.value > 0 
-                                    ? 'bg-[#12EBFC]/20 text-brand-teal border-[#12EBFC]/50' 
+                                    ? 'bg-[#C77A93]/20 text-brand-teal border-[#C77A93]/50' 
                                     : mod.value < 0 
                                     ? 'bg-red-500/10 text-red-500 border-red-500/30'
                                     : 'bg-muted'
@@ -5305,7 +5305,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
 
                   {/* EPM/ERP Fit Results */}
                   {usesFitScoring && (categoryType === 'epm' || categoryType === 'erp') && fitResults && fitResults.length > 0 && (
-                    <div className="pt-4 border-t border-[#12EBFC]/20">
+                    <div className="pt-4 border-t border-[#C77A93]/20">
                       {(() => {
                         const topFit = fitResults.find(f => f.platformId === recommendedPlatform.id);
                         if (!topFit) return null;
@@ -5407,15 +5407,15 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                             <h4 className="font-semibold text-sm mb-2">ERP Synergy Bonuses</h4>
                             <ul className="text-sm text-muted-foreground space-y-1">
                               <li className="flex items-center gap-2">
-                                <Badge className="bg-[#12EBFC]/20 text-brand-teal text-xs">+20</Badge>
+                                <Badge className="bg-[#C77A93]/20 text-brand-teal text-xs">+20</Badge>
                                 <span><strong>Native Integration:</strong> Same-vendor ERP (e.g., Microsoft Copilot + Dynamics 365)</span>
                               </li>
                               <li className="flex items-center gap-2">
-                                <Badge className="bg-[#12EBFC]/20 text-brand-teal text-xs">+12</Badge>
+                                <Badge className="bg-[#C77A93]/20 text-brand-teal text-xs">+12</Badge>
                                 <span><strong>Pre-built Connector:</strong> RPA bots and integrations available (e.g., UiPath, Automation Anywhere)</span>
                               </li>
                               <li className="flex items-center gap-2">
-                                <Badge className="bg-[#12EBFC]/20 text-brand-teal text-xs">+8</Badge>
+                                <Badge className="bg-[#C77A93]/20 text-brand-teal text-xs">+8</Badge>
                                 <span><strong>Partnership:</strong> Vendor partnership agreements (e.g., IBM watsonx + SAP)</span>
                               </li>
                               <li className="flex items-center gap-2">
@@ -5429,7 +5429,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                             <h4 className="font-semibold text-sm mb-2">Technology Stack Alignment</h4>
                             <ul className="text-sm text-muted-foreground space-y-1">
                               <li className="flex items-center gap-2">
-                                <Badge className="bg-[#12EBFC]/20 text-brand-teal text-xs">+15</Badge>
+                                <Badge className="bg-[#C77A93]/20 text-brand-teal text-xs">+15</Badge>
                                 <span><strong>Strong Alignment:</strong> Platform deeply integrated with your tech ecosystem</span>
                               </li>
                               <li className="flex items-center gap-2">
@@ -5443,7 +5443,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                             <h4 className="font-semibold text-sm mb-2">Company Size & Scale Fit</h4>
                             <ul className="text-sm text-muted-foreground space-y-1">
                               <li className="flex items-center gap-2">
-                                <Badge className="bg-[#12EBFC]/20 text-brand-teal text-xs">+10</Badge>
+                                <Badge className="bg-[#C77A93]/20 text-brand-teal text-xs">+10</Badge>
                                 <span><strong>Optimal Fit:</strong> Platform designed for your company scale</span>
                               </li>
                               <li className="flex items-center gap-2">
@@ -5457,15 +5457,15 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                             <h4 className="font-semibold text-sm mb-2">Industry & Finance Focus</h4>
                             <ul className="text-sm text-muted-foreground space-y-1">
                               <li className="flex items-center gap-2">
-                                <Badge className="bg-[#12EBFC]/20 text-brand-teal text-xs">+10</Badge>
+                                <Badge className="bg-[#C77A93]/20 text-brand-teal text-xs">+10</Badge>
                                 <span><strong>Purpose-built for Finance:</strong> Dedicated finance automation features</span>
                               </li>
                               <li className="flex items-center gap-2">
-                                <Badge className="bg-[#12EBFC]/20 text-brand-teal text-xs">+8</Badge>
+                                <Badge className="bg-[#C77A93]/20 text-brand-teal text-xs">+8</Badge>
                                 <span><strong>Industry Specialisation:</strong> Strong vertical expertise</span>
                               </li>
                               <li className="flex items-center gap-2">
-                                <Badge className="bg-[#12EBFC]/20 text-brand-teal text-xs">+8</Badge>
+                                <Badge className="bg-[#C77A93]/20 text-brand-teal text-xs">+8</Badge>
                                 <span><strong>Deployment Ease:</strong> Plug-and-play implementation</span>
                               </li>
                             </ul>
@@ -5511,7 +5511,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                 <div className="flex items-center justify-between">
                   <CardTitle>Score Comparison</CardTitle>
                   {usesFitScoring && (
-                    <Badge variant="outline" className="text-xs border-[#12EBFC]/50 text-brand-teal">
+                    <Badge variant="outline" className="text-xs border-[#C77A93]/50 text-brand-teal">
                       <Target className="w-3 h-3 mr-1" />
                       Fit-Adjusted
                     </Badge>
@@ -5561,7 +5561,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
       <section className="py-6 sm:py-8 bg-muted/30 rounded-xl comparison-section-lazy">
         <div className="px-3 sm:px-6">
           <div className="flex items-center gap-2 sm:gap-3 mb-6 sm:mb-8">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center flex-shrink-0">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center flex-shrink-0">
               <BarChart3 className="w-5 h-5 sm:w-6 sm:h-6 text-brand-cream" />
             </div>
             <div>
@@ -5749,7 +5749,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                               <div className="flex items-center justify-center gap-2">
                                 <div className="w-16 h-2 bg-muted rounded-full overflow-hidden">
                                   <div
-                                    className="h-full bg-gradient-to-r from-[#0884AA] to-[#12EBFC]"
+                                    className="h-full bg-gradient-to-r from-[#7FB8A3] to-[#C77A93]"
                                     style={{ width: `${score * 10}%` }}
                                   />
                                 </div>
@@ -5866,7 +5866,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                         <PolarAngleAxis dataKey="category" tick={{ fill: "hsl(var(--muted-foreground))", fontSize: 14 }} />
                         <PolarRadiusAxis angle={30} domain={[0, 10]} tick={false} axisLine={false} />
                         {sortedScores.map((platform, index) => {
-                          const colours = ["#12EBFC", "#0884AA", "#0070C0", "#02205B", "#6366f1", "#8b5cf6"];
+                          const colours = ["#C77A93", "#7FB8A3", "#1E2630", "#12161D", "#6366f1", "#8b5cf6"];
                           return (
                             <Radar
                               key={platform.id}
@@ -5913,7 +5913,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                         <PolarAngleAxis dataKey="category" tick={{ fill: "hsl(var(--muted-foreground))", fontSize: 12 }} />
                         <PolarRadiusAxis angle={30} domain={[0, 10]} tick={false} axisLine={false} />
                         {sortedScores.map((platform, index) => {
-                          const colours = ["#12EBFC", "#0884AA", "#0070C0", "#02205B", "#6366f1", "#8b5cf6"];
+                          const colours = ["#C77A93", "#7FB8A3", "#1E2630", "#12161D", "#6366f1", "#8b5cf6"];
                           return (
                             <Radar
                               key={platform.id}
@@ -5951,7 +5951,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                   <PolarAngleAxis dataKey="category" tick={{ fill: "#374151", fontSize: 12 }} />
                   <PolarRadiusAxis angle={30} domain={[0, 10]} tick={false} axisLine={false} />
                   {sortedScores.map((platform, index) => {
-                    const colours = ["#12EBFC", "#0884AA", "#0070C0", "#02205B", "#6366f1", "#8b5cf6"];
+                    const colours = ["#C77A93", "#7FB8A3", "#1E2630", "#12161D", "#6366f1", "#8b5cf6"];
                     return (
                       <Radar
                         key={platform.id}
@@ -5975,7 +5975,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
         <Collapsible open={showTimeline} onOpenChange={setShowTimeline}>
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center">
                 <Clock className="w-5 h-5 text-brand-cream" />
               </div>
               <div>
@@ -6007,7 +6007,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
       <section className="py-8">
         <div className="flex flex-col md:flex-row md:items-center gap-4 mb-8">
           <div className="flex items-center gap-3 flex-1">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center">
               <Layers className="w-6 h-6 text-brand-cream" />
             </div>
             <div>
@@ -6038,7 +6038,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                 onClick={() => setDeepDiveModalOpen(true)}
                 disabled={!canCompareSelected}
                 className={`${canCompareSelected 
-                  ? 'bg-gradient-to-r from-[#02205B] to-[#0884AA] hover:from-[#02205B]/90 hover:to-[#0884AA]/90 text-white' 
+                  ? 'bg-gradient-to-r from-[#12161D] to-[#7FB8A3] hover:from-[#12161D]/90 hover:to-[#7FB8A3]/90 text-white' 
                   : ''
                 }`}
                 data-testid="button-compare-selected"
@@ -6051,7 +6051,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
         </div>
         
         {canEnterDeepDive && (
-          <div className="mb-6 p-4 bg-[#12EBFC]/5 border border-[#12EBFC]/20 rounded-lg">
+          <div className="mb-6 p-4 bg-[#C77A93]/5 border border-[#C77A93]/20 rounded-lg">
             <div className="flex items-start gap-3">
               <Scale className="w-5 h-5 text-brand-cyan mt-0.5 flex-shrink-0" />
               <div>
@@ -6070,8 +6070,8 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
             <Card
               key={platform.id}
               className={`overflow-hidden transition-all ${
-                expandedPlatform === platform.id ? "ring-2 ring-[#0884AA]" : ""
-              } ${deepDiveSelectedPlatforms.includes(platform.id) ? "ring-2 ring-[#12EBFC]" : ""}`}
+                expandedPlatform === platform.id ? "ring-2 ring-[#7FB8A3]" : ""
+              } ${deepDiveSelectedPlatforms.includes(platform.id) ? "ring-2 ring-[#C77A93]" : ""}`}
               data-testid={`card-deepdive-${platform.id}`}
             >
               <CardHeader
@@ -6090,12 +6090,12 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                           checked={deepDiveSelectedPlatforms.includes(platform.id)}
                           onCheckedChange={() => handleDeepDivePlatformToggle(platform.id)}
                           disabled={!deepDiveSelectedPlatforms.includes(platform.id) && deepDiveSelectedPlatforms.length >= 3}
-                          className="h-5 w-5 border-[#0884AA] data-[state=checked]:bg-[#12EBFC] data-[state=checked]:border-[#12EBFC]"
+                          className="h-5 w-5 border-[#7FB8A3] data-[state=checked]:bg-[#C77A93] data-[state=checked]:border-[#C77A93]"
                           data-testid={`checkbox-platform-${platform.id}`}
                         />
                       </div>
                     )}
-                    <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center text-white font-bold text-lg">
+                    <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center text-white font-bold text-lg">
                       {platform.logo}
                     </div>
                     <div>
@@ -6216,7 +6216,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                       {positiveModifiers.slice(0, 3).map((mod, idx) => (
                         <Badge 
                           key={idx} 
-                          className="text-[9px] px-1 py-0 bg-[#12EBFC]/20 text-brand-teal border-[#12EBFC]/50"
+                          className="text-[9px] px-1 py-0 bg-[#C77A93]/20 text-brand-teal border-[#C77A93]/50"
                         >
                           {mod.label}
                         </Badge>
@@ -6399,10 +6399,10 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
               {deepDiveSelectedPlatformsData.map((platform) => {
                 const calcScore = calculatedScores.find((p) => p.id === platform.id);
                 return (
-                  <Card key={platform.id} className="border-[#12EBFC]/30">
+                  <Card key={platform.id} className="border-[#C77A93]/30">
                     <CardContent className="p-4">
                       <div className="flex items-center gap-3 mb-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center text-white font-bold text-sm">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center text-white font-bold text-sm">
                           {platform.logo}
                         </div>
                         <div>
@@ -6452,7 +6452,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                       <Fragment key={category.category}>
                         {/* Category Header with Verdict */}
                         <TableRow 
-                          className="bg-gradient-to-r from-[#02205B]/10 to-[#0884AA]/10 cursor-pointer hover:from-[#02205B]/15 hover:to-[#0884AA]/15"
+                          className="bg-gradient-to-r from-[#12161D]/10 to-[#7FB8A3]/10 cursor-pointer hover:from-[#12161D]/15 hover:to-[#7FB8A3]/15"
                           onClick={() => handleCategoryToggle(category.category)}
                         >
                           <TableCell className="font-bold">
@@ -6609,7 +6609,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
               onClick={handleExportPDF}
               disabled={isExportingPDF}
               size="sm"
-              className="bg-[#12EBFC] text-[#02205B] flex-shrink-0"
+              className="bg-[#C77A93] text-[#12161D] flex-shrink-0"
               data-testid="button-sticky-export-pdf"
             >
               {isExportingPDF ? (
@@ -6641,9 +6641,9 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
 }
 
 const heroTechImages = [
-  { icon: Target, label: "EPM Solutions", color: "#12EBFC" },
-  { icon: Database, label: "ERP Systems", color: "#0884AA" },
-  { icon: Bot, label: "AI Tools", color: "#12EBFC" },
+  { icon: Target, label: "EPM Solutions", color: "#C77A93" },
+  { icon: Database, label: "ERP Systems", color: "#7FB8A3" },
+  { icon: Bot, label: "AI Tools", color: "#C77A93" },
 ];
 
 // Skeleton loading component for initial page load
@@ -6653,7 +6653,7 @@ function ComparisonPageSkeleton() {
       <Navigation />
       <main className="pt-16 sm:pt-20">
         {/* Hero skeleton */}
-        <section className="py-10 md:py-16 lg:py-24 bg-gradient-to-b from-[#02205B] to-[#0884AA]">
+        <section className="py-10 md:py-16 lg:py-24 bg-gradient-to-b from-[#12161D] to-[#7FB8A3]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="flex flex-col items-center text-center">
               <Skeleton className="h-10 w-64 mb-4 bg-white/20" />
@@ -6733,23 +6733,23 @@ export default function TechComparisonPage() {
       <Navigation />
 
       <main className="pt-16 sm:pt-20">
-        <section className="py-10 md:py-16 lg:py-24 bg-gradient-to-b from-[#02205B] to-[#0884AA] relative overflow-hidden">
+        <section className="py-10 md:py-16 lg:py-24 bg-gradient-to-b from-[#12161D] to-[#7FB8A3] relative overflow-hidden">
           {/* Background orbs - static on mobile/reduced motion for better performance */}
           {shouldReduceMotion ? (
             <>
               <div
-                className="absolute top-1/4 left-10 w-64 h-64 rounded-full bg-[#12EBFC]/10 blur-3xl opacity-40"
+                className="absolute top-1/4 left-10 w-64 h-64 rounded-full bg-[#C77A93]/10 blur-3xl opacity-40"
                 aria-hidden="true"
               />
               <div
-                className="absolute bottom-1/4 right-10 w-96 h-96 rounded-full bg-[#0884AA]/20 blur-3xl opacity-30"
+                className="absolute bottom-1/4 right-10 w-96 h-96 rounded-full bg-[#7FB8A3]/20 blur-3xl opacity-30"
                 aria-hidden="true"
               />
             </>
           ) : (
             <>
               <motion.div
-                className="absolute top-1/4 left-10 w-64 h-64 rounded-full bg-[#12EBFC]/10 blur-3xl will-change-transform"
+                className="absolute top-1/4 left-10 w-64 h-64 rounded-full bg-[#C77A93]/10 blur-3xl will-change-transform"
                 animate={{
                   scale: [1, 1.2, 1],
                   opacity: [0.3, 0.5, 0.3],
@@ -6758,7 +6758,7 @@ export default function TechComparisonPage() {
                 aria-hidden="true"
               />
               <motion.div
-                className="absolute bottom-1/4 right-10 w-96 h-96 rounded-full bg-[#0884AA]/20 blur-3xl will-change-transform"
+                className="absolute bottom-1/4 right-10 w-96 h-96 rounded-full bg-[#7FB8A3]/20 blur-3xl will-change-transform"
                 animate={{
                   scale: [1.2, 1, 1.2],
                   opacity: [0.4, 0.2, 0.4],
@@ -6777,7 +6777,7 @@ export default function TechComparisonPage() {
                 transition={{ duration: 0.6 }}
                 className="text-center lg:text-left"
               >
-                <Badge className="bg-white/10 backdrop-blur-md border-[#12EBFC]/30 text-white mb-6" data-testid="badge-hero">
+                <Badge className="bg-white/10 backdrop-blur-md border-[#C77A93]/30 text-white mb-6" data-testid="badge-hero">
                   Interactive Tool
                 </Badge>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
@@ -6807,24 +6807,24 @@ export default function TechComparisonPage() {
                   {/* Rotating circles - static when reduced motion preferred */}
                   {shouldReduceMotion ? (
                     <>
-                      <div className="absolute inset-0 rounded-full border-2 border-[#12EBFC]/20" />
-                      <div className="absolute inset-4 rounded-full border-2 border-[#12EBFC]/30" />
-                      <div className="absolute inset-8 rounded-full border-2 border-[#12EBFC]/40" />
+                      <div className="absolute inset-0 rounded-full border-2 border-[#C77A93]/20" />
+                      <div className="absolute inset-4 rounded-full border-2 border-[#C77A93]/30" />
+                      <div className="absolute inset-8 rounded-full border-2 border-[#C77A93]/40" />
                     </>
                   ) : (
                     <>
                       <motion.div
-                        className="absolute inset-0 rounded-full border-2 border-[#12EBFC]/20 will-change-transform"
+                        className="absolute inset-0 rounded-full border-2 border-[#C77A93]/20 will-change-transform"
                         animate={{ rotate: 360 }}
                         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                       />
                       <motion.div
-                        className="absolute inset-4 rounded-full border-2 border-[#12EBFC]/30 will-change-transform"
+                        className="absolute inset-4 rounded-full border-2 border-[#C77A93]/30 will-change-transform"
                         animate={{ rotate: -360 }}
                         transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
                       />
                       <motion.div
-                        className="absolute inset-8 rounded-full border-2 border-[#12EBFC]/40 will-change-transform"
+                        className="absolute inset-8 rounded-full border-2 border-[#C77A93]/40 will-change-transform"
                         animate={{ rotate: 360 }}
                         transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
                       />
@@ -6879,7 +6879,7 @@ export default function TechComparisonPage() {
                   {!shouldReduceMotion && [0, 1, 2].map((idx) => (
                     <motion.div
                       key={idx}
-                      className="absolute w-4 h-4 rounded-full bg-[#12EBFC] will-change-transform"
+                      className="absolute w-4 h-4 rounded-full bg-[#C77A93] will-change-transform"
                       style={{
                         top: "50%",
                         left: "50%",
@@ -6915,7 +6915,7 @@ export default function TechComparisonPage() {
                   <TabsList className="h-auto p-1 bg-muted/50 flex-wrap">
                     <TabsTrigger 
                       value="epm" 
-                      className="data-[state=active]:bg-[#12EBFC] data-[state=active]:text-[#02205B] px-3 md:px-6 py-2 md:py-3 text-sm md:text-base"
+                      className="data-[state=active]:bg-[#C77A93] data-[state=active]:text-[#12161D] px-3 md:px-6 py-2 md:py-3 text-sm md:text-base"
                       data-testid="tab-category-epm"
                     >
                       <Target className="w-4 h-4 mr-1 md:mr-2" />
@@ -6923,7 +6923,7 @@ export default function TechComparisonPage() {
                     </TabsTrigger>
                     <TabsTrigger 
                       value="erp" 
-                      className="data-[state=active]:bg-[#12EBFC] data-[state=active]:text-[#02205B] px-3 md:px-6 py-2 md:py-3 text-sm md:text-base"
+                      className="data-[state=active]:bg-[#C77A93] data-[state=active]:text-[#12161D] px-3 md:px-6 py-2 md:py-3 text-sm md:text-base"
                       data-testid="tab-category-erp"
                     >
                       <Database className="w-4 h-4 mr-1 md:mr-2" />
@@ -6931,7 +6931,7 @@ export default function TechComparisonPage() {
                     </TabsTrigger>
                     <TabsTrigger 
                       value="ai" 
-                      className="data-[state=active]:bg-[#12EBFC] data-[state=active]:text-[#02205B] px-3 md:px-6 py-2 md:py-3 text-sm md:text-base"
+                      className="data-[state=active]:bg-[#C77A93] data-[state=active]:text-[#12161D] px-3 md:px-6 py-2 md:py-3 text-sm md:text-base"
                       data-testid="tab-category-ai"
                     >
                       <Bot className="w-4 h-4 mr-1 md:mr-2" />
@@ -6980,7 +6980,7 @@ export default function TechComparisonPage() {
           </div>
         </section>
 
-        <section className="py-12 md:py-16 lg:py-24 lg:pb-40 bg-gradient-to-r from-[#02205B] via-[#0070C0] to-[#0884AA]">
+        <section className="py-12 md:py-16 lg:py-24 lg:pb-40 bg-gradient-to-r from-[#12161D] via-[#1E2630] to-[#7FB8A3]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -7001,7 +7001,7 @@ export default function TechComparisonPage() {
                   <Link href="/contact">
                     <Button
                       size="lg"
-                      className="bg-[#12EBFC] text-[#02205B] hover:bg-[#08CCF9]"
+                      className="bg-[#C77A93] text-[#12161D] hover:bg-[#08CCF9]"
                       data-testid="button-contact-cta"
                     >
                       Schedule a Consultation

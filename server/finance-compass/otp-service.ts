@@ -172,7 +172,7 @@ export async function sendFcOtpEmail(email: string, firstName: string, otp: stri
       <div style="font-family: 'Inter', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f8f9fa; padding: 40px;">
         <div style="background: white; border-radius: 12px; padding: 40px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
           <div style="text-align: center; margin-bottom: 30px;">
-            <h1 style="color: #02205B; margin: 0;">FinanceCompass</h1>
+            <h1 style="color: #12161D; margin: 0;">FinanceCompass</h1>
             <p style="color: #666; margin-top: 8px;">Finance Transformation Assessment</p>
           </div>
           
@@ -181,8 +181,8 @@ export async function sendFcOtpEmail(email: string, firstName: string, otp: stri
             Please use the verification code below to access your finance transformation assessment:
           </p>
           
-          <div style="background: linear-gradient(135deg, #02205B 0%, #0884AA 100%); padding: 24px; border-radius: 8px; text-align: center; margin: 24px 0;">
-            <span style="font-size: 36px; font-weight: bold; letter-spacing: 10px; color: #12EBFC;">${otp}</span>
+          <div style="background: linear-gradient(135deg, #12161D 0%, #7FB8A3 100%); padding: 24px; border-radius: 8px; text-align: center; margin: 24px 0;">
+            <span style="font-size: 36px; font-weight: bold; letter-spacing: 10px; color: #C77A93;">${otp}</span>
           </div>
           
           <p style="color: #666; font-size: 14px; text-align: center;">

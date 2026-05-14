@@ -189,7 +189,7 @@ export function BelowFoldSections() {
                   <Zap className="w-5 h-5 text-brand-cyan" />
                 </div>
                 <span
-                  className="text-xs font-medium uppercase tracking-wider text-[#12EBFC]/80"
+                  className="text-xs font-medium uppercase tracking-wider text-[#C77A93]/80"
                   data-testid="text-how-we-work-label"
                 >
                   How We Work
@@ -203,12 +203,12 @@ export function BelowFoldSections() {
                   Consulting firms have spent decades charging more for the same output. We're changing that.
                 </p>
                 <p
-                  className="text-base sm:text-lg leading-relaxed text-[#FEFFF3]/80"
+                  className="text-base sm:text-lg leading-relaxed text-[#F6F3EE]/80"
                   data-testid="text-how-we-work-body"
                 >
                   Our AI-augmented delivery model standardises the process, the output, and the outcome across every engagement. That means faster delivery, lower cost, and a result you can predict from the start, not one you're hoping for at go-live.
                 </p>
-                <p className="text-sm sm:text-base leading-relaxed text-[#FEFFF3]/60">
+                <p className="text-sm sm:text-base leading-relaxed text-[#F6F3EE]/60">
                   We've delivered programmes at AerCap, Howden, Reckitt Benckiser, and BAT. We know what good looks like. Now we've built the tools to make it repeatable.
                 </p>
               </div>

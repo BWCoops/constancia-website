@@ -580,7 +580,7 @@ async function sendAdminErrorReport(
 <head>
   <style>
     body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-    .header { background: linear-gradient(135deg, #02205B, #0884AA); color: white; padding: 20px; border-radius: 8px 8px 0 0; }
+    .header { background: linear-gradient(135deg, #12161D, #7FB8A3); color: white; padding: 20px; border-radius: 8px 8px 0 0; }
     .content { padding: 20px; background: #f9f9f9; }
     .issue { margin: 10px 0; padding: 12px; border-radius: 6px; }
     .critical { background: #fee2e2; border-left: 4px solid #dc2626; }
@@ -589,7 +589,7 @@ async function sendAdminErrorReport(
     .code-suggestion { background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 6px; font-family: monospace; font-size: 12px; overflow-x: auto; margin: 15px 0; }
     .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0; }
     .metric { background: white; padding: 15px; border-radius: 8px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-    .metric-value { font-size: 24px; font-weight: bold; color: #02205B; }
+    .metric-value { font-size: 24px; font-weight: bold; color: #12161D; }
     .metric-label { font-size: 12px; color: #666; }
     .footer { padding: 15px; text-align: center; font-size: 12px; color: #666; }
   </style>

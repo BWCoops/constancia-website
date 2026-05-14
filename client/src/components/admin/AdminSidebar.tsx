@@ -108,7 +108,7 @@ export function AdminSidebar() {
     <Sidebar collapsible="icon" data-testid="admin-sidebar">
       <SidebarHeader className="border-b border-sidebar-border">
         <Link href="/admin" className="flex items-center gap-2 px-2 py-2" data-testid="link-sidebar-home">
-          <Settings className="h-5 w-5 text-[#12EBFC] shrink-0" />
+          <Settings className="h-5 w-5 text-[#C77A93] shrink-0" />
           <span className="font-semibold text-sm truncate group-data-[collapsible=icon]:hidden">
             Admin Console
           </span>

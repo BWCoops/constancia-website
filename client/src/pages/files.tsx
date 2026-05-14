@@ -174,7 +174,7 @@ export default function FilesPage() {
                       <div className="flex gap-2">
                         <Button 
                           size="sm" 
-                          className="flex-1 bg-gradient-to-r from-[#02205B] to-[#0884AA]"
+                          className="flex-1 bg-gradient-to-r from-[#12161D] to-[#7FB8A3]"
                           onClick={() => handleDownload(file)}
                           data-testid={`button-download-${file.id}`}
                         >
@@ -220,7 +220,7 @@ export default function FilesPage() {
                       onClick={() => setSelectedCategory(null)}
                       className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
                         !selectedCategory 
-                          ? "bg-[#12EBFC]/10 text-brand-teal dark:text-brand-cyan" 
+                          ? "bg-[#C77A93]/10 text-brand-teal dark:text-brand-cyan" 
                           : "hover:bg-muted text-muted-foreground"
                       }`}
                       data-testid="button-file-category-all"
@@ -233,7 +233,7 @@ export default function FilesPage() {
                         onClick={() => setSelectedCategory(category)}
                         className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
                           selectedCategory === category 
-                            ? "bg-[#12EBFC]/10 text-brand-teal dark:text-brand-cyan" 
+                            ? "bg-[#C77A93]/10 text-brand-teal dark:text-brand-cyan" 
                             : "hover:bg-muted text-muted-foreground"
                         }`}
                         data-testid={`button-file-category-${category.toLowerCase().replace(/\s+/g, '-')}`}
@@ -332,7 +332,7 @@ export default function FilesPage() {
                           </Button>
                           <Button 
                             size="sm"
-                            className="bg-gradient-to-r from-[#02205B] to-[#0884AA]"
+                            className="bg-gradient-to-r from-[#12161D] to-[#7FB8A3]"
                             onClick={() => handleDownload(file)}
                             data-testid={`button-download-${file.id}`}
                           >

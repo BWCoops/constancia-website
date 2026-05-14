@@ -65,13 +65,13 @@ function parseInlineFormatting(text: string, keyPrefix: string): JSX.Element[] {
   parts.forEach((part, idx) => {
     if (part.startsWith('**') && part.endsWith('**')) {
       elements.push(
-        <strong key={`${keyPrefix}-bold-${idx}`} className="font-semibold text-[#0884AA] dark:text-[#12EBFC]">
+        <strong key={`${keyPrefix}-bold-${idx}`} className="font-semibold text-[#7FB8A3] dark:text-[#C77A93]">
           {part.slice(2, -2)}
         </strong>
       );
     } else if (part.startsWith('`') && part.endsWith('`')) {
       elements.push(
-        <code key={`${keyPrefix}-code-${idx}`} className="px-1.5 py-0.5 rounded bg-[#12EBFC]/10 text-[#0884AA] dark:text-[#12EBFC] font-mono text-xs">
+        <code key={`${keyPrefix}-code-${idx}`} className="px-1.5 py-0.5 rounded bg-[#C77A93]/10 text-[#7FB8A3] dark:text-[#C77A93] font-mono text-xs">
           {part.slice(1, -1)}
         </code>
       );
@@ -84,7 +84,7 @@ function parseInlineFormatting(text: string, keyPrefix: string): JSX.Element[] {
             href={linkMatch[2]} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-[#0884AA] dark:text-[#12EBFC] underline underline-offset-2 hover:text-[#12EBFC] transition-colors"
+            className="text-[#7FB8A3] dark:text-[#C77A93] underline underline-offset-2 hover:text-[#C77A93] transition-colors"
           >
             {linkMatch[1]}
           </a>
@@ -145,7 +145,7 @@ function renderMarkdown(text: string): JSX.Element[] {
           <ul key={`list-${listKey}`} className="space-y-2 my-3">
             {currentList.items.map((item, i) => (
               <li key={i} className="flex items-start gap-2 text-sm">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#0884AA] dark:bg-[#12EBFC] mt-2 flex-shrink-0" />
+                <span className="h-1.5 w-1.5 rounded-full bg-[#7FB8A3] dark:bg-[#C77A93] mt-2 flex-shrink-0" />
                 <span className="leading-relaxed">{parseInlineFormatting(item, `li-${listKey}-${i}`)}</span>
               </li>
             ))}
@@ -156,7 +156,7 @@ function renderMarkdown(text: string): JSX.Element[] {
           <ol key={`list-${listKey}`} className="space-y-2 my-3">
             {currentList.items.map((item, i) => (
               <li key={i} className="flex items-start gap-3 text-sm">
-                <span className="h-5 w-5 rounded-full bg-gradient-to-br from-[#02205B] to-[#0884AA] text-white text-xs flex items-center justify-center flex-shrink-0 font-medium">
+                <span className="h-5 w-5 rounded-full bg-gradient-to-br from-[#12161D] to-[#7FB8A3] text-white text-xs flex items-center justify-center flex-shrink-0 font-medium">
                   {i + 1}
                 </span>
                 <span className="leading-relaxed pt-0.5">{parseInlineFormatting(item, `oli-${listKey}-${i}`)}</span>
@@ -175,13 +175,13 @@ function renderMarkdown(text: string): JSX.Element[] {
       const tableData = parseTable(currentTable);
       if (tableData) {
         elements.push(
-          <div key={`table-${tableKey}`} className="my-2 sm:my-3 rounded-lg border border-[#0884AA]/20 overflow-x-auto -mx-1 sm:mx-0 touch-pan-x">
+          <div key={`table-${tableKey}`} className="my-2 sm:my-3 rounded-lg border border-[#7FB8A3]/20 overflow-x-auto -mx-1 sm:mx-0 touch-pan-x">
             <div className="text-[9px] sm:hidden text-muted-foreground px-2 py-1 bg-muted/30 flex items-center gap-1">
               <ChevronLeft className="h-3 w-3" /><span>Swipe to view more</span><ChevronRight className="h-3 w-3" />
             </div>
             <table className="w-full text-[10px] sm:text-xs min-w-[400px] sm:min-w-[500px]">
               <thead>
-                <tr className="bg-gradient-to-r from-[#02205B] to-[#0884AA]">
+                <tr className="bg-gradient-to-r from-[#12161D] to-[#7FB8A3]">
                   {tableData.headers.map((header, i) => (
                     <th key={i} className={cn(
                       "px-1.5 sm:px-3 py-1.5 sm:py-2.5 text-left font-semibold text-white whitespace-nowrap",
@@ -197,8 +197,8 @@ function renderMarkdown(text: string): JSX.Element[] {
                   <tr 
                     key={rowIdx} 
                     className={cn(
-                      "border-t border-[#0884AA]/10",
-                      rowIdx % 2 === 0 ? "bg-background" : "bg-[#12EBFC]/5"
+                      "border-t border-[#7FB8A3]/10",
+                      rowIdx % 2 === 0 ? "bg-background" : "bg-[#C77A93]/5"
                     )}
                   >
                     {row.map((cell, cellIdx) => (
@@ -250,7 +250,7 @@ function renderMarkdown(text: string): JSX.Element[] {
     if (trimmedLine.startsWith('>')) {
       flushList();
       elements.push(
-        <blockquote key={`quote-${lineIdx}`} className="border-l-3 border-[#0884AA] pl-3 my-3 py-2 bg-[#12EBFC]/5 rounded-r-lg">
+        <blockquote key={`quote-${lineIdx}`} className="border-l-3 border-[#7FB8A3] pl-3 my-3 py-2 bg-[#C77A93]/5 rounded-r-lg">
           <p className="text-sm text-muted-foreground italic">
             {parseInlineFormatting(trimmedLine.slice(1).trim(), `quote-${lineIdx}`)}
           </p>
@@ -264,7 +264,7 @@ function renderMarkdown(text: string): JSX.Element[] {
       flushList();
       elements.push(
         <h4 key={`h3-${lineIdx}`} className="flex items-center gap-2 font-semibold text-sm mt-4 mb-2 text-foreground">
-          <span className="h-1 w-4 bg-gradient-to-r from-[#0884AA] to-[#12EBFC] rounded-full" />
+          <span className="h-1 w-4 bg-gradient-to-r from-[#7FB8A3] to-[#C77A93] rounded-full" />
           {parseInlineFormatting(trimmedLine.slice(4), `h3-${lineIdx}`)}
         </h4>
       );
@@ -275,7 +275,7 @@ function renderMarkdown(text: string): JSX.Element[] {
       flushList();
       elements.push(
         <h3 key={`h2-${lineIdx}`} className="flex items-center gap-2 font-bold text-base mt-4 mb-2 text-foreground">
-          <span className="h-1.5 w-5 bg-gradient-to-r from-[#02205B] to-[#0884AA] rounded-full" />
+          <span className="h-1.5 w-5 bg-gradient-to-r from-[#12161D] to-[#7FB8A3] rounded-full" />
           {parseInlineFormatting(trimmedLine.slice(3), `h2-${lineIdx}`)}
         </h3>
       );
@@ -288,7 +288,7 @@ function renderMarkdown(text: string): JSX.Element[] {
       flushList();
       elements.push(
         <div key={`kv-${lineIdx}`} className="flex items-start gap-2 my-1.5 text-sm">
-          <span className="font-medium text-[#0884AA] dark:text-[#12EBFC] min-w-fit">{keyValueMatch[1]}:</span>
+          <span className="font-medium text-[#7FB8A3] dark:text-[#C77A93] min-w-fit">{keyValueMatch[1]}:</span>
           <span className="text-foreground">{parseInlineFormatting(keyValueMatch[2], `kv-${lineIdx}`)}</span>
         </div>
       );
@@ -1178,7 +1178,7 @@ What would you like to know?`,
         <div 
           className="fixed bottom-20 sm:bottom-24 z-50 animate-in slide-in-from-right-4 fade-in duration-300 left-4 right-4 sm:left-auto sm:right-6"
         >
-          <div className="bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-[#0884AA]/20 p-3 sm:p-4 max-w-full sm:max-w-[280px] sm:ml-auto">
+          <div className="bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-[#7FB8A3]/20 p-3 sm:p-4 max-w-full sm:max-w-[280px] sm:ml-auto">
             {/* Close button - touch-friendly */}
             <button
               onClick={dismissPopup}
@@ -1190,8 +1190,8 @@ What would you like to know?`,
             
             {/* Notification content */}
             <div className="flex items-start gap-3">
-              <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center flex-shrink-0">
-                <Sparkles className="h-5 w-5 text-[#12EBFC]" />
+              <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center flex-shrink-0">
+                <Sparkles className="h-5 w-5 text-[#C77A93]" />
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-foreground mb-1">
@@ -1202,7 +1202,7 @@ What would you like to know?`,
                 </p>
                 <Button
                   onClick={() => setIsOpen(true)}
-                  className="bg-gradient-to-r from-[#02205B] to-[#0884AA] hover:from-[#0884AA] hover:to-[#12EBFC] text-white min-h-[44px] sm:min-h-0 w-full sm:w-auto"
+                  className="bg-gradient-to-r from-[#12161D] to-[#7FB8A3] hover:from-[#7FB8A3] hover:to-[#C77A93] text-white min-h-[44px] sm:min-h-0 w-full sm:w-auto"
                   data-testid="button-popup-chat"
                 >
                   <MessageSquare className="h-4 w-4 mr-2" />
@@ -1227,7 +1227,7 @@ What would you like to know?`,
           onClick={() => setIsOpen(true)}
           className={cn(
             "h-14 w-14 rounded-full shadow-lg p-0",
-            "bg-gradient-to-br from-[#02205B] to-[#0884AA] hover:from-[#0884AA] hover:to-[#12EBFC]",
+            "bg-gradient-to-br from-[#12161D] to-[#7FB8A3] hover:from-[#7FB8A3] hover:to-[#C77A93]",
             "transition-all duration-300 hover:shadow-xl hover:scale-105"
           )}
           data-testid="button-open-chatbot"
@@ -1236,7 +1236,7 @@ What would you like to know?`,
           <div className="relative">
             <Sparkles className="h-6 w-6 text-white" />
             {hasNewMessages && (
-              <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-[#12EBFC] animate-pulse" />
+              <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-[#C77A93] animate-pulse" />
             )}
           </div>
         </Button>
@@ -1271,20 +1271,20 @@ What would you like to know?`,
           onTouchStart={handleResizeStart}
           data-testid="resize-handle"
         >
-          <div className="w-1 h-12 rounded-full bg-[#0884AA]/30 group-hover:bg-[#12EBFC] transition-colors" />
+          <div className="w-1 h-12 rounded-full bg-[#7FB8A3]/30 group-hover:bg-[#C77A93] transition-colors" />
         </div>
         
         <Card 
           className={cn(
-            "flex flex-col h-full overflow-hidden border-l-2 border-[#0884AA]/20 shadow-2xl rounded-none",
+            "flex flex-col h-full overflow-hidden border-l-2 border-[#7FB8A3]/20 shadow-2xl rounded-none",
             isResizing ? "" : "transition-all duration-300"
           )}
         >
           {/* Header - Touch-friendly with safe area */}
-          <div className="flex items-center justify-between p-3 sm:p-4 bg-gradient-to-r from-[#02205B] to-[#0884AA] pt-[max(0.75rem,env(safe-area-inset-top))]">
+          <div className="flex items-center justify-between p-3 sm:p-4 bg-gradient-to-r from-[#12161D] to-[#7FB8A3] pt-[max(0.75rem,env(safe-area-inset-top))]">
             <div className="flex items-center gap-2 sm:gap-3">
               <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
-                <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-[#12EBFC]" />
+                <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-[#C77A93]" />
               </div>
               <div className="min-w-0">
                 <h3 className="font-semibold text-white text-sm">Astral</h3>
@@ -1294,7 +1294,7 @@ What would you like to know?`,
                     className={cn(
                       "text-[10px] px-2 py-0.5 rounded-full transition-all flex items-center gap-1",
                       responseMode === 'detailed' 
-                        ? "bg-[#12EBFC]/30 text-[#12EBFC]"
+                        ? "bg-[#C77A93]/30 text-[#C77A93]"
                         : "bg-white/10 text-white/70 hover:bg-white/20"
                     )}
                     data-testid="button-toggle-response-mode"
@@ -1432,8 +1432,8 @@ What would you like to know?`,
                       className={cn(
                         "w-full text-left p-3 sm:p-3 min-h-[56px] rounded-lg border transition-colors hover-elevate active:scale-[0.99]",
                         session.sessionToken === sessionToken.current
-                          ? "border-[#0884AA] bg-[#0884AA]/5"
-                          : "border-border hover:border-[#0884AA]/50"
+                          ? "border-[#7FB8A3] bg-[#7FB8A3]/5"
+                          : "border-border hover:border-[#7FB8A3]/50"
                       )}
                       data-testid={`button-session-${session.id}`}
                     >
@@ -1464,10 +1464,10 @@ What would you like to know?`,
 
           {/* Messages Area - both scrollbars on main container, touch-optimized */}
           {!showHistory && (
-          <div className="flex-1 overflow-auto p-2 sm:p-4 scrollbar-thin scrollbar-thumb-[#0884AA]/30 scrollbar-track-transparent hover:scrollbar-thumb-[#0884AA]/50 overscroll-contain touch-pan-y">
+          <div className="flex-1 overflow-auto p-2 sm:p-4 scrollbar-thin scrollbar-thumb-[#7FB8A3]/30 scrollbar-track-transparent hover:scrollbar-thumb-[#7FB8A3]/50 overscroll-contain touch-pan-y">
             {messages.length === 0 ? (
               <div className="text-center py-4 sm:py-6">
-                <Sparkles className="h-10 w-10 sm:h-12 sm:w-12 mx-auto text-[#0884AA] mb-3 sm:mb-4 opacity-50" />
+                <Sparkles className="h-10 w-10 sm:h-12 sm:w-12 mx-auto text-[#7FB8A3] mb-3 sm:mb-4 opacity-50" />
                 <h4 className="font-medium text-foreground mb-2 text-sm sm:text-base">
                   {getTimeBasedGreeting()}! I'm your EPM Assistant
                 </h4>
@@ -1480,13 +1480,13 @@ What would you like to know?`,
                   const insight = getProactiveInsight(assessmentContext);
                   if (!insight) return null;
                   return (
-                    <div className="mt-3 sm:mt-4 mx-1 sm:mx-2 p-2.5 sm:p-3 rounded-xl bg-gradient-to-br from-[#12EBFC]/10 to-[#0884AA]/10 border border-[#12EBFC]/20">
+                    <div className="mt-3 sm:mt-4 mx-1 sm:mx-2 p-2.5 sm:p-3 rounded-xl bg-gradient-to-br from-[#C77A93]/10 to-[#7FB8A3]/10 border border-[#C77A93]/20">
                       <div className="flex items-start gap-2 sm:gap-2.5">
-                        <div className="h-8 w-8 rounded-full bg-[#12EBFC]/20 flex items-center justify-center flex-shrink-0">
-                          <Lightbulb className="h-4 w-4 text-[#0884AA] dark:text-[#12EBFC]" />
+                        <div className="h-8 w-8 rounded-full bg-[#C77A93]/20 flex items-center justify-center flex-shrink-0">
+                          <Lightbulb className="h-4 w-4 text-[#7FB8A3] dark:text-[#C77A93]" />
                         </div>
                         <div className="text-left">
-                          <p className="text-xs font-semibold text-[#0884AA] dark:text-[#12EBFC] mb-0.5">
+                          <p className="text-xs font-semibold text-[#7FB8A3] dark:text-[#C77A93] mb-0.5">
                             {insight.title}
                           </p>
                           <p className="text-[11px] sm:text-xs text-muted-foreground leading-relaxed">
@@ -1507,7 +1507,7 @@ What would you like to know?`,
                         setInputValue(suggestion);
                         textareaRef.current?.focus();
                       }}
-                      className="min-h-[44px] px-4 py-2.5 text-xs sm:text-sm rounded-full bg-[#12EBFC]/10 text-[#0884AA] dark:text-[#12EBFC] hover-elevate active:scale-[0.98] transition-all text-left sm:text-center"
+                      className="min-h-[44px] px-4 py-2.5 text-xs sm:text-sm rounded-full bg-[#C77A93]/10 text-[#7FB8A3] dark:text-[#C77A93] hover-elevate active:scale-[0.98] transition-all text-left sm:text-center"
                       data-testid={`button-suggestion-${i}`}
                     >
                       {suggestion}
@@ -1533,7 +1533,7 @@ What would you like to know?`,
                         className={cn(
                           "max-w-[90%] sm:max-w-[85%] rounded-2xl px-2.5 sm:px-4 py-2 sm:py-2.5 min-w-0",
                           message.role === "user"
-                            ? "bg-[#0884AA]/10 dark:bg-[#0884AA]/15 text-foreground border border-[#0884AA]/20 rounded-br-md"
+                            ? "bg-[#7FB8A3]/10 dark:bg-[#7FB8A3]/15 text-foreground border border-[#7FB8A3]/20 rounded-br-md"
                             : "bg-muted rounded-bl-md"
                         )}
                       >
@@ -1564,7 +1564,7 @@ What would you like to know?`,
                           {renderMarkdown(message.content)}
                         </div>
                         {message.researchUsed && message.sources && message.sources.length > 0 && (
-                          <div className="mt-2 pt-2 border-t border-[#0884AA]/20">
+                          <div className="mt-2 pt-2 border-t border-[#7FB8A3]/20">
                             <button
                               onClick={() => {
                                 const newExpanded = new Set(expandedSources);
@@ -1575,7 +1575,7 @@ What would you like to know?`,
                                 }
                                 setExpandedSources(newExpanded);
                               }}
-                              className="min-h-[44px] flex items-center gap-2 text-xs sm:text-sm text-[#0884AA] dark:text-[#12EBFC] hover:underline py-2 -my-1 active:bg-[#0884AA]/5 rounded-md px-1 -mx-1 transition-colors"
+                              className="min-h-[44px] flex items-center gap-2 text-xs sm:text-sm text-[#7FB8A3] dark:text-[#C77A93] hover:underline py-2 -my-1 active:bg-[#7FB8A3]/5 rounded-md px-1 -mx-1 transition-colors"
                               data-testid={`button-toggle-sources-${message.id}`}
                             >
                               {expandedSources.has(message.id) ? (
@@ -1588,14 +1588,14 @@ What would you like to know?`,
                             </button>
                             
                             {expandedSources.has(message.id) && (
-                              <div className="mt-2 space-y-2 sm:space-y-1.5 pl-2 sm:pl-4 border-l-2 border-[#0884AA]/20 animate-in fade-in slide-in-from-top-2 duration-200">
+                              <div className="mt-2 space-y-2 sm:space-y-1.5 pl-2 sm:pl-4 border-l-2 border-[#7FB8A3]/20 animate-in fade-in slide-in-from-top-2 duration-200">
                                 {message.sources.map((source, i) => (
                                   <div
                                     key={i}
-                                    className="flex items-start gap-2 p-2.5 sm:p-2 rounded-lg bg-[#0884AA]/5 text-xs"
+                                    className="flex items-start gap-2 p-2.5 sm:p-2 rounded-lg bg-[#7FB8A3]/5 text-xs"
                                   >
-                                    <div className="h-6 w-6 sm:h-5 sm:w-5 rounded-full bg-[#0884AA]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                      <Link2 className="h-3.5 w-3.5 sm:h-3 sm:w-3 text-[#0884AA] dark:text-[#12EBFC]" />
+                                    <div className="h-6 w-6 sm:h-5 sm:w-5 rounded-full bg-[#7FB8A3]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                      <Link2 className="h-3.5 w-3.5 sm:h-3 sm:w-3 text-[#7FB8A3] dark:text-[#C77A93]" />
                                     </div>
                                     <div className="flex-1 min-w-0">
                                       <p className="font-medium text-foreground text-xs sm:text-xs leading-relaxed">{source}</p>
@@ -1623,14 +1623,14 @@ What would you like to know?`,
                         
                         {/* Quick Action Buttons */}
                         {showActions && (
-                          <div className="mt-3 pt-2 border-t border-[#0884AA]/10">
+                          <div className="mt-3 pt-2 border-t border-[#7FB8A3]/10">
                             <p className="text-xs text-muted-foreground mb-2">Quick actions:</p>
                             <div className="flex flex-wrap gap-1.5">
                               <Link href="/tools/epm-comparison">
                                 <Button
                                   variant="secondary"
                                   size="sm"
-                                  className="h-7 text-xs bg-[#12EBFC]/10 hover:bg-[#12EBFC]/20 text-[#0884AA] dark:text-[#12EBFC]"
+                                  className="h-7 text-xs bg-[#C77A93]/10 hover:bg-[#C77A93]/20 text-[#7FB8A3] dark:text-[#C77A93]"
                                   data-testid={`button-action-comparison-${message.id}`}
                                 >
                                   <ArrowRight className="h-3 w-3 mr-1" />
@@ -1641,7 +1641,7 @@ What would you like to know?`,
                                 <Button
                                   variant="secondary"
                                   size="sm"
-                                  className="h-7 text-xs bg-[#12EBFC]/10 hover:bg-[#12EBFC]/20 text-[#0884AA] dark:text-[#12EBFC]"
+                                  className="h-7 text-xs bg-[#C77A93]/10 hover:bg-[#C77A93]/20 text-[#7FB8A3] dark:text-[#C77A93]"
                                   data-testid={`button-action-consultation-${message.id}`}
                                 >
                                   <Calendar className="h-3 w-3 mr-1" />
@@ -1653,7 +1653,7 @@ What would you like to know?`,
                         )}
                         
                         {message.role === "assistant" && message.followUpSuggestions && message.followUpSuggestions.length > 0 && (
-                          <div className="mt-2 sm:mt-3 pt-2 border-t border-[#0884AA]/10">
+                          <div className="mt-2 sm:mt-3 pt-2 border-t border-[#7FB8A3]/10">
                             <p className="text-[10px] sm:text-xs text-muted-foreground mb-2">Continue exploring:</p>
                             <div className="flex flex-col sm:flex-row sm:flex-wrap gap-1.5 sm:gap-2">
                               {message.followUpSuggestions.map((suggestion, i) => (
@@ -1663,7 +1663,7 @@ What would you like to know?`,
                                     setInputValue(suggestion);
                                     textareaRef.current?.focus();
                                   }}
-                                  className="min-h-[40px] sm:min-h-0 px-3 sm:px-2.5 py-2 sm:py-1 text-xs rounded-full bg-[#12EBFC]/10 text-[#0884AA] dark:text-[#12EBFC] hover:bg-[#12EBFC]/20 active:scale-[0.98] transition-all text-left sm:text-center"
+                                  className="min-h-[40px] sm:min-h-0 px-3 sm:px-2.5 py-2 sm:py-1 text-xs rounded-full bg-[#C77A93]/10 text-[#7FB8A3] dark:text-[#C77A93] hover:bg-[#C77A93]/20 active:scale-[0.98] transition-all text-left sm:text-center"
                                   data-testid={`button-followup-${i}`}
                                 >
                                   {suggestion}
@@ -1714,11 +1714,11 @@ What would you like to know?`,
 
             {/* Processing Indicator - Shows completed steps building up like Replit */}
             {(processingStage || completedSteps.length > 0) && isLoading && (
-              <div className="mt-3 sm:mt-4 p-3 sm:p-4 bg-gradient-to-br from-[#02205B]/5 to-[#0884AA]/10 rounded-xl border border-[#0884AA]/20">
+              <div className="mt-3 sm:mt-4 p-3 sm:p-4 bg-gradient-to-br from-[#12161D]/5 to-[#7FB8A3]/10 rounded-xl border border-[#7FB8A3]/20">
                 {/* Header */}
-                <div className="flex items-center gap-2 mb-2 sm:mb-3 pb-2 border-b border-[#0884AA]/20">
-                  <div className="h-6 w-6 rounded-full bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center flex-shrink-0">
-                    <Sparkles className="h-3 w-3 text-[#12EBFC]" />
+                <div className="flex items-center gap-2 mb-2 sm:mb-3 pb-2 border-b border-[#7FB8A3]/20">
+                  <div className="h-6 w-6 rounded-full bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center flex-shrink-0">
+                    <Sparkles className="h-3 w-3 text-[#C77A93]" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="text-xs sm:text-sm font-medium text-foreground">Preparing analysis</span>
@@ -1729,9 +1729,9 @@ What would you like to know?`,
                     </p>
                   </div>
                   <div className="flex items-center gap-0.5 flex-shrink-0">
-                    <span className="w-1.5 h-1.5 sm:w-1 sm:h-1 rounded-full bg-[#0884AA] animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <span className="w-1.5 h-1.5 sm:w-1 sm:h-1 rounded-full bg-[#0884AA] animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <span className="w-1.5 h-1.5 sm:w-1 sm:h-1 rounded-full bg-[#0884AA] animate-bounce" style={{ animationDelay: '300ms' }} />
+                    <span className="w-1.5 h-1.5 sm:w-1 sm:h-1 rounded-full bg-[#7FB8A3] animate-bounce" style={{ animationDelay: '0ms' }} />
+                    <span className="w-1.5 h-1.5 sm:w-1 sm:h-1 rounded-full bg-[#7FB8A3] animate-bounce" style={{ animationDelay: '150ms' }} />
+                    <span className="w-1.5 h-1.5 sm:w-1 sm:h-1 rounded-full bg-[#7FB8A3] animate-bounce" style={{ animationDelay: '300ms' }} />
                   </div>
                 </div>
 
@@ -1758,22 +1758,22 @@ What would you like to know?`,
                   {/* Current Step */}
                   {processingStage && (
                     <div className="flex items-start gap-2 text-xs">
-                      <div className="h-5 w-5 rounded-full bg-[#0884AA]/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <div className="h-5 w-5 rounded-full bg-[#7FB8A3]/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                         {/* Cycling icons for current step */}
                         {(() => {
                           const CycleIcon = RESEARCH_CYCLE_ICONS[cyclingIconIndex];
-                          return <CycleIcon className="h-3 w-3 text-[#0884AA] dark:text-[#12EBFC] animate-pulse" />;
+                          return <CycleIcon className="h-3 w-3 text-[#7FB8A3] dark:text-[#C77A93] animate-pulse" />;
                         })()}
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-1.5">
-                          <span className="font-medium text-[#0884AA] dark:text-[#12EBFC]">
+                          <span className="font-medium text-[#7FB8A3] dark:text-[#C77A93]">
                             {STAGE_LABELS[processingStage.stage as keyof typeof STAGE_LABELS] || processingStage.stage}
                           </span>
                           <div className="flex items-center gap-0.5">
-                            <span className="w-1 h-1 rounded-full bg-[#0884AA] animate-bounce" style={{ animationDelay: '0ms' }} />
-                            <span className="w-1 h-1 rounded-full bg-[#0884AA] animate-bounce" style={{ animationDelay: '100ms' }} />
-                            <span className="w-1 h-1 rounded-full bg-[#0884AA] animate-bounce" style={{ animationDelay: '200ms' }} />
+                            <span className="w-1 h-1 rounded-full bg-[#7FB8A3] animate-bounce" style={{ animationDelay: '0ms' }} />
+                            <span className="w-1 h-1 rounded-full bg-[#7FB8A3] animate-bounce" style={{ animationDelay: '100ms' }} />
+                            <span className="w-1 h-1 rounded-full bg-[#7FB8A3] animate-bounce" style={{ animationDelay: '200ms' }} />
                           </div>
                         </div>
                         <p className="text-muted-foreground">{processingStage.message}</p>
@@ -1789,7 +1789,7 @@ What would you like to know?`,
                                   className={cn(
                                     "h-3 w-3 transition-all duration-300",
                                     idx <= cyclingIconIndex 
-                                      ? "text-[#0884AA] dark:text-[#12EBFC]" 
+                                      ? "text-[#7FB8A3] dark:text-[#C77A93]" 
                                       : "text-muted-foreground/30"
                                   )}
                                 />
@@ -1806,7 +1806,7 @@ What would you like to know?`,
                 {processingStage && (
                   <div className="mt-3 h-1 w-full bg-muted rounded-full overflow-hidden">
                     <div 
-                      className="h-full bg-gradient-to-r from-[#0884AA] to-[#12EBFC] transition-all duration-300"
+                      className="h-full bg-gradient-to-r from-[#7FB8A3] to-[#C77A93] transition-all duration-300"
                       style={{ width: `${processingStage.progress}%` }}
                     />
                   </div>
@@ -1825,14 +1825,14 @@ What would you like to know?`,
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Ask about EPM, your assessment, or next steps..."
-                className="min-h-[48px] sm:min-h-[44px] max-h-[120px] resize-none rounded-xl border-[#0884AA]/20 focus:border-[#12EBFC] text-base sm:text-sm py-3 px-3 sm:px-4"
+                className="min-h-[48px] sm:min-h-[44px] max-h-[120px] resize-none rounded-xl border-[#7FB8A3]/20 focus:border-[#C77A93] text-base sm:text-sm py-3 px-3 sm:px-4"
                 disabled={isLoading || !sessionId}
                 data-testid="input-chatbot-message"
               />
               <Button
                 onClick={sendMessage}
                 disabled={!inputValue.trim() || isLoading || !sessionId}
-                className="h-12 w-12 sm:h-11 sm:w-11 rounded-xl bg-gradient-to-br from-[#02205B] to-[#0884AA] hover:from-[#0884AA] hover:to-[#12EBFC] flex-shrink-0 active:scale-95 transition-transform"
+                className="h-12 w-12 sm:h-11 sm:w-11 rounded-xl bg-gradient-to-br from-[#12161D] to-[#7FB8A3] hover:from-[#7FB8A3] hover:to-[#C77A93] flex-shrink-0 active:scale-95 transition-transform"
                 size="icon"
                 data-testid="button-send-message"
               >

@@ -7,10 +7,10 @@
 import { LOGO_TURQUOISE_BASE64, ICON_WHITE_BASE64 } from '../../pdf-logo-base64';
 
 const BRAND = {
-  navy: '#02205B',
-  cyan: '#12EBFC',
-  teal: '#0884AA',
-  cream: '#FEFFF3',
+  navy: '#12161D',
+  cyan: '#C77A93',
+  teal: '#7FB8A3',
+  cream: '#F6F3EE',
   white: '#FFFFFF',
   muted: '#64748b',
   cardBg: '#f8fafc',
@@ -21,9 +21,9 @@ const BRAND = {
 };
 
 const IMPLEMENTATION_PHASES = [
-  { name: 'Discovery & Planning', startPct: 0, endPct: 0.15, color: '#02205B' },
-  { name: 'Design & Configuration', startPct: 0.12, endPct: 0.45, color: '#0884AA' },
-  { name: 'Build & Testing', startPct: 0.40, endPct: 0.75, color: '#12EBFC' },
+  { name: 'Discovery & Planning', startPct: 0, endPct: 0.15, color: '#12161D' },
+  { name: 'Design & Configuration', startPct: 0.12, endPct: 0.45, color: '#7FB8A3' },
+  { name: 'Build & Testing', startPct: 0.40, endPct: 0.75, color: '#C77A93' },
   { name: 'Training & Go-Live', startPct: 0.70, endPct: 1.0, color: '#10b981' },
 ];
 
@@ -443,8 +443,8 @@ export function generateComparisonHTML(data: ComparisonExportData): string {
       margin-bottom: 16pt;
     }
     .card-gradient {
-      background: linear-gradient(135deg, rgba(2,32,91,0.03) 0%, rgba(8,132,170,0.03) 100%);
-      border-color: rgba(18,235,252,0.3);
+      background: linear-gradient(135deg, rgba(18,22,29,0.03) 0%, rgba(127,184,163,0.03) 100%);
+      border-color: rgba(199,122,147,0.3);
     }
     .card-header {
       display: flex;
@@ -456,7 +456,7 @@ export function generateComparisonHTML(data: ComparisonExportData): string {
       width: 36pt;
       height: 36pt;
       border-radius: 50%;
-      background: rgba(18,235,252,0.2);
+      background: rgba(199,122,147,0.2);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -555,8 +555,8 @@ export function generateComparisonHTML(data: ComparisonExportData): string {
       background: ${BRAND.white};
     }
     .rec-card.top {
-      border-color: rgba(18,235,252,0.5);
-      background: rgba(18,235,252,0.05);
+      border-color: rgba(199,122,147,0.5);
+      background: rgba(199,122,147,0.05);
     }
     .rank-circle {
       width: 36pt;
@@ -570,7 +570,7 @@ export function generateComparisonHTML(data: ComparisonExportData): string {
       flex-shrink: 0;
     }
     .rank-circle.r1 { background: ${BRAND.cyan}; color: ${BRAND.navy}; }
-    .rank-circle.r2 { background: rgba(8,132,170,0.2); color: ${BRAND.teal}; }
+    .rank-circle.r2 { background: rgba(127,184,163,0.2); color: ${BRAND.teal}; }
     .rank-circle.r3, .rank-circle.r4 { background: ${BRAND.cardBg}; color: ${BRAND.muted}; }
     
     .rec-content { flex: 1; min-width: 0; }
@@ -598,7 +598,7 @@ export function generateComparisonHTML(data: ComparisonExportData): string {
       border-radius: 10pt;
     }
     .badge-best {
-      background: rgba(18,235,252,0.2);
+      background: rgba(199,122,147,0.2);
       color: ${BRAND.teal};
     }
     .badge-outline {
@@ -659,7 +659,7 @@ export function generateComparisonHTML(data: ComparisonExportData): string {
       color: #047857;
     }
     .tag-teal {
-      background: rgba(8,132,170,0.1);
+      background: rgba(127,184,163,0.1);
       color: ${BRAND.teal};
     }
     
@@ -699,7 +699,7 @@ export function generateComparisonHTML(data: ComparisonExportData): string {
       border-bottom: 1px solid ${BRAND.cardBorder};
     }
     .rankings-table tr:nth-child(even) { background: ${BRAND.cardBg}; }
-    .rankings-table tr:first-child td { background: rgba(18,235,252,0.08); }
+    .rankings-table tr:first-child td { background: rgba(199,122,147,0.08); }
     
     .rank-badge {
       display: inline-flex;

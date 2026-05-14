@@ -874,13 +874,13 @@ publicRouter.post("/verify-otp", checkBetaAccessByContactIdMiddleware, async (re
             subject: `New FinanceCompass Lead: ${contact.firstName} ${contact.lastName} from ${companyName}`,
             htmlContent: `
               <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-                <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, #02205B 0%, #0884AA 100%); border-radius: 8px;">
-                  <h1 style="color: #12EBFC; margin: 0;">New FinanceCompass Lead</h1>
+                <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, #12161D 0%, #7FB8A3 100%); border-radius: 8px;">
+                  <h1 style="color: #C77A93; margin: 0;">New FinanceCompass Lead</h1>
                   <p style="color: #fff; margin: 5px 0;">Verified Assessment User</p>
                 </div>
                 
                 <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                  <h2 style="color: #02205B; margin-top: 0;">Contact Details</h2>
+                  <h2 style="color: #12161D; margin-top: 0;">Contact Details</h2>
                   <table style="width: 100%; border-collapse: collapse;">
                     <tr>
                       <td style="padding: 8px 0; color: #666; width: 140px;"><strong>Name:</strong></td>
@@ -888,7 +888,7 @@ publicRouter.post("/verify-otp", checkBetaAccessByContactIdMiddleware, async (re
                     </tr>
                     <tr>
                       <td style="padding: 8px 0; color: #666;"><strong>Email:</strong></td>
-                      <td style="padding: 8px 0;"><a href="mailto:${escapeHtml(contact.email)}" style="color: #0884AA;">${escapeHtml(contact.email)}</a></td>
+                      <td style="padding: 8px 0;"><a href="mailto:${escapeHtml(contact.email)}" style="color: #7FB8A3;">${escapeHtml(contact.email)}</a></td>
                     </tr>
                     ${phone ? `
                     <tr>
@@ -904,7 +904,7 @@ publicRouter.post("/verify-otp", checkBetaAccessByContactIdMiddleware, async (re
                 </div>
                 
                 <div style="background: #fff; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px; margin-bottom: 20px;">
-                  <h2 style="color: #02205B; margin-top: 0;">Company Information</h2>
+                  <h2 style="color: #12161D; margin-top: 0;">Company Information</h2>
                   <table style="width: 100%; border-collapse: collapse;">
                     <tr>
                       <td style="padding: 8px 0; color: #666; width: 140px;"><strong>Company:</strong></td>
@@ -921,8 +921,8 @@ publicRouter.post("/verify-otp", checkBetaAccessByContactIdMiddleware, async (re
                   </table>
                 </div>
                 
-                <div style="background: #f0f9ff; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #0884AA;">
-                  <h3 style="color: #02205B; margin: 0 0 10px 0; font-size: 14px;">Transformation Priorities</h3>
+                <div style="background: #f0f9ff; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #7FB8A3;">
+                  <h3 style="color: #12161D; margin: 0 0 10px 0; font-size: 14px;">Transformation Priorities</h3>
                   <p style="color: #333; margin: 0;">${escapeHtml(prioritiesText)}</p>
                 </div>
                 
@@ -2504,7 +2504,7 @@ async function runAnalysisAsync(
           <div style="font-family: 'Inter', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f8f9fa; padding: 40px;">
             <div style="background: white; border-radius: 12px; padding: 40px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
               <div style="text-align: center; margin-bottom: 30px;">
-                <h1 style="color: #02205B; margin: 0;">FinanceCompass</h1>
+                <h1 style="color: #12161D; margin: 0;">FinanceCompass</h1>
                 <p style="color: #666; margin-top: 8px;">Your Assessment Results Are Ready</p>
               </div>
               
@@ -2513,13 +2513,13 @@ async function runAnalysisAsync(
                 Great news! Your ${tierName} has been analysed and your results are now ready to view.
               </p>
               
-              <div style="background-color: #02205B; background: linear-gradient(135deg, #02205B 0%, #0884AA 100%); padding: 24px; border-radius: 8px; text-align: center; margin: 24px 0;">
-                <p style="color: #12EBFC; font-size: 14px; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1px;">Your EPM Readiness Score</p>
+              <div style="background-color: #12161D; background: linear-gradient(135deg, #12161D 0%, #7FB8A3 100%); padding: 24px; border-radius: 8px; text-align: center; margin: 24px 0;">
+                <p style="color: #C77A93; font-size: 14px; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1px;">Your EPM Readiness Score</p>
                 <p style="font-size: 48px; font-weight: bold; color: #ffffff; margin: 0;">${score}%</p>
               </div>
               
               <div style="text-align: center; margin: 24px 0;">
-                <a href="${resultsUrl}" style="display: inline-block; background: #0884AA; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">
+                <a href="${resultsUrl}" style="display: inline-block; background: #7FB8A3; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">
                   View Your Full Results
                 </a>
               </div>
@@ -2533,7 +2533,7 @@ async function runAnalysisAsync(
               
               <p style="color: #888; font-size: 12px; text-align: center;">
                 Need help interpreting your results? Our expert consultants are here to help.<br>
-                <a href="mailto:info@constancia.io" style="color: #0884AA;">Contact us</a> to schedule a consultation.<br><br>
+                <a href="mailto:info@constancia.io" style="color: #7FB8A3;">Contact us</a> to schedule a consultation.<br><br>
                 &copy; Constancia Ltd. All rights reserved.
               </p>
             </div>
@@ -4165,7 +4165,7 @@ publicRouter.post("/assessments/:id/narratives/regenerate", async (req: Request,
         <table cellpadding="0" cellspacing="0" border="0" width="600" style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
           <!-- Header -->
           <tr>
-            <td style="background: linear-gradient(135deg, #02205B 0%, #0884AA 100%); padding: 30px 40px; border-radius: 8px 8px 0 0;">
+            <td style="background: linear-gradient(135deg, #12161D 0%, #7FB8A3 100%); padding: 30px 40px; border-radius: 8px 8px 0 0;">
               <img src="${logoBase64}" alt="Constancia" style="height: 40px; width: auto;" />
             </td>
           </tr>
@@ -4173,7 +4173,7 @@ publicRouter.post("/assessments/:id/narratives/regenerate", async (req: Request,
           <!-- Content -->
           <tr>
             <td style="padding: 40px;">
-              <h1 style="color: #02205B; font-size: 24px; margin: 0 0 20px 0;">Your AI Report is Ready</h1>
+              <h1 style="color: #12161D; font-size: 24px; margin: 0 0 20px 0;">Your AI Report is Ready</h1>
               
               <p style="color: #333333; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
                 Dear ${contact.firstName || 'Valued Customer'},
@@ -4191,7 +4191,7 @@ publicRouter.post("/assessments/:id/narratives/regenerate", async (req: Request,
               <table cellpadding="0" cellspacing="0" border="0" width="100%">
                 <tr>
                   <td align="center">
-                    <a href="${resultsUrl}" style="display: inline-block; background-color: #12EBFC; color: #02205B; font-size: 16px; font-weight: 600; text-decoration: none; padding: 14px 32px; border-radius: 6px;">
+                    <a href="${resultsUrl}" style="display: inline-block; background-color: #C77A93; color: #12161D; font-size: 16px; font-weight: 600; text-decoration: none; padding: 14px 32px; border-radius: 6px;">
                       View Your Report
                     </a>
                   </td>
@@ -4206,12 +4206,12 @@ publicRouter.post("/assessments/:id/narratives/regenerate", async (req: Request,
           
           <!-- Footer -->
           <tr>
-            <td style="background-color: #02205B; padding: 20px 40px; border-radius: 0 0 8px 8px;">
-              <p style="color: #FEFFF3; font-size: 12px; margin: 0; text-align: center;">
+            <td style="background-color: #12161D; padding: 20px 40px; border-radius: 0 0 8px 8px;">
+              <p style="color: #F6F3EE; font-size: 12px; margin: 0; text-align: center;">
                 © ${new Date().getFullYear()} Constancia Group. All rights reserved.
               </p>
-              <p style="color: #0884AA; font-size: 12px; margin: 10px 0 0 0; text-align: center;">
-                <a href="https://constancia.io" style="color: #12EBFC; text-decoration: none;">constancia.io</a>
+              <p style="color: #7FB8A3; font-size: 12px; margin: 10px 0 0 0; text-align: center;">
+                <a href="https://constancia.io" style="color: #C77A93; text-decoration: none;">constancia.io</a>
               </p>
             </td>
           </tr>

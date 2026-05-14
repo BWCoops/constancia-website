@@ -6,10 +6,10 @@
  */
 
 export const BRAND_COLORS = {
-  navy: '#02205B',
-  cyan: '#12EBFC',
-  teal: '#0884AA',
-  cream: '#FEFFF3',
+  navy: '#12161D',
+  cyan: '#C77A93',
+  teal: '#7FB8A3',
+  cream: '#F6F3EE',
   white: '#FFFFFF',
   lightGray: '#F8FAFC',
   mediumGray: '#E2E8F0',

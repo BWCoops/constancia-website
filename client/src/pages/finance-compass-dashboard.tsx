@@ -203,7 +203,7 @@ function calculateRiskIndicators(dimensionScores: Record<string, number> | null,
 }
 
 function VendorCard({ vendor, rank }: { vendor: VendorAffinityScore; rank: number }) {
-  const rankColors = ["from-[#02205B] to-[#0884AA]", "from-[#0884AA] to-[#12EBFC]", "from-[#0070C0] to-[#0884AA]"];
+  const rankColors = ["from-[#12161D] to-[#7FB8A3]", "from-[#7FB8A3] to-[#C77A93]", "from-[#1E2630] to-[#7FB8A3]"];
   const rankLabels = ["Top Pick", "Strong Match", "Good Fit"];
   
   return (
@@ -221,7 +221,7 @@ function VendorCard({ vendor, rank }: { vendor: VendorAffinityScore; rank: numbe
               <CardDescription className="text-xs capitalize">{vendor.category.replace("_", " ")}</CardDescription>
             </div>
           </div>
-          <Badge className="bg-[#12EBFC]/10 text-brand-teal border-[#0884AA]/30">
+          <Badge className="bg-[#C77A93]/10 text-brand-teal border-[#7FB8A3]/30">
             {rankLabels[rank] || "Recommended"}
           </Badge>
         </div>
@@ -491,7 +491,7 @@ export default function FinanceCompassInteractiveDashboard() {
             <Button 
               variant="ghost" 
               size="sm" 
-              className="text-brand-teal hover:text-[#02205B] -ml-2"
+              className="text-brand-teal hover:text-[#12161D] -ml-2"
               data-testid="button-back-main-dashboard"
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
@@ -500,7 +500,7 @@ export default function FinanceCompassInteractiveDashboard() {
           </Link>
         </div>
         
-        <section className="bg-gradient-to-r from-[#02205B] via-[#0070C0] to-[#0884AA] py-10">
+        <section className="bg-gradient-to-r from-[#12161D] via-[#1E2630] to-[#7FB8A3] py-10">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -533,7 +533,7 @@ export default function FinanceCompassInteractiveDashboard() {
                   Download PDF
                 </Button>
                 <Link href={`/finance-compass/roi/${assessmentId}`}>
-                  <Button className="bg-[#12EBFC] text-[#02205B] hover:bg-[#12EBFC]/90" data-testid="button-go-roi-wizard">
+                  <Button className="bg-[#C77A93] text-[#12161D] hover:bg-[#C77A93]/90" data-testid="button-go-roi-wizard">
                     <Calculator className="h-4 w-4 mr-2" />
                     Full ROI Wizard
                   </Button>
@@ -594,20 +594,20 @@ export default function FinanceCompassInteractiveDashboard() {
                 />
               </div>
             ) : (
-              <Card className="mb-8 p-6 border-dashed border-2 border-[#0884AA]/30 bg-[#0884AA]/5" data-testid="card-roi-locked">
+              <Card className="mb-8 p-6 border-dashed border-2 border-[#7FB8A3]/30 bg-[#7FB8A3]/5" data-testid="card-roi-locked">
                 <div className="flex flex-col md:flex-row items-center gap-4">
-                  <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#02205B]/20 to-[#0884AA]/20 flex items-center justify-center flex-shrink-0" aria-hidden="true">
+                  <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#12161D]/20 to-[#7FB8A3]/20 flex items-center justify-center flex-shrink-0" aria-hidden="true">
                     <Calculator className="h-6 w-6 text-brand-teal/60" />
                   </div>
                   <div className="flex-1 text-center md:text-left">
-                    <h4 className="font-semibold text-[#02205B] dark:text-white">Complete the Full Assessment to Unlock ROI & Business Case</h4>
+                    <h4 className="font-semibold text-[#12161D] dark:text-white">Complete the Full Assessment to Unlock ROI & Business Case</h4>
                     <p className="text-sm text-muted-foreground">
                       ROI metrics, NPV, Payback, TCO, and BCR analysis are available after completing the Full Assessment. Complete your Full Assessment to access detailed financial projections.
                     </p>
                   </div>
                   <Link href="/finance-compass/dashboard">
                     <Button
-                      className="bg-[#0884AA] hover:bg-brand-navy"
+                      className="bg-[#7FB8A3] hover:bg-brand-navy"
                       data-testid="button-go-to-full-assessment"
                       aria-label="Go to dashboard to start Full Assessment"
                     >
@@ -1068,7 +1068,7 @@ export default function FinanceCompassInteractiveDashboard() {
                                 <div className="space-y-2">
                                   <div className="flex items-center justify-between p-2 bg-muted/30 rounded">
                                     <div className="flex items-center gap-2">
-                                      <div className="h-2 w-2 rounded-full bg-[#0884AA]" />
+                                      <div className="h-2 w-2 rounded-full bg-[#7FB8A3]" />
                                       <span className="font-medium">Dimension Match</span>
                                     </div>
                                     <div className="flex items-center gap-2">
@@ -1082,7 +1082,7 @@ export default function FinanceCompassInteractiveDashboard() {
                                   
                                   <div className="flex items-center justify-between p-2 bg-muted/30 rounded">
                                     <div className="flex items-center gap-2">
-                                      <div className="h-2 w-2 rounded-full bg-[#0884AA]" />
+                                      <div className="h-2 w-2 rounded-full bg-[#7FB8A3]" />
                                       <span className="font-medium">Industry Alignment</span>
                                     </div>
                                     <div className="flex items-center gap-2">
@@ -1096,7 +1096,7 @@ export default function FinanceCompassInteractiveDashboard() {
                                   
                                   <div className="flex items-center justify-between p-2 bg-muted/30 rounded">
                                     <div className="flex items-center gap-2">
-                                      <div className="h-2 w-2 rounded-full bg-[#0884AA]" />
+                                      <div className="h-2 w-2 rounded-full bg-[#7FB8A3]" />
                                       <span className="font-medium">Company Size Fit</span>
                                     </div>
                                     <div className="flex items-center gap-2">
@@ -1110,7 +1110,7 @@ export default function FinanceCompassInteractiveDashboard() {
                                   
                                   <div className="flex items-center justify-between p-2 bg-muted/30 rounded">
                                     <div className="flex items-center gap-2">
-                                      <div className="h-2 w-2 rounded-full bg-[#0884AA]" />
+                                      <div className="h-2 w-2 rounded-full bg-[#7FB8A3]" />
                                       <span className="font-medium">Tech Stack Compatibility</span>
                                     </div>
                                     <div className="flex items-center gap-2">
@@ -1124,7 +1124,7 @@ export default function FinanceCompassInteractiveDashboard() {
                                   
                                   <div className="flex items-center justify-between p-2 bg-muted/30 rounded">
                                     <div className="flex items-center gap-2">
-                                      <div className="h-2 w-2 rounded-full bg-[#0884AA]" />
+                                      <div className="h-2 w-2 rounded-full bg-[#7FB8A3]" />
                                       <span className="font-medium">Ambition Level</span>
                                     </div>
                                     <div className="flex items-center gap-2">
@@ -1145,7 +1145,7 @@ export default function FinanceCompassInteractiveDashboard() {
                                     {vendorRecommendations.map((vendor, idx) => (
                                       <div key={vendor.vendorId} className="flex items-center justify-between p-2 bg-muted/30 rounded" data-testid={`vendor-score-breakdown-${vendor.vendorId}`}>
                                         <div className="flex items-center gap-2">
-                                          <span className="h-5 w-5 rounded text-xs flex items-center justify-center bg-[#0884AA] text-white font-bold">
+                                          <span className="h-5 w-5 rounded text-xs flex items-center justify-center bg-[#7FB8A3] text-white font-bold">
                                             {idx + 1}
                                           </span>
                                           <span className="font-medium">{vendor.vendorName}</span>
@@ -1235,7 +1235,7 @@ export default function FinanceCompassInteractiveDashboard() {
                       <ul className="space-y-3">
                         {aiAnalysis.keyInsights.map((insight, idx) => (
                           <li key={idx} className="flex items-start gap-3">
-                            <div className="h-6 w-6 rounded-full bg-[#12EBFC]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <div className="h-6 w-6 rounded-full bg-[#C77A93]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                               <span className="text-xs font-bold text-brand-teal">{idx + 1}</span>
                             </div>
                             <p className="text-sm text-muted-foreground">{insight}</p>

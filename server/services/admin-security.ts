@@ -70,7 +70,7 @@ export async function sendTestEmail(toEmail: string): Promise<{ success: boolean
       <style>
         body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
         .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-        .header { background: #02205B; color: white; padding: 20px; text-align: center; }
+        .header { background: #12161D; color: white; padding: 20px; text-align: center; }
         .content { padding: 20px; background: #f9f9f9; }
         .footer { text-align: center; padding: 20px; font-size: 12px; color: #666; }
         .success { color: #22c55e; font-weight: bold; }
@@ -561,10 +561,10 @@ export async function sendLoginNotification(
       <style>
         body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
         .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-        .header { background: #02205B; color: white; padding: 20px; text-align: center; }
+        .header { background: #12161D; color: white; padding: 20px; text-align: center; }
         .content { padding: 20px; background: #f9f9f9; }
         .detail { margin: 10px 0; }
-        .label { font-weight: bold; color: #02205B; }
+        .label { font-weight: bold; color: #12161D; }
         .footer { text-align: center; padding: 20px; font-size: 12px; color: #666; }
       </style>
     </head>

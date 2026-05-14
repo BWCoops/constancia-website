@@ -218,7 +218,7 @@ SLIDE 7 - CONTACT INFORMATION:
 
 ## DESIGN REQUIREMENTS
 - Professional, clean design
-- Dark navy (#02205B) and teal (#0891B2) accent colors
+- Dark navy (#12161D) and teal (#0891B2) accent colors
 - Maximum 3 bullets per slide
 - Scores as whole numbers with %
 - NO detailed dimension analysis
@@ -500,7 +500,7 @@ SLIDE 21 - NEXT STEPS & CONTACT:
 
 ## DESIGN REQUIREMENTS
 - Professional, executive-ready styling
-- Dark navy (#02205B) and teal (#0891B2) accent colors
+- Dark navy (#12161D) and teal (#0891B2) accent colors
 - Clean data visualizations with clear labels
 - Consistent header/footer on all slides
 - Page numbers on all slides except title

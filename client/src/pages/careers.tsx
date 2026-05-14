@@ -215,7 +215,7 @@ export default function CareersPage() {
             <Button
               asChild
               size="lg"
-              className="bg-[#12EBFC] text-[#02205B] border-[#12EBFC] font-semibold"
+              className="bg-[#C77A93] text-[#12161D] border-[#C77A93] font-semibold"
               data-testid="button-join-talent"
             >
               <a href="#apply">
@@ -343,7 +343,7 @@ export default function CareersPage() {
               {expectItems.map((item, index) => (
                 <div key={item.title} className="flex gap-4" data-testid={`expect-item-${index}`}>
                   <div
-                    className="w-0.5 min-h-[64px] flex-shrink-0 mt-1 rounded-full bg-gradient-to-b from-[#12EBFC] via-[#0884AA] to-transparent"
+                    className="w-0.5 min-h-[64px] flex-shrink-0 mt-1 rounded-full bg-gradient-to-b from-[#C77A93] via-[#7FB8A3] to-transparent"
                     aria-hidden="true"
                   />
                   <div>

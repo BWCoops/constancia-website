@@ -255,7 +255,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                 >
                   <Avatar className="h-8 w-8 border border-border flex-shrink-0">
                     <AvatarImage src={session.user?.profileImageUrl} />
-                    <AvatarFallback className="bg-[#12EBFC]/10 text-brand-cyan text-xs font-semibold">
+                    <AvatarFallback className="bg-[#C77A93]/10 text-brand-cyan text-xs font-semibold">
                       {userInitials}
                     </AvatarFallback>
                   </Avatar>

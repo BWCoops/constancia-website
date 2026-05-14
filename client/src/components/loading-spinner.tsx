@@ -5,7 +5,7 @@ export function LoadingSpinner() {
   return (
     <div className="min-h-screen bg-background flex items-center justify-center">
       <div className="flex flex-col items-center gap-4">
-        <Loader2 className="h-8 w-8 animate-spin text-[#0884AA]" />
+        <Loader2 className="h-8 w-8 animate-spin text-[#7FB8A3]" />
         <p className="text-sm text-muted-foreground">Loading...</p>
       </div>
     </div>
@@ -35,7 +35,7 @@ export function LoadingFallback() {
 export function SectionLoadingSpinner() {
   return (
     <div className="flex items-center justify-center py-12">
-      <Loader2 className="h-6 w-6 animate-spin text-[#0884AA]" />
+      <Loader2 className="h-6 w-6 animate-spin text-[#7FB8A3]" />
     </div>
   );
 }

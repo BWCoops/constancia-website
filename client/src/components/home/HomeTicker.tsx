@@ -20,8 +20,8 @@ export function HomeTicker() {
     <div
       className="h-[34px] overflow-hidden flex items-center"
       style={{
-        background: '#010E2A',
-        borderBottom: '1px solid rgba(18,235,252,0.12)',
+        background: '#0A0E14',
+        borderBottom: '1px solid rgba(199,122,147,0.12)',
       }}
     >
       <div
@@ -35,12 +35,13 @@ export function HomeTicker() {
           <span
             key={idx}
             style={{
-              padding: '0 26px',
-              fontSize: '10px',
-              fontFamily: 'var(--hp-font-mono)',
-              color: item.highlight ? '#12EBFC' : 'rgba(255,255,255,0.65)',
-              letterSpacing: '0.06em',
-              borderRight: '1px solid rgba(255,255,255,0.06)',
+              padding: '0 28px',
+              fontSize: '11px',
+              fontFamily: 'var(--brand-font-mono)',
+              color: item.highlight ? 'var(--brand-muted-rose)' : 'rgba(246,243,238,0.72)',
+              letterSpacing: '0.08em',
+              borderRight: '1px solid rgba(246,243,238,0.06)',
+              fontWeight: item.highlight ? 600 : 400,
             }}
           >
             {item.text}

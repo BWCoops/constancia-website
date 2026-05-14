@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, lazy, Suspense } from "react";
 import { ArrowRight, CheckCircle2, Target } from "@/lib/icons";
 import { m, LazyMotion, domAnimation, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -6,7 +6,11 @@ import { Link } from "wouter";
 import { useFeatureFlags } from "@/lib/feature-flags";
 import { CutIcon } from "@/components/ui/cut-icon";
 import { ConstanciaMark } from "@/components/ui/constancia-mark";
-import { HeroParticleCanvas } from "@/components/home/HeroParticleCanvas";
+
+// Lazy-load the WebGL scene — only ~120KB extra and only when this hero mounts
+const HeroScene3D = lazy(() =>
+  import("@/components/home/HeroScene3D").then((m) => ({ default: m.HeroScene3D })),
+);
 
 // Visible reveal — bigger displacement so motion is clearly seen on arrival.
 const fadeUp = {
@@ -43,9 +47,11 @@ export function HeroSectionStatic() {
       }}
       aria-labelledby="hero-heading"
     >
-      {/* Canvas — full bleed background layer */}
+      {/* WebGL scene — Constancia overlapping spheres in real 3D */}
       <div className="absolute inset-0" style={{ zIndex: 0 }}>
-        <HeroParticleCanvas />
+        <Suspense fallback={null}>
+          <HeroScene3D />
+        </Suspense>
       </div>
 
       {/* Dark overlay so text stays readable over the canvas */}

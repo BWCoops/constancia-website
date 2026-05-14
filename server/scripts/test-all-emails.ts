@@ -44,7 +44,7 @@ async function send(label: string, subject: string, html: string): Promise<boole
 function tplConfigTest(): string {
   return `
     <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto">
-      <div style="background:#02205B;color:#fff;padding:24px;text-align:center">
+      <div style="background:#12161D;color:#fff;padding:24px;text-align:center">
         <h2 style="margin:0">Constancia Email Configuration Test</h2>
       </div>
       <div style="padding:24px;background:#f9f9f9">
@@ -128,15 +128,15 @@ function tplFinanceCompassOtp(): string {
   const code = "523 847";
   return `
     <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;background:#f8f9fa;padding:0">
-      <div style="background:#02205B;padding:32px 24px;text-align:center">
+      <div style="background:#12161D;padding:32px 24px;text-align:center">
         <h1 style="color:#fff;margin:0;font-size:22px">FinanceCompass</h1>
         <p style="color:rgba(255,255,255,.75);margin:6px 0 0;font-size:14px">by Constancia</p>
       </div>
       <div style="padding:32px 24px;background:#fff">
-        <h2 style="color:#02205B;margin:0 0 16px">Your Verification Code</h2>
+        <h2 style="color:#12161D;margin:0 0 16px">Your Verification Code</h2>
         <p style="color:#555;font-size:16px;margin:0 0 24px">Hi ${TEST_NAME}, please use this code to access FinanceCompass:</p>
-        <div style="background:#f0f4ff;border:2px solid #02205B;border-radius:8px;padding:24px;text-align:center;margin:0 0 24px">
-          <span style="font-size:36px;font-weight:bold;letter-spacing:8px;color:#02205B">${code}</span>
+        <div style="background:#f0f4ff;border:2px solid #12161D;border-radius:8px;padding:24px;text-align:center;margin:0 0 24px">
+          <span style="font-size:36px;font-weight:bold;letter-spacing:8px;color:#12161D">${code}</span>
         </div>
         <p style="color:#888;font-size:14px">This code expires in 10 minutes. If you didn't request this code, please ignore this email.</p>
       </div>
@@ -183,7 +183,7 @@ function tplLeadVerified(): string {
 function tplLoginAlert(): string {
   return `
     <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto">
-      <div style="background:#02205B;color:#fff;padding:24px;text-align:center">
+      <div style="background:#12161D;color:#fff;padding:24px;text-align:center">
         <h2 style="margin:0">Login Alert</h2>
         <p style="margin:4px 0 0;opacity:.75;font-size:14px">Constancia Admin Centre</p>
       </div>
