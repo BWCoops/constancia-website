@@ -70,9 +70,9 @@ interface MarketingAsset {
   updatedAt: string | null;
 }
 
-import whiteLogo from "@assets/1QG - Type Logo (White)_1764696707171.png";
-import gradientLogo from "@assets/1QG - Type Logo (Dark to Light Gradient)_1764696691129.png";
-import iconWhite from "@assets/1QG - Icon (White)_1764415609503.png";
+import whiteLogo from "@assets/Constancia - Type Logo (White)_1764696707171.png";
+import gradientLogo from "@assets/Constancia - Type Logo (Dark to Light Gradient)_1764696691129.png";
+import iconWhite from "@assets/Constancia - Icon (White)_1764415609503.png";
 
 import peopleProfessional1 from "@assets/stock_images/professional_busines_5c31713e.jpg";
 import peopleProfessional2 from "@assets/stock_images/professional_busines_49e2d0d2.jpg";
@@ -135,7 +135,7 @@ const gradientCovers: GradientCoverConfig[] = [
   {
     id: "grad-linkedin-navy-cyan",
     name: "Navy to Cyan Gradient",
-    description: "Classic 1QG brand gradient - professional and modern",
+    description: "Classic Constancia brand gradient - professional and modern",
     type: "linkedin-cover",
     dimensions: { width: 1584, height: 396 },
     gradientStyle: "linear",
@@ -1492,7 +1492,7 @@ const videoAssets: VideoAssetConfig[] = [
   {
     id: "video-linkedin-brand-1",
     name: "Brand Introduction",
-    description: "Abstract data flow animation with 1QG branding",
+    description: "Abstract data flow animation with Constancia branding",
     platform: "linkedin",
     dimensions: { width: 1920, height: 1080 },
     aspectRatio: "16:9",
@@ -1908,7 +1908,7 @@ function GradientCoverPreview({
         <div className="absolute flex items-center justify-center w-full h-full">
           <img 
             src={iconWhite}
-            alt="1QG Icon"
+            alt="Constancia Icon"
             className="drop-shadow-lg"
             style={{ width: iconSize, height: 'auto', maxWidth: '120px' }}
           />
@@ -1927,7 +1927,7 @@ function GradientCoverPreview({
           >
             <img 
               src={logoSrc}
-              alt="1QG Logo"
+              alt="Constancia Logo"
               className="drop-shadow-xl"
               style={{ 
                 height: `${scale.logoHeight}px`,
@@ -1978,7 +1978,7 @@ function GradientCoverPreview({
         <div className="absolute flex flex-col items-center justify-center gap-4 w-full h-full p-4">
           <img 
             src={logoSrc}
-            alt="1QG Logo"
+            alt="Constancia Logo"
             className="drop-shadow-lg"
             style={{ width: logoWidth, height: 'auto' }}
           />
@@ -2001,7 +2001,7 @@ function GradientCoverPreview({
         <div className="absolute flex flex-col items-center justify-center w-full h-full p-3">
           <img 
             src={logoSrc}
-            alt="1QG Logo"
+            alt="Constancia Logo"
             className="drop-shadow-lg"
             style={{ width: logoWidth, height: 'auto' }}
           />
@@ -2013,7 +2013,7 @@ function GradientCoverPreview({
       <div className="absolute flex flex-col items-center justify-center gap-3 w-full h-full p-4">
         <img 
           src={logoSrc}
-          alt="1QG Logo"
+          alt="Constancia Logo"
           className="drop-shadow-lg"
           style={{ width: logoWidth, height: 'auto' }}
         />
@@ -2078,7 +2078,7 @@ function GradientCoverPreview({
               <div className="relative">
                 <img 
                   src={whiteLogo}
-                  alt="1QG Logo"
+                  alt="Constancia Logo"
                   className="drop-shadow-lg"
                   style={{
                     height: '55%',
@@ -2111,7 +2111,7 @@ function GradientCoverPreview({
               <div className="relative">
                 <img 
                   src={whiteLogo}
-                  alt="1QG Logo"
+                  alt="Constancia Logo"
                   className="drop-shadow-lg"
                   style={{
                     height: isSquare ? '22%' : '28%',
@@ -2293,7 +2293,7 @@ function AssetPreview({
           <div className="absolute inset-0" style={overlayStyle} />
           <img 
             src={whiteLogo}
-            alt="1QG Logo"
+            alt="Constancia Logo"
             className="absolute drop-shadow-lg"
             style={{
               left: `${layout.logoX}%`,
@@ -2455,7 +2455,7 @@ function VideoAssetPreview({
             <div className="relative z-10 flex flex-col items-center gap-3">
               <img 
                 src={whiteLogo}
-                alt="1QG Logo"
+                alt="Constancia Logo"
                 className="h-8 w-auto drop-shadow-lg"
               />
               <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30 group-hover:scale-110 transition-transform">
@@ -3571,7 +3571,7 @@ function MarketingAssetsContent() {
       const videoBlob = await recordingPromise;
       
       const link = document.createElement('a');
-      link.download = `1QG-${video.platform}-${video.style}-${video.duration}s-${Date.now()}.webm`;
+      link.download = `Constancia-${video.platform}-${video.style}-${video.duration}s-${Date.now()}.webm`;
       link.href = URL.createObjectURL(videoBlob);
       link.click();
       
@@ -3820,7 +3820,7 @@ function MarketingAssetsContent() {
       ctx.shadowBlur = 0;
 
       const link = document.createElement('a');
-      link.download = `1QG-gradient-${cover.type}-${Date.now()}.png`;
+      link.download = `Constancia-gradient-${cover.type}-${Date.now()}.png`;
       link.href = canvas.toDataURL('image/png', 1.0);
       link.click();
 
@@ -3934,7 +3934,7 @@ function MarketingAssetsContent() {
 
       const dataUrl = canvas.toDataURL('image/png');
       const link = document.createElement('a');
-      link.download = `1QG-Teams-${bg.name.replace(/\s+/g, '-')}.png`;
+      link.download = `Constancia-Teams-${bg.name.replace(/\s+/g, '-')}.png`;
       link.href = dataUrl;
       link.click();
 
@@ -4056,7 +4056,7 @@ function MarketingAssetsContent() {
       ctx.fillText(TAGLINE.line2, taglineX, taglineY + lineHeight);
 
       const link = document.createElement('a');
-      link.download = `1QG-${asset.type}-${asset.category}-${Date.now()}.png`;
+      link.download = `Constancia-${asset.type}-${asset.category}-${Date.now()}.png`;
       link.href = canvas.toDataURL('image/png', 1.0);
       link.click();
 
@@ -4104,7 +4104,7 @@ function MarketingAssetsContent() {
             <div>
               <h2 className="text-xl font-semibold mb-1">Premium Quality Assets</h2>
               <p className="text-white/80 text-sm">
-                All images are generated at full resolution with professional stock photography and 1QG branding
+                All images are generated at full resolution with professional stock photography and Constancia branding
               </p>
             </div>
           </div>
@@ -4653,7 +4653,7 @@ function MarketingAssetsContent() {
               <Badge variant="secondary" className="ml-2">1920×1080 UHD</Badge>
             </h3>
             <p className="text-sm text-muted-foreground mb-4">
-              Professional backgrounds with 1QG branding and tagline positioned to avoid video feed overlap.
+              Professional backgrounds with Constancia branding and tagline positioned to avoid video feed overlap.
             </p>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {teamsBackgrounds.map((bg) => (
@@ -4675,7 +4675,7 @@ function MarketingAssetsContent() {
                       <div className="relative">
                         <img 
                           src={whiteLogo} 
-                          alt="1QG Logo" 
+                          alt="Constancia Logo" 
                           className="h-10 drop-shadow-lg"
                           style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' }}
                         />
@@ -4742,7 +4742,7 @@ function MarketingAssetsContent() {
                       <div className="relative">
                         <img 
                           src={whiteLogo} 
-                          alt="1QG Logo" 
+                          alt="Constancia Logo" 
                           className="h-8 drop-shadow-lg"
                           style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' }}
                         />
@@ -4846,7 +4846,7 @@ function MarketingAssetsContent() {
               onClick={() => {
                 const link = document.createElement('a');
                 link.href = whiteLogo;
-                link.download = '1QG-Logo-White.png';
+                link.download = 'Constancia-Logo-White.png';
                 link.click();
               }}
               data-testid="button-download-logo-white"
@@ -4862,7 +4862,7 @@ function MarketingAssetsContent() {
               onClick={() => {
                 const link = document.createElement('a');
                 link.href = gradientLogo;
-                link.download = '1QG-Logo-Gradient.png';
+                link.download = 'Constancia-Logo-Gradient.png';
                 link.click();
               }}
               data-testid="button-download-logo-gradient"
@@ -4878,7 +4878,7 @@ function MarketingAssetsContent() {
               onClick={() => {
                 const link = document.createElement('a');
                 link.href = iconWhite;
-                link.download = '1QG-Icon-White.png';
+                link.download = 'Constancia-Icon-White.png';
                 link.click();
               }}
               data-testid="button-download-icon-white"

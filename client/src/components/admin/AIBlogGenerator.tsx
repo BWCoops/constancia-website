@@ -3124,7 +3124,7 @@ export function AIBlogGenerator({ isOpen, onClose, onPublishSuccess }: AIBlogGen
                   {editableContent.excerpt || parseFinalContent()?.excerpt || ""}
                 </p>
                 <div className="flex flex-wrap items-center gap-4 pb-6 border-b border-border text-sm text-muted-foreground">
-                  <span className="font-medium text-foreground">1QG Editorial</span>
+                  <span className="font-medium text-foreground">Constancia Editorial</span>
                   <span className="flex items-center gap-1">
                     <Calendar className="w-4 h-4" />
                     {new Date().toLocaleDateString("en-GB", { year: "numeric", month: "long", day: "numeric" })}

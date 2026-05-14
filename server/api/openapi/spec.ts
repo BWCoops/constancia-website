@@ -1,7 +1,7 @@
 /**
  * OpenAPI Specification
  * 
- * Centralized API documentation for the 1QG platform.
+ * Centralized API documentation for the Constancia platform.
  * This file exports the OpenAPI specification object that can be:
  * - Served as JSON endpoint
  * - Used to generate Swagger UI
@@ -83,14 +83,14 @@ interface SecurityScheme {
 }
 
 /**
- * OpenAPI specification for the 1QG API
+ * OpenAPI specification for the Constancia API
  */
 export const openAPISpec: OpenAPISpec = {
   openapi: '3.0.3',
   info: {
-    title: '1QG Platform API',
+    title: 'Constancia Platform API',
     version: '1.0.0',
-    description: 'API for the 1QG AI-powered business solutions platform',
+    description: 'API for the Constancia AI-powered business solutions platform',
   },
   servers: [
     {

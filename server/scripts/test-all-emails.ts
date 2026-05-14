@@ -7,9 +7,9 @@
  * without touching live user inboxes.
  */
 
-const TEST_RECIPIENT = "bradley.cooper@1qg.com";
+const TEST_RECIPIENT = "bradley.cooper@constancia.io";
 const TEST_NAME      = "Bradley";
-const SENDER         = "info@1qg.com";
+const SENDER         = "info@constancia.io";
 
 import { sendEmailViaGraph } from "../services/ms-graph-email";
 import {
@@ -45,15 +45,15 @@ function tplConfigTest(): string {
   return `
     <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto">
       <div style="background:#02205B;color:#fff;padding:24px;text-align:center">
-        <h2 style="margin:0">1QG Email Configuration Test</h2>
+        <h2 style="margin:0">Constancia Email Configuration Test</h2>
       </div>
       <div style="padding:24px;background:#f9f9f9">
         <p style="color:#22c55e;font-weight:bold;font-size:16px">Email service is working correctly!</p>
         <p>This test was sent at <strong>${new Date().toLocaleString("en-GB", { dateStyle: "full", timeStyle: "long" })}</strong></p>
-        <p><strong>Transport:</strong> Gmail SMTP (info@1qg.com)</p>
+        <p><strong>Transport:</strong> Gmail SMTP (info@constancia.io)</p>
         <p><strong>Recipient:</strong> ${TEST_RECIPIENT}</p>
       </div>
-      <div style="text-align:center;padding:16px;font-size:12px;color:#888">Automated test from 1QG Admin Centre.</div>
+      <div style="text-align:center;padding:16px;font-size:12px;color:#888">Automated test from Constancia Admin Centre.</div>
     </div>`;
 }
 
@@ -75,7 +75,7 @@ function tplContactFormNotification(): string {
     </div>`;
   return `
     <div style="font-family:'Segoe UI',Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px">
-      ${generateNotificationHeader({ title: "New Contact Form Submission", subtitle: "1QG Website" })}
+      ${generateNotificationHeader({ title: "New Contact Form Submission", subtitle: "Constancia Website" })}
       ${generateInfoCard(table)}
       ${msg}
       <hr style="border:none;border-top:1px solid #eee;margin:30px 0">
@@ -87,12 +87,12 @@ function tplContactFormNotification(): string {
 
 // 3. Contact email verification (sent to submitter)
 function tplContactVerification(): string {
-  const verificationLink = "https://1qg.com/api/contact/verify?token=test-token-abc123";
+  const verificationLink = "https://constancia.io/api/contact/verify?token=test-token-abc123";
   const header = generateEmailHeader({ variant: "dark" });
   const body = `
     <p style="color:${EMAIL_BRAND.darkGray};font-size:16px;margin:0 0 20px">Hi ${TEST_NAME},</p>
     <p style="color:${EMAIL_BRAND.darkGray};font-size:16px;line-height:1.6;margin:0 0 20px">
-      Thank you for contacting 1QG. Please verify your email address to confirm your enquiry.
+      Thank you for contacting Constancia. Please verify your email address to confirm your enquiry.
     </p>
     ${generateCtaButton("Verify Email Address", verificationLink)}
     <p style="color:${EMAIL_BRAND.mutedGray};font-size:14px;margin:25px 0 10px">
@@ -115,7 +115,7 @@ function tplResourceOtp(): string {
   const body = `
     <p style="color:${EMAIL_BRAND.darkGray};font-size:16px;margin:0 0 20px">Hi ${TEST_NAME},</p>
     <p style="color:${EMAIL_BRAND.darkGray};font-size:16px;line-height:1.6;margin:0 0 20px">
-      Thank you for your interest in 1QG resources. Please use the following code to access your download:
+      Thank you for your interest in Constancia resources. Please use the following code to access your download:
     </p>
     ${generateOtpBox("847 291")}
     <p style="color:${EMAIL_BRAND.mutedGray};font-size:14px;margin:0">This code expires in 10 minutes.</p>`;
@@ -130,7 +130,7 @@ function tplFinanceCompassOtp(): string {
     <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;background:#f8f9fa;padding:0">
       <div style="background:#02205B;padding:32px 24px;text-align:center">
         <h1 style="color:#fff;margin:0;font-size:22px">FinanceCompass</h1>
-        <p style="color:rgba(255,255,255,.75);margin:6px 0 0;font-size:14px">by 1QG</p>
+        <p style="color:rgba(255,255,255,.75);margin:6px 0 0;font-size:14px">by Constancia</p>
       </div>
       <div style="padding:32px 24px;background:#fff">
         <h2 style="color:#02205B;margin:0 0 16px">Your Verification Code</h2>
@@ -140,7 +140,7 @@ function tplFinanceCompassOtp(): string {
         </div>
         <p style="color:#888;font-size:14px">This code expires in 10 minutes. If you didn't request this code, please ignore this email.</p>
       </div>
-      <div style="padding:16px;text-align:center;color:#999;font-size:12px">&copy; 1QG Ltd. All rights reserved.</div>
+      <div style="padding:16px;text-align:center;color:#999;font-size:12px">&copy; Constancia Ltd. All rights reserved.</div>
     </div>`;
 }
 
@@ -151,7 +151,7 @@ function tplLeadVerified(): string {
     <table style="width:100%;border-collapse:collapse">
       <tr><td style="padding:8px 0;color:${EMAIL_BRAND.mutedGray};width:120px"><strong>Name:</strong></td><td>${TEST_NAME} Cooper (test)</td></tr>
       <tr><td style="padding:8px 0;color:${EMAIL_BRAND.mutedGray}"><strong>Email:</strong></td><td><a href="mailto:${TEST_RECIPIENT}" style="color:${EMAIL_BRAND.teal}">${TEST_RECIPIENT}</a></td></tr>
-      <tr><td style="padding:8px 0;color:${EMAIL_BRAND.mutedGray}"><strong>Company:</strong></td><td>1QG</td></tr>
+      <tr><td style="padding:8px 0;color:${EMAIL_BRAND.mutedGray}"><strong>Company:</strong></td><td>Constancia</td></tr>
       <tr><td style="padding:8px 0;color:${EMAIL_BRAND.mutedGray}"><strong>Job Title:</strong></td><td>Director</td></tr>
       <tr><td style="padding:8px 0;color:${EMAIL_BRAND.mutedGray}"><strong>Resource:</strong></td><td>EPM Vendor Comparison Guide 2025</td></tr>
     </table>`;
@@ -163,7 +163,7 @@ function tplLeadVerified(): string {
         <tr><td style="padding:4px 0;color:#856404"><strong>Timezone:</strong></td><td>Europe/London</td></tr>
         <tr><td style="padding:4px 0;color:#856404"><strong>Language:</strong></td><td>en-GB</td></tr>
         <tr><td style="padding:4px 0;color:#856404"><strong>Referrer:</strong></td><td>https://www.linkedin.com/</td></tr>
-        <tr><td style="padding:4px 0;color:#856404"><strong>Page:</strong></td><td>https://1qg.com/resources</td></tr>
+        <tr><td style="padding:4px 0;color:#856404"><strong>Page:</strong></td><td>https://constancia.io/resources</td></tr>
       </table>
     </div>`;
   return `
@@ -185,10 +185,10 @@ function tplLoginAlert(): string {
     <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto">
       <div style="background:#02205B;color:#fff;padding:24px;text-align:center">
         <h2 style="margin:0">Login Alert</h2>
-        <p style="margin:4px 0 0;opacity:.75;font-size:14px">1QG Admin Centre</p>
+        <p style="margin:4px 0 0;opacity:.75;font-size:14px">Constancia Admin Centre</p>
       </div>
       <div style="padding:24px;background:#f9f9f9">
-        <p style="font-size:15px;margin:0 0 20px;color:#333">A successful login to the 1QG Admin Centre was recorded.</p>
+        <p style="font-size:15px;margin:0 0 20px;color:#333">A successful login to the Constancia Admin Centre was recorded.</p>
         <table style="width:100%;border-collapse:collapse;font-size:14px">
           <tr style="border-bottom:1px solid #eee"><td style="padding:8px 0;width:130px;color:#555;font-weight:bold">Admin</td><td>Test Admin (test)</td></tr>
           <tr style="border-bottom:1px solid #eee"><td style="padding:8px 0;color:#555;font-weight:bold">Email</td><td>${TEST_RECIPIENT}</td></tr>
@@ -201,25 +201,25 @@ function tplLoginAlert(): string {
           If you did not perform this login, please contact your security team immediately.
         </p>
       </div>
-      <div style="text-align:center;padding:16px;font-size:12px;color:#888">Automated security alert from 1QG Admin Centre.</div>
+      <div style="text-align:center;padding:16px;font-size:12px;color:#888">Automated security alert from Constancia Admin Centre.</div>
     </div>`;
 }
 
 // ── Run all tests ─────────────────────────────────────────────────────────────
 console.log(`\n${"─".repeat(62)}`);
-console.log(`  1QG Email Test Suite`);
+console.log(`  Constancia Email Test Suite`);
 console.log(`  All 7 types → ${TEST_RECIPIENT}`);
 console.log(`${"─".repeat(62)}\n`);
 
 (async () => {
   const passed = [
-    await send("1. Admin config test",             "[1QG] Email Configuration Test",                           tplConfigTest()),
+    await send("1. Admin config test",             "[Constancia] Email Configuration Test",                           tplConfigTest()),
     await send("2. Contact form notification",       `New Contact Form Submission from Jane Smith`,             tplContactFormNotification()),
-    await send("3. Contact email verification",      "Verify your email - 1QG Contact",                        tplContactVerification()),
-    await send("4. Resource access OTP",             "Your 1QG Resource Access Code",                          tplResourceOtp()),
+    await send("3. Contact email verification",      "Verify your email - Constancia Contact",                        tplContactVerification()),
+    await send("4. Resource access OTP",             "Your Constancia Resource Access Code",                          tplResourceOtp()),
     await send("5. FinanceCompass OTP",              "Your FinanceCompass Verification Code",                   tplFinanceCompassOtp()),
-    await send("6. Lead verified notification",      `New Verified Lead: ${TEST_NAME} Cooper from 1QG`,        tplLeadVerified()),
-    await send("7. Admin login alert",               `[1QG Admin] Login Alert: Test Admin`,                    tplLoginAlert()),
+    await send("6. Lead verified notification",      `New Verified Lead: ${TEST_NAME} Cooper from Constancia`,        tplLeadVerified()),
+    await send("7. Admin login alert",               `[Constancia Admin] Login Alert: Test Admin`,                    tplLoginAlert()),
   ].filter(Boolean).length;
 
   console.log(`\n${"─".repeat(62)}`);

@@ -227,7 +227,7 @@ export default function FinanceCompassStart() {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title={`Start ${info.name} | FinanceCompass | 1QG`}
+        title={`Start ${info.name} | FinanceCompass | Constancia`}
         description={info.description}
       />
       

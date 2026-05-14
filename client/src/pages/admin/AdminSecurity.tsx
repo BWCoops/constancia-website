@@ -241,7 +241,7 @@ function AdminSecurityContent() {
               </div>
 
               <div className="p-3 rounded-lg bg-muted/30 border border-border/50 text-sm text-muted-foreground">
-                <p>Login notifications are automatically sent to all active admin users (except info@1qg.com)</p>
+                <p>Login notifications are automatically sent to all active admin users (except info@constancia.io)</p>
               </div>
             </div>
           )}
@@ -373,7 +373,7 @@ function AdminSecurityContent() {
               <div className="space-y-3">
                 <div className="flex flex-col sm:flex-row gap-2">
                   <Input
-                    placeholder="Email address (e.g. user@1qg.com)"
+                    placeholder="Email address (e.g. user@constancia.io)"
                     value={newEmail}
                     onChange={(e) => setNewEmail(e.target.value)}
                     disabled={addEmailMutation.isPending}

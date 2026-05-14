@@ -88,11 +88,11 @@ const NATS_TEST_DATA = {
   },
 };
 
-// 1QG Group Limited - Small professional services consultancy
+// Constancia Group Limited - Small professional services consultancy
 // Expert EPM/finance transformation advisory with 5 employees
 const ONEQG_TEST_DATA = {
   company: {
-    name: "1QG Group Limited",
+    name: "Constancia Group Limited",
     companyNumber: "12345678",
     sector: "Professional Services",
     sicCode: "7022",
@@ -104,7 +104,7 @@ const ONEQG_TEST_DATA = {
   contact: {
     firstName: "Bradley",
     lastName: "Cooper",
-    email: "bradley.cooper@1qg.com",
+    email: "bradley.cooper@constancia.io",
     roleTitle: "Managing Director",
     businessPhone: "+44 20 7946 0958",
     priorities: ["ai_automation", "planning_forecasting", "reporting_viz"],
@@ -269,7 +269,7 @@ export function registerDevRoutes(publicRouter: Router): void {
         employees
       } = req.body;
       
-      // Select test data profile - "nats" for NATS, "1qg" for 1QG, default is "techflow"
+      // Select test data profile - "nats" for NATS, "1qg" for Constancia, default is "techflow"
       const TEST_PROFILES: Record<string, any> = {
         techflow: TECHFLOW_TEST_DATA,
         nats: NATS_TEST_DATA,

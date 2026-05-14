@@ -13,7 +13,7 @@ import { createOrUpdateContact, isHubSpotConnected, type HubSpotContactResult } 
 const router = Router();
 
 const HUBSPOT_PORTAL_ID = process.env.HUBSPOT_PORTAL_ID || "";
-const LEAD_NOTIFICATION_EMAIL = process.env.LEAD_NOTIFICATION_EMAIL || "info@1qg.com";
+const LEAD_NOTIFICATION_EMAIL = process.env.LEAD_NOTIFICATION_EMAIL || "info@constancia.io";
 
 const EXCLUDED_ANALYTICS_IPS = [
   "2a06:5906:1423:7000:8de0:ce1:adef:4e1",
@@ -185,7 +185,7 @@ function buildHubSpotContactUrl(data: {
   if (data.score !== undefined) assessmentParts.push(`Finance Readiness Score: ${data.score}%`);
   if (data.maturityLevel) assessmentParts.push(`Maturity Level: ${data.maturityLevel}`);
   if (assessmentParts.length > 0) {
-    params.set("hs_content_membership_notes", `[1QG FinanceCompass Assessment] ${assessmentParts.join(' | ')}`);
+    params.set("hs_content_membership_notes", `[Constancia FinanceCompass Assessment] ${assessmentParts.join(' | ')}`);
   }
   
   return `https://app.hubspot.com/contacts/${HUBSPOT_PORTAL_ID}/contact/new?${params.toString()}`;
@@ -224,7 +224,7 @@ function mapRevenueToValue(revenue: string): string {
 }
 
 /**
- * Build and send lead notification email to 1QG team
+ * Build and send lead notification email to Constancia team
  */
 async function sendWidgetLeadNotification(data: {
   email: string;
@@ -1165,7 +1165,7 @@ function buildWidgetResultsEmailHtml(data: z.infer<typeof widgetEmailResultsSche
                     <p style="margin: 0 0 24px 0; font-size: 14px; color: #ffffff; line-height: 1.6;">
                       Get detailed analysis across 95+ questions with AI-powered recommendations tailored to your organisation.
                     </p>
-                    <a href="https://1qg.com/finance-compass" target="_blank" style="display: inline-block; padding: 16px 40px; background-color: #12EBFC; color: #02205B; font-size: 16px; font-weight: 600; text-decoration: none; border-radius: 8px;">
+                    <a href="https://constancia.io/finance-compass" target="_blank" style="display: inline-block; padding: 16px 40px; background-color: #12EBFC; color: #02205B; font-size: 16px; font-weight: 600; text-decoration: none; border-radius: 8px;">
                       Start Your Full Assessment
                     </a>
                   </td>
@@ -1186,12 +1186,12 @@ function buildWidgetResultsEmailHtml(data: z.infer<typeof widgetEmailResultsSche
                       Finance Transformation & EPM Specialists
                     </p>
                     <p style="margin: 0 0 16px 0; font-size: 13px; color: #6b7280;">
-                      <a href="mailto:info@1qg.com" style="color: #0884AA; text-decoration: none;">info@1qg.com</a>
+                      <a href="mailto:info@constancia.io" style="color: #0884AA; text-decoration: none;">info@constancia.io</a>
                       &nbsp;|&nbsp;
-                      <a href="https://1qg.com" style="color: #0884AA; text-decoration: none;">www.1qg.com</a>
+                      <a href="https://constancia.io" style="color: #0884AA; text-decoration: none;">www.constancia.io</a>
                     </p>
                     <p style="margin: 0; font-size: 11px; color: #6b7280;">
-                      © ${new Date().getFullYear()} 1QG Group. All rights reserved.
+                      © ${new Date().getFullYear()} Constancia Group. All rights reserved.
                     </p>
                     <p style="margin: 8px 0 0 0; font-size: 11px; color: #6b7280;">
                       You received this email because you completed a Finance Readiness Assessment on our website.
@@ -1989,7 +1989,7 @@ router.post("/widget-email-results", async (req: Request, res: Response) => {
     }
 
     const htmlContent = buildWidgetResultsEmailHtml(data);
-    const subject = `Your Finance Readiness Score: ${data.score}% - ${data.maturityLevel} | 1QG`;
+    const subject = `Your Finance Readiness Score: ${data.score}% - ${data.maturityLevel} | Constancia`;
 
     // Save email HTML for debugging/inspection
     const fs = await import("fs");
@@ -2027,7 +2027,7 @@ router.post("/widget-email-results", async (req: Request, res: Response) => {
 
     log.info({ sessionId: data.sessionId, email: data.email.substring(0, 3) + "***", score: data.score, maturityLevel: data.maturityLevel }, "Widget results email sent");
 
-    // Send lead notification email to 1QG team (non-blocking)
+    // Send lead notification email to Constancia team (non-blocking)
     sendWidgetLeadNotification({
       email: data.email,
       sessionId: data.sessionId,

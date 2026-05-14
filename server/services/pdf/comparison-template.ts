@@ -258,11 +258,11 @@ export function generateComparisonHTML(data: ComparisonExportData): string {
   const topThree = sortedPlatforms.slice(0, 3);
 
   const logoHtml = LOGO_TURQUOISE_BASE64
-    ? `<img src="${LOGO_TURQUOISE_BASE64}" alt="1QG" style="height: 24px;" />`
-    : `<span style="font-size: 18px; font-weight: bold; color: ${BRAND.cyan};">1QG</span>`;
+    ? `<img src="${LOGO_TURQUOISE_BASE64}" alt="Constancia" style="height: 24px;" />`
+    : `<span style="font-size: 18px; font-weight: bold; color: ${BRAND.cyan};">Constancia</span>`;
 
   const iconHtml = ICON_WHITE_BASE64
-    ? `<img src="${ICON_WHITE_BASE64}" alt="1QG" style="position: absolute; top: 20mm; right: 20mm; width: 30mm; opacity: 0.1;" />`
+    ? `<img src="${ICON_WHITE_BASE64}" alt="Constancia" style="position: absolute; top: 20mm; right: 20mm; width: 30mm; opacity: 0.1;" />`
     : '';
 
   const dateStr = new Date().toLocaleDateString('en-GB', { 
@@ -293,7 +293,7 @@ export function generateComparisonHTML(data: ComparisonExportData): string {
       margin: 12mm 15mm 20mm 15mm;
       
       @bottom-left {
-        content: "1QG | ${data.categoryType.toUpperCase()} Comparison Report";
+        content: "Constancia | ${data.categoryType.toUpperCase()} Comparison Report";
         font-family: 'Inter', Arial, sans-serif;
         font-size: 8pt;
         color: ${BRAND.navy};
@@ -301,7 +301,7 @@ export function generateComparisonHTML(data: ComparisonExportData): string {
         padding-top: 8pt;
       }
       @bottom-center {
-        content: "info@1qg.com | 1qg.com";
+        content: "info@constancia.io | constancia.io";
         font-family: 'Inter', Arial, sans-serif;
         font-size: 8pt;
         color: ${BRAND.teal};
@@ -1055,7 +1055,7 @@ export function generateComparisonHTML(data: ComparisonExportData): string {
     
     <div class="cover-footer">
       <div class="tagline">Finance Transformed. Designed for Change. <span class="highlight">Driven by Technology.</span></div>
-      <div class="cover-contact">info@1qg.com | 1qg.com | London, United Kingdom</div>
+      <div class="cover-contact">info@constancia.io | constancia.io | London, United Kingdom</div>
     </div>
   </div>
   
@@ -1318,12 +1318,12 @@ export function generateComparisonHTML(data: ComparisonExportData): string {
     
     <div class="cta-box">
       <div class="cta-title">Ready to take the next step?</div>
-      <div><a href="https://1qg.com/finance-compass" class="cta-link">Try FinanceCompass Free</a></div>
+      <div><a href="https://constancia.io/finance-compass" class="cta-link">Try FinanceCompass Free</a></div>
     </div>
     
     <div class="disclaimer">
       <div class="disclaimer-title">Disclaimer</div>
-      <p>This document has been prepared using publicly available information and is intended for general informational purposes only. It does not constitute professional advice or a formal recommendation. Scores, fit recommendations, and vendor comparisons are based on 1QG consultant experience and publicly available information including analyst reports and vendor materials. Always validate through vendor demonstrations, proof-of-concept evaluations, and reference checks specific to your requirements before making selection decisions. To discuss how 1QG can support your specific requirements, contact info@1qg.com or visit 1qg.com.</p>
+      <p>This document has been prepared using publicly available information and is intended for general informational purposes only. It does not constitute professional advice or a formal recommendation. Scores, fit recommendations, and vendor comparisons are based on Constancia consultant experience and publicly available information including analyst reports and vendor materials. Always validate through vendor demonstrations, proof-of-concept evaluations, and reference checks specific to your requirements before making selection decisions. To discuss how Constancia can support your specific requirements, contact info@constancia.io or visit constancia.io.</p>
     </div>
   </div>
 </body>

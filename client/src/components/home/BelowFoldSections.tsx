@@ -310,7 +310,7 @@ export function BelowFoldSections() {
                   Our team has delivered EPM programmes across some of the world's most complex finance functions, AerCap, Howden, Reckitt Benckiser, BAT. We know what these projects cost, where they go wrong, and what good delivery actually looks like.
                 </p>
                 <p className="text-base mb-6 leading-relaxed text-muted-foreground">
-                  We built 1QG to do it at a fraction of the cost and risk, by combining senior practitioners with AI-powered tools that standardise the work from day one.
+                  We built Constancia to do it at a fraction of the cost and risk, by combining senior practitioners with AI-powered tools that standardise the work from day one.
                 </p>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
                   {coreValues.map((value) => (

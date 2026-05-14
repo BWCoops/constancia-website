@@ -44,7 +44,7 @@ export const COLOR = {
   borderMuted:      'rgba(246,243,238,0.05)',
   borderStrong:     'rgba(246,243,238,0.14)',
 
-  // Text — bumped opacity vs 1QG palette for "highly legible" spec requirement
+  // Text — bumped opacity vs Constancia palette for "highly legible" spec requirement
   textPrimary:      '#F6F3EE',
   textSecondary:    'rgba(246,243,238,0.68)',
   textMuted:        'rgba(246,243,238,0.42)',

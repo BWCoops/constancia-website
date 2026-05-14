@@ -93,7 +93,7 @@ const METRIC_DERIVATIONS: MetricDerivation[] = [
     lowerIsBetter: true,
     derivationType: 'proxy',
     sourceDatasets: ['1qg_consulting_experience'],
-    formula: '1QG insights from 40+ years of finance transformation engagements',
+    formula: 'Constancia insights from 40+ years of finance transformation engagements',
     confidenceLevel: 'high',
     derivation: () => null,
     typical: { min: 6, max: 12, mid: 8 },
@@ -108,7 +108,7 @@ const METRIC_DERIVATIONS: MetricDerivation[] = [
     lowerIsBetter: true,
     derivationType: 'proxy',
     sourceDatasets: ['1qg_consulting_experience'],
-    formula: '1QG insights from 40+ years of finance transformation engagements',
+    formula: 'Constancia insights from 40+ years of finance transformation engagements',
     confidenceLevel: 'medium',
     derivation: () => null,
     typical: { min: 12, max: 21, mid: 16 },
@@ -123,7 +123,7 @@ const METRIC_DERIVATIONS: MetricDerivation[] = [
     lowerIsBetter: true,
     derivationType: 'proxy',
     sourceDatasets: ['apqc_open_standards', '1qg_consulting_experience'],
-    formula: 'APQC Open Standards Benchmarking data combined with 1QG insights',
+    formula: 'APQC Open Standards Benchmarking data combined with Constancia insights',
     confidenceLevel: 'high',
     derivation: () => null,
     typical: { min: 90, max: 150, mid: 120 },
@@ -138,7 +138,7 @@ const METRIC_DERIVATIONS: MetricDerivation[] = [
     lowerIsBetter: false,
     derivationType: 'proxy',
     sourceDatasets: ['1qg_consulting_experience'],
-    formula: '1QG insights from 40+ years of finance transformation engagements',
+    formula: 'Constancia insights from 40+ years of finance transformation engagements',
     confidenceLevel: 'medium',
     derivation: () => null,
     typical: { min: 85, max: 92, mid: 88 },
@@ -153,7 +153,7 @@ const METRIC_DERIVATIONS: MetricDerivation[] = [
     lowerIsBetter: false,
     derivationType: 'proxy',
     sourceDatasets: ['1qg_consulting_experience'],
-    formula: '1QG insights from 40+ years of finance transformation engagements',
+    formula: 'Constancia insights from 40+ years of finance transformation engagements',
     confidenceLevel: 'medium',
     derivation: () => null,
     typical: { min: 20, max: 40, mid: 30 },
@@ -304,14 +304,14 @@ function formatSourceAttribution(derivation: MetricDerivation): string {
     // Research sources
     if (s.startsWith('apqc_')) return 'APQC';
     
-    // 1QG sources
-    if (s.startsWith('1qg_')) return '1QG Insights';
+    // Constancia sources
+    if (s.startsWith('1qg_')) return 'Constancia Insights';
     return s;
   });
   
   const uniqueSources = Array.from(new Set(sources));
   
-  return `1QG Insights (${uniqueSources.join(', ')})`;
+  return `Constancia Insights (${uniqueSources.join(', ')})`;
 }
 
 /**
@@ -468,7 +468,7 @@ export function generateBenchmarks(): BenchmarkGenerationReport {
 
   sourcesUsed.push({
     sourceId: '1qg_consulting_experience',
-    sourceName: '1QG Consulting Experience',
+    sourceName: 'Constancia Consulting Experience',
     sourceType: 'expert_estimate',
     sourceUrl: 'https://1qg.ai/',
     accessedDate: generatedAt,

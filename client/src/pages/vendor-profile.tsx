@@ -232,7 +232,7 @@ export default function VendorProfilePage() {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title={`${platform.name} Profile | 1QG - Independent ${TOOL_TYPE_LABELS[toolType]} Review`}
+        title={`${platform.name} Profile | Constancia - Independent ${TOOL_TYPE_LABELS[toolType]} Review`}
         description={`Independent review of ${platform.name}: ${platform.bestFor}. Objective capability scores, strengths, limitations and pricing analysis.`}
         keywords={[
           platform.name,
@@ -241,7 +241,7 @@ export default function VendorProfilePage() {
           "independent platform review",
           "vendor-agnostic analysis",
         ]}
-        canonicalUrl={`https://1qg.com/vendors/${platform.id}`}
+        canonicalUrl={`https://constancia.io/vendors/${platform.id}`}
       />
 
       <Navigation />

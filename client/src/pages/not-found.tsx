@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 export default function NotFound() {
   useEffect(() => {
-    document.title = "Page Not Found | 1QG";
+    document.title = "Page Not Found | Constancia";
     
     let robotsMeta = document.querySelector('meta[name="robots"]') as HTMLMetaElement;
     if (!robotsMeta) {

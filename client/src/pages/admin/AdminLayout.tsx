@@ -30,7 +30,7 @@ import {
   WifiOff,
   RefreshCw
 } from "lucide-react";
-import logo from "@assets/1QG - Type Logo (Dark Blue)_1764415487342.png";
+import logo from "@assets/Constancia - Type Logo (Dark Blue)_1764415487342.png";
 
 interface AdminSession {
   authenticated: boolean;
@@ -209,7 +209,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                 <Link href="/" className="flex items-center gap-2 group" data-testid="link-website">
                   <img 
                     src={logo} 
-                    alt="1QG" 
+                    alt="Constancia" 
                     className="h-5 object-contain transition-opacity group-hover:opacity-70"
                     data-testid="header-logo"
                   />

@@ -52,8 +52,8 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen page-dark">
       <SEOHead
-        title="1QG Insights Hub - Finance Transformation & EPM Insights"
-        description="Expert insights on finance transformation, EPM platform selection, ERP optimisation, and AI for finance from 1QG's independent advisory team."
+        title="Constancia Insights Hub - Finance Transformation & EPM Insights"
+        description="Expert insights on finance transformation, EPM platform selection, ERP optimisation, and AI for finance from Constancia's independent advisory team."
         keywords={[
           "AI insights",
           "digital transformation blog",
@@ -68,7 +68,7 @@ export default function BlogPage() {
       <main className="pt-16 sm:pt-20 pb-16">
         <PageHero
           badge="Insights & Updates"
-          title="1QG Insights Hub"
+          title="Constancia Insights Hub"
           description="Expert insights on finance transformation, ERP, EPM, and AI-driven business solutions."
         />
 

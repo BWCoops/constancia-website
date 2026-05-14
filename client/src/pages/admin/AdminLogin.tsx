@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertCircle, LogIn } from "lucide-react";
-import logo from "@assets/1QG - Type Logo (Dark Blue)_1764414916528.png";
+import logo from "@assets/Constancia - Type Logo (Dark Blue)_1764414916528.png";
 
 export default function AdminLogin() {
   const [, setLocation] = useLocation();
@@ -58,7 +58,7 @@ export default function AdminLogin() {
           <div className="flex justify-center">
             <img 
               src={logo} 
-              alt="1QG Logo" 
+              alt="Constancia Logo" 
               className="h-12 object-contain"
               data-testid="logo-image"
             />
@@ -68,7 +68,7 @@ export default function AdminLogin() {
               Admin Centre
             </CardTitle>
             <CardDescription className="mt-2" data-testid="text-description">
-              Sign in to access the 1QG administration dashboard
+              Sign in to access the Constancia administration dashboard
             </CardDescription>
           </div>
         </CardHeader>
@@ -90,7 +90,7 @@ export default function AdminLogin() {
           </Button>
 
           <p className="text-xs text-center text-muted-foreground mt-4" data-testid="text-security-notice">
-            Access is restricted to authorized 1QG staff only.
+            Access is restricted to authorized Constancia staff only.
             <br />
             Authentication is handled via Replit authentication.
           </p>

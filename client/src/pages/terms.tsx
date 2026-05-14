@@ -9,9 +9,9 @@ export default function TermsOfUsePage() {
   return (
     <div className="min-h-screen page-dark">
       <SEOHead
-        title="Terms of Use | 1QG"
-        description="Terms of Use for the 1QG GROUP LIMITED website. Conditions governing access to our advisory platform, tools, and resources for finance professionals."
-        keywords={["terms of use", "terms and conditions", "website terms", "1QG terms", "legal terms"]}
+        title="Terms of Use | Constancia"
+        description="Terms of Use for the Constancia GROUP LIMITED website. Conditions governing access to our advisory platform, tools, and resources for finance professionals."
+        keywords={["terms of use", "terms and conditions", "website terms", "Constancia terms", "legal terms"]}
       />
       
       <Navigation />
@@ -53,7 +53,7 @@ export default function TermsOfUsePage() {
               <section className="mb-12" data-testid="section-about-terms">
                 <h2 className="text-2xl font-bold text-foreground mb-4">About these Terms of Use</h2>
                 <p className="text-muted-foreground mb-4">
-                  We are 1QG GROUP LIMITED, incorporated in England and Wales under company registration number 16121837. Our registered office is at 86-90 Paul Street, London, EC2A 4NE, United Kingdom.
+                  We are Constancia GROUP LIMITED, incorporated in England and Wales under company registration number 16121837. Our registered office is at 86-90 Paul Street, London, EC2A 4NE, United Kingdom.
                 </p>
                 <p className="text-muted-foreground mb-4">
                   These Terms of Use apply to the use of this website, regardless of how you access it. Please read these Terms of Use carefully before you proceed.
@@ -112,7 +112,7 @@ export default function TermsOfUsePage() {
               <section className="mb-12" data-testid="section-links-from-third-party">
                 <h2 className="text-2xl font-bold text-foreground mb-4">Links from third party websites</h2>
                 <p className="text-muted-foreground">
-                  You can link to this website, so long as you do so fairly and without suggesting any affiliation, endorsement, approval or association with 1QG GROUP LIMITED if there is none. We reserve the right to withdraw permission to link to our site at any time.
+                  You can link to this website, so long as you do so fairly and without suggesting any affiliation, endorsement, approval or association with Constancia GROUP LIMITED if there is none. We reserve the right to withdraw permission to link to our site at any time.
                 </p>
               </section>
 

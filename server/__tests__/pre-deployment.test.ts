@@ -1760,7 +1760,7 @@ describe('Google Lighthouse Performance Checks', () => {
       const indexHtml = join(process.cwd(), 'client/index.html');
       const content = readFileSync(indexHtml, 'utf-8');
       expect(content).toContain('<title>');
-      expect(content).toContain('1QG');
+      expect(content).toContain('Constancia');
     });
 
     it('should have meta description', () => {
@@ -1773,7 +1773,7 @@ describe('Google Lighthouse Performance Checks', () => {
       const indexHtml = join(process.cwd(), 'client/index.html');
       const content = readFileSync(indexHtml, 'utf-8');
       expect(content).toContain('rel="canonical"');
-      expect(content).toContain('https://1qg.com/');
+      expect(content).toContain('https://constancia.io/');
     });
 
     it('should have Open Graph tags', () => {
@@ -1797,10 +1797,10 @@ describe('Google Lighthouse Performance Checks', () => {
     it('should have llms.txt with key content sections', () => {
       const llmsPath = join(process.cwd(), 'client/public/llms.txt');
       const content = readFileSync(llmsPath, 'utf-8');
-      expect(content).toContain('1QG');
+      expect(content).toContain('Constancia');
       expect(content).toContain('FinanceCompass');
       expect(content).toContain('EPM');
-      expect(content).toContain('https://1qg.com');
+      expect(content).toContain('https://constancia.io');
     });
 
     it('should reference llms.txt in robots.txt', () => {
@@ -1812,7 +1812,7 @@ describe('Google Lighthouse Performance Checks', () => {
     it('should have sitemap reference in robots.txt', () => {
       const robotsPath = join(process.cwd(), 'client/public/robots.txt');
       const content = readFileSync(robotsPath, 'utf-8');
-      expect(content).toContain('Sitemap: https://1qg.com/sitemap.xml');
+      expect(content).toContain('Sitemap: https://constancia.io/sitemap.xml');
     });
 
     it('should have sitemap generation service', () => {
@@ -1958,7 +1958,7 @@ describe('Google Lighthouse Performance Checks', () => {
     it('should have theme color matching brand', () => {
       const manifestPath = join(process.cwd(), 'client/public/manifest.json');
       const manifest = JSON.parse(readFileSync(manifestPath, 'utf-8'));
-      expect(manifest.theme_color).toBe('#02205B'); // 1QG Navy
+      expect(manifest.theme_color).toBe('#02205B'); // Constancia Navy
     });
   });
 

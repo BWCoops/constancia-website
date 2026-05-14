@@ -590,7 +590,7 @@ export function ExportGateModal({ exportConfig, open, onOpenChange, onExportAppr
               </div>
               <h3 className="text-lg font-semibold text-[#02205B] dark:text-[#12EBFC] mb-2">Export Started!</h3>
               <p className="text-sm text-muted-foreground">
-                Your {exportConfig?.type.toUpperCase()} report is being generated. Thank you for your interest in 1QG.
+                Your {exportConfig?.type.toUpperCase()} report is being generated. Thank you for your interest in Constancia.
               </p>
             </motion.div>
           )}

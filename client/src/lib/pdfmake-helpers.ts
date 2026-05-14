@@ -18,7 +18,7 @@ import type { TDocumentDefinitions, Content, TableCell, Style, StyleDictionary }
 // Initialize pdfmake with fonts (using addVirtualFileSystem for Vite compatibility)
 (pdfMake as any).addVirtualFileSystem(pdfFonts);
 
-// Brand colors matching 1QG guidelines
+// Brand colors matching Constancia guidelines
 const BRAND_COLORS = {
   navy: "#02205B",
   cyan: "#12EBFC",
@@ -29,7 +29,7 @@ const BRAND_COLORS = {
   lightGray: "#F5F5F5",
 };
 
-// Default styles for 1QG branded documents
+// Default styles for Constancia branded documents
 const DEFAULT_STYLES: StyleDictionary = {
   header: {
     fontSize: 18,
@@ -314,7 +314,7 @@ export function createColumns(left: Content, right: Content, options: {
  */
 export function createHeader(title: string, subtitle?: string): Content {
   const content: Content[] = [
-    { text: "1QG", style: "header", color: BRAND_COLORS.navy },
+    { text: "Constancia", style: "header", color: BRAND_COLORS.navy },
   ];
 
   if (subtitle) {
@@ -333,7 +333,7 @@ export function createHeader(title: string, subtitle?: string): Content {
 export function createFooterFunction(): (currentPage: number, pageCount: number) => Content {
   return (currentPage: number, pageCount: number) => ({
     columns: [
-      { text: `1QG  |  info@1qg.com  |  https://1qg.com`, style: "footer", alignment: "left" },
+      { text: `Constancia  |  info@constancia.io  |  https://constancia.io`, style: "footer", alignment: "left" },
       { text: `Page ${currentPage} of ${pageCount}`, style: "footer", alignment: "right" },
     ],
     margin: [40, 10, 40, 0],

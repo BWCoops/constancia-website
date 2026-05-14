@@ -1240,8 +1240,8 @@ export type Citation = z.infer<typeof citationSchema>;
 // Whitelisted Admin Emails (only these accounts can access admin)
 // For Replit Auth, any logged in Replit user can access admin (for development)
 export const ADMIN_WHITELIST_EMAILS = [
-  "grant.vanwyk@1qg.com",
-  "bradley.cooper@1qg.com",
+  "grant.vanwyk@constancia.io",
+  "bradley.cooper@constancia.io",
 ];
 
 // ============================================

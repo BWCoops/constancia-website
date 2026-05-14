@@ -117,7 +117,7 @@ The investment required for effective change management is substantial—typical
 
 The cautionary tales presented above share a common thread: they represent failures of approach rather than failures of technology. Modern EPM platforms—whether Pigment with its intuitive business planning capabilities or OneStream with its unified financial intelligence—provide robust foundations for transformation. Success depends on how organisations implement these platforms.
 
-1QG has developed a co-implementation methodology that addresses the failure modes identified in this analysis. This approach emphasises several critical elements that distinguish successful implementations from troubled ones.
+Constancia has developed a co-implementation methodology that addresses the failure modes identified in this analysis. This approach emphasises several critical elements that distinguish successful implementations from troubled ones.
 
 The methodology begins with comprehensive readiness assessment. Before any platform configuration occurs, organisations undergo structured evaluation of data quality, process maturity, and change readiness. Issues identified during assessment are addressed before implementation proceeds, avoiding the costly mid-project remediation that plagued several organisations discussed above.
 
@@ -207,7 +207,7 @@ async function publishBlogPost() {
         heroImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200",
         categoryId: categoryId,
         tags: ["EPM implementation failure", "EPM project risks", "EPM best practices", "enterprise software implementation", "change management"],
-        author: "1QG Insights Team",
+        author: "Constancia Insights Team",
         publishedAt: new Date().toISOString().split('T')[0],
         readingTime: `${Math.ceil(wordCount / 200)} min read`,
         featured: true,
@@ -226,7 +226,7 @@ async function publishBlogPost() {
       heroImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200",
       categoryId: categoryId,
       tags: ["EPM implementation failure", "EPM project risks", "EPM best practices", "enterprise software implementation", "change management"],
-      author: "1QG Insights Team",
+      author: "Constancia Insights Team",
       publishedAt: new Date().toISOString().split('T')[0],
       readingTime: `${Math.ceil(wordCount / 200)} min read`,
       featured: true,

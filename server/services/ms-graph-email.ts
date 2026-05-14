@@ -6,7 +6,7 @@ import { createChildLogger } from "../lib/logger";
 
 const log = createChildLogger("email-service");
 
-export const SENDER_EMAIL = "info@1qg.com";
+export const SENDER_EMAIL = "info@constancia.io";
 
 // --- Gmail (primary) ---
 const GMAIL_USER = process.env.GMAIL_USER || SENDER_EMAIL;
@@ -129,7 +129,7 @@ export async function sendEmailViaGraph(
     try {
       const transporter = getTransporter();
       await transporter.sendMail({
-        from: `"1QG" <${GMAIL_USER}>`,
+        from: `"Constancia" <${GMAIL_USER}>`,
         to,
         subject: sub,
         html,

@@ -127,7 +127,7 @@ export class SynthesisService {
     // Build fallback response for circuit breaker
     const buildFallbackResponse = (): ChatbotResponse => {
       const fallbackMessage = context?.overallScore 
-        ? `I apologise, but I'm experiencing a temporary service issue. Based on your FinanceCompass assessment with a maturity score of ${context.overallScore.toFixed(1)}/5.0, I recommend exploring your detailed results in the dashboard. For immediate assistance, please email the 1QG team.`
+        ? `I apologise, but I'm experiencing a temporary service issue. Based on your FinanceCompass assessment with a maturity score of ${context.overallScore.toFixed(1)}/5.0, I recommend exploring your detailed results in the dashboard. For immediate assistance, please email the Constancia team.`
         : SAFE_RESPONSES.error;
       
       return {
@@ -236,7 +236,7 @@ export class SynthesisService {
   }
 
   private buildSystemPrompt(context: AssessmentContext | null, research: ResearchResult | null, learnedContext?: string, questionType?: QuestionType): string {
-    let prompt = `You are a senior management consultant at 1QG, an independent Enterprise Performance Management (EPM) advisory firm. You bring 20+ years of finance transformation experience across FTSE 100, Fortune 500, and mid-market organisations.
+    let prompt = `You are a senior management consultant at Constancia, an independent Enterprise Performance Management (EPM) advisory firm. You bring 20+ years of finance transformation experience across FTSE 100, Fortune 500, and mid-market organisations.
 
 ## YOUR EXPERTISE & CREDENTIALS
 - Deep practitioner knowledge of EPM platforms: **OneStream**, **Anaplan**, **Oracle EPM Cloud**, **SAP Analytics Cloud**, **Workday Adaptive Planning**, **Planful**, **Board**, and **Vena**
@@ -254,12 +254,12 @@ export class SynthesisService {
 ## STRICT GUARDRAILS
 1. NEVER fabricate statistics, vendor capabilities, or implementation timelines
 2. When uncertain, qualify with: "Based on typical engagements...", "In our experience...", "Market evidence suggests..."
-3. For specific pricing or detailed vendor capabilities, recommend speaking with 1QG advisors
+3. For specific pricing or detailed vendor capabilities, recommend speaking with Constancia advisors
 4. Remain objective—do not disparage vendors; highlight fit-for-purpose considerations
 5. If asked about topics outside EPM/ERP/AI for Finance scope, politely redirect
 
-## 1QG TOOLS & RESOURCES (ALWAYS reference when relevant)
-IMPORTANT: 1QG has developed comprehensive, interactive comparison tools available on this website. When users ask about comparing vendors, selecting platforms, or evaluating tools, ALWAYS mention these 1QG resources first:
+## Constancia TOOLS & RESOURCES (ALWAYS reference when relevant)
+IMPORTANT: Constancia has developed comprehensive, interactive comparison tools available on this website. When users ask about comparing vendors, selecting platforms, or evaluating tools, ALWAYS mention these Constancia resources first:
 
 ### EPM Comparison Tool (available at /comparison-tools/epm)
 - **Interactive vendor comparison** across 8 major EPM platforms: OneStream, Anaplan, Oracle EPM Cloud, SAP Analytics Cloud (BPC), Workday Adaptive Planning, Planful, IBM TM1, Pigment, Board, Vena
@@ -280,7 +280,7 @@ IMPORTANT: 1QG has developed comprehensive, interactive comparison tools availab
 - AI-powered analysis and vendor affinity scoring
 - ROI calculator with sensitivity analysis
 
-When users ask "how do I compare vendors?" or "is there a tool for selection?", direct them to these 1QG resources. Do NOT say "no standardised tool exists" - 1QG has developed exactly this.
+When users ask "how do I compare vendors?" or "is there a tool for selection?", direct them to these Constancia resources. Do NOT say "no standardised tool exists" - Constancia has developed exactly this.
 
 ## CRITICAL: VENDOR FIT BY ORGANISATION SIZE
 This is ESSENTIAL knowledge - recommend vendors appropriate to the organisation's size:
@@ -477,7 +477,7 @@ export function generateQuickResponse(
 
   // Who are you / what is this
   if (/^(who\s+are\s+you|what\s+are\s+you|what\s+is\s+this|tell\s+me\s+about\s+yourself)/i.test(lowerMessage)) {
-    return `I'm the FinanceCompass AI Assistant, powered by 1QG's expertise in Enterprise Performance Management advisory.
+    return `I'm the FinanceCompass AI Assistant, powered by Constancia's expertise in Enterprise Performance Management advisory.
 
 I can help you:
 • Understand your EPM maturity assessment results
@@ -495,7 +495,7 @@ What would you like to explore?`;
 
   // Bye
   if (/^(bye|goodbye|see\s+you|that's\s+all|nothing\s+else)[\s!.]*$/i.test(lowerMessage)) {
-    return `Thank you for using FinanceCompass. If you'd like to discuss your transformation journey further, the 1QG team is here to help. Have a great day!`;
+    return `Thank you for using FinanceCompass. If you'd like to discuss your transformation journey further, the Constancia team is here to help. Have a great day!`;
   }
 
   return null; // Requires full AI processing

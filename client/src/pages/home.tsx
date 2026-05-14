@@ -26,7 +26,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background overflow-x-hidden" style={{ fontFamily: 'var(--hp-font-sans)' }}>
       <SEOHead
-        title="1QG | Independent Enterprise Performance Management Advisory"
+        title="Constancia | Independent Enterprise Performance Management Advisory"
         description="Independent Enterprise Performance Management advisory for finance leaders. Platform selection, transformation planning, and AI readiness from senior practitioners."
         keywords={[
           "Enterprise Performance Management",

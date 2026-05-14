@@ -70,7 +70,7 @@ export async function sendContactFormNotification(submission: {
       `New Contact Form Submission from ${submission.firstName} ${submission.lastName}`,
       `
         <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          ${generateNotificationHeader({ title: 'New Contact Form Submission', subtitle: '1QG Website' })}
+          ${generateNotificationHeader({ title: 'New Contact Form Submission', subtitle: 'Constancia Website' })}
           
           ${generateInfoCard(contactDetailsTable)}
           ${messageSection}
@@ -78,7 +78,7 @@ export async function sendContactFormNotification(submission: {
           <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
           
           <p style="color: ${EMAIL_BRAND.mutedGray}; font-size: 12px; text-align: center;">
-            This notification was sent from the 1QG website contact form.
+            This notification was sent from the Constancia website contact form.
             <br>
             Submitted: ${new Date().toLocaleString('en-GB', { dateStyle: 'full', timeStyle: 'short' })}
           </p>
@@ -95,7 +95,7 @@ export async function sendContactFormNotification(submission: {
 
 export async function sendContactVerificationEmail(to: string, firstName: string, token: string): Promise<boolean> {
   try {
-    const baseUrl = process.env.BASE_URL || 'https://1qg.com';
+    const baseUrl = process.env.BASE_URL || 'https://constancia.io';
     const verificationLink = `${baseUrl}/api/contact/verify?token=${token}`;
     
     const header = generateEmailHeader({ variant: 'dark' });
@@ -104,7 +104,7 @@ export async function sendContactVerificationEmail(to: string, firstName: string
       <p style="color: ${EMAIL_BRAND.darkGray}; font-size: 16px; margin: 0 0 20px 0;">Hi ${escapeHtml(firstName)},</p>
       
       <p style="color: ${EMAIL_BRAND.darkGray}; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
-        Thank you for contacting 1QG. Please verify your email address to confirm your enquiry.
+        Thank you for contacting Constancia. Please verify your email address to confirm your enquiry.
       </p>
       
       ${generateCtaButton('Verify Email Address', verificationLink)}
@@ -127,7 +127,7 @@ export async function sendContactVerificationEmail(to: string, firstName: string
     
     await sendEmailViaGraph(
       to,
-      `Verify your email - 1QG Contact`,
+      `Verify your email - Constancia Contact`,
       generateEmailWrapper(header, body, footer)
     );
 
@@ -146,7 +146,7 @@ export async function sendOtpEmail(email: string, firstName: string, otp: string
       <p style="color: ${EMAIL_BRAND.darkGray}; font-size: 16px; margin: 0 0 20px 0;">Hi ${escapeHtml(firstName)},</p>
       
       <p style="color: ${EMAIL_BRAND.darkGray}; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
-        Thank you for your interest in 1QG resources. Please use the following code to access your download:
+        Thank you for your interest in Constancia resources. Please use the following code to access your download:
       </p>
       
       ${generateOtpBox(otp)}
@@ -158,7 +158,7 @@ export async function sendOtpEmail(email: string, firstName: string, otp: string
     
     await sendEmailViaGraph(
       email,
-      "Your 1QG Resource Access Code",
+      "Your Constancia Resource Access Code",
       generateEmailWrapper(header, body, footer)
     );
 
@@ -263,7 +263,7 @@ export async function sendLeadVerificationNotification(lead: {
           <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
           
           <p style="color: ${EMAIL_BRAND.mutedGray}; font-size: 12px; text-align: center;">
-            This notification was sent automatically from the 1QG website.
+            This notification was sent automatically from the Constancia website.
             <br>
             Verified: ${new Date().toLocaleString('en-GB', { dateStyle: 'full', timeStyle: 'short' })}
           </p>
@@ -333,7 +333,7 @@ export async function syncLeadToHubSpot(lead: HubSpotLeadData): Promise<{ succes
   }
 
   const messageLines: string[] = [];
-  messageLines.push("Source: 1QG Website Resource Download");
+  messageLines.push("Source: Constancia Website Resource Download");
   messageLines.push(`Newsletter: ${lead.subscribeNewsletter !== false ? 'Yes' : 'No'}`);
   
   if (lead.resourceId) messageLines.push(`Resource: ${lead.resourceId}`);

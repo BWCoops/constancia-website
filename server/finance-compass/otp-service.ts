@@ -193,7 +193,7 @@ export async function sendFcOtpEmail(email: string, firstName: string, otp: stri
           
           <p style="color: #888; font-size: 12px; text-align: center;">
             If you didn't request this code, please ignore this email.<br>
-            &copy; 1QG Ltd. All rights reserved.
+            &copy; Constancia Ltd. All rights reserved.
           </p>
         </div>
       </div>

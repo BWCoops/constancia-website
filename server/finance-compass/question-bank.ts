@@ -2111,7 +2111,7 @@ export const FULL_ASSESSMENT_QUESTIONS: QuestionDefinition[] = [
     order: 44,
     questionType: "single_select",
     questionText: "How many manual adjustments/journal entries are required to close each month?",
-    helpText: "1QG benchmark is <25 adjustments. High counts indicate data quality issues and can represent 5-10 FTE in rework.",
+    helpText: "Constancia benchmark is <25 adjustments. High counts indicate data quality issues and can represent 5-10 FTE in rework.",
     required: true,
     options: [
       { value: "very_high", label: "100+ manual adjustments" },

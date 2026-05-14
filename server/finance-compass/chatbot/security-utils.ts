@@ -203,9 +203,9 @@ export function sanitiseApiResponse(response: string): string {
   sanitised = sanitised.replace(
     /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/gi,
     (match) => {
-      // Don't redact common example emails or 1QG contact
+      // Don't redact common example emails or Constancia contact
       if (match.toLowerCase().includes('example') || 
-          match.toLowerCase() === 'info@1qg.com') {
+          match.toLowerCase() === 'info@constancia.io') {
         return match;
       }
       return '[EMAIL_REDACTED]';

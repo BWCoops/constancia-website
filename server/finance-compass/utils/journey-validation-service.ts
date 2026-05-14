@@ -61,7 +61,7 @@ const STRICT_VALIDATION_RULES = {
   noScoresOver100: true,
 };
 
-const ADMIN_EMAIL_RECIPIENTS = ['admin@1qg.com', 'support@1qg.com'];
+const ADMIN_EMAIL_RECIPIENTS = ['admin@constancia.io', 'support@constancia.io'];
 
 // ============================================
 // VALIDATION RESULT TYPES
@@ -676,7 +676,7 @@ await storage.fcAssessments.update("${validationResult.assessmentId}", {
   
   <div class="footer">
     <p>This is an automated message from the FinanceCompass Validation System</p>
-    <p>© 2026 1QG Ltd. All rights reserved.</p>
+    <p>© 2026 Constancia Ltd. All rights reserved.</p>
   </div>
 </body>
 </html>`;

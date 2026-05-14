@@ -780,17 +780,17 @@ export default function BlogPostPage() {
           },
           "publisher": {
             "@type": "Organization",
-            "name": "1QG",
+            "name": "Constancia",
             "logo": {
               "@type": "ImageObject",
-              "url": "https://1qg.com/logo.png"
+              "url": "https://constancia.io/logo.png"
             }
           },
           "datePublished": post.publishedAt,
           "dateModified": post.publishedAt,
           "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": `https://1qg.com/blog/${post.slug}`
+            "@id": `https://constancia.io/blog/${post.slug}`
           }
         })
       }} />

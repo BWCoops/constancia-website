@@ -325,9 +325,9 @@ const industries = [
 
 const rankingSources = [
   {
-    name: '1QG Industry Experience',
+    name: 'Constancia Industry Experience',
     year: 2025,
-    description: 'Scores, fit recommendations, and vendor comparisons are based on 1QG consultant experience and publicly available information.',
+    description: 'Scores, fit recommendations, and vendor comparisons are based on Constancia consultant experience and publicly available information.',
     isPrimary: true
   },
   {
@@ -4403,10 +4403,10 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                       <div className="bg-muted/50 rounded-lg p-4 mb-4">
                         <h5 className="font-medium text-sm mb-2 flex items-center gap-2">
                           <Shield className="w-4 h-4 text-brand-teal" />
-                          1QG Independent Assessment
+                          Constancia Independent Assessment
                         </h5>
                         <p className="text-xs text-muted-foreground">
-                          Scores, fit recommendations, and vendor comparisons are based on 1QG consultant experience 
+                          Scores, fit recommendations, and vendor comparisons are based on Constancia consultant experience 
                           and publicly available information including analyst reports and vendor materials.
                         </p>
                       </div>
@@ -5495,7 +5495,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                       
                       <div className="pt-2 border-t">
                         <p className="text-xs text-muted-foreground italic">
-                          Scores based on 1QG consulting experience and publicly available information. 
+                          Scores based on Constancia consulting experience and publicly available information. 
                           These assessments should be validated through vendor demonstrations and proof-of-concept evaluations.
                         </p>
                       </div>
@@ -6725,7 +6725,7 @@ export default function TechComparisonPage() {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="Enterprise Technology Comparison Tool | 1QG - Compare EPM, ERP & AI Solutions"
+        title="Enterprise Technology Comparison Tool | Constancia - Compare EPM, ERP & AI Solutions"
         description="Compare EPM platforms like OneStream, Anaplan, and Pigment side by side. Filter by requirements, view detailed scoring, and export analysis for your evaluation."
         keywords={["EPM comparison", "ERP comparison", "AI for finance", "OneStream vs Anaplan", "Oracle ERP", "SAP S/4HANA", "Microsoft Copilot", "financial technology"]}
       />

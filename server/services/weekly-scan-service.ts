@@ -12,8 +12,8 @@ const log = createChildLogger("weekly-scan");
 const MS_GRAPH_CLIENT_ID = process.env.MS_GRAPH_CLIENT_ID;
 const MS_GRAPH_CLIENT_SECRET = process.env.MS_GRAPH_CLIENT_SECRET;
 const MS_GRAPH_TENANT_ID = process.env.MS_GRAPH_TENANT_ID;
-const SENDER_EMAIL = "info@1qg.com";
-const ADMIN_EMAILS = ["grant.vanwyk@1qg.com", "bradley.cooper@1qg.com"];
+const SENDER_EMAIL = "info@constancia.io";
+const ADMIN_EMAILS = ["grant.vanwyk@constancia.io", "bradley.cooper@constancia.io"];
 
 interface ScanSummary {
   totalBlogs: number;
@@ -214,10 +214,10 @@ async function sendScanReportEmail(summary: ScanSummary): Promise<{ success: boo
   const criticalCount = summary.severeIssues.filter(i => i.severity === "critical").length;
 
   const subject = hasSevereIssues
-    ? `[${criticalCount > 0 ? "CRITICAL" : "WARNING"}] 1QG Weekly Content Scan Report - ${new Date().toLocaleDateString("en-GB")}`
-    : `1QG Weekly Content Scan Report - ${new Date().toLocaleDateString("en-GB")}`;
+    ? `[${criticalCount > 0 ? "CRITICAL" : "WARNING"}] Constancia Weekly Content Scan Report - ${new Date().toLocaleDateString("en-GB")}`
+    : `Constancia Weekly Content Scan Report - ${new Date().toLocaleDateString("en-GB")}`;
 
-  const adminBaseUrl = process.env.REPLIT_DOMAINS?.split(",")[0] || "https://1qg.com";
+  const adminBaseUrl = process.env.REPLIT_DOMAINS?.split(",")[0] || "https://constancia.io";
   
   const severeIssuesHtml = summary.severeIssues.length > 0 ? `
     <div style="background: #FEE2E2; border-left: 4px solid #DC2626; padding: 16px; margin: 16px 0; border-radius: 4px;">
@@ -367,7 +367,7 @@ async function sendScanReportEmail(summary: ScanSummary): Promise<{ success: boo
       
       <div style="background: #02205B; padding: 16px; border-radius: 0 0 8px 8px; text-align: center;">
         <p style="color: #9CA3AF; margin: 0; font-size: 12px;">
-          This is an automated report from the 1QG Admin Centre.
+          This is an automated report from the Constancia Admin Centre.
           <br />Questions? Contact the development team.
         </p>
       </div>

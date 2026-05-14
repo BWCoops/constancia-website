@@ -45,7 +45,7 @@ const dataSourceCategories = [
   },
   {
     id: "proprietary",
-    name: "1QG Analysis & Methodology",
+    name: "Constancia Analysis & Methodology",
     icon: Award,
     description: "Our proprietary analysis built on 40+ years of combined consulting experience",
     sources: BENCHMARK_SOURCES.filter(s => s.type === "proprietary"),
@@ -128,8 +128,8 @@ const maturityLevels = [
 
 const benchmarkTiers = [
   { tier: "typical", label: "Typical", description: "Median performance (P50) - where most organisations operate", color: "text-slate-600 dark:text-slate-400" },
-  { tier: "1qg_good", label: "1QG Good", description: "Top quartile (P75) - what good looks like in modern finance", color: "text-cyan-600 dark:text-cyan-400" },
-  { tier: "1qg_best", label: "1QG Best", description: "Digital world class (P90+) - aspirational excellence", color: "text-teal-600 dark:text-teal-400" },
+  { tier: "1qg_good", label: "Constancia Good", description: "Top quartile (P75) - what good looks like in modern finance", color: "text-cyan-600 dark:text-cyan-400" },
+  { tier: "1qg_best", label: "Constancia Best", description: "Digital world class (P90+) - aspirational excellence", color: "text-teal-600 dark:text-teal-400" },
 ];
 
 export default function FinanceCompassMethodology() {
@@ -140,8 +140,8 @@ export default function FinanceCompassMethodology() {
   return (
     <>
       <SEOHead
-        title="Benchmarking Methodology | FinanceCompass | 1QG"
-        description="How 1QG builds accurate finance benchmarks using UK government data. Full transparency into our scoring methodology, data sources, and calculations."
+        title="Benchmarking Methodology | FinanceCompass | Constancia"
+        description="How Constancia builds accurate finance benchmarks using UK government data. Full transparency into our scoring methodology, data sources, and calculations."
         canonicalUrl="/finance-compass/methodology"
       />
       <Navigation />
@@ -467,7 +467,7 @@ export default function FinanceCompassMethodology() {
                     <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center">
                       <Calculator className="w-4 h-4 text-white" />
                     </div>
-                    <CardTitle className="text-lg">1QG Insights + APQC</CardTitle>
+                    <CardTitle className="text-lg">Constancia Insights + APQC</CardTitle>
                   </div>
                 </CardHeader>
                 <CardContent>
@@ -548,7 +548,7 @@ export default function FinanceCompassMethodology() {
                 7 Assessment Dimensions
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                The 1QG Finance Transformation Framework assesses your organisation across 7 key dimensions,
+                The Constancia Finance Transformation Framework assesses your organisation across 7 key dimensions,
                 each contributing to your overall finance transformation readiness score.
               </p>
             </motion.div>
@@ -621,9 +621,9 @@ export default function FinanceCompassMethodology() {
                     How do you calculate the benchmark ranges?
                   </AccordionTrigger>
                   <AccordionContent className="text-muted-foreground">
-                    Our 1QG analysis team aggregates data from multiple government sources, applying statistical analysis 
-                    to derive percentile ranges. "Typical" represents median (P50) performance, "1QG Good" represents top 
-                    quartile (P75), and "1QG Best" represents digital world class (P90+). These ranges are validated 
+                    Our Constancia analysis team aggregates data from multiple government sources, applying statistical analysis 
+                    to derive percentile ranges. "Typical" represents median (P50) performance, "Constancia Good" represents top 
+                    quartile (P75), and "Constancia Best" represents digital world class (P90+). These ranges are validated 
                     against our 40+ years of combined consulting experience working with UK enterprises.
                   </AccordionContent>
                 </AccordionItem>

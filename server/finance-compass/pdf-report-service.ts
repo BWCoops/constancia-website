@@ -275,7 +275,7 @@ function buildDocumentDefinition(data: ReportData): TDocumentDefinitions {
       return {
         columns: [
           { 
-            text: "1QG Finance Transformation Advisors", 
+            text: "Constancia Finance Transformation Advisors", 
             style: "footer", 
             width: "*",
             margin: [160, 0, 0, 0],
@@ -1396,7 +1396,7 @@ function buildAppendix(data: ReportData): Content[] {
         width: "50%",
         stack: [
           { text: "Methodology", style: "sectionTitle" },
-          { text: "The 1QG Finance Technology & Maturity Assessment utilises a proprietary 8-dimension maturity model developed from best practices across 200+ finance transformation programmes.", style: "body", margin: [0, 0, 0, 10] },
+          { text: "The Constancia Finance Technology & Maturity Assessment utilises a proprietary 8-dimension maturity model developed from best practices across 200+ finance transformation programmes.", style: "body", margin: [0, 0, 0, 10] },
           { text: "Each dimension is scored using weighted criteria aligned to industry benchmarks and validated through client interviews and document review.", style: "body", margin: [0, 0, 0, 10] },
           { text: "Scoring Framework", style: "sectionTitle", margin: [0, 10, 0, 6] },
           buildScoringTable(),
@@ -1457,7 +1457,7 @@ function buildAppendix(data: ReportData): Content[] {
       {
         width: "50%",
         stack: [
-          { text: "1QG Engagement Options", style: "sectionTitle" },
+          { text: "Constancia Engagement Options", style: "sectionTitle" },
           buildEngagementOption("Discovery Workshop", "Half-day session to deep-dive into findings and co-develop improvement roadmap"),
           buildEngagementOption("Transformation Programme", "End-to-end programme management for EPM and ERP implementations"),
           buildEngagementOption("Advisory Retainer", "Ongoing strategic advice and programme governance support"),
@@ -1479,9 +1479,9 @@ function buildAppendix(data: ReportData): Content[] {
           {
             width: "50%",
             stack: [
-              { text: "CONTACT 1QG", style: { fontSize: 10, bold: true, color: BRAND_COLORS.darkNavy } },
-              { text: "info@1qg.com", style: { fontSize: 10, color: BRAND_COLORS.teal }, margin: [0, 4, 0, 0] },
-              { text: "https://1qg.com", style: { fontSize: 10, color: BRAND_COLORS.teal } },
+              { text: "CONTACT Constancia", style: { fontSize: 10, bold: true, color: BRAND_COLORS.darkNavy } },
+              { text: "info@constancia.io", style: { fontSize: 10, color: BRAND_COLORS.teal }, margin: [0, 4, 0, 0] },
+              { text: "https://constancia.io", style: { fontSize: 10, color: BRAND_COLORS.teal } },
               { text: "linkedin.com/company/1qg-group-limited", style: { fontSize: 10, color: BRAND_COLORS.teal } },
               { text: "86-90 Paul Street, London, UK", style: { fontSize: 10, color: BRAND_COLORS.darkGray }, margin: [0, 4, 0, 0] },
             ],

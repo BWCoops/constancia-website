@@ -2,7 +2,7 @@ import { ArrowRight, CheckCircle2, Target } from "@/lib/icons";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { useFeatureFlags } from "@/lib/feature-flags";
-import logoWhite from "@assets/1QG-TypeLogo-320.png";
+import logoWhite from "@assets/Constancia-TypeLogo-320.png";
 import { HeroParticleCanvas } from "@/components/home/HeroParticleCanvas";
 
 export function HeroSectionStatic() {
@@ -42,7 +42,7 @@ export function HeroSectionStatic() {
         <div className="mb-6">
           <img
             src={logoWhite}
-            alt="1QG"
+            alt="Constancia"
             className="h-10 md:h-12 w-auto mx-auto opacity-90"
             loading="eager"
             {...{ fetchpriority: "high" } as React.ImgHTMLAttributes<HTMLImageElement>}

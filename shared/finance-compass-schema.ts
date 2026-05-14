@@ -2,7 +2,7 @@
  * FinanceCompass - Finance Transformation Assessment Platform
  * 
  * RINGFENCED SCHEMA - This module is designed to be deployed independently
- * from the main 1QG website. All tables are prefixed with 'fc_' for isolation.
+ * from the main Constancia website. All tables are prefixed with 'fc_' for isolation.
  * 
  * Version: 1.0
  * Platform Name: FinanceCompass
@@ -910,7 +910,7 @@ export const FC_DIMENSION_DEFINITIONS = {
       1: "Annual budget only, manual spreadsheet processes",
       2: "Quarterly reforecasts with some automation",
       3: "Monthly rolling forecasts, structured processes",
-      4: "Weekly rolling forecasts, AI-assisted analysis (1QG Good)",
+      4: "Weekly rolling forecasts, AI-assisted analysis (Constancia Good)",
       5: "Continuous real-time forecasting with autonomous AI agents"
     }
   },
@@ -924,7 +924,7 @@ export const FC_DIMENSION_DEFINITIONS = {
       1: "Static monthly reports, manual compilation",
       2: "Standardised reports with basic automation",
       3: "Interactive dashboards with drill-down",
-      4: "Real-time dashboards with automated alerts (1QG Good)",
+      4: "Real-time dashboards with automated alerts (Constancia Good)",
       5: "AI-powered self-service with proactive insights"
     }
   },
@@ -938,7 +938,7 @@ export const FC_DIMENSION_DEFINITIONS = {
       1: "Manual close processes, extended timelines",
       2: "Basic automation, some standardization",
       3: "Workflow automation, structured close calendar",
-      4: "Accelerated close with intelligent routing (1QG Good)",
+      4: "Accelerated close with intelligent routing (Constancia Good)",
       5: "Continuous close with agentic AI handling exceptions"
     }
   },
@@ -952,7 +952,7 @@ export const FC_DIMENSION_DEFINITIONS = {
       1: "Manual controls, periodic testing",
       2: "Documented controls with scheduled reviews",
       3: "Automated key controls, risk-based testing",
-      4: "Continuous monitoring with real-time alerts (1QG Good)",
+      4: "Continuous monitoring with real-time alerts (Constancia Good)",
       5: "AI-powered predictive risk management and autonomous compliance"
     }
   },
@@ -966,7 +966,7 @@ export const FC_DIMENSION_DEFINITIONS = {
       1: "Legacy systems, manual integrations",
       2: "Modern ERP with basic integrations",
       3: "Cloud-based systems with standard APIs",
-      4: "Unified platform with embedded analytics (1QG Good)",
+      4: "Unified platform with embedded analytics (Constancia Good)",
       5: "AI-native platform with agentic automation capabilities"
     }
   },
@@ -980,7 +980,7 @@ export const FC_DIMENSION_DEFINITIONS = {
       1: "Transactional focus, limited business interaction",
       2: "Some business partnering, developing skills",
       3: "Established business partnering model",
-      4: "Strategic advisors with strong digital skills (1QG Good)",
+      4: "Strategic advisors with strong digital skills (Constancia Good)",
       5: "AI-augmented teams driving strategic value creation"
     }
   },
@@ -994,7 +994,7 @@ export const FC_DIMENSION_DEFINITIONS = {
       1: "Fragmented data, poor quality, no governance",
       2: "Basic data standards, some governance",
       3: "Unified data model, established governance",
-      4: "Analytics centre of excellence, advanced BI (1QG Good)",
+      4: "Analytics centre of excellence, advanced BI (Constancia Good)",
       5: "AI-ready data fabric with autonomous quality management"
     }
   },
@@ -1941,7 +1941,7 @@ export type InsertFcIndustryBenchmark = z.infer<typeof insertFcIndustryBenchmark
 export type FcIndustryBenchmark = typeof fcIndustryBenchmarks.$inferSelect;
 
 // ============================================
-// BENCHMARKING ENGINE - ASSESSMENT BENCHMARKS (Proprietary 1QG Data)
+// BENCHMARKING ENGINE - ASSESSMENT BENCHMARKS (Proprietary Constancia Data)
 // ============================================
 
 export const fcAssessmentBenchmarks = pgTable("fc_assessment_benchmarks", {

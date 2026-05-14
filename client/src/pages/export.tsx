@@ -119,7 +119,7 @@ export default function ExportPage() {
             WordPress Export
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Download the complete 1QG WordPress theme and content to install on your WordPress site at 1qg.com
+            Download the complete Constancia WordPress theme and content to install on your WordPress site at constancia.io
           </p>
         </div>
 
@@ -134,7 +134,7 @@ export default function ExportPage() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Palette className="w-5 h-5 text-primary" />
-                  1QG WordPress Theme
+                  Constancia WordPress Theme
                 </CardTitle>
                 <CardDescription>
                   Complete WordPress theme matching the current site design, ready to install.
@@ -299,7 +299,7 @@ export default function ExportPage() {
               <ol className="space-y-3 text-muted-foreground">
                 <li className="flex gap-3">
                   <span className="font-semibold text-primary">1.</span>
-                  Install the 1QG theme first (see WordPress Theme tab)
+                  Install the Constancia theme first (see WordPress Theme tab)
                 </li>
                 <li className="flex gap-3">
                   <span className="font-semibold text-primary">2.</span>
@@ -361,7 +361,7 @@ export default function ExportPage() {
               </li>
               <li className="flex items-center gap-2">
                 <Check className="w-4 h-4 text-green-500" />
-                1QG brand colours and styling
+                Constancia brand colours and styling
               </li>
             </ul>
           </CardContent>

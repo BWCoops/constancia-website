@@ -862,7 +862,7 @@ publicRouter.post("/verify-otp", checkBetaAccessByContactIdMiddleware, async (re
           log.warn({ email: redactEmail(contact.email) }, "HubSpot sync failed, will send email fallback");
         }
         
-        // Always send email notification to 1QG team as primary notification (and HubSpot fallback)
+        // Always send email notification to Constancia team as primary notification (and HubSpot fallback)
         try {
           // Send detailed FinanceCompass lead notification email
           const prioritiesText = priorities.length > 0 
@@ -870,7 +870,7 @@ publicRouter.post("/verify-otp", checkBetaAccessByContactIdMiddleware, async (re
             : "None specified";
             
           await sendEmailViaGraph({
-            to: "info@1qg.com",
+            to: "info@constancia.io",
             subject: `New FinanceCompass Lead: ${contact.firstName} ${contact.lastName} from ${companyName}`,
             htmlContent: `
               <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
@@ -2533,8 +2533,8 @@ async function runAnalysisAsync(
               
               <p style="color: #888; font-size: 12px; text-align: center;">
                 Need help interpreting your results? Our expert consultants are here to help.<br>
-                <a href="mailto:info@1qg.com" style="color: #0884AA;">Contact us</a> to schedule a consultation.<br><br>
-                &copy; 1QG Ltd. All rights reserved.
+                <a href="mailto:info@constancia.io" style="color: #0884AA;">Contact us</a> to schedule a consultation.<br><br>
+                &copy; Constancia Ltd. All rights reserved.
               </p>
             </div>
           </div>
@@ -4149,7 +4149,7 @@ publicRouter.post("/assessments/:id/narratives/regenerate", async (req: Request,
           try {
             const logoBase64 = getLogoTurquoise();
             const companyName = company?.name || "Your Company";
-            const resultsUrl = `${process.env.REPLIT_DEV_DOMAIN ? `https://${process.env.REPLIT_DEV_DOMAIN}` : 'https://1qg.com'}/finance-compass/results/${id}`;
+            const resultsUrl = `${process.env.REPLIT_DEV_DOMAIN ? `https://${process.env.REPLIT_DEV_DOMAIN}` : 'https://constancia.io'}/finance-compass/results/${id}`;
             
             const emailHtml = `
 <!DOCTYPE html>
@@ -4166,7 +4166,7 @@ publicRouter.post("/assessments/:id/narratives/regenerate", async (req: Request,
           <!-- Header -->
           <tr>
             <td style="background: linear-gradient(135deg, #02205B 0%, #0884AA 100%); padding: 30px 40px; border-radius: 8px 8px 0 0;">
-              <img src="${logoBase64}" alt="1QG" style="height: 40px; width: auto;" />
+              <img src="${logoBase64}" alt="Constancia" style="height: 40px; width: auto;" />
             </td>
           </tr>
           
@@ -4208,10 +4208,10 @@ publicRouter.post("/assessments/:id/narratives/regenerate", async (req: Request,
           <tr>
             <td style="background-color: #02205B; padding: 20px 40px; border-radius: 0 0 8px 8px;">
               <p style="color: #FEFFF3; font-size: 12px; margin: 0; text-align: center;">
-                © ${new Date().getFullYear()} 1QG Group. All rights reserved.
+                © ${new Date().getFullYear()} Constancia Group. All rights reserved.
               </p>
               <p style="color: #0884AA; font-size: 12px; margin: 10px 0 0 0; text-align: center;">
-                <a href="https://1qg.com" style="color: #12EBFC; text-decoration: none;">1qg.com</a>
+                <a href="https://constancia.io" style="color: #12EBFC; text-decoration: none;">constancia.io</a>
               </p>
             </td>
           </tr>
@@ -4777,9 +4777,9 @@ publicRouter.get("/assessments/:id/score-breakdown", async (req: Request, res: R
         tier: assessment.tier,
         dimensions: dimensionBreakdowns,
         methodology: {
-          description: "Your scores are calculated using 1QG's proprietary Finance Transformation Framework with a 6-layer AI-validated scoring system, developed with 40+ years of combined finance transformation experience.",
-          benchmarkSource: "1QG Benchmark Database",
-          benchmarkDescription: "Industry benchmarks are derived from anonymised data across 1QG's client base, segmented by sector, company size, and finance function maturity. Our benchmarks are refreshed quarterly to reflect evolving best practices.",
+          description: "Your scores are calculated using Constancia's proprietary Finance Transformation Framework with a 6-layer AI-validated scoring system, developed with 40+ years of combined finance transformation experience.",
+          benchmarkSource: "Constancia Benchmark Database",
+          benchmarkDescription: "Industry benchmarks are derived from anonymised data across Constancia's client base, segmented by sector, company size, and finance function maturity. Our benchmarks are refreshed quarterly to reflect evolving best practices.",
           assessmentStructure: {
             description: "Your final report combines insights from both assessment tiers to provide a comprehensive view of your finance transformation readiness.",
             tiers: [
@@ -4835,7 +4835,7 @@ publicRouter.get("/assessments/:id/score-breakdown", async (req: Request, res: R
             ]
           },
           framework: {
-            name: "1QG Finance Transformation Framework",
+            name: "Constancia Finance Transformation Framework",
             dimensions: [
               { code: "D1", name: "Financial Planning & Analysis", description: "Budgeting, forecasting, scenario planning capabilities" },
               { code: "D2", name: "Management Reporting", description: "Report quality, timeliness, and insight generation" },
@@ -4854,8 +4854,8 @@ publicRouter.get("/assessments/:id/score-breakdown", async (req: Request, res: R
             ],
             benchmarkTiers: [
               { tier: "Typical", description: "Baseline/median performance across UK enterprises" },
-              { tier: "1QG Good", description: "Top quartile - what good looks like" },
-              { tier: "1QG Best", description: "Digital world-class performance" },
+              { tier: "Constancia Good", description: "Top quartile - what good looks like" },
+              { tier: "Constancia Best", description: "Digital world-class performance" },
             ],
           },
           weightingSystem: {

@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { ShieldCheckIcon } from "lucide-react";
-import logo from "@assets/1QG-TypeLogo-320.png";
+import logo from "@assets/Constancia-TypeLogo-320.png";
 
 export default function AdminSecurityMfaVerify() {
   const [_location, setLocation] = useLocation();
@@ -63,7 +63,7 @@ export default function AdminSecurityMfaVerify() {
     <div className="min-h-screen bg-gradient-to-br from-[#02205B] to-[#0d4a7c] flex items-center justify-center p-4">
       <Card className="w-full max-w-md p-8 bg-white shadow-2xl">
         <div className="flex justify-center mb-8">
-          <img src={logo} alt="1QG" className="h-12" />
+          <img src={logo} alt="Constancia" className="h-12" />
         </div>
 
         <h1 className="text-2xl font-bold text-center mb-2 text-[#02205B]">Two-Factor Authentication</h1>

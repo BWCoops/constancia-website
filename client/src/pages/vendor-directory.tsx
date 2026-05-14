@@ -462,7 +462,7 @@ export default function VendorDirectoryPage() {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="Independent Platform Profiles | 1QG - EPM, ERP & AI Vendor Directory"
+        title="Independent Platform Profiles | Constancia - EPM, ERP & AI Vendor Directory"
         description="Explore 49 independent platform profiles across EPM, ERP and AI for Finance. Objective analysis with no vendor bias, built for buyers evaluating finance technology."
         keywords={[
           "EPM vendor comparison",

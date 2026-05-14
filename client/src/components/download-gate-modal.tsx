@@ -956,7 +956,7 @@ export function DownloadGateModal({
               </div>
               <h3 className="text-lg font-semibold text-[#02205B] mb-2">Download Started!</h3>
               <p className="text-sm text-muted-foreground">
-                Your resource is downloading. Thank you for your interest in 1QG.
+                Your resource is downloading. Thank you for your interest in Constancia.
               </p>
             </motion.div>
           )}

@@ -187,12 +187,12 @@ export function drawStandardHeader(
     } catch {
       doc.setFontSize(16);
       doc.setTextColor(PDF_BRAND_COLORS.navy.hex);
-      doc.text("1QG", PDF_MARGINS.left, headerY + 4);
+      doc.text("Constancia", PDF_MARGINS.left, headerY + 4);
     }
   } else {
     doc.setFontSize(16);
     doc.setTextColor(PDF_BRAND_COLORS.navy.hex);
-    doc.text("1QG", PDF_MARGINS.left, headerY + 4);
+    doc.text("Constancia", PDF_MARGINS.left, headerY + 4);
   }
 
   // Title (right-aligned)
@@ -232,7 +232,7 @@ export function drawStandardFooter(
   doc.setFontSize(PDF_TYPOGRAPHY.sizes.footer);
   doc.setTextColor(PDF_BRAND_COLORS.teal.hex);
   doc.text(
-    `1QG  |  ${PDF_CONTACT_INFO.email}  |  ${PDF_CONTACT_INFO.website}  |  London, UK`,
+    `Constancia  |  ${PDF_CONTACT_INFO.email}  |  ${PDF_CONTACT_INFO.website}  |  London, UK`,
     PDF_MARGINS.left,
     footerY
   );

@@ -1,5 +1,5 @@
 /**
- * 1QG EPM/CPM Transformation Benchmarking Data
+ * Constancia EPM/CPM Transformation Benchmarking Data
  * 
  * Data Sources (UK Open Source):
  * - ONS (Office for National Statistics) - data.gov.uk
@@ -15,14 +15,14 @@
  * - FCA Financial Services Data
  * - Charity Commission Data
  * 
- * Analysis & Methodology: 1QG Benchmark Database
+ * Analysis & Methodology: Constancia Benchmark Database
  * - 40+ years combined consulting experience
  * - Aggregated from open source UK government data
- * - Validated against 1QG client engagements
+ * - Validated against Constancia client engagements
  * 
  * Last Updated: December 2025
  * 
- * 1QG Terminology:
+ * Constancia Terminology:
  * - "typical" = baseline/median performance (P50)
  * - "1qg_good" = top quartile, what good looks like (P75)
  * - "1qg_best" = digital world class (P90+)
@@ -107,7 +107,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 1.0, max: 1.5, mid: 1.25 },
     '1qg_good': { min: 0.6, max: 0.9, mid: 0.75 },
     '1qg_best': { min: 0.4, max: 0.7, mid: 0.54 },
-    source: '1QG Analysis (ONS Business Statistics)',
+    source: 'Constancia Analysis (ONS Business Statistics)',
     lowerIsBetter: true,
   },
   {
@@ -120,7 +120,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 800, max: 1000, mid: 900 },
     '1qg_good': { min: 400, max: 600, mid: 500 },
     '1qg_best': { min: 350, max: 450, mid: 400 },
-    source: '1QG Analysis (ONS Business Statistics)',
+    source: 'Constancia Analysis (ONS Business Statistics)',
     lowerIsBetter: true,
   },
   {
@@ -132,7 +132,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     category: 'finance_cost',
     typical: { min: 70, max: 90, mid: 80 },
     '1qg_good': { min: 55, max: 70, mid: 62 },
-    source: '1QG Analysis (UK Enterprise Data)',
+    source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: true,
   },
 
@@ -147,7 +147,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 8, max: 12, mid: 10 },
     '1qg_good': { min: 4, max: 5, mid: 4.5 },
     '1qg_best': { min: 1, max: 2, mid: 1.5 },
-    source: '1QG Analysis (ONS Business Statistics)',
+    source: 'Constancia Analysis (ONS Business Statistics)',
     lowerIsBetter: true,
   },
   {
@@ -159,7 +159,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     category: 'planning',
     typical: { min: 120, max: 150, mid: 135 },
     '1qg_good': { min: 60, max: 90, mid: 75 },
-    source: '1QG Analysis (NAO Studies)',
+    source: 'Constancia Analysis (NAO Studies)',
     lowerIsBetter: true,
   },
   {
@@ -172,7 +172,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 19, max: 30, mid: 24 },
     '1qg_good': { min: 10, max: 15, mid: 12 },
     '1qg_best': { min: 5, max: 7, mid: 6 },
-    source: '1QG Analysis (NAO Studies)',
+    source: 'Constancia Analysis (NAO Studies)',
     lowerIsBetter: true,
   },
   {
@@ -185,7 +185,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 10, max: 15, mid: 12.5 },
     '1qg_good': { min: 2, max: 4, mid: 3 },
     '1qg_best': { min: 1, max: 2, mid: 1.5 },
-    source: '1QG Analysis (ONS, Companies House)',
+    source: 'Constancia Analysis (ONS, Companies House)',
     lowerIsBetter: true,
   },
 
@@ -200,7 +200,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 80, max: 85, mid: 82.5 },
     '1qg_good': { min: 90, max: 95, mid: 92.5 },
     '1qg_best': { min: 95, max: 99, mid: 97 },
-    source: '1QG Analysis (NAO Forecasting)',
+    source: 'Constancia Analysis (NAO Forecasting)',
     lowerIsBetter: false,
   },
   {
@@ -212,7 +212,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     category: 'planning',
     typical: { min: 15, max: 25, mid: 20 },
     '1qg_good': { min: 3, max: 8, mid: 5 },
-    source: '1QG Analysis (UK Enterprise Data)',
+    source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: true,
   },
   {
@@ -224,7 +224,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 1, max: 2, mid: 1.5 },
     '1qg_good': { min: 5, max: 10, mid: 7 },
     '1qg_best': { min: 10, max: 20, mid: 15 },
-    source: '1QG Analysis (UK Enterprise Data)',
+    source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
 
@@ -238,7 +238,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 50, max: 100, mid: 75 },
     '1qg_good': { min: 10, max: 20, mid: 15 },
     '1qg_best': { min: 2, max: 5, mid: 3.5 },
-    source: '1QG Analysis (UK Enterprise Data)',
+    source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: true,
   },
   {
@@ -250,7 +250,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 2, max: 5, mid: 3.5 },
     '1qg_good': { min: 0.2, max: 0.5, mid: 0.35 },
     '1qg_best': { min: 0, max: 0.1, mid: 0.05 },
-    source: '1QG Analysis (UK Enterprise Data)',
+    source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: true,
   },
   {
@@ -261,7 +261,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     category: 'consolidation',
     typical: { min: 15, max: 30, mid: 22 },
     '1qg_good': { min: 2, max: 5, mid: 3.5 },
-    source: '1QG Analysis (UK Enterprise Data)',
+    source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: true,
   },
   {
@@ -273,7 +273,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 80, max: 120, mid: 100 },
     '1qg_good': { min: 30, max: 50, mid: 40 },
     '1qg_best': { min: 10, max: 20, mid: 15 },
-    source: '1QG Analysis (UK Enterprise Data)',
+    source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: true,
   },
 
@@ -288,7 +288,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 20, max: 40, mid: 30 },
     '1qg_good': { min: 70, max: 85, mid: 77 },
     '1qg_best': { min: 85, max: 95, mid: 90 },
-    source: '1QG Analysis (ONS Business Statistics)',
+    source: 'Constancia Analysis (ONS Business Statistics)',
     lowerIsBetter: false,
   },
   {
@@ -300,7 +300,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 120, max: 240, mid: 180 },
     '1qg_good': { min: 15, max: 30, mid: 22 },
     '1qg_best': { min: 1, max: 5, mid: 3 },
-    source: '1QG Analysis (UK Enterprise Data)',
+    source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: true,
   },
   {
@@ -312,7 +312,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 20, max: 30, mid: 25 },
     '1qg_good': { min: 60, max: 80, mid: 70 },
     '1qg_best': { min: 80, max: 95, mid: 87 },
-    source: '1QG Analysis (UK Enterprise Data)',
+    source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
   {
@@ -324,7 +324,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 72, max: 120, mid: 96 },
     '1qg_good': { min: 8, max: 24, mid: 16 },
     '1qg_best': { min: 1, max: 2, mid: 1.5 },
-    source: '1QG Analysis (UK Enterprise Data)',
+    source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: true,
   },
 
@@ -338,7 +338,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     category: 'working_capital',
     typical: { min: 35, max: 55, mid: 45 },
     '1qg_good': { min: 15, max: 25, mid: 20 },
-    source: '1QG Analysis (Companies House Data)',
+    source: 'Constancia Analysis (Companies House Data)',
     lowerIsBetter: true,
   },
   {
@@ -350,7 +350,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     category: 'working_capital',
     typical: { min: 35, max: 45, mid: 40 },
     '1qg_good': { min: 55, max: 75, mid: 65 },
-    source: '1QG Analysis (Companies House Data)',
+    source: 'Constancia Analysis (Companies House Data)',
     lowerIsBetter: false,
   },
   {
@@ -362,7 +362,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     category: 'working_capital',
     typical: { min: 45, max: 90, mid: 67 },
     '1qg_good': { min: 25, max: 35, mid: 30 },
-    source: '1QG Analysis (Companies House Data)',
+    source: 'Constancia Analysis (Companies House Data)',
     lowerIsBetter: true,
   },
   {
@@ -374,7 +374,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     category: 'working_capital',
     typical: { min: 40, max: 90, mid: 65 },
     '1qg_good': { min: 0, max: 20, mid: 10 },
-    source: '1QG Analysis (Companies House Data)',
+    source: 'Constancia Analysis (Companies House Data)',
     lowerIsBetter: true,
   },
 
@@ -388,7 +388,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     category: 'accounts_payable',
     typical: { min: 8, max: 15, mid: 11 },
     '1qg_good': { min: 2, max: 5, mid: 3.5 },
-    source: '1QG Analysis (UK Enterprise Data)',
+    source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: true,
   },
   {
@@ -399,7 +399,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     category: 'accounts_payable',
     typical: { min: 7, max: 10, mid: 8.5 },
     '1qg_good': { min: 3, max: 5, mid: 4 },
-    source: '1QG Analysis (UK Enterprise Data)',
+    source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: true,
   },
   {
@@ -410,7 +410,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     category: 'accounts_payable',
     typical: { min: 30, max: 50, mid: 40 },
     '1qg_good': { min: 80, max: 95, mid: 87 },
-    source: '1QG Analysis (UK Enterprise Data)',
+    source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
   {
@@ -421,7 +421,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     category: 'accounts_payable',
     typical: { min: 70, max: 85, mid: 77 },
     '1qg_good': { min: 95, max: 99, mid: 97 },
-    source: '1QG Analysis (UK Enterprise Data)',
+    source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
 
@@ -434,7 +434,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     category: 'accounts_receivable',
     typical: { min: 35, max: 60, mid: 47 },
     '1qg_good': { min: 20, max: 30, mid: 25 },
-    source: '1QG Analysis (UK Enterprise Data)',
+    source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: true,
   },
   {
@@ -445,7 +445,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     category: 'accounts_receivable',
     typical: { min: 40, max: 60, mid: 50 },
     '1qg_good': { min: 85, max: 95, mid: 90 },
-    source: '1QG Analysis (UK Enterprise Data)',
+    source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
   {
@@ -456,7 +456,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     category: 'accounts_receivable',
     typical: { min: 0.5, max: 2.0, mid: 1.25 },
     '1qg_good': { min: 0.1, max: 0.3, mid: 0.2 },
-    source: '1QG Analysis (UK Enterprise Data)',
+    source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: true,
   },
 
@@ -470,7 +470,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 15, max: 30, mid: 22 },
     '1qg_good': { min: 50, max: 70, mid: 60 },
     '1qg_best': { min: 70, max: 90, mid: 80 },
-    source: '1QG Analysis (ONS Digital Economy Survey)',
+    source: 'Constancia Analysis (ONS Digital Economy Survey)',
     lowerIsBetter: false,
   },
   {
@@ -482,7 +482,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 4, max: 6, mid: 5 },
     '1qg_good': { min: 7, max: 8, mid: 7.5 },
     '1qg_best': { min: 8, max: 10, mid: 9 },
-    source: '1QG Analysis (UK Enterprise Data)',
+    source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
   {
@@ -494,7 +494,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 30, max: 50, mid: 40 },
     '1qg_good': { min: 70, max: 85, mid: 77 },
     '1qg_best': { min: 85, max: 98, mid: 92 },
-    source: '1QG Analysis (ONS Digital Economy Survey)',
+    source: 'Constancia Analysis (ONS Digital Economy Survey)',
     lowerIsBetter: false,
   },
   {
@@ -506,7 +506,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 5, max: 15, mid: 10 },
     '1qg_good': { min: 25, max: 40, mid: 32 },
     '1qg_best': { min: 40, max: 60, mid: 50 },
-    source: '1QG Analysis (ONS Business Statistics)',
+    source: 'Constancia Analysis (ONS Business Statistics)',
     lowerIsBetter: false,
   },
   {
@@ -518,7 +518,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 60, max: 75, mid: 67 },
     '1qg_good': { min: 85, max: 92, mid: 88 },
     '1qg_best': { min: 92, max: 99, mid: 95 },
-    source: '1QG Analysis (UK Enterprise Data)',
+    source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
   {
@@ -530,7 +530,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 3, max: 8, mid: 5 },
     '1qg_good': { min: 0, max: 2, mid: 1 },
     '1qg_best': { min: 0, max: 0, mid: 0 },
-    source: '1QG Analysis (ONS Cyber Security Survey)',
+    source: 'Constancia Analysis (ONS Cyber Security Survey)',
     lowerIsBetter: true,
   },
 
@@ -545,7 +545,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 8, max: 15, mid: 11 },
     '1qg_good': { min: 18, max: 30, mid: 24 },
     '1qg_best': { min: 30, max: 50, mid: 40 },
-    source: '1QG Analysis (ONS Labour Productivity)',
+    source: 'Constancia Analysis (ONS Labour Productivity)',
     lowerIsBetter: false,
   },
   {
@@ -557,7 +557,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 800, max: 1500, mid: 1150 },
     '1qg_good': { min: 2500, max: 4000, mid: 3250 },
     '1qg_best': { min: 4000, max: 7000, mid: 5500 },
-    source: '1QG Analysis (UK Enterprise Data)',
+    source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
   {
@@ -569,7 +569,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 150, max: 300, mid: 225 },
     '1qg_good': { min: 500, max: 800, mid: 650 },
     '1qg_best': { min: 800, max: 1500, mid: 1150 },
-    source: '1QG Analysis (UK Enterprise Data)',
+    source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
   {
@@ -581,7 +581,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 3000, max: 5000, mid: 4000 },
     '1qg_good': { min: 8000, max: 12000, mid: 10000 },
     '1qg_best': { min: 12000, max: 20000, mid: 16000 },
-    source: '1QG Analysis (UK Enterprise Data)',
+    source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
   {
@@ -593,7 +593,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 25, max: 40, mid: 32 },
     '1qg_good': { min: 55, max: 70, mid: 62 },
     '1qg_best': { min: 70, max: 85, mid: 77 },
-    source: '1QG Analysis (ONS Business Statistics)',
+    source: 'Constancia Analysis (ONS Business Statistics)',
     lowerIsBetter: false,
   },
 
@@ -607,7 +607,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 8, max: 15, mid: 11 },
     '1qg_good': { min: 2, max: 5, mid: 3.5 },
     '1qg_best': { min: 0, max: 2, mid: 1 },
-    source: '1QG Analysis (NAO, LG Inform)',
+    source: 'Constancia Analysis (NAO, LG Inform)',
     lowerIsBetter: true,
   },
   {
@@ -619,7 +619,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 85, max: 92, mid: 88 },
     '1qg_good': { min: 95, max: 98, mid: 96 },
     '1qg_best': { min: 98, max: 100, mid: 99 },
-    source: '1QG Analysis (UK Enterprise Data)',
+    source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
   {
@@ -631,7 +631,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 90, max: 96, mid: 93 },
     '1qg_good': { min: 98, max: 100, mid: 99 },
     '1qg_best': { min: 100, max: 100, mid: 100 },
-    source: '1QG Analysis (Companies House, FCA)',
+    source: 'Constancia Analysis (Companies House, FCA)',
     lowerIsBetter: false,
   },
   {
@@ -643,7 +643,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 80, max: 90, mid: 85 },
     '1qg_good': { min: 95, max: 98, mid: 96 },
     '1qg_best': { min: 98, max: 100, mid: 99 },
-    source: '1QG Analysis (UK Enterprise Data)',
+    source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
   {
@@ -654,7 +654,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     category: 'compliance',
     typical: { min: 0.08, max: 0.15, mid: 0.11 },
     '1qg_good': { min: 0.04, max: 0.07, mid: 0.055 },
-    source: '1QG Analysis (Companies House Data)',
+    source: 'Constancia Analysis (Companies House Data)',
     lowerIsBetter: true,
   },
 
@@ -668,7 +668,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 12, max: 20, mid: 16 },
     '1qg_good': { min: 6, max: 10, mid: 8 },
     '1qg_best': { min: 3, max: 6, mid: 4.5 },
-    source: '1QG Analysis (ONS Labour Market)',
+    source: 'Constancia Analysis (ONS Labour Market)',
     lowerIsBetter: true,
   },
   {
@@ -680,7 +680,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 16, max: 30, mid: 23 },
     '1qg_good': { min: 40, max: 60, mid: 50 },
     '1qg_best': { min: 60, max: 100, mid: 80 },
-    source: '1QG Analysis (UK Enterprise Data)',
+    source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
   {
@@ -692,7 +692,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 30, max: 50, mid: 40 },
     '1qg_good': { min: 60, max: 75, mid: 67 },
     '1qg_best': { min: 75, max: 90, mid: 82 },
-    source: '1QG Analysis (UK Enterprise Data)',
+    source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
   {
@@ -704,7 +704,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 55, max: 68, mid: 61 },
     '1qg_good': { min: 72, max: 82, mid: 77 },
     '1qg_best': { min: 82, max: 92, mid: 87 },
-    source: '1QG Analysis (UK Enterprise Data)',
+    source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
   {
@@ -716,7 +716,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     typical: { min: 0.15, max: 0.25, mid: 0.2 },
     '1qg_good': { min: 0.35, max: 0.50, mid: 0.42 },
     '1qg_best': { min: 0.50, max: 0.75, mid: 0.62 },
-    source: '1QG Analysis (UK Enterprise Data)',
+    source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
 ];
@@ -1208,7 +1208,7 @@ export const INDUSTRIES: Industry[] = [
 export const BENCHMARK_SOURCES = [
   {
     id: '1qg',
-    name: '1QG Benchmark Database',
+    name: 'Constancia Benchmark Database',
     description: 'Proprietary analysis methodology with 40+ years combined consulting experience, validated against client engagements',
     url: 'https://1qg.ai/',
     type: 'proprietary' as const,

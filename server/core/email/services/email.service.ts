@@ -189,9 +189,9 @@ export class EmailService implements IEmailService {
  */
 export function createDefaultEmailConfig(overrides?: Partial<EmailConfig>): EmailConfig {
   return {
-    senderEmail: process.env.SENDER_EMAIL || 'info@1qg.com',
-    senderName: '1QG',
-    baseUrl: process.env.BASE_URL || 'https://1qg.com',
+    senderEmail: process.env.SENDER_EMAIL || 'info@constancia.io',
+    senderName: 'Constancia',
+    baseUrl: process.env.BASE_URL || 'https://constancia.io',
     otpExpiryMinutes: 10,
     ...overrides,
   };

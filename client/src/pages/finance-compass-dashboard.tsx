@@ -889,7 +889,7 @@ export default function FinanceCompassInteractiveDashboard() {
                             </div>
                             
                             <p className="text-xs text-muted-foreground italic border-t pt-3">
-                              Source: 1QG Benchmark Database, industry research, and your assessment responses. 
+                              Source: Constancia Benchmark Database, industry research, and your assessment responses. 
                               Adjust sliders above to model different scenarios.
                             </p>
                           </div>
@@ -1165,7 +1165,7 @@ export default function FinanceCompassInteractiveDashboard() {
                               )}
                               
                               <p className="text-xs text-muted-foreground italic border-t pt-3">
-                                Source: 1QG Benchmark Database, vendor capability matrices, and industry research. 
+                                Source: Constancia Benchmark Database, vendor capability matrices, and industry research. 
                                 Scores are indicative and should inform, not replace, detailed vendor evaluation.
                               </p>
                             </div>

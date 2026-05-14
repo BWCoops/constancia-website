@@ -755,7 +755,7 @@ export default function FinanceCompassAssess() {
   return (
     <>
       <SEOHead
-        title={`${tierName} | FinanceCompass | 1QG`}
+        title={`${tierName} | FinanceCompass | Constancia`}
         description="Complete your FinanceCompass assessment to receive a personalised maturity score, transformation roadmap, vendor recommendations, and ROI projections."
       />
       
