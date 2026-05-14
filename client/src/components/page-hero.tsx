@@ -1,4 +1,5 @@
-import { memo } from "react";
+import { memo, useRef } from "react";
+import { m, useScroll, useTransform } from "framer-motion";
 import { CutIcon } from "@/components/ui/cut-icon";
 import { ConstanciaMark } from "@/components/ui/constancia-mark";
 
@@ -19,9 +20,19 @@ const PageHeroComponent = ({
   description,
   children,
 }: PageHeroProps) => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const yRose   = useTransform(scrollYProgress, [0, 1], [0,  120]);
+  const yMint   = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const yMark   = useTransform(scrollYProgress, [0, 1], [0,  -60]);
+  const opacityFade = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+
   return (
     <div className="relative" style={{ fontFamily: 'var(--brand-font-sans)' }}>
-      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
+      <section ref={sectionRef} className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
         {/* Base anchor — Constancia primary-dark */}
         <div
           className="absolute inset-0"
@@ -38,26 +49,36 @@ const PageHeroComponent = ({
           aria-hidden="true"
         />
 
-        {/* Cut Icon decoration — Constancia signature dots, drifting continuously */}
-        <CutIcon
-          size={520}
-          variant="rose"
-          className="hidden md:block absolute -top-40 -right-40 opacity-[0.10] blur-[2px] pointer-events-none constancia-drift constancia-pulse"
-        />
-        <CutIcon
-          size={360}
-          variant="mint"
-          className="hidden md:block absolute -bottom-32 -left-32 opacity-[0.12] blur-[1px] pointer-events-none constancia-drift-reverse"
-        />
+        {/* Cut Icon decoration — Constancia circles drift + scroll-parallax */}
+        <m.div
+          style={{ y: yRose, opacity: opacityFade }}
+          className="hidden md:block absolute -top-40 -right-40 pointer-events-none"
+        >
+          <CutIcon
+            size={520}
+            variant="rose"
+            className="opacity-[0.16] blur-[2px] constancia-drift constancia-pulse"
+          />
+        </m.div>
+        <m.div
+          style={{ y: yMint, opacity: opacityFade }}
+          className="hidden md:block absolute -bottom-32 -left-32 pointer-events-none"
+        >
+          <CutIcon
+            size={360}
+            variant="mint"
+            className="opacity-[0.20] blur-[1px] constancia-drift-reverse"
+          />
+        </m.div>
         <CutIcon
           size={180}
           variant="rose"
-          className="hidden lg:block absolute top-[18%] right-[14%] opacity-[0.14] pointer-events-none constancia-drift-reverse"
+          className="hidden lg:block absolute top-[18%] right-[14%] opacity-[0.18] pointer-events-none constancia-drift-reverse"
         />
         <CutIcon
           size={90}
           variant="mint"
-          className="hidden lg:block absolute bottom-[24%] right-[28%] opacity-[0.18] pointer-events-none constancia-drift constancia-pulse"
+          className="hidden lg:block absolute bottom-[24%] right-[28%] opacity-[0.26] pointer-events-none constancia-drift constancia-pulse"
         />
 
         {/* Top hairline — rose tint */}
@@ -68,14 +89,18 @@ const PageHeroComponent = ({
         />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-32 text-center">
-          {/* Brand mark — two-dot Constancia signature, breathing */}
-          <div className="mb-9 reveal-up reveal-up-1 flex justify-center">
+          {/* Brand mark — overlapping-circles icon, big + interactive cursor tilt */}
+          <m.div
+            style={{ y: yMark }}
+            className="mb-10 reveal-up reveal-up-1 flex justify-center"
+          >
             <ConstanciaMark
-              size={96}
+              size={200}
+              interactive
               aria-label="Constancia"
-              className="constancia-breath"
+              className="constancia-breath drop-shadow-[0_8px_36px_rgba(199,122,147,0.16)]"
             />
-          </div>
+          </m.div>
 
           {/* Eyebrow badge */}
           <div className="reveal-up reveal-up-2 inline-flex items-center gap-2 sm:gap-2.5 px-4 sm:px-5 py-2 rounded-full bg-[#F6F3EE]/[0.05] backdrop-blur-sm border border-[#F6F3EE]/[0.10] mb-8 max-w-[90vw]">

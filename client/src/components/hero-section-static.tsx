@@ -1,5 +1,6 @@
+import { useRef } from "react";
 import { ArrowRight, CheckCircle2, Target } from "@/lib/icons";
-import { m, LazyMotion, domAnimation } from "framer-motion";
+import { m, LazyMotion, domAnimation, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { useFeatureFlags } from "@/lib/feature-flags";
@@ -19,9 +20,21 @@ const fadeUp = {
 
 export function HeroSectionStatic() {
   const { flags } = useFeatureFlags();
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Scroll-driven parallax — background CutIcon circles drift on scroll
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const yRose   = useTransform(scrollYProgress, [0, 1], [0,  140]);
+  const yMint   = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const yMark   = useTransform(scrollYProgress, [0, 1], [0,  -80]);
+  const opacityFade = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
   return (
     <section
+      ref={sectionRef}
       className="relative overflow-hidden flex items-center justify-center"
       style={{
         background: 'var(--brand-bg-primary)',
@@ -45,27 +58,37 @@ export function HeroSectionStatic() {
         aria-hidden="true"
       />
 
-      {/* Cut Icon decoration — Constancia signature dots, drifting continuously.
+      {/* Cut Icon decoration — Constancia signature circles, drifting + scroll parallax.
           Echoes the wordmark's terminal period. Visible motion, classy, low opacity. */}
-      <CutIcon
-        size={520}
-        variant="rose"
-        className="hidden md:block absolute -top-40 -right-40 opacity-[0.10] blur-[2px] pointer-events-none constancia-drift constancia-pulse"
-      />
-      <CutIcon
-        size={360}
-        variant="mint"
-        className="hidden md:block absolute -bottom-32 -left-32 opacity-[0.12] blur-[1px] pointer-events-none constancia-drift-reverse"
-      />
+      <m.div
+        style={{ y: yRose, opacity: opacityFade }}
+        className="hidden md:block absolute -top-40 -right-40 pointer-events-none"
+      >
+        <CutIcon
+          size={520}
+          variant="rose"
+          className="opacity-[0.16] blur-[2px] constancia-drift constancia-pulse"
+        />
+      </m.div>
+      <m.div
+        style={{ y: yMint, opacity: opacityFade }}
+        className="hidden md:block absolute -bottom-32 -left-32 pointer-events-none"
+      >
+        <CutIcon
+          size={360}
+          variant="mint"
+          className="opacity-[0.20] blur-[1px] constancia-drift-reverse"
+        />
+      </m.div>
       <CutIcon
         size={180}
         variant="rose"
-        className="hidden lg:block absolute top-1/3 right-[12%] opacity-[0.16] pointer-events-none constancia-drift-reverse"
+        className="hidden lg:block absolute top-1/3 right-[12%] opacity-[0.18] pointer-events-none constancia-drift-reverse"
       />
       <CutIcon
         size={80}
         variant="mint"
-        className="hidden lg:block absolute bottom-[18%] right-[24%] opacity-[0.22] pointer-events-none constancia-drift constancia-pulse"
+        className="hidden lg:block absolute bottom-[18%] right-[24%] opacity-[0.28] pointer-events-none constancia-drift constancia-pulse"
       />
 
       {/* Text — centered, on top */}
@@ -74,18 +97,20 @@ export function HeroSectionStatic() {
           className="relative w-full max-w-4xl mx-auto px-6 sm:px-10 py-24 text-center"
           style={{ zIndex: 2 }}
         >
-          {/* Brand mark — the two-dot Constancia signature, bigger, breathing */}
+          {/* Brand mark — full Constancia overlapping-circles icon, big + interactive tilt */}
           <m.div
-            className="mb-9 flex justify-center"
+            className="mb-10 flex justify-center"
             initial="hidden"
             animate="visible"
             custom={0}
             variants={fadeUp}
+            style={{ y: yMark }}
           >
             <ConstanciaMark
-              size={120}
+              size={240}
+              interactive
               aria-label="Constancia"
-              className="constancia-breath"
+              className="constancia-breath drop-shadow-[0_8px_40px_rgba(199,122,147,0.18)]"
             />
           </m.div>
 
