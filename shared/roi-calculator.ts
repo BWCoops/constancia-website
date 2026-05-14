@@ -12,7 +12,7 @@ import {
   calculateAsIsVsToBe,
   type BenchmarkRange,
 } from "./epm-benchmarks";
-import { getHistoricalBenchmark, BENCHMARK_YEARS, type BenchmarkYear, type IndustryId, type MetricId } from './1qg-historical-benchmarks';
+import { getHistoricalBenchmark, BENCHMARK_YEARS, type BenchmarkYear, type IndustryId, type MetricId } from './historical-benchmarks';
 
 export interface RoiMetrics {
   totalImplementationCost: number;

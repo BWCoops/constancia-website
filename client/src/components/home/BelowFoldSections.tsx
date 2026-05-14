@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Compass, Settings, Brain, FileCheck, Briefcase, BarChart3, TrendingUp, CheckCircle2, Target, Users, Zap } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { ProofBar, GlassCard } from "@/components/ui/1qg";
-import type { ProofBarItem } from "@/components/ui/1qg";
+import { ProofBar, GlassCard } from "@/components/ui/constancia";
+import type { ProofBarItem } from "@/components/ui/constancia";
 import { useFeatureFlags } from "@/lib/feature-flags";
 
 const proofBarItems: ProofBarItem[] = [
