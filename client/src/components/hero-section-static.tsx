@@ -2,7 +2,7 @@ import { ArrowRight, CheckCircle2, Target } from "@/lib/icons";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { useFeatureFlags } from "@/lib/feature-flags";
-import logoWhite from "@assets/Constancia-TypeLogo-320.png";
+import logoWhite from "@assets/brand/Constancia-Logo-ML-Transparent.png";
 import { HeroParticleCanvas } from "@/components/home/HeroParticleCanvas";
 
 export function HeroSectionStatic() {

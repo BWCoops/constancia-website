@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ShieldX, ArrowLeft, Mail } from "lucide-react";
-import logo from "@assets/Constancia - Type Logo (Dark Blue)_1764414916528.png";
+import logo from "@assets/brand/Constancia-Logo-PD-Transparent.png";
 
 export default function AdminAccessDenied() {
   const handleBack = () => {

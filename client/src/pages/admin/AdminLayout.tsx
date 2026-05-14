@@ -30,7 +30,7 @@ import {
   WifiOff,
   RefreshCw
 } from "lucide-react";
-import logo from "@assets/Constancia - Type Logo (Dark Blue)_1764415487342.png";
+import logo from "@assets/brand/Constancia-Logo-PD-Transparent.png";
 
 interface AdminSession {
   authenticated: boolean;

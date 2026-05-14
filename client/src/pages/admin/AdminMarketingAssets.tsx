@@ -70,9 +70,9 @@ interface MarketingAsset {
   updatedAt: string | null;
 }
 
-import whiteLogo from "@assets/Constancia - Type Logo (White)_1764696707171.png";
-import gradientLogo from "@assets/Constancia - Type Logo (Dark to Light Gradient)_1764696691129.png";
-import iconWhite from "@assets/Constancia - Icon (White)_1764415609503.png";
+import whiteLogo from "@assets/brand/Constancia-Logo-ML-Transparent.png";
+import gradientLogo from "@assets/brand/Constancia-Logo-ML-Transparent.png";
+import iconWhite from "@assets/brand/Constancia-Cut-Icon-PD.png";
 
 import peopleProfessional1 from "@assets/stock_images/professional_busines_5c31713e.jpg";
 import peopleProfessional2 from "@assets/stock_images/professional_busines_49e2d0d2.jpg";

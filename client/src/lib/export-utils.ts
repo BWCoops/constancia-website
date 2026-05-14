@@ -2,8 +2,8 @@ import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
 import type { Workbook, Cell } from "exceljs";
 
-import logoWhite from "@assets/Constancia - Type Logo (White)_1764415552032.png";
-import logoBlue from "@assets/Constancia - Type Logo (Dark Blue)_1764415487342.png";
+import logoWhite from "@assets/brand/Constancia-Logo-ML-Transparent.png";
+import logoBlue from "@assets/brand/Constancia-Logo-PD-Transparent.png";
 
 import {
   PDF_MARGINS,
