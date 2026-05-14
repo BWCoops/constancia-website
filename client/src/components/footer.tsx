@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { Linkedin, Mail, MapPin, ArrowUpRight } from "@/lib/icons";
-import logoWhite from "@assets/1QG-TypeLogo-320.png";
+import constanciaLogo from "@assets/brand/Constancia-Logo-ML-Transparent.png";
 import { VisitorDataManager } from "@/components/visitor-data-manager";
 import { useFeatureFlags } from "@/lib/feature-flags";
 import type { FeatureFlags } from "@shared/feature-flags";
@@ -60,9 +60,9 @@ export function Footer() {
           <div className="col-span-2 md:col-span-4 lg:col-span-1">
             <Link href="/" className="inline-block mb-2 group" data-testid="link-footer-home">
               <img
-                src={logoWhite}
-                alt="1QG®"
-                className="h-16 w-auto max-w-[200px]"
+                src={constanciaLogo}
+                alt="Constancia"
+                className="h-14 w-auto max-w-[220px]"
               />
             </Link>
             
@@ -80,7 +80,7 @@ export function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-[#FEFFF3]/70 hover:text-brand-cyan transition-colors text-sm"
+                    className="text-[#F6F3EE]/70 hover:text-brand-cyan transition-colors text-sm"
                     data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
                   >
                     {link.label}
@@ -97,7 +97,7 @@ export function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-[#FEFFF3]/70 hover:text-brand-cyan transition-colors text-sm"
+                    className="text-[#F6F3EE]/70 hover:text-brand-cyan transition-colors text-sm"
                     data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
                   >
                     {link.label}
@@ -114,7 +114,7 @@ export function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-[#FEFFF3]/70 hover:text-brand-cyan transition-colors text-sm flex items-center gap-1"
+                    className="text-[#F6F3EE]/70 hover:text-brand-cyan transition-colors text-sm flex items-center gap-1"
                     data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
                   >
                     {link.label}
@@ -132,7 +132,7 @@ export function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-[#FEFFF3]/70 hover:text-brand-cyan transition-colors text-sm"
+                    className="text-[#F6F3EE]/70 hover:text-brand-cyan transition-colors text-sm"
                     data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
                   >
                     {link.label}
@@ -143,11 +143,11 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="pt-8 border-t border-[#FEFFF3]/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-[#FEFFF3]/60">
-            {new Date().getFullYear()} 1QG®. All rights reserved.
+        <div className="pt-8 border-t border-[#F6F3EE]/10 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-[#F6F3EE]/60">
+            © {new Date().getFullYear()} Constancia. All rights reserved.
           </p>
-          <div className="flex flex-wrap items-center gap-3 sm:gap-4 md:gap-6 text-sm text-[#FEFFF3]/60">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4 md:gap-6 text-sm text-[#F6F3EE]/60">
             {socialLinks.map((social) => (
               <a
                 key={social.label}
@@ -161,9 +161,9 @@ export function Footer() {
                 <social.icon className="w-4 h-4" />
               </a>
             ))}
-            <a href="mailto:info@1qg.com" className="flex items-center gap-2 hover:text-brand-cyan transition-colors">
+            <a href="mailto:info@constancia.io" className="flex items-center gap-2 hover:text-brand-cyan transition-colors">
               <Mail className="w-4 h-4 flex-shrink-0" />
-              <span className="break-all">info@1qg.com</span>
+              <span className="break-all">info@constancia.io</span>
             </a>
             <span className="flex items-start gap-2">
               <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" />
