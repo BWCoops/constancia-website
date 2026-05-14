@@ -11,6 +11,8 @@ import { VisitorProvider } from "@/contexts/VisitorContext";
 import { initializeImagePreconnects, preloadCriticalImages, preloadPriorityRoutes, preloadHeavyRoutes } from "@/lib/preload";
 import { initAdClickTracker } from "@/lib/ad-click-tracker";
 import { FeatureFlagProvider, useFeatureFlags } from "@/lib/feature-flags";
+import { ModalProvider } from "@/lib/modals/store";
+import { GlobalModalHost } from "@/components/global-modal-host";
 import { LoadingFallback } from "@/components/loading-spinner";
 import { FinanceCompassLoading } from "@/components/finance-compass-loading";
 import { AdminLoadingFallback } from "@/components/admin/AdminLoadingFallback";
@@ -393,16 +395,19 @@ function Router() {
 
 function App() {
   return (
-    <ThemeProvider defaultTheme="light" storageKey="1qg-ui-theme">
+    <ThemeProvider defaultTheme="light" storageKey="constancia-ui-theme">
       <LazyMotionProvider>
         <QueryClientProvider client={queryClient}>
           <FeatureFlagProvider>
             <VisitorProvider>
-              <TooltipProvider>
-                <Toaster />
-                <Router />
-                <CookieConsentBanner />
-              </TooltipProvider>
+              <ModalProvider>
+                <TooltipProvider>
+                  <Toaster />
+                  <Router />
+                  <CookieConsentBanner />
+                  <GlobalModalHost />
+                </TooltipProvider>
+              </ModalProvider>
             </VisitorProvider>
           </FeatureFlagProvider>
         </QueryClientProvider>

@@ -22,3 +22,7 @@ export type { ButtonProps }       from "./button";
 
 export { CutIcon }     from "./cut-icon";
 export type { CutIconProps } from "./cut-icon";
+
+// Global modal system (single import surface)
+export { useModal, useModalStack, ModalProvider } from "@/lib/modals/store";
+export type { ModalId, ModalDataMap } from "@/lib/modals/types";
