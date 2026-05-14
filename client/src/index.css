@@ -4,52 +4,65 @@
 
 /*
  * ════════════════════════════════════════════════════════════════════
- *  1QG DESIGN SYSTEM — index.css
+ *  CONSTANCIA DESIGN SYSTEM — index.css
  *
  *  All values here correspond 1:1 with /src/lib/tokens.ts.
  *  To change a colour, update tokens.ts AND the matching var below.
  *  Never hardcode hex or rgba values in component files.
+ *
+ *  Identity: dark-led, restrained. Rose and Mineral Green are accent
+ *  colours only — not dominant fills.
  * ════════════════════════════════════════════════════════════════════
  */
 
 /* ── 1. Brand tokens (always available, every context) ─────────────── */
 :root {
   /* Backgrounds */
-  --brand-bg-primary:       #0C1E3B;
-  --brand-bg-secondary:     #011630;
-  --brand-bg-surface:       rgba(255,255,255,0.025);
-  --brand-bg-surface-hover: rgba(8,132,170,0.05);
+  --brand-bg-primary:       #12161D;
+  --brand-bg-secondary:     #1E2630;
+  --brand-bg-surface:       rgba(246,243,238,0.025);
+  --brand-bg-surface-hover: rgba(199,122,147,0.05);
 
   /* Borders */
-  --brand-border:           rgba(255,255,255,0.07);
-  --brand-border-hover:     rgba(8,132,170,0.28);
-  --brand-border-muted:     rgba(255,255,255,0.05);
-  --brand-border-strong:    rgba(255,255,255,0.14);
+  --brand-border:           rgba(246,243,238,0.07);
+  --brand-border-hover:     rgba(199,122,147,0.28);
+  --brand-border-muted:     rgba(246,243,238,0.05);
+  --brand-border-strong:    rgba(246,243,238,0.14);
 
-  /* Text */
-  --brand-text-primary:     #FEFFF3;
-  --brand-text-secondary:   rgba(254,255,243,0.55);
-  --brand-text-muted:       rgba(254,255,243,0.28);
-  --brand-text-tertiary:    rgba(254,255,243,0.22);
+  /* Text — bumped opacity vs prior palette for "highly legible" brand spec */
+  --brand-text-primary:     #F6F3EE;
+  --brand-text-secondary:   rgba(246,243,238,0.68);
+  --brand-text-muted:       rgba(246,243,238,0.42);
+  --brand-text-tertiary:    rgba(246,243,238,0.30);
 
-  /* Accent colours */
-  --brand-teal:             #0884AA;
-  --brand-teal-accessible:  #0A6688;   /* darker teal — 4.6:1 on white, WCAG AA for light backgrounds */
-  --brand-cyan:             #12EBFC;
-  --brand-navy:             #02205B;
-  --brand-cream:            #FEFFF3;
+  /* Accent colours — Constancia palette */
+  --brand-primary-dark:     #12161D;   /* anchor */
+  --brand-secondary-dark:   #1E2630;   /* layering */
+  --brand-main-light:       #F6F3EE;   /* warm off-white */
+  --brand-support-neutral:  #D8D0C6;   /* muted stone */
+  --brand-muted-rose:       #C77A93;   /* signature accent (the `i`) */
+  --brand-deep-berry:       #8E4F67;   /* premium grounded */
+  --brand-mineral-green:    #7FB8A3;   /* digital/product cues (the `.`) */
+  --brand-deep-mint:        #5E8D7A;   /* understated balance */
 
-  /* Gradient shorthands */
-  --brand-gradient-banner:  linear-gradient(135deg, #02205B 0%, #0070C0 60%, #0884AA 100%);
-  --brand-gradient-hero:    linear-gradient(135deg, #010E2A 0%, #02205B 100%);
+  /* Legacy semantic aliases — kept so existing references resolve */
+  --brand-teal:             #7FB8A3;   /* old teal role → mineral green */
+  --brand-teal-accessible:  #5E8D7A;   /* darker mineral — better contrast */
+  --brand-cyan:             #C77A93;   /* old cyan role → muted rose */
+  --brand-navy:             #0A0E14;
+  --brand-cream:            #F6F3EE;
 
-  /* Info box (cyan tint) */
-  --brand-info-bg:          rgba(18,235,252,0.05);
-  --brand-info-border:      rgba(18,235,252,0.12);
+  /* Gradient shorthands — slow, considered, no harsh contrast jumps */
+  --brand-gradient-banner:  linear-gradient(135deg, #12161D 0%, #1E2630 60%, #5E8D7A 100%);
+  --brand-gradient-hero:    linear-gradient(135deg, #0A0E14 0%, #12161D 100%);
+
+  /* Info box — rose-tinted warmth (was cyan electric) */
+  --brand-info-bg:          rgba(199,122,147,0.05);
+  --brand-info-border:      rgba(199,122,147,0.12);
 
   /* Typography */
-  --brand-font-sans:        'DM Sans', system-ui, sans-serif;
-  --brand-font-mono:        'IBM Plex Mono', monospace;
+  --brand-font-sans:        'Noto Sans', system-ui, -apple-system, sans-serif;
+  --brand-font-mono:        'IBM Plex Mono', ui-monospace, monospace;
 
   /* Spacing */
   --brand-section-py:       72px;
@@ -63,10 +76,10 @@
   --brand-radius-lg:        12px;
   --brand-radius-btn:       0px;
 
-  /* Button — brand variant (Option D style) */
+  /* Button — brand variant */
   --brand-btn-border:           1px solid var(--brand-border-strong);
-  --brand-btn-accent-primary:   var(--brand-cyan);
-  --brand-btn-accent-secondary: rgba(255,255,255,0.12);
+  --brand-btn-accent-primary:   var(--brand-muted-rose);
+  --brand-btn-accent-secondary: rgba(246,243,238,0.12);
   --brand-btn-font:             var(--brand-font-mono);
   --brand-btn-tracking:         0.08em;
   --brand-btn-size:             13px;
@@ -102,42 +115,43 @@
   --elevate-1:                       rgba(0,0,0,0.03);
   --elevate-2:                       rgba(0,0,0,0.08);
 
-  --background:         60 33% 99%;
-  --foreground:         220 5% 14%;
-  --border:             200 20% 90%;
+  /* HSL values mapped to Constancia palette */
+  --background:         36 30% 95%;            /* main-light #F6F3EE */
+  --foreground:         220 22% 9%;            /* primary-dark #12161D */
+  --border:             34 18% 81%;            /* support-neutral #D8D0C6 */
   --card:               0 0% 100%;
-  --card-foreground:    220 5% 14%;
-  --card-border:        200 20% 90%;
+  --card-foreground:    220 22% 9%;
+  --card-border:        34 18% 81%;
   --popover:            0 0% 100%;
-  --popover-foreground: 220 5% 14%;
-  --popover-border:     200 20% 90%;
-  --primary:            215 97% 19%;
-  --primary-foreground: 60 33% 99%;
-  --secondary:          197 100% 52%;
-  --secondary-foreground: 220 5% 14%;
-  --muted:              200 20% 96%;
-  --muted-foreground:   200 10% 35%;
-  --accent:             193 93% 35%;
-  --accent-foreground:  60 33% 99%;
-  --destructive:        0 84% 60%;
-  --destructive-foreground: 0 0% 98%;
-  --input:              200 20% 90%;
-  --ring:               197 100% 52%;
-  --sidebar:            200 20% 97%;
-  --sidebar-foreground: 220 5% 14%;
-  --sidebar-border:     200 20% 90%;
-  --sidebar-primary:    197 100% 52%;
-  --sidebar-primary-foreground: 220 5% 14%;
-  --sidebar-accent:     197 80% 92%;
-  --sidebar-accent-foreground: 220 5% 14%;
-  --sidebar-ring:       197 100% 52%;
-  --chart-1: 215 97% 19%;
-  --chart-2: 197 100% 52%;
-  --chart-3: 193 93% 35%;
-  --chart-4: 204 100% 38%;
-  --chart-5: 197 95% 45%;
+  --popover-foreground: 220 22% 9%;
+  --popover-border:     34 18% 81%;
+  --primary:            220 22% 9%;            /* primary-dark */
+  --primary-foreground: 36 30% 95%;
+  --secondary:          340 39% 63%;           /* muted-rose #C77A93 */
+  --secondary-foreground: 220 22% 9%;
+  --muted:              34 18% 88%;
+  --muted-foreground:   220 10% 35%;
+  --accent:             156 25% 61%;           /* mineral-green #7FB8A3 */
+  --accent-foreground:  220 22% 9%;
+  --destructive:        0 70% 55%;
+  --destructive-foreground: 36 30% 95%;
+  --input:              34 18% 81%;
+  --ring:               340 39% 63%;           /* rose ring */
+  --sidebar:            36 25% 92%;
+  --sidebar-foreground: 220 22% 9%;
+  --sidebar-border:     34 18% 81%;
+  --sidebar-primary:    340 39% 63%;
+  --sidebar-primary-foreground: 36 30% 95%;
+  --sidebar-accent:     34 18% 88%;
+  --sidebar-accent-foreground: 220 22% 9%;
+  --sidebar-ring:       340 39% 63%;
+  --chart-1: 220 22% 9%;
+  --chart-2: 340 39% 63%;
+  --chart-3: 156 25% 61%;
+  --chart-4: 340 30% 43%;        /* deep-berry */
+  --chart-5: 156 20% 46%;        /* deep-mint */
 
-  --font-sans:   'DM Sans', Inter, system-ui, sans-serif;
+  --font-sans:   'Noto Sans', Inter, system-ui, -apple-system, sans-serif;
   --font-serif:  Georgia, serif;
   --font-mono:   'IBM Plex Mono', ui-monospace, monospace;
   --radius:      0.5rem;
@@ -171,46 +185,46 @@
 
 /* ── 3. shadcn tokens — dark mode ─────────────────────────────────── */
 .dark {
-  --button-outline:                  rgba(255,255,255,0.10);
-  --badge-outline:                   rgba(255,255,255,0.05);
+  --button-outline:                  rgba(246,243,238,0.10);
+  --badge-outline:                   rgba(246,243,238,0.05);
   --opaque-button-border-intensity:  9;
-  --elevate-1:                       rgba(255,255,255,0.04);
-  --elevate-2:                       rgba(255,255,255,0.09);
+  --elevate-1:                       rgba(246,243,238,0.04);
+  --elevate-2:                       rgba(246,243,238,0.09);
 
-  --background:         220 5% 8%;
-  --foreground:         60 33% 97%;
-  --border:             220 5% 18%;
-  --card:               220 5% 10%;
-  --card-foreground:    60 33% 97%;
-  --card-border:        220 5% 15%;
-  --popover:            220 5% 12%;
-  --popover-foreground: 60 33% 97%;
-  --popover-border:     220 5% 18%;
-  --primary:            197 100% 52%;
-  --primary-foreground: 220 5% 8%;
-  --secondary:          220 5% 18%;
-  --secondary-foreground: 60 33% 97%;
-  --muted:              220 5% 18%;
-  --muted-foreground:   200 10% 65%;
-  --accent:             193 93% 40%;
-  --accent-foreground:  60 33% 97%;
-  --destructive:        0 63% 50%;
-  --destructive-foreground: 0 0% 98%;
-  --input:              220 5% 25%;
-  --ring:               197 100% 52%;
-  --sidebar:            220 5% 9%;
-  --sidebar-foreground: 60 33% 97%;
-  --sidebar-border:     220 5% 15%;
-  --sidebar-primary:    197 100% 52%;
-  --sidebar-primary-foreground: 220 5% 8%;
-  --sidebar-accent:     220 5% 18%;
-  --sidebar-accent-foreground: 60 33% 97%;
-  --sidebar-ring:       197 100% 52%;
-  --chart-1: 197 100% 52%;
-  --chart-2: 193 93% 45%;
-  --chart-3: 204 100% 45%;
-  --chart-4: 215 97% 40%;
-  --chart-5: 197 95% 55%;
+  --background:         220 22% 9%;             /* primary-dark */
+  --foreground:         36 30% 95%;
+  --border:             220 13% 18%;
+  --card:               220 18% 14%;            /* secondary-dark vicinity */
+  --card-foreground:    36 30% 95%;
+  --card-border:        220 13% 22%;
+  --popover:            220 18% 12%;
+  --popover-foreground: 36 30% 95%;
+  --popover-border:     220 13% 18%;
+  --primary:            340 39% 63%;            /* rose as dark-mode primary */
+  --primary-foreground: 220 22% 9%;
+  --secondary:          220 13% 22%;
+  --secondary-foreground: 36 30% 95%;
+  --muted:              220 13% 22%;
+  --muted-foreground:   34 12% 70%;
+  --accent:             156 25% 56%;            /* mineral-green slightly darker for dark mode */
+  --accent-foreground:  36 30% 95%;
+  --destructive:        0 60% 50%;
+  --destructive-foreground: 36 30% 95%;
+  --input:              220 13% 25%;
+  --ring:               340 39% 63%;
+  --sidebar:            220 22% 10%;
+  --sidebar-foreground: 36 30% 95%;
+  --sidebar-border:     220 13% 22%;
+  --sidebar-primary:    340 39% 63%;
+  --sidebar-primary-foreground: 220 22% 9%;
+  --sidebar-accent:     220 13% 22%;
+  --sidebar-accent-foreground: 36 30% 95%;
+  --sidebar-ring:       340 39% 63%;
+  --chart-1: 340 39% 63%;
+  --chart-2: 156 25% 56%;
+  --chart-3: 340 30% 43%;
+  --chart-4: 156 20% 46%;
+  --chart-5: 34 18% 81%;
 
   --shadow-2xs: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
   --shadow-xs:  0px 2px 0px 0px hsl(0 0% 0% / 0.00);
@@ -245,23 +259,23 @@
 
 /* ── 5. page-dark — applies brand dark system to any public page ────── */
 .page-dark {
-  --background:           220 96% 5%;
-  --foreground:           60  33% 97%;
-  --border:               220 30% 16%;
-  --input:                220 30% 14%;
-  --ring:                 197 100% 52%;
-  --card:                 220 60% 8%;
-  --card-foreground:      60  33% 97%;
-  --card-border:          220 30% 16%;
-  --popover:              220 60% 8%;
-  --popover-foreground:   60  33% 97%;
-  --popover-border:       220 30% 16%;
-  --muted:                220 30% 14%;
-  --muted-foreground:     200 12% 52%;
-  --secondary:            220 30% 14%;
-  --secondary-foreground: 60 33% 97%;
-  --accent:               193 93% 35%;
-  --accent-foreground:    60  33% 97%;
+  --background:           220 22% 9%;             /* primary-dark */
+  --foreground:           36 30% 95%;
+  --border:               220 13% 18%;
+  --input:                220 13% 22%;
+  --ring:                 340 39% 63%;
+  --card:                 220 18% 14%;
+  --card-foreground:      36 30% 95%;
+  --card-border:          220 13% 22%;
+  --popover:              220 18% 12%;
+  --popover-foreground:   36 30% 95%;
+  --popover-border:       220 13% 18%;
+  --muted:                220 13% 22%;
+  --muted-foreground:     34 12% 62%;
+  --secondary:            220 13% 22%;
+  --secondary-foreground: 36 30% 95%;
+  --accent:               156 25% 56%;
+  --accent-foreground:    36 30% 95%;
 
   background:  var(--brand-bg-primary);
   color:       var(--brand-text-primary);
@@ -269,17 +283,17 @@
 }
 
 .page-dark .prose {
-  --tw-prose-body:       rgba(254,255,243,0.65);
-  --tw-prose-headings:   rgba(254,255,243,0.95);
-  --tw-prose-links:      var(--brand-cyan);
-  --tw-prose-bold:       rgba(254,255,243,0.9);
-  --tw-prose-counters:   rgba(254,255,243,0.5);
-  --tw-prose-bullets:    rgba(254,255,243,0.4);
-  --tw-prose-hr:         rgba(255,255,255,0.1);
-  --tw-prose-quotes:     rgba(254,255,243,0.7);
-  --tw-prose-code:       var(--brand-cyan);
-  --tw-prose-th-borders: rgba(255,255,255,0.1);
-  --tw-prose-td-borders: rgba(255,255,255,0.06);
+  --tw-prose-body:       rgba(246,243,238,0.68);
+  --tw-prose-headings:   rgba(246,243,238,0.95);
+  --tw-prose-links:      var(--brand-muted-rose);
+  --tw-prose-bold:       rgba(246,243,238,0.9);
+  --tw-prose-counters:   rgba(246,243,238,0.5);
+  --tw-prose-bullets:    rgba(246,243,238,0.4);
+  --tw-prose-hr:         rgba(246,243,238,0.1);
+  --tw-prose-quotes:     rgba(246,243,238,0.7);
+  --tw-prose-code:       var(--brand-mineral-green);
+  --tw-prose-th-borders: rgba(246,243,238,0.1);
+  --tw-prose-td-borders: rgba(246,243,238,0.06);
 }
 
 /* ── 6. Reusable layout utility classes ────────────────────────────── */
@@ -297,14 +311,14 @@
     background:    var(--brand-bg-surface);
     border:        1px solid var(--brand-border);
     border-radius: var(--brand-radius-lg);
-    transition:    border-color 0.2s ease, background 0.2s ease;
+    transition:    border-color 0.22s ease, background 0.22s ease;
   }
   .glass-card:hover {
     border-color: var(--brand-border-hover);
     background:   var(--brand-bg-surface-hover);
   }
 
-  /* Cyan info / callout box */
+  /* Rose-tinted info / callout box (warmth, emphasis) */
   .info-box {
     background:    var(--brand-info-bg);
     border:        1px solid var(--brand-info-border);
@@ -312,28 +326,28 @@
     padding:       1rem;
   }
 
-  /* Section tag pill (e.g. "What We Do") */
+  /* Section tag pill — mineral-green tint (digital cue) */
   .section-tag {
     display:        inline-block;
     padding:        0.375rem 1rem;
     border-radius:  9999px;
-    background:     rgba(18,235,252,0.08);
-    color:          var(--brand-cyan);
+    background:     rgba(127,184,163,0.08);
+    color:          var(--brand-mineral-green);
     font-size:      0.75rem;
-    font-weight:    600;
+    font-weight:    500;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     font-family:    var(--brand-font-mono);
   }
 
-  /* Teal CTA button — replaces repeated inline style={{ background: 'var(--hp-teal)' }} */
+  /* Mineral-green CTA button — replaces repeated inline style={{ background: 'var(--hp-teal)' }} */
   .btn-cta {
-    background: var(--brand-teal) !important;
-    color:      var(--brand-text-primary) !important;
+    background: var(--brand-mineral-green) !important;
+    color:      var(--brand-primary-dark) !important;
     border:     none !important;
   }
 
-  /* Brand button base (Option D — zero radius, mono, left accent bar) */
+  /* Brand button base */
   .btn-brand-base {
     display:         inline-flex;
     align-items:     center;
@@ -347,87 +361,88 @@
     letter-spacing:  var(--brand-btn-tracking);
     text-transform:  uppercase;
     cursor:          pointer;
-    transition:      background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    transition:      background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
     white-space:     nowrap;
     text-decoration: none;
   }
 
+  /* Primary brand button — rose accent bar (signature element) */
   .btn-brand {
     color:       var(--brand-cream);
     border:      1px solid var(--brand-border-strong);
-    border-left: 3px solid var(--brand-cyan);
+    border-left: 3px solid var(--brand-muted-rose);
   }
   .btn-brand:hover {
-    background:        rgba(18,235,252,0.06);
-    border-color:      rgba(255,255,255,0.22);
-    border-left-color: var(--brand-cyan);
-    color:             #fff;
+    background:        rgba(199,122,147,0.06);
+    border-color:      rgba(246,243,238,0.22);
+    border-left-color: var(--brand-muted-rose);
+    color:             var(--brand-cream);
   }
-  .btn-brand:active { background: rgba(18,235,252,0.10); }
+  .btn-brand:active { background: rgba(199,122,147,0.10); }
 
   .btn-brand-secondary {
-    color:       rgba(254,255,243,0.55);
-    border:      1px solid rgba(255,255,255,0.08);
+    color:       rgba(246,243,238,0.68);
+    border:      1px solid rgba(246,243,238,0.08);
     border-left: 3px solid var(--brand-btn-accent-secondary);
   }
   .btn-brand-secondary:hover {
-    background:        rgba(255,255,255,0.03);
-    border-color:      rgba(255,255,255,0.16);
-    border-left-color: rgba(255,255,255,0.25);
-    color:             rgba(254,255,243,0.80);
+    background:        rgba(246,243,238,0.03);
+    border-color:      rgba(246,243,238,0.16);
+    border-left-color: rgba(246,243,238,0.25);
+    color:             rgba(246,243,238,0.85);
   }
 
   .btn-brand-ghost {
     font-size:       0.8125rem;
-    color:           rgba(254,255,243,0.38);
+    color:           rgba(246,243,238,0.42);
     background:      none;
     border:          none;
     cursor:          pointer;
     font-family:     var(--brand-font-sans);
     letter-spacing:  0.01em;
-    transition:      color 0.15s ease;
+    transition:      color 0.18s ease;
     text-decoration: none;
   }
-  .btn-brand-ghost:hover { color: rgba(254,255,243,0.65); }
+  .btn-brand-ghost:hover { color: rgba(246,243,238,0.68); }
 
-  /* Nav link hover effects — source of truth for nav underline / glow */
+  /* Nav link hover effects — subtle, considered, classy */
   .nav-link-glow {
     background: linear-gradient(
       to right,
       transparent,
-      rgba(18,235,252,0.10),
+      rgba(199,122,147,0.10),
       transparent
     );
   }
   .nav-link-underline {
-    background: linear-gradient(to right, var(--brand-cyan), var(--brand-teal));
+    background: linear-gradient(to right, var(--brand-muted-rose), var(--brand-mineral-green));
   }
 
   /* hp-gradient-banner — used by existing hero / banner sections */
   .hp-gradient-banner { background: var(--brand-gradient-banner); }
 
-  /* Switch brand colour — data-attribute selectors need a real class, not arbitrary Tailwind */
-  .switch-brand[data-state="checked"] { background: var(--brand-teal); }
+  /* Switch brand colour */
+  .switch-brand[data-state="checked"] { background: var(--brand-mineral-green); }
 
-  /* Icon gradient wrappers (replaces inline linear-gradient styles) */
+  /* Icon gradient wrappers */
   .icon-gradient {
-    background: linear-gradient(135deg, var(--brand-navy), var(--brand-teal));
+    background: linear-gradient(135deg, var(--brand-navy), var(--brand-mineral-green));
   }
   .icon-gradient-teal-cyan {
-    background: linear-gradient(135deg, var(--brand-teal), var(--brand-cyan));
+    background: linear-gradient(135deg, var(--brand-mineral-green), var(--brand-muted-rose));
   }
   .icon-gradient-navy-cyan {
-    background: linear-gradient(135deg, var(--brand-navy), var(--brand-cyan));
+    background: linear-gradient(135deg, var(--brand-navy), var(--brand-muted-rose));
   }
 
-  /* Stat icon wrapper — cyan-tinted circle used in stats section */
+  /* Stat icon wrapper — rose-tinted circle (the brand signature shape) */
   .stat-icon-wrapper {
-    background: rgba(18,235,252,0.2);
+    background: rgba(199,122,147,0.18);
   }
 
-  /* Stats banner section */
+  /* Stats banner section — restrained gradient, no harsh colour pop */
   .section-stats-banner {
-    background: linear-gradient(to right, var(--brand-navy), #0070C0, var(--brand-teal));
+    background: linear-gradient(to right, var(--brand-navy), var(--brand-secondary-dark), var(--brand-deep-mint));
     color:       var(--brand-cream);
     padding:     var(--brand-section-py) 0;
   }
@@ -435,7 +450,7 @@
   /* Partners strip */
   .partners-strip {
     background:    var(--brand-bg-primary);
-    border-bottom: 1px solid rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(246,243,238,0.04);
     padding:       28px 0;
   }
   .partners-strip-label {
@@ -450,8 +465,8 @@
   .partners-strip-name {
     font-family:    var(--brand-font-sans);
     font-size:      clamp(18px, 2vw, 26px);
-    font-weight:    700;
-    letter-spacing: -0.03em;
+    font-weight:    500;
+    letter-spacing: -0.01em;
     color:          var(--brand-text-secondary);
     line-height:    1;
     margin-bottom:  4px;
@@ -466,9 +481,22 @@
 
   /* Banner overlay icon wrapper */
   .banner-icon-wrapper {
-    background:        rgba(255,255,255,0.1);
+    background:        rgba(246,243,238,0.1);
     backdrop-filter:   blur(4px);
   }
+
+  /* ── Constancia signature: the Cut Icon circle (period scaled up) ── */
+  .cut-icon-dot {
+    position:        relative;
+    display:         inline-block;
+    width:           0.32em;
+    height:          0.32em;
+    border-radius:   9999px;
+    background:      var(--brand-mineral-green);
+    vertical-align:  baseline;
+    margin-left:     0.05em;
+  }
+  .cut-icon-dot--rose { background: var(--brand-muted-rose); }
 }
 
 /* ── 7. Elevation system ───────────────────────────────────────────── */
@@ -534,14 +562,14 @@
   }
 }
 
-/* ── 8. Keyframe animations ─────────────────────────────────────────── */
+/* ── 8. Keyframe animations — slow, considered, classy ───────────── */
 @keyframes gradient-shift {
   0%, 100% { background-position: 0% 50%; }
   50%       { background-position: 100% 50%; }
 }
 .animate-gradient-shift {
   background-size: 200% 200%;
-  animation: gradient-shift 4s ease-in-out infinite;
+  animation: gradient-shift 6s ease-in-out infinite;
 }
 
 @keyframes hp-fade-up {
@@ -565,9 +593,9 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-.hp-anim-fade-up { opacity: 0; animation: hp-fade-up  0.6s ease forwards; }
-.hp-anim-fade-in { opacity: 0; animation: hp-fade-in  0.8s ease forwards; }
-.nav-slide-down  { animation: nav-slide-down 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.hp-anim-fade-up { opacity: 0; animation: hp-fade-up  0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.hp-anim-fade-in { opacity: 0; animation: hp-fade-in  1s ease forwards; }
+.nav-slide-down  { animation: nav-slide-down 0.24s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
 
 /* ── 9. Mobile proof bar ─────────────────────────────────────────────── */
 @media (max-width: 640px) {
@@ -593,7 +621,7 @@
 @media (hover: none) and (pointer: coarse) {
   .hover-elevate:hover::after,
   .hover-elevate-2:hover::after { background-color: transparent !important; }
-  button, a, [role="button"] { transition-duration: 100ms !important; }
+  button, a, [role="button"] { transition-duration: 120ms !important; }
 }
 
 @media (max-width: 768px) {
@@ -604,7 +632,7 @@
     -webkit-backdrop-filter: blur(4px) !important;
   }
   .blur-3xl { filter: blur(32px) !important; }
-  .animate-pulse { animation-duration: 2s !important; }
+  .animate-pulse { animation-duration: 2.5s !important; }
   a, button, input, select, textarea, [role="button"], [role="checkbox"], [role="slider"] {
     touch-action: manipulation;
   }
