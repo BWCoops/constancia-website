@@ -569,7 +569,7 @@
 }
 .animate-gradient-shift {
   background-size: 200% 200%;
-  animation: gradient-shift 6s ease-in-out infinite;
+  animation: gradient-shift 12s ease-in-out infinite;
 }
 
 @keyframes hp-fade-up {
@@ -596,6 +596,59 @@
 .hp-anim-fade-up { opacity: 0; animation: hp-fade-up  0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
 .hp-anim-fade-in { opacity: 0; animation: hp-fade-in  1s ease forwards; }
 .nav-slide-down  { animation: nav-slide-down 0.24s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+/* ── Constancia continuous motion — drift, pulse, breath ─────────── */
+@keyframes drift-slow {
+  0%, 100% { transform: translate(0, 0); }
+  25%      { transform: translate(18px, -12px); }
+  50%      { transform: translate(28px, 8px); }
+  75%      { transform: translate(10px, 14px); }
+}
+@keyframes drift-reverse {
+  0%, 100% { transform: translate(0, 0); }
+  25%      { transform: translate(-22px, 14px); }
+  50%      { transform: translate(-10px, 24px); }
+  75%      { transform: translate(-18px, -10px); }
+}
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 1; }
+}
+@keyframes breath {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50%      { transform: scale(1.06); opacity: 1; }
+}
+@keyframes glow-rose {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(199,122,147,0); }
+  50%      { box-shadow: 0 0 40px 6px rgba(199,122,147,0.18); }
+}
+@keyframes shimmer-x {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.constancia-drift          { animation: drift-slow      14s ease-in-out infinite; }
+.constancia-drift-reverse  { animation: drift-reverse   18s ease-in-out infinite; }
+.constancia-pulse          { animation: pulse-soft       4.2s ease-in-out infinite; }
+.constancia-breath         { animation: breath           5s ease-in-out infinite; }
+.constancia-glow-rose      { animation: glow-rose        3.8s ease-in-out infinite; }
+
+/* Reveal-on-mount with bigger displacement so the motion is actually visible */
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.reveal-up {
+  opacity: 0;
+  animation: reveal-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.reveal-up-1 { animation-delay: 0.10s; }
+.reveal-up-2 { animation-delay: 0.22s; }
+.reveal-up-3 { animation-delay: 0.34s; }
+.reveal-up-4 { animation-delay: 0.46s; }
+.reveal-up-5 { animation-delay: 0.58s; }
+.reveal-up-6 { animation-delay: 0.70s; }
+.reveal-up-7 { animation-delay: 0.82s; }
 
 /* ── 9. Mobile proof bar ─────────────────────────────────────────────── */
 @media (max-width: 640px) {

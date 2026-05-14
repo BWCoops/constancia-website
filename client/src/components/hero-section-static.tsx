@@ -4,16 +4,16 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { useFeatureFlags } from "@/lib/feature-flags";
 import { CutIcon } from "@/components/ui/cut-icon";
-import logoWhite from "@assets/brand/Constancia-Logo-ML-Transparent.png";
+import { ConstanciaMark } from "@/components/ui/constancia-mark";
 import { HeroParticleCanvas } from "@/components/home/HeroParticleCanvas";
 
-// Subtle reveal — slow, considered, classy. Constancia identity rule.
+// Visible reveal — bigger displacement so motion is clearly seen on arrival.
 const fadeUp = {
-  hidden: { opacity: 0, y: 16 },
+  hidden: { opacity: 0, y: 32 },
   visible: (i: number = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.95, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] },
   }),
 };
 
@@ -45,22 +45,27 @@ export function HeroSectionStatic() {
         aria-hidden="true"
       />
 
-      {/* Cut Icon decoration — Constancia signature dots placed for visual rhythm.
-          Subtle, low-opacity, large radius. Echoes the wordmark's terminal period. */}
+      {/* Cut Icon decoration — Constancia signature dots, drifting continuously.
+          Echoes the wordmark's terminal period. Visible motion, classy, low opacity. */}
       <CutIcon
         size={520}
         variant="rose"
-        className="hidden md:block absolute -top-40 -right-40 opacity-[0.06] blur-[2px] pointer-events-none"
+        className="hidden md:block absolute -top-40 -right-40 opacity-[0.10] blur-[2px] pointer-events-none constancia-drift constancia-pulse"
       />
       <CutIcon
         size={360}
         variant="mint"
-        className="hidden md:block absolute -bottom-32 -left-32 opacity-[0.08] blur-[1px] pointer-events-none"
+        className="hidden md:block absolute -bottom-32 -left-32 opacity-[0.12] blur-[1px] pointer-events-none constancia-drift-reverse"
       />
       <CutIcon
-        size={140}
+        size={180}
         variant="rose"
-        className="hidden lg:block absolute top-1/3 right-[12%] opacity-[0.10] pointer-events-none"
+        className="hidden lg:block absolute top-1/3 right-[12%] opacity-[0.16] pointer-events-none constancia-drift-reverse"
+      />
+      <CutIcon
+        size={80}
+        variant="mint"
+        className="hidden lg:block absolute bottom-[18%] right-[24%] opacity-[0.22] pointer-events-none constancia-drift constancia-pulse"
       />
 
       {/* Text — centered, on top */}
@@ -69,20 +74,18 @@ export function HeroSectionStatic() {
           className="relative w-full max-w-4xl mx-auto px-6 sm:px-10 py-24 text-center"
           style={{ zIndex: 2 }}
         >
-          {/* Logo */}
+          {/* Brand mark — the two-dot Constancia signature, bigger, breathing */}
           <m.div
-            className="mb-7"
+            className="mb-9 flex justify-center"
             initial="hidden"
             animate="visible"
             custom={0}
             variants={fadeUp}
           >
-            <img
-              src={logoWhite}
-              alt="Constancia"
-              className="h-9 md:h-11 w-auto mx-auto opacity-95"
-              loading="eager"
-              {...{ fetchpriority: "high" } as React.ImgHTMLAttributes<HTMLImageElement>}
+            <ConstanciaMark
+              size={120}
+              aria-label="Constancia"
+              className="constancia-breath"
             />
           </m.div>
 
@@ -117,42 +120,42 @@ export function HeroSectionStatic() {
             </span>
           </m.div>
 
-          {/* H1 — slimmer weight, optical-aligned letter spacing for editorial feel */}
+          {/* H1 — heavier weight + tighter tracking for impact + legibility */}
           <m.h1
             id="hero-heading"
-            className="mb-5"
+            className="mb-6"
             initial="hidden"
             animate="visible"
             custom={2}
             variants={fadeUp}
             style={{
-              fontSize: 'clamp(36px, 5.5vw, 72px)',
+              fontSize: 'clamp(44px, 6.4vw, 88px)',
               color: 'var(--brand-text-primary)',
-              lineHeight: '1.05',
-              letterSpacing: '-0.022em',
-              fontWeight: 500,
+              lineHeight: '1.02',
+              letterSpacing: '-0.028em',
+              fontWeight: 700,
             }}
           >
             The EPM firm that charges less
             <br />
-            <span style={{ color: 'var(--brand-muted-rose)', fontWeight: 400 }}>
+            <span style={{ color: 'var(--brand-muted-rose)', fontWeight: 600 }}>
               and delivers more
             </span>
-            <CutIcon size={14} variant="mint" className="ml-1" />
+            <CutIcon size={20} variant="mint" className="ml-2 constancia-breath inline-block align-baseline" />
           </m.h1>
 
-          {/* Body */}
+          {/* Body — bigger, more legible (0.85 opacity, 18-20px) */}
           <m.p
-            className="mx-auto mb-8"
+            className="mx-auto mb-10"
             initial="hidden"
             animate="visible"
             custom={3}
             variants={fadeUp}
             style={{
-              fontSize: 'clamp(15px, 1.6vw, 18px)',
-              color: 'var(--brand-text-secondary)',
-              lineHeight: '1.7',
-              maxWidth: '600px',
+              fontSize: 'clamp(17px, 1.7vw, 20px)',
+              color: 'rgba(246,243,238,0.85)',
+              lineHeight: '1.6',
+              maxWidth: '640px',
               fontWeight: 400,
             }}
           >

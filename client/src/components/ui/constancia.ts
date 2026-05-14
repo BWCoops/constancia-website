@@ -23,6 +23,9 @@ export type { ButtonProps }       from "./button";
 export { CutIcon }     from "./cut-icon";
 export type { CutIconProps } from "./cut-icon";
 
+export { ConstanciaMark }     from "./constancia-mark";
+export type { ConstanciaMarkProps } from "./constancia-mark";
+
 // Global modal system (single import surface)
 export { useModal, useModalStack, ModalProvider } from "@/lib/modals/store";
 export type { ModalId, ModalDataMap } from "@/lib/modals/types";
