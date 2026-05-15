@@ -18,7 +18,7 @@ import {
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { PageHero } from "@/components/page-hero";
-import { DownloadGateModal } from "@/components/download-gate-modal";
+import { useModal } from "@/lib/modals/store";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -51,10 +51,9 @@ const fileTypeColors: Record<string, string> = {
 export default function FilesPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [gateModalOpen, setGateModalOpen] = useState(false);
-  const [selectedResource, setSelectedResource] = useState<ResourceFile | null>(null);
   const downloadTriggered = useRef(false);
   const searchString = useSearch();
+  const { open: openModal } = useModal();
 
   const { data: filesData, isLoading } = useQuery<{ success: boolean; data: ResourceFile[] | { items: ResourceFile[] } }>({
     queryKey: ["/api/files"],
@@ -89,9 +88,8 @@ export default function FilesPage() {
         const resourceToDownload = files.find(f => f.slug === downloadSlug);
         if (resourceToDownload) {
           downloadTriggered.current = true;
-          setSelectedResource(resourceToDownload);
-          setGateModalOpen(true);
-          
+          openModal('download-gate', { resource: resourceToDownload });
+
           // Track view for deep-linked resource
           apiRequest("POST", `/api/files/${resourceToDownload.id}/view`).catch(() => {});
         }
@@ -100,9 +98,8 @@ export default function FilesPage() {
   }, [files, searchString]);
 
   const handleDownload = async (file: ResourceFile) => {
-    setSelectedResource(file);
-    setGateModalOpen(true);
-    
+    openModal('download-gate', { resource: file });
+
     // Track view when user opens download modal
     try {
       await apiRequest("POST", `/api/files/${file.id}/view`);
@@ -351,12 +348,7 @@ export default function FilesPage() {
       </main>
 
       <Footer />
-      
-      <DownloadGateModal
-        resource={selectedResource}
-        open={gateModalOpen}
-        onOpenChange={setGateModalOpen}
-      />
+      {/* DownloadGateModal is now rendered by GlobalModalHost when opened via useModal('download-gate', {resource}) */}
     </div>
   );
 }

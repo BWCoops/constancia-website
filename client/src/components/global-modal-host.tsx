@@ -29,11 +29,20 @@ export function GlobalModalHost() {
         if (!Component) return null;
 
         const onClose = () => close({ key: modal.key });
+        // Bridge to shadcn Dialog-style components that expect onOpenChange:
+        // when the modal flips its `open` state to false, treat as close.
+        const onOpenChange = (open: boolean) => { if (!open) onClose(); };
         const data = (modal.data ?? {}) as Record<string, unknown>;
 
         return (
           <Suspense key={modal.key} fallback={null}>
-            <Component {...data} onClose={onClose} isOpen={true} open={true} />
+            <Component
+              {...data}
+              onClose={onClose}
+              isOpen={true}
+              open={true}
+              onOpenChange={onOpenChange}
+            />
           </Suspense>
         );
       })}

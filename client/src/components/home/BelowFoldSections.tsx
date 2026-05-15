@@ -243,8 +243,14 @@ export function BelowFoldSections() {
       </section>
 
       {/* ── Tools ── */}
-      <section className="section-secondary">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section className="section-secondary relative">
+        <Suspense fallback={null}>
+          <div className="absolute top-16 left-6 lg:left-16 opacity-45 pointer-events-none">
+            <SectionAccent3D variant="mint" size={150} />
+          </div>
+        </Suspense>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="text-center mb-12">
             <span className="section-tag mb-4">Tools &amp; Accelerators</span>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Start Your Evaluation</h2>
@@ -309,8 +315,14 @@ export function BelowFoldSections() {
       </section>
 
       {/* ── About ── */}
-      <section className="section-primary">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section className="section-primary relative">
+        <Suspense fallback={null}>
+          <div className="hidden lg:block absolute bottom-12 right-12 opacity-50 pointer-events-none">
+            <SectionAccent3D variant="berry" size={180} />
+          </div>
+        </Suspense>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           <div ref={aboutReveal.ref} style={revealStyle(aboutReveal.visible)}>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div>
@@ -365,8 +377,14 @@ export function BelowFoldSections() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="section-secondary" style={{ paddingBottom: '120px' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section className="section-secondary relative" style={{ paddingBottom: '120px' }}>
+        <Suspense fallback={null}>
+          <div className="absolute -top-4 left-1/2 -translate-x-1/2 opacity-55 pointer-events-none">
+            <SectionAccent3D variant="mint" size={120} />
+          </div>
+        </Suspense>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           <div ref={ctaReveal.ref} style={revealStyle(ctaReveal.visible)}>
             <GlassCard className="p-8 sm:p-12 text-center">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">

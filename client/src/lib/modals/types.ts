@@ -21,7 +21,10 @@ export type ModalId =
  * so call-sites get full type safety.
  */
 export interface ModalDataMap {
-  'download-gate': { resourceId: string; resourceTitle?: string };
+  // DownloadGateModal accepts the full ResourceFile object so it can show
+  // the right title, file type, etc. Typed as `unknown` here to avoid
+  // dragging shared/schema into this lib; the consumer types it correctly.
+  'download-gate': { resource: unknown };
   'export-gate':   { exportType: 'pdf' | 'xlsx'; subjectId?: string };
   'chart-popout':  { chartId: string; title?: string };
   'table-popout':  { tableId: string; title?: string };
