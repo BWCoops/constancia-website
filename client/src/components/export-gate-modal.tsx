@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion, AnimatePresence } from "framer-motion";
 import { Turnstile, useTurnstileToken } from "@/components/turnstile";
+import { dlog } from "@/lib/dev-log";
 import {
   Dialog,
   DialogContent,
@@ -157,13 +158,13 @@ export function ExportGateModal({ exportConfig, open, onOpenChange, onExportAppr
       return response.json();
     },
     onSuccess: (data) => {
-      console.log("[ExportGateModal] OTP verification success, data:", data);
+      dlog("[ExportGateModal] OTP verification success, data:", data);
       if (data.verified) {
-        console.log("[ExportGateModal] OTP verified, calling handleExportApproved");
+        dlog("[ExportGateModal] OTP verified, calling handleExportApproved");
         setStep("success");
         trackLeadCaptured("comparison_export_otp", { exportType: exportConfig?.type, categoryType: exportConfig?.categoryType, verified: true });
         handleExportApproved();
-        console.log("[ExportGateModal] handleExportApproved returned");
+        dlog("[ExportGateModal] handleExportApproved returned");
       }
     },
     onError: (error: Error) => {

@@ -1,6 +1,7 @@
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
 import type { Workbook, Cell } from "exceljs";
+import { dlog } from "@/lib/dev-log";
 
 import logoWhite from "@assets/brand/Constancia-Logo-ML-Transparent.png";
 import logoBlue from "@assets/brand/Constancia-Logo-PD-Transparent.png";
@@ -420,7 +421,7 @@ export async function exportToPDF(data: ExportData, toast?: ToastFunction): Prom
     return;
   }
 
-  console.log("[PDFExport] Using server-side Adobe PDF generation");
+  dlog("[PDFExport] Using server-side Adobe PDF generation");
   
   try {
     toast?.({
@@ -1950,7 +1951,7 @@ async function _legacyExportToPDF(data: ExportData, toast?: ToastFunction): Prom
 }
 
 export async function exportToExcel(data: ExportData, toast?: ToastFunction): Promise<void> {
-  console.log("[ExcelExport] Starting Excel export...");
+  dlog("[ExcelExport] Starting Excel export...");
   
   const validation = validateExportData(data);
   if (!validation.valid) {
@@ -1963,7 +1964,7 @@ export async function exportToExcel(data: ExportData, toast?: ToastFunction): Pr
     return;
   }
 
-  console.log("[ExcelExport] Loading ExcelJS...");
+  dlog("[ExcelExport] Loading ExcelJS...");
   
   // Dynamic import of ExcelJS - try multiple import patterns for compatibility
   let ExcelJS: any;
@@ -1978,12 +1979,12 @@ export async function exportToExcel(data: ExportData, toast?: ToastFunction): Pr
       ExcelJS = { Workbook: module.Workbook };
     }
     
-    console.log("[ExcelExport] ExcelJS loaded, checking Workbook...");
+    dlog("[ExcelExport] ExcelJS loaded, checking Workbook...");
     
     // Verify Workbook class exists
     if (!ExcelJS.Workbook) {
       // Last resort: try the browser bundle
-      console.log("[ExcelExport] Workbook not found, trying browser bundle...");
+      dlog("[ExcelExport] Workbook not found, trying browser bundle...");
       const browserModule = await import("exceljs/dist/exceljs.min.js");
       ExcelJS = browserModule.default || browserModule;
     }
@@ -1992,7 +1993,7 @@ export async function exportToExcel(data: ExportData, toast?: ToastFunction): Pr
       throw new Error("ExcelJS.Workbook class not found in any loaded module");
     }
     
-    console.log("[ExcelExport] ExcelJS ready with Workbook class");
+    dlog("[ExcelExport] ExcelJS ready with Workbook class");
   } catch (error) {
     console.error("[ExcelExport] Failed to load ExcelJS:", error);
     toast?.({
@@ -2003,12 +2004,12 @@ export async function exportToExcel(data: ExportData, toast?: ToastFunction): Pr
     return;
   }
 
-  console.log("[ExcelExport] Creating workbook...");
+  dlog("[ExcelExport] Creating workbook...");
   
   let workbook: Workbook;
   try {
     workbook = new ExcelJS.Workbook();
-    console.log("[ExcelExport] Workbook created successfully");
+    dlog("[ExcelExport] Workbook created successfully");
   } catch (error) {
     console.error("[ExcelExport] Failed to create workbook:", error);
     toast?.({
@@ -5144,18 +5145,18 @@ export async function exportToExcel(data: ExportData, toast?: ToastFunction): Pr
   // Generate and download with error handling
   const fileName = `Constancia-${data.categoryType.toUpperCase()}-Comparison-${new Date().toISOString().split("T")[0]}.xlsx`;
   
-  console.log("[ExcelExport] Generating Excel buffer...");
+  dlog("[ExcelExport] Generating Excel buffer...");
   
   let buffer: ArrayBuffer;
   try {
     buffer = await workbook.xlsx.writeBuffer();
-    console.log("[ExcelExport] Buffer generated, size:", buffer.byteLength, "bytes");
+    dlog("[ExcelExport] Buffer generated, size:", buffer.byteLength, "bytes");
     
     const blob = new Blob([buffer], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
-    console.log("[ExcelExport] Blob created, size:", blob.size, "bytes");
+    dlog("[ExcelExport] Blob created, size:", blob.size, "bytes");
     
     const url = URL.createObjectURL(blob);
-    console.log("[ExcelExport] Object URL created:", url);
+    dlog("[ExcelExport] Object URL created:", url);
     
     // Detect mobile/iOS for different download handling
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
@@ -5165,7 +5166,7 @@ export async function exportToExcel(data: ExportData, toast?: ToastFunction): Pr
     
     if (isIOS) {
       // iOS Safari doesn't support download attribute well - open in new tab
-      console.log("[ExcelExport] iOS detected, opening in new tab");
+      dlog("[ExcelExport] iOS detected, opening in new tab");
       const newWindow = window.open(url, '_blank');
       if (!newWindow) {
         // Popup blocked - fall back to location change
@@ -5184,14 +5185,14 @@ export async function exportToExcel(data: ExportData, toast?: ToastFunction): Pr
       link.download = fileName;
       link.style.display = 'none';
       document.body.appendChild(link);
-      console.log("[ExcelExport] Triggering download for:", fileName);
+      dlog("[ExcelExport] Triggering download for:", fileName);
       link.click();
       
       // Delay cleanup to ensure download starts
       setTimeout(() => {
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
-        console.log("[ExcelExport] Download triggered and cleaned up");
+        dlog("[ExcelExport] Download triggered and cleaned up");
       }, isMobile ? 3000 : 1000);
       
       toast?.({

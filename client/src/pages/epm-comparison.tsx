@@ -134,6 +134,7 @@ import { Footer } from "@/components/footer";
 import { SEOHead } from "@/components/seo-head";
 import { CookiePreferencesIcon } from "@/components/cookie-consent";
 import { useModal } from "@/lib/modals/store";
+import { dlog } from "@/lib/dev-log";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
@@ -3842,8 +3843,8 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
     const currentPresetLabel = selectedPreset ? presetOptions.find(p => p.id === selectedPreset)?.label : null;
     
     return async () => {
-      console.log("[ExportFunction] Export function called, type:", exportType);
-      console.log("[ExportFunction] Data snapshot:", {
+      dlog("[ExportFunction] Export function called, type:", exportType);
+      dlog("[ExportFunction] Data snapshot:", {
         categoryType: currentCategoryType,
         platformsCount: currentSelectedPlatformsData?.length,
         categoriesCount: currentCategories?.length,
@@ -3872,7 +3873,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
       } : currentCompanyProfile;
 
       if (exportType === "pdf") {
-        console.log("[ExportFunction] Starting PDF export...");
+        dlog("[ExportFunction] Starting PDF export...");
         setIsExportingPDF(true);
         try {
           // Dynamic import - only loads PDF export code when user actually exports
@@ -3893,7 +3894,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
             industryLabel: currentIndustryLabel,
             presetLabel: currentPresetLabel,
           }, toast);
-          console.log("[ExportFunction] PDF export completed successfully");
+          dlog("[ExportFunction] PDF export completed successfully");
           trackComparisonExport("epm", "pdf");
         } catch (error) {
           console.error("[ExportFunction] PDF export error:", error);
@@ -3902,7 +3903,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
           setIsExportingPDF(false);
         }
       } else if (exportType === "excel") {
-        console.log("[ExportFunction] Starting Excel export...");
+        dlog("[ExportFunction] Starting Excel export...");
         setIsExportingExcel(true);
         try {
           // Dynamic import - only loads Excel export code when user actually exports
@@ -3918,7 +3919,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
             companyProfile: exportProfile,
             chartImages,
           }, toast);
-          console.log("[ExportFunction] Excel export completed successfully");
+          dlog("[ExportFunction] Excel export completed successfully");
           trackComparisonExport("epm", "excel");
         } catch (error) {
           console.error("[ExportFunction] Excel export error:", error);
