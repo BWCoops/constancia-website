@@ -45,6 +45,7 @@ import {
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import AdminLayout from "./AdminLayout";
+import { AdminQueryErrorBanner } from "./components/AdminQueryErrorBanner";
 import { 
   LineChart, 
   Line, 
@@ -221,152 +222,152 @@ function TrendIndicator({ change, label }: { change: number; label: string }) {
 function AnalyticsContent() {
   const [period, setPeriod] = useState("30");
 
-  const { data: overview, isLoading: overviewLoading } = useQuery<AnalyticsOverview>({
+  const { data: overview, isLoading: overviewLoading, error: overviewError } = useQuery<AnalyticsOverview>({
     queryKey: ["/api/admin/analytics/overview", period],
     queryFn: async () => {
       const res = await fetch(`/api/admin/analytics/overview?days=${period}`, { credentials: "include" });
-      if (!res.ok) throw new Error("Failed to fetch");
+      if (!res.ok) throw new Error(`${res.status}: ${res.statusText || "Failed to fetch"}`);
       return res.json();
     },
   });
 
-  const { data: topPages, isLoading: pagesLoading } = useQuery<TopPage[]>({
+  const { data: topPages, isLoading: pagesLoading, error: pagesError } = useQuery<TopPage[]>({
     queryKey: ["/api/admin/analytics/top-pages", period],
     queryFn: async () => {
       const res = await fetch(`/api/admin/analytics/top-pages?days=${period}`, { credentials: "include" });
-      if (!res.ok) throw new Error("Failed to fetch");
+      if (!res.ok) throw new Error(`${res.status}: ${res.statusText || "Failed to fetch"}`);
       return res.json();
     },
   });
 
-  const { data: sources, isLoading: sourcesLoading } = useQuery<TrafficSource[]>({
+  const { data: sources, isLoading: sourcesLoading, error: sourcesError } = useQuery<TrafficSource[]>({
     queryKey: ["/api/admin/analytics/traffic-sources", period],
     queryFn: async () => {
       const res = await fetch(`/api/admin/analytics/traffic-sources?days=${period}`, { credentials: "include" });
-      if (!res.ok) throw new Error("Failed to fetch");
+      if (!res.ok) throw new Error(`${res.status}: ${res.statusText || "Failed to fetch"}`);
       return res.json();
     },
   });
 
-  const { data: devices, isLoading: devicesLoading } = useQuery<DeviceBreakdown[]>({
+  const { data: devices, isLoading: devicesLoading, error: devicesError } = useQuery<DeviceBreakdown[]>({
     queryKey: ["/api/admin/analytics/devices", period],
     queryFn: async () => {
       const res = await fetch(`/api/admin/analytics/devices?days=${period}`, { credentials: "include" });
-      if (!res.ok) throw new Error("Failed to fetch");
+      if (!res.ok) throw new Error(`${res.status}: ${res.statusText || "Failed to fetch"}`);
       return res.json();
     },
   });
 
-  const { data: dailyStats, isLoading: dailyLoading } = useQuery<DailyStats[]>({
+  const { data: dailyStats, isLoading: dailyLoading, error: dailyError } = useQuery<DailyStats[]>({
     queryKey: ["/api/admin/analytics/daily", period],
     queryFn: async () => {
       const res = await fetch(`/api/admin/analytics/daily?days=${period}`, { credentials: "include" });
-      if (!res.ok) throw new Error("Failed to fetch");
+      if (!res.ok) throw new Error(`${res.status}: ${res.statusText || "Failed to fetch"}`);
       return res.json();
     },
   });
 
-  const { data: trends, isLoading: trendsLoading } = useQuery<TrendsData>({
+  const { data: trends, isLoading: trendsLoading, error: trendsError } = useQuery<TrendsData>({
     queryKey: ["/api/admin/analytics/trends", period],
     queryFn: async () => {
       const res = await fetch(`/api/admin/analytics/trends?days=${period}`, { credentials: "include" });
-      if (!res.ok) throw new Error("Failed to fetch");
+      if (!res.ok) throw new Error(`${res.status}: ${res.statusText || "Failed to fetch"}`);
       return res.json();
     },
   });
 
-  const { data: engagement, isLoading: engagementLoading } = useQuery<EngagementData>({
+  const { data: engagement, isLoading: engagementLoading, error: engagementError } = useQuery<EngagementData>({
     queryKey: ["/api/admin/analytics/engagement", period],
     queryFn: async () => {
       const res = await fetch(`/api/admin/analytics/engagement?days=${period}`, { credentials: "include" });
-      if (!res.ok) throw new Error("Failed to fetch");
+      if (!res.ok) throw new Error(`${res.status}: ${res.statusText || "Failed to fetch"}`);
       return res.json();
     },
   });
 
-  const { data: blogStats, isLoading: blogLoading } = useQuery<BlogStats>({
+  const { data: blogStats, isLoading: blogLoading, error: blogError } = useQuery<BlogStats>({
     queryKey: ["/api/admin/analytics/blog-stats", period],
     queryFn: async () => {
       const res = await fetch(`/api/admin/analytics/blog-stats?days=${period}`, { credentials: "include" });
-      if (!res.ok) throw new Error("Failed to fetch");
+      if (!res.ok) throw new Error(`${res.status}: ${res.statusText || "Failed to fetch"}`);
       return res.json();
     },
   });
 
-  const { data: countries, isLoading: countriesLoading } = useQuery<CountryData[]>({
+  const { data: countries, isLoading: countriesLoading, error: countriesError } = useQuery<CountryData[]>({
     queryKey: ["/api/admin/analytics/countries", period],
     queryFn: async () => {
       const res = await fetch(`/api/admin/analytics/countries?days=${period}`, { credentials: "include" });
-      if (!res.ok) throw new Error("Failed to fetch");
+      if (!res.ok) throw new Error(`${res.status}: ${res.statusText || "Failed to fetch"}`);
       return res.json();
     },
   });
 
-  const { data: leadsSummary, isLoading: leadsLoading } = useQuery<LeadsSummary>({
+  const { data: leadsSummary, isLoading: leadsLoading, error: leadsError } = useQuery<LeadsSummary>({
     queryKey: ["/api/admin/analytics/leads-summary", period],
     queryFn: async () => {
       const res = await fetch(`/api/admin/analytics/leads-summary?days=${period}`, { credentials: "include" });
-      if (!res.ok) throw new Error("Failed to fetch");
+      if (!res.ok) throw new Error(`${res.status}: ${res.statusText || "Failed to fetch"}`);
       return res.json();
     },
   });
 
-  const { data: realtime, refetch: refetchRealtime } = useQuery<RealtimeData>({
+  const { data: realtime, refetch: refetchRealtime, error: realtimeError } = useQuery<RealtimeData>({
     queryKey: ["/api/admin/analytics/realtime"],
     queryFn: async () => {
       const res = await fetch(`/api/admin/analytics/realtime`, { credentials: "include" });
-      if (!res.ok) throw new Error("Failed to fetch");
+      if (!res.ok) throw new Error(`${res.status}: ${res.statusText || "Failed to fetch"}`);
       return res.json();
     },
     staleTime: 30000, // Data considered fresh for 30 seconds
     refetchInterval: 30000,
   });
 
-  const { data: hourlyData, isLoading: hourlyLoading } = useQuery<HourlyData[]>({
+  const { data: hourlyData, isLoading: hourlyLoading, error: hourlyError } = useQuery<HourlyData[]>({
     queryKey: ["/api/admin/analytics/hourly", period],
     queryFn: async () => {
       const res = await fetch(`/api/admin/analytics/hourly?days=${period}`, { credentials: "include" });
-      if (!res.ok) throw new Error("Failed to fetch");
+      if (!res.ok) throw new Error(`${res.status}: ${res.statusText || "Failed to fetch"}`);
       return res.json();
     },
     staleTime: 60000, // Data considered fresh for 1 minute
   });
 
-  const { data: browsers, isLoading: browsersLoading } = useQuery<BrowserData[]>({
+  const { data: browsers, isLoading: browsersLoading, error: browsersError } = useQuery<BrowserData[]>({
     queryKey: ["/api/admin/analytics/browsers", period],
     queryFn: async () => {
       const res = await fetch(`/api/admin/analytics/browsers?days=${period}`, { credentials: "include" });
-      if (!res.ok) throw new Error("Failed to fetch");
+      if (!res.ok) throw new Error(`${res.status}: ${res.statusText || "Failed to fetch"}`);
       return res.json();
     },
     staleTime: 60000, // Data considered fresh for 1 minute
   });
 
-  const { data: osData, isLoading: osLoading } = useQuery<OSData[]>({
+  const { data: osData, isLoading: osLoading, error: osError } = useQuery<OSData[]>({
     queryKey: ["/api/admin/analytics/os", period],
     queryFn: async () => {
       const res = await fetch(`/api/admin/analytics/os?days=${period}`, { credentials: "include" });
-      if (!res.ok) throw new Error("Failed to fetch");
+      if (!res.ok) throw new Error(`${res.status}: ${res.statusText || "Failed to fetch"}`);
       return res.json();
     },
     staleTime: 60000, // Data considered fresh for 1 minute
   });
 
-  const { data: downloadStats, isLoading: downloadsLoading } = useQuery<DownloadAnalytics>({
+  const { data: downloadStats, isLoading: downloadsLoading, error: downloadsError } = useQuery<DownloadAnalytics>({
     queryKey: ["/api/admin/analytics/downloads", period],
     queryFn: async () => {
       const res = await fetch(`/api/admin/analytics/downloads?days=${period}`, { credentials: "include" });
-      if (!res.ok) throw new Error("Failed to fetch");
+      if (!res.ok) throw new Error(`${res.status}: ${res.statusText || "Failed to fetch"}`);
       return res.json();
     },
     staleTime: 60000, // Data considered fresh for 1 minute
   });
 
-  const { data: weeklyComparison, isLoading: weeklyLoading } = useQuery<WeeklyComparison>({
+  const { data: weeklyComparison, isLoading: weeklyLoading, error: weeklyError } = useQuery<WeeklyComparison>({
     queryKey: ["/api/admin/analytics/weekly-comparison"],
     queryFn: async () => {
       const res = await fetch(`/api/admin/analytics/weekly-comparison`, { credentials: "include" });
-      if (!res.ok) throw new Error("Failed to fetch");
+      if (!res.ok) throw new Error(`${res.status}: ${res.statusText || "Failed to fetch"}`);
       return res.json();
     },
     staleTime: 120000, // Weekly data changes slowly - 2 minute stale time
@@ -378,6 +379,25 @@ function AnalyticsContent() {
     }, 30000);
     return () => clearInterval(interval);
   }, [refetchRealtime]);
+
+  const queryErrors = [
+    { label: "Overview",          error: overviewError },
+    { label: "Top pages",         error: pagesError },
+    { label: "Traffic sources",   error: sourcesError },
+    { label: "Devices",           error: devicesError },
+    { label: "Daily stats",       error: dailyError },
+    { label: "Trends",            error: trendsError },
+    { label: "Engagement",        error: engagementError },
+    { label: "Blog stats",        error: blogError },
+    { label: "Countries",         error: countriesError },
+    { label: "Leads summary",     error: leadsError },
+    { label: "Realtime",          error: realtimeError },
+    { label: "Hourly",            error: hourlyError },
+    { label: "Browsers",          error: browsersError },
+    { label: "OS",                error: osError },
+    { label: "Downloads",         error: downloadsError },
+    { label: "Weekly comparison", error: weeklyError },
+  ];
 
   const getDeviceIcon = (type: string | null) => {
     switch (type?.toLowerCase()) {
@@ -578,6 +598,8 @@ function AnalyticsContent() {
           </Select>
         </div>
       </div>
+
+      <AdminQueryErrorBanner errors={queryErrors} totalQueries={queryErrors.length} />
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card data-testid="card-page-views">

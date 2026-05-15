@@ -44,6 +44,7 @@ import {
   AlertCircle
 } from "lucide-react";
 import AdminLayout from "./AdminLayout";
+import { AdminQueryErrorBanner } from "./components/AdminQueryErrorBanner";
 
 function toNumber(value: unknown, fallback = 0): number {
   if (value === null || value === undefined || value === '') return fallback;
@@ -269,41 +270,54 @@ function DashboardContent() {
     queryKey: ["/api/admin/dashboard/stats"],
   });
 
-  const { data: analyticsOverview, isLoading: overviewLoading } = useQuery<AnalyticsOverview>({
+  const { data: analyticsOverview, isLoading: overviewLoading, error: overviewError } = useQuery<AnalyticsOverview>({
     queryKey: ["/api/admin/analytics/overview"],
   });
 
-  const { data: trends, isLoading: trendsLoading } = useQuery<AnalyticsTrends>({
+  const { data: trends, isLoading: trendsLoading, error: trendsError } = useQuery<AnalyticsTrends>({
     queryKey: ["/api/admin/analytics/trends"],
   });
 
-  const { data: topPages, isLoading: topPagesLoading } = useQuery<TopPage[]>({
+  const { data: topPages, isLoading: topPagesLoading, error: topPagesError } = useQuery<TopPage[]>({
     queryKey: ["/api/admin/analytics/top-pages"],
   });
 
-  const { data: trafficSources, isLoading: sourcesLoading } = useQuery<TrafficSource[]>({
+  const { data: trafficSources, isLoading: sourcesLoading, error: sourcesError } = useQuery<TrafficSource[]>({
     queryKey: ["/api/admin/analytics/traffic-sources"],
   });
 
-  const { data: devices, isLoading: devicesLoading } = useQuery<DeviceBreakdown[]>({
+  const { data: devices, isLoading: devicesLoading, error: devicesError } = useQuery<DeviceBreakdown[]>({
     queryKey: ["/api/admin/analytics/devices"],
   });
 
-  const { data: countries, isLoading: countriesLoading } = useQuery<CountryData[]>({
+  const { data: countries, isLoading: countriesLoading, error: countriesError } = useQuery<CountryData[]>({
     queryKey: ["/api/admin/analytics/countries"],
   });
 
-  const { data: engagement, isLoading: engagementLoading } = useQuery<EngagementData>({
+  const { data: engagement, isLoading: engagementLoading, error: engagementError } = useQuery<EngagementData>({
     queryKey: ["/api/admin/analytics/engagement"],
   });
 
-  const { data: recentLeads, isLoading: leadsLoading } = useQuery<Lead[]>({
+  const { data: recentLeads, isLoading: leadsLoading, error: leadsError } = useQuery<Lead[]>({
     queryKey: ["/api/admin/dashboard/recent-leads"],
   });
 
-  const { data: recentScans, isLoading: scansLoading } = useQuery<ScanScore[]>({
+  const { data: recentScans, isLoading: scansLoading, error: scansError } = useQuery<ScanScore[]>({
     queryKey: ["/api/admin/scans/recent"],
   });
+
+  const queryErrors = [
+    { label: "Dashboard stats",  error: statsError },
+    { label: "Overview",         error: overviewError },
+    { label: "Trends",           error: trendsError },
+    { label: "Top pages",        error: topPagesError },
+    { label: "Traffic sources",  error: sourcesError },
+    { label: "Devices",          error: devicesError },
+    { label: "Countries",        error: countriesError },
+    { label: "Engagement",       error: engagementError },
+    { label: "Recent leads",     error: leadsError },
+    { label: "Recent scans",     error: scansError },
+  ];
 
   const hasAnalyticsData = analyticsOverview && (analyticsOverview.pageViews > 0 || analyticsOverview.sessions > 0);
   const hasTrendData = trends && trends.pageViews && Number(trends.pageViews.current) > 0;
@@ -361,6 +375,8 @@ function DashboardContent() {
           </Badge>
         )}
       </div>
+
+      <AdminQueryErrorBanner errors={queryErrors} totalQueries={queryErrors.length} />
 
       {/* Key Metrics with Trends */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">

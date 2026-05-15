@@ -23,6 +23,7 @@ import {
   FileText
 } from "lucide-react";
 import AdminLayout from "./AdminLayout";
+import { AdminQueryErrorBanner } from "./components/AdminQueryErrorBanner";
 
 interface DownloadSummary {
   totalDownloads: number;
@@ -112,28 +113,34 @@ function formatDate(dateString: string | null): string {
 function DownloadsContent() {
   const [verifiedOnly, setVerifiedOnly] = useState(false);
 
-  const { data: summary, isLoading: summaryLoading } = useQuery<DownloadSummary>({
+  const { data: summary, isLoading: summaryLoading, error: summaryError } = useQuery<DownloadSummary>({
     queryKey: ["/api/admin/downloads/summary"],
   });
 
-  const { data: byResource, isLoading: byResourceLoading } = useQuery<ResourceDownload[]>({
+  const { data: byResource, isLoading: byResourceLoading, error: byResourceError } = useQuery<ResourceDownload[]>({
     queryKey: ["/api/admin/downloads/by-resource"],
   });
 
-  const { data: historyData, isLoading: historyLoading } = useQuery<DownloadHistoryResponse>({
+  const { data: historyData, isLoading: historyLoading, error: historyError } = useQuery<DownloadHistoryResponse>({
     queryKey: ["/api/admin/downloads/history", verifiedOnly],
     queryFn: async () => {
       const params = new URLSearchParams();
       if (verifiedOnly) params.set("verifiedOnly", "true");
-      const res = await fetch(`/api/admin/downloads/history?${params.toString()}`, { 
-        credentials: "include" 
+      const res = await fetch(`/api/admin/downloads/history?${params.toString()}`, {
+        credentials: "include",
       });
-      if (!res.ok) throw new Error("Failed to fetch download history");
+      if (!res.ok) throw new Error(`${res.status}: ${res.statusText || "Failed to fetch download history"}`);
       return res.json();
     },
   });
 
   const downloads = historyData?.downloads ?? [];
+
+  const queryErrors = [
+    { label: "Summary",         error: summaryError },
+    { label: "By resource",     error: byResourceError },
+    { label: "Download history", error: historyError },
+  ];
 
   return (
     <div className="space-y-6">
@@ -143,6 +150,8 @@ function DownloadsContent() {
           Track resource downloads and user engagement
         </p>
       </div>
+
+      <AdminQueryErrorBanner errors={queryErrors} totalQueries={queryErrors.length} />
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <StatsCard

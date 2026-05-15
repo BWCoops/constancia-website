@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import AdminLayout from "./AdminLayout";
+import { AdminQueryErrorBanner } from "./components/AdminQueryErrorBanner";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -95,17 +96,23 @@ export default function AdminAdFraud() {
   const { toast } = useToast();
   const [copiedIPs, setCopiedIPs] = useState(false);
 
-  const { data: stats, isLoading: statsLoading } = useQuery<AdFraudStats>({
+  const { data: stats, isLoading: statsLoading, error: statsError } = useQuery<AdFraudStats>({
     queryKey: ["/api/admin/ad-fraud/stats"],
   });
 
-  const { data: suspiciousIPs, isLoading: suspiciousLoading } = useQuery<SuspiciousIP[]>({
+  const { data: suspiciousIPs, isLoading: suspiciousLoading, error: suspiciousError } = useQuery<SuspiciousIP[]>({
     queryKey: ["/api/admin/ad-fraud/suspicious"],
   });
 
-  const { data: countryStats, isLoading: countriesLoading } = useQuery<CountryStat[]>({
+  const { data: countryStats, isLoading: countriesLoading, error: countriesError } = useQuery<CountryStat[]>({
     queryKey: ["/api/admin/ad-fraud/countries"],
   });
+
+  const queryErrors = [
+    { label: "Fraud stats",   error: statsError },
+    { label: "Suspicious IPs", error: suspiciousError },
+    { label: "Country stats", error: countriesError },
+  ];
 
   const copyIPList = () => {
     if (!suspiciousIPs || suspiciousIPs.length === 0) {
@@ -135,6 +142,8 @@ export default function AdminAdFraud() {
             <p className="text-muted-foreground">Monitor and identify suspicious ad clicks from Google Ads campaigns</p>
           </div>
         </div>
+
+        <AdminQueryErrorBanner errors={queryErrors} totalQueries={queryErrors.length} />
 
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {statsLoading ? (
