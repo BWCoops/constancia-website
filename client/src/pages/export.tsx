@@ -70,7 +70,7 @@ export default function ExportPage() {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
-        a.download = "1qg-wordpress-export.zip";
+        a.download = "constancia-wordpress-export.zip";
         document.body.appendChild(a);
         a.click();
         window.URL.revokeObjectURL(url);
@@ -163,7 +163,7 @@ export default function ExportPage() {
                   <Button
                     size="lg"
                     className="flex-1"
-                    onClick={() => window.open('/wordpress-theme/1qg-wordpress-theme.zip', '_blank')}
+                    onClick={() => window.open('/wordpress-theme/constancia-wordpress-theme.zip', '_blank')}
                     data-testid="button-download-theme"
                   >
                     <Download className="mr-2 h-5 w-5" aria-hidden="true" />
@@ -173,7 +173,7 @@ export default function ExportPage() {
                     size="lg"
                     variant="outline"
                     className="flex-1"
-                    onClick={() => window.open('/wordpress-theme/1qg-content-export.xml', '_blank')}
+                    onClick={() => window.open('/wordpress-theme/constancia-content-export.xml', '_blank')}
                     data-testid="button-download-wxr"
                   >
                     <FileText className="mr-2 h-5 w-5" aria-hidden="true" />

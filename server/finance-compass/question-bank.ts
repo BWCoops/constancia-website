@@ -2047,7 +2047,7 @@ export const FULL_ASSESSMENT_QUESTIONS: QuestionDefinition[] = [
 
   // ============================================
   // FULL ASSESSMENT - Additional Questions (Q41-Q62)
-  // Added from 1QG_all_95_questions JSON full_assessment sections
+  // Added from Constancia all-95-questions JSON full_assessment sections
   // ============================================
 
   // Dimension 1: Financial Planning & Analysis (Q1.4, Q1.5, Q1.6)

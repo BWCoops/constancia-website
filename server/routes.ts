@@ -60,7 +60,7 @@ const OTP_EXPIRY_MINUTES = 10;
 
 // Resource session configuration
 const SESSION_EXPIRY_DAYS = 7;
-const SESSION_COOKIE_NAME = "1qg_resource_session";
+const SESSION_COOKIE_NAME = "constancia_resource_session";
 
 const MAX_OTP_ATTEMPTS = 5;
 
@@ -1586,7 +1586,7 @@ export async function registerRoutes(
         content,
         heroImage,
         author: generatedPost.author || "Constancia Editorial Team",
-        authorAvatar: "/avatars/1qg-avatar.png",
+        authorAvatar: "/avatars/constancia-avatar.png",
         readingTime,
         publishedAt: new Date().toISOString(),
         categoryId: categoryId || "",
@@ -2195,7 +2195,7 @@ export async function registerRoutes(
       });
       
       res.setHeader("Content-Type", "application/pdf");
-      res.setHeader("Content-Disposition", 'attachment; filename="1qg-pdf-test.pdf"');
+      res.setHeader("Content-Disposition", 'attachment; filename="constancia-pdf-test.pdf"');
       res.setHeader("X-PDF-Method", result.method);
       res.send(result.buffer);
     } catch (error: any) {

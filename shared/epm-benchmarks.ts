@@ -24,8 +24,8 @@
  * 
  * Constancia Terminology:
  * - "typical" = baseline/median performance (P50)
- * - "1qg_good" = top quartile, what good looks like (P75)
- * - "1qg_best" = digital world class (P90+)
+ * - "constancia_good" = top quartile, what good looks like (P75)
+ * - "constancia_best" = digital world class (P90+)
  * 
  * Methodology:
  * - Cross-industry benchmarks aggregated from UK government open data
@@ -33,7 +33,7 @@
  * - All financial metrics calibrated for UK market conditions
  */
 
-export type BenchmarkTier = 'typical' | '1qg_good' | '1qg_best';
+export type BenchmarkTier = 'typical' | 'constancia_good' | 'constancia_best';
 
 export interface BenchmarkRange {
   min: number;
@@ -63,8 +63,8 @@ export interface BenchmarkMetric {
   unit: string;
   category: BenchmarkCategory;
   typical: BenchmarkRange;
-  '1qg_good': BenchmarkRange;
-  '1qg_best'?: BenchmarkRange;
+  'constancia_good': BenchmarkRange;
+  'constancia_best'?: BenchmarkRange;
   source: string;
   lowerIsBetter: boolean;
 }
@@ -72,8 +72,8 @@ export interface BenchmarkMetric {
 export interface IndustryOverrides {
   [metricId: string]: {
     typical?: BenchmarkRange;
-    '1qg_good'?: BenchmarkRange;
-    '1qg_best'?: BenchmarkRange;
+    'constancia_good'?: BenchmarkRange;
+    'constancia_best'?: BenchmarkRange;
   };
 }
 
@@ -86,7 +86,7 @@ export interface Industry {
     [key: string]: {
       name: string;
       typical: BenchmarkRange;
-      '1qg_good'?: BenchmarkRange;
+      'constancia_good'?: BenchmarkRange;
     };
   };
 }
@@ -105,8 +105,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: '%',
     category: 'finance_cost',
     typical: { min: 1.0, max: 1.5, mid: 1.25 },
-    '1qg_good': { min: 0.6, max: 0.9, mid: 0.75 },
-    '1qg_best': { min: 0.4, max: 0.7, mid: 0.54 },
+    'constancia_good': { min: 0.6, max: 0.9, mid: 0.75 },
+    'constancia_best': { min: 0.4, max: 0.7, mid: 0.54 },
     source: 'Constancia Analysis (ONS Business Statistics)',
     lowerIsBetter: true,
   },
@@ -118,8 +118,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: 'FTEs',
     category: 'finance_cost',
     typical: { min: 800, max: 1000, mid: 900 },
-    '1qg_good': { min: 400, max: 600, mid: 500 },
-    '1qg_best': { min: 350, max: 450, mid: 400 },
+    'constancia_good': { min: 400, max: 600, mid: 500 },
+    'constancia_best': { min: 350, max: 450, mid: 400 },
     source: 'Constancia Analysis (ONS Business Statistics)',
     lowerIsBetter: true,
   },
@@ -131,7 +131,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: '£k',
     category: 'finance_cost',
     typical: { min: 70, max: 90, mid: 80 },
-    '1qg_good': { min: 55, max: 70, mid: 62 },
+    'constancia_good': { min: 55, max: 70, mid: 62 },
     source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: true,
   },
@@ -145,8 +145,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: 'days',
     category: 'cycle_time',
     typical: { min: 8, max: 12, mid: 10 },
-    '1qg_good': { min: 4, max: 5, mid: 4.5 },
-    '1qg_best': { min: 1, max: 2, mid: 1.5 },
+    'constancia_good': { min: 4, max: 5, mid: 4.5 },
+    'constancia_best': { min: 1, max: 2, mid: 1.5 },
     source: 'Constancia Analysis (ONS Business Statistics)',
     lowerIsBetter: true,
   },
@@ -158,7 +158,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: 'days',
     category: 'planning',
     typical: { min: 120, max: 150, mid: 135 },
-    '1qg_good': { min: 60, max: 90, mid: 75 },
+    'constancia_good': { min: 60, max: 90, mid: 75 },
     source: 'Constancia Analysis (NAO Studies)',
     lowerIsBetter: true,
   },
@@ -170,8 +170,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: 'days',
     category: 'planning',
     typical: { min: 19, max: 30, mid: 24 },
-    '1qg_good': { min: 10, max: 15, mid: 12 },
-    '1qg_best': { min: 5, max: 7, mid: 6 },
+    'constancia_good': { min: 10, max: 15, mid: 12 },
+    'constancia_best': { min: 5, max: 7, mid: 6 },
     source: 'Constancia Analysis (NAO Studies)',
     lowerIsBetter: true,
   },
@@ -183,8 +183,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: 'days',
     category: 'consolidation',
     typical: { min: 10, max: 15, mid: 12.5 },
-    '1qg_good': { min: 2, max: 4, mid: 3 },
-    '1qg_best': { min: 1, max: 2, mid: 1.5 },
+    'constancia_good': { min: 2, max: 4, mid: 3 },
+    'constancia_best': { min: 1, max: 2, mid: 1.5 },
     source: 'Constancia Analysis (ONS, Companies House)',
     lowerIsBetter: true,
   },
@@ -198,8 +198,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: '%',
     category: 'planning',
     typical: { min: 80, max: 85, mid: 82.5 },
-    '1qg_good': { min: 90, max: 95, mid: 92.5 },
-    '1qg_best': { min: 95, max: 99, mid: 97 },
+    'constancia_good': { min: 90, max: 95, mid: 92.5 },
+    'constancia_best': { min: 95, max: 99, mid: 97 },
     source: 'Constancia Analysis (NAO Forecasting)',
     lowerIsBetter: false,
   },
@@ -211,7 +211,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: '%',
     category: 'planning',
     typical: { min: 15, max: 25, mid: 20 },
-    '1qg_good': { min: 3, max: 8, mid: 5 },
+    'constancia_good': { min: 3, max: 8, mid: 5 },
     source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: true,
   },
@@ -222,8 +222,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: 'count',
     category: 'planning',
     typical: { min: 1, max: 2, mid: 1.5 },
-    '1qg_good': { min: 5, max: 10, mid: 7 },
-    '1qg_best': { min: 10, max: 20, mid: 15 },
+    'constancia_good': { min: 5, max: 10, mid: 7 },
+    'constancia_best': { min: 10, max: 20, mid: 15 },
     source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
@@ -236,8 +236,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: 'count',
     category: 'consolidation',
     typical: { min: 50, max: 100, mid: 75 },
-    '1qg_good': { min: 10, max: 20, mid: 15 },
-    '1qg_best': { min: 2, max: 5, mid: 3.5 },
+    'constancia_good': { min: 10, max: 20, mid: 15 },
+    'constancia_best': { min: 2, max: 5, mid: 3.5 },
     source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: true,
   },
@@ -248,8 +248,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: '%',
     category: 'consolidation',
     typical: { min: 2, max: 5, mid: 3.5 },
-    '1qg_good': { min: 0.2, max: 0.5, mid: 0.35 },
-    '1qg_best': { min: 0, max: 0.1, mid: 0.05 },
+    'constancia_good': { min: 0.2, max: 0.5, mid: 0.35 },
+    'constancia_best': { min: 0, max: 0.1, mid: 0.05 },
     source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: true,
   },
@@ -260,7 +260,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: 'count',
     category: 'consolidation',
     typical: { min: 15, max: 30, mid: 22 },
-    '1qg_good': { min: 2, max: 5, mid: 3.5 },
+    'constancia_good': { min: 2, max: 5, mid: 3.5 },
     source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: true,
   },
@@ -271,8 +271,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: 'hours',
     category: 'consolidation',
     typical: { min: 80, max: 120, mid: 100 },
-    '1qg_good': { min: 30, max: 50, mid: 40 },
-    '1qg_best': { min: 10, max: 20, mid: 15 },
+    'constancia_good': { min: 30, max: 50, mid: 40 },
+    'constancia_best': { min: 10, max: 20, mid: 15 },
     source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: true,
   },
@@ -286,8 +286,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: '%',
     category: 'reporting',
     typical: { min: 20, max: 40, mid: 30 },
-    '1qg_good': { min: 70, max: 85, mid: 77 },
-    '1qg_best': { min: 85, max: 95, mid: 90 },
+    'constancia_good': { min: 70, max: 85, mid: 77 },
+    'constancia_best': { min: 85, max: 95, mid: 90 },
     source: 'Constancia Analysis (ONS Business Statistics)',
     lowerIsBetter: false,
   },
@@ -298,8 +298,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: 'minutes',
     category: 'reporting',
     typical: { min: 120, max: 240, mid: 180 },
-    '1qg_good': { min: 15, max: 30, mid: 22 },
-    '1qg_best': { min: 1, max: 5, mid: 3 },
+    'constancia_good': { min: 15, max: 30, mid: 22 },
+    'constancia_best': { min: 1, max: 5, mid: 3 },
     source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: true,
   },
@@ -310,8 +310,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: '%',
     category: 'reporting',
     typical: { min: 20, max: 30, mid: 25 },
-    '1qg_good': { min: 60, max: 80, mid: 70 },
-    '1qg_best': { min: 80, max: 95, mid: 87 },
+    'constancia_good': { min: 60, max: 80, mid: 70 },
+    'constancia_best': { min: 80, max: 95, mid: 87 },
     source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
@@ -322,8 +322,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: 'hours',
     category: 'reporting',
     typical: { min: 72, max: 120, mid: 96 },
-    '1qg_good': { min: 8, max: 24, mid: 16 },
-    '1qg_best': { min: 1, max: 2, mid: 1.5 },
+    'constancia_good': { min: 8, max: 24, mid: 16 },
+    'constancia_best': { min: 1, max: 2, mid: 1.5 },
     source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: true,
   },
@@ -337,7 +337,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: 'days',
     category: 'working_capital',
     typical: { min: 35, max: 55, mid: 45 },
-    '1qg_good': { min: 15, max: 25, mid: 20 },
+    'constancia_good': { min: 15, max: 25, mid: 20 },
     source: 'Constancia Analysis (Companies House Data)',
     lowerIsBetter: true,
   },
@@ -349,7 +349,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: 'days',
     category: 'working_capital',
     typical: { min: 35, max: 45, mid: 40 },
-    '1qg_good': { min: 55, max: 75, mid: 65 },
+    'constancia_good': { min: 55, max: 75, mid: 65 },
     source: 'Constancia Analysis (Companies House Data)',
     lowerIsBetter: false,
   },
@@ -361,7 +361,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: 'days',
     category: 'working_capital',
     typical: { min: 45, max: 90, mid: 67 },
-    '1qg_good': { min: 25, max: 35, mid: 30 },
+    'constancia_good': { min: 25, max: 35, mid: 30 },
     source: 'Constancia Analysis (Companies House Data)',
     lowerIsBetter: true,
   },
@@ -373,7 +373,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: 'days',
     category: 'working_capital',
     typical: { min: 40, max: 90, mid: 65 },
-    '1qg_good': { min: 0, max: 20, mid: 10 },
+    'constancia_good': { min: 0, max: 20, mid: 10 },
     source: 'Constancia Analysis (Companies House Data)',
     lowerIsBetter: true,
   },
@@ -387,7 +387,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: '£',
     category: 'accounts_payable',
     typical: { min: 8, max: 15, mid: 11 },
-    '1qg_good': { min: 2, max: 5, mid: 3.5 },
+    'constancia_good': { min: 2, max: 5, mid: 3.5 },
     source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: true,
   },
@@ -398,7 +398,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: 'days',
     category: 'accounts_payable',
     typical: { min: 7, max: 10, mid: 8.5 },
-    '1qg_good': { min: 3, max: 5, mid: 4 },
+    'constancia_good': { min: 3, max: 5, mid: 4 },
     source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: true,
   },
@@ -409,7 +409,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: '%',
     category: 'accounts_payable',
     typical: { min: 30, max: 50, mid: 40 },
-    '1qg_good': { min: 80, max: 95, mid: 87 },
+    'constancia_good': { min: 80, max: 95, mid: 87 },
     source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
@@ -420,7 +420,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: '%',
     category: 'accounts_payable',
     typical: { min: 70, max: 85, mid: 77 },
-    '1qg_good': { min: 95, max: 99, mid: 97 },
+    'constancia_good': { min: 95, max: 99, mid: 97 },
     source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
@@ -433,7 +433,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: 'days',
     category: 'accounts_receivable',
     typical: { min: 35, max: 60, mid: 47 },
-    '1qg_good': { min: 20, max: 30, mid: 25 },
+    'constancia_good': { min: 20, max: 30, mid: 25 },
     source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: true,
   },
@@ -444,7 +444,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: '%',
     category: 'accounts_receivable',
     typical: { min: 40, max: 60, mid: 50 },
-    '1qg_good': { min: 85, max: 95, mid: 90 },
+    'constancia_good': { min: 85, max: 95, mid: 90 },
     source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
@@ -455,7 +455,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: '%',
     category: 'accounts_receivable',
     typical: { min: 0.5, max: 2.0, mid: 1.25 },
-    '1qg_good': { min: 0.1, max: 0.3, mid: 0.2 },
+    'constancia_good': { min: 0.1, max: 0.3, mid: 0.2 },
     source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: true,
   },
@@ -468,8 +468,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: '%',
     category: 'technology',
     typical: { min: 15, max: 30, mid: 22 },
-    '1qg_good': { min: 50, max: 70, mid: 60 },
-    '1qg_best': { min: 70, max: 90, mid: 80 },
+    'constancia_good': { min: 50, max: 70, mid: 60 },
+    'constancia_best': { min: 70, max: 90, mid: 80 },
     source: 'Constancia Analysis (ONS Digital Economy Survey)',
     lowerIsBetter: false,
   },
@@ -480,8 +480,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: 'score',
     category: 'technology',
     typical: { min: 4, max: 6, mid: 5 },
-    '1qg_good': { min: 7, max: 8, mid: 7.5 },
-    '1qg_best': { min: 8, max: 10, mid: 9 },
+    'constancia_good': { min: 7, max: 8, mid: 7.5 },
+    'constancia_best': { min: 8, max: 10, mid: 9 },
     source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
@@ -492,8 +492,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: '%',
     category: 'technology',
     typical: { min: 30, max: 50, mid: 40 },
-    '1qg_good': { min: 70, max: 85, mid: 77 },
-    '1qg_best': { min: 85, max: 98, mid: 92 },
+    'constancia_good': { min: 70, max: 85, mid: 77 },
+    'constancia_best': { min: 85, max: 98, mid: 92 },
     source: 'Constancia Analysis (ONS Digital Economy Survey)',
     lowerIsBetter: false,
   },
@@ -504,8 +504,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: '%',
     category: 'technology',
     typical: { min: 5, max: 15, mid: 10 },
-    '1qg_good': { min: 25, max: 40, mid: 32 },
-    '1qg_best': { min: 40, max: 60, mid: 50 },
+    'constancia_good': { min: 25, max: 40, mid: 32 },
+    'constancia_best': { min: 40, max: 60, mid: 50 },
     source: 'Constancia Analysis (ONS Business Statistics)',
     lowerIsBetter: false,
   },
@@ -516,8 +516,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: 'score',
     category: 'technology',
     typical: { min: 60, max: 75, mid: 67 },
-    '1qg_good': { min: 85, max: 92, mid: 88 },
-    '1qg_best': { min: 92, max: 99, mid: 95 },
+    'constancia_good': { min: 85, max: 92, mid: 88 },
+    'constancia_best': { min: 92, max: 99, mid: 95 },
     source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
@@ -528,8 +528,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: 'count',
     category: 'technology',
     typical: { min: 3, max: 8, mid: 5 },
-    '1qg_good': { min: 0, max: 2, mid: 1 },
-    '1qg_best': { min: 0, max: 0, mid: 0 },
+    'constancia_good': { min: 0, max: 2, mid: 1 },
+    'constancia_best': { min: 0, max: 0, mid: 0 },
     source: 'Constancia Analysis (ONS Cyber Security Survey)',
     lowerIsBetter: true,
   },
@@ -543,8 +543,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: '£M',
     category: 'productivity',
     typical: { min: 8, max: 15, mid: 11 },
-    '1qg_good': { min: 18, max: 30, mid: 24 },
-    '1qg_best': { min: 30, max: 50, mid: 40 },
+    'constancia_good': { min: 18, max: 30, mid: 24 },
+    'constancia_best': { min: 30, max: 50, mid: 40 },
     source: 'Constancia Analysis (ONS Labour Productivity)',
     lowerIsBetter: false,
   },
@@ -555,8 +555,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: 'count',
     category: 'productivity',
     typical: { min: 800, max: 1500, mid: 1150 },
-    '1qg_good': { min: 2500, max: 4000, mid: 3250 },
-    '1qg_best': { min: 4000, max: 7000, mid: 5500 },
+    'constancia_good': { min: 2500, max: 4000, mid: 3250 },
+    'constancia_best': { min: 4000, max: 7000, mid: 5500 },
     source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
@@ -567,8 +567,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: 'count',
     category: 'productivity',
     typical: { min: 150, max: 300, mid: 225 },
-    '1qg_good': { min: 500, max: 800, mid: 650 },
-    '1qg_best': { min: 800, max: 1500, mid: 1150 },
+    'constancia_good': { min: 500, max: 800, mid: 650 },
+    'constancia_best': { min: 800, max: 1500, mid: 1150 },
     source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
@@ -579,8 +579,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: 'count',
     category: 'productivity',
     typical: { min: 3000, max: 5000, mid: 4000 },
-    '1qg_good': { min: 8000, max: 12000, mid: 10000 },
-    '1qg_best': { min: 12000, max: 20000, mid: 16000 },
+    'constancia_good': { min: 8000, max: 12000, mid: 10000 },
+    'constancia_best': { min: 12000, max: 20000, mid: 16000 },
     source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
@@ -591,8 +591,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: '%',
     category: 'productivity',
     typical: { min: 25, max: 40, mid: 32 },
-    '1qg_good': { min: 55, max: 70, mid: 62 },
-    '1qg_best': { min: 70, max: 85, mid: 77 },
+    'constancia_good': { min: 55, max: 70, mid: 62 },
+    'constancia_best': { min: 70, max: 85, mid: 77 },
     source: 'Constancia Analysis (ONS Business Statistics)',
     lowerIsBetter: false,
   },
@@ -605,8 +605,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: 'count',
     category: 'compliance',
     typical: { min: 8, max: 15, mid: 11 },
-    '1qg_good': { min: 2, max: 5, mid: 3.5 },
-    '1qg_best': { min: 0, max: 2, mid: 1 },
+    'constancia_good': { min: 2, max: 5, mid: 3.5 },
+    'constancia_best': { min: 0, max: 2, mid: 1 },
     source: 'Constancia Analysis (NAO, LG Inform)',
     lowerIsBetter: true,
   },
@@ -617,8 +617,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: '%',
     category: 'compliance',
     typical: { min: 85, max: 92, mid: 88 },
-    '1qg_good': { min: 95, max: 98, mid: 96 },
-    '1qg_best': { min: 98, max: 100, mid: 99 },
+    'constancia_good': { min: 95, max: 98, mid: 96 },
+    'constancia_best': { min: 98, max: 100, mid: 99 },
     source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
@@ -629,8 +629,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: '%',
     category: 'compliance',
     typical: { min: 90, max: 96, mid: 93 },
-    '1qg_good': { min: 98, max: 100, mid: 99 },
-    '1qg_best': { min: 100, max: 100, mid: 100 },
+    'constancia_good': { min: 98, max: 100, mid: 99 },
+    'constancia_best': { min: 100, max: 100, mid: 100 },
     source: 'Constancia Analysis (Companies House, FCA)',
     lowerIsBetter: false,
   },
@@ -641,8 +641,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: '%',
     category: 'compliance',
     typical: { min: 80, max: 90, mid: 85 },
-    '1qg_good': { min: 95, max: 98, mid: 96 },
-    '1qg_best': { min: 98, max: 100, mid: 99 },
+    'constancia_good': { min: 95, max: 98, mid: 96 },
+    'constancia_best': { min: 98, max: 100, mid: 99 },
     source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
@@ -653,7 +653,7 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: '%',
     category: 'compliance',
     typical: { min: 0.08, max: 0.15, mid: 0.11 },
-    '1qg_good': { min: 0.04, max: 0.07, mid: 0.055 },
+    'constancia_good': { min: 0.04, max: 0.07, mid: 0.055 },
     source: 'Constancia Analysis (Companies House Data)',
     lowerIsBetter: true,
   },
@@ -666,8 +666,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: '%',
     category: 'talent',
     typical: { min: 12, max: 20, mid: 16 },
-    '1qg_good': { min: 6, max: 10, mid: 8 },
-    '1qg_best': { min: 3, max: 6, mid: 4.5 },
+    'constancia_good': { min: 6, max: 10, mid: 8 },
+    'constancia_best': { min: 3, max: 6, mid: 4.5 },
     source: 'Constancia Analysis (ONS Labour Market)',
     lowerIsBetter: true,
   },
@@ -678,8 +678,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: 'hours',
     category: 'talent',
     typical: { min: 16, max: 30, mid: 23 },
-    '1qg_good': { min: 40, max: 60, mid: 50 },
-    '1qg_best': { min: 60, max: 100, mid: 80 },
+    'constancia_good': { min: 40, max: 60, mid: 50 },
+    'constancia_best': { min: 60, max: 100, mid: 80 },
     source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
@@ -690,8 +690,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: '%',
     category: 'talent',
     typical: { min: 30, max: 50, mid: 40 },
-    '1qg_good': { min: 60, max: 75, mid: 67 },
-    '1qg_best': { min: 75, max: 90, mid: 82 },
+    'constancia_good': { min: 60, max: 75, mid: 67 },
+    'constancia_best': { min: 75, max: 90, mid: 82 },
     source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
@@ -702,8 +702,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: 'score',
     category: 'talent',
     typical: { min: 55, max: 68, mid: 61 },
-    '1qg_good': { min: 72, max: 82, mid: 77 },
-    '1qg_best': { min: 82, max: 92, mid: 87 },
+    'constancia_good': { min: 72, max: 82, mid: 77 },
+    'constancia_best': { min: 82, max: 92, mid: 87 },
     source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
@@ -714,8 +714,8 @@ export const BENCHMARK_METRICS: BenchmarkMetric[] = [
     unit: 'ratio',
     category: 'talent',
     typical: { min: 0.15, max: 0.25, mid: 0.2 },
-    '1qg_good': { min: 0.35, max: 0.50, mid: 0.42 },
-    '1qg_best': { min: 0.50, max: 0.75, mid: 0.62 },
+    'constancia_good': { min: 0.35, max: 0.50, mid: 0.42 },
+    'constancia_best': { min: 0.50, max: 0.75, mid: 0.62 },
     source: 'Constancia Analysis (UK Enterprise Data)',
     lowerIsBetter: false,
   },
@@ -739,16 +739,16 @@ export const INDUSTRIES: Industry[] = [
     overrides: {
       finance_cost_pct_revenue: { typical: { min: 0.8, max: 1.2, mid: 1.0 } },
       finance_ftes_per_1b: { typical: { min: 700, max: 900, mid: 800 } },
-      days_to_close: { typical: { min: 6, max: 10, mid: 8 }, '1qg_good': { min: 4, max: 6, mid: 5 } },
-      budget_cycle_days: { typical: { min: 90, max: 120, mid: 105 }, '1qg_good': { min: 60, max: 90, mid: 75 } },
-      forecast_cycle_days: { typical: { min: 15, max: 25, mid: 20 }, '1qg_good': { min: 8, max: 15, mid: 11 } },
-      consolidation_cycle_days: { typical: { min: 7, max: 10, mid: 8.5 }, '1qg_good': { min: 3, max: 5, mid: 4 } },
-      reports_automated_pct: { typical: { min: 30, max: 50, mid: 40 }, '1qg_good': { min: 70, max: 85, mid: 77 } },
+      days_to_close: { typical: { min: 6, max: 10, mid: 8 }, 'constancia_good': { min: 4, max: 6, mid: 5 } },
+      budget_cycle_days: { typical: { min: 90, max: 120, mid: 105 }, 'constancia_good': { min: 60, max: 90, mid: 75 } },
+      forecast_cycle_days: { typical: { min: 15, max: 25, mid: 20 }, 'constancia_good': { min: 8, max: 15, mid: 11 } },
+      consolidation_cycle_days: { typical: { min: 7, max: 10, mid: 8.5 }, 'constancia_good': { min: 3, max: 5, mid: 4 } },
+      reports_automated_pct: { typical: { min: 30, max: 50, mid: 40 }, 'constancia_good': { min: 70, max: 85, mid: 77 } },
       dso_days: { typical: { min: 10, max: 30, mid: 20 } },
     },
     businessKpis: {
       net_interest_margin: { name: 'Net Interest Margin', typical: { min: 1.5, max: 3.5 } },
-      cost_to_income: { name: 'Cost to Income Ratio', typical: { min: 45, max: 65 }, '1qg_good': { min: 40, max: 55 } },
+      cost_to_income: { name: 'Cost to Income Ratio', typical: { min: 45, max: 65 }, 'constancia_good': { min: 40, max: 55 } },
       roe: { name: 'Return on Equity', typical: { min: 8, max: 15 } },
     },
   },
@@ -759,8 +759,8 @@ export const INDUSTRIES: Industry[] = [
     overrides: {
       finance_cost_pct_revenue: { typical: { min: 0.9, max: 1.3, mid: 1.1 } },
       finance_ftes_per_1b: { typical: { min: 750, max: 950, mid: 850 } },
-      days_to_close: { typical: { min: 7, max: 11, mid: 9 }, '1qg_good': { min: 5, max: 7, mid: 6 } },
-      consolidation_cycle_days: { typical: { min: 8, max: 12, mid: 10 }, '1qg_good': { min: 3, max: 5, mid: 4 } },
+      days_to_close: { typical: { min: 7, max: 11, mid: 9 }, 'constancia_good': { min: 5, max: 7, mid: 6 } },
+      consolidation_cycle_days: { typical: { min: 8, max: 12, mid: 10 }, 'constancia_good': { min: 3, max: 5, mid: 4 } },
       dio_days: { typical: { min: 10, max: 30, mid: 20 } },
       dso_days: { typical: { min: 30, max: 60, mid: 45 } },
       dpo_days: { typical: { min: 30, max: 50, mid: 40 } },
@@ -777,10 +777,10 @@ export const INDUSTRIES: Industry[] = [
     overrides: {
       finance_cost_pct_revenue: { typical: { min: 0.8, max: 1.4, mid: 1.1 } },
       finance_ftes_per_1b: { typical: { min: 700, max: 1000, mid: 850 } },
-      days_to_close: { typical: { min: 8, max: 12, mid: 10 }, '1qg_good': { min: 5, max: 8, mid: 6.5 } },
+      days_to_close: { typical: { min: 8, max: 12, mid: 10 }, 'constancia_good': { min: 5, max: 8, mid: 6.5 } },
       budget_cycle_days: { typical: { min: 100, max: 140, mid: 120 } },
       forecast_cycle_days: { typical: { min: 15, max: 25, mid: 20 } },
-      consolidation_cycle_days: { typical: { min: 8, max: 12, mid: 10 }, '1qg_good': { min: 3, max: 5, mid: 4 } },
+      consolidation_cycle_days: { typical: { min: 8, max: 12, mid: 10 }, 'constancia_good': { min: 3, max: 5, mid: 4 } },
       dio_days: { typical: { min: 40, max: 80, mid: 60 } },
       dso_days: { typical: { min: 30, max: 60, mid: 45 } },
       dpo_days: { typical: { min: 35, max: 55, mid: 45 } },
@@ -863,14 +863,14 @@ export const INDUSTRIES: Industry[] = [
     overrides: {
       finance_cost_pct_revenue: { typical: { min: 0.9, max: 1.4, mid: 1.15 } },
       finance_ftes_per_1b: { typical: { min: 750, max: 1000, mid: 875 } },
-      days_to_close: { typical: { min: 7, max: 12, mid: 9.5 }, '1qg_good': { min: 4, max: 7, mid: 5.5 } },
-      budget_cycle_days: { typical: { min: 100, max: 140, mid: 120 }, '1qg_good': { min: 70, max: 100, mid: 85 } },
-      forecast_cycle_days: { typical: { min: 18, max: 28, mid: 23 }, '1qg_good': { min: 10, max: 18, mid: 14 } },
-      consolidation_cycle_days: { typical: { min: 8, max: 14, mid: 11 }, '1qg_good': { min: 4, max: 7, mid: 5.5 } },
-      reports_automated_pct: { typical: { min: 25, max: 45, mid: 35 }, '1qg_good': { min: 65, max: 80, mid: 72 } },
+      days_to_close: { typical: { min: 7, max: 12, mid: 9.5 }, 'constancia_good': { min: 4, max: 7, mid: 5.5 } },
+      budget_cycle_days: { typical: { min: 100, max: 140, mid: 120 }, 'constancia_good': { min: 70, max: 100, mid: 85 } },
+      forecast_cycle_days: { typical: { min: 18, max: 28, mid: 23 }, 'constancia_good': { min: 10, max: 18, mid: 14 } },
+      consolidation_cycle_days: { typical: { min: 8, max: 14, mid: 11 }, 'constancia_good': { min: 4, max: 7, mid: 5.5 } },
+      reports_automated_pct: { typical: { min: 25, max: 45, mid: 35 }, 'constancia_good': { min: 65, max: 80, mid: 72 } },
     },
     businessKpis: {
-      combined_ratio: { name: 'Combined Ratio', typical: { min: 95, max: 105 }, '1qg_good': { min: 90, max: 98 } },
+      combined_ratio: { name: 'Combined Ratio', typical: { min: 95, max: 105 }, 'constancia_good': { min: 90, max: 98 } },
       solvency_ratio: { name: 'Solvency II Ratio', typical: { min: 140, max: 180 } },
       loss_ratio: { name: 'Loss Ratio', typical: { min: 60, max: 75 } },
     },
@@ -882,12 +882,12 @@ export const INDUSTRIES: Industry[] = [
     overrides: {
       finance_cost_pct_revenue: { typical: { min: 0.6, max: 1.0, mid: 0.8 } },
       finance_ftes_per_1b: { typical: { min: 500, max: 750, mid: 625 } },
-      days_to_close: { typical: { min: 5, max: 9, mid: 7 }, '1qg_good': { min: 3, max: 5, mid: 4 } },
-      forecast_cycle_days: { typical: { min: 12, max: 22, mid: 17 }, '1qg_good': { min: 7, max: 12, mid: 9.5 } },
+      days_to_close: { typical: { min: 5, max: 9, mid: 7 }, 'constancia_good': { min: 3, max: 5, mid: 4 } },
+      forecast_cycle_days: { typical: { min: 12, max: 22, mid: 17 }, 'constancia_good': { min: 7, max: 12, mid: 9.5 } },
     },
     businessKpis: {
       aum_per_employee: { name: 'AUM per Employee (£M)', typical: { min: 100, max: 500 } },
-      cost_income_ratio: { name: 'Cost/Income Ratio', typical: { min: 55, max: 75 }, '1qg_good': { min: 45, max: 60 } },
+      cost_income_ratio: { name: 'Cost/Income Ratio', typical: { min: 55, max: 75 }, 'constancia_good': { min: 45, max: 60 } },
       management_fee_margin: { name: 'Mgmt Fee Margin (bps)', typical: { min: 40, max: 80 } },
     },
   },
@@ -898,7 +898,7 @@ export const INDUSTRIES: Industry[] = [
     overrides: {
       finance_cost_pct_revenue: { typical: { min: 1.0, max: 1.6, mid: 1.3 } },
       finance_ftes_per_1b: { typical: { min: 900, max: 1200, mid: 1050 } },
-      days_to_close: { typical: { min: 10, max: 15, mid: 12.5 }, '1qg_good': { min: 6, max: 9, mid: 7.5 } },
+      days_to_close: { typical: { min: 10, max: 15, mid: 12.5 }, 'constancia_good': { min: 6, max: 9, mid: 7.5 } },
       budget_cycle_days: { typical: { min: 90, max: 130, mid: 110 } },
       forecast_cycle_days: { typical: { min: 18, max: 30, mid: 24 } },
       dso_days: { typical: { min: 55, max: 90, mid: 72 } },
@@ -917,7 +917,7 @@ export const INDUSTRIES: Industry[] = [
     overrides: {
       finance_cost_pct_revenue: { typical: { min: 0.7, max: 1.2, mid: 0.95 } },
       finance_ftes_per_1b: { typical: { min: 450, max: 700, mid: 575 } },
-      days_to_close: { typical: { min: 8, max: 13, mid: 10.5 }, '1qg_good': { min: 5, max: 8, mid: 6.5 } },
+      days_to_close: { typical: { min: 8, max: 13, mid: 10.5 }, 'constancia_good': { min: 5, max: 8, mid: 6.5 } },
       dso_days: { typical: { min: 20, max: 45, mid: 32 } },
     },
     businessKpis: {
@@ -933,13 +933,13 @@ export const INDUSTRIES: Industry[] = [
     overrides: {
       finance_cost_pct_revenue: { typical: { min: 0.8, max: 1.3, mid: 1.05 } },
       finance_ftes_per_1b: { typical: { min: 650, max: 900, mid: 775 } },
-      days_to_close: { typical: { min: 6, max: 10, mid: 8 }, '1qg_good': { min: 4, max: 6, mid: 5 } },
+      days_to_close: { typical: { min: 6, max: 10, mid: 8 }, 'constancia_good': { min: 4, max: 6, mid: 5 } },
       forecast_cycle_days: { typical: { min: 14, max: 22, mid: 18 } },
       dso_days: { typical: { min: 25, max: 45, mid: 35 } },
     },
     businessKpis: {
       arpu: { name: 'ARPU (£)', typical: { min: 15, max: 45 } },
-      churn_rate: { name: 'Monthly Churn %', typical: { min: 1.0, max: 2.5 }, '1qg_good': { min: 0.5, max: 1.2 } },
+      churn_rate: { name: 'Monthly Churn %', typical: { min: 1.0, max: 2.5 }, 'constancia_good': { min: 0.5, max: 1.2 } },
       ebitda_margin: { name: 'EBITDA Margin %', typical: { min: 25, max: 40 } },
     },
   },
@@ -950,7 +950,7 @@ export const INDUSTRIES: Industry[] = [
     overrides: {
       finance_cost_pct_revenue: { typical: { min: 0.9, max: 1.5, mid: 1.2 } },
       finance_ftes_per_1b: { typical: { min: 800, max: 1100, mid: 950 } },
-      days_to_close: { typical: { min: 7, max: 12, mid: 9.5 }, '1qg_good': { min: 4, max: 7, mid: 5.5 } },
+      days_to_close: { typical: { min: 7, max: 12, mid: 9.5 }, 'constancia_good': { min: 4, max: 7, mid: 5.5 } },
       forecast_cycle_days: { typical: { min: 15, max: 25, mid: 20 } },
     },
     businessKpis: {
@@ -1002,7 +1002,7 @@ export const INDUSTRIES: Industry[] = [
     overrides: {
       finance_cost_pct_revenue: { typical: { min: 1.1, max: 1.7, mid: 1.4 } },
       finance_ftes_per_1b: { typical: { min: 900, max: 1300, mid: 1100 } },
-      days_to_close: { typical: { min: 9, max: 15, mid: 12 }, '1qg_good': { min: 5, max: 9, mid: 7 } },
+      days_to_close: { typical: { min: 9, max: 15, mid: 12 }, 'constancia_good': { min: 5, max: 9, mid: 7 } },
       budget_cycle_days: { typical: { min: 110, max: 160, mid: 135 } },
       forecast_cycle_days: { typical: { min: 20, max: 35, mid: 27 } },
       dio_days: { typical: { min: 80, max: 150, mid: 115 } },
@@ -1021,7 +1021,7 @@ export const INDUSTRIES: Industry[] = [
     overrides: {
       finance_cost_pct_revenue: { typical: { min: 0.6, max: 1.0, mid: 0.8 } },
       finance_ftes_per_1b: { typical: { min: 400, max: 650, mid: 525 } },
-      days_to_close: { typical: { min: 6, max: 10, mid: 8 }, '1qg_good': { min: 3, max: 6, mid: 4.5 } },
+      days_to_close: { typical: { min: 6, max: 10, mid: 8 }, 'constancia_good': { min: 3, max: 6, mid: 4.5 } },
       forecast_cycle_days: { typical: { min: 15, max: 25, mid: 20 } },
     },
     businessKpis: {
@@ -1071,7 +1071,7 @@ export const INDUSTRIES: Industry[] = [
     overrides: {
       finance_cost_pct_revenue: { typical: { min: 0.9, max: 1.4, mid: 1.15 } },
       finance_ftes_per_1b: { typical: { min: 750, max: 1050, mid: 900 } },
-      days_to_close: { typical: { min: 7, max: 12, mid: 9.5 }, '1qg_good': { min: 4, max: 7, mid: 5.5 } },
+      days_to_close: { typical: { min: 7, max: 12, mid: 9.5 }, 'constancia_good': { min: 4, max: 7, mid: 5.5 } },
       dio_days: { typical: { min: 25, max: 55, mid: 40 } },
       dpo_days: { typical: { min: 45, max: 80, mid: 62 } },
     },
@@ -1106,13 +1106,13 @@ export const INDUSTRIES: Industry[] = [
     overrides: {
       finance_cost_pct_revenue: { typical: { min: 1.2, max: 1.8, mid: 1.5 } },
       finance_ftes_per_1b: { typical: { min: 1000, max: 1400, mid: 1200 } },
-      days_to_close: { typical: { min: 12, max: 20, mid: 16 }, '1qg_good': { min: 7, max: 12, mid: 9.5 } },
-      budget_cycle_days: { typical: { min: 150, max: 200, mid: 175 }, '1qg_good': { min: 100, max: 140, mid: 120 } },
+      days_to_close: { typical: { min: 12, max: 20, mid: 16 }, 'constancia_good': { min: 7, max: 12, mid: 9.5 } },
+      budget_cycle_days: { typical: { min: 150, max: 200, mid: 175 }, 'constancia_good': { min: 100, max: 140, mid: 120 } },
       forecast_cycle_days: { typical: { min: 25, max: 40, mid: 32 } },
-      reports_automated_pct: { typical: { min: 15, max: 35, mid: 25 }, '1qg_good': { min: 50, max: 70, mid: 60 } },
+      reports_automated_pct: { typical: { min: 15, max: 35, mid: 25 }, 'constancia_good': { min: 50, max: 70, mid: 60 } },
     },
     businessKpis: {
-      budget_variance: { name: 'Budget Variance %', typical: { min: 2, max: 8 }, '1qg_good': { min: 0, max: 2 } },
+      budget_variance: { name: 'Budget Variance %', typical: { min: 2, max: 8 }, 'constancia_good': { min: 0, max: 2 } },
       cost_per_transaction: { name: 'Cost per Transaction (£)', typical: { min: 5, max: 15 } },
       citizen_satisfaction: { name: 'Citizen Satisfaction %', typical: { min: 60, max: 80 } },
     },
@@ -1207,10 +1207,10 @@ export const INDUSTRIES: Industry[] = [
 
 export const BENCHMARK_SOURCES = [
   {
-    id: '1qg',
+    id: 'constancia',
     name: 'Constancia Benchmark Database',
     description: 'Proprietary analysis methodology with 40+ years combined consulting experience, validated against client engagements',
-    url: 'https://1qg.ai/',
+    url: 'https://constancia.io/',
     type: 'proprietary' as const,
   },
   {
@@ -1316,17 +1316,17 @@ export interface TransformationFactors {
 }
 
 export const TRANSFORMATION_FACTORS: TransformationFactors[] = [
-  { metricId: 'finance_cost_pct_revenue', withEpm: { improvementPct: 36, targetTier: '1qg_good' }, withDigitalEpm: { improvementPct: 44, targetTier: '1qg_best' } },
-  { metricId: 'finance_ftes_per_1b', withEpm: { improvementPct: 45, targetTier: '1qg_good' }, withDigitalEpm: { improvementPct: 58, targetTier: '1qg_best' } },
-  { metricId: 'days_to_close', withEpm: { improvementPct: 55, targetTier: '1qg_good' }, withDigitalEpm: { improvementPct: 85, targetTier: '1qg_best' } },
-  { metricId: 'forecast_cycle_days', withEpm: { improvementPct: 50, targetTier: '1qg_good' }, withDigitalEpm: { improvementPct: 75, targetTier: '1qg_best' } },
-  { metricId: 'consolidation_cycle_days', withEpm: { improvementPct: 70, targetTier: '1qg_good' }, withDigitalEpm: { improvementPct: 87, targetTier: '1qg_best' } },
-  { metricId: 'forecast_accuracy_pct', withEpm: { improvementPct: 10, targetTier: '1qg_good' }, withDigitalEpm: { improvementPct: 15, targetTier: '1qg_best' } },
-  { metricId: 'reports_automated_pct', withEpm: { improvementPct: 100, targetTier: '1qg_good' }, withDigitalEpm: { improvementPct: 200, targetTier: '1qg_best' } },
-  { metricId: 'manual_reconciliations', withEpm: { improvementPct: 75, targetTier: '1qg_good' }, withDigitalEpm: { improvementPct: 95, targetTier: '1qg_best' } },
-  { metricId: 'data_entry_errors_pct', withEpm: { improvementPct: 90, targetTier: '1qg_good' }, withDigitalEpm: { improvementPct: 98, targetTier: '1qg_best' } },
-  { metricId: 'close_fte_hours', withEpm: { improvementPct: 55, targetTier: '1qg_good' }, withDigitalEpm: { improvementPct: 85, targetTier: '1qg_best' } },
-  { metricId: 'self_service_adoption_pct', withEpm: { improvementPct: 130, targetTier: '1qg_good' }, withDigitalEpm: { improvementPct: 250, targetTier: '1qg_best' } },
+  { metricId: 'finance_cost_pct_revenue', withEpm: { improvementPct: 36, targetTier: 'constancia_good' }, withDigitalEpm: { improvementPct: 44, targetTier: 'constancia_best' } },
+  { metricId: 'finance_ftes_per_1b', withEpm: { improvementPct: 45, targetTier: 'constancia_good' }, withDigitalEpm: { improvementPct: 58, targetTier: 'constancia_best' } },
+  { metricId: 'days_to_close', withEpm: { improvementPct: 55, targetTier: 'constancia_good' }, withDigitalEpm: { improvementPct: 85, targetTier: 'constancia_best' } },
+  { metricId: 'forecast_cycle_days', withEpm: { improvementPct: 50, targetTier: 'constancia_good' }, withDigitalEpm: { improvementPct: 75, targetTier: 'constancia_best' } },
+  { metricId: 'consolidation_cycle_days', withEpm: { improvementPct: 70, targetTier: 'constancia_good' }, withDigitalEpm: { improvementPct: 87, targetTier: 'constancia_best' } },
+  { metricId: 'forecast_accuracy_pct', withEpm: { improvementPct: 10, targetTier: 'constancia_good' }, withDigitalEpm: { improvementPct: 15, targetTier: 'constancia_best' } },
+  { metricId: 'reports_automated_pct', withEpm: { improvementPct: 100, targetTier: 'constancia_good' }, withDigitalEpm: { improvementPct: 200, targetTier: 'constancia_best' } },
+  { metricId: 'manual_reconciliations', withEpm: { improvementPct: 75, targetTier: 'constancia_good' }, withDigitalEpm: { improvementPct: 95, targetTier: 'constancia_best' } },
+  { metricId: 'data_entry_errors_pct', withEpm: { improvementPct: 90, targetTier: 'constancia_good' }, withDigitalEpm: { improvementPct: 98, targetTier: 'constancia_best' } },
+  { metricId: 'close_fte_hours', withEpm: { improvementPct: 55, targetTier: 'constancia_good' }, withDigitalEpm: { improvementPct: 85, targetTier: 'constancia_best' } },
+  { metricId: 'self_service_adoption_pct', withEpm: { improvementPct: 130, targetTier: 'constancia_good' }, withDigitalEpm: { improvementPct: 250, targetTier: 'constancia_best' } },
 ];
 
 // ============================================
@@ -1337,7 +1337,7 @@ export const DATA_STANDARDS_IMPACT = {
   low: { financeCostPctRevenue: 1.76, financeFtesPer1b: 1320 },
   medium: { financeCostPctRevenue: 1.32, financeFtesPer1b: 1000 },
   high: { financeCostPctRevenue: 0.69, financeFtesPer1b: 525 },
-  '1qg_best': { financeCostPctRevenue: 0.54, financeFtesPer1b: 400 },
+  'constancia_best': { financeCostPctRevenue: 0.54, financeFtesPer1b: 400 },
 };
 
 // ============================================
@@ -1370,8 +1370,8 @@ export function getMetricBenchmarks(
   return {
     ...baseMetric,
     typical: overrides.typical || baseMetric.typical,
-    '1qg_good': overrides['1qg_good'] || baseMetric['1qg_good'],
-    '1qg_best': overrides['1qg_best'] || baseMetric['1qg_best'],
+    'constancia_good': overrides['constancia_good'] || baseMetric['constancia_good'],
+    'constancia_best': overrides['constancia_best'] || baseMetric['constancia_best'],
   };
 }
 
@@ -1379,25 +1379,25 @@ export function calculateAsIsVsToBe(
   currentValue: number,
   metricId: string,
   industryId: string = 'cross_industry',
-  targetTier: BenchmarkTier = '1qg_good'
+  targetTier: BenchmarkTier = 'constancia_good'
 ): {
   current: number;
   typical: BenchmarkRange;
   target: BenchmarkRange;
   gap: number;
   gapPct: number;
-  performanceLevel: 'below_typical' | 'typical' | '1qg_good' | '1qg_best';
+  performanceLevel: 'below_typical' | 'typical' | 'constancia_good' | 'constancia_best';
 } | undefined {
   const metric = getMetricBenchmarks(metricId, industryId);
   if (!metric) return undefined;
 
   let target: BenchmarkRange;
   switch (targetTier) {
-    case '1qg_best':
-      target = metric['1qg_best'] || metric['1qg_good'];
+    case 'constancia_best':
+      target = metric['constancia_best'] || metric['constancia_good'];
       break;
     default:
-      target = metric['1qg_good'];
+      target = metric['constancia_good'];
   }
 
   const typicalMid = metric.typical.mid || (metric.typical.min + metric.typical.max) / 2;
@@ -1420,23 +1420,23 @@ export function calculateAsIsVsToBe(
     gapPct = currentValue > 0 ? (gap / currentValue) * 100 : 0;
   }
 
-  let performanceLevel: 'below_typical' | 'typical' | '1qg_good' | '1qg_best';
+  let performanceLevel: 'below_typical' | 'typical' | 'constancia_good' | 'constancia_best';
   
   if (metric.lowerIsBetter) {
-    if (metric['1qg_best'] && currentValue <= metric['1qg_best'].max) {
-      performanceLevel = '1qg_best';
-    } else if (currentValue <= metric['1qg_good'].max) {
-      performanceLevel = '1qg_good';
+    if (metric['constancia_best'] && currentValue <= metric['constancia_best'].max) {
+      performanceLevel = 'constancia_best';
+    } else if (currentValue <= metric['constancia_good'].max) {
+      performanceLevel = 'constancia_good';
     } else if (currentValue <= metric.typical.max) {
       performanceLevel = 'typical';
     } else {
       performanceLevel = 'below_typical';
     }
   } else {
-    if (metric['1qg_best'] && currentValue >= metric['1qg_best'].min) {
-      performanceLevel = '1qg_best';
-    } else if (currentValue >= metric['1qg_good'].min) {
-      performanceLevel = '1qg_good';
+    if (metric['constancia_best'] && currentValue >= metric['constancia_best'].min) {
+      performanceLevel = 'constancia_best';
+    } else if (currentValue >= metric['constancia_good'].min) {
+      performanceLevel = 'constancia_good';
     } else if (currentValue >= metric.typical.min) {
       performanceLevel = 'typical';
     } else {

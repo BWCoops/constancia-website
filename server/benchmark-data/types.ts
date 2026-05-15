@@ -89,8 +89,8 @@ export interface GeneratedBenchmark {
   unit: string;
   category: 'cost' | 'efficiency' | 'technology' | 'working_capital' | 'compliance' | 'talent';
   typical: BenchmarkTierValues;
-  '1qg_good': BenchmarkTierValues;
-  '1qg_best': BenchmarkTierValues;
+  'constancia_good': BenchmarkTierValues;
+  'constancia_best': BenchmarkTierValues;
   source: string;
   sourceDetails: {
     type: DataSourceType;
@@ -109,8 +109,8 @@ export interface IndustryOverride {
   metricId: string;
   overrideValues: {
     typical?: Partial<BenchmarkTierValues>;
-    '1qg_good'?: Partial<BenchmarkTierValues>;
-    '1qg_best'?: Partial<BenchmarkTierValues>;
+    'constancia_good'?: Partial<BenchmarkTierValues>;
+    'constancia_best'?: Partial<BenchmarkTierValues>;
   };
   sourceMetadata: DataSourceMetadata;
 }

@@ -2264,9 +2264,9 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                         <div className="space-y-2">
                           {benchmarks.metrics.map((metric) => {
                             const colorStyles = getPerformanceColor(metric.performanceLevel);
-                            const bgColorClass = metric.performanceLevel === '1qg_best' 
+                            const bgColorClass = metric.performanceLevel === 'constancia_best' 
                               ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800'
-                              : metric.performanceLevel === '1qg_good'
+                              : metric.performanceLevel === 'constancia_good'
                               ? 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800'
                               : metric.performanceLevel === 'typical'
                               ? 'bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800'

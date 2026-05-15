@@ -128,8 +128,8 @@ const maturityLevels = [
 
 const benchmarkTiers = [
   { tier: "typical", label: "Typical", description: "Median performance (P50) - where most organisations operate", color: "text-slate-600 dark:text-slate-400" },
-  { tier: "1qg_good", label: "Constancia Good", description: "Top quartile (P75) - what good looks like in modern finance", color: "text-cyan-600 dark:text-cyan-400" },
-  { tier: "1qg_best", label: "Constancia Best", description: "Digital world class (P90+) - aspirational excellence", color: "text-teal-600 dark:text-teal-400" },
+  { tier: "constancia_good", label: "Constancia Good", description: "Top quartile (P75) - what good looks like in modern finance", color: "text-cyan-600 dark:text-cyan-400" },
+  { tier: "constancia_best", label: "Constancia Best", description: "Digital world class (P90+) - aspirational excellence", color: "text-teal-600 dark:text-teal-400" },
 ];
 
 export default function FinanceCompassMethodology() {

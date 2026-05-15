@@ -1301,7 +1301,7 @@ router.get("/contact-submissions/export", async (req: Request, res: Response) =>
     );
 
     res.setHeader("Content-Type", "text/csv");
-    res.setHeader("Content-Disposition", "attachment; filename=1qg-contact-submissions-export.csv");
+    res.setHeader("Content-Disposition", "attachment; filename=constancia-contact-submissions-export.csv");
     res.send(csvHeader + csvRows);
   } catch (error: any) {
     log.error({ err: error }, "Contact submissions export error");
@@ -1452,7 +1452,7 @@ router.get("/leads/export", async (req: Request, res: Response) => {
     );
 
     res.setHeader("Content-Type", "text/csv");
-    res.setHeader("Content-Disposition", "attachment; filename=1qg-leads-export.csv");
+    res.setHeader("Content-Disposition", "attachment; filename=constancia-leads-export.csv");
     res.send(csvHeader + csvRows);
   } catch (error: any) {
     log.error({ err: error }, "Leads export error");

@@ -80,7 +80,7 @@ export function getSession() {
     store: sessionStore,
     resave: false,
     saveUninitialized: false,
-    name: '1qg_admin_session',
+    name: 'constancia_admin_session',
     rolling: true,
     cookie: {
       httpOnly: true,

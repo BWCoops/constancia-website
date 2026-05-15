@@ -1360,13 +1360,13 @@ What would you like to know?`,
               <div className="hidden md:flex items-center gap-1">
                 <div className="h-5 w-px bg-white/20 mx-0.5" />
                 <a 
-                  href={`mailto:info@constancia.io?subject=FinanceCompass%20Enquiry${assessmentContext?.overallScore ? `%20-%20Score%3A%20${assessmentContext.overallScore.toFixed(1)}` : ''}&body=Hi%201QG%20Team%2C%0A%0AI%27ve%20been%20using%20FinanceCompass%20and%20would%20like%20to%20discuss%20my%20EPM%20requirements.%0A%0APlease%20contact%20me%20at%20your%20earliest%20convenience.%0A%0ABest%20regards`}
+                  href={`mailto:info@constancia.io?subject=FinanceCompass%20Enquiry${assessmentContext?.overallScore ? `%20-%20Score%3A%20${assessmentContext.overallScore.toFixed(1)}` : ''}&body=Hi%20Constancia%20Team%2C%0A%0AI%27ve%20been%20using%20FinanceCompass%20and%20would%20like%20to%20discuss%20my%20EPM%20requirements.%0A%0APlease%20contact%20me%20at%20your%20earliest%20convenience.%0A%0ABest%20regards`}
                 >
                   <Button
                     variant="ghost"
                     size="icon"
                     className="text-white/90 hover:text-white hover:bg-white/10 h-9 w-9"
-                    data-testid="button-email-1qg"
+                    data-testid="button-email-constancia"
                     title="Email Constancia"
                   >
                     <Mail className="h-4 w-4" />

@@ -269,11 +269,11 @@ export function registerDevRoutes(publicRouter: Router): void {
         employees
       } = req.body;
       
-      // Select test data profile - "nats" for NATS, "1qg" for Constancia, default is "techflow"
+      // Select test data profile - "nats" for NATS, "constancia" for Constancia, default is "techflow"
       const TEST_PROFILES: Record<string, any> = {
         techflow: TECHFLOW_TEST_DATA,
         nats: NATS_TEST_DATA,
-        "1qg": ONEQG_TEST_DATA,
+        "constancia": ONEQG_TEST_DATA,
         oneqg: ONEQG_TEST_DATA,
       };
       

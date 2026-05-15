@@ -2498,7 +2498,7 @@ async function runAnalysisAsync(
       try {
         const tierName = tier === "full" ? "Full Assessment" : "Pre-Assessment";
         const score = updateData.epmReadinessScore || 0;
-        const resultsUrl = `${process.env.REPLIT_DEV_DOMAIN ? `https://${process.env.REPLIT_DEV_DOMAIN}` : 'https://1qg.co.uk'}/finance-compass/results/${assessmentId}`;
+        const resultsUrl = `${process.env.REPLIT_DEV_DOMAIN ? `https://${process.env.REPLIT_DEV_DOMAIN}` : 'https://constancia.io'}/finance-compass/results/${assessmentId}`;
         
         const htmlContent = `
           <div style="font-family: 'Inter', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f8f9fa; padding: 40px;">

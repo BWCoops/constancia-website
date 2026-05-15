@@ -38,7 +38,7 @@ async function publishBlog() {
     content,
     heroImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop",
     author: "Constancia Editorial Team",
-    authorAvatar: "/avatars/1qg-avatar.png",
+    authorAvatar: "/avatars/constancia-avatar.png",
     readingTime,
     publishedAt: new Date().toISOString(),
     categoryId,
