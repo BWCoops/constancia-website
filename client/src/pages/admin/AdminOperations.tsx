@@ -202,44 +202,61 @@ export default function AdminOperations() {
   const [currentEntity, setCurrentEntity] = useState<any>(null);
   const [entityType, setEntityType] = useState<string>("");
 
-  const { data: health, isLoading: healthLoading, refetch: refetchHealth } = useQuery<SystemHealth>({
+  const { data: health, isLoading: healthLoading, refetch: refetchHealth, error: healthError } = useQuery<SystemHealth>({
     queryKey: ["/api/admin/operations/health"],
     refetchInterval: 30000,
   });
 
-  const { data: logs, isLoading: logsLoading, refetch: refetchLogs } = useQuery<{ logs: RequestLog[]; total: number }>({
+  const { data: logs, isLoading: logsLoading, refetch: refetchLogs, error: logsError } = useQuery<{ logs: RequestLog[]; total: number }>({
     queryKey: ["/api/admin/operations/request-logs"],
   });
 
-  const { data: stats, isLoading: statsLoading } = useQuery<RequestStats>({
+  const { data: stats, isLoading: statsLoading, error: statsError } = useQuery<RequestStats>({
     queryKey: ["/api/admin/operations/request-stats"],
     refetchInterval: 60000,
   });
 
-  const { data: seoStatus, isLoading: seoLoading } = useQuery<SeoStatus>({
+  const { data: seoStatus, isLoading: seoLoading, error: seoError } = useQuery<SeoStatus>({
     queryKey: ["/api/admin/operations/seo/status"],
   });
 
   // AI Config queries
-  const { data: systemPrompts, isLoading: promptsLoading, refetch: refetchPrompts } = useQuery<FcAiSystemPrompt[]>({
+  const { data: systemPrompts, isLoading: promptsLoading, refetch: refetchPrompts, error: promptsError } = useQuery<FcAiSystemPrompt[]>({
     queryKey: ["/api/admin/ai-config/system-prompts"],
   });
 
-  const { data: guardrails, isLoading: guardrailsLoading, refetch: refetchGuardrails } = useQuery<FcAiGuardrail[]>({
+  const { data: guardrails, isLoading: guardrailsLoading, refetch: refetchGuardrails, error: guardrailsError } = useQuery<FcAiGuardrail[]>({
     queryKey: ["/api/admin/ai-config/guardrails"],
   });
 
-  const { data: groundingRules, isLoading: groundingLoading, refetch: refetchGrounding } = useQuery<FcAiGroundingRule[]>({
+  const { data: groundingRules, isLoading: groundingLoading, refetch: refetchGrounding, error: groundingError } = useQuery<FcAiGroundingRule[]>({
     queryKey: ["/api/admin/ai-config/grounding-rules"],
   });
 
-  const { data: knowledgeBase, isLoading: kbLoading, refetch: refetchKb } = useQuery<FcAiKnowledgeBase[]>({
+  const { data: knowledgeBase, isLoading: kbLoading, refetch: refetchKb, error: kbError } = useQuery<FcAiKnowledgeBase[]>({
     queryKey: ["/api/admin/ai-config/knowledge-base"],
   });
 
-  const { data: followupTemplates, isLoading: followupLoading, refetch: refetchFollowup } = useQuery<FcAiFollowupTemplate[]>({
+  const { data: followupTemplates, isLoading: followupLoading, refetch: refetchFollowup, error: followupError } = useQuery<FcAiFollowupTemplate[]>({
     queryKey: ["/api/admin/ai-config/followup-templates"],
   });
+
+  // Aggregate query errors so the admin knows when something's broken instead
+  // of staring at infinite skeletons. Auth failures (401/403) are by far the
+  // most common cause — surface them up front.
+  const queryErrors = [
+    { label: "System health",     error: healthError },
+    { label: "Request logs",      error: logsError },
+    { label: "Request stats",     error: statsError },
+    { label: "SEO status",        error: seoError },
+    { label: "AI prompts",        error: promptsError },
+    { label: "AI guardrails",     error: guardrailsError },
+    { label: "AI grounding",      error: groundingError },
+    { label: "AI knowledge base", error: kbError },
+    { label: "AI followups",      error: followupError },
+  ].filter((e) => e.error != null);
+  const firstErrMsg = queryErrors[0]?.error instanceof Error ? queryErrors[0].error.message : "";
+  const looksLikeAuth = firstErrMsg.startsWith("401") || firstErrMsg.startsWith("403");
 
   // Mutations
   const toggleActiveMutation = useMutation({
@@ -345,9 +362,9 @@ export default function AdminOperations() {
               System health, request monitoring, and SEO tools
             </p>
           </div>
-          <Button 
-            variant="outline" 
-            size="sm" 
+          <Button
+            variant="outline"
+            size="sm"
             onClick={() => {
               refetchHealth();
               refetchLogs();
@@ -359,6 +376,41 @@ export default function AdminOperations() {
             Refresh All
           </Button>
         </div>
+
+        {queryErrors.length > 0 && (
+          <Card className="border-destructive/40 bg-destructive/5" data-testid="banner-operations-errors">
+            <CardContent className="pt-6">
+              <div className="flex items-start gap-3">
+                <AlertTriangle className="h-5 w-5 text-destructive mt-0.5 flex-shrink-0" aria-hidden="true" />
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-semibold text-destructive mb-1">
+                    {looksLikeAuth
+                      ? "Admin access required"
+                      : `${queryErrors.length} of 9 endpoints failed to load`}
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    {looksLikeAuth
+                      ? "You're signed in but Clerk doesn't see you as an admin. Set publicMetadata.role='admin' on your user in the Clerk dashboard, then sign out and back in."
+                      : "Server reachable but some queries returned errors. Try Refresh All — if errors persist, check server logs."}
+                  </p>
+                  <details className="text-xs text-muted-foreground/80">
+                    <summary className="cursor-pointer hover:text-muted-foreground">
+                      Failed endpoints ({queryErrors.length})
+                    </summary>
+                    <ul className="mt-2 space-y-1 pl-4">
+                      {queryErrors.map((e) => (
+                        <li key={e.label}>
+                          <span className="font-medium">{e.label}:</span>{" "}
+                          {e.error instanceof Error ? e.error.message : String(e.error)}
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         <Tabs defaultValue="health" className="space-y-4">
           <TabsList className="flex-wrap h-auto gap-1" data-testid="tabs-operations">
