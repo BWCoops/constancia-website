@@ -20,7 +20,7 @@
  */
 
 import { Suspense, useEffect, useMemo, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Color, type ShaderMaterial as ShaderMaterialType } from "three";
 
 // Editorial palette — same deep tones as the rest of the 3D system
@@ -118,6 +118,17 @@ function WavePlane({
   scrollRef,
 }: WavePlaneProps) {
   const matRef = useRef<ShaderMaterialType>(null);
+  const { viewport } = useThree();
+  // Always overflow the viewport by ~40% so the tilted plane never reveals
+  // its edges. Portrait phones especially need this — the rotation pushes
+  // corners outside the visible cone.
+  const planeW = Math.max(8, viewport.width  * 1.45);
+  const planeH = Math.max(5, viewport.height * 1.45);
+  // Soften the diagonal roll on portrait viewports — too much looks chaotic
+  // on a 9:16 phone screen.
+  const isPortrait = viewport.height > viewport.width;
+  const tiltX = isPortrait ? -Math.PI / 9  : -Math.PI / 7;
+  const rollZ = isPortrait ? -Math.PI / 22 : -Math.PI / 14;
 
   // Construct uniforms ONCE — subsequent prop changes patch in via useEffect
   const uniforms = useMemo(
@@ -153,9 +164,10 @@ function WavePlane({
   });
 
   return (
-    // Tilt + slight roll = the diagonal sweep from the brand mark
-    <mesh rotation={[-Math.PI / 7, 0, -Math.PI / 14]}>
-      <planeGeometry args={[12, 7, 128, 96]} />
+    // Tilt + slight roll = the diagonal sweep from the brand mark.
+    // Plane scales to the viewport so it always overflows — no edges visible.
+    <mesh rotation={[tiltX, 0, rollZ]}>
+      <planeGeometry args={[planeW, planeH, 128, 96]} />
       <shaderMaterial
         ref={matRef}
         vertexShader={VERTEX_SHADER}
