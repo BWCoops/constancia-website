@@ -285,15 +285,17 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   const cspDirectives = [
     "default-src 'self'",
     // Scripts: self + GA/GTM + HubSpot (all EU/US variants) + Cloudflare + LinkedIn + Apollo
-    "script-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com https://www.googletagmanager.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://js-eu1.hs-scripts.com https://js.hs-scripts.com https://js.hsforms.net https://js-eu1.hsforms.net https://js.hs-analytics.net https://js-eu1.hs-analytics.net https://js.hscollectedforms.net https://js-eu1.hscollectedforms.net https://js.usemessages.com https://js-eu1.usemessages.com https://js-eu1.hs-banner.com https://js.hs-banner.com https://js-eu1.hsadspixel.net https://js.hsadspixel.net https://challenges.cloudflare.com https://static.cloudflareinsights.com https://snap.licdn.com https://assets.apollo.io" + 
+    // + Clerk (auth) — its JS lives on *.clerk.accounts.dev / clerk.com / clerk.constancia.io
+    "script-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com https://www.googletagmanager.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://js-eu1.hs-scripts.com https://js.hs-scripts.com https://js.hsforms.net https://js-eu1.hsforms.net https://js.hs-analytics.net https://js-eu1.hs-analytics.net https://js.hscollectedforms.net https://js-eu1.hscollectedforms.net https://js.usemessages.com https://js-eu1.usemessages.com https://js-eu1.hs-banner.com https://js.hs-banner.com https://js-eu1.hsadspixel.net https://js.hsadspixel.net https://challenges.cloudflare.com https://static.cloudflareinsights.com https://snap.licdn.com https://assets.apollo.io https://*.clerk.accounts.dev https://clerk.com https://*.clerk.com https://clerk.constancia.io" +
       (isProduction ? "" : " 'unsafe-eval'"),
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.clerk.accounts.dev https://clerk.com https://*.clerk.com",
     "font-src 'self' https://fonts.gstatic.com data:",
-    // img-src: self + data URIs (avatars) + https CDNs (blog images, GA pixel) + blob (canvas)
-    "img-src 'self' data: blob: https://www.google-analytics.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://px.ads.linkedin.com https://www.linkedin.com https:",
-    "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://stats.g.doubleclick.net https://www.google.com https://api.hubapi.com https://api-eu1.hubapi.com https://api-eu1.hubspot.com https://forms.hubspot.com https://forms-eu1.hubspot.com https://api.hsforms.com https://forms-eu1.hscollectedforms.net https://challenges.cloudflare.com https://px.ads.linkedin.com https://aplo-evnt.com wss:",
-    // Frames: HubSpot + Cloudflare + GTM + reCAPTCHA v2 challenge popup
-    "frame-src 'self' https://app.hubspot.com https://app-eu1.hubspot.com https://challenges.cloudflare.com https://www.googletagmanager.com https://www.google.com https://www.recaptcha.net",
+    // img-src: self + data URIs (avatars) + https CDNs (blog images, GA pixel) + blob (canvas) + Clerk avatars
+    "img-src 'self' data: blob: https://www.google-analytics.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://px.ads.linkedin.com https://www.linkedin.com https://img.clerk.com https://*.clerk.accounts.dev https:",
+    // connect-src: + Clerk API + websocket for Clerk session
+    "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://stats.g.doubleclick.net https://www.google.com https://api.hubapi.com https://api-eu1.hubapi.com https://api-eu1.hubspot.com https://forms.hubspot.com https://forms-eu1.hubspot.com https://api.hsforms.com https://forms-eu1.hscollectedforms.net https://challenges.cloudflare.com https://px.ads.linkedin.com https://aplo-evnt.com https://*.clerk.accounts.dev https://clerk.com https://*.clerk.com https://clerk.constancia.io wss:",
+    // Frames: HubSpot + Cloudflare + GTM + reCAPTCHA v2 challenge popup + Clerk modals
+    "frame-src 'self' https://app.hubspot.com https://app-eu1.hubspot.com https://challenges.cloudflare.com https://www.googletagmanager.com https://www.google.com https://www.recaptcha.net https://*.clerk.accounts.dev https://clerk.com https://*.clerk.com",
     "frame-ancestors 'self'",
     "base-uri 'self'",
     "form-action 'self' https://forms.hubspot.com",
@@ -303,8 +305,11 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     "manifest-src 'self'",
     "upgrade-insecure-requests",
     "block-all-mixed-content",
-    // Allow service worker for performance (asset caching) - restricted to self origin only
-    "worker-src 'self'",
+    // Service workers + Clerk's internal web workers (which use blob: URLs).
+    // The Replit Agent identified this on 2026-05-15: without `blob:` here the
+    // Clerk JS bundle was blocked from spawning its session worker, leaving
+    // <SignIn> blank on /admin/sign-in.
+    "worker-src 'self' blob:",
     // CSP violation reporting - both legacy report-uri and modern report-to
     "report-uri /api/csp-report",
     "report-to security-violations",
