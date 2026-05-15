@@ -48,7 +48,7 @@ const categories: CategoryCard[] = [
     icon: Compass,
     url: "/admin/finance-compass",
     color: "text-brand-cyan",
-    bgColor: "bg-[#12EBFC]/10",
+    bgColor: "bg-[#C77A93]/10",
     features: ["Assessments", "Questions", "AI Config", "Tenants", "Knowledge Base"]
   },
   {
@@ -78,7 +78,7 @@ function CategoryCardComponent({ category }: { category: CategoryCard }) {
   return (
     <Link href={category.url} data-testid={testId}>
       <Card 
-        className="cursor-pointer transition-all hover:shadow-lg hover:border-[#12EBFC]/30 h-full group"
+        className="cursor-pointer transition-all hover:shadow-lg hover:border-[#C77A93]/30 h-full group"
         data-testid={`card-category-${category.title.toLowerCase().replace(/\s+/g, "-")}`}
       >
         <CardContent className="pt-6 pb-5">
@@ -139,7 +139,7 @@ export default function AdminHub() {
         <div>
           <h1 className="text-3xl font-bold" data-testid="text-page-title">Admin Hub</h1>
           <p className="text-muted-foreground mt-2">
-            Welcome to the 1QG administration centre. Select a category to get started.
+            Welcome to the Constancia administration centre. Select a category to get started.
           </p>
         </div>
 

@@ -1,10 +1,15 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import { ArrowRight, Compass, Settings, Brain, FileCheck, Briefcase, BarChart3, TrendingUp, CheckCircle2, Target, Users, Zap } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { ProofBar, GlassCard } from "@/components/ui/1qg";
-import type { ProofBarItem } from "@/components/ui/1qg";
+import { ProofBar, GlassCard } from "@/components/ui/constancia";
+import type { ProofBarItem } from "@/components/ui/constancia";
 import { useFeatureFlags } from "@/lib/feature-flags";
+
+// 3D section accent — single floating sphere between sections
+const SectionAccent3D = lazy(() =>
+  import("@/components/3d/SectionAccent3D").then((m) => ({ default: m.SectionAccent3D })),
+);
 
 const proofBarItems: ProofBarItem[] = [
   { stat: 'AI',        label: 'Delivery, augmented',     body: 'Our tools standardise process, output, and outcome across every engagement. Faster delivery, lower cost, no loss of quality.' },
@@ -131,8 +136,15 @@ export function BelowFoldSections() {
       </div>
 
       {/* ── Services ── */}
-      <section className="section-primary">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section className="section-primary relative">
+        {/* 3D accent — small berry sphere top-right of section */}
+        <Suspense fallback={null}>
+          <div className="absolute top-12 right-8 lg:right-20 opacity-50 pointer-events-none">
+            <SectionAccent3D variant="berry" size={140} />
+          </div>
+        </Suspense>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="text-center mb-12">
             <span className="section-tag mb-4">What We Do</span>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -189,7 +201,7 @@ export function BelowFoldSections() {
                   <Zap className="w-5 h-5 text-brand-cyan" />
                 </div>
                 <span
-                  className="text-xs font-medium uppercase tracking-wider text-[#12EBFC]/80"
+                  className="text-xs font-medium uppercase tracking-wider text-[#C77A93]/80"
                   data-testid="text-how-we-work-label"
                 >
                   How We Work
@@ -203,12 +215,12 @@ export function BelowFoldSections() {
                   Consulting firms have spent decades charging more for the same output. We're changing that.
                 </p>
                 <p
-                  className="text-base sm:text-lg leading-relaxed text-[#FEFFF3]/80"
+                  className="text-base sm:text-lg leading-relaxed text-[#F6F3EE]/80"
                   data-testid="text-how-we-work-body"
                 >
                   Our AI-augmented delivery model standardises the process, the output, and the outcome across every engagement. That means faster delivery, lower cost, and a result you can predict from the start, not one you're hoping for at go-live.
                 </p>
-                <p className="text-sm sm:text-base leading-relaxed text-[#FEFFF3]/60">
+                <p className="text-sm sm:text-base leading-relaxed text-[#F6F3EE]/60">
                   We've delivered programmes at AerCap, Howden, Reckitt Benckiser, and BAT. We know what good looks like. Now we've built the tools to make it repeatable.
                 </p>
               </div>
@@ -231,8 +243,14 @@ export function BelowFoldSections() {
       </section>
 
       {/* ── Tools ── */}
-      <section className="section-secondary">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section className="section-secondary relative">
+        <Suspense fallback={null}>
+          <div className="absolute top-16 left-6 lg:left-16 opacity-45 pointer-events-none">
+            <SectionAccent3D variant="mint" size={150} />
+          </div>
+        </Suspense>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="text-center mb-12">
             <span className="section-tag mb-4">Tools &amp; Accelerators</span>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Start Your Evaluation</h2>
@@ -297,8 +315,14 @@ export function BelowFoldSections() {
       </section>
 
       {/* ── About ── */}
-      <section className="section-primary">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section className="section-primary relative">
+        <Suspense fallback={null}>
+          <div className="hidden lg:block absolute bottom-12 right-12 opacity-50 pointer-events-none">
+            <SectionAccent3D variant="berry" size={180} />
+          </div>
+        </Suspense>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           <div ref={aboutReveal.ref} style={revealStyle(aboutReveal.visible)}>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div>
@@ -310,7 +334,7 @@ export function BelowFoldSections() {
                   Our team has delivered EPM programmes across some of the world's most complex finance functions, AerCap, Howden, Reckitt Benckiser, BAT. We know what these projects cost, where they go wrong, and what good delivery actually looks like.
                 </p>
                 <p className="text-base mb-6 leading-relaxed text-muted-foreground">
-                  We built 1QG to do it at a fraction of the cost and risk, by combining senior practitioners with AI-powered tools that standardise the work from day one.
+                  We built Constancia to do it at a fraction of the cost and risk, by combining senior practitioners with AI-powered tools that standardise the work from day one.
                 </p>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
                   {coreValues.map((value) => (
@@ -353,8 +377,14 @@ export function BelowFoldSections() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="section-secondary" style={{ paddingBottom: '120px' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section className="section-secondary relative" style={{ paddingBottom: '120px' }}>
+        <Suspense fallback={null}>
+          <div className="absolute -top-4 left-1/2 -translate-x-1/2 opacity-55 pointer-events-none">
+            <SectionAccent3D variant="mint" size={120} />
+          </div>
+        </Suspense>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           <div ref={ctaReveal.ref} style={revealStyle(ctaReveal.visible)}>
             <GlassCard className="p-8 sm:p-12 text-center">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">

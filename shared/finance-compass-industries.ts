@@ -7,7 +7,7 @@
  * 
  * Data Sources:
  * - APQC Open Standards Benchmarking (budget cycle, close cycle data)
- * - 1QG Insights (40+ years combined consulting experience)
+ * - Constancia Insights (40+ years combined consulting experience)
  * 
  * Last Updated: December 2025
  */

@@ -30,6 +30,9 @@ export type User = typeof users.$inferSelect;
 
 export const contactSubmissions = pgTable("contact_submissions", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  // Clerk user id (null for anonymous submissions, set for Clerk-authed leads).
+  // Used by /api/leads/sync as the canonical dedupe key. Indexed in DB.
+  clerkUserId: text("clerk_user_id"),
   firstName: text("first_name").notNull(),
   lastName: text("last_name").notNull(),
   email: text("email").notNull(),
@@ -448,8 +451,8 @@ export const BLOCKED_EMAIL_DOMAINS = [
 export function isBusinessEmail(email: string): boolean {
   const domain = email.split("@")[1]?.toLowerCase();
   if (!domain) return false;
-  // Allow 1qg domains
-  if (domain.includes("1qg")) return true;
+  // Allow internal Constancia + legacy 1QG domains through the consumer-domain block
+  if (domain.includes("constancia") || domain.includes("1qg")) return true;
   return !BLOCKED_EMAIL_DOMAINS.includes(domain);
 }
 
@@ -1240,8 +1243,8 @@ export type Citation = z.infer<typeof citationSchema>;
 // Whitelisted Admin Emails (only these accounts can access admin)
 // For Replit Auth, any logged in Replit user can access admin (for development)
 export const ADMIN_WHITELIST_EMAILS = [
-  "grant.vanwyk@1qg.com",
-  "bradley.cooper@1qg.com",
+  "grant.vanwyk@constancia.io",
+  "bradley.cooper@constancia.io",
 ];
 
 // ============================================
@@ -1685,7 +1688,7 @@ export type LinkChangeLog = typeof linkChangeLogs.$inferSelect;
 
 export const linkHealthConfig = pgTable("link_health_config", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
-  primaryDomain: text("primary_domain").notNull().default("1qg.co.uk"),
+  primaryDomain: text("primary_domain").notNull().default("constancia.io"),
   whitelistedDomains: text("whitelisted_domains").array().default(sql`'{}'::text[]`),
   excludedPaths: text("excluded_paths").array().default(sql`'{}'::text[]`),
   rule1Enabled: boolean("rule1_enabled").notNull().default(true),

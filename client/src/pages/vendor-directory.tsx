@@ -37,9 +37,9 @@ interface VendorEntry {
 }
 
 const TOOL_TYPE_INITIALS_BG: Record<ToolType, string> = {
-  epm: "bg-gradient-to-br from-[#02205B] to-[#0884AA]",
-  erp: "bg-gradient-to-br from-[#0884AA] to-[#12EBFC]",
-  ai: "bg-gradient-to-br from-[#0070C0] to-[#02205B]",
+  epm: "bg-gradient-to-br from-[#12161D] to-[#7FB8A3]",
+  erp: "bg-gradient-to-br from-[#7FB8A3] to-[#C77A93]",
+  ai: "bg-gradient-to-br from-[#1E2630] to-[#12161D]",
 };
 
 const SEGMENT_COLORS: Record<string, { bg: string; text: string }> = {
@@ -335,7 +335,7 @@ function CategoryTabContent({
         className="space-y-2"
       >
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-[#0884AA]/10">
+          <div className="p-2 rounded-lg bg-[#7FB8A3]/10">
             <config.icon className="h-5 w-5 text-brand-teal dark:text-brand-cyan" />
           </div>
           <div>
@@ -462,7 +462,7 @@ export default function VendorDirectoryPage() {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="Independent Platform Profiles | 1QG - EPM, ERP & AI Vendor Directory"
+        title="Independent Platform Profiles | Constancia - EPM, ERP & AI Vendor Directory"
         description="Explore 49 independent platform profiles across EPM, ERP and AI for Finance. Objective analysis with no vendor bias, built for buyers evaluating finance technology."
         keywords={[
           "EPM vendor comparison",
@@ -489,7 +489,7 @@ export default function VendorDirectoryPage() {
             <div
               className="text-center mb-8"
             >
-              <span className="inline-block px-4 py-1.5 bg-[#12EBFC]/10 text-brand-teal dark:text-brand-cyan text-sm font-medium rounded-full mb-4">Platform Directory</span>
+              <span className="inline-block px-4 py-1.5 bg-[#C77A93]/10 text-brand-teal dark:text-brand-cyan text-sm font-medium rounded-full mb-4">Platform Directory</span>
               <h2
                 className="text-xl sm:text-2xl font-bold text-foreground mb-2"
                 data-testid="heading-how-to-use"
@@ -543,7 +543,7 @@ export default function VendorDirectoryPage() {
         <section className="py-8 sm:py-12 bg-muted/30">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div
-              className="p-5 sm:p-8 lg:p-10 rounded-xl bg-gradient-to-r from-[#02205B] via-[#0070C0] to-[#0884AA] text-center"
+              className="p-5 sm:p-8 lg:p-10 rounded-xl bg-gradient-to-r from-[#12161D] via-[#1E2630] to-[#7FB8A3] text-center"
             >
               <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3">
                 Need help identifying the right platform?
@@ -556,7 +556,7 @@ export default function VendorDirectoryPage() {
                   <Link href="/tools/epm-comparison">
                     <Button
                       size="lg"
-                      className="bg-[#12EBFC] text-[#02205B] font-semibold"
+                      className="bg-[#C77A93] text-[#12161D] font-semibold"
                       onClick={() => trackCTAClicked("vendor-directory", "compare-platforms")}
                       data-testid="button-cta-compare"
                     >

@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion, AnimatePresence } from "framer-motion";
 import { Turnstile, useTurnstileToken } from "@/components/turnstile";
+import { dlog } from "@/lib/dev-log";
 import {
   Dialog,
   DialogContent,
@@ -157,13 +158,13 @@ export function ExportGateModal({ exportConfig, open, onOpenChange, onExportAppr
       return response.json();
     },
     onSuccess: (data) => {
-      console.log("[ExportGateModal] OTP verification success, data:", data);
+      dlog("[ExportGateModal] OTP verification success, data:", data);
       if (data.verified) {
-        console.log("[ExportGateModal] OTP verified, calling handleExportApproved");
+        dlog("[ExportGateModal] OTP verified, calling handleExportApproved");
         setStep("success");
         trackLeadCaptured("comparison_export_otp", { exportType: exportConfig?.type, categoryType: exportConfig?.categoryType, verified: true });
         handleExportApproved();
-        console.log("[ExportGateModal] handleExportApproved returned");
+        dlog("[ExportGateModal] handleExportApproved returned");
       }
     },
     onError: (error: Error) => {
@@ -273,7 +274,7 @@ export function ExportGateModal({ exportConfig, open, onOpenChange, onExportAppr
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[480px] max-h-[85vh] overflow-hidden flex flex-col">
         <DialogHeader className="flex-shrink-0">
-          <DialogTitle className="text-xl font-semibold text-[#02205B]">
+          <DialogTitle className="text-xl font-semibold text-[#12161D]">
             {step === "form" && "Export Comparison Report"}
             {step === "otp" && "Verify Your Email"}
             {step === "success" && "Export Ready"}
@@ -287,15 +288,15 @@ export function ExportGateModal({ exportConfig, open, onOpenChange, onExportAppr
 
         <div className="flex-1 overflow-y-auto overscroll-contain min-h-0 pr-1" style={{ WebkitOverflowScrolling: 'touch' }}>
           {exportConfig && (
-            <div className="bg-gradient-to-r from-[#02205B]/5 to-[#0884AA]/5 p-4 rounded-lg mb-4">
+            <div className="bg-gradient-to-r from-[#12161D]/5 to-[#7FB8A3]/5 p-4 rounded-lg mb-4">
               <div className="flex items-center gap-3">
                 {exportConfig.type === "pdf" ? (
-                  <FileText className="h-8 w-8 text-[#02205B]" />
+                  <FileText className="h-8 w-8 text-[#12161D]" />
                 ) : (
-                  <FileSpreadsheet className="h-8 w-8 text-[#0884AA]" />
+                  <FileSpreadsheet className="h-8 w-8 text-[#7FB8A3]" />
                 )}
                 <div>
-                  <p className="text-sm font-medium text-[#02205B]">
+                  <p className="text-sm font-medium text-[#12161D]">
                     {getCategoryLabel()} Comparison - {exportConfig.type.toUpperCase()}
                   </p>
                   <p className="text-xs text-muted-foreground mt-1">
@@ -461,7 +462,7 @@ export function ExportGateModal({ exportConfig, open, onOpenChange, onExportAppr
 
                   <Button 
                     type="submit" 
-                    className="w-full bg-gradient-to-r from-[#02205B] to-[#0884AA] hover:from-[#02205B]/90 hover:to-[#0884AA]/90"
+                    className="w-full bg-gradient-to-r from-[#12161D] to-[#7FB8A3] hover:from-[#12161D]/90 hover:to-[#7FB8A3]/90"
                     disabled={submitLeadMutation.isPending || (turnstileConfig?.enabled ? !captchaToken : false)}
                     data-testid="button-export-submit-lead"
                   >
@@ -491,7 +492,7 @@ export function ExportGateModal({ exportConfig, open, onOpenChange, onExportAppr
               transition={{ duration: 0.2 }}
             >
               <div className="flex justify-center mb-6">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#02205B] to-[#0884AA] flex items-center justify-center">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#12161D] to-[#7FB8A3] flex items-center justify-center">
                   <Mail className="h-8 w-8 text-white" />
                 </div>
               </div>
@@ -528,7 +529,7 @@ export function ExportGateModal({ exportConfig, open, onOpenChange, onExportAppr
 
                   <Button 
                     type="submit" 
-                    className="w-full bg-gradient-to-r from-[#02205B] to-[#0884AA] hover:from-[#02205B]/90 hover:to-[#0884AA]/90"
+                    className="w-full bg-gradient-to-r from-[#12161D] to-[#7FB8A3] hover:from-[#12161D]/90 hover:to-[#7FB8A3]/90"
                     disabled={verifyOtpMutation.isPending || otpForm.watch("otp").length !== 6}
                     data-testid="button-export-verify-otp"
                   >
@@ -552,7 +553,7 @@ export function ExportGateModal({ exportConfig, open, onOpenChange, onExportAppr
                       size="sm"
                       onClick={() => resendOtpMutation.mutate()}
                       disabled={resendOtpMutation.isPending}
-                      className="text-muted-foreground hover:text-[#0884AA]"
+                      className="text-muted-foreground hover:text-[#7FB8A3]"
                       data-testid="button-export-resend-otp"
                     >
                       {resendOtpMutation.isPending ? (
@@ -585,12 +586,12 @@ export function ExportGateModal({ exportConfig, open, onOpenChange, onExportAppr
               transition={{ duration: 0.3 }}
               className="text-center py-6"
             >
-              <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-r from-[#02205B] to-[#0884AA] flex items-center justify-center">
-                <CheckCircle className="h-10 w-10 text-[#12EBFC]" />
+              <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-r from-[#12161D] to-[#7FB8A3] flex items-center justify-center">
+                <CheckCircle className="h-10 w-10 text-[#C77A93]" />
               </div>
-              <h3 className="text-lg font-semibold text-[#02205B] dark:text-[#12EBFC] mb-2">Export Started!</h3>
+              <h3 className="text-lg font-semibold text-[#12161D] dark:text-[#C77A93] mb-2">Export Started!</h3>
               <p className="text-sm text-muted-foreground">
-                Your {exportConfig?.type.toUpperCase()} report is being generated. Thank you for your interest in 1QG.
+                Your {exportConfig?.type.toUpperCase()} report is being generated. Thank you for your interest in Constancia.
               </p>
             </motion.div>
           )}

@@ -52,8 +52,8 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen page-dark">
       <SEOHead
-        title="1QG Insights Hub - Finance Transformation & EPM Insights"
-        description="Expert insights on finance transformation, EPM platform selection, ERP optimisation, and AI for finance from 1QG's independent advisory team."
+        title="Constancia Insights Hub - Finance Transformation & EPM Insights"
+        description="Expert insights on finance transformation, EPM platform selection, ERP optimisation, and AI for finance from Constancia's independent advisory team."
         keywords={[
           "AI insights",
           "digital transformation blog",
@@ -68,7 +68,7 @@ export default function BlogPage() {
       <main className="pt-16 sm:pt-20 pb-16">
         <PageHero
           badge="Insights & Updates"
-          title="1QG Insights Hub"
+          title="Constancia Insights Hub"
           description="Expert insights on finance transformation, ERP, EPM, and AI-driven business solutions."
         />
 
@@ -96,7 +96,7 @@ export default function BlogPage() {
                     )}
                     <CardHeader className="pb-2">
                       <div className="flex items-center gap-2 mb-2">
-                        <Badge variant="secondary" className="bg-[#12EBFC]/10 text-brand-teal">
+                        <Badge variant="secondary" className="bg-[#C77A93]/10 text-brand-teal">
                           {getCategoryName(post.categoryId)}
                         </Badge>
                         <Badge variant="outline">Featured</Badge>
@@ -189,7 +189,7 @@ export default function BlogPage() {
                     )}
                     <CardHeader className="pb-2 flex-grow">
                       <div className="flex items-center gap-2 mb-2">
-                        <Badge variant="secondary" className="bg-[#12EBFC]/10 text-brand-teal">
+                        <Badge variant="secondary" className="bg-[#C77A93]/10 text-brand-teal">
                           {getCategoryName(post.categoryId)}
                         </Badge>
                       </div>

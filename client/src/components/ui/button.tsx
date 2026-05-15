@@ -11,10 +11,10 @@ import { cn } from "@/lib/utils"
  *  outline          — transparent with outline (admin UI)
  *  secondary        — secondary action in admin / tools
  *  ghost            — no border, no background
- *  brand            — 1QG public site primary CTA (Option D: zero radius,
+ *  brand            — Constancia public site primary CTA (Option D: zero radius,
  *                     mono uppercase, cyan left accent bar)
- *  brand-secondary  — 1QG public site secondary CTA (muted left accent)
- *  brand-ghost      — 1QG public site quiet link-style action
+ *  brand-secondary  — Constancia public site secondary CTA (muted left accent)
+ *  brand-ghost      — Constancia public site quiet link-style action
  *
  * All brand colours are sourced from CSS variables — never hardcoded.
  * See /src/lib/tokens.ts and the brand-* vars in index.css.

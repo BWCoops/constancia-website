@@ -48,7 +48,7 @@ import { sendOtpEmail, sendLeadVerificationNotification, syncLeadToHubSpot } fro
 
 const router = Router();
 
-const SESSION_COOKIE_NAME = "1qg_resource_session";
+const SESSION_COOKIE_NAME = "constancia_resource_session";
 const SESSION_EXPIRY_DAYS = 30;
 const OTP_EXPIRY_MINUTES = 10;
 const MAX_OTP_ATTEMPTS = 5;

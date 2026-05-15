@@ -1,6 +1,7 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import AdminLayout from "./AdminLayout";
+import { AdminQueryErrorBanner } from "./components/AdminQueryErrorBanner";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
@@ -202,44 +203,59 @@ export default function AdminOperations() {
   const [currentEntity, setCurrentEntity] = useState<any>(null);
   const [entityType, setEntityType] = useState<string>("");
 
-  const { data: health, isLoading: healthLoading, refetch: refetchHealth } = useQuery<SystemHealth>({
+  const { data: health, isLoading: healthLoading, refetch: refetchHealth, error: healthError } = useQuery<SystemHealth>({
     queryKey: ["/api/admin/operations/health"],
     refetchInterval: 30000,
   });
 
-  const { data: logs, isLoading: logsLoading, refetch: refetchLogs } = useQuery<{ logs: RequestLog[]; total: number }>({
+  const { data: logs, isLoading: logsLoading, refetch: refetchLogs, error: logsError } = useQuery<{ logs: RequestLog[]; total: number }>({
     queryKey: ["/api/admin/operations/request-logs"],
   });
 
-  const { data: stats, isLoading: statsLoading } = useQuery<RequestStats>({
+  const { data: stats, isLoading: statsLoading, error: statsError } = useQuery<RequestStats>({
     queryKey: ["/api/admin/operations/request-stats"],
     refetchInterval: 60000,
   });
 
-  const { data: seoStatus, isLoading: seoLoading } = useQuery<SeoStatus>({
+  const { data: seoStatus, isLoading: seoLoading, error: seoError } = useQuery<SeoStatus>({
     queryKey: ["/api/admin/operations/seo/status"],
   });
 
   // AI Config queries
-  const { data: systemPrompts, isLoading: promptsLoading, refetch: refetchPrompts } = useQuery<FcAiSystemPrompt[]>({
+  const { data: systemPrompts, isLoading: promptsLoading, refetch: refetchPrompts, error: promptsError } = useQuery<FcAiSystemPrompt[]>({
     queryKey: ["/api/admin/ai-config/system-prompts"],
   });
 
-  const { data: guardrails, isLoading: guardrailsLoading, refetch: refetchGuardrails } = useQuery<FcAiGuardrail[]>({
+  const { data: guardrails, isLoading: guardrailsLoading, refetch: refetchGuardrails, error: guardrailsError } = useQuery<FcAiGuardrail[]>({
     queryKey: ["/api/admin/ai-config/guardrails"],
   });
 
-  const { data: groundingRules, isLoading: groundingLoading, refetch: refetchGrounding } = useQuery<FcAiGroundingRule[]>({
+  const { data: groundingRules, isLoading: groundingLoading, refetch: refetchGrounding, error: groundingError } = useQuery<FcAiGroundingRule[]>({
     queryKey: ["/api/admin/ai-config/grounding-rules"],
   });
 
-  const { data: knowledgeBase, isLoading: kbLoading, refetch: refetchKb } = useQuery<FcAiKnowledgeBase[]>({
+  const { data: knowledgeBase, isLoading: kbLoading, refetch: refetchKb, error: kbError } = useQuery<FcAiKnowledgeBase[]>({
     queryKey: ["/api/admin/ai-config/knowledge-base"],
   });
 
-  const { data: followupTemplates, isLoading: followupLoading, refetch: refetchFollowup } = useQuery<FcAiFollowupTemplate[]>({
+  const { data: followupTemplates, isLoading: followupLoading, refetch: refetchFollowup, error: followupError } = useQuery<FcAiFollowupTemplate[]>({
     queryKey: ["/api/admin/ai-config/followup-templates"],
   });
+
+  // Aggregate query errors so the admin knows when something's broken instead
+  // of staring at infinite skeletons. Auth failures (401/403) are by far the
+  // most common cause — surface them up front via AdminQueryErrorBanner.
+  const queryErrors = [
+    { label: "System health",     error: healthError },
+    { label: "Request logs",      error: logsError },
+    { label: "Request stats",     error: statsError },
+    { label: "SEO status",        error: seoError },
+    { label: "AI prompts",        error: promptsError },
+    { label: "AI guardrails",     error: guardrailsError },
+    { label: "AI grounding",      error: groundingError },
+    { label: "AI knowledge base", error: kbError },
+    { label: "AI followups",      error: followupError },
+  ];
 
   // Mutations
   const toggleActiveMutation = useMutation({
@@ -345,9 +361,9 @@ export default function AdminOperations() {
               System health, request monitoring, and SEO tools
             </p>
           </div>
-          <Button 
-            variant="outline" 
-            size="sm" 
+          <Button
+            variant="outline"
+            size="sm"
             onClick={() => {
               refetchHealth();
               refetchLogs();
@@ -359,6 +375,8 @@ export default function AdminOperations() {
             Refresh All
           </Button>
         </div>
+
+        <AdminQueryErrorBanner errors={queryErrors} totalQueries={queryErrors.length} />
 
         <Tabs defaultValue="health" className="space-y-4">
           <TabsList className="flex-wrap h-auto gap-1" data-testid="tabs-operations">

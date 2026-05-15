@@ -120,7 +120,7 @@ export async function createOrUpdateContact(data: HubSpotContactData): Promise<H
     }
     
     if (assessmentDetails.length > 0) {
-      properties.message = `[1QG FinanceCompass Assessment]\n${assessmentDetails.join('\n')}`;
+      properties.message = `[Constancia FinanceCompass Assessment]\n${assessmentDetails.join('\n')}`;
     }
     
     let contactId: string | undefined;

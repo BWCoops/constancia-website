@@ -32,14 +32,14 @@ let _iconWhite: string | null = null;
 
 export function getLogoTurquoise(): string {
   if (_logoTurquoise === null) {
-    _logoTurquoise = loadLogoAsBase64('1QG - Type Logo (Turquoise)_1764415510183.png');
+    _logoTurquoise = loadLogoAsBase64('Constancia - Type Logo (Turquoise)_1764415510183.png');
   }
   return _logoTurquoise;
 }
 
 export function getIconWhite(): string {
   if (_iconWhite === null) {
-    _iconWhite = loadLogoAsBase64('1QG - Icon (White)_1764414896685.png');
+    _iconWhite = loadLogoAsBase64('Constancia - Icon (White)_1764414896685.png');
   }
   return _iconWhite;
 }

@@ -42,7 +42,7 @@ export function HeroResultsVisual({ className }: HeroResultsVisualProps) {
             <h3 className="text-lg font-semibold text-white">Finance Readiness</h3>
           </div>
           <div className="text-right">
-            <p className="text-3xl font-bold text-[#12EBFC]">{overallScore}</p>
+            <p className="text-3xl font-bold text-[#C77A93]">{overallScore}</p>
             <p className="text-xs text-white/60">/ 100</p>
           </div>
         </div>
@@ -65,8 +65,8 @@ export function HeroResultsVisual({ className }: HeroResultsVisualProps) {
               <Radar
                 name="Your Score"
                 dataKey="score"
-                stroke="#12EBFC"
-                fill="#12EBFC"
+                stroke="#C77A93"
+                fill="#C77A93"
                 fillOpacity={0.3}
                 strokeWidth={2}
               />

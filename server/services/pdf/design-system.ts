@@ -6,10 +6,10 @@
  */
 
 export const BRAND_COLORS = {
-  navy: '#02205B',
-  cyan: '#12EBFC',
-  teal: '#0884AA',
-  cream: '#FEFFF3',
+  navy: '#12161D',
+  cyan: '#C77A93',
+  teal: '#7FB8A3',
+  cream: '#F6F3EE',
   white: '#FFFFFF',
   lightGray: '#F8FAFC',
   mediumGray: '#E2E8F0',
@@ -122,10 +122,10 @@ export const GRADIENTS = {
 };
 
 export const CONTACT_INFO = {
-  company: '1QG Group Limited',
+  company: 'Constancia Group Limited',
   address: '86-90 Paul Street, London, EC2A 4NE, United Kingdom',
-  email: 'info@1qg.com',
-  website: 'https://1qg.com',
+  email: 'info@constancia.io',
+  website: 'https://constancia.io',
   linkedin: 'linkedin.com/company/1qg-group-limited',
 };
 

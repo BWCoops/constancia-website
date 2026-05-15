@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
  * process notes, and legal page callouts.
  *
  * Replaces ad-hoc inline style blocks like:
- *   style={{ background: 'rgba(18,235,252,0.05)', border: '1px solid rgba(18,235,252,0.12)' }}
+ *   style={{ background: 'rgba(199,122,147,0.05)', border: '1px solid rgba(199,122,147,0.12)' }}
  *
  * All values sourced from --brand-info-* CSS variables.
  */

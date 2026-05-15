@@ -13,8 +13,8 @@ export const BRAND_COLORS = {
 
 export const CONTACT_INFO = {
   address: "86-90 Paul Street, London, EC2A 4NE, United Kingdom",
-  email: "info@1qg.com",
-  website: "https://1qg.com",
+  email: "info@constancia.io",
+  website: "https://constancia.io",
   linkedin: "linkedin.com/company/1qg-group-limited",
 };
 
@@ -57,12 +57,12 @@ export function createBrandedPDF(options: PDFTemplateOptions): jsPDF {
     } catch (e) {
       doc.setFontSize(28);
       doc.setTextColor(BRAND_COLORS.cyan.r, BRAND_COLORS.cyan.g, BRAND_COLORS.cyan.b);
-      doc.text("1QG", margin, 35);
+      doc.text("Constancia", margin, 35);
     }
   } else {
     doc.setFontSize(28);
     doc.setTextColor(BRAND_COLORS.cyan.r, BRAND_COLORS.cyan.g, BRAND_COLORS.cyan.b);
-    doc.text("1QG", margin, 35);
+    doc.text("Constancia", margin, 35);
   }
 
   // Main title
@@ -157,7 +157,7 @@ export function createBrandedPDF(options: PDFTemplateOptions): jsPDF {
     doc.setTextColor(100, 100, 100);
     doc.setFont("helvetica", "normal");
     const disclaimerText1 = "This document has been prepared using publicly available information and is intended for general informational purposes only. It does not constitute professional advice, a formal recommendation, or an offer of services.";
-    const disclaimerText2 = `To discuss how 1QG can support your specific requirements, please contact us at ${CONTACT_INFO.email} or visit ${CONTACT_INFO.website}.`;
+    const disclaimerText2 = `To discuss how Constancia can support your specific requirements, please contact us at ${CONTACT_INFO.email} or visit ${CONTACT_INFO.website}.`;
 
     doc.text(disclaimerText1, margin + 10, yPos + 22, { maxWidth: pageWidth - margin * 2 - 20 });
     doc.text(disclaimerText2, margin + 10, yPos + 42, { maxWidth: pageWidth - margin * 2 - 20 });
@@ -177,13 +177,13 @@ export function createBrandedPDF(options: PDFTemplateOptions): jsPDF {
         doc.setFontSize(12);
         doc.setTextColor(BRAND_COLORS.navy.r, BRAND_COLORS.navy.g, BRAND_COLORS.navy.b);
         doc.setFont("helvetica", "bold");
-        doc.text("1QG", margin, 12);
+        doc.text("Constancia", margin, 12);
       }
     } else {
       doc.setFontSize(12);
       doc.setTextColor(BRAND_COLORS.navy.r, BRAND_COLORS.navy.g, BRAND_COLORS.navy.b);
       doc.setFont("helvetica", "bold");
-      doc.text("1QG", margin, 12);
+      doc.text("Constancia", margin, 12);
     }
 
     doc.setFontSize(8);
@@ -198,7 +198,7 @@ export function createBrandedPDF(options: PDFTemplateOptions): jsPDF {
     // Footer text
     doc.setFontSize(7);
     doc.setTextColor(BRAND_COLORS.teal.r, BRAND_COLORS.teal.g, BRAND_COLORS.teal.b);
-    doc.text(`1QG  |  ${CONTACT_INFO.email}  |  ${CONTACT_INFO.website}  |  London, UK`, margin, pageHeight - 10);
+    doc.text(`Constancia  |  ${CONTACT_INFO.email}  |  ${CONTACT_INFO.website}  |  London, UK`, margin, pageHeight - 10);
     doc.text(`Page ${i - 1} of ${pageCount - 1}`, pageWidth - margin, pageHeight - 10, { align: "right" });
   }
 

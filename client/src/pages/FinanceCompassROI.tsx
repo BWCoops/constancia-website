@@ -14,7 +14,7 @@ export default function FinanceCompassROI() {
     return (
       <div className="container mx-auto py-12 px-4">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-[#02205B] dark:text-white mb-4">
+          <h1 className="text-2xl font-bold text-[#12161D] dark:text-white mb-4">
             Assessment Not Found
           </h1>
           <p className="text-muted-foreground mb-6">
@@ -35,9 +35,9 @@ export default function FinanceCompassROI() {
   return (
     <div className="container mx-auto py-8 px-4 max-w-6xl">
       <SEOHead
-        title="ROI Analysis | Finance Compass | 1QG"
+        title="ROI Analysis | Finance Compass | Constancia"
         description="Review your Finance Compass ROI analysis and investment case for your EPM or ERP transformation."
-        canonicalUrl="https://1qg.com/finance-compass/roi"
+        canonicalUrl="https://constancia.io/finance-compass/roi"
       />
       <div className="mb-6">
         <Button

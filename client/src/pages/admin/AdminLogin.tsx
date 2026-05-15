@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertCircle, LogIn } from "lucide-react";
-import logo from "@assets/1QG - Type Logo (Dark Blue)_1764414916528.png";
+import logo from "@assets/brand/Constancia-Logo-PD-Transparent.png";
 
 export default function AdminLogin() {
   const [, setLocation] = useLocation();
@@ -45,20 +45,20 @@ export default function AdminLogin() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#02205B] via-[#0070C0] to-[#0884AA]">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#12161D] via-[#1E2630] to-[#7FB8A3]">
         <div className="animate-pulse text-white text-lg">Loading...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#02205B] via-[#0070C0] to-[#0884AA] p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#12161D] via-[#1E2630] to-[#7FB8A3] p-4">
       <Card className="w-full max-w-md" data-testid="login-card">
         <CardHeader className="text-center space-y-4">
           <div className="flex justify-center">
             <img 
               src={logo} 
-              alt="1QG Logo" 
+              alt="Constancia Logo" 
               className="h-12 object-contain"
               data-testid="logo-image"
             />
@@ -68,7 +68,7 @@ export default function AdminLogin() {
               Admin Centre
             </CardTitle>
             <CardDescription className="mt-2" data-testid="text-description">
-              Sign in to access the 1QG administration dashboard
+              Sign in to access the Constancia administration dashboard
             </CardDescription>
           </div>
         </CardHeader>
@@ -82,7 +82,7 @@ export default function AdminLogin() {
           
           <Button 
             onClick={handleLogin}
-            className="w-full h-12 gap-3 bg-brand-navy text-white border-[#02205B]"
+            className="w-full h-12 gap-3 bg-brand-navy text-white border-[#12161D]"
             data-testid="button-login"
           >
             <LogIn className="h-5 w-5" />
@@ -90,7 +90,7 @@ export default function AdminLogin() {
           </Button>
 
           <p className="text-xs text-center text-muted-foreground mt-4" data-testid="text-security-notice">
-            Access is restricted to authorized 1QG staff only.
+            Access is restricted to authorized Constancia staff only.
             <br />
             Authentication is handled via Replit authentication.
           </p>

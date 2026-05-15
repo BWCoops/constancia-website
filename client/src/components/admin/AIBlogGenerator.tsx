@@ -2751,7 +2751,7 @@ export function AIBlogGenerator({ isOpen, onClose, onPublishSuccess }: AIBlogGen
                                                 }
                                               }}
                                             >
-                                              <h3 className="text-lg font-bold text-[#02205B] dark:text-[#12EBFC] flex-1">
+                                              <h3 className="text-lg font-bold text-[#12161D] dark:text-[#C77A93] flex-1">
                                                 {section.title.replace("## ", "")}
                                               </h3>
                                               {!isEditingThis && (
@@ -3113,7 +3113,7 @@ export function AIBlogGenerator({ isOpen, onClose, onPublishSuccess }: AIBlogGen
               {/* Mock Blog Header */}
               <header className="mb-8">
                 <div className="flex flex-wrap items-center gap-2 mb-4">
-                  <Badge variant="secondary" className="bg-[#12EBFC]/10 text-[#0884AA] dark:text-[#12EBFC]">
+                  <Badge variant="secondary" className="bg-[#C77A93]/10 text-[#7FB8A3] dark:text-[#C77A93]">
                     Blog Post
                   </Badge>
                 </div>
@@ -3124,7 +3124,7 @@ export function AIBlogGenerator({ isOpen, onClose, onPublishSuccess }: AIBlogGen
                   {editableContent.excerpt || parseFinalContent()?.excerpt || ""}
                 </p>
                 <div className="flex flex-wrap items-center gap-4 pb-6 border-b border-border text-sm text-muted-foreground">
-                  <span className="font-medium text-foreground">1QG Editorial</span>
+                  <span className="font-medium text-foreground">Constancia Editorial</span>
                   <span className="flex items-center gap-1">
                     <Calendar className="w-4 h-4" />
                     {new Date().toLocaleDateString("en-GB", { year: "numeric", month: "long", day: "numeric" })}
@@ -3145,13 +3145,13 @@ export function AIBlogGenerator({ isOpen, onClose, onPublishSuccess }: AIBlogGen
               {/* Blog Content with Visual Components */}
               <div className="prose prose-lg dark:prose-invert max-w-none
                 prose-headings:text-foreground prose-headings:font-bold
-                prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4 prose-h2:text-[#02205B] dark:prose-h2:text-[#12EBFC]
-                prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3 prose-h3:text-[#0884AA] dark:prose-h3:text-[#12EBFC]/80
+                prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4 prose-h2:text-[#12161D] dark:prose-h2:text-[#C77A93]
+                prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3 prose-h3:text-[#7FB8A3] dark:prose-h3:text-[#C77A93]/80
                 prose-p:text-muted-foreground prose-p:leading-relaxed prose-p:mb-4
                 prose-li:text-muted-foreground prose-li:my-1
                 prose-strong:text-foreground prose-strong:font-semibold
-                prose-a:text-[#0884AA] dark:prose-a:text-[#12EBFC] prose-a:no-underline hover:prose-a:underline
-                prose-blockquote:border-l-[#12EBFC] prose-blockquote:bg-muted/30 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-r-lg"
+                prose-a:text-[#7FB8A3] dark:prose-a:text-[#C77A93] prose-a:no-underline hover:prose-a:underline
+                prose-blockquote:border-l-[#C77A93] prose-blockquote:bg-muted/30 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-r-lg"
               >
                 {(() => {
                   const rawContent = editableContent.content || parseFinalContent()?.content || "";
@@ -3162,14 +3162,14 @@ export function AIBlogGenerator({ isOpen, onClose, onPublishSuccess }: AIBlogGen
                       remarkPlugins={[remarkGfm]}
                       components={{
                         h2: ({children}) => (
-                          <h2 className="text-2xl font-bold mt-12 mb-6 text-[#02205B] dark:text-[#12EBFC] flex items-center gap-3">
-                            <span className="w-1 h-8 bg-gradient-to-b from-[#12EBFC] to-[#0884AA] rounded-full" />
+                          <h2 className="text-2xl font-bold mt-12 mb-6 text-[#12161D] dark:text-[#C77A93] flex items-center gap-3">
+                            <span className="w-1 h-8 bg-gradient-to-b from-[#C77A93] to-[#7FB8A3] rounded-full" />
                             {children}
                           </h2>
                         ),
                         h3: ({children}) => (
-                          <h3 className="text-xl font-semibold mt-8 mb-4 text-[#0884AA] dark:text-[#12EBFC]/80 flex items-center gap-2">
-                            <span className="w-0.5 h-6 bg-[#12EBFC]/50 rounded-full" />
+                          <h3 className="text-xl font-semibold mt-8 mb-4 text-[#7FB8A3] dark:text-[#C77A93]/80 flex items-center gap-2">
+                            <span className="w-0.5 h-6 bg-[#C77A93]/50 rounded-full" />
                             {children}
                           </h3>
                         ),
@@ -3309,17 +3309,17 @@ export function AIBlogGenerator({ isOpen, onClose, onPublishSuccess }: AIBlogGen
                           return <p className="mb-4 leading-relaxed text-muted-foreground">{children}</p>;
                         },
                         ul: ({children}) => (
-                          <ul className="my-4 ml-6 list-disc space-y-2 marker:text-[#12EBFC]">
+                          <ul className="my-4 ml-6 list-disc space-y-2 marker:text-[#C77A93]">
                             {children}
                           </ul>
                         ),
                         ol: ({children}) => (
-                          <ol className="my-4 ml-6 list-decimal space-y-2 marker:text-[#12EBFC] marker:font-bold">
+                          <ol className="my-4 ml-6 list-decimal space-y-2 marker:text-[#C77A93] marker:font-bold">
                             {children}
                           </ol>
                         ),
                         blockquote: ({children}) => (
-                          <blockquote className="border-l-4 border-[#12EBFC] bg-muted/30 py-3 px-4 rounded-r-lg my-6 italic">
+                          <blockquote className="border-l-4 border-[#C77A93] bg-muted/30 py-3 px-4 rounded-r-lg my-6 italic">
                             {children}
                           </blockquote>
                         ),
@@ -3328,7 +3328,7 @@ export function AIBlogGenerator({ isOpen, onClose, onPublishSuccess }: AIBlogGen
                           return (
                             <a 
                               href={href} 
-                              className="text-[#0884AA] dark:text-[#12EBFC] hover:underline"
+                              className="text-[#7FB8A3] dark:text-[#C77A93] hover:underline"
                               target={isExternal ? '_blank' : undefined}
                               rel={isExternal ? 'nofollow noopener noreferrer' : undefined}
                             >

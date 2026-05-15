@@ -21,8 +21,8 @@ const colorSchemes = {
   },
   epm: {
     low: '#ef4444',
-    mid: '#0884AA',
-    high: '#02205B',
+    mid: '#7FB8A3',
+    high: '#12161D',
     track: 'hsl(var(--muted))',
   },
   ai: {
@@ -34,7 +34,7 @@ const colorSchemes = {
   infrastructure: {
     low: '#ef4444',
     mid: '#14b8a6',
-    high: '#12EBFC',
+    high: '#C77A93',
     track: 'hsl(var(--muted))',
   },
 };

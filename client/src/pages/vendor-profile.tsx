@@ -83,7 +83,7 @@ const ROI_BG: Record<string, string> = {
 
 function getScoreColour(score: number): string {
   if (score >= 8) return "bg-emerald-500";
-  if (score >= 6) return "bg-[#0884AA]";
+  if (score >= 6) return "bg-[#7FB8A3]";
   if (score >= 4) return "bg-amber-500";
   return "bg-red-500";
 }
@@ -116,7 +116,7 @@ const VendorLogo = memo(function VendorLogo({
   if (!logoSrc || imgError) {
     return (
       <div
-        className={`${sizeClasses} rounded-lg bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center flex-shrink-0`}
+        className={`${sizeClasses} rounded-lg bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center flex-shrink-0`}
         data-testid={`logo-vendor-${platform.id}`}
       >
         <span className={`text-white font-bold ${textSize} leading-none`}>
@@ -232,7 +232,7 @@ export default function VendorProfilePage() {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title={`${platform.name} Profile | 1QG - Independent ${TOOL_TYPE_LABELS[toolType]} Review`}
+        title={`${platform.name} Profile | Constancia - Independent ${TOOL_TYPE_LABELS[toolType]} Review`}
         description={`Independent review of ${platform.name}: ${platform.bestFor}. Objective capability scores, strengths, limitations and pricing analysis.`}
         keywords={[
           platform.name,
@@ -241,7 +241,7 @@ export default function VendorProfilePage() {
           "independent platform review",
           "vendor-agnostic analysis",
         ]}
-        canonicalUrl={`https://1qg.com/vendors/${platform.id}`}
+        canonicalUrl={`https://constancia.io/vendors/${platform.id}`}
       />
 
       <Navigation />
@@ -288,7 +288,7 @@ export default function VendorProfilePage() {
                           </Badge>
                           <Badge
                             variant="outline"
-                            className="bg-brand-navy/10 text-[#02205B] dark:text-brand-cyan border-[#02205B]/20 dark:border-[#12EBFC]/20"
+                            className="bg-brand-navy/10 text-[#12161D] dark:text-brand-cyan border-[#12161D]/20 dark:border-[#C77A93]/20"
                             data-testid="badge-vendor-type"
                           >
                             {TOOL_TYPE_LABELS[toolType]}
@@ -343,7 +343,7 @@ export default function VendorProfilePage() {
                 <CardContent className="p-0">
                   <div className="p-6">
                     <div className="flex items-center gap-2.5 mb-4">
-                      <div className="flex-shrink-0 p-1.5 rounded-md bg-[#0884AA]/10 dark:bg-[#12EBFC]/10">
+                      <div className="flex-shrink-0 p-1.5 rounded-md bg-[#7FB8A3]/10 dark:bg-[#C77A93]/10">
                         <BookOpen className="h-4 w-4 text-brand-teal dark:text-brand-cyan" />
                       </div>
                       <h2
@@ -365,7 +365,7 @@ export default function VendorProfilePage() {
 
                   <div className="p-6">
                     <div className="flex items-center gap-2.5 mb-3">
-                      <div className="flex-shrink-0 p-1.5 rounded-md bg-[#0884AA]/10 dark:bg-[#12EBFC]/10">
+                      <div className="flex-shrink-0 p-1.5 rounded-md bg-[#7FB8A3]/10 dark:bg-[#C77A93]/10">
                         <Target className="h-4 w-4 text-brand-teal dark:text-brand-cyan" />
                       </div>
                       <h3
@@ -389,7 +389,7 @@ export default function VendorProfilePage() {
               <Card>
                 <CardContent className="p-6">
                   <div className="flex items-center gap-2.5 mb-5">
-                    <div className="flex-shrink-0 p-1.5 rounded-md bg-[#0884AA]/10 dark:bg-[#12EBFC]/10">
+                    <div className="flex-shrink-0 p-1.5 rounded-md bg-[#7FB8A3]/10 dark:bg-[#C77A93]/10">
                       <Sparkles className="h-4 w-4 text-brand-teal dark:text-brand-cyan" />
                     </div>
                     <h2
@@ -406,7 +406,7 @@ export default function VendorProfilePage() {
                         className="flex items-center gap-2.5 rounded-md bg-muted/50 px-3 py-2.5"
                         data-testid={`feature-item-${idx}`}
                       >
-                        <div className="h-1.5 w-1.5 rounded-full bg-[#0884AA] dark:bg-[#12EBFC] flex-shrink-0" />
+                        <div className="h-1.5 w-1.5 rounded-full bg-[#7FB8A3] dark:bg-[#C77A93] flex-shrink-0" />
                         <span className="text-sm font-medium text-foreground">
                           {feature}
                         </span>
@@ -420,7 +420,7 @@ export default function VendorProfilePage() {
               <Card>
                 <CardContent className="p-6">
                   <div className="flex items-center gap-2.5 mb-5">
-                    <div className="flex-shrink-0 p-1.5 rounded-md bg-[#0884AA]/10 dark:bg-[#12EBFC]/10">
+                    <div className="flex-shrink-0 p-1.5 rounded-md bg-[#7FB8A3]/10 dark:bg-[#C77A93]/10">
                       <BarChart3 className="h-4 w-4 text-brand-teal dark:text-brand-cyan" />
                     </div>
                     <h2
@@ -507,7 +507,7 @@ export default function VendorProfilePage() {
               </div>
 
               <div
-                className="p-5 sm:p-8 rounded-xl bg-gradient-to-r from-[#02205B] via-[#0070C0] to-[#0884AA] text-center"
+                className="p-5 sm:p-8 rounded-xl bg-gradient-to-r from-[#12161D] via-[#1E2630] to-[#7FB8A3] text-center"
               >
                 <h2
                   className="text-xl sm:text-2xl font-bold text-white mb-3"
@@ -523,7 +523,7 @@ export default function VendorProfilePage() {
                     <Link href="/tools/epm-comparison">
                       <Button
                         size="lg"
-                        className="bg-[#12EBFC] text-[#02205B] font-semibold"
+                        className="bg-[#C77A93] text-[#12161D] font-semibold"
                         data-testid="button-cta-compare"
                       >
                         Compare Platforms
@@ -604,7 +604,7 @@ export default function VendorProfilePage() {
                                 key={i}
                                 className={`w-2.5 h-2.5 rounded-full ${
                                   i < platform.priceTier
-                                    ? "bg-[#0884AA] dark:bg-[#12EBFC]"
+                                    ? "bg-[#7FB8A3] dark:bg-[#C77A93]"
                                     : "bg-muted"
                                 }`}
                               />

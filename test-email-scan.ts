@@ -2,7 +2,7 @@ import { runComprehensiveWeeklyScan } from "./server/services/weekly-scan-servic
 
 async function testEmailScan() {
   console.log("Starting comprehensive weekly scan to test email delivery...");
-  console.log("Target recipients: bradley.cooper@1qg.com, grant.vanwyk@1qg.com");
+  console.log("Target recipients: bradley.cooper@constancia.io, grant.vanwyk@constancia.io");
   
   try {
     const result = await runComprehensiveWeeklyScan();

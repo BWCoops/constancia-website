@@ -19,7 +19,7 @@ export function VisitorDataManager() {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 text-[#FEFFF3]/60 hover:text-[#12EBFC] transition-colors text-sm"
+        className="flex items-center gap-2 text-[#F6F3EE]/60 hover:text-[#C77A93] transition-colors text-sm"
         data-testid="button-visitor-settings"
         aria-label="Visitor data settings"
       >
@@ -42,7 +42,7 @@ export function VisitorDataManager() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
               transition={{ duration: 0.2 }}
-              className="absolute bottom-full left-0 mb-2 w-72 bg-[#1a1a2e] border border-[#FEFFF3]/10 rounded-lg shadow-xl z-50 overflow-hidden"
+              className="absolute bottom-full left-0 mb-2 w-72 bg-[#1a1a2e] border border-[#F6F3EE]/10 rounded-lg shadow-xl z-50 overflow-hidden"
               data-testid="dropdown-visitor-data"
             >
               <div className="p-4">
@@ -51,7 +51,7 @@ export function VisitorDataManager() {
                   <Button
                     size="icon"
                     variant="ghost"
-                    className="h-6 w-6 text-[#FEFFF3]/60 hover:text-white hover:bg-white/10"
+                    className="h-6 w-6 text-[#F6F3EE]/60 hover:text-white hover:bg-white/10"
                     onClick={() => setIsOpen(false)}
                     data-testid="button-close-visitor-dropdown"
                   >
@@ -104,10 +104,10 @@ export function VisitorDataManager() {
                       )}
                     </div>
 
-                    <div className="flex items-center justify-between py-3 border-t border-[#FEFFF3]/10">
+                    <div className="flex items-center justify-between py-3 border-t border-[#F6F3EE]/10">
                       <div className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#12EBFC]" />
-                        <span className="text-sm text-[#FEFFF3]/80">Remember me</span>
+                        <Check className="w-4 h-4 text-[#C77A93]" />
+                        <span className="text-sm text-[#F6F3EE]/80">Remember me</span>
                       </div>
                       <Switch
                         checked={visitor.rememberMe !== false}
@@ -132,16 +132,16 @@ export function VisitorDataManager() {
                   </>
                 ) : (
                   <div className="text-center py-4">
-                    <p className="text-sm text-[#FEFFF3]/60 mb-2">
+                    <p className="text-sm text-[#F6F3EE]/60 mb-2">
                       No data stored yet
                     </p>
-                    <p className="text-xs text-[#FEFFF3]/40">
+                    <p className="text-xs text-[#F6F3EE]/40">
                       When you fill out a form, your information can be saved for faster access next time.
                     </p>
                   </div>
                 )}
 
-                <p className="text-[10px] text-[#FEFFF3]/40 mt-3 pt-3 border-t border-[#FEFFF3]/10">
+                <p className="text-[10px] text-[#F6F3EE]/40 mt-3 pt-3 border-t border-[#F6F3EE]/10">
                   Data is stored locally on your device only. We do not track or store this information on our servers.
                 </p>
               </div>
@@ -163,9 +163,9 @@ interface DataRowProps {
 function DataRow({ icon: Icon, label, value, testId }: DataRowProps) {
   return (
     <div className="flex items-center gap-2 text-sm">
-      <Icon className="w-3.5 h-3.5 text-[#12EBFC] flex-shrink-0" />
-      <span className="text-[#FEFFF3]/50 flex-shrink-0">{label}:</span>
-      <span className="text-[#FEFFF3]/90 truncate" data-testid={testId}>
+      <Icon className="w-3.5 h-3.5 text-[#C77A93] flex-shrink-0" />
+      <span className="text-[#F6F3EE]/50 flex-shrink-0">{label}:</span>
+      <span className="text-[#F6F3EE]/90 truncate" data-testid={testId}>
         {value}
       </span>
     </div>

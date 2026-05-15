@@ -70,7 +70,7 @@ export default function ExportPage() {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
-        a.download = "1qg-wordpress-export.zip";
+        a.download = "constancia-wordpress-export.zip";
         document.body.appendChild(a);
         a.click();
         window.URL.revokeObjectURL(url);
@@ -119,7 +119,7 @@ export default function ExportPage() {
             WordPress Export
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Download the complete 1QG WordPress theme and content to install on your WordPress site at 1qg.com
+            Download the complete Constancia WordPress theme and content to install on your WordPress site at constancia.io
           </p>
         </div>
 
@@ -134,7 +134,7 @@ export default function ExportPage() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Palette className="w-5 h-5 text-primary" />
-                  1QG WordPress Theme
+                  Constancia WordPress Theme
                 </CardTitle>
                 <CardDescription>
                   Complete WordPress theme matching the current site design, ready to install.
@@ -163,7 +163,7 @@ export default function ExportPage() {
                   <Button
                     size="lg"
                     className="flex-1"
-                    onClick={() => window.open('/wordpress-theme/1qg-wordpress-theme.zip', '_blank')}
+                    onClick={() => window.open('/wordpress-theme/constancia-wordpress-theme.zip', '_blank')}
                     data-testid="button-download-theme"
                   >
                     <Download className="mr-2 h-5 w-5" aria-hidden="true" />
@@ -173,7 +173,7 @@ export default function ExportPage() {
                     size="lg"
                     variant="outline"
                     className="flex-1"
-                    onClick={() => window.open('/wordpress-theme/1qg-content-export.xml', '_blank')}
+                    onClick={() => window.open('/wordpress-theme/constancia-content-export.xml', '_blank')}
                     data-testid="button-download-wxr"
                   >
                     <FileText className="mr-2 h-5 w-5" aria-hidden="true" />
@@ -299,7 +299,7 @@ export default function ExportPage() {
               <ol className="space-y-3 text-muted-foreground">
                 <li className="flex gap-3">
                   <span className="font-semibold text-primary">1.</span>
-                  Install the 1QG theme first (see WordPress Theme tab)
+                  Install the Constancia theme first (see WordPress Theme tab)
                 </li>
                 <li className="flex gap-3">
                   <span className="font-semibold text-primary">2.</span>
@@ -322,9 +322,9 @@ export default function ExportPage() {
           </TabsContent>
         </Tabs>
 
-        <Card className="border-[#12EBFC]/30 bg-gradient-to-br from-[#02205B]/5 to-[#0884AA]/10">
+        <Card className="border-[#C77A93]/30 bg-gradient-to-br from-[#12161D]/5 to-[#7FB8A3]/10">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-[#02205B] dark:text-brand-cyan">
+            <CardTitle className="flex items-center gap-2 text-[#12161D] dark:text-brand-cyan">
               <Settings className="w-5 h-5" />
               Theme Features
             </CardTitle>
@@ -361,7 +361,7 @@ export default function ExportPage() {
               </li>
               <li className="flex items-center gap-2">
                 <Check className="w-4 h-4 text-green-500" />
-                1QG brand colours and styling
+                Constancia brand colours and styling
               </li>
             </ul>
           </CardContent>

@@ -160,7 +160,7 @@ export class SlideSpeakService {
     const payload = {
       title: validatedConfig.title,
       subtitle: validatedConfig.subtitle,
-      author: validatedConfig.author || "1QG FinanceCompass",
+      author: validatedConfig.author || "Constancia FinanceCompass",
       theme: validatedConfig.theme || "professional",
       slides: validatedConfig.slides.map(slide => ({
         title: slide.title,
@@ -315,7 +315,7 @@ export class SlideSpeakService {
       const result = await this.generatePresentation({
         title: `Finance Transformation Assessment`,
         subtitle: company?.name || "Confidential",
-        author: "1QG FinanceCompass",
+        author: "Constancia FinanceCompass",
         theme: "professional",
         slides,
         branding: {
@@ -362,7 +362,7 @@ export class SlideSpeakService {
       content: [
         company?.name || "Your Organisation",
         `Assessment Date: ${new Date(assessment.createdAt).toLocaleDateString("en-GB")}`,
-        "Prepared by 1QG FinanceCompass",
+        "Prepared by Constancia FinanceCompass",
       ],
       layout: "title",
     });
@@ -427,8 +427,8 @@ export class SlideSpeakService {
       content: [
         "Review detailed findings with your leadership team",
         "Prioritise transformation initiatives based on impact and effort",
-        "Engage with 1QG for strategic guidance and implementation support",
-        "Contact: info@1qg.com | www.1qg.com",
+        "Engage with Constancia for strategic guidance and implementation support",
+        "Contact: info@constancia.io | www.constancia.io",
       ],
       layout: "content",
     });

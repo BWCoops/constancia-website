@@ -12,7 +12,7 @@ import {
   calculateAsIsVsToBe,
   type BenchmarkRange,
 } from "./epm-benchmarks";
-import { getHistoricalBenchmark, BENCHMARK_YEARS, type BenchmarkYear, type IndustryId, type MetricId } from './1qg-historical-benchmarks';
+import { getHistoricalBenchmark, BENCHMARK_YEARS, type BenchmarkYear, type IndustryId, type MetricId } from './historical-benchmarks';
 
 export interface RoiMetrics {
   totalImplementationCost: number;
@@ -670,7 +670,7 @@ export interface BenchmarkMetricComparison {
   oneQgGood: BenchmarkRange;
   gap: number;
   gapPct: number;
-  performanceLevel: 'below_typical' | 'typical' | '1qg_good' | '1qg_best';
+  performanceLevel: 'below_typical' | 'typical' | 'constancia_good' | 'constancia_best';
   lowerIsBetter: boolean;
 }
 
@@ -695,8 +695,8 @@ function computeHistoricalComparison(
   current: number,
   historicalData: {
     typical: { min: number; max: number; median: number };
-    '1qg_good': { min: number; max: number };
-    '1qg_best': { min: number; max: number };
+    'constancia_good': { min: number; max: number };
+    'constancia_best': { min: number; max: number };
     direction: 'lower_is_better' | 'higher_is_better';
   }
 ): {
@@ -704,7 +704,7 @@ function computeHistoricalComparison(
   oneQgGood: BenchmarkRange;
   gap: number;
   gapPct: number;
-  performanceLevel: 'below_typical' | 'typical' | '1qg_good' | '1qg_best';
+  performanceLevel: 'below_typical' | 'typical' | 'constancia_good' | 'constancia_best';
   lowerIsBetter: boolean;
 } {
   const lowerIsBetter = historicalData.direction === 'lower_is_better';
@@ -714,23 +714,23 @@ function computeHistoricalComparison(
     mid: historicalData.typical.median,
   };
   const oneQgGood: BenchmarkRange = {
-    min: historicalData['1qg_good'].min,
-    max: historicalData['1qg_good'].max,
+    min: historicalData['constancia_good'].min,
+    max: historicalData['constancia_good'].max,
   };
-  const oneQgBest = historicalData['1qg_best'];
+  const oneQgBest = historicalData['constancia_best'];
 
-  // Calculate gap to 1qg_good target
+  // Calculate gap to constancia_good target
   const targetValue = lowerIsBetter ? oneQgGood.max : oneQgGood.min;
   const gap = lowerIsBetter ? current - targetValue : targetValue - current;
   const gapPct = targetValue !== 0 ? (gap / targetValue) * 100 : 0;
 
   // Determine performance level
-  let performanceLevel: 'below_typical' | 'typical' | '1qg_good' | '1qg_best';
+  let performanceLevel: 'below_typical' | 'typical' | 'constancia_good' | 'constancia_best';
   if (lowerIsBetter) {
     if (current <= oneQgBest.max) {
-      performanceLevel = '1qg_best';
+      performanceLevel = 'constancia_best';
     } else if (current <= oneQgGood.max) {
-      performanceLevel = '1qg_good';
+      performanceLevel = 'constancia_good';
     } else if (current <= typical.max) {
       performanceLevel = 'typical';
     } else {
@@ -738,9 +738,9 @@ function computeHistoricalComparison(
     }
   } else {
     if (current >= oneQgBest.min) {
-      performanceLevel = '1qg_best';
+      performanceLevel = 'constancia_best';
     } else if (current >= oneQgGood.min) {
-      performanceLevel = '1qg_good';
+      performanceLevel = 'constancia_good';
     } else if (current >= typical.min) {
       performanceLevel = 'typical';
     } else {
@@ -806,7 +806,7 @@ export function calculateBenchmarkComparison(
   if (!closeMetricAdded) {
     const closeBenchmark = getMetricBenchmarks('days_to_close', industryId);
     if (closeBenchmark) {
-      const closeAnalysis = calculateAsIsVsToBe(targetCloseDays, 'days_to_close', industryId, '1qg_good');
+      const closeAnalysis = calculateAsIsVsToBe(targetCloseDays, 'days_to_close', industryId, 'constancia_good');
       if (closeAnalysis) {
         metrics.push({
           metricId: 'days_to_close',
@@ -853,7 +853,7 @@ export function calculateBenchmarkComparison(
   if (!forecastMetricAdded) {
     const forecastBenchmark = getMetricBenchmarks('forecast_accuracy_pct', industryId);
     if (forecastBenchmark) {
-      const forecastAnalysis = calculateAsIsVsToBe(currentForecastAccuracy, 'forecast_accuracy_pct', industryId, '1qg_good');
+      const forecastAnalysis = calculateAsIsVsToBe(currentForecastAccuracy, 'forecast_accuracy_pct', industryId, 'constancia_good');
       if (forecastAnalysis) {
         metrics.push({
           metricId: 'forecast_accuracy_pct',
@@ -900,7 +900,7 @@ export function calculateBenchmarkComparison(
   if (!reportsMetricAdded) {
     const reportsBenchmark = getMetricBenchmarks('reports_automated_pct', industryId);
     if (reportsBenchmark) {
-      const reportsAnalysis = calculateAsIsVsToBe(currentReportsAutomated, 'reports_automated_pct', industryId, '1qg_good');
+      const reportsAnalysis = calculateAsIsVsToBe(currentReportsAutomated, 'reports_automated_pct', industryId, 'constancia_good');
       if (reportsAnalysis) {
         metrics.push({
           metricId: 'reports_automated_pct',
@@ -922,7 +922,7 @@ export function calculateBenchmarkComparison(
   const estimatedReconciliations = Math.round(currentCloseDays * 7.5); // ~75 at 10 days
   const reconBenchmark = getMetricBenchmarks('manual_reconciliations', industryId);
   if (reconBenchmark) {
-    const reconAnalysis = calculateAsIsVsToBe(estimatedReconciliations, 'manual_reconciliations', industryId, '1qg_good');
+    const reconAnalysis = calculateAsIsVsToBe(estimatedReconciliations, 'manual_reconciliations', industryId, 'constancia_good');
     if (reconAnalysis) {
       metrics.push({
         metricId: 'manual_reconciliations',
@@ -943,7 +943,7 @@ export function calculateBenchmarkComparison(
   const estimatedCloseHours = Math.round(currentCloseDays * 10); // ~100 at 10 days
   const closeFteBenchmark = getMetricBenchmarks('close_fte_hours', industryId);
   if (closeFteBenchmark) {
-    const closeFteAnalysis = calculateAsIsVsToBe(estimatedCloseHours, 'close_fte_hours', industryId, '1qg_good');
+    const closeFteAnalysis = calculateAsIsVsToBe(estimatedCloseHours, 'close_fte_hours', industryId, 'constancia_good');
     if (closeFteAnalysis) {
       metrics.push({
         metricId: 'close_fte_hours',
@@ -977,9 +977,9 @@ export function getPerformanceColor(level: BenchmarkMetricComparison['performanc
   border: string;
 } {
   switch (level) {
-    case '1qg_best':
+    case 'constancia_best':
       return { bg: 'bg-emerald-100 dark:bg-emerald-900/30', text: 'text-emerald-700 dark:text-emerald-300', border: 'border-emerald-300 dark:border-emerald-700' };
-    case '1qg_good':
+    case 'constancia_good':
       return { bg: 'bg-green-100 dark:bg-green-900/30', text: 'text-green-700 dark:text-green-300', border: 'border-green-300 dark:border-green-700' };
     case 'typical':
       return { bg: 'bg-amber-100 dark:bg-amber-900/30', text: 'text-amber-700 dark:text-amber-300', border: 'border-amber-300 dark:border-amber-700' };

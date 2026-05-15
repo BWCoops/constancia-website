@@ -1,6 +1,6 @@
 /**
  * FinanceCompass Industry Benchmarks and Scoring Framework - Client Side
- * Based on 1QG Assessment Platform specifications
+ * Based on Constancia Assessment Platform specifications
  * 
  * Re-exports from shared constants for consistency with server.
  */

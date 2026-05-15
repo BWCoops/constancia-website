@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { ShieldCheckIcon } from "lucide-react";
-import logo from "@assets/1QG-TypeLogo-320.png";
+import logo from "@assets/brand/Constancia-Logo-ML-Transparent.png";
 
 export default function AdminSecurityMfaVerify() {
   const [_location, setLocation] = useLocation();
@@ -60,13 +60,13 @@ export default function AdminSecurityMfaVerify() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#02205B] to-[#0d4a7c] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#12161D] to-[#0d4a7c] flex items-center justify-center p-4">
       <Card className="w-full max-w-md p-8 bg-white shadow-2xl">
         <div className="flex justify-center mb-8">
-          <img src={logo} alt="1QG" className="h-12" />
+          <img src={logo} alt="Constancia" className="h-12" />
         </div>
 
-        <h1 className="text-2xl font-bold text-center mb-2 text-[#02205B]">Two-Factor Authentication</h1>
+        <h1 className="text-2xl font-bold text-center mb-2 text-[#12161D]">Two-Factor Authentication</h1>
         <p className="text-center text-gray-600 mb-6">Enter your authentication code to continue</p>
 
         {!useBackup ? (
@@ -138,7 +138,7 @@ export default function AdminSecurityMfaVerify() {
         )}
 
         <div className="mt-8 p-4 bg-blue-50 rounded-md flex gap-3">
-          <ShieldCheckIcon className="w-5 h-5 text-[#02205B] flex-shrink-0 mt-0.5" />
+          <ShieldCheckIcon className="w-5 h-5 text-[#12161D] flex-shrink-0 mt-0.5" />
           <p className="text-sm text-gray-700">
             Your authentication code is encrypted and never stored. This ensures your account remains secure.
           </p>

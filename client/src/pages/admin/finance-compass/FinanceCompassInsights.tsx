@@ -233,7 +233,7 @@ interface AnalyticsResponse {
 }
 
 const DIMENSION_COLORS: Record<string, string> = {
-  financial_planning_analysis: "#12EBFC",
+  financial_planning_analysis: "#C77A93",
   management_reporting: "#0EA5E9",
   consolidation_close: "#6366F1",
   transaction_processing: "#8B5CF6",
@@ -1256,11 +1256,11 @@ function InsightsContent() {
                                 type="monotone"
                                 dataKey="totalEvents"
                                 name="Total Events"
-                                fill="#12EBFC"
+                                fill="#C77A93"
                                 fillOpacity={0.2}
-                                stroke="#12EBFC"
+                                stroke="#C77A93"
                               />
-                              <Bar dataKey="questionAnsweredCount" name="Questions Answered" fill="#0884AA" />
+                              <Bar dataKey="questionAnsweredCount" name="Questions Answered" fill="#7FB8A3" />
                               <Bar dataKey="qualificationCompletedCount" name="Qualifications" fill="#10B981" />
                             </ComposedChart>
                           </ResponsiveContainer>

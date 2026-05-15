@@ -26,6 +26,23 @@ export default {
 
       colors: {
         brand: {
+          // Constancia canonical
+          "primary-dark":    "var(--brand-primary-dark)",
+          "secondary-dark":  "var(--brand-secondary-dark)",
+          "main-light":      "var(--brand-main-light)",
+          "support-neutral": "var(--brand-support-neutral)",
+          "muted-rose":      "var(--brand-muted-rose)",
+          "deep-berry":      "var(--brand-deep-berry)",
+          "mineral-green":   "var(--brand-mineral-green)",
+          "deep-mint":       "var(--brand-deep-mint)",
+
+          // Convenience short aliases for the two signature accents
+          rose:              "var(--brand-muted-rose)",
+          berry:             "var(--brand-deep-berry)",
+          mint:              "var(--brand-mineral-green)",
+          "deep-mint-alt":   "var(--brand-deep-mint)",
+
+          // Backward-compat with existing component code
           "bg-primary":    "var(--brand-bg-primary)",
           "bg-secondary":  "var(--brand-bg-secondary)",
           surface:         "var(--brand-bg-surface)",

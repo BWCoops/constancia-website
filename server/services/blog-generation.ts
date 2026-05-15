@@ -1341,7 +1341,7 @@ Write substantial, detailed content that meets the minimum word count. Each para
 
   private generateSourcesSection(citations: Citation[]): string {
     if (citations.length === 0) {
-      return "## Sources\n\nBased on 1QG consulting experience and industry best practices.";
+      return "## Sources\n\nBased on Constancia consulting experience and industry best practices.";
     }
     
     const sourcesList = citations
@@ -1638,7 +1638,7 @@ CONTENT INTEGRITY:
 - Only reference sources provided in the research
 - If data is unavailable, write "Based on consulting experience" or "Industry research suggests"
 - All percentages and figures must come from verified sources
-- Use "we" to refer to collective industry/professional perspective, NOT 1QG specifically
+- Use "we" to refer to collective industry/professional perspective, NOT Constancia specifically
 
 PROFESSIONAL FRAMING:
 - Open sections with strategic context, not anecdotes
@@ -1952,7 +1952,7 @@ Return the humanized content in the SAME format (if JSON, return JSON; if markdo
       tags: parsed.tags?.length > 0 ? parsed.tags : targetKeywords,
       readingTime,
       categoryId: this.inferCategoryId(brief, targetKeywords, categoryName),
-      author: "1QG Editorial Team",
+      author: "Constancia Editorial Team",
     };
   }
 
@@ -2202,7 +2202,7 @@ Return the humanized content in the SAME format (if JSON, return JSON; if markdo
       [/What did I miss\?/gi, ''],
       [/If you've tackled this differently,?\s*I'd love to hear\.?/gi, ''],
       
-      // DIRECT CLIENT CLAIMS (1QG is a startup - use research-based language)
+      // DIRECT CLIENT CLAIMS (Constancia is a startup - use research-based language)
       [/CFOs\s+(?:often\s+)?ask\s+us:?\s*/gi, 'CFOs frequently inquire: '],
       [/clients\s+(?:often\s+)?ask\s+us:?\s*/gi, 'Finance leaders commonly ask: '],
       [/we've\s+collaborated\s+with\s+/gi, 'Research shows that '],
@@ -3233,7 +3233,7 @@ export const DEFAULT_GUARDRAIL_CATEGORIES = [
   { name: "Forbidden Terms", slug: "forbidden-terms", description: "Blocked words and phrases", priority: 2 },
   { name: "Framework Usage", slug: "framework-usage", description: "Strategic framework inclusion", priority: 3 },
   { name: "Call to Action", slug: "call-to-action", description: "Conversion-oriented content elements", priority: 4 },
-  { name: "Brand Voice", slug: "brand-voice", description: "1QG brand consistency", priority: 2 },
+  { name: "Brand Voice", slug: "brand-voice", description: "Constancia brand consistency", priority: 2 },
   { name: "Technical Accuracy", slug: "technical-accuracy", description: "EPM/ERP/AI terminology correctness", priority: 2 },
   { name: "Competitor Mentions", slug: "competitor-mentions", description: "Appropriate competitor referencing", priority: 3 },
   { name: "Date References", slug: "date-references", description: "Temporal accuracy in content", priority: 3 },
@@ -3244,7 +3244,7 @@ export const DEFAULT_GUARDRAIL_CATEGORIES = [
 export const DEFAULT_GUARDRAIL_RULES = [
   { categorySlug: "citation-integrity", name: "No fabricated Gartner citations", ruleType: "citation", severity: "error", 
     ruleConfig: { forbiddenCitations: ["Gartner reports", "Gartner predicts", "According to Gartner", "Gartner Magic Quadrant"] },
-    errorMessage: "Cannot reference Gartner without verified source URL", suggestedFix: "Use 'Based on 1QG consulting experience' instead", appliesToStage: ["final"] },
+    errorMessage: "Cannot reference Gartner without verified source URL", suggestedFix: "Use 'Based on Constancia consulting experience' instead", appliesToStage: ["final"] },
   
   { categorySlug: "citation-integrity", name: "No fabricated McKinsey citations", ruleType: "citation", severity: "error",
     ruleConfig: { forbiddenCitations: ["McKinsey reports", "McKinsey research", "According to McKinsey", "McKinsey Global Institute"] },
@@ -3252,7 +3252,7 @@ export const DEFAULT_GUARDRAIL_RULES = [
   
   { categorySlug: "citation-integrity", name: "No fabricated Deloitte citations", ruleType: "citation", severity: "error",
     ruleConfig: { forbiddenCitations: ["Deloitte survey", "Deloitte research", "According to Deloitte", "Deloitte report"] },
-    errorMessage: "Cannot reference Deloitte without verified source URL", suggestedFix: "Use 'Based on 1QG consulting experience' instead", appliesToStage: ["final"] },
+    errorMessage: "Cannot reference Deloitte without verified source URL", suggestedFix: "Use 'Based on Constancia consulting experience' instead", appliesToStage: ["final"] },
   
   { categorySlug: "citation-integrity", name: "Requires verified sources section", ruleType: "citation", severity: "error",
     ruleConfig: { requiresVerifiedSources: true },

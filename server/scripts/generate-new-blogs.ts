@@ -26,7 +26,7 @@ const NEW_BLOG_TOPICS = [
   },
   {
     title: "EPM Implementation Horror Stories: The 5 Mistakes That Cost Fortune 500s Millions",
-    brief: `Use real cautionary tales (anonymised) to position 1QG as the experienced partner who prevents implementation disasters. Cover the Agile EPM disaster (why iterative does not work for financial consolidation), scope creep and unclear objectives leading to budget overruns, the vendor mismatch problem (choosing partners without proven expertise), data quality nightmares (garbage in garbage out at enterprise scale), user resistance killing projects (the change management failure), and best practices for co-implementation methodology with Pigment and OneStream. This builds trust by demonstrating expertise and risk awareness.`,
+    brief: `Use real cautionary tales (anonymised) to position Constancia as the experienced partner who prevents implementation disasters. Cover the Agile EPM disaster (why iterative does not work for financial consolidation), scope creep and unclear objectives leading to budget overruns, the vendor mismatch problem (choosing partners without proven expertise), data quality nightmares (garbage in garbage out at enterprise scale), user resistance killing projects (the change management failure), and best practices for co-implementation methodology with Pigment and OneStream. This builds trust by demonstrating expertise and risk awareness.`,
     targetKeywords: ["EPM implementation failure", "EPM project risks", "EPM best practices", "enterprise software implementation", "change management EPM"],
     targetAudience: "Project sponsors and IT leaders planning EPM initiatives who fear implementation failure",
     categoryName: "EPM & ERP"

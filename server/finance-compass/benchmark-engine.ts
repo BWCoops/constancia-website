@@ -4,7 +4,7 @@
  * Calculates percentiles and aggregations from:
  * 1. Company financial data
  * 2. Macro benchmark sources (ONS, FRED, World Bank)
- * 3. Proprietary 1QG assessment data
+ * 3. Proprietary Constancia assessment data
  */
 
 import { db } from "../db";

@@ -5,7 +5,7 @@ import { escapeHtml as escapeXml } from "../utils/html-escape";
 
 const log = createChildLogger("seo");
 
-const SITE_URL = process.env.SITE_URL || "https://1qg.com";
+const SITE_URL = process.env.SITE_URL || "https://constancia.io";
 
 interface SitemapUrl {
   loc: string;

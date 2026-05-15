@@ -174,7 +174,7 @@ export default function CareersPage() {
         toast({ title: "Unable to submit", description: result.error || "Please check your details and try again.", variant: "destructive" });
       }
     } catch (error: any) {
-      let errorMessage = "Please try again later or email careers@1qg.com directly.";
+      let errorMessage = "Please try again later or email careers@constancia.io directly.";
       if (error?.message) {
         try {
           const jsonPart = error.message.replace(/^\d+:\s*/, "");
@@ -193,12 +193,12 @@ export default function CareersPage() {
   return (
     <div className="min-h-screen page-dark">
       <SEOHead
-        title="EPM Consultant Jobs UK | 1QG Careers"
-        description="Join 1QG. We build a firm of practitioners, not a bench of consultants. No vendor targets, no utilisation pressure. Roles in EPM delivery, finance systems, and FP&A advisory."
+        title="EPM Consultant Jobs UK | Constancia Careers"
+        description="Join Constancia. We build a firm of practitioners, not a bench of consultants. No vendor targets, no utilisation pressure. Roles in EPM delivery, finance systems, and FP&A advisory."
         keywords={["EPM consultant jobs UK", "finance systems consultant", "FP&A consultant", "OneStream consultant", "finance transformation jobs", "EPM careers UK"]}
         breadcrumbs={[
-          { name: "Home", url: "https://1qg.com" },
-          { name: "Careers", url: "https://1qg.com/careers" },
+          { name: "Home", url: "https://constancia.io" },
+          { name: "Careers", url: "https://constancia.io/careers" },
         ]}
       />
 
@@ -206,7 +206,7 @@ export default function CareersPage() {
 
       <main className="pt-16 sm:pt-20">
         <PageHero
-          badge="Careers at 1QG"
+          badge="Careers at Constancia"
           title="We're Not Building a Consulting Firm."
           highlightedText="We're Dismantling One."
           description="If you've delivered EPM programmes and you're tired of working for firms with vendor targets, bench pressure, and junior staff on your engagements, let's talk."
@@ -215,7 +215,7 @@ export default function CareersPage() {
             <Button
               asChild
               size="lg"
-              className="bg-[#12EBFC] text-[#02205B] border-[#12EBFC] font-semibold"
+              className="bg-[#C77A93] text-[#12161D] border-[#C77A93] font-semibold"
               data-testid="button-join-talent"
             >
               <a href="#apply">
@@ -264,14 +264,14 @@ export default function CareersPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-                  Why 1QG
+                  Why Constancia
                 </h2>
                 <p className="text-xl font-medium text-foreground/80 mb-6">
                   We do the work others talk about.
                 </p>
                 <p className="text-lg text-muted-foreground mb-4">
                   Most EPM programmes are run by large firms with a lot of staff between the partner
-                  and the work. We built 1QG because that model produces reports, not results.
+                  and the work. We built Constancia because that model produces reports, not results.
                 </p>
                 <p className="text-lg text-muted-foreground">
                   You will work on client problems directly, alongside people who have run them at
@@ -333,7 +333,7 @@ export default function CareersPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Life at 1QG
+                Life at Constancia
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 What you can expect from us.
@@ -343,7 +343,7 @@ export default function CareersPage() {
               {expectItems.map((item, index) => (
                 <div key={item.title} className="flex gap-4" data-testid={`expect-item-${index}`}>
                   <div
-                    className="w-0.5 min-h-[64px] flex-shrink-0 mt-1 rounded-full bg-gradient-to-b from-[#12EBFC] via-[#0884AA] to-transparent"
+                    className="w-0.5 min-h-[64px] flex-shrink-0 mt-1 rounded-full bg-gradient-to-b from-[#C77A93] via-[#7FB8A3] to-transparent"
                     aria-hidden="true"
                   />
                   <div>
@@ -384,7 +384,7 @@ export default function CareersPage() {
                       </div>
                       <h3 className="text-xl font-bold text-foreground mb-3" data-testid="text-success-heading">Thank you for reaching out.</h3>
                       <p className="text-muted-foreground max-w-sm mb-6">
-                        We will review your details and be in touch if there is a fit. Follow 1QG on LinkedIn in the meantime.
+                        We will review your details and be in touch if there is a fit. Follow Constancia on LinkedIn in the meantime.
                       </p>
                       <Button
                         asChild
@@ -484,7 +484,7 @@ export default function CareersPage() {
                           <Textarea
                             id="message"
                             name="message"
-                            placeholder="Your background, what you are looking for, and why 1QG interests you..."
+                            placeholder="Your background, what you are looking for, and why Constancia interests you..."
                             rows={5}
                             value={formData.message}
                             onChange={handleChange}
@@ -502,7 +502,7 @@ export default function CareersPage() {
                             data-testid="checkbox-consent"
                           />
                           <Label htmlFor="consent" className="text-sm font-normal text-muted-foreground leading-relaxed cursor-pointer">
-                            I am happy for 1QG to retain my details and contact me about relevant opportunities. I can withdraw consent at any time.
+                            I am happy for Constancia to retain my details and contact me about relevant opportunities. I can withdraw consent at any time.
                           </Label>
                         </div>
 
@@ -553,7 +553,7 @@ export default function CareersPage() {
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-8">
                 Follow us on LinkedIn to stay updated on company news and future career
-                opportunities, or get in touch to learn more about 1QG.
+                opportunities, or get in touch to learn more about Constancia.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Button

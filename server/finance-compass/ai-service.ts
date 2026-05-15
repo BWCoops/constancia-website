@@ -2574,7 +2574,7 @@ Format as JSON:
         score: dimensionScores[d],
         rating: dimensionRatings[d],
         analysis: `Score: ${dimensionScores[d]}% - ${dimensionRatings[d] === 'red' ? 'Critical attention required' : dimensionRatings[d] === 'amber' ? 'Improvement opportunities identified' : 'Performing well'}`,
-        recommendations: ["Contact 1QG for detailed dimension-specific recommendations"]
+        recommendations: ["Contact Constancia for detailed dimension-specific recommendations"]
       };
     }
     
@@ -2599,7 +2599,7 @@ Format as JSON:
       nextSteps: [
         "Review this assessment with key finance stakeholders",
         "Consider upgrading to Full Assessment for comprehensive analysis",
-        "Contact 1QG to discuss your transformation journey"
+        "Contact Constancia to discuss your transformation journey"
       ],
       technologyFocus: specialization.specialization,
       specializationContext: specialization,
@@ -2902,7 +2902,7 @@ Format as JSON:
         score: dimensionScores[d],
         rating: dimensionRatings[d],
         analysis: `Score: ${dimensionScores[d]}% - ${dimensionRatings[d] === 'red' ? 'Critical attention required' : dimensionRatings[d] === 'amber' ? 'Improvement opportunities identified' : 'Performing well'}`,
-        recommendations: ["Contact 1QG for detailed dimension-specific recommendations"]
+        recommendations: ["Contact Constancia for detailed dimension-specific recommendations"]
       };
     }
     
@@ -2919,12 +2919,12 @@ Format as JSON:
       prioritisedRecommendations: [{
         priority: "high",
         title: "Schedule Expert Consultation",
-        description: "Engage with 1QG consultants to review findings and develop transformation roadmap",
+        description: "Engage with Constancia consultants to review findings and develop transformation roadmap",
         expectedBenefit: "Tailored transformation strategy with clear implementation path"
       }],
       nextSteps: [
         "Download full assessment report when available",
-        "Schedule consultation with 1QG team",
+        "Schedule consultation with Constancia team",
         "Prepare for stakeholder alignment workshop"
       ],
       technologyFocus: specialization.specialization,

@@ -64,9 +64,9 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen page-dark">
       <SEOHead
-        title="About Us | 1QG - Senior EPM Practitioners, Not Theorists"
-        description="1QG is a senior EPM advisory built by practitioners who have delivered finance transformation programmes at AerCap, Howden, Reckitt Benckiser, and BAT. Fixed fee. No vendor agenda."
-        keywords={["about 1QG", "EPM consultancy London", "senior EPM consultants", "finance technology advisory", "EPM practitioners"]}
+        title="About Us | Constancia - Senior EPM Practitioners, Not Theorists"
+        description="Constancia is a senior EPM advisory built by practitioners who have delivered finance transformation programmes at AerCap, Howden, Reckitt Benckiser, and BAT. Fixed fee. No vendor agenda."
+        keywords={["about Constancia", "EPM consultancy London", "senior EPM consultants", "finance technology advisory", "EPM practitioners"]}
       />
       
       <Navigation />
@@ -75,7 +75,7 @@ export default function AboutPage() {
         <PageHero
           badge="About Us"
           title="We've Delivered It. Now We're Disrupting It."
-          description="We're practitioners who've spent careers inside the consulting model that's been overcharging finance leaders for decades. We built 1QG because we knew there was a better way."
+          description="We're practitioners who've spent careers inside the consulting model that's been overcharging finance leaders for decades. We built Constancia because we knew there was a better way."
         />
 
         <section className="py-8 sm:py-16 lg:py-24 bg-hp-primary">
@@ -134,7 +134,7 @@ export default function AboutPage() {
                   Because the firms that know EPM best are usually the ones selling it, or charging three times what the work is worth to deliver it.
                 </p>
                 <p className="text-base text-muted-foreground mb-8 leading-relaxed">
-                  We've spent years inside those firms. We know how the model works and where the value leaks out. 1QG is built on the premise that a small team of senior practitioners, armed with the right tools, can outdeliver a 20-person consulting team at a fraction of the cost. Our tools, FinanceCompass, the EPM Comparison Tool, and detailed Vendor Profiles, aren't sales aids. They're how we standardise the quality of our work and get you to the right answer faster.
+                  We've spent years inside those firms. We know how the model works and where the value leaks out. Constancia is built on the premise that a small team of senior practitioners, armed with the right tools, can outdeliver a 20-person consulting team at a fraction of the cost. Our tools, FinanceCompass, the EPM Comparison Tool, and detailed Vendor Profiles, aren't sales aids. They're how we standardise the quality of our work and get you to the right answer faster.
                 </p>
                 <ul className="space-y-4">
                   {differentiators.map((item) => (

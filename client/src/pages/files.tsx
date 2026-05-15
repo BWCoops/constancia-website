@@ -18,7 +18,7 @@ import {
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { PageHero } from "@/components/page-hero";
-import { DownloadGateModal } from "@/components/download-gate-modal";
+import { useModal } from "@/lib/modals/store";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -51,10 +51,9 @@ const fileTypeColors: Record<string, string> = {
 export default function FilesPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [gateModalOpen, setGateModalOpen] = useState(false);
-  const [selectedResource, setSelectedResource] = useState<ResourceFile | null>(null);
   const downloadTriggered = useRef(false);
   const searchString = useSearch();
+  const { open: openModal } = useModal();
 
   const { data: filesData, isLoading } = useQuery<{ success: boolean; data: ResourceFile[] | { items: ResourceFile[] } }>({
     queryKey: ["/api/files"],
@@ -89,9 +88,8 @@ export default function FilesPage() {
         const resourceToDownload = files.find(f => f.slug === downloadSlug);
         if (resourceToDownload) {
           downloadTriggered.current = true;
-          setSelectedResource(resourceToDownload);
-          setGateModalOpen(true);
-          
+          openModal('download-gate', { resource: resourceToDownload });
+
           // Track view for deep-linked resource
           apiRequest("POST", `/api/files/${resourceToDownload.id}/view`).catch(() => {});
         }
@@ -100,9 +98,8 @@ export default function FilesPage() {
   }, [files, searchString]);
 
   const handleDownload = async (file: ResourceFile) => {
-    setSelectedResource(file);
-    setGateModalOpen(true);
-    
+    openModal('download-gate', { resource: file });
+
     // Track view when user opens download modal
     try {
       await apiRequest("POST", `/api/files/${file.id}/view`);
@@ -120,7 +117,7 @@ export default function FilesPage() {
   return (
     <div className="min-h-screen page-dark">
       <SEOHead
-        title="1QG Resources - Guides, Frameworks & Downloads"
+        title="Constancia Resources - Guides, Frameworks & Downloads"
         description="Access guides, whitepapers, frameworks, and documentation for finance transformation. Download resources on EPM, ERP optimisation, and AI-driven solutions."
         keywords={[
           "AI resources",
@@ -136,7 +133,7 @@ export default function FilesPage() {
       <main className="pt-16 sm:pt-20 pb-16">
         <PageHero
           badge="Resources & Downloads"
-          title="1QG Resources"
+          title="Constancia Resources"
           description="Access guides, whitepapers, frameworks, and documentation to help you get the most out of your finance transformation."
         />
 
@@ -174,7 +171,7 @@ export default function FilesPage() {
                       <div className="flex gap-2">
                         <Button 
                           size="sm" 
-                          className="flex-1 bg-gradient-to-r from-[#02205B] to-[#0884AA]"
+                          className="flex-1 bg-gradient-to-r from-[#12161D] to-[#7FB8A3]"
                           onClick={() => handleDownload(file)}
                           data-testid={`button-download-${file.id}`}
                         >
@@ -220,7 +217,7 @@ export default function FilesPage() {
                       onClick={() => setSelectedCategory(null)}
                       className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
                         !selectedCategory 
-                          ? "bg-[#12EBFC]/10 text-brand-teal dark:text-brand-cyan" 
+                          ? "bg-[#C77A93]/10 text-brand-teal dark:text-brand-cyan" 
                           : "hover:bg-muted text-muted-foreground"
                       }`}
                       data-testid="button-file-category-all"
@@ -233,7 +230,7 @@ export default function FilesPage() {
                         onClick={() => setSelectedCategory(category)}
                         className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
                           selectedCategory === category 
-                            ? "bg-[#12EBFC]/10 text-brand-teal dark:text-brand-cyan" 
+                            ? "bg-[#C77A93]/10 text-brand-teal dark:text-brand-cyan" 
                             : "hover:bg-muted text-muted-foreground"
                         }`}
                         data-testid={`button-file-category-${category.toLowerCase().replace(/\s+/g, '-')}`}
@@ -332,7 +329,7 @@ export default function FilesPage() {
                           </Button>
                           <Button 
                             size="sm"
-                            className="bg-gradient-to-r from-[#02205B] to-[#0884AA]"
+                            className="bg-gradient-to-r from-[#12161D] to-[#7FB8A3]"
                             onClick={() => handleDownload(file)}
                             data-testid={`button-download-${file.id}`}
                           >
@@ -351,12 +348,7 @@ export default function FilesPage() {
       </main>
 
       <Footer />
-      
-      <DownloadGateModal
-        resource={selectedResource}
-        open={gateModalOpen}
-        onOpenChange={setGateModalOpen}
-      />
+      {/* DownloadGateModal is now rendered by GlobalModalHost when opened via useModal('download-gate', {resource}) */}
     </div>
   );
 }

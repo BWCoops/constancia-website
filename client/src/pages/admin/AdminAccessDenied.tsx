@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ShieldX, ArrowLeft, Mail } from "lucide-react";
-import logo from "@assets/1QG - Type Logo (Dark Blue)_1764414916528.png";
+import logo from "@assets/brand/Constancia-Logo-PD-Transparent.png";
 
 export default function AdminAccessDenied() {
   const handleBack = () => {
@@ -9,13 +9,13 @@ export default function AdminAccessDenied() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#02205B] via-[#0070C0] to-[#0884AA] p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#12161D] via-[#1E2630] to-[#7FB8A3] p-4">
       <Card className="w-full max-w-md" data-testid="access-denied-card">
         <CardHeader className="text-center space-y-4">
           <div className="flex justify-center">
             <img 
               src={logo} 
-              alt="1QG Logo" 
+              alt="Constancia Logo" 
               className="h-12 object-contain"
               data-testid="logo-image"
             />
@@ -30,14 +30,14 @@ export default function AdminAccessDenied() {
               Access Denied
             </CardTitle>
             <CardDescription className="mt-2" data-testid="text-description">
-              Your account is not authorized to access the 1QG Admin Centre.
+              Your account is not authorized to access the Constancia Admin Centre.
             </CardDescription>
           </div>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="bg-muted p-4 rounded-lg text-sm text-muted-foreground" data-testid="info-box">
             <p className="mb-2">
-              Access to the Admin Centre is restricted to authorized 1QG team members only.
+              Access to the Admin Centre is restricted to authorized Constancia team members only.
             </p>
             <p>
               If you believe you should have access, please contact your administrator.
@@ -58,7 +58,7 @@ export default function AdminAccessDenied() {
             <Button 
               variant="ghost"
               className="w-full gap-2 text-muted-foreground"
-              onClick={() => window.location.href = "mailto:info@1qg.com"}
+              onClick={() => window.location.href = "mailto:info@constancia.io"}
               data-testid="button-contact"
             >
               <Mail className="h-4 w-4" />

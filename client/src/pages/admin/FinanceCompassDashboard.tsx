@@ -369,7 +369,7 @@ function DashboardContent() {
           return (
             <Link key={module.url} href={module.url}>
               <Card 
-                className="cursor-pointer transition-all hover:shadow-md hover:border-[#12EBFC]/30 h-full"
+                className="cursor-pointer transition-all hover:shadow-md hover:border-[#C77A93]/30 h-full"
                 data-testid={`card-module-${module.title.toLowerCase().replace(/\s+/g, "-")}`}
               >
                 <CardContent className="pt-5 pb-4">

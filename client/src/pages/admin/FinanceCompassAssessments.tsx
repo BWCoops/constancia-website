@@ -683,11 +683,11 @@ function AssessmentsContent() {
               </div>
 
               {selectedAssessment.contact && (
-                <Card className="border-[#0884AA]/30 bg-[#0884AA]/5">
+                <Card className="border-[#7FB8A3]/30 bg-[#7FB8A3]/5">
                   <CardContent className="pt-4">
                     <div className="flex items-center justify-between gap-4">
                       <div className="flex items-center gap-3">
-                        <div className="h-10 w-10 rounded-lg flex items-center justify-center bg-[#0884AA]/10">
+                        <div className="h-10 w-10 rounded-lg flex items-center justify-center bg-[#7FB8A3]/10">
                           <Shield className="h-5 w-5 text-brand-teal" />
                         </div>
                         <div>
@@ -962,7 +962,7 @@ function AssessmentsContent() {
                                         </span>
                                       </div>
                                       {response?.score !== undefined && response?.score !== null && (
-                                        <Badge className="bg-[#0884AA]/10 text-brand-teal border-0">
+                                        <Badge className="bg-[#7FB8A3]/10 text-brand-teal border-0">
                                           Score: {response.score}
                                         </Badge>
                                       )}

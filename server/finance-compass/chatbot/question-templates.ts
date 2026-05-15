@@ -237,12 +237,12 @@ const TEMPLATES: Record<QuestionType, QuestionTemplate> = {
       { header: 'Solution Archetype for Your Profile', description: '3-4 bullets: Central design choices (single EPM vs best-of-breed, cloud model, integration pattern)', required: true, maxBullets: 4 },
       { header: 'Vendor Comparison', description: 'Table or structured comparison: Vendors/options vs Fit-for-you, Capability coverage, Complexity, Typical cost band, Implementation effort', required: true },
       { header: 'When Each Option Makes Sense', description: '3-5 bullets: "Choose X if...", "Choose Y if..."', required: true, maxBullets: 5 },
-      { header: 'Decision Criteria & Next Steps', description: '3-5 bullets defining evaluation criteria + suggested RFP/PoC path. Always mention 1QG Comparison Tools', required: true, maxBullets: 5 },
+      { header: 'Decision Criteria & Next Steps', description: '3-5 bullets defining evaluation criteria + suggested RFP/PoC path. Always mention Constancia Comparison Tools', required: true, maxBullets: 5 },
       { header: 'Data & Sources', description: 'Split: Analyst reports vs vendor documentation vs case examples', required: false, maxBullets: 8 },
     ],
     structureInstructions: `Provide objective vendor guidance:
 - Use the exact section headers provided
-- Always mention 1QG's EPM/ERP Comparison Tools as a resource
+- Always mention Constancia's EPM/ERP Comparison Tools as a resource
 - Be balanced across vendors—highlight fit-for-purpose
 - Include practical decision criteria`,
   },

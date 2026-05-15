@@ -99,7 +99,7 @@ export const DIMENSION_BENEFIT_MAPPING: Record<RoiBenefitCategory, DimensionBene
   ]
 };
 
-// Benchmark targets for "1QG Good" performance (score out of 100)
+// Benchmark targets for "Constancia Good" performance (score out of 100)
 export const BENCHMARK_TARGET = 75;
 
 // Industry-specific benefit multipliers (annual £k per dimension point gap)

@@ -999,19 +999,19 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
           animate={{ opacity: 1, scale: 1 }}
           className={cn("w-full", className)}
         >
-          <Card className="border-2 border-[#12EBFC]/30 bg-white/95 backdrop-blur-sm shadow-xl overflow-hidden">
-            <div className="h-1.5 bg-gradient-to-r from-[#02205B] via-[#0884AA] to-[#12EBFC]" />
+          <Card className="border-2 border-[#C77A93]/30 bg-white/95 backdrop-blur-sm shadow-xl overflow-hidden">
+            <div className="h-1.5 bg-gradient-to-r from-[#12161D] via-[#7FB8A3] to-[#C77A93]" />
             <CardContent className="p-4 sm:p-6">
               <div className="text-center mb-4 sm:mb-6">
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
-                  className="inline-flex items-center justify-center h-14 w-14 sm:h-16 sm:w-16 rounded-full bg-gradient-to-br from-[#0884AA] to-[#12EBFC] mb-3 sm:mb-4"
+                  className="inline-flex items-center justify-center h-14 w-14 sm:h-16 sm:w-16 rounded-full bg-gradient-to-br from-[#7FB8A3] to-[#C77A93] mb-3 sm:mb-4"
                 >
                   <Sparkles className="h-7 w-7 sm:h-8 sm:w-8 text-white" />
                 </motion.div>
-                <h3 className="text-lg sm:text-xl font-bold text-[#02205B] mb-1">Finance Readiness Score</h3>
+                <h3 className="text-lg sm:text-xl font-bold text-[#12161D] mb-1">Finance Readiness Score</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground">Based on 10 key dimensions (1-5 scale)</p>
               </div>
 
@@ -1021,7 +1021,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
-                    className="text-4xl sm:text-5xl font-bold text-[#02205B]"
+                    className="text-4xl sm:text-5xl font-bold text-[#12161D]"
                   >
                     {score}
                   </motion.span>
@@ -1048,12 +1048,12 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.35 }}
-                  className="mb-4 p-3 rounded-lg bg-[#02205B]/5 border border-[#02205B]/10"
+                  className="mb-4 p-3 rounded-lg bg-[#12161D]/5 border border-[#12161D]/10"
                   data-testid="peer-comparison-section"
                 >
                   <div className="flex items-center gap-2 mb-3">
-                    <BarChart3 className="h-4 w-4 text-[#0884AA]" />
-                    <p className="text-[10px] font-semibold text-[#02205B] uppercase tracking-wide">How You Compare</p>
+                    <BarChart3 className="h-4 w-4 text-[#7FB8A3]" />
+                    <p className="text-[10px] font-semibold text-[#12161D] uppercase tracking-wide">How You Compare</p>
                   </div>
                   <div className="space-y-2.5">
                     <div className="flex items-center gap-2" data-testid="peer-comparison-your-score">
@@ -1061,19 +1061,19 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                       <div className="flex-1">
                         <Progress value={score} className="h-2 bg-slate-200" />
                       </div>
-                      <span className="text-xs font-semibold text-[#02205B] w-10 text-right">{score}%</span>
+                      <span className="text-xs font-semibold text-[#12161D] w-10 text-right">{score}%</span>
                     </div>
                     <div className="flex items-center gap-2" data-testid="peer-comparison-industry-avg">
                       <span className="text-[10px] text-muted-foreground w-24 sm:w-28 flex-shrink-0">Industry Average</span>
                       <div className="flex-1">
                         <div className="relative h-2 bg-slate-200 rounded-full overflow-hidden">
                           <div 
-                            className="absolute inset-y-0 left-0 bg-[#0884AA]/60 rounded-full"
+                            className="absolute inset-y-0 left-0 bg-[#7FB8A3]/60 rounded-full"
                             style={{ width: `${INDUSTRY_BENCHMARKS[qualificationData.industry]?.avg || 50}%` }}
                           />
                         </div>
                       </div>
-                      <span className="text-xs font-semibold text-[#0884AA] w-10 text-right">
+                      <span className="text-xs font-semibold text-[#7FB8A3] w-10 text-right">
                         {INDUSTRY_BENCHMARKS[qualificationData.industry]?.avg || 50}%
                       </span>
                     </div>
@@ -1099,7 +1099,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                     </p>
                   )}
                   {score >= (INDUSTRY_BENCHMARKS[qualificationData.industry]?.avg || 50) && score < (INDUSTRY_BENCHMARKS[qualificationData.industry]?.topPerformer || 68) && (
-                    <p className="text-xs text-[#0884AA] mt-2.5 flex items-center gap-1.5">
+                    <p className="text-xs text-[#7FB8A3] mt-2.5 flex items-center gap-1.5">
                       <TrendingUp className="h-3.5 w-3.5 flex-shrink-0" />
                       You're above average – {(INDUSTRY_BENCHMARKS[qualificationData.industry]?.topPerformer || 68) - score} points from top performer status
                     </p>
@@ -1118,13 +1118,13 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="mb-4 p-3 rounded-lg bg-[#02205B]/5 border border-[#02205B]/10"
+                className="mb-4 p-3 rounded-lg bg-[#12161D]/5 border border-[#12161D]/10"
               >
                 <div className="flex items-start gap-2 mb-2">
-                  <Lightbulb className="h-4 w-4 text-[#0884AA] mt-0.5 flex-shrink-0" />
-                  <p className="text-[10px] font-semibold text-[#02205B] uppercase tracking-wide">What This Means</p>
+                  <Lightbulb className="h-4 w-4 text-[#7FB8A3] mt-0.5 flex-shrink-0" />
+                  <p className="text-[10px] font-semibold text-[#12161D] uppercase tracking-wide">What This Means</p>
                 </div>
-                <p className="text-xs text-[#02205B] mb-1.5">{interpretation.summary}</p>
+                <p className="text-xs text-[#12161D] mb-1.5">{interpretation.summary}</p>
                 <p className="text-[10px] text-muted-foreground">{interpretation.detail}</p>
               </motion.div>
 
@@ -1141,7 +1141,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                     {qualificationData.industry && (
                       <div>
                         <p className="text-[10px] text-muted-foreground">Industry</p>
-                        <p className="font-medium text-[#02205B] truncate">
+                        <p className="font-medium text-[#12161D] truncate">
                           {QUALIFICATION_QUESTIONS.find(q => q.field === "industry")?.options.find(o => o.value === qualificationData.industry)?.label || qualificationData.industry}
                         </p>
                       </div>
@@ -1149,7 +1149,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                     {qualificationData.companySize && (
                       <div>
                         <p className="text-[10px] text-muted-foreground">Size</p>
-                        <p className="font-medium text-[#02205B] truncate">
+                        <p className="font-medium text-[#12161D] truncate">
                           {QUALIFICATION_QUESTIONS.find(q => q.field === "companySize")?.options.find(o => o.value === qualificationData.companySize)?.label || qualificationData.companySize}
                         </p>
                       </div>
@@ -1157,7 +1157,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                     {qualificationData.revenue && (
                       <div>
                         <p className="text-[10px] text-muted-foreground">Revenue</p>
-                        <p className="font-medium text-[#02205B] truncate">
+                        <p className="font-medium text-[#12161D] truncate">
                           {QUALIFICATION_QUESTIONS.find(q => q.field === "revenue")?.options.find(o => o.value === qualificationData.revenue)?.label || qualificationData.revenue}
                         </p>
                       </div>
@@ -1172,14 +1172,14 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
-                  className="mb-4 p-3 rounded-lg bg-[#0884AA]/5 border border-[#0884AA]/20"
+                  className="mb-4 p-3 rounded-lg bg-[#7FB8A3]/5 border border-[#7FB8A3]/20"
                 >
-                  <p className="text-[10px] font-semibold text-[#0884AA] uppercase tracking-wide mb-2">Industry Context</p>
+                  <p className="text-[10px] font-semibold text-[#7FB8A3] uppercase tracking-wide mb-2">Industry Context</p>
                   <p className="text-[10px] text-muted-foreground mb-1.5">
-                    <span className="font-medium text-[#02205B]">Challenge:</span> {industryInsight.challenge}
+                    <span className="font-medium text-[#12161D]">Challenge:</span> {industryInsight.challenge}
                   </p>
                   <p className="text-[10px] text-muted-foreground">
-                    <span className="font-medium text-[#02205B]">Opportunity:</span> {industryInsight.opportunity}
+                    <span className="font-medium text-[#12161D]">Opportunity:</span> {industryInsight.opportunity}
                   </p>
                 </motion.div>
               )}
@@ -1258,18 +1258,18 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.65 }}
-                className="mb-4 p-3 rounded-lg bg-gradient-to-br from-[#02205B]/5 to-[#0884AA]/5 border border-[#02205B]/10"
+                className="mb-4 p-3 rounded-lg bg-gradient-to-br from-[#12161D]/5 to-[#7FB8A3]/5 border border-[#12161D]/10"
               >
                 <div className="flex items-center gap-2 mb-2">
-                  <TrendingUp className="h-4 w-4 text-[#02205B]" />
-                  <p className="text-[10px] font-semibold text-[#02205B] uppercase tracking-wide">Recommended Next Steps</p>
+                  <TrendingUp className="h-4 w-4 text-[#12161D]" />
+                  <p className="text-[10px] font-semibold text-[#12161D] uppercase tracking-wide">Recommended Next Steps</p>
                 </div>
                 <div className="space-y-2">
                   {recommendations.map((rec, idx) => (
                     <div key={idx} className="flex items-start gap-2">
-                      <span className="flex-shrink-0 w-4 h-4 rounded-full bg-[#0884AA] text-white text-[10px] flex items-center justify-center font-bold">{idx + 1}</span>
+                      <span className="flex-shrink-0 w-4 h-4 rounded-full bg-[#7FB8A3] text-white text-[10px] flex items-center justify-center font-bold">{idx + 1}</span>
                       <div>
-                        <p className="text-xs font-medium text-[#02205B]">{rec.title}</p>
+                        <p className="text-xs font-medium text-[#12161D]">{rec.title}</p>
                         <p className="text-[10px] text-muted-foreground">{rec.description}</p>
                       </div>
                     </div>
@@ -1295,7 +1295,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                     }}
                     className={cn(
                       "flex items-center justify-between text-xs p-1.5 sm:p-2 rounded-lg transition-all cursor-pointer",
-                      "hover:ring-2 hover:ring-[#0884AA]/40 hover:scale-[1.02]",
+                      "hover:ring-2 hover:ring-[#7FB8A3]/40 hover:scale-[1.02]",
                       dim.rawScore === 1 ? "bg-red-50 border-2 border-red-400 animate-pulse" :
                       dim.rawScore === 2 ? "bg-amber-50 border-2 border-amber-400" :
                       "bg-slate-50"
@@ -1322,7 +1322,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8 }}
-                className="mb-4 p-3 rounded-lg bg-gradient-to-r from-[#02205B] to-[#0884AA] text-white"
+                className="mb-4 p-3 rounded-lg bg-gradient-to-r from-[#12161D] to-[#7FB8A3] text-white"
               >
                 <p className="text-xs font-semibold mb-1">Unlock Your Full Potential</p>
                 <p className="text-[10px] opacity-90">
@@ -1340,22 +1340,22 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                 className="mb-4"
                 data-testid="pre-cta-commitment-section"
               >
-                <p className="text-sm font-medium text-[#02205B] mb-2">
+                <p className="text-sm font-medium text-[#12161D] mb-2">
                   What would you like to discover? (Select all that apply)
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {PRIORITY_OPTIONS.map(option => (
                     <label 
                       key={option.id} 
-                      className="flex items-center gap-2 p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-50 hover:border-[#0884AA]/50 transition-colors"
+                      className="flex items-center gap-2 p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-50 hover:border-[#7FB8A3]/50 transition-colors"
                       data-testid={`priority-option-${option.id}`}
                     >
                       <Checkbox 
                         checked={priorities.includes(option.id)}
                         onCheckedChange={(checked) => handlePriorityChange(option.id, checked === true)}
-                        className="data-[state=checked]:bg-[#02205B] data-[state=checked]:border-[#02205B]"
+                        className="data-[state=checked]:bg-[#12161D] data-[state=checked]:border-[#12161D]"
                       />
-                      <span className="text-xs sm:text-sm text-[#02205B]">{option.label}</span>
+                      <span className="text-xs sm:text-sm text-[#12161D]">{option.label}</span>
                     </label>
                   ))}
                 </div>
@@ -1366,21 +1366,21 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 }}
-                className="mb-4 p-3 rounded-lg bg-gradient-to-r from-[#02205B]/10 to-[#0884AA]/10 border border-[#0884AA]/20"
+                className="mb-4 p-3 rounded-lg bg-gradient-to-r from-[#12161D]/10 to-[#7FB8A3]/10 border border-[#7FB8A3]/20"
                 data-testid="section-unlock-value"
               >
-                <p className="text-[10px] font-semibold text-[#02205B] uppercase tracking-wide mb-2">Unlock Your Full Potential</p>
+                <p className="text-[10px] font-semibold text-[#12161D] uppercase tracking-wide mb-2">Unlock Your Full Potential</p>
                 <div className="space-y-1.5">
-                  <div className="flex items-center gap-2 text-xs text-[#02205B]" data-testid="text-value-74-questions">
-                    <CheckCircle className="h-3.5 w-3.5 text-[#0884AA] flex-shrink-0" />
+                  <div className="flex items-center gap-2 text-xs text-[#12161D]" data-testid="text-value-74-questions">
+                    <CheckCircle className="h-3.5 w-3.5 text-[#7FB8A3] flex-shrink-0" />
                     <span>74 questions across 7 comprehensive dimensions</span>
                   </div>
-                  <div className="flex items-center gap-2 text-xs text-[#02205B]" data-testid="text-value-ai-recommendations">
-                    <CheckCircle className="h-3.5 w-3.5 text-[#0884AA] flex-shrink-0" />
+                  <div className="flex items-center gap-2 text-xs text-[#12161D]" data-testid="text-value-ai-recommendations">
+                    <CheckCircle className="h-3.5 w-3.5 text-[#7FB8A3] flex-shrink-0" />
                     <span>AI-powered personalised recommendations</span>
                   </div>
-                  <div className="flex items-center gap-2 text-xs text-[#02205B]" data-testid="text-value-roadmap">
-                    <CheckCircle className="h-3.5 w-3.5 text-[#0884AA] flex-shrink-0" />
+                  <div className="flex items-center gap-2 text-xs text-[#12161D]" data-testid="text-value-roadmap">
+                    <CheckCircle className="h-3.5 w-3.5 text-[#7FB8A3] flex-shrink-0" />
                     <span>Detailed transformation roadmap & ROI projections</span>
                   </div>
                 </div>
@@ -1449,7 +1449,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
           <Dialog open={showEmailDialog} onOpenChange={setShowEmailDialog}>
             <DialogContent className="sm:max-w-md">
               <DialogHeader>
-                <DialogTitle className="flex items-center gap-2 text-[#02205B]">
+                <DialogTitle className="flex items-center gap-2 text-[#12161D]">
                   <Mail className="h-5 w-5" />
                   Email Your Results
                 </DialogTitle>
@@ -1461,11 +1461,11 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
               {emailStatus === "success" ? (
                 <div className="py-6 text-center">
                   <CheckCircle className="h-12 w-12 text-emerald-500 mx-auto mb-3" />
-                  <p className="font-medium text-[#02205B] mb-1">Results Sent Successfully!</p>
+                  <p className="font-medium text-[#12161D] mb-1">Results Sent Successfully!</p>
                   <p className="text-sm text-muted-foreground">Check your inbox for your Finance Readiness summary.</p>
                   <Button
                     onClick={() => setShowEmailDialog(false)}
-                    className="mt-4 bg-[#02205B]"
+                    className="mt-4 bg-[#12161D]"
                   >
                     Close
                   </Button>
@@ -1500,7 +1500,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                     </Button>
                     <Button
                       onClick={handleEmailResults}
-                      className="flex-1 bg-[#02205B]"
+                      className="flex-1 bg-[#12161D]"
                       disabled={emailStatus === "sending"}
                       data-testid="button-send-email"
                     >
@@ -1541,11 +1541,11 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
           animate={{ opacity: 1, y: 0 }}
           className={cn("w-full", className)}
         >
-          <Card className="border-2 border-[#12EBFC]/30 bg-white/95 backdrop-blur-sm shadow-xl overflow-hidden">
+          <Card className="border-2 border-[#C77A93]/30 bg-white/95 backdrop-blur-sm shadow-xl overflow-hidden">
             {/* Enhanced Progress Bar for Mobile */}
             <div className="h-2 bg-slate-200">
               <motion.div
-                className="h-full bg-gradient-to-r from-[#02205B] via-[#0884AA] to-[#12EBFC]"
+                className="h-full bg-gradient-to-r from-[#12161D] via-[#7FB8A3] to-[#C77A93]"
                 initial={{ width: 0 }}
                 animate={{ width: `${progress}%` }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
@@ -1565,7 +1565,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                           <ArrowLeft className="h-4 w-4 text-slate-600" />
                         </button>
                       )}
-                      <div className="h-8 w-8 rounded-full bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center">
+                      <div className="h-8 w-8 rounded-full bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center">
                         <Sparkles className="h-4 w-4 text-white" />
                       </div>
                     </div>
@@ -1579,14 +1579,14 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                         />
                       )}
                       {/* Mobile-optimized progress counter */}
-                      <div className="bg-[#02205B] text-white px-3 py-1.5 rounded-full text-xs font-bold">
+                      <div className="bg-[#12161D] text-white px-3 py-1.5 rounded-full text-xs font-bold">
                         {currentOverallQuestion + 1} of {totalQuestions}
                       </div>
                     </div>
                   </div>
                   {/* Visible step label on mobile */}
                   <div className="mb-2">
-                    <span className="text-xs text-[#02205B] font-medium">Step 1 · About Your Organisation</span>
+                    <span className="text-xs text-[#12161D] font-medium">Step 1 · About Your Organisation</span>
                   </div>
 
               <AnimatePresence mode="wait">
@@ -1598,13 +1598,13 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                   transition={{ duration: 0.3 }}
                 >
                   <div className="flex items-start gap-2 mb-3 sm:mb-4">
-                    <h3 className="text-base sm:text-lg font-semibold text-[#02205B] leading-snug flex-1">
+                    <h3 className="text-base sm:text-lg font-semibold text-[#12161D] leading-snug flex-1">
                       {qualQuestion.text}
                     </h3>
                     <Tooltip delayDuration={0}>
                       <TooltipTrigger asChild>
-                        <button className="flex-shrink-0 h-5 w-5 rounded-full bg-[#02205B]/10 hover:bg-[#02205B]/20 flex items-center justify-center transition-colors">
-                          <Info className="h-3 w-3 text-[#02205B]" />
+                        <button className="flex-shrink-0 h-5 w-5 rounded-full bg-[#12161D]/10 hover:bg-[#12161D]/20 flex items-center justify-center transition-colors">
+                          <Info className="h-3 w-3 text-[#12161D]" />
                         </button>
                       </TooltipTrigger>
                       <TooltipContent side="left" className="max-w-[250px] text-xs">
@@ -1629,9 +1629,9 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                           disabled={isAnimating}
                           className={cn(
                             "w-full text-left p-3 sm:p-3.5 rounded-xl border-2 transition-all touch-manipulation min-h-[48px]",
-                            "hover:border-[#02205B] hover:bg-[#02205B]/5",
-                            "active:scale-[0.98] active:border-[#02205B] active:bg-[#02205B]/10",
-                            "focus:outline-none focus:ring-2 focus:ring-[#12EBFC]/50",
+                            "hover:border-[#12161D] hover:bg-[#12161D]/5",
+                            "active:scale-[0.98] active:border-[#12161D] active:bg-[#12161D]/10",
+                            "focus:outline-none focus:ring-2 focus:ring-[#C77A93]/50",
                             isAnimating && "opacity-50 pointer-events-none"
                           )}
                           data-testid={`qual-option-${option.value}`}
@@ -1662,11 +1662,11 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
         animate={{ opacity: 1, y: 0 }}
         className={cn("w-full", className)}
       >
-        <Card className="border-2 border-[#12EBFC]/30 bg-white/95 backdrop-blur-sm shadow-xl overflow-hidden">
+        <Card className="border-2 border-[#C77A93]/30 bg-white/95 backdrop-blur-sm shadow-xl overflow-hidden">
           {/* Enhanced Progress Bar for Mobile */}
           <div className="h-2 bg-slate-200">
             <motion.div
-              className="h-full bg-gradient-to-r from-[#02205B] via-[#0884AA] to-[#12EBFC]"
+              className="h-full bg-gradient-to-r from-[#12161D] via-[#7FB8A3] to-[#C77A93]"
               initial={{ width: 0 }}
               animate={{ width: `${progress}%` }}
               transition={{ duration: 0.3, ease: "easeOut" }}
@@ -1684,20 +1684,20 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                 >
                   <ArrowLeft className="h-4 w-4 sm:h-4 sm:w-4 text-slate-600" />
                 </button>
-                <div className="h-8 w-8 sm:h-8 sm:w-8 rounded-full bg-gradient-to-br from-[#0884AA] to-[#12EBFC] flex items-center justify-center">
+                <div className="h-8 w-8 sm:h-8 sm:w-8 rounded-full bg-gradient-to-br from-[#7FB8A3] to-[#C77A93] flex items-center justify-center">
                   <Sparkles className="h-4 w-4 text-white" />
                 </div>
               </div>
               {/* Mobile-optimized progress counter */}
               <div className="flex items-center gap-2">
-                <div className="bg-[#02205B] text-white px-3 py-1.5 rounded-full text-xs font-bold">
+                <div className="bg-[#12161D] text-white px-3 py-1.5 rounded-full text-xs font-bold">
                   {currentOverallQuestion + 1} of {totalQuestions}
                 </div>
               </div>
             </div>
             {/* Visible dimension badge on mobile */}
             <div className="mb-2">
-              <span className="text-xs text-[#0884AA] font-medium">Step 2 · Maturity Assessment</span>
+              <span className="text-xs text-[#7FB8A3] font-medium">Step 2 · Maturity Assessment</span>
             </div>
 
             <AnimatePresence mode="wait">
@@ -1709,18 +1709,18 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                 transition={{ duration: 0.3 }}
               >
                 <div className="mb-3 sm:mb-4">
-                  <span className="inline-block px-2 py-0.5 text-[10px] font-semibold text-white bg-[#0884AA] rounded uppercase tracking-wide">
+                  <span className="inline-block px-2 py-0.5 text-[10px] font-semibold text-white bg-[#7FB8A3] rounded uppercase tracking-wide">
                     {question.dimension}
                   </span>
                 </div>
-                <h3 className="text-base sm:text-lg font-semibold text-[#02205B] mb-3 leading-snug">
+                <h3 className="text-base sm:text-lg font-semibold text-[#12161D] mb-3 leading-snug">
                   {question.text}
                 </h3>
-                <div className="bg-gradient-to-r from-[#0884AA]/10 to-[#12EBFC]/10 border-l-3 border-[#0884AA] rounded-r-lg p-3 mb-4">
-                  <p className="text-sm text-[#02205B] leading-relaxed">
+                <div className="bg-gradient-to-r from-[#7FB8A3]/10 to-[#C77A93]/10 border-l-3 border-[#7FB8A3] rounded-r-lg p-3 mb-4">
+                  <p className="text-sm text-[#12161D] leading-relaxed">
                     {question.tooltip}
                   </p>
-                  <p className="text-xs text-[#0884AA] mt-1.5 font-medium">
+                  <p className="text-xs text-[#7FB8A3] mt-1.5 font-medium">
                     {question.whyItMatters}
                   </p>
                 </div>
@@ -1737,9 +1737,9 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                       disabled={isAnimating}
                       className={cn(
                         "w-full text-left p-3 sm:p-3.5 rounded-xl border-2 transition-all touch-manipulation min-h-[52px]",
-                        "hover:border-[#0884AA] hover:bg-[#0884AA]/5",
-                        "active:scale-[0.98] active:border-[#0884AA] active:bg-[#0884AA]/10",
-                        "focus:outline-none focus:ring-2 focus:ring-[#12EBFC]/50",
+                        "hover:border-[#7FB8A3] hover:bg-[#7FB8A3]/5",
+                        "active:scale-[0.98] active:border-[#7FB8A3] active:bg-[#7FB8A3]/10",
+                        "focus:outline-none focus:ring-2 focus:ring-[#C77A93]/50",
                         isAnimating && "opacity-50 pointer-events-none"
                       )}
                       data-testid={`preview-option-${option.value}`}

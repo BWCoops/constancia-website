@@ -70,9 +70,9 @@ interface MarketingAsset {
   updatedAt: string | null;
 }
 
-import whiteLogo from "@assets/1QG - Type Logo (White)_1764696707171.png";
-import gradientLogo from "@assets/1QG - Type Logo (Dark to Light Gradient)_1764696691129.png";
-import iconWhite from "@assets/1QG - Icon (White)_1764415609503.png";
+import whiteLogo from "@assets/brand/Constancia-Logo-ML-Transparent.png";
+import gradientLogo from "@assets/brand/Constancia-Logo-ML-Transparent.png";
+import iconWhite from "@assets/brand/Constancia-Cut-Icon-PD.png";
 
 import peopleProfessional1 from "@assets/stock_images/professional_busines_5c31713e.jpg";
 import peopleProfessional2 from "@assets/stock_images/professional_busines_49e2d0d2.jpg";
@@ -84,9 +84,9 @@ import londonOffice from "@assets/stock_images/london_office.jpg";
 
 // Brand colors
 const BRAND = {
-  navy: "#02205B",
-  cyan: "#12EBFC",
-  teal: "#0884AA",
+  navy: "#12161D",
+  cyan: "#C77A93",
+  teal: "#7FB8A3",
 };
 
 // Tagline configuration (matches footer format exactly)
@@ -135,7 +135,7 @@ const gradientCovers: GradientCoverConfig[] = [
   {
     id: "grad-linkedin-navy-cyan",
     name: "Navy to Cyan Gradient",
-    description: "Classic 1QG brand gradient - professional and modern",
+    description: "Classic Constancia brand gradient - professional and modern",
     type: "linkedin-cover",
     dimensions: { width: 1584, height: 396 },
     gradientStyle: "linear",
@@ -1492,7 +1492,7 @@ const videoAssets: VideoAssetConfig[] = [
   {
     id: "video-linkedin-brand-1",
     name: "Brand Introduction",
-    description: "Abstract data flow animation with 1QG branding",
+    description: "Abstract data flow animation with Constancia branding",
     platform: "linkedin",
     dimensions: { width: 1920, height: 1080 },
     aspectRatio: "16:9",
@@ -1908,7 +1908,7 @@ function GradientCoverPreview({
         <div className="absolute flex items-center justify-center w-full h-full">
           <img 
             src={iconWhite}
-            alt="1QG Icon"
+            alt="Constancia Icon"
             className="drop-shadow-lg"
             style={{ width: iconSize, height: 'auto', maxWidth: '120px' }}
           />
@@ -1927,7 +1927,7 @@ function GradientCoverPreview({
           >
             <img 
               src={logoSrc}
-              alt="1QG Logo"
+              alt="Constancia Logo"
               className="drop-shadow-xl"
               style={{ 
                 height: `${scale.logoHeight}px`,
@@ -1978,7 +1978,7 @@ function GradientCoverPreview({
         <div className="absolute flex flex-col items-center justify-center gap-4 w-full h-full p-4">
           <img 
             src={logoSrc}
-            alt="1QG Logo"
+            alt="Constancia Logo"
             className="drop-shadow-lg"
             style={{ width: logoWidth, height: 'auto' }}
           />
@@ -2001,7 +2001,7 @@ function GradientCoverPreview({
         <div className="absolute flex flex-col items-center justify-center w-full h-full p-3">
           <img 
             src={logoSrc}
-            alt="1QG Logo"
+            alt="Constancia Logo"
             className="drop-shadow-lg"
             style={{ width: logoWidth, height: 'auto' }}
           />
@@ -2013,7 +2013,7 @@ function GradientCoverPreview({
       <div className="absolute flex flex-col items-center justify-center gap-3 w-full h-full p-4">
         <img 
           src={logoSrc}
-          alt="1QG Logo"
+          alt="Constancia Logo"
           className="drop-shadow-lg"
           style={{ width: logoWidth, height: 'auto' }}
         />
@@ -2078,7 +2078,7 @@ function GradientCoverPreview({
               <div className="relative">
                 <img 
                   src={whiteLogo}
-                  alt="1QG Logo"
+                  alt="Constancia Logo"
                   className="drop-shadow-lg"
                   style={{
                     height: '55%',
@@ -2111,7 +2111,7 @@ function GradientCoverPreview({
               <div className="relative">
                 <img 
                   src={whiteLogo}
-                  alt="1QG Logo"
+                  alt="Constancia Logo"
                   className="drop-shadow-lg"
                   style={{
                     height: isSquare ? '22%' : '28%',
@@ -2133,13 +2133,13 @@ function GradientCoverPreview({
               <div className="flex flex-col items-center" style={{ marginTop: '8px' }}>
                 <span 
                   className="font-medium tracking-wide drop-shadow-md text-center"
-                  style={{ fontSize: isSquare ? '0.6rem' : '0.5rem', lineHeight: 1.4, color: '#FEFFF3' }}
+                  style={{ fontSize: isSquare ? '0.6rem' : '0.5rem', lineHeight: 1.4, color: '#F6F3EE' }}
                 >
                   {TAGLINE.line1}
                 </span>
                 <span 
                   className="font-medium tracking-wide drop-shadow-md text-center"
-                  style={{ fontSize: isSquare ? '0.6rem' : '0.5rem', lineHeight: 1.4, color: '#FEFFF3' }}
+                  style={{ fontSize: isSquare ? '0.6rem' : '0.5rem', lineHeight: 1.4, color: '#F6F3EE' }}
                 >
                   {TAGLINE.line2}
                 </span>
@@ -2293,7 +2293,7 @@ function AssetPreview({
           <div className="absolute inset-0" style={overlayStyle} />
           <img 
             src={whiteLogo}
-            alt="1QG Logo"
+            alt="Constancia Logo"
             className="absolute drop-shadow-lg"
             style={{
               left: `${layout.logoX}%`,
@@ -2401,17 +2401,17 @@ function VideoAssetPreview({
   const getPreviewGradient = () => {
     switch (video.style) {
       case "abstract":
-        return "bg-gradient-to-br from-[#02205B] via-[#0884AA] to-[#12EBFC]";
+        return "bg-gradient-to-br from-[#12161D] via-[#7FB8A3] to-[#C77A93]";
       case "corporate":
-        return "bg-gradient-to-br from-[#02205B] via-[#0a3d7a] to-[#0884AA]";
+        return "bg-gradient-to-br from-[#12161D] via-[#0a3d7a] to-[#7FB8A3]";
       case "data":
-        return "bg-gradient-to-br from-[#0884AA] via-[#12EBFC] to-[#02205B]";
+        return "bg-gradient-to-br from-[#7FB8A3] via-[#C77A93] to-[#12161D]";
       case "technology":
-        return "bg-gradient-to-br from-[#12EBFC] via-[#0884AA] to-[#02205B]";
+        return "bg-gradient-to-br from-[#C77A93] via-[#7FB8A3] to-[#12161D]";
       case "people":
         return "";
       default:
-        return "bg-gradient-to-br from-[#02205B] to-[#0884AA]";
+        return "bg-gradient-to-br from-[#12161D] to-[#7FB8A3]";
     }
   };
 
@@ -2429,8 +2429,8 @@ function VideoAssetPreview({
                 alt={video.name}
                 className="absolute inset-0 w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#02205B]/80 via-[#02205B]/40 to-transparent" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#02205B]/60 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#12161D]/80 via-[#12161D]/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#12161D]/60 via-transparent to-transparent" />
             </>
           )}
           <div className="absolute inset-0 flex items-center justify-center">
@@ -2446,16 +2446,16 @@ function VideoAssetPreview({
             {isPeopleStyle && (
               <div className="absolute inset-0 opacity-40">
                 <div className="absolute inset-0 animate-pulse">
-                  <div className="absolute top-1/4 right-1/4 w-24 h-24 rounded-full bg-[#12EBFC]/30 blur-xl" />
-                  <div className="absolute bottom-1/3 right-1/3 w-20 h-20 rounded-full bg-[#0884AA]/40 blur-lg" />
-                  <div className="absolute top-1/2 right-1/5 w-16 h-16 rounded-full bg-[#12EBFC]/20 blur-md" />
+                  <div className="absolute top-1/4 right-1/4 w-24 h-24 rounded-full bg-[#C77A93]/30 blur-xl" />
+                  <div className="absolute bottom-1/3 right-1/3 w-20 h-20 rounded-full bg-[#7FB8A3]/40 blur-lg" />
+                  <div className="absolute top-1/2 right-1/5 w-16 h-16 rounded-full bg-[#C77A93]/20 blur-md" />
                 </div>
               </div>
             )}
             <div className="relative z-10 flex flex-col items-center gap-3">
               <img 
                 src={whiteLogo}
-                alt="1QG Logo"
+                alt="Constancia Logo"
                 className="h-8 w-auto drop-shadow-lg"
               />
               <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30 group-hover:scale-110 transition-transform">
@@ -2690,7 +2690,7 @@ function LibraryTabContent() {
 
   return (
     <>
-      <Card className="bg-gradient-to-r from-[#02205B] via-[#0884AA] to-[#12EBFC] text-white">
+      <Card className="bg-gradient-to-r from-[#12161D] via-[#7FB8A3] to-[#C77A93] text-white">
         <CardContent className="py-6">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-4">
@@ -2937,7 +2937,7 @@ function LibraryTabContent() {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#02205B] to-[#0884AA]">
+                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#12161D] to-[#7FB8A3]">
                     {typeIcons[asset.type] || <ImageIcon className="h-8 w-8 text-white/50" />}
                   </div>
                 )}
@@ -3571,7 +3571,7 @@ function MarketingAssetsContent() {
       const videoBlob = await recordingPromise;
       
       const link = document.createElement('a');
-      link.download = `1QG-${video.platform}-${video.style}-${video.duration}s-${Date.now()}.webm`;
+      link.download = `Constancia-${video.platform}-${video.style}-${video.duration}s-${Date.now()}.webm`;
       link.href = URL.createObjectURL(videoBlob);
       link.click();
       
@@ -3820,7 +3820,7 @@ function MarketingAssetsContent() {
       ctx.shadowBlur = 0;
 
       const link = document.createElement('a');
-      link.download = `1QG-gradient-${cover.type}-${Date.now()}.png`;
+      link.download = `Constancia-gradient-${cover.type}-${Date.now()}.png`;
       link.href = canvas.toDataURL('image/png', 1.0);
       link.click();
 
@@ -3923,7 +3923,7 @@ function MarketingAssetsContent() {
       ctx.shadowColor = 'rgba(0, 0, 0, 0.6)';
       ctx.shadowBlur = 8;
       
-      ctx.fillStyle = '#FEFFF3';
+      ctx.fillStyle = '#F6F3EE';
       ctx.font = `500 ${fontSize}px Inter, system-ui, sans-serif`;
       ctx.fillText(TAGLINE.line1, taglineCentreX, taglineStartY);
       ctx.fillText(TAGLINE.line2, taglineCentreX, taglineStartY + lineHeight);
@@ -3934,7 +3934,7 @@ function MarketingAssetsContent() {
 
       const dataUrl = canvas.toDataURL('image/png');
       const link = document.createElement('a');
-      link.download = `1QG-Teams-${bg.name.replace(/\s+/g, '-')}.png`;
+      link.download = `Constancia-Teams-${bg.name.replace(/\s+/g, '-')}.png`;
       link.href = dataUrl;
       link.click();
 
@@ -4056,7 +4056,7 @@ function MarketingAssetsContent() {
       ctx.fillText(TAGLINE.line2, taglineX, taglineY + lineHeight);
 
       const link = document.createElement('a');
-      link.download = `1QG-${asset.type}-${asset.category}-${Date.now()}.png`;
+      link.download = `Constancia-${asset.type}-${asset.category}-${Date.now()}.png`;
       link.href = canvas.toDataURL('image/png', 1.0);
       link.click();
 
@@ -4095,7 +4095,7 @@ function MarketingAssetsContent() {
         </p>
       </div>
 
-      <Card className="bg-gradient-to-r from-[#02205B] to-[#0884AA] text-white">
+      <Card className="bg-gradient-to-r from-[#12161D] to-[#7FB8A3] text-white">
         <CardContent className="py-6">
           <div className="flex items-center gap-4">
             <div className="p-3 rounded-xl bg-white/10">
@@ -4104,7 +4104,7 @@ function MarketingAssetsContent() {
             <div>
               <h2 className="text-xl font-semibold mb-1">Premium Quality Assets</h2>
               <p className="text-white/80 text-sm">
-                All images are generated at full resolution with professional stock photography and 1QG branding
+                All images are generated at full resolution with professional stock photography and Constancia branding
               </p>
             </div>
           </div>
@@ -4184,7 +4184,7 @@ function MarketingAssetsContent() {
         </TabsList>
 
         <TabsContent value="gradient" className="space-y-6">
-          <Card className="bg-gradient-to-r from-[#02205B] via-[#0884AA] to-[#12EBFC] text-white">
+          <Card className="bg-gradient-to-r from-[#12161D] via-[#7FB8A3] to-[#C77A93] text-white">
             <CardContent className="py-6">
               <div className="flex items-center gap-4">
                 <div className="p-3 rounded-xl bg-white/10">
@@ -4236,7 +4236,7 @@ function MarketingAssetsContent() {
           
           <div>
             <h3 className="font-semibold mb-4 flex items-center gap-2">
-              <Globe className="h-5 w-5 text-[#02205B]" />
+              <Globe className="h-5 w-5 text-[#12161D]" />
               Website & Email
             </h3>
             <div className="grid gap-6 md:grid-cols-2">
@@ -4255,7 +4255,7 @@ function MarketingAssetsContent() {
             <CardContent className="py-6">
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-lg bg-brand-navy/10">
-                  <Palette className="h-6 w-6 text-[#02205B]" />
+                  <Palette className="h-6 w-6 text-[#12161D]" />
                 </div>
                 <div>
                   <h3 className="font-medium mb-1">Your Brand Tagline</h3>
@@ -4480,7 +4480,7 @@ function MarketingAssetsContent() {
             <CardContent className="py-6">
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-lg bg-brand-navy/10">
-                  <Globe className="h-6 w-6 text-[#02205B]" />
+                  <Globe className="h-6 w-6 text-[#12161D]" />
                 </div>
                 <div>
                   <h3 className="font-medium mb-1">Website Hero Banner Guidelines</h3>
@@ -4525,7 +4525,7 @@ function MarketingAssetsContent() {
         </TabsContent>
 
         <TabsContent value="videos" className="space-y-6">
-          <Card className="bg-gradient-to-r from-[#02205B] via-[#0884AA] to-[#12EBFC] text-white">
+          <Card className="bg-gradient-to-r from-[#12161D] via-[#7FB8A3] to-[#C77A93] text-white">
             <CardContent className="py-6">
               <div className="flex items-center gap-4">
                 <div className="p-3 rounded-xl bg-white/10">
@@ -4595,7 +4595,7 @@ function MarketingAssetsContent() {
 
           <div>
             <h3 className="font-semibold mb-4 flex items-center gap-2">
-              <Globe className="h-5 w-5 text-[#02205B]" />
+              <Globe className="h-5 w-5 text-[#12161D]" />
               Website Videos
             </h3>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -4614,7 +4614,7 @@ function MarketingAssetsContent() {
             <CardContent className="py-6">
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-lg bg-brand-navy/10">
-                  <Video className="h-6 w-6 text-[#02205B]" />
+                  <Video className="h-6 w-6 text-[#12161D]" />
                 </div>
                 <div>
                   <h3 className="font-medium mb-1">Video Generation Guidelines</h3>
@@ -4630,7 +4630,7 @@ function MarketingAssetsContent() {
         </TabsContent>
 
         <TabsContent value="virtual-backgrounds" className="space-y-6">
-          <Card className="bg-gradient-to-r from-[#02205B] via-[#0884AA] to-[#12EBFC] text-white">
+          <Card className="bg-gradient-to-r from-[#12161D] via-[#7FB8A3] to-[#C77A93] text-white">
             <CardContent className="py-6">
               <div className="flex items-center gap-4">
                 <div className="p-3 rounded-xl bg-white/10">
@@ -4653,7 +4653,7 @@ function MarketingAssetsContent() {
               <Badge variant="secondary" className="ml-2">1920×1080 UHD</Badge>
             </h3>
             <p className="text-sm text-muted-foreground mb-4">
-              Professional backgrounds with 1QG branding and tagline positioned to avoid video feed overlap.
+              Professional backgrounds with Constancia branding and tagline positioned to avoid video feed overlap.
             </p>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {teamsBackgrounds.map((bg) => (
@@ -4665,7 +4665,7 @@ function MarketingAssetsContent() {
                       className="w-full h-full object-cover"
                     />
                     {bg.featured && (
-                      <Badge className="absolute top-2 left-2 bg-[#12EBFC] text-[#02205B]">
+                      <Badge className="absolute top-2 left-2 bg-[#C77A93] text-[#12161D]">
                         <Star className="h-3 w-3 mr-1" />
                         Featured
                       </Badge>
@@ -4675,15 +4675,15 @@ function MarketingAssetsContent() {
                       <div className="relative">
                         <img 
                           src={whiteLogo} 
-                          alt="1QG Logo" 
+                          alt="Constancia Logo" 
                           className="h-10 drop-shadow-lg"
                           style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' }}
                         />
                         <span className="absolute -top-1 -right-3 text-white text-[8px] font-medium drop-shadow-lg">®</span>
                       </div>
                       <div className="text-center leading-snug drop-shadow-lg">
-                        <p className="text-sm font-medium" style={{ color: '#FEFFF3' }}>{TAGLINE.line1}</p>
-                        <p className="text-sm font-medium" style={{ color: '#FEFFF3' }}>{TAGLINE.line2}</p>
+                        <p className="text-sm font-medium" style={{ color: '#F6F3EE' }}>{TAGLINE.line1}</p>
+                        <p className="text-sm font-medium" style={{ color: '#F6F3EE' }}>{TAGLINE.line2}</p>
                         <p className="text-sm font-medium italic" style={{ color: BRAND.cyan }}>{TAGLINE.line3}</p>
                       </div>
                     </div>
@@ -4732,7 +4732,7 @@ function MarketingAssetsContent() {
                       className="w-full h-full object-cover"
                     />
                     {bg.featured && (
-                      <Badge className="absolute top-2 left-2 bg-[#12EBFC] text-[#02205B]">
+                      <Badge className="absolute top-2 left-2 bg-[#C77A93] text-[#12161D]">
                         <Star className="h-3 w-3 mr-1" />
                         Featured
                       </Badge>
@@ -4742,15 +4742,15 @@ function MarketingAssetsContent() {
                       <div className="relative">
                         <img 
                           src={whiteLogo} 
-                          alt="1QG Logo" 
+                          alt="Constancia Logo" 
                           className="h-8 drop-shadow-lg"
                           style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' }}
                         />
                         <span className="absolute -top-1 -right-2 text-white text-[6px] font-medium drop-shadow-lg">®</span>
                       </div>
                       <div className="text-center leading-snug drop-shadow-lg">
-                        <p className="text-xs font-medium" style={{ color: '#FEFFF3' }}>{TAGLINE.line1}</p>
-                        <p className="text-xs font-medium" style={{ color: '#FEFFF3' }}>{TAGLINE.line2}</p>
+                        <p className="text-xs font-medium" style={{ color: '#F6F3EE' }}>{TAGLINE.line1}</p>
+                        <p className="text-xs font-medium" style={{ color: '#F6F3EE' }}>{TAGLINE.line2}</p>
                         <p className="text-xs font-medium italic" style={{ color: BRAND.cyan }}>{TAGLINE.line3}</p>
                       </div>
                     </div>
@@ -4846,7 +4846,7 @@ function MarketingAssetsContent() {
               onClick={() => {
                 const link = document.createElement('a');
                 link.href = whiteLogo;
-                link.download = '1QG-Logo-White.png';
+                link.download = 'Constancia-Logo-White.png';
                 link.click();
               }}
               data-testid="button-download-logo-white"
@@ -4862,7 +4862,7 @@ function MarketingAssetsContent() {
               onClick={() => {
                 const link = document.createElement('a');
                 link.href = gradientLogo;
-                link.download = '1QG-Logo-Gradient.png';
+                link.download = 'Constancia-Logo-Gradient.png';
                 link.click();
               }}
               data-testid="button-download-logo-gradient"
@@ -4878,7 +4878,7 @@ function MarketingAssetsContent() {
               onClick={() => {
                 const link = document.createElement('a');
                 link.href = iconWhite;
-                link.download = '1QG-Icon-White.png';
+                link.download = 'Constancia-Icon-White.png';
                 link.click();
               }}
               data-testid="button-download-icon-white"

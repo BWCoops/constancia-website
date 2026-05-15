@@ -115,7 +115,7 @@ router.post("/comparison/export-pdf", async (req: Request, res: Response) => {
       watermark: { position: "corner", opacity: 0.15 },
     });
 
-    const fileName = `1QG-${data.categoryType.toUpperCase()}-Comparison-${new Date().toISOString().split("T")[0]}.pdf`;
+    const fileName = `Constancia-${data.categoryType.toUpperCase()}-Comparison-${new Date().toISOString().split("T")[0]}.pdf`;
     
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader("Content-Disposition", `attachment; filename="${fileName}"`);

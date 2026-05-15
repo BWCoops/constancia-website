@@ -29,8 +29,8 @@ interface MetricDerivation {
   confidenceLevel: 'high' | 'medium' | 'low';
   derivation: (sectorData: any) => BenchmarkTierValues | null;
   typical?: BenchmarkTierValues;
-  '1qg_good'?: BenchmarkTierValues;
-  '1qg_best'?: BenchmarkTierValues;
+  'constancia_good'?: BenchmarkTierValues;
+  'constancia_best'?: BenchmarkTierValues;
 }
 
 /**
@@ -59,8 +59,8 @@ const METRIC_DERIVATIONS: MetricDerivation[] = [
       };
     },
     typical: { min: 1.1, max: 1.7, mid: 1.4 },
-    '1qg_good': { min: 0.7, max: 0.9, mid: 0.8 },
-    '1qg_best': { min: 0.45, max: 0.6, mid: 0.52 },
+    'constancia_good': { min: 0.7, max: 0.9, mid: 0.8 },
+    'constancia_best': { min: 0.45, max: 0.6, mid: 0.52 },
   },
   {
     metricId: 'finance_ftes_per_1b',
@@ -82,8 +82,8 @@ const METRIC_DERIVATIONS: MetricDerivation[] = [
       };
     },
     typical: { min: 800, max: 1200, mid: 1000 },
-    '1qg_good': { min: 450, max: 600, mid: 525 },
-    '1qg_best': { min: 300, max: 420, mid: 360 },
+    'constancia_good': { min: 450, max: 600, mid: 525 },
+    'constancia_best': { min: 300, max: 420, mid: 360 },
   },
   {
     metricId: 'days_to_close',
@@ -92,13 +92,13 @@ const METRIC_DERIVATIONS: MetricDerivation[] = [
     category: 'efficiency',
     lowerIsBetter: true,
     derivationType: 'proxy',
-    sourceDatasets: ['1qg_consulting_experience'],
-    formula: '1QG insights from 40+ years of finance transformation engagements',
+    sourceDatasets: ['constancia_consulting_experience'],
+    formula: 'Constancia insights from 40+ years of finance transformation engagements',
     confidenceLevel: 'high',
     derivation: () => null,
     typical: { min: 6, max: 12, mid: 8 },
-    '1qg_good': { min: 4, max: 6, mid: 5 },
-    '1qg_best': { min: 1, max: 3, mid: 2 },
+    'constancia_good': { min: 4, max: 6, mid: 5 },
+    'constancia_best': { min: 1, max: 3, mid: 2 },
   },
   {
     metricId: 'forecast_cycle_days',
@@ -107,13 +107,13 @@ const METRIC_DERIVATIONS: MetricDerivation[] = [
     category: 'efficiency',
     lowerIsBetter: true,
     derivationType: 'proxy',
-    sourceDatasets: ['1qg_consulting_experience'],
-    formula: '1QG insights from 40+ years of finance transformation engagements',
+    sourceDatasets: ['constancia_consulting_experience'],
+    formula: 'Constancia insights from 40+ years of finance transformation engagements',
     confidenceLevel: 'medium',
     derivation: () => null,
     typical: { min: 12, max: 21, mid: 16 },
-    '1qg_good': { min: 5, max: 8, mid: 6.5 },
-    '1qg_best': { min: 2, max: 4, mid: 3 },
+    'constancia_good': { min: 5, max: 8, mid: 6.5 },
+    'constancia_best': { min: 2, max: 4, mid: 3 },
   },
   {
     metricId: 'budget_cycle_days',
@@ -122,13 +122,13 @@ const METRIC_DERIVATIONS: MetricDerivation[] = [
     category: 'efficiency',
     lowerIsBetter: true,
     derivationType: 'proxy',
-    sourceDatasets: ['apqc_open_standards', '1qg_consulting_experience'],
-    formula: 'APQC Open Standards Benchmarking data combined with 1QG insights',
+    sourceDatasets: ['apqc_open_standards', 'constancia_consulting_experience'],
+    formula: 'APQC Open Standards Benchmarking data combined with Constancia insights',
     confidenceLevel: 'high',
     derivation: () => null,
     typical: { min: 90, max: 150, mid: 120 },
-    '1qg_good': { min: 45, max: 70, mid: 57 },
-    '1qg_best': { min: 21, max: 35, mid: 28 },
+    'constancia_good': { min: 45, max: 70, mid: 57 },
+    'constancia_best': { min: 21, max: 35, mid: 28 },
   },
   {
     metricId: 'forecast_accuracy_pct',
@@ -137,13 +137,13 @@ const METRIC_DERIVATIONS: MetricDerivation[] = [
     category: 'efficiency',
     lowerIsBetter: false,
     derivationType: 'proxy',
-    sourceDatasets: ['1qg_consulting_experience'],
-    formula: '1QG insights from 40+ years of finance transformation engagements',
+    sourceDatasets: ['constancia_consulting_experience'],
+    formula: 'Constancia insights from 40+ years of finance transformation engagements',
     confidenceLevel: 'medium',
     derivation: () => null,
     typical: { min: 85, max: 92, mid: 88 },
-    '1qg_good': { min: 93, max: 96, mid: 94.5 },
-    '1qg_best': { min: 97, max: 99, mid: 98 },
+    'constancia_good': { min: 93, max: 96, mid: 94.5 },
+    'constancia_best': { min: 97, max: 99, mid: 98 },
   },
   {
     metricId: 'reports_automated_pct',
@@ -152,13 +152,13 @@ const METRIC_DERIVATIONS: MetricDerivation[] = [
     category: 'technology',
     lowerIsBetter: false,
     derivationType: 'proxy',
-    sourceDatasets: ['1qg_consulting_experience'],
-    formula: '1QG insights from 40+ years of finance transformation engagements',
+    sourceDatasets: ['constancia_consulting_experience'],
+    formula: 'Constancia insights from 40+ years of finance transformation engagements',
     confidenceLevel: 'medium',
     derivation: () => null,
     typical: { min: 20, max: 40, mid: 30 },
-    '1qg_good': { min: 60, max: 75, mid: 67 },
-    '1qg_best': { min: 85, max: 95, mid: 90 },
+    'constancia_good': { min: 60, max: 75, mid: 67 },
+    'constancia_best': { min: 85, max: 95, mid: 90 },
   },
   {
     metricId: 'dso_days',
@@ -190,8 +190,8 @@ const METRIC_DERIVATIONS: MetricDerivation[] = [
       };
     },
     typical: { min: 38, max: 55, mid: 46 },
-    '1qg_good': { min: 28, max: 38, mid: 33 },
-    '1qg_best': { min: 18, max: 28, mid: 23 },
+    'constancia_good': { min: 28, max: 38, mid: 33 },
+    'constancia_best': { min: 18, max: 28, mid: 23 },
   },
   {
     metricId: 'dio_days',
@@ -220,8 +220,8 @@ const METRIC_DERIVATIONS: MetricDerivation[] = [
       };
     },
     typical: { min: 35, max: 55, mid: 45 },
-    '1qg_good': { min: 22, max: 32, mid: 27 },
-    '1qg_best': { min: 12, max: 20, mid: 16 },
+    'constancia_good': { min: 22, max: 32, mid: 27 },
+    'constancia_best': { min: 12, max: 20, mid: 16 },
   },
   {
     metricId: 'dpo_days',
@@ -249,8 +249,8 @@ const METRIC_DERIVATIONS: MetricDerivation[] = [
       };
     },
     typical: { min: 38, max: 52, mid: 45 },
-    '1qg_good': { min: 48, max: 60, mid: 54 },
-    '1qg_best': { min: 55, max: 70, mid: 62 },
+    'constancia_good': { min: 48, max: 60, mid: 54 },
+    'constancia_best': { min: 55, max: 70, mid: 62 },
   },
   {
     metricId: 'audit_findings_per_year',
@@ -264,8 +264,8 @@ const METRIC_DERIVATIONS: MetricDerivation[] = [
     confidenceLevel: 'low',
     derivation: () => null,
     typical: { min: 8, max: 18, mid: 13 },
-    '1qg_good': { min: 3, max: 6, mid: 4.5 },
-    '1qg_best': { min: 0, max: 2, mid: 1 },
+    'constancia_good': { min: 3, max: 6, mid: 4.5 },
+    'constancia_best': { min: 0, max: 2, mid: 1 },
   },
   {
     metricId: 'turnover_rate_pct',
@@ -288,8 +288,8 @@ const METRIC_DERIVATIONS: MetricDerivation[] = [
       };
     },
     typical: { min: 12, max: 20, mid: 16 },
-    '1qg_good': { min: 6, max: 10, mid: 8 },
-    '1qg_best': { min: 3, max: 6, mid: 4.5 },
+    'constancia_good': { min: 6, max: 10, mid: 8 },
+    'constancia_best': { min: 3, max: 6, mid: 4.5 },
   },
 ];
 
@@ -304,20 +304,20 @@ function formatSourceAttribution(derivation: MetricDerivation): string {
     // Research sources
     if (s.startsWith('apqc_')) return 'APQC';
     
-    // 1QG sources
-    if (s.startsWith('1qg_')) return '1QG Insights';
+    // Constancia sources
+    if (s.startsWith('constancia_')) return 'Constancia Insights';
     return s;
   });
   
   const uniqueSources = Array.from(new Set(sources));
   
-  return `1QG Insights (${uniqueSources.join(', ')})`;
+  return `Constancia Insights (${uniqueSources.join(', ')})`;
 }
 
 /**
  * Generate industry-specific benchmark values using APQC data
  */
-export function getIndustryBenchmarks(industryCode: string): Record<string, { typical: BenchmarkTierValues; '1qg_good': BenchmarkTierValues; '1qg_best': BenchmarkTierValues }> {
+export function getIndustryBenchmarks(industryCode: string): Record<string, { typical: BenchmarkTierValues; 'constancia_good': BenchmarkTierValues; 'constancia_best': BenchmarkTierValues }> {
   const industry = ALL_INDUSTRIES.find(ind => ind.code === industryCode);
   if (!industry) {
     return {};
@@ -333,12 +333,12 @@ export function getIndustryBenchmarks(industryCode: string): Record<string, { ty
       max: Math.round(apqcBenchmarks.budgetCycleDays.laggard * 0.85),
       mid: apqcBenchmarks.budgetCycleDays.median,
     },
-    '1qg_good': {
+    'constancia_good': {
       min: Math.round(apqcBenchmarks.budgetCycleDays.topPerformer * 0.9),
       max: Math.round(apqcBenchmarks.budgetCycleDays.median * 0.7),
       mid: Math.round((apqcBenchmarks.budgetCycleDays.topPerformer + apqcBenchmarks.budgetCycleDays.median * 0.5) / 1.5),
     },
-    '1qg_best': {
+    'constancia_best': {
       min: Math.round(apqcBenchmarks.budgetCycleDays.topPerformer * 0.6),
       max: Math.round(apqcBenchmarks.budgetCycleDays.topPerformer * 0.9),
       mid: Math.round(apqcBenchmarks.budgetCycleDays.topPerformer * 0.75),
@@ -355,15 +355,15 @@ export function getIndustryBenchmarks(industryCode: string): Record<string, { ty
   // Days to close adjusted by complexity
   const daysToClose = {
     typical: adjustMetric({ min: 6, max: 12, mid: 8 }, complexity),
-    '1qg_good': adjustMetric({ min: 4, max: 6, mid: 5 }, complexity),
-    '1qg_best': adjustMetric({ min: 1, max: 3, mid: 2 }, complexity),
+    'constancia_good': adjustMetric({ min: 4, max: 6, mid: 5 }, complexity),
+    'constancia_best': adjustMetric({ min: 1, max: 3, mid: 2 }, complexity),
   };
   
   // Forecast cycle adjusted by complexity and volatility
   const forecastCycle = {
     typical: adjustMetric({ min: 12, max: 21, mid: 16 }, complexity * (volatility * 0.5 + 0.5)),
-    '1qg_good': adjustMetric({ min: 5, max: 8, mid: 6.5 }, complexity),
-    '1qg_best': adjustMetric({ min: 2, max: 4, mid: 3 }, complexity),
+    'constancia_good': adjustMetric({ min: 5, max: 8, mid: 6.5 }, complexity),
+    'constancia_best': adjustMetric({ min: 2, max: 4, mid: 3 }, complexity),
   };
   
   // Forecast accuracy inverse adjusted by volatility (higher volatility = harder to forecast)
@@ -374,16 +374,16 @@ export function getIndustryBenchmarks(industryCode: string): Record<string, { ty
       max: Math.round((92 + (forecastAccuracyFactor - 1) * 3) * 10) / 10,
       mid: Math.round((88 + (forecastAccuracyFactor - 1) * 4) * 10) / 10,
     },
-    '1qg_good': { min: 93, max: 96, mid: 94.5 },
-    '1qg_best': { min: 97, max: 99, mid: 98 },
+    'constancia_good': { min: 93, max: 96, mid: 94.5 },
+    'constancia_best': { min: 97, max: 99, mid: 98 },
   };
   
   // Reports automated adjusted by complexity (higher complexity = lower automation)
   const automationFactor = 1 / complexity;
   const reportsAutomated = {
     typical: adjustMetric({ min: 20, max: 40, mid: 30 }, automationFactor),
-    '1qg_good': { min: 60, max: 75, mid: 67 },
-    '1qg_best': { min: 85, max: 95, mid: 90 },
+    'constancia_good': { min: 60, max: 75, mid: 67 },
+    'constancia_best': { min: 85, max: 95, mid: 90 },
   };
   
   // Regulatory filing adjusted by regulatory burden
@@ -393,8 +393,8 @@ export function getIndustryBenchmarks(industryCode: string): Record<string, { ty
       max: Math.round(93 / regulatory),
       mid: Math.round(89 / regulatory),
     },
-    '1qg_good': { min: 95, max: 99, mid: 97 },
-    '1qg_best': { min: 99, max: 100, mid: 99.5 },
+    'constancia_good': { min: 95, max: 99, mid: 97 },
+    'constancia_best': { min: 99, max: 100, mid: 99.5 },
   };
   
   return {
@@ -426,8 +426,8 @@ export function generateBenchmarks(): BenchmarkGenerationReport {
       unit: derivation.unit,
       category: derivation.category,
       typical: derivation.typical || { min: 0, max: 0, mid: 0 },
-      '1qg_good': derivation['1qg_good'] || { min: 0, max: 0, mid: 0 },
-      '1qg_best': derivation['1qg_best'] || { min: 0, max: 0, mid: 0 },
+      'constancia_good': derivation['constancia_good'] || { min: 0, max: 0, mid: 0 },
+      'constancia_best': derivation['constancia_best'] || { min: 0, max: 0, mid: 0 },
       source: formatSourceAttribution(derivation),
       sourceDetails: {
         type: derivation.derivationType === 'calculated' ? 'ons' 
@@ -467,10 +467,10 @@ export function generateBenchmarks(): BenchmarkGenerationReport {
   }
 
   sourcesUsed.push({
-    sourceId: '1qg_consulting_experience',
-    sourceName: '1QG Consulting Experience',
+    sourceId: 'constancia_consulting_experience',
+    sourceName: 'Constancia Consulting Experience',
     sourceType: 'expert_estimate',
-    sourceUrl: 'https://1qg.ai/',
+    sourceUrl: 'https://constancia.io/',
     accessedDate: generatedAt,
     description: '40+ years combined consulting experience across UK finance functions',
   });

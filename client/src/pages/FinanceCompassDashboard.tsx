@@ -1,6 +1,11 @@
-import { memo, useCallback, useMemo, useState } from "react";
+import { lazy, memo, Suspense, useCallback, useMemo, useState } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
+
+// Lazy-load WebGL ambient scene only when dashboard mounts
+const AmbientScene3D = lazy(() =>
+  import("@/components/3d/AmbientScene3D").then((m) => ({ default: m.AmbientScene3D })),
+);
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
@@ -77,7 +82,7 @@ const DIMENSION_CONFIG: Record<string, {
     name: "Financial Planning & Analysis",
     shortName: "FP&A",
     icon: TrendingUp,
-    color: "#0884AA",
+    color: "#7FB8A3",
     description: "Budgeting, forecasting, scenario planning, and strategic finance",
     tooltipContent: {
       measures: "Assesses budgeting, forecasting, scenario planning, and strategic finance capabilities including driver-based planning and rolling forecasts.",
@@ -89,7 +94,7 @@ const DIMENSION_CONFIG: Record<string, {
     name: "Management Reporting",
     shortName: "Reporting",
     icon: BarChart3,
-    color: "#12EBFC",
+    color: "#C77A93",
     description: "Dashboards, analytics, KPIs, and insight delivery",
     tooltipContent: {
       measures: "Evaluates dashboards, analytics, KPI frameworks, and the ability to deliver timely, actionable insights to stakeholders.",
@@ -101,7 +106,7 @@ const DIMENSION_CONFIG: Record<string, {
     name: "Consolidation & Close",
     shortName: "Close",
     icon: RefreshCw,
-    color: "#02205B",
+    color: "#12161D",
     description: "Financial close, consolidation, intercompany, and period-end processes",
     tooltipContent: {
       measures: "Assesses financial close efficiency, consolidation automation, intercompany eliminations, and period-end process maturity.",
@@ -200,7 +205,7 @@ const tierConfig: Record<string, {
     name: "Pre-Assessment",
     tagline: "Strategic Analysis",
     icon: PreAssessmentIcon,
-    gradient: "from-[#0884AA] to-[#02205B]",
+    gradient: "from-[#7FB8A3] to-[#12161D]",
     questions: 50,
     duration: "20-25 minutes",
   },
@@ -208,7 +213,7 @@ const tierConfig: Record<string, {
     name: "Full Assessment",
     tagline: "Complete Transformation",
     icon: FullAssessmentIcon,
-    gradient: "from-[#02205B] to-[#0884AA]",
+    gradient: "from-[#12161D] to-[#7FB8A3]",
     questions: 74,
     duration: "35-45 minutes",
   },
@@ -223,8 +228,8 @@ const statusConfig: Record<string, {
   in_progress: {
     label: "In Progress",
     color: "text-brand-teal",
-    bgColor: "bg-[#0884AA]/10",
-    borderColor: "border-[#0884AA]/30",
+    bgColor: "bg-[#7FB8A3]/10",
+    borderColor: "border-[#7FB8A3]/30",
   },
   initial_complete: {
     label: "Initial Complete",
@@ -235,8 +240,8 @@ const statusConfig: Record<string, {
   completed: {
     label: "Completed",
     color: "text-brand-teal",
-    bgColor: "bg-[#0884AA]/10",
-    borderColor: "border-[#0884AA]/30",
+    bgColor: "bg-[#7FB8A3]/10",
+    borderColor: "border-[#7FB8A3]/30",
   },
   analysed: {
     label: "Analysed",
@@ -246,9 +251,9 @@ const statusConfig: Record<string, {
   },
   report_generated: {
     label: "Report Ready",
-    color: "text-[#02205B]",
+    color: "text-[#12161D]",
     bgColor: "bg-brand-navy/10",
-    borderColor: "border-[#02205B]/30",
+    borderColor: "border-[#12161D]/30",
   },
   not_started: {
     label: "Not Started",
@@ -346,7 +351,7 @@ const KpiIndicator = memo(function KpiIndicator({
             <Tooltip>
               <TooltipTrigger asChild>
                 <span 
-                  className="text-sm font-medium text-[#02205B] dark:text-white truncate cursor-help flex items-center gap-1"
+                  className="text-sm font-medium text-[#12161D] dark:text-white truncate cursor-help flex items-center gap-1"
                   data-testid={`tooltip-trigger-dimension-${testId}`}
                 >
                   {label}
@@ -460,12 +465,12 @@ const MaturityScorecard = memo(function MaturityScorecard({
   return (
     <div className="space-y-4" role="region" aria-label="Maturity Scorecard">
       {overallMaturity && (
-        <div className="flex items-center justify-between p-3 rounded-lg bg-gradient-to-r from-[#02205B]/5 to-[#0884AA]/5 border border-[#0884AA]/20">
+        <div className="flex items-center justify-between p-3 rounded-lg bg-gradient-to-r from-[#12161D]/5 to-[#7FB8A3]/5 border border-[#7FB8A3]/20">
           <div className="flex items-center gap-2">
             <Gauge className="h-5 w-5 text-brand-teal" aria-hidden="true" />
             <Tooltip>
               <TooltipTrigger asChild>
-                <span className="font-medium text-[#02205B] dark:text-white cursor-help flex items-center gap-1">
+                <span className="font-medium text-[#12161D] dark:text-white cursor-help flex items-center gap-1">
                   Overall Maturity
                   <Info className="h-3 w-3 opacity-40" />
                 </span>
@@ -555,7 +560,7 @@ const MaturityScorecard = memo(function MaturityScorecard({
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <span 
-                        className="text-sm font-medium text-[#02205B] dark:text-white truncate cursor-help flex items-center gap-1"
+                        className="text-sm font-medium text-[#12161D] dark:text-white truncate cursor-help flex items-center gap-1"
                         data-testid={`tooltip-trigger-dimension-${key}`}
                       >
                         {config.shortName}
@@ -659,17 +664,17 @@ const RoiKpiPanel = memo(function RoiKpiPanel({ assessmentId }: RoiKpiPanelProps
 
   if (!hasMetrics) {
     return (
-      <Card className="p-6 border-dashed border-2 border-[#0884AA]/30 bg-[#0884AA]/5" data-testid="card-roi-empty-state">
+      <Card className="p-6 border-dashed border-2 border-[#7FB8A3]/30 bg-[#7FB8A3]/5" data-testid="card-roi-empty-state">
         <div className="flex items-center gap-4">
-          <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center" aria-hidden="true">
+          <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center" aria-hidden="true">
             <Calculator className="h-6 w-6 text-white" />
           </div>
           <div className="flex-1">
-            <h4 className="font-semibold text-[#02205B] dark:text-white">Build Your Business Case</h4>
+            <h4 className="font-semibold text-[#12161D] dark:text-white">Build Your Business Case</h4>
             <p className="text-sm text-muted-foreground">Use our ROI Calculator to quantify your finance transformation benefits</p>
           </div>
           <Button
-            className="bg-[#0884AA] hover:bg-brand-navy"
+            className="bg-[#7FB8A3] hover:bg-brand-navy"
             onClick={handleNavigateToRoi}
             data-testid="button-start-roi-wizard"
             aria-label="Calculate ROI for your transformation"
@@ -685,12 +690,12 @@ const RoiKpiPanel = memo(function RoiKpiPanel({ assessmentId }: RoiKpiPanelProps
   return (
     <div className="space-y-3" role="region" aria-label="ROI metrics dashboard">
       <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-        <Card className="p-4 bg-gradient-to-br from-[#12EBFC]/10 to-[#0884AA]/20 dark:from-[#12EBFC]/10 dark:to-[#0884AA]/20 border-[#0884AA]/30 dark:border-[#0884AA]/40">
+        <Card className="p-4 bg-gradient-to-br from-[#C77A93]/10 to-[#7FB8A3]/20 dark:from-[#C77A93]/10 dark:to-[#7FB8A3]/20 border-[#7FB8A3]/30 dark:border-[#7FB8A3]/40">
           <div className="flex items-center gap-2 text-brand-teal dark:text-brand-cyan text-xs mb-1">
             <Percent className="h-3 w-3" aria-hidden="true" />
             <span>ROI</span>
           </div>
-          <div className="text-xl font-bold text-[#02205B] dark:text-brand-cyan" data-testid="kpi-roi" aria-label={`Return on Investment: ${formatPercent(metrics!.roiPercent)}`}>
+          <div className="text-xl font-bold text-[#12161D] dark:text-brand-cyan" data-testid="kpi-roi" aria-label={`Return on Investment: ${formatPercent(metrics!.roiPercent)}`}>
             {formatPercent(metrics!.roiPercent)}
           </div>
         </Card>
@@ -756,9 +761,9 @@ interface AssessmentJourneyViewProps {
 
 const VALIDATION_PIPELINE_LAYERS = [
   { layer: 1, name: "Base Scoring", icon: Calculator, description: "Context-aware scoring engine", color: "bg-brand-navy" },
-  { layer: 2, name: "Fragmentation Check", icon: Layers, description: "Multi-vendor fragmentation detection", color: "bg-[#0884AA]" },
+  { layer: 2, name: "Fragmentation Check", icon: Layers, description: "Multi-vendor fragmentation detection", color: "bg-[#7FB8A3]" },
   { layer: 2.5, name: "Correlation Matrix", icon: Target, description: "8x8 dimension correlations", color: "bg-purple-500" },
-  { layer: 3, name: "Business Rules", icon: Shield, description: "Vendor benchmarks validation", color: "bg-[#12EBFC]" },
+  { layer: 3, name: "Business Rules", icon: Shield, description: "Vendor benchmarks validation", color: "bg-[#C77A93]" },
   { layer: 4, name: "AI Advisory", icon: Sparkles, description: "GPT validation layer", color: "bg-cyan-500" },
   { layer: 5, name: "Intelligence Engine", icon: TrendingUp, description: "Root cause & stakeholder insights", color: "bg-indigo-500" },
 ];
@@ -903,16 +908,16 @@ const AssessmentJourneyView = memo(function AssessmentJourneyView({
                   transition={{ type: "spring", stiffness: 300 }}
                   className={`
                     relative p-5 rounded-2xl border transition-all h-full min-h-[320px] flex flex-col overflow-hidden
-                    ${isCompleted ? "bg-gradient-to-br from-[#0884AA]/10 to-[#12EBFC]/10 border-[#0884AA] shadow-lg shadow-[#0884AA]/20" : ""}
-                    ${isInProgress ? "bg-gradient-to-br from-[#02205B]/10 to-[#0884AA]/10 border-[#0884AA]/60 shadow-md" : ""}
-                    ${isReady ? "bg-gradient-to-br from-white to-[#0884AA]/5 dark:from-gray-900 dark:to-[#0884AA]/10 border-[#0884AA]/40 hover:border-[#0884AA] hover:shadow-lg" : ""}
+                    ${isCompleted ? "bg-gradient-to-br from-[#7FB8A3]/10 to-[#C77A93]/10 border-[#7FB8A3] shadow-lg shadow-[#7FB8A3]/20" : ""}
+                    ${isInProgress ? "bg-gradient-to-br from-[#12161D]/10 to-[#7FB8A3]/10 border-[#7FB8A3]/60 shadow-md" : ""}
+                    ${isReady ? "bg-gradient-to-br from-white to-[#7FB8A3]/5 dark:from-gray-900 dark:to-[#7FB8A3]/10 border-[#7FB8A3]/40 hover:border-[#7FB8A3] hover:shadow-lg" : ""}
                     ${isLocked ? "bg-gray-50 dark:bg-gray-900/50 border-gray-200 dark:border-gray-700" : ""}
                     ${!isCompleted && !isInProgress && !isReady && !isLocked ? "bg-background border-border" : ""}
                   `}
                 >
                   {/* Decorative gradient orb for completed/active states */}
                   {(isCompleted || isInProgress) && (
-                    <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-[#0884AA]/20 to-[#12EBFC]/20 rounded-full blur-2xl" />
+                    <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-[#7FB8A3]/20 to-[#C77A93]/20 rounded-full blur-2xl" />
                   )}
                   
                   {/* Step indicator with pulsing animation for active */}
@@ -922,9 +927,9 @@ const AssessmentJourneyView = memo(function AssessmentJourneyView({
                       transition={{ duration: 2, repeat: Infinity }}
                       className={`
                         w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold shadow-lg
-                        ${isCompleted ? "bg-gradient-to-br from-[#0884AA] to-[#12EBFC] text-white" : ""}
-                        ${isInProgress ? "bg-gradient-to-br from-[#02205B] to-[#0884AA] text-white" : ""}
-                        ${isReady ? "bg-gradient-to-br from-[#0884AA] to-[#02205B] text-white" : ""}
+                        ${isCompleted ? "bg-gradient-to-br from-[#7FB8A3] to-[#C77A93] text-white" : ""}
+                        ${isInProgress ? "bg-gradient-to-br from-[#12161D] to-[#7FB8A3] text-white" : ""}
+                        ${isReady ? "bg-gradient-to-br from-[#7FB8A3] to-[#12161D] text-white" : ""}
                         ${isLocked ? "bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400" : ""}
                         ${!isCompleted && !isInProgress && !isReady && !isLocked ? "bg-brand-navy text-white" : ""}
                       `}
@@ -932,15 +937,15 @@ const AssessmentJourneyView = memo(function AssessmentJourneyView({
                       {isCompleted ? <CheckCircle2 className="h-5 w-5" /> : idx + 1}
                     </motion.div>
                     <div className="flex-1">
-                      <h4 className={`font-semibold text-base ${isLocked ? "text-muted-foreground" : "text-[#02205B] dark:text-white"}`}>
+                      <h4 className={`font-semibold text-base ${isLocked ? "text-muted-foreground" : "text-[#12161D] dark:text-white"}`}>
                         {stage.name}
                       </h4>
                       <Badge 
                         variant="outline" 
                         className={`text-[10px] mt-1 ${
-                          isCompleted ? "border-[#0884AA] text-brand-teal" : 
-                          isInProgress ? "border-[#02205B] text-[#02205B] dark:border-[#0884AA] dark:text-brand-teal" : 
-                          isReady ? "border-[#0884AA]/50 text-brand-teal" :
+                          isCompleted ? "border-[#7FB8A3] text-brand-teal" : 
+                          isInProgress ? "border-[#12161D] text-[#12161D] dark:border-[#7FB8A3] dark:text-brand-teal" : 
+                          isReady ? "border-[#7FB8A3]/50 text-brand-teal" :
                           "border-gray-300 text-gray-500"
                         }`}
                       >
@@ -956,11 +961,11 @@ const AssessmentJourneyView = memo(function AssessmentJourneyView({
                       transition={{ duration: 4, repeat: Infinity }}
                       className={`
                         w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg
-                        ${isCompleted ? "bg-gradient-to-br from-[#0884AA] to-[#12EBFC]" : ""}
-                        ${isInProgress ? "bg-gradient-to-br from-[#02205B] to-[#0884AA]" : ""}
-                        ${isReady ? "bg-gradient-to-br from-[#0884AA] to-[#02205B]" : ""}
+                        ${isCompleted ? "bg-gradient-to-br from-[#7FB8A3] to-[#C77A93]" : ""}
+                        ${isInProgress ? "bg-gradient-to-br from-[#12161D] to-[#7FB8A3]" : ""}
+                        ${isReady ? "bg-gradient-to-br from-[#7FB8A3] to-[#12161D]" : ""}
                         ${isLocked ? "bg-gray-300 dark:bg-gray-600" : ""}
-                        ${!isCompleted && !isInProgress && !isReady && !isLocked ? "bg-gradient-to-br from-[#02205B] to-[#0884AA]" : ""}
+                        ${!isCompleted && !isInProgress && !isReady && !isLocked ? "bg-gradient-to-br from-[#12161D] to-[#7FB8A3]" : ""}
                       `}
                     >
                       <IconComponent className="h-8 w-8 text-white" />
@@ -983,9 +988,9 @@ const AssessmentJourneyView = memo(function AssessmentJourneyView({
                               className={`flex items-center gap-2 ${isLocked ? "text-muted-foreground/60" : "text-muted-foreground"}`}
                             >
                               <div className={`w-1.5 h-1.5 rounded-full ${
-                                isCompleted ? "bg-[#0884AA]" : 
-                                isInProgress ? "bg-brand-navy dark:bg-[#0884AA]" : 
-                                isReady ? "bg-[#0884AA]/60" : 
+                                isCompleted ? "bg-[#7FB8A3]" : 
+                                isInProgress ? "bg-brand-navy dark:bg-[#7FB8A3]" : 
+                                isReady ? "bg-[#7FB8A3]/60" : 
                                 "bg-gray-300"
                               }`} />
                               {highlight}
@@ -994,7 +999,7 @@ const AssessmentJourneyView = memo(function AssessmentJourneyView({
                         </ul>
                         {details.metrics && (
                           <div className={`text-[11px] font-medium pt-2 border-t border-dashed ${
-                            isLocked ? "text-muted-foreground/50 border-gray-200" : "text-brand-teal border-[#0884AA]/20"
+                            isLocked ? "text-muted-foreground/50 border-gray-200" : "text-brand-teal border-[#7FB8A3]/20"
                           }`}>
                             {details.metrics}
                           </div>
@@ -1010,8 +1015,8 @@ const AssessmentJourneyView = memo(function AssessmentJourneyView({
                         <Button 
                           className={`w-full ${
                             isCompleted 
-                              ? "bg-gradient-to-r from-[#0884AA] to-[#12EBFC] hover:from-[#0884AA]/90 hover:to-[#12EBFC]/90 text-white shadow-md" 
-                              : "bg-gradient-to-r from-[#02205B] to-[#0884AA] hover:from-[#02205B]/90 hover:to-[#0884AA]/90 text-white shadow-md"
+                              ? "bg-gradient-to-r from-[#7FB8A3] to-[#C77A93] hover:from-[#7FB8A3]/90 hover:to-[#C77A93]/90 text-white shadow-md" 
+                              : "bg-gradient-to-r from-[#12161D] to-[#7FB8A3] hover:from-[#12161D]/90 hover:to-[#7FB8A3]/90 text-white shadow-md"
                           }`}
                           data-testid={`button-journey-${stage.id}`}
                         >
@@ -1020,7 +1025,7 @@ const AssessmentJourneyView = memo(function AssessmentJourneyView({
                       </Link>
                     ) : stage.onAction && !isLocked ? (
                       <Button 
-                        className="w-full bg-gradient-to-r from-[#02205B] to-[#0884AA] hover:from-[#02205B]/90 hover:to-[#0884AA]/90 text-white shadow-md"
+                        className="w-full bg-gradient-to-r from-[#12161D] to-[#7FB8A3] hover:from-[#12161D]/90 hover:to-[#7FB8A3]/90 text-white shadow-md"
                         onClick={stage.onAction}
                         data-testid={`button-journey-${stage.id}`}
                       >
@@ -1047,7 +1052,7 @@ const AssessmentJourneyView = memo(function AssessmentJourneyView({
                       animate={{ height: 40 }}
                       transition={{ duration: 0.5, delay: idx * 0.2 }}
                       className={`w-0.5 ${
-                        isCompleted ? "bg-gradient-to-b from-[#0884AA] to-[#12EBFC]" : "bg-gradient-to-b from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600"
+                        isCompleted ? "bg-gradient-to-b from-[#7FB8A3] to-[#C77A93]" : "bg-gradient-to-b from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600"
                       }`}
                     />
                   </div>
@@ -1059,15 +1064,15 @@ const AssessmentJourneyView = memo(function AssessmentJourneyView({
       </div>
       
       {/* Combined Assessment Summary */}
-      <Card className="bg-gradient-to-br from-[#02205B]/5 to-[#0884AA]/5 border-[#0884AA]/20">
+      <Card className="bg-gradient-to-br from-[#12161D]/5 to-[#7FB8A3]/5 border-[#7FB8A3]/20">
         <CardContent className="py-4">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div className="flex items-center gap-4">
-              <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center">
+              <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center">
                 <Gauge className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h4 className="font-semibold text-[#02205B] dark:text-white">Assessment Progress</h4>
+                <h4 className="font-semibold text-[#12161D] dark:text-white">Assessment Progress</h4>
                 <p className="text-sm text-muted-foreground">
                   {totalQuestionsAnswered > 0 
                     ? `${totalQuestionsAnswered} of 124 questions completed (Pre + Full combined)`
@@ -1108,26 +1113,26 @@ const AssessmentJourneyView = memo(function AssessmentJourneyView({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <Card className="border-[#02205B]/20 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-[#02205B]/5 via-transparent to-[#0884AA]/5 pointer-events-none" />
+          <Card className="border-[#12161D]/20 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-[#12161D]/5 via-transparent to-[#7FB8A3]/5 pointer-events-none" />
             <CardHeader className="pb-3 relative">
               <div className="flex items-center gap-3">
                 <motion.div 
                   animate={{ rotate: [0, 360] }}
                   transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  className="h-10 w-10 rounded-xl bg-gradient-to-br from-[#02205B] to-[#0884AA] flex items-center justify-center shadow-lg"
+                  className="h-10 w-10 rounded-xl bg-gradient-to-br from-[#12161D] to-[#7FB8A3] flex items-center justify-center shadow-lg"
                 >
                   <Layers className="h-5 w-5 text-white" />
                 </motion.div>
                 <div>
-                  <CardTitle className="text-lg text-[#02205B] dark:text-white">6-Layer AI Validation Pipeline</CardTitle>
+                  <CardTitle className="text-lg text-[#12161D] dark:text-white">6-Layer AI Validation Pipeline</CardTitle>
                   <CardDescription className="text-sm">Your scores pass through our rigorous validation system</CardDescription>
                 </div>
               </div>
             </CardHeader>
             <CardContent className="relative">
               {/* Flowing connection line for desktop */}
-              <div className="absolute top-[40px] left-[8%] right-[8%] h-1 bg-gradient-to-r from-[#02205B]/20 via-[#0884AA]/40 to-[#12EBFC]/20 rounded-full hidden lg:block" />
+              <div className="absolute top-[40px] left-[8%] right-[8%] h-1 bg-gradient-to-r from-[#12161D]/20 via-[#7FB8A3]/40 to-[#C77A93]/20 rounded-full hidden lg:block" />
               
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                 {VALIDATION_PIPELINE_LAYERS.map((layer, idx) => {
@@ -1139,7 +1144,7 @@ const AssessmentJourneyView = memo(function AssessmentJourneyView({
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.4, delay: idx * 0.1 }}
                       whileHover={{ scale: 1.05, y: -2 }}
-                      className="relative p-4 rounded-xl border bg-gradient-to-br from-white to-[#0884AA]/5 dark:from-gray-900 dark:to-[#0884AA]/10 border-[#0884AA]/20 hover:border-[#0884AA]/50 transition-all shadow-sm hover:shadow-md"
+                      className="relative p-4 rounded-xl border bg-gradient-to-br from-white to-[#7FB8A3]/5 dark:from-gray-900 dark:to-[#7FB8A3]/10 border-[#7FB8A3]/20 hover:border-[#7FB8A3]/50 transition-all shadow-sm hover:shadow-md"
                       data-testid={`validation-layer-${layer.layer}`}
                     >
                       <div className="flex flex-col items-center text-center gap-3">
@@ -1151,16 +1156,16 @@ const AssessmentJourneyView = memo(function AssessmentJourneyView({
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
                             transition={{ delay: 0.5 + idx * 0.1 }}
-                            className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-[#12EBFC] flex items-center justify-center shadow-md"
+                            className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-[#C77A93] flex items-center justify-center shadow-md"
                           >
-                            <CheckCircle2 className="h-3 w-3 text-[#02205B]" />
+                            <CheckCircle2 className="h-3 w-3 text-[#12161D]" />
                           </motion.div>
                         </div>
                         <div>
-                          <Badge variant="outline" className="text-[10px] border-[#0884AA]/30 text-brand-teal mb-1">
+                          <Badge variant="outline" className="text-[10px] border-[#7FB8A3]/30 text-brand-teal mb-1">
                             Layer {layer.layer}
                           </Badge>
-                          <div className="text-xs font-semibold text-[#02205B] dark:text-white">{layer.name}</div>
+                          <div className="text-xs font-semibold text-[#12161D] dark:text-white">{layer.name}</div>
                           <div className="text-[10px] text-muted-foreground mt-1 leading-tight">{layer.description}</div>
                         </div>
                       </div>
@@ -1220,7 +1225,7 @@ const AssessmentCard = memo(function AssessmentCard({ assessment }: AssessmentCa
                 <IconComponent className="h-6 w-6 text-white" />
               </div>
               <div>
-                <CardTitle className="text-lg text-[#02205B] dark:text-white" data-testid={`text-tier-name-${assessment.id}`}>
+                <CardTitle className="text-lg text-[#12161D] dark:text-white" data-testid={`text-tier-name-${assessment.id}`}>
                   {tier.name}
                 </CardTitle>
                 <CardDescription className="text-sm">{tier.tagline}</CardDescription>
@@ -1252,7 +1257,7 @@ const AssessmentCard = memo(function AssessmentCard({ assessment }: AssessmentCa
               <Calendar className="h-4 w-4" aria-hidden="true" />
               <span>Started</span>
             </dt>
-            <dd className="font-medium text-[#02205B] dark:text-white" data-testid={`text-started-${assessment.id}`}>
+            <dd className="font-medium text-[#12161D] dark:text-white" data-testid={`text-started-${assessment.id}`}>
               {formatDate(assessment.startedAt)}
             </dd>
 
@@ -1260,7 +1265,7 @@ const AssessmentCard = memo(function AssessmentCard({ assessment }: AssessmentCa
               <RefreshCw className="h-4 w-4" aria-hidden="true" />
               <span>Updated</span>
             </dt>
-            <dd className="font-medium text-[#02205B] dark:text-white" data-testid={`text-updated-${assessment.id}`}>
+            <dd className="font-medium text-[#12161D] dark:text-white" data-testid={`text-updated-${assessment.id}`}>
               {formatDateTime(assessment.updatedAt)}
             </dd>
           </dl>
@@ -1269,7 +1274,7 @@ const AssessmentCard = memo(function AssessmentCard({ assessment }: AssessmentCa
             <div className="pt-3 border-t border-dashed">
               <div className="flex items-center gap-2 mb-3">
                 <Layers className="h-4 w-4 text-brand-teal" aria-hidden="true" />
-                <span className="text-sm font-medium text-[#02205B] dark:text-white">Finance Maturity Scorecard</span>
+                <span className="text-sm font-medium text-[#12161D] dark:text-white">Finance Maturity Scorecard</span>
               </div>
               {resultsLoading ? (
                 <div className="flex items-center justify-center py-4" role="status" aria-label="Loading scorecard">
@@ -1289,7 +1294,7 @@ const AssessmentCard = memo(function AssessmentCard({ assessment }: AssessmentCa
             <div className="pt-3 border-t border-dashed" data-testid={`ai-insights-${assessment.id}`}>
               <div className="flex items-center gap-2 mb-3">
                 <Sparkles className="h-4 w-4 text-[#8B5CF6]" aria-hidden="true" />
-                <span className="text-sm font-medium text-[#02205B] dark:text-white">AI Insights</span>
+                <span className="text-sm font-medium text-[#12161D] dark:text-white">AI Insights</span>
               </div>
               {aiAnalysis.summary && (
                 <p className="text-xs text-muted-foreground mb-3" data-testid={`ai-summary-${assessment.id}`}>
@@ -1313,7 +1318,7 @@ const AssessmentCard = memo(function AssessmentCard({ assessment }: AssessmentCa
         <CardFooter className="flex flex-wrap gap-2 pt-3 border-t">
           {isInProgress && (
             <Button
-              className="flex-1 bg-[#0884AA] hover:bg-brand-navy"
+              className="flex-1 bg-[#7FB8A3] hover:bg-brand-navy"
               onClick={handleResume}
               data-testid={`button-resume-${assessment.id}`}
               aria-label={`Resume ${tier.name}`}
@@ -1326,7 +1331,7 @@ const AssessmentCard = memo(function AssessmentCard({ assessment }: AssessmentCa
           {isCompleted && (
             <Button
               variant="outline"
-              className="flex-1 border-[#0884AA] text-brand-teal hover:bg-[#0884AA]/10"
+              className="flex-1 border-[#7FB8A3] text-brand-teal hover:bg-[#7FB8A3]/10"
               onClick={handleViewResults}
               data-testid={`button-view-results-${assessment.id}`}
               aria-label={`View results for ${tier.name}`}
@@ -1343,7 +1348,7 @@ const AssessmentCard = memo(function AssessmentCard({ assessment }: AssessmentCa
             >
               <Button
                 variant="outline"
-                className="w-full border-[#0884AA] text-brand-teal hover:bg-[#0884AA]/10"
+                className="w-full border-[#7FB8A3] text-brand-teal hover:bg-[#7FB8A3]/10"
                 data-testid={`button-download-pdf-${assessment.id}`}
                 aria-label={`Download PDF report for ${tier.name}`}
               >
@@ -1423,14 +1428,14 @@ const StartNewAssessmentCard = memo(function StartNewAssessmentCard({
       transition={{ duration: 0.4 }}
       aria-label={`Start new ${config.name}`}
     >
-      <Card className={`hover-elevate h-full ${showContactUs ? "border-dashed border-2 border-[#02205B]/30" : ""}`}>
+      <Card className={`hover-elevate h-full ${showContactUs ? "border-dashed border-2 border-[#12161D]/30" : ""}`}>
         <CardHeader className="pb-3">
           <div className="flex items-center gap-3">
             <div className={`h-10 w-10 rounded-lg flex items-center justify-center bg-gradient-to-br ${config.gradient}`} aria-hidden="true">
               <IconComponent className="h-5 w-5 text-white" />
             </div>
             <div>
-              <CardTitle className="text-base text-[#02205B] dark:text-white">{config.name}</CardTitle>
+              <CardTitle className="text-base text-[#12161D] dark:text-white">{config.name}</CardTitle>
               <CardDescription className="text-xs">{config.tagline}</CardDescription>
             </div>
           </div>
@@ -1447,7 +1452,7 @@ const StartNewAssessmentCard = memo(function StartNewAssessmentCard({
         </CardContent>
         <CardFooter className="pt-3">
           <Button
-            className={showContactUs ? "w-full" : "w-full bg-[#0884AA] hover:bg-brand-navy"}
+            className={showContactUs ? "w-full" : "w-full bg-[#7FB8A3] hover:bg-brand-navy"}
             variant={showContactUs ? "outline" : "default"}
             onClick={handleClick}
             data-testid={`button-start-${tier}`}
@@ -1539,7 +1544,7 @@ const AnalyticsDashboard = memo(function AnalyticsDashboard({
     return (
       <section className="mb-10" data-testid="section-analytics-dashboard" aria-labelledby="analytics-dashboard-heading">
         <div className="mb-6">
-          <h2 id="analytics-dashboard-heading" className="text-xl font-semibold text-[#02205B] dark:text-white flex items-center gap-2">
+          <h2 id="analytics-dashboard-heading" className="text-xl font-semibold text-[#12161D] dark:text-white flex items-center gap-2">
             <Gauge className="h-5 w-5 text-brand-teal" aria-hidden="true" />
             Maturity Summary
           </h2>
@@ -1547,13 +1552,13 @@ const AnalyticsDashboard = memo(function AnalyticsDashboard({
             Complete an assessment to see your finance transformation maturity scores
           </p>
         </div>
-        <Card className="border-[#0884AA]/20 bg-[#0884AA]/5" data-testid="card-empty-maturity-state">
+        <Card className="border-[#7FB8A3]/20 bg-[#7FB8A3]/5" data-testid="card-empty-maturity-state">
           <CardContent className="py-12">
             <div className="flex flex-col items-center text-center">
-              <div className="h-16 w-16 rounded-full bg-[#0884AA]/20 flex items-center justify-center mb-4" aria-hidden="true">
+              <div className="h-16 w-16 rounded-full bg-[#7FB8A3]/20 flex items-center justify-center mb-4" aria-hidden="true">
                 <Gauge className="h-8 w-8 text-brand-teal" />
               </div>
-              <h3 className="font-semibold text-lg text-[#02205B] dark:text-white mb-2">No Maturity Data Yet</h3>
+              <h3 className="font-semibold text-lg text-[#12161D] dark:text-white mb-2">No Maturity Data Yet</h3>
               <p className="text-muted-foreground text-sm mb-4 max-w-md">
                 Complete your first assessment to unlock your personalised finance transformation maturity scorecard and dimension analysis.
               </p>
@@ -1572,7 +1577,7 @@ const AnalyticsDashboard = memo(function AnalyticsDashboard({
     <section className="mb-10" data-testid="section-analytics-dashboard" aria-labelledby="analytics-dashboard-heading">
       <div className="flex items-center justify-between gap-4 flex-wrap mb-6">
         <div>
-          <h2 id="analytics-dashboard-heading" className="text-xl font-semibold text-[#02205B] dark:text-white flex items-center gap-2">
+          <h2 id="analytics-dashboard-heading" className="text-xl font-semibold text-[#12161D] dark:text-white flex items-center gap-2">
             <Gauge className="h-5 w-5 text-brand-teal" aria-hidden="true" />
             Maturity Summary
           </h2>
@@ -1584,7 +1589,7 @@ const AnalyticsDashboard = memo(function AnalyticsDashboard({
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
         <Card className="relative overflow-hidden" data-testid="card-overall-score">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#02205B]/5 to-[#0884AA]/10" aria-hidden="true" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#12161D]/5 to-[#7FB8A3]/10" aria-hidden="true" />
           <CardContent className="relative pt-6">
             <div className="flex flex-col items-center text-center">
               <div
@@ -1609,19 +1614,19 @@ const AnalyticsDashboard = memo(function AnalyticsDashboard({
               >
                 {overallMaturity.label}
               </Badge>
-              <span className="text-xs font-medium text-[#02205B] dark:text-white mb-4">Overall Maturity Score</span>
+              <span className="text-xs font-medium text-[#12161D] dark:text-white mb-4">Overall Maturity Score</span>
               
               {/* Benchmark & Insight Section */}
-              <div className="w-full pt-3 border-t border-[#0884AA]/20 space-y-2">
+              <div className="w-full pt-3 border-t border-[#7FB8A3]/20 space-y-2">
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-muted-foreground">Industry Average</span>
-                  <span className="font-medium text-[#02205B] dark:text-white">48%</span>
+                  <span className="font-medium text-[#12161D] dark:text-white">48%</span>
                 </div>
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-muted-foreground">Your Position</span>
                   <Badge 
                     variant="outline" 
-                    className={`text-xs ${displayOverallScore >= 48 ? 'text-brand-teal border-[#0884AA]/40' : 'text-amber-600 border-amber-400/40'}`}
+                    className={`text-xs ${displayOverallScore >= 48 ? 'text-brand-teal border-[#7FB8A3]/40' : 'text-amber-600 border-amber-400/40'}`}
                     data-testid="badge-benchmark-position"
                   >
                     {displayOverallScore >= 48 
@@ -1645,7 +1650,7 @@ const AnalyticsDashboard = memo(function AnalyticsDashboard({
 
         <Card className="lg:col-span-2" data-testid="card-dimension-summary">
           <CardHeader className="pb-3">
-            <CardTitle className="text-base text-[#02205B] dark:text-white flex items-center gap-2">
+            <CardTitle className="text-base text-[#12161D] dark:text-white flex items-center gap-2">
               <Layers className="h-4 w-4 text-brand-teal" aria-hidden="true" />
               Dimension Overview
             </CardTitle>
@@ -1676,7 +1681,7 @@ const AnalyticsDashboard = memo(function AnalyticsDashboard({
                           >
                             <DimensionIcon className="h-3.5 w-3.5" style={{ color: config.color }} />
                           </div>
-                          <span className="text-xs font-medium text-[#02205B] dark:text-white truncate flex items-center gap-1">
+                          <span className="text-xs font-medium text-[#12161D] dark:text-white truncate flex items-center gap-1">
                             {config.shortName}
                             <Info className="h-2.5 w-2.5 opacity-40" />
                           </span>
@@ -1757,7 +1762,7 @@ const AnalyticsDashboard = memo(function AnalyticsDashboard({
           label="Transformation Readiness"
           value={kpis.transformationReadiness}
           icon={Target}
-          color="#0884AA"
+          color="#7FB8A3"
           description="Overall maturity composite"
           tooltipContent={{
             measures: "Overall assessment of your finance function's readiness for digital transformation, combining people, process, technology, and governance factors.",
@@ -1770,7 +1775,7 @@ const AnalyticsDashboard = memo(function AnalyticsDashboard({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card data-testid="card-top-strengths">
           <CardHeader className="pb-3">
-            <CardTitle className="text-base text-[#02205B] dark:text-white flex items-center gap-2">
+            <CardTitle className="text-base text-[#12161D] dark:text-white flex items-center gap-2">
               <TrendingUp className="h-4 w-4 text-brand-teal" aria-hidden="true" />
               Top Strengths
             </CardTitle>
@@ -1791,7 +1796,7 @@ const AnalyticsDashboard = memo(function AnalyticsDashboard({
                       >
                         <DimensionIcon className="h-4 w-4" style={{ color: config.color }} />
                       </div>
-                      <span className="text-sm font-medium text-[#02205B] dark:text-white">{config.shortName}</span>
+                      <span className="text-sm font-medium text-[#12161D] dark:text-white">{config.shortName}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-bold" style={{ color: maturity.color }}>{Math.round(score)}%</span>
@@ -1811,7 +1816,7 @@ const AnalyticsDashboard = memo(function AnalyticsDashboard({
 
         <Card data-testid="card-top-opportunities">
           <CardHeader className="pb-3">
-            <CardTitle className="text-base text-[#02205B] dark:text-white flex items-center gap-2">
+            <CardTitle className="text-base text-[#12161D] dark:text-white flex items-center gap-2">
               <Target className="h-4 w-4 text-amber-500" aria-hidden="true" />
               Improvement Opportunities
             </CardTitle>
@@ -1832,7 +1837,7 @@ const AnalyticsDashboard = memo(function AnalyticsDashboard({
                       >
                         <DimensionIcon className="h-4 w-4" style={{ color: config.color }} />
                       </div>
-                      <span className="text-sm font-medium text-[#02205B] dark:text-white">{config.shortName}</span>
+                      <span className="text-sm font-medium text-[#12161D] dark:text-white">{config.shortName}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-bold" style={{ color: maturity.color }}>{Math.round(score)}%</span>
@@ -1869,7 +1874,7 @@ const JOURNEY_STAGE_CONFIG = {
     description: "Establish your baseline maturity across 8 dimensions and identify priority focus areas",
     duration: "20-25 minutes",
     questions: "50 questions",
-    gradient: "from-[#0884AA] to-[#12EBFC]",
+    gradient: "from-[#7FB8A3] to-[#C77A93]",
     icon: PreAssessmentIcon,
     features: [
       "Finance Maturity Scorecard",
@@ -1885,7 +1890,7 @@ const JOURNEY_STAGE_CONFIG = {
     description: "Build on your discovery with detailed capability mapping and transformation roadmap",
     duration: "35-45 minutes",
     questions: "74 questions",
-    gradient: "from-[#02205B] to-[#0884AA]",
+    gradient: "from-[#12161D] to-[#7FB8A3]",
     icon: FullAssessmentIcon,
     features: [
       "Complete KPI Registry",
@@ -1901,7 +1906,7 @@ const JOURNEY_STAGE_CONFIG = {
     description: "Quantify your business case and track transformation benefits over time",
     duration: "Real-time",
     questions: "Ongoing",
-    gradient: "from-[#12EBFC] to-[#0884AA]",
+    gradient: "from-[#C77A93] to-[#7FB8A3]",
     icon: BarChart3,
     features: [
       "ROI Calculator",
@@ -1952,7 +1957,7 @@ const JourneyStageCard = memo(function JourneyStageCard({
       <Card className={`h-full flex flex-col hover-elevate ${showContactUs ? "border-dashed border-2" : ""}`} data-testid={`card-path-${path}`}>
         <CardHeader className="pb-3">
           <div className="flex items-center justify-between gap-2 mb-3">
-            <Badge className="text-xs font-semibold bg-gradient-to-r from-[#02205B] to-[#0884AA] text-white border-0">
+            <Badge className="text-xs font-semibold bg-gradient-to-r from-[#12161D] to-[#7FB8A3] text-white border-0">
               Stage {config.stage}
             </Badge>
             {isPremium && (
@@ -1964,7 +1969,7 @@ const JourneyStageCard = memo(function JourneyStageCard({
               <IconComponent className="h-6 w-6 text-white" />
             </div>
             <div>
-              <CardTitle className="text-lg text-[#02205B] dark:text-white">{config.name}</CardTitle>
+              <CardTitle className="text-lg text-[#12161D] dark:text-white">{config.name}</CardTitle>
               <CardDescription className="text-xs">{config.subtitle}</CardDescription>
             </div>
           </div>
@@ -1988,7 +1993,7 @@ const JourneyStageCard = memo(function JourneyStageCard({
             {config.features.map((feature, index) => (
               <li key={index} className="flex items-center gap-2 text-sm">
                 <CheckCircle2 className="h-4 w-4 text-brand-teal flex-shrink-0" aria-hidden="true" />
-                <span className="text-[#02205B] dark:text-white">{feature}</span>
+                <span className="text-[#12161D] dark:text-white">{feature}</span>
               </li>
             ))}
           </ul>
@@ -1996,7 +2001,7 @@ const JourneyStageCard = memo(function JourneyStageCard({
 
         <CardFooter className="pt-4 border-t">
           <Button
-            className={`w-full ${isDisabled ? "" : showContactUs ? "" : "bg-[#0884AA] hover:bg-brand-navy"}`}
+            className={`w-full ${isDisabled ? "" : showContactUs ? "" : "bg-[#7FB8A3] hover:bg-brand-navy"}`}
             variant={isDisabled ? "secondary" : showContactUs ? "outline" : "default"}
             onClick={handleClick}
             disabled={isDisabled}
@@ -2036,7 +2041,7 @@ const JourneyToValueSection = memo(function JourneyToValueSection({
   return (
     <section className="mb-12" aria-labelledby="journey-heading" data-testid="section-journey-to-value">
       <div className="mb-6">
-        <h2 id="journey-heading" className="text-xl font-semibold text-[#02205B] dark:text-white flex items-center gap-2">
+        <h2 id="journey-heading" className="text-xl font-semibold text-[#12161D] dark:text-white flex items-center gap-2">
           <CompassIcon className="h-5 w-5 text-brand-teal" aria-hidden="true" />
           Your Journey to Value
         </h2>
@@ -2048,7 +2053,7 @@ const JourneyToValueSection = memo(function JourneyToValueSection({
       {/* Journey flow indicator */}
       <div className="relative">
         {/* Connecting flow line - desktop only */}
-        <div className="absolute top-1/2 left-[15%] right-[15%] h-1 bg-gradient-to-r from-[#0884AA]/20 via-[#02205B]/30 to-[#12EBFC]/20 rounded-full hidden md:block -translate-y-1/2 z-0" />
+        <div className="absolute top-1/2 left-[15%] right-[15%] h-1 bg-gradient-to-r from-[#7FB8A3]/20 via-[#12161D]/30 to-[#C77A93]/20 rounded-full hidden md:block -translate-y-1/2 z-0" />
         
         <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6">
           <JourneyStageCard
@@ -2164,7 +2169,7 @@ export default function FinanceCompassDashboard() {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="My Dashboard | FinanceCompass | 1QG"
+        title="My Dashboard | FinanceCompass | Constancia"
         description="View and manage your finance transformation assessments. Track your progress, view results, and download reports."
         keywords={["finance dashboard", "EPM assessment", "finance transformation", "assessment results"]}
       />
@@ -2178,7 +2183,7 @@ export default function FinanceCompassDashboard() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-brand-teal hover:text-[#02205B] -ml-2"
+                className="text-brand-teal hover:text-[#12161D] -ml-2"
                 data-testid="button-back-to-landing"
               >
                 <ArrowLeft className="h-4 w-4 mr-2" aria-hidden="true" />
@@ -2187,33 +2192,42 @@ export default function FinanceCompassDashboard() {
             </Link>
           </nav>
 
-          <motion.header
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mb-8"
-          >
-            <div className="flex items-start gap-4 flex-wrap">
-              <div className="h-14 w-14 flex items-center justify-center rounded-xl bg-gradient-to-br from-[#02205B] to-[#0884AA] shadow-lg" aria-hidden="true">
-                <CompassIcon className="h-7 w-7 text-white" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-3 flex-wrap mb-1">
-                  <h1 className="text-2xl md:text-3xl font-bold text-[#02205B] dark:text-white" data-testid="text-welcome-message">
-                    Welcome back, {sessionData?.firstName}!
-                  </h1>
-                  <Badge className="bg-[#0884AA]/10 text-brand-teal border-[#0884AA]/30">
-                    <CheckCircle2 className="h-3 w-3 mr-1" aria-hidden="true" />
-                    Verified
-                  </Badge>
-                </div>
-                <p className="text-muted-foreground flex items-center gap-2 text-sm" data-testid="text-user-email">
-                  <Mail className="h-4 w-4" aria-hidden="true" />
-                  {sessionData?.email}
-                </p>
-              </div>
+          <div className="relative mb-8 overflow-hidden rounded-2xl border border-[#12161D]/5 bg-gradient-to-br from-white via-white to-[#F6F3EE]/40 px-6 py-6 sm:px-8 sm:py-8 dark:from-[#1A1F28] dark:via-[#1A1F28] dark:to-[#12161D]/40 dark:border-white/5">
+            {/* Editorial 3D ambient — sits behind the header card */}
+            <div className="absolute inset-0 pointer-events-none opacity-40">
+              <Suspense fallback={null}>
+                <AmbientScene3D intensity={0.4} variant="rose-mint" />
+              </Suspense>
             </div>
-          </motion.header>
+
+            <motion.header
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="relative z-10"
+            >
+              <div className="flex items-start gap-4 flex-wrap">
+                <div className="h-14 w-14 flex items-center justify-center rounded-xl bg-gradient-to-br from-[#12161D] to-[#7FB8A3] shadow-lg" aria-hidden="true">
+                  <CompassIcon className="h-7 w-7 text-white" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-3 flex-wrap mb-1">
+                    <h1 className="text-2xl md:text-3xl font-bold text-[#12161D] dark:text-white" data-testid="text-welcome-message">
+                      Welcome back, {sessionData?.firstName}!
+                    </h1>
+                    <Badge className="bg-[#7FB8A3]/10 text-brand-teal border-[#7FB8A3]/30">
+                      <CheckCircle2 className="h-3 w-3 mr-1" aria-hidden="true" />
+                      Verified
+                    </Badge>
+                  </div>
+                  <p className="text-muted-foreground flex items-center gap-2 text-sm" data-testid="text-user-email">
+                    <Mail className="h-4 w-4" aria-hidden="true" />
+                    {sessionData?.email}
+                  </p>
+                </div>
+              </div>
+            </motion.header>
+          </div>
 
           <AnalyticsDashboard
             assessments={assessments}
@@ -2237,7 +2251,7 @@ export default function FinanceCompassDashboard() {
               return (
                 <section className="mb-12" aria-labelledby="roi-heading">
                   <div className="mb-6">
-                    <h2 id="roi-heading" className="text-xl font-semibold text-[#02205B] dark:text-white flex items-center gap-2">
+                    <h2 id="roi-heading" className="text-xl font-semibold text-[#12161D] dark:text-white flex items-center gap-2">
                       <Calculator className="h-5 w-5 text-brand-teal" aria-hidden="true" />
                       ROI & Business Case
                     </h2>
@@ -2252,7 +2266,7 @@ export default function FinanceCompassDashboard() {
               return (
                 <section className="mb-12" aria-labelledby="roi-heading">
                   <div className="mb-6">
-                    <h2 id="roi-heading" className="text-xl font-semibold text-[#02205B] dark:text-white flex items-center gap-2">
+                    <h2 id="roi-heading" className="text-xl font-semibold text-[#12161D] dark:text-white flex items-center gap-2">
                       <Calculator className="h-5 w-5 text-brand-teal" aria-hidden="true" />
                       ROI & Business Case
                     </h2>
@@ -2260,19 +2274,19 @@ export default function FinanceCompassDashboard() {
                       Financial metrics from your transformation business case
                     </p>
                   </div>
-                  <Card className="p-6 border-dashed border-2 border-[#0884AA]/30 bg-[#0884AA]/5" data-testid="card-roi-locked">
+                  <Card className="p-6 border-dashed border-2 border-[#7FB8A3]/30 bg-[#7FB8A3]/5" data-testid="card-roi-locked">
                     <div className="flex items-center gap-4">
-                      <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#02205B]/20 to-[#0884AA]/20 flex items-center justify-center" aria-hidden="true">
+                      <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#12161D]/20 to-[#7FB8A3]/20 flex items-center justify-center" aria-hidden="true">
                         <Calculator className="h-6 w-6 text-brand-teal/60" />
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-semibold text-[#02205B] dark:text-white">Complete the Full Assessment to Unlock</h4>
+                        <h4 className="font-semibold text-[#12161D] dark:text-white">Complete the Full Assessment to Unlock</h4>
                         <p className="text-sm text-muted-foreground">
                           ROI & Business Case analysis is available after completing the Full Assessment. Start your Full Assessment to access detailed financial projections and transformation business case.
                         </p>
                       </div>
                       <Button
-                        className="bg-[#0884AA] hover:bg-brand-navy"
+                        className="bg-[#7FB8A3] hover:bg-brand-navy"
                         onClick={() => handleStartAssessment("full")}
                         data-testid="button-start-full-for-roi"
                         aria-label="Start Full Assessment to unlock ROI analysis"
@@ -2291,7 +2305,7 @@ export default function FinanceCompassDashboard() {
           <section className="mb-12" aria-labelledby="assessments-heading">
             <div className="flex items-center justify-between gap-4 flex-wrap mb-6">
               <div>
-                <h2 id="assessments-heading" className="text-xl font-semibold text-[#02205B] dark:text-white flex items-center gap-2">
+                <h2 id="assessments-heading" className="text-xl font-semibold text-[#12161D] dark:text-white flex items-center gap-2">
                   <BarChart3 className="h-5 w-5 text-brand-teal" aria-hidden="true" />
                   Your Assessment Journey
                 </h2>

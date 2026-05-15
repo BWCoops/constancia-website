@@ -1,5 +1,5 @@
 /**
- * 1QG Design Tokens
+ * Constancia Design Tokens
  * ─────────────────────────────────────────────────────────────────
  * Single source of truth for every brand value used across the app.
  *
@@ -13,84 +13,98 @@
  *
  * NEVER hardcode a hex value, rgba, or pixel measurement anywhere else
  * in the codebase. Add it here first, then reference it as a variable.
+ *
+ * BRAND RULE — Rose and Mineral Green are accent colours, not dominant
+ * fills. The identity stays dark-led and restrained.
  */
 
 // ─── Colour palette ──────────────────────────────────────────────────────────
 
 export const COLOR = {
-  // Backgrounds — dark first, used on every public page
-  bgPrimary:        '#010E2A',   // deepest navy, outer / odd sections
-  bgSecondary:      '#011630',   // slightly lighter, even sections
-  bgSurface:        'rgba(255,255,255,0.025)', // glass card fill
-  bgSurfaceHover:   'rgba(8,132,170,0.05)',    // glass card hover fill
+  // ── Constancia canonical palette ─────────────────────────────────
+  primaryDark:      '#12161D',   // brand anchor, main background
+  secondaryDark:    '#1E2630',   // panels, layering, depth
+  mainLight:        '#F6F3EE',   // warm off-white, body text on dark
+  supportNeutral:   '#D8D0C6',   // muted stone, supporting surfaces
+  mutedRose:        '#C77A93',   // accent — warmth & emphasis
+  deepBerry:        '#8E4F67',   // accent — premium moments, depth
+  mineralGreen:     '#7FB8A3',   // accent — freshness, digital cues
+  deepMint:         '#5E8D7A',   // accent — understated balance
+
+  // ── Semantic role tokens (used throughout the codebase) ─────────
+  // Backgrounds
+  bgPrimary:        '#12161D',   // primary-dark
+  bgSecondary:      '#1E2630',   // secondary-dark
+  bgSurface:        'rgba(246,243,238,0.025)',  // glass card fill — main-light tint
+  bgSurfaceHover:   'rgba(199,122,147,0.05)',   // glass card hover — rose tint
 
   // Borders
-  border:           'rgba(255,255,255,0.07)',  // default card / divider
-  borderHover:      'rgba(8,132,170,0.28)',    // card hover state
-  borderMuted:      'rgba(255,255,255,0.05)',  // section dividers
-  borderStrong:     'rgba(255,255,255,0.14)',  // btn-brand full border
+  border:           'rgba(246,243,238,0.07)',
+  borderHover:      'rgba(199,122,147,0.28)',   // rose-tinted hover
+  borderMuted:      'rgba(246,243,238,0.05)',
+  borderStrong:     'rgba(246,243,238,0.14)',
 
-  // Text
-  textPrimary:      '#FEFFF3',                        // headings, strong copy
-  textSecondary:    'rgba(254,255,243,0.55)',          // body, descriptions
-  textMuted:        'rgba(254,255,243,0.28)',          // labels
-  textTertiary:     'rgba(254,255,243,0.22)',          // mono captions
+  // Text — bumped opacity vs Constancia palette for "highly legible" spec requirement
+  textPrimary:      '#F6F3EE',
+  textSecondary:    'rgba(246,243,238,0.68)',
+  textMuted:        'rgba(246,243,238,0.42)',
+  textTertiary:     'rgba(246,243,238,0.30)',
 
-  // Brand accents
-  teal:             '#0884AA',   // primary CTA, active nav, icons
-  cyan:             '#12EBFC',   // highlights, btn accent bar, hover
-  navy:             '#02205B',   // deep gradient start, footer bg
-  cream:            '#FEFFF3',   // primary text on dark
+  // Brand accents — semantic legacy names mapped to Constancia palette
+  teal:             '#7FB8A3',   // teal role → mineral green (digital/product cue)
+  cyan:             '#C77A93',   // cyan role → muted rose (signature accent — the `i`)
+  navy:             '#0A0E14',   // deepest, footer/gradient endpoint
+  cream:            '#F6F3EE',   // main-light alias
 
   // Gradient stops
-  gradientBannerFrom:   '#02205B',
-  gradientBannerMid:    '#0070C0',
-  gradientBannerTo:     '#0884AA',
-  gradientHeroFrom:     '#010E2A',
-  gradientHeroTo:       '#02205B',
+  gradientBannerFrom:   '#12161D',
+  gradientBannerMid:    '#1E2630',
+  gradientBannerTo:     '#5E8D7A',   // deep mint at end — subtle, classy
+  gradientHeroFrom:     '#0A0E14',
+  gradientHeroTo:       '#12161D',
 
-  // Cyan info box (used in careers, legal pages)
-  infoBg:           'rgba(18,235,252,0.05)',
-  infoBorder:       'rgba(18,235,252,0.12)',
+  // Info box — rose-tinted for warmth (was cyan electric)
+  infoBg:           'rgba(199,122,147,0.05)',
+  infoBorder:       'rgba(199,122,147,0.12)',
 } as const;
 
 // ─── Typography ──────────────────────────────────────────────────────────────
 
 export const FONT = {
-  sans: "'DM Sans', system-ui, sans-serif",
-  mono: "'IBM Plex Mono', monospace",
+  sans: "'Noto Sans', system-ui, -apple-system, sans-serif",
+  mono: "'IBM Plex Mono', ui-monospace, monospace",
 } as const;
 
 // ─── Spacing ─────────────────────────────────────────────────────────────────
 
 export const SPACING = {
-  sectionPy:     '72px',  // full section vertical padding
-  sectionPySm:   '40px',  // reduced on mobile
-  navHeight:     '64px',  // sticky nav height — used for pt-nav offsets
-  maxWidth:      '80rem', // max-w-7xl = 1280px
-  containerPx:   '1.5rem', // px-6
+  sectionPy:     '72px',
+  sectionPySm:   '40px',
+  navHeight:     '64px',
+  maxWidth:      '80rem',
+  containerPx:   '1.5rem',
 } as const;
 
 // ─── Border radius ───────────────────────────────────────────────────────────
 
 export const RADIUS = {
-  sm:      '3px',   // pill tags, small badges
-  md:      '8px',   // form elements, dropdown items
-  lg:      '12px',  // cards
-  none:    '0px',   // brand buttons (Option D style)
+  sm:      '3px',
+  md:      '8px',
+  lg:      '12px',
+  none:    '0px',
 } as const;
 
 // ─── Shadows ─────────────────────────────────────────────────────────────────
 
 export const SHADOW = {
-  card:    '0 0 0 1px rgba(8,132,170,0.1)',
-  glow:    '0 0 24px rgba(18,235,252,0.08)',
+  card:    '0 0 0 1px rgba(127,184,163,0.10)',   // mineral-green tint
+  glow:    '0 0 24px rgba(199,122,147,0.08)',    // muted-rose glow
 } as const;
 
 // ─── Animation ───────────────────────────────────────────────────────────────
 
 export const ANIMATION = {
-  transitionBase:  '0.15s ease',
-  transitionSlow:  '0.3s ease',
-  transitionColor: 'color 0.15s ease, border-color 0.15s ease, background 0.15s ease',
+  transitionBase:  '0.18s ease',    // slightly slower for "considered" feel
+  transitionSlow:  '0.32s ease',
+  transitionColor: 'color 0.18s ease, border-color 0.18s ease, background 0.18s ease',
 } as const;

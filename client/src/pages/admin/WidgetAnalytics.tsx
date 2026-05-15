@@ -566,10 +566,10 @@ function FunnelAnalysisTab({ data, isLoading }: { data: DimensionAnalysisData | 
   return (
     <div className="space-y-6">
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        <Card className="bg-gradient-to-br from-[#0D1B3E]/5 to-[#0884AA]/5 border-[#0884AA]/20">
+        <Card className="bg-gradient-to-br from-[#0D1B3E]/5 to-[#7FB8A3]/5 border-[#7FB8A3]/20">
           <CardContent className="p-3 sm:p-6">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-[#0884AA]/10 shrink-0">
+              <div className="p-2 rounded-lg bg-[#7FB8A3]/10 shrink-0">
                 <Target className="h-5 w-5 text-brand-teal" />
               </div>
               <div className="min-w-0">
@@ -667,7 +667,7 @@ function FunnelAnalysisTab({ data, isLoading }: { data: DimensionAnalysisData | 
           </div>
           <div className="mt-4 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[#0884AA] shrink-0" />
+              <div className="w-3 h-3 rounded bg-[#7FB8A3] shrink-0" />
               <span className="text-muted-foreground whitespace-nowrap">Normal (&lt;20%)</span>
             </div>
             <div className="flex items-center gap-2">
@@ -1460,11 +1460,11 @@ export default function WidgetAnalytics() {
           <p className="text-sm text-muted-foreground">{pageDescription}</p>
         </div>
 
-        <Card className="mb-6 border-[#12EBFC]/30 bg-gradient-to-r from-[#02205B]/5 to-[#12EBFC]/5 dark:from-[#02205B]/20 dark:to-[#12EBFC]/10">
+        <Card className="mb-6 border-[#C77A93]/30 bg-gradient-to-r from-[#12161D]/5 to-[#C77A93]/5 dark:from-[#12161D]/20 dark:to-[#C77A93]/10">
           <CardContent className="py-4">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-[#12EBFC]/20">
+                <div className="p-2 rounded-lg bg-[#C77A93]/20">
                   <GitCompare className="h-5 w-5 text-brand-teal" />
                 </div>
                 <div>
@@ -2314,11 +2314,11 @@ export default function WidgetAnalytics() {
                             type="monotone"
                             dataKey="totalEvents"
                             name="Total Events"
-                            fill="#12EBFC"
+                            fill="#C77A93"
                             fillOpacity={0.2}
-                            stroke="#12EBFC"
+                            stroke="#C77A93"
                           />
-                          <Bar dataKey="questionAnsweredCount" name="Questions Answered" fill="#0884AA" />
+                          <Bar dataKey="questionAnsweredCount" name="Questions Answered" fill="#7FB8A3" />
                           <Bar dataKey="qualificationCompletedCount" name="Qualifications" fill="#10B981" />
                         </ComposedChart>
                       </ResponsiveContainer>
@@ -3174,7 +3174,7 @@ export default function WidgetAnalytics() {
                 {selectedEvent.finalScore !== null && (
                   <div>
                     <h4 className="text-sm font-medium mb-2">Score</h4>
-                    <p className="text-2xl font-bold text-[#02205B]">{selectedEvent.finalScore}%</p>
+                    <p className="text-2xl font-bold text-[#12161D]">{selectedEvent.finalScore}%</p>
                   </div>
                 )}
 

@@ -1341,7 +1341,7 @@ export const INDUSTRY_VALUE_PROFILES: Record<string, IndustryValueProfile> = {
  * Forecast impact multipliers are derived from:
  * - Deloitte CFO Survey correlations
  * - APQC benchmarking studies
- * - 1QG consulting experience across 200+ implementations
+ * - Constancia consulting experience across 200+ implementations
  * 
  * ACCURACY NOTES:
  * - Margins can vary significantly within sectors based on sub-industry, scale, and geography
@@ -2612,7 +2612,7 @@ const SECTOR_FINANCE_COST_BENCHMARKS: Record<string, { median: number; topQuarti
 
 /**
  * Efficiency improvement potential by maturity level
- * Based on 1QG consulting experience and industry benchmarks
+ * Based on Constancia consulting experience and industry benchmarks
  */
 const MATURITY_IMPROVEMENT_POTENTIAL: Record<string, { minPercent: number; maxPercent: number }> = {
   foundational: { minPercent: 20, maxPercent: 35 },  // Score 0-29: High improvement potential

@@ -19,7 +19,7 @@ export default function ChatPopupPage() {
     }
     
     // Set document title
-    document.title = "Astral - 1QG AI Assistant";
+    document.title = "Astral - Constancia AI Assistant";
   }, []);
 
   return (
@@ -155,23 +155,23 @@ function ChatbotWidgetPopup({ assessmentId }: { assessmentId?: string }) {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-32px)] bg-background border-2 border-[#0884AA]/20 rounded-2xl shadow-2xl overflow-hidden">
+    <div className="flex flex-col h-[calc(100vh-32px)] bg-background border-2 border-[#7FB8A3]/20 rounded-2xl shadow-2xl overflow-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between p-4 bg-gradient-to-r from-[#02205B] to-[#0884AA]">
+      <div className="flex items-center justify-between p-4 bg-gradient-to-r from-[#12161D] to-[#7FB8A3]">
         <div className="flex items-center gap-3">
           <div className="h-10 w-10 rounded-full bg-white/10 flex items-center justify-center">
             <span className="text-brand-cyan text-lg">✨</span>
           </div>
           <div>
             <h3 className="font-semibold text-white text-sm">Astral</h3>
-            <p className="text-xs text-white/60">Powered by 1QG</p>
+            <p className="text-xs text-white/60">Powered by Constancia</p>
           </div>
         </div>
         <button
           onClick={() => setResponseMode(responseMode === 'detailed' ? 'quick' : 'detailed')}
           className={`text-xs px-3 py-1 rounded-full transition-all ${
             responseMode === 'detailed' 
-              ? "bg-[#12EBFC]/30 text-brand-cyan"
+              ? "bg-[#C77A93]/30 text-brand-cyan"
               : "bg-white/10 text-white/70"
           }`}
         >
@@ -198,7 +198,7 @@ function ChatbotWidgetPopup({ assessmentId }: { assessmentId?: string }) {
             <div
               className={`max-w-[90%] sm:max-w-[85%] rounded-2xl px-3 sm:px-4 py-3 overflow-hidden ${
                 message.role === "user"
-                  ? "bg-[#0884AA]/10 dark:bg-[#0884AA]/15 text-foreground border border-[#0884AA]/20 rounded-br-md"
+                  ? "bg-[#7FB8A3]/10 dark:bg-[#7FB8A3]/15 text-foreground border border-[#7FB8A3]/20 rounded-br-md"
                   : "bg-muted rounded-bl-md"
               }`}
             >
@@ -208,11 +208,11 @@ function ChatbotWidgetPopup({ assessmentId }: { assessmentId?: string }) {
         ))}
 
         {processingStage && (
-          <div className="p-4 bg-[#12EBFC]/5 rounded-xl border border-[#0884AA]/20">
+          <div className="p-4 bg-[#C77A93]/5 rounded-xl border border-[#7FB8A3]/20">
             <p className="text-sm text-muted-foreground">{processingStage.message}</p>
             <div className="mt-2 h-1 bg-muted rounded-full overflow-hidden">
               <div 
-                className="h-full bg-gradient-to-r from-[#0884AA] to-[#12EBFC] transition-all"
+                className="h-full bg-gradient-to-r from-[#7FB8A3] to-[#C77A93] transition-all"
                 style={{ width: `${processingStage.progress}%` }}
               />
             </div>
@@ -228,13 +228,13 @@ function ChatbotWidgetPopup({ assessmentId }: { assessmentId?: string }) {
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
             placeholder="Ask about EPM, vendors, or your assessment..."
-            className="flex-1 px-4 py-2 rounded-xl border border-[#0884AA]/20 focus:border-[#12EBFC] focus:outline-none text-sm"
+            className="flex-1 px-4 py-2 rounded-xl border border-[#7FB8A3]/20 focus:border-[#C77A93] focus:outline-none text-sm"
             disabled={isLoading || !sessionId}
           />
           <button
             onClick={sendMessage}
             disabled={!inputValue.trim() || isLoading || !sessionId}
-            className="h-10 w-10 rounded-xl bg-gradient-to-br from-[#02205B] to-[#0884AA] text-white flex items-center justify-center disabled:opacity-50"
+            className="h-10 w-10 rounded-xl bg-gradient-to-br from-[#12161D] to-[#7FB8A3] text-white flex items-center justify-center disabled:opacity-50"
           >
             {isLoading ? "..." : "→"}
           </button>

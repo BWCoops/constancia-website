@@ -27,6 +27,11 @@ export default defineConfig({
     },
   },
   root: path.resolve(import.meta.dirname, "client"),
+  // Production builds drop console.* and debugger statements automatically.
+  // Dev keeps them so debugging works.
+  esbuild: {
+    drop: process.env.NODE_ENV === "production" ? ["console", "debugger"] : [],
+  },
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
@@ -42,6 +47,8 @@ export default defineConfig({
             if (id.includes("@tanstack")) return "query";
             if (id.includes("recharts") || id.includes("d3-")) return "charts";
             if (id.includes("@anthropic-ai") || id.includes("openai")) return "ai-sdk";
+            if (id.includes("@react-three") || id.includes("three")) return "three-d";
+            if (id.includes("@clerk")) return "auth";
           }
         },
       },

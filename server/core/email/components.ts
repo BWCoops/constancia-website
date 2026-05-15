@@ -1,17 +1,17 @@
 /**
  * Modular Email Components
  * 
- * Reusable HTML components for email templates with 1QG branding.
+ * Reusable HTML components for email templates with Constancia branding.
  * Includes headers with logo, footers, and common styling.
  */
 
 import { TYPE_LOGO_TURQUOISE_SMALL_BASE64, TYPE_LOGO_WHITE_SMALL_BASE64 } from '../../pdf-logo-base64';
 
 export const EMAIL_BRAND = {
-  navy: '#02205B',
-  cyan: '#12EBFC',
-  teal: '#0884AA',
-  cream: '#FEFFF3',
+  navy: '#12161D',
+  cyan: '#C77A93',
+  teal: '#7FB8A3',
+  cream: '#F6F3EE',
   white: '#FFFFFF',
   lightGray: '#f8f9fa',
   mediumGray: '#e5e7eb',
@@ -20,11 +20,11 @@ export const EMAIL_BRAND = {
 };
 
 export const EMAIL_CONTACT = {
-  email: 'info@1qg.com',
-  website: '1qg.com',
-  websiteUrl: 'https://1qg.com',
+  email: 'info@constancia.io',
+  website: 'constancia.io',
+  websiteUrl: 'https://constancia.io',
   address: '86-90 Paul Street, London EC2A 4NE',
-  financeCompassUrl: 'https://1qg.com/finance-compass',
+  financeCompassUrl: 'https://constancia.io/finance-compass',
 };
 
 export interface EmailHeaderOptions {
@@ -47,7 +47,7 @@ export function generateEmailHeader(options: EmailHeaderOptions = {}): string {
 
   return `
     <div style="background-color: ${bgColor}; padding: 30px 20px; text-align: center;">
-      <img src="${logo}" alt="1QG" style="height: 36px; max-width: 140px;" />
+      <img src="${logo}" alt="Constancia" style="height: 36px; max-width: 140px;" />
       ${showTagline ? `
         <p style="color: ${taglineColor}; margin: 12px 0 0 0; font-size: 13px; opacity: 0.9;">${tagline}</p>
       ` : ''}
@@ -65,7 +65,7 @@ export function generateEmailFooter(options: EmailFooterOptions = {}): string {
   const { 
     variant = 'dark',
     showFinanceCompass = false,
-    disclaimer = '1QG provides independent EPM, ERP, and AI advisory services for finance leaders.'
+    disclaimer = 'Constancia provides independent EPM, ERP, and AI advisory services for finance leaders.'
   } = options;
 
   const isDark = variant === 'dark';

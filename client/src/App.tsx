@@ -11,6 +11,9 @@ import { VisitorProvider } from "@/contexts/VisitorContext";
 import { initializeImagePreconnects, preloadCriticalImages, preloadPriorityRoutes, preloadHeavyRoutes } from "@/lib/preload";
 import { initAdClickTracker } from "@/lib/ad-click-tracker";
 import { FeatureFlagProvider, useFeatureFlags } from "@/lib/feature-flags";
+import { ModalProvider } from "@/lib/modals/store";
+import { GlobalModalHost } from "@/components/global-modal-host";
+import { ConstanciaClerkProvider } from "@/components/clerk-provider";
 import { LoadingFallback } from "@/components/loading-spinner";
 import { FinanceCompassLoading } from "@/components/finance-compass-loading";
 import { AdminLoadingFallback } from "@/components/admin/AdminLoadingFallback";
@@ -35,6 +38,10 @@ const PrivacyPolicyPage = lazy(() => import("@/pages/privacy"));
 const CookiePolicyPage = lazy(() => import("@/pages/cookies"));
 
 const AdminLogin = lazy(() => import("@/pages/admin/AdminLogin"));
+const AdminSignIn = lazy(() => import("@/pages/admin/AdminSignIn"));
+const SignInPage = lazy(() => import("@/pages/SignIn"));
+const SignUpPage = lazy(() => import("@/pages/SignUp"));
+const OnboardingPage = lazy(() => import("@/pages/Onboarding"));
 const AdminAccessDenied = lazy(() => import("@/pages/admin/AdminAccessDenied"));
 const AdminHub = lazy(() => import("@/pages/admin/AdminHub"));
 const AdminDashboard = lazy(() => import("@/pages/admin/AdminDashboard"));
@@ -284,8 +291,17 @@ function Router() {
             )}
           </Route>
           
+          {/* Auth routes — Clerk-backed (replaces all prior auth flows) */}
+          <Route path="/sign-in" component={SignInPage} />
+          <Route path="/sign-in/:rest*" component={SignInPage} />
+          <Route path="/sign-up" component={SignUpPage} />
+          <Route path="/sign-up/:rest*" component={SignUpPage} />
+          <Route path="/onboarding" component={OnboardingPage} />
+          <Route path="/admin/sign-in" component={AdminSignIn} />
+          <Route path="/admin/sign-in/:rest*" component={AdminSignIn} />
+
           {/* Admin routes - always enabled (admin auth handles access) */}
-          <Route path="/admin/login" component={AdminLogin} />
+          <Route path="/admin/login" component={AdminSignIn} />
           <Route path="/admin/access-denied" component={AdminAccessDenied} />
           <Route path="/admin/login/mfa-verify" component={AdminSecurityMfaVerify} />
           <Route path="/admin/dashboard">
@@ -393,21 +409,26 @@ function Router() {
 
 function App() {
   return (
-    <ThemeProvider defaultTheme="light" storageKey="1qg-ui-theme">
-      <LazyMotionProvider>
-        <QueryClientProvider client={queryClient}>
-          <FeatureFlagProvider>
-            <VisitorProvider>
-              <TooltipProvider>
-                <Toaster />
-                <Router />
-                <CookieConsentBanner />
-              </TooltipProvider>
-            </VisitorProvider>
-          </FeatureFlagProvider>
-        </QueryClientProvider>
-      </LazyMotionProvider>
-    </ThemeProvider>
+    <ConstanciaClerkProvider>
+      <ThemeProvider defaultTheme="light" storageKey="constancia-ui-theme">
+        <LazyMotionProvider>
+          <QueryClientProvider client={queryClient}>
+            <FeatureFlagProvider>
+              <VisitorProvider>
+                <ModalProvider>
+                  <TooltipProvider>
+                    <Toaster />
+                    <Router />
+                    <CookieConsentBanner />
+                    <GlobalModalHost />
+                  </TooltipProvider>
+                </ModalProvider>
+              </VisitorProvider>
+            </FeatureFlagProvider>
+          </QueryClientProvider>
+        </LazyMotionProvider>
+      </ThemeProvider>
+    </ConstanciaClerkProvider>
   );
 }
 

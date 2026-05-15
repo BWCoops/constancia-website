@@ -88,7 +88,7 @@ export default function ServicesPage() {
   return (
     <div className="min-h-screen page-dark">
       <SEOHead
-        title="EPM Implementation & Platform Selection | 1QG Services"
+        title="EPM Implementation & Platform Selection | Constancia Services"
         description="Senior EPM implementation, platform selection, AI for finance, and finance transformation services. Fixed fee. Scoped upfront. Delivered by practitioners, not graduates."
         keywords={["EPM implementation", "platform selection advisory", "OneStream consulting", "Abacum implementation", "FP&A tools", "finance transformation advisory"]}
       />
@@ -96,7 +96,7 @@ export default function ServicesPage() {
         "@context": "https://schema.org",
         "@type": "Service",
         "serviceType": "Enterprise Performance Management Advisory",
-        "provider": { "@type": "Organization", "name": "1QG", "url": "https://1qg.com" },
+        "provider": { "@type": "Organization", "name": "Constancia", "url": "https://constancia.io" },
         "areaServed": ["GB", "IE", "ZA", "AE"],
         "description": "Senior EPM advisory, platform selection, implementation, AI readiness, and finance transformation services. Fixed fee, no vendor agenda."
       }) }} />

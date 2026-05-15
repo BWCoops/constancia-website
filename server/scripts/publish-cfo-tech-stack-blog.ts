@@ -286,7 +286,7 @@ For forward-thinking CFOs, the imperative is clear. They must develop a coherent
 
 ## Sources and References
 
-- 1QG Group industry research and benchmarks (2024-2025)
+- Constancia Group industry research and benchmarks (2024-2025)
 - Enterprise performance management vendor documentation
 - Finance transformation programme analysis
 - CFO survey data and industry benchmarks
@@ -306,7 +306,7 @@ For forward-thinking CFOs, the imperative is clear. They must develop a coherent
     heroImage: "https://images.unsplash.com/photo-1553484771-371a605b060b?w=1200",
     categoryId: categoryId,
     tags: ["CFO tech stack 2026", "finance technology", "CFO digital transformation", "EPM selection guide", "finance systems integration"],
-    author: "1QG Insights Team",
+    author: "Constancia Insights Team",
     authorImage: null,
     publishedAt: new Date().toISOString().split('T')[0],
     readingTime: `${Math.ceil(wordCount / 200)} min read`,

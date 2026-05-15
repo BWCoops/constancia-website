@@ -60,12 +60,12 @@ function GapRow({ result, index }: { result: GapAnalysisResult; index: number })
         <div className="relative">
           <Progress value={progressValue} className="h-3" />
           <div 
-            className="absolute top-0 h-3 w-0.5 bg-[#02205B]"
+            className="absolute top-0 h-3 w-0.5 bg-[#12161D]"
             style={{ left: `${benchmarkPosition}%` }}
             title="Industry Benchmark"
           />
           <div 
-            className="absolute top-0 h-3 w-0.5 bg-[#12EBFC]"
+            className="absolute top-0 h-3 w-0.5 bg-[#C77A93]"
             style={{ left: `${worldClassPosition}%` }}
             title="World Class"
           />
@@ -77,7 +77,7 @@ function GapRow({ result, index }: { result: GapAnalysisResult; index: number })
               You: <span className="font-medium text-foreground">{result.scaleScore.toFixed(2)}</span>
             </span>
             <span className="whitespace-nowrap">
-              Bench: <span className="font-medium text-[#02205B]">{result.benchmark.toFixed(2)}</span>
+              Bench: <span className="font-medium text-[#12161D]">{result.benchmark.toFixed(2)}</span>
             </span>
           </div>
           <span className="whitespace-nowrap">
@@ -121,7 +121,7 @@ export function GapAnalysisCard({
           <div className="flex items-start justify-between">
             <div>
               <CardTitle className="flex items-center gap-2">
-                <TrendingUp className="h-5 w-5 text-[#0A6688]" />
+                <TrendingUp className="h-5 w-5 text-[#5E8D7A]" />
                 {title}
               </CardTitle>
               <CardDescription>{description}</CardDescription>

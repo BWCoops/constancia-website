@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useClerkLead, syncLead } from "@/lib/clerk-lead-sync";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -113,6 +114,11 @@ export function DownloadGateModal({
   const [sessionInfo, setSessionInfo] = useState<SessionStatus | null>(null);
   const [isCheckingSession, setIsCheckingSession] = useState(false);
   const { toast } = useToast();
+
+  // Clerk fast-path: when a signed-in user with a complete profile opens
+  // the modal, we skip the email + OTP flow entirely (Clerk has verified
+  // the email already, and we have the lead fields stored in unsafeMetadata).
+  const clerkLead = useClerkLead();
   
   // Use ref to always have latest customExportFn available (avoids stale closures in setTimeout)
   const customExportFnRef = useRef(customExportFn);
@@ -140,13 +146,49 @@ export function DownloadGateModal({
         setStep("form");
         return;
       }
-      // Small delay to ensure React state updates have propagated
+
+      // Clerk fast-path: signed-in user with complete profile gets the
+      // download immediately, no email/OTP gate.
+      if (clerkLead.isLoaded && clerkLead.isSignedIn && clerkLead.isProfileComplete && clerkLead.profile) {
+        const profile = clerkLead.profile;
+        setEmail(profile.email);
+        // Background sync to keep our lead row up-to-date — non-blocking,
+        // fire-and-forget so the download isn't held up.
+        syncLead(profile).catch((err) => {
+          // eslint-disable-next-line no-console
+          console.warn("[DownloadGateModal] Lead sync failed (non-blocking):", err);
+        });
+        setSessionInfo({
+          verified:  true,
+          leadId:    profile.clerkUserId,
+          firstName: profile.firstName,
+          lastName:  profile.lastName,
+          email:     profile.email,
+        });
+        setLeadId(profile.clerkUserId);
+        setStep("session");
+        // Trigger download via the existing path
+        const t = setTimeout(() => {
+          performSessionDownload();
+        }, 50);
+        return () => clearTimeout(t);
+      }
+
+      // Signed-in but profile incomplete — bounce to onboarding so we collect
+      // company + jobTitle first, then return here.
+      if (clerkLead.isLoaded && clerkLead.isSignedIn && !clerkLead.isProfileComplete) {
+        const ret = encodeURIComponent(window.location.pathname + window.location.search);
+        window.location.href = `/onboarding?return=${ret}`;
+        return;
+      }
+
+      // Otherwise: standard session check + lead capture flow
       const timer = setTimeout(() => {
         checkSession();
       }, 50);
       return () => clearTimeout(timer);
     }
-  }, [open, resource, customExportFn, requireFreshVerification]);
+  }, [open, resource, customExportFn, requireFreshVerification, clerkLead.isLoaded, clerkLead.isSignedIn, clerkLead.isProfileComplete]);
 
   // Helper to wait for export function to be set (polls until available or timeout)
   const waitForExportFn = (): Promise<(() => Promise<void>) | null> => {
@@ -539,7 +581,7 @@ export function DownloadGateModal({
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[480px] max-h-[85vh] overflow-hidden flex flex-col">
         <DialogHeader className="flex-shrink-0">
-          <DialogTitle className="text-xl font-semibold text-[#02205B]">
+          <DialogTitle className="text-xl font-semibold text-[#12161D]">
             {step === "checking" && "Checking Access..."}
             {step === "session" && "Welcome Back"}
             {step === "form" && "Access Your Resource"}
@@ -559,14 +601,14 @@ export function DownloadGateModal({
 
         <div className="flex-1 overflow-y-auto overscroll-contain min-h-0 pr-1" style={{ WebkitOverflowScrolling: 'touch' }}>
           {resource && (
-            <div className="bg-gradient-to-r from-[#02205B]/5 to-[#0884AA]/5 p-4 rounded-lg mb-4">
-              <p className="text-sm font-medium text-[#02205B]">{resource.title}</p>
+            <div className="bg-gradient-to-r from-[#12161D]/5 to-[#7FB8A3]/5 p-4 rounded-lg mb-4">
+              <p className="text-sm font-medium text-[#12161D]">{resource.title}</p>
               <p className="text-xs text-muted-foreground mt-1">{resource.category} - {resource.fileSize}</p>
             </div>
           )}
           {!resource && customExportTitle && (
-            <div className="bg-gradient-to-r from-[#02205B]/5 to-[#0884AA]/5 p-4 rounded-lg mb-4">
-              <p className="text-sm font-medium text-[#02205B]">{customExportTitle}</p>
+            <div className="bg-gradient-to-r from-[#12161D]/5 to-[#7FB8A3]/5 p-4 rounded-lg mb-4">
+              <p className="text-sm font-medium text-[#12161D]">{customExportTitle}</p>
               {customExportDescription && (
                 <p className="text-xs text-muted-foreground mt-1">{customExportDescription}</p>
               )}
@@ -582,7 +624,7 @@ export function DownloadGateModal({
               exit={{ opacity: 0 }}
               className="flex flex-col items-center justify-center py-8"
             >
-              <Loader2 className="h-8 w-8 animate-spin text-[#0884AA] mb-4" />
+              <Loader2 className="h-8 w-8 animate-spin text-[#7FB8A3] mb-4" />
               <p className="text-sm text-muted-foreground">Checking your access status...</p>
             </motion.div>
           )}
@@ -612,7 +654,7 @@ export function DownloadGateModal({
 
               <Button
                 onClick={handleSessionDownload}
-                className="w-full bg-[#02205B] hover:bg-[#02205B]/90"
+                className="w-full bg-[#12161D] hover:bg-[#12161D]/90"
                 data-testid="button-session-download"
               >
                 <Download className="mr-2 h-4 w-4" />
@@ -772,7 +814,7 @@ export function DownloadGateModal({
                     control={leadForm.control}
                     name="subscribeNewsletter"
                     render={({ field }) => (
-                      <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-gradient-to-r from-[#02205B]/5 to-[#0884AA]/5">
+                      <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-gradient-to-r from-[#12161D]/5 to-[#7FB8A3]/5">
                         <FormControl>
                           <Checkbox
                             checked={field.value}
@@ -809,7 +851,7 @@ export function DownloadGateModal({
 
                   <Button 
                     type="submit" 
-                    className="w-full bg-gradient-to-r from-[#02205B] to-[#0884AA] hover:from-[#02205B]/90 hover:to-[#0884AA]/90"
+                    className="w-full bg-gradient-to-r from-[#12161D] to-[#7FB8A3] hover:from-[#12161D]/90 hover:to-[#7FB8A3]/90"
                     disabled={submitLeadMutation.isPending || (turnstileConfig?.enabled ? !captchaToken : false)}
                     data-testid="button-submit-lead"
                   >
@@ -839,7 +881,7 @@ export function DownloadGateModal({
               transition={{ duration: 0.2 }}
             >
               <div className="flex justify-center mb-6">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#02205B] to-[#0884AA] flex items-center justify-center">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#12161D] to-[#7FB8A3] flex items-center justify-center">
                   <Mail className="h-8 w-8 text-white" />
                 </div>
               </div>
@@ -876,7 +918,7 @@ export function DownloadGateModal({
 
                   <Button 
                     type="submit" 
-                    className="w-full bg-gradient-to-r from-[#02205B] to-[#0884AA] hover:from-[#02205B]/90 hover:to-[#0884AA]/90"
+                    className="w-full bg-gradient-to-r from-[#12161D] to-[#7FB8A3] hover:from-[#12161D]/90 hover:to-[#7FB8A3]/90"
                     disabled={verifyOtpMutation.isPending || otpForm.watch("otp").length !== 6}
                     data-testid="button-verify-otp"
                   >
@@ -900,7 +942,7 @@ export function DownloadGateModal({
                       size="sm"
                       onClick={() => resendOtpMutation.mutate()}
                       disabled={resendOtpMutation.isPending}
-                      className="text-muted-foreground hover:text-[#0884AA]"
+                      className="text-muted-foreground hover:text-[#7FB8A3]"
                       data-testid="button-resend-otp"
                     >
                       {resendOtpMutation.isPending ? (
@@ -933,10 +975,10 @@ export function DownloadGateModal({
               exit={{ opacity: 0 }}
               className="text-center py-8"
             >
-              <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-r from-[#02205B] to-[#0884AA] flex items-center justify-center">
-                <Loader2 className="h-10 w-10 animate-spin text-[#12EBFC]" />
+              <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-r from-[#12161D] to-[#7FB8A3] flex items-center justify-center">
+                <Loader2 className="h-10 w-10 animate-spin text-[#C77A93]" />
               </div>
-              <h3 className="text-lg font-semibold text-[#02205B] mb-2">Preparing Your Document</h3>
+              <h3 className="text-lg font-semibold text-[#12161D] mb-2">Preparing Your Document</h3>
               <p className="text-sm text-muted-foreground mb-4">
                 Please wait while we prepare your document. This might take a moment.
               </p>
@@ -951,12 +993,12 @@ export function DownloadGateModal({
               transition={{ duration: 0.3 }}
               className="text-center py-6"
             >
-              <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-r from-[#02205B] to-[#0884AA] flex items-center justify-center">
-                <CheckCircle className="h-10 w-10 text-[#12EBFC]" />
+              <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-r from-[#12161D] to-[#7FB8A3] flex items-center justify-center">
+                <CheckCircle className="h-10 w-10 text-[#C77A93]" />
               </div>
-              <h3 className="text-lg font-semibold text-[#02205B] mb-2">Download Started!</h3>
+              <h3 className="text-lg font-semibold text-[#12161D] mb-2">Download Started!</h3>
               <p className="text-sm text-muted-foreground">
-                Your resource is downloading. Thank you for your interest in 1QG.
+                Your resource is downloading. Thank you for your interest in Constancia.
               </p>
             </motion.div>
           )}

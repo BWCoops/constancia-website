@@ -60,7 +60,7 @@ const OTP_EXPIRY_MINUTES = 10;
 
 // Resource session configuration
 const SESSION_EXPIRY_DAYS = 7;
-const SESSION_COOKIE_NAME = "1qg_resource_session";
+const SESSION_COOKIE_NAME = "constancia_resource_session";
 
 const MAX_OTP_ATTEMPTS = 5;
 
@@ -193,13 +193,13 @@ async function sendLeadVerificationNotification(lead: {
       `New Verified Lead: ${lead.firstName} ${lead.lastName} from ${lead.company}`,
       `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, #02205B 0%, #0884AA 100%); border-radius: 8px;">
-            <h1 style="color: #12EBFC; margin: 0;">New Verified Lead</h1>
+          <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, #12161D 0%, #7FB8A3 100%); border-radius: 8px;">
+            <h1 style="color: #C77A93; margin: 0;">New Verified Lead</h1>
             <p style="color: #fff; margin: 5px 0;">Resource Download</p>
           </div>
           
           <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-            <h2 style="color: #02205B; margin-top: 0;">Lead Details</h2>
+            <h2 style="color: #12161D; margin-top: 0;">Lead Details</h2>
             <table style="width: 100%; border-collapse: collapse;">
               <tr>
                 <td style="padding: 8px 0; color: #666; width: 120px;"><strong>Name:</strong></td>
@@ -207,7 +207,7 @@ async function sendLeadVerificationNotification(lead: {
               </tr>
               <tr>
                 <td style="padding: 8px 0; color: #666;"><strong>Email:</strong></td>
-                <td style="padding: 8px 0;"><a href="mailto:${lead.email}" style="color: #0884AA;">${lead.email}</a></td>
+                <td style="padding: 8px 0;"><a href="mailto:${lead.email}" style="color: #7FB8A3;">${lead.email}</a></td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; color: #666;"><strong>Company:</strong></td>
@@ -237,7 +237,7 @@ async function sendLeadVerificationNotification(lead: {
           <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
           
           <p style="color: #666; font-size: 12px; text-align: center;">
-            This notification was sent automatically from the 1QG website.
+            This notification was sent automatically from the Constancia website.
             <br>
             Verified: ${new Date().toLocaleString('en-GB', { dateStyle: 'full', timeStyle: 'short' })}
           </p>
@@ -269,13 +269,13 @@ async function sendContactFormNotification(submission: {
       `New Contact Form Submission from ${submission.firstName} ${submission.lastName}`,
       `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, #02205B 0%, #0884AA 100%); border-radius: 8px;">
-            <h1 style="color: #12EBFC; margin: 0;">New Contact Form Submission</h1>
-            <p style="color: #fff; margin: 5px 0;">1QG Website</p>
+          <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, #12161D 0%, #7FB8A3 100%); border-radius: 8px;">
+            <h1 style="color: #C77A93; margin: 0;">New Contact Form Submission</h1>
+            <p style="color: #fff; margin: 5px 0;">Constancia Website</p>
           </div>
           
           <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-            <h2 style="color: #02205B; margin-top: 0;">Contact Details</h2>
+            <h2 style="color: #12161D; margin-top: 0;">Contact Details</h2>
             <table style="width: 100%; border-collapse: collapse;">
               <tr>
                 <td style="padding: 8px 0; color: #666; width: 120px;"><strong>Name:</strong></td>
@@ -283,7 +283,7 @@ async function sendContactFormNotification(submission: {
               </tr>
               <tr>
                 <td style="padding: 8px 0; color: #666;"><strong>Email:</strong></td>
-                <td style="padding: 8px 0;"><a href="mailto:${submission.email}" style="color: #0884AA;">${submission.email}</a></td>
+                <td style="padding: 8px 0;"><a href="mailto:${submission.email}" style="color: #7FB8A3;">${submission.email}</a></td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; color: #666;"><strong>Company:</strong></td>
@@ -303,14 +303,14 @@ async function sendContactFormNotification(submission: {
           </div>
           
           <div style="background: #fff; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px;">
-            <h2 style="color: #02205B; margin-top: 0;">Message</h2>
+            <h2 style="color: #12161D; margin-top: 0;">Message</h2>
             <p style="color: #333; line-height: 1.6; white-space: pre-wrap;">${submission.message}</p>
           </div>
           
           <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
           
           <p style="color: #666; font-size: 12px; text-align: center;">
-            This notification was sent from the 1QG website contact form.
+            This notification was sent from the Constancia website contact form.
             <br>
             Submitted: ${new Date().toLocaleString('en-GB', { dateStyle: 'full', timeStyle: 'short' })}
           </p>
@@ -334,20 +334,20 @@ async function sendOtpEmail(email: string, firstName: string, otp: string): Prom
   try {
     await sendEmailViaGraph(
       email,
-      "Your 1QG Resource Access Code",
+      "Your Constancia Resource Access Code",
       `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
           <div style="text-align: center; margin-bottom: 30px;">
-            <h1 style="color: #02205B; margin: 0;">1QG</h1>
-            <p style="color: #0884AA; margin: 5px 0;">Enterprise Performance Management Advisory</p>
+            <h1 style="color: #12161D; margin: 0;">Constancia</h1>
+            <p style="color: #7FB8A3; margin: 5px 0;">Enterprise Performance Management Advisory</p>
           </div>
           
           <p style="color: #333;">Hi ${firstName},</p>
           
-          <p style="color: #333;">Thank you for your interest in 1QG resources. Please use the following code to access your download:</p>
+          <p style="color: #333;">Thank you for your interest in Constancia resources. Please use the following code to access your download:</p>
           
-          <div style="background: linear-gradient(135deg, #02205B 0%, #0884AA 100%); padding: 20px; border-radius: 8px; text-align: center; margin: 30px 0;">
-            <span style="font-size: 32px; font-weight: bold; letter-spacing: 8px; color: #12EBFC;">${otp}</span>
+          <div style="background: linear-gradient(135deg, #12161D 0%, #7FB8A3 100%); padding: 20px; border-radius: 8px; text-align: center; margin: 30px 0;">
+            <span style="font-size: 32px; font-weight: bold; letter-spacing: 8px; color: #C77A93;">${otp}</span>
           </div>
           
           <p style="color: #666; font-size: 14px;">This code expires in ${OTP_EXPIRY_MINUTES} minutes.</p>
@@ -355,11 +355,11 @@ async function sendOtpEmail(email: string, firstName: string, otp: string): Prom
           <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
           
           <p style="color: #666; font-size: 12px;">
-            1QG provides independent, vendor-agnostic EPM advisory services for finance leaders.
+            Constancia provides independent, vendor-agnostic EPM advisory services for finance leaders.
             <br><br>
             86-90 Paul Street, London EC2A 4NE
             <br>
-            <a href="https://1qg.com" style="color: #0884AA;">1qg.com</a>
+            <a href="https://constancia.io" style="color: #7FB8A3;">constancia.io</a>
           </p>
         </div>
       `
@@ -381,17 +381,17 @@ async function sendOtpEmail(email: string, firstName: string, otp: string): Prom
  */
 async function sendContactVerificationEmail(to: string, firstName: string, token: string): Promise<boolean> {
   try {
-    const baseUrl = process.env.BASE_URL || 'https://1qg.com';
+    const baseUrl = process.env.BASE_URL || 'https://constancia.io';
     const verificationLink = `${baseUrl}/api/contact/verify?token=${token}`;
     
     await sendEmailViaGraph(
       to,
-      `Verify your email - 1QG Contact`,
+      `Verify your email - Constancia Contact`,
       `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 0; background-color: #f5f5f5;">
-          <!-- Header with 1QG branding -->
+          <!-- Header with Constancia branding -->
           <div style="background-color: #0A2540; padding: 30px 20px; text-align: center;">
-            <h1 style="color: #12EBFC; margin: 0; font-size: 28px; font-weight: bold;">1QG</h1>
+            <h1 style="color: #C77A93; margin: 0; font-size: 28px; font-weight: bold;">Constancia</h1>
             <p style="color: #ffffff; margin: 8px 0 0 0; font-size: 14px;">Enterprise Performance Management Advisory</p>
           </div>
           
@@ -400,12 +400,12 @@ async function sendContactVerificationEmail(to: string, firstName: string, token
             <p style="color: #333333; font-size: 16px; margin: 0 0 20px 0;">Hi ${firstName},</p>
             
             <p style="color: #333333; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
-              Thank you for contacting 1QG. Please verify your email address to confirm your enquiry.
+              Thank you for contacting Constancia. Please verify your email address to confirm your enquiry.
             </p>
             
             <!-- CTA Button -->
             <div style="text-align: center; margin: 35px 0;">
-              <a href="${verificationLink}" style="display: inline-block; background-color: #12EBFC; color: #0A2540; padding: 16px 40px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 16px;">
+              <a href="${verificationLink}" style="display: inline-block; background-color: #C77A93; color: #0A2540; padding: 16px 40px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 16px;">
                 Verify Email Address
               </a>
             </div>
@@ -414,7 +414,7 @@ async function sendContactVerificationEmail(to: string, firstName: string, token
             <p style="color: #666666; font-size: 14px; margin: 25px 0 10px 0;">
               If the button above doesn't work, copy and paste this link into your browser:
             </p>
-            <p style="color: #12EBFC; font-size: 13px; word-break: break-all; background-color: #f8f9fa; padding: 12px; border-radius: 4px; margin: 0 0 25px 0;">
+            <p style="color: #C77A93; font-size: 13px; word-break: break-all; background-color: #f8f9fa; padding: 12px; border-radius: 4px; margin: 0 0 25px 0;">
               ${verificationLink}
             </p>
             
@@ -433,12 +433,12 @@ async function sendContactVerificationEmail(to: string, firstName: string, token
           <!-- Footer -->
           <div style="background-color: #0A2540; padding: 25px 20px; text-align: center;">
             <p style="color: #ffffff; font-size: 12px; margin: 0 0 10px 0;">
-              1QG provides independent, vendor-agnostic EPM advisory services for finance leaders.
+              Constancia provides independent, vendor-agnostic EPM advisory services for finance leaders.
             </p>
             <p style="color: #aaaaaa; font-size: 12px; margin: 0 0 10px 0;">
               86-90 Paul Street, London EC2A 4NE
             </p>
-            <a href="https://1qg.com" style="color: #12EBFC; font-size: 12px; text-decoration: none;">1qg.com</a>
+            <a href="https://constancia.io" style="color: #C77A93; font-size: 12px; text-decoration: none;">constancia.io</a>
           </div>
         </div>
       `
@@ -490,7 +490,7 @@ async function syncLeadToHubSpot(lead: HubSpotLeadData): Promise<{ success: bool
 
   // Build message with all lead data in plain text
   const messageLines: string[] = [];
-  messageLines.push("Source: 1QG Website Resource Download");
+  messageLines.push("Source: Constancia Website Resource Download");
   
   // Include newsletter subscription preference
   messageLines.push(`Newsletter: ${lead.subscribeNewsletter !== false ? 'Yes' : 'No'}`);
@@ -657,6 +657,15 @@ export async function registerRoutes(
   // ============================================
   app.use("/api", modularRoutes);
   log.info("modular domain routes registered");
+
+  // ============================================
+  // CLERK LEADS SYNC — POST /api/leads/sync
+  // Bridges Clerk user sign-up data into the leads/contact_submissions table.
+  // See server/routes/leads-sync.ts and client/src/lib/clerk-lead-sync.ts.
+  // ============================================
+  const { default: leadsSyncRouter } = await import("./routes/leads-sync");
+  app.use("/api/leads", leadsSyncRouter);
+  log.info("Clerk leads sync route registered (/api/leads/sync)");
   
   // ============================================
   // FEATURE FLAGS API ENDPOINTS
@@ -896,12 +905,12 @@ export async function registerRoutes(
           `New Talent Community Submission: ${parsed.firstName} ${parsed.lastName}`,
           `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-              <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, #02205B 0%, #0884AA 100%); border-radius: 8px;">
-                <h1 style="color: #12EBFC; margin: 0;">Talent Community Submission</h1>
-                <p style="color: #fff; margin: 5px 0;">1QG Careers</p>
+              <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, #12161D 0%, #7FB8A3 100%); border-radius: 8px;">
+                <h1 style="color: #C77A93; margin: 0;">Talent Community Submission</h1>
+                <p style="color: #fff; margin: 5px 0;">Constancia Careers</p>
               </div>
               <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                <h2 style="color: #02205B; margin-top: 0;">Candidate Details</h2>
+                <h2 style="color: #12161D; margin-top: 0;">Candidate Details</h2>
                 <table style="width: 100%; border-collapse: collapse;">
                   <tr>
                     <td style="padding: 8px 0; color: #666; width: 140px;"><strong>Name:</strong></td>
@@ -909,12 +918,12 @@ export async function registerRoutes(
                   </tr>
                   <tr>
                     <td style="padding: 8px 0; color: #666;"><strong>Email:</strong></td>
-                    <td style="padding: 8px 0;"><a href="mailto:${parsed.email}" style="color: #0884AA;">${parsed.email}</a></td>
+                    <td style="padding: 8px 0;"><a href="mailto:${parsed.email}" style="color: #7FB8A3;">${parsed.email}</a></td>
                   </tr>
                   ${parsed.linkedIn ? `
                   <tr>
                     <td style="padding: 8px 0; color: #666;"><strong>LinkedIn:</strong></td>
-                    <td style="padding: 8px 0;"><a href="${parsed.linkedIn}" style="color: #0884AA;">${parsed.linkedIn}</a></td>
+                    <td style="padding: 8px 0;"><a href="${parsed.linkedIn}" style="color: #7FB8A3;">${parsed.linkedIn}</a></td>
                   </tr>` : ""}
                   <tr>
                     <td style="padding: 8px 0; color: #666;"><strong>Area of Interest:</strong></td>
@@ -923,12 +932,12 @@ export async function registerRoutes(
                 </table>
               </div>
               <div style="background: #fff; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px;">
-                <h2 style="color: #02205B; margin-top: 0;">Message</h2>
+                <h2 style="color: #12161D; margin-top: 0;">Message</h2>
                 <p style="color: #333; line-height: 1.6; white-space: pre-wrap;">${parsed.message}</p>
               </div>
               <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
               <p style="color: #666; font-size: 12px; text-align: center;">
-                This notification was sent from the 1QG website careers form.
+                This notification was sent from the Constancia website careers form.
                 <br>
                 Submitted: ${new Date().toLocaleString("en-GB", { dateStyle: "full", timeStyle: "short" })}
               </p>
@@ -1576,8 +1585,8 @@ export async function registerRoutes(
         excerpt,
         content,
         heroImage,
-        author: generatedPost.author || "1QG Editorial Team",
-        authorAvatar: "/avatars/1qg-avatar.png",
+        author: generatedPost.author || "Constancia Editorial Team",
+        authorAvatar: "/avatars/constancia-avatar.png",
         readingTime,
         publishedAt: new Date().toISOString(),
         categoryId: categoryId || "",
@@ -2097,9 +2106,9 @@ export async function registerRoutes(
       const schema = {
         "@context": "https://schema.org",
         "@type": "Organization",
-        name: "1QG",
-        url: "https://1qg.com",
-        logo: "https://1qg.com/logo.png"
+        name: "Constancia",
+        url: "https://constancia.io",
+        logo: "https://constancia.io/logo.png"
       };
       res.json(schema);
     } catch (error: any) {
@@ -2153,7 +2162,7 @@ export async function registerRoutes(
             type: "list" as const,
             content: "",
             items: [
-              { text: "Professional branding with 1QG colors", context: "Navy, cyan, and teal color palette" },
+              { text: "Professional branding with Constancia colors", context: "Navy, cyan, and teal color palette" },
               { text: "Pixel-perfect typography using Inter font", context: "Consistent font weights and sizes" },
               { text: "Support for multiple content types", context: "Text, lists, tables, metrics" },
               "Adobe PDF Services API integration",
@@ -2186,7 +2195,7 @@ export async function registerRoutes(
       });
       
       res.setHeader("Content-Type", "application/pdf");
-      res.setHeader("Content-Disposition", 'attachment; filename="1qg-pdf-test.pdf"');
+      res.setHeader("Content-Disposition", 'attachment; filename="constancia-pdf-test.pdf"');
       res.setHeader("X-PDF-Method", result.method);
       res.send(result.buffer);
     } catch (error: any) {
@@ -2215,31 +2224,31 @@ function generateWordPressHTML(): string {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <!-- Primary Meta Tags -->
-  <title>1QG | Finance Transformation & ERP/EPM Consultancy</title>
-  <meta name="title" content="1QG | Finance Transformation & ERP/EPM Consultancy">
-  <meta name="description" content="1QG is an independent ERP and EPM consultancy helping finance leaders modernise their functions through technology, process optimisation, and AI-driven insights across the UK and Ireland.">
+  <title>Constancia | Finance Transformation & ERP/EPM Consultancy</title>
+  <meta name="title" content="Constancia | Finance Transformation & ERP/EPM Consultancy">
+  <meta name="description" content="Constancia is an independent ERP and EPM consultancy helping finance leaders modernise their functions through technology, process optimisation, and AI-driven insights across the UK and Ireland.">
   <meta name="keywords" content="ERP consultancy, EPM implementation, finance transformation, AI finance solutions, Oracle Cloud, Anaplan, OneStream, Board, CFO advisory">
-  <meta name="author" content="1QG">
+  <meta name="author" content="Constancia">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://1qg.com/">
+  <link rel="canonical" href="https://constancia.io/">
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://1qg.com/">
-  <meta property="og:title" content="1QG | Finance Transformation & ERP/EPM Consultancy">
+  <meta property="og:url" content="https://constancia.io/">
+  <meta property="og:title" content="Constancia | Finance Transformation & ERP/EPM Consultancy">
   <meta property="og:description" content="Independent ERP and EPM consultancy delivering AI-powered finance transformation across the UK and Ireland.">
-  <meta property="og:image" content="https://1qg.com/og-image.png">
-  <meta property="og:site_name" content="1QG">
+  <meta property="og:image" content="https://constancia.io/og-image.png">
+  <meta property="og:site_name" content="Constancia">
   <meta property="og:locale" content="en_GB">
   
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://1qg.com/">
-  <meta name="twitter:title" content="1QG | Finance Transformation & ERP/EPM Consultancy">
+  <meta name="twitter:url" content="https://constancia.io/">
+  <meta name="twitter:title" content="Constancia | Finance Transformation & ERP/EPM Consultancy">
   <meta name="twitter:description" content="Independent ERP and EPM consultancy delivering AI-powered finance transformation across the UK and Ireland.">
-  <meta name="twitter:image" content="https://1qg.com/og-image.png">
+  <meta name="twitter:image" content="https://constancia.io/og-image.png">
   
-  <meta name="theme-color" content="#02205B">
+  <meta name="theme-color" content="#12161D">
   
   <link rel="stylesheet" href="style.css">
   
@@ -2248,9 +2257,9 @@ function generateWordPressHTML(): string {
   {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "1QG",
-    "url": "https://1qg.com",
-    "logo": "https://1qg.com/logo.png",
+    "name": "Constancia",
+    "url": "https://constancia.io",
+    "logo": "https://constancia.io/logo.png",
     "description": "Independent ERP and EPM consultancy delivering AI-powered finance transformation across the UK and Ireland.",
     "address": {
       "@type": "PostalAddress",
@@ -2262,7 +2271,7 @@ function generateWordPressHTML(): string {
     },
     "contactPoint": {
       "@type": "ContactPoint",
-      "email": "info@1qg.com",
+      "email": "info@constancia.io",
       "contactType": "customer service",
       "availableLanguage": "English"
     },
@@ -2274,8 +2283,8 @@ function generateWordPressHTML(): string {
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "1QG",
-    "url": "https://1qg.com",
+    "name": "Constancia",
+    "url": "https://constancia.io",
     "description": "Independent ERP and EPM consultancy delivering AI-powered finance transformation."
   }
   </script>
@@ -2287,7 +2296,7 @@ function generateWordPressHTML(): string {
     <nav class="nav-container" role="navigation" aria-label="Main navigation">
       <a href="/" class="logo">
         <div class="logo-icon">1Q</div>
-        <span class="logo-text">1QG</span>
+        <span class="logo-text">Constancia</span>
       </a>
       <div class="nav-links">
         <a href="#services">Services</a>
@@ -2304,7 +2313,7 @@ function generateWordPressHTML(): string {
       <div class="hero-content">
         <span class="badge">Independent Finance Consultancy</span>
         <h1 id="hero-heading">Modernise Your Finance Function with Confidence</h1>
-        <p class="hero-description">1QG partners with CFOs and finance leaders to deliver intelligent ERP and EPM solutions that transform financial operations across the UK and Ireland.</p>
+        <p class="hero-description">Constancia partners with CFOs and finance leaders to deliver intelligent ERP and EPM solutions that transform financial operations across the UK and Ireland.</p>
         <div class="hero-buttons">
           <a href="#contact" class="btn btn-primary btn-lg">Start Your Transformation</a>
           <a href="#services" class="btn btn-outline btn-lg">Explore Services</a>
@@ -2349,9 +2358,9 @@ function generateWordPressHTML(): string {
 
     <section id="about" class="about" aria-labelledby="about-heading">
       <div class="container">
-        <span class="badge">About 1QG</span>
+        <span class="badge">About Constancia</span>
         <h2 id="about-heading">Your Trusted Finance Technology Partner</h2>
-        <p>1QG is an independent consultancy dedicated to helping finance leaders modernise their functions. We combine deep technical expertise with practical business insight to deliver measurable outcomes.</p>
+        <p>Constancia is an independent consultancy dedicated to helping finance leaders modernise their functions. We combine deep technical expertise with practical business insight to deliver measurable outcomes.</p>
         
         <ul class="benefits-list">
           <li>Vendor-neutral advice focused on your organisation's needs</li>
@@ -2413,7 +2422,7 @@ function generateWordPressHTML(): string {
     <section class="cta" aria-labelledby="cta-heading">
       <div class="container">
         <h2 id="cta-heading">Ready to Transform Your Finance Function?</h2>
-        <p>Partner with 1QG for independent, expert guidance on your finance transformation journey.</p>
+        <p>Partner with Constancia for independent, expert guidance on your finance transformation journey.</p>
         <div class="cta-buttons">
           <a href="#contact" class="btn btn-white btn-lg">Schedule a Consultation</a>
           <a href="#contact" class="btn btn-outline-white btn-lg">Contact Us</a>
@@ -2431,7 +2440,7 @@ function generateWordPressHTML(): string {
             <h3>Contact Information</h3>
             <div class="contact-item">
               <span>Email:</span>
-              <a href="mailto:info@1qg.com">info@1qg.com</a>
+              <a href="mailto:info@constancia.io">info@constancia.io</a>
             </div>
             <div class="contact-item">
               <span>Address:</span>
@@ -2469,7 +2478,7 @@ function generateWordPressHTML(): string {
         <div class="footer-brand">
           <a href="/" class="logo">
             <div class="logo-icon">1Q</div>
-            <span class="logo-text">1QG</span>
+            <span class="logo-text">Constancia</span>
           </a>
           <p>Independent ERP and EPM consultancy delivering AI-powered finance transformation.</p>
         </div>
@@ -2505,7 +2514,7 @@ function generateWordPressHTML(): string {
       </div>
       
       <div class="footer-bottom">
-        <p>&copy; 2024 1QG. All rights reserved.</p>
+        <p>&copy; 2024 Constancia. All rights reserved.</p>
         <div class="footer-meta">
           <a href="/sitemap.xml">Sitemap</a>
           <a href="/robots.txt">Robots.txt</a>
@@ -2518,14 +2527,14 @@ function generateWordPressHTML(): string {
 }
 
 function generateWordPressCSS(): string {
-  return `/* 1QG WordPress Theme Styles */
+  return `/* Constancia WordPress Theme Styles */
 :root {
-  --dark-navy: #02205B;
-  --bright-cyan: #12EBFC;
-  --teal: #0884AA;
-  --primary: #02205B;
+  --dark-navy: #12161D;
+  --bright-cyan: #C77A93;
+  --teal: #7FB8A3;
+  --primary: #12161D;
   --primary-foreground: #ffffff;
-  --accent: #12EBFC;
+  --accent: #C77A93;
   --background: #f8fafc;
   --foreground: #0f172a;
   --muted: #f1f5f9;
@@ -3075,7 +3084,7 @@ section h2 {
 
 /* Blog Styles */
 .blog-hero {
-  background: linear-gradient(135deg, var(--primary) 0%, #0884AA 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, #7FB8A3 100%);
   color: white;
   padding: 4rem 0;
   text-align: center;
@@ -3131,7 +3140,7 @@ section h2 {
 }
 
 .article-header {
-  background: linear-gradient(135deg, var(--primary) 0%, #0884AA 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, #7FB8A3 100%);
   color: white;
   padding: 4rem 0 6rem;
   text-align: center;
@@ -3147,13 +3156,13 @@ section h2 {
 }
 
 .article-content h1 { font-size: 2rem; margin-top: 2rem; margin-bottom: 1rem; color: var(--primary); }
-.article-content h2 { font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; color: var(--primary); border-bottom: 2px solid #12EBFC; padding-bottom: 0.5rem; }
-.article-content h3 { font-size: 1.25rem; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #0884AA; }
+.article-content h2 { font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; color: var(--primary); border-bottom: 2px solid #C77A93; padding-bottom: 0.5rem; }
+.article-content h3 { font-size: 1.25rem; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #7FB8A3; }
 .article-content h4 { font-size: 1.1rem; margin-top: 1rem; margin-bottom: 0.5rem; }
 .article-content p { margin-bottom: 1rem; line-height: 1.8; }
 .article-content ul, .article-content ol { margin-bottom: 1rem; padding-left: 2rem; }
 .article-content li { margin-bottom: 0.5rem; line-height: 1.6; }
-.article-content blockquote { border-left: 4px solid #12EBFC; padding-left: 1rem; margin: 1.5rem 0; background: rgba(18, 235, 252, 0.05); padding: 1rem; border-radius: 0 8px 8px 0; }
+.article-content blockquote { border-left: 4px solid #C77A93; padding-left: 1rem; margin: 1.5rem 0; background: rgba(18, 235, 252, 0.05); padding: 1rem; border-radius: 0 8px 8px 0; }
 .article-content table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
 .article-content th { background: var(--primary); color: white; padding: 1rem; text-align: left; }
 .article-content td { padding: 1rem; border: 1px solid var(--border); }
@@ -3162,7 +3171,7 @@ section h2 {
 
 .callout-box {
   background: linear-gradient(135deg, rgba(18, 235, 252, 0.1) 0%, rgba(8, 132, 170, 0.1) 100%);
-  border-left: 4px solid #12EBFC;
+  border-left: 4px solid #C77A93;
   padding: 1.5rem;
   margin: 1.5rem 0;
   border-radius: 0 8px 8px 0;
@@ -3176,7 +3185,7 @@ section h2 {
 }
 
 .stat-box {
-  background: linear-gradient(135deg, var(--primary) 0%, #0884AA 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, #7FB8A3 100%);
   color: white;
   padding: 1.5rem;
   border-radius: var(--radius);
@@ -3186,7 +3195,7 @@ section h2 {
 .stat-box .stat-value {
   font-size: 2rem;
   font-weight: bold;
-  color: #12EBFC;
+  color: #C77A93;
 }
 
 .stat-box .stat-label {
@@ -3205,7 +3214,7 @@ section h2 {
 
 .tag {
   background: rgba(18, 235, 252, 0.1);
-  color: #0884AA;
+  color: #7FB8A3;
   padding: 0.25rem 0.75rem;
   border-radius: 999px;
   font-size: 0.875rem;
@@ -3281,11 +3290,11 @@ function generateBlogPostHTML(post: { title: string; slug: string; excerpt: stri
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${post.title} | 1QG</title>
+  <title>${post.title} | Constancia</title>
   <meta name="description" content="${post.excerpt}">
   <meta name="keywords" content="${post.tags.join(', ')}">
   <meta name="author" content="${post.author}">
-  <link rel="canonical" href="https://1qg.com/blog/${post.slug}">
+  <link rel="canonical" href="https://constancia.io/blog/${post.slug}">
   
   <meta property="og:type" content="article">
   <meta property="og:title" content="${post.title}">
@@ -3314,10 +3323,10 @@ function generateBlogPostHTML(post: { title: string; slug: string; excerpt: stri
     },
     "publisher": {
       "@type": "Organization",
-      "name": "1QG",
+      "name": "Constancia",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://1qg.com/logo.png"
+        "url": "https://constancia.io/logo.png"
       }
     },
     "datePublished": "${post.publishedAt}",
@@ -3330,7 +3339,7 @@ function generateBlogPostHTML(post: { title: string; slug: string; excerpt: stri
     <nav class="nav-container">
       <a href="../index.html" class="logo">
         <div class="logo-icon">1Q</div>
-        <span class="logo-text">1QG</span>
+        <span class="logo-text">Constancia</span>
       </a>
       <div class="nav-links">
         <a href="../index.html#services">Services</a>
@@ -3375,9 +3384,9 @@ function generateBlogPostHTML(post: { title: string; slug: string; excerpt: stri
   <footer class="site-footer">
     <div class="container">
       <div class="footer-bottom">
-        <p>&copy; ${new Date().getFullYear()} 1QG. All rights reserved.</p>
+        <p>&copy; ${new Date().getFullYear()} Constancia. All rights reserved.</p>
         <div class="footer-meta">
-          <a href="https://1qg.com">1qg.com</a>
+          <a href="https://constancia.io">constancia.io</a>
         </div>
       </div>
     </div>
@@ -3394,12 +3403,12 @@ function generateBlogIndexHTML(posts: Array<{ title: string; slug: string; excer
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog | 1QG Finance Transformation Insights</title>
-  <meta name="description" content="Expert insights on finance transformation, EPM, ERP, AI, and technology from 1QG consultants.">
-  <link rel="canonical" href="https://1qg.com/blog">
+  <title>Blog | Constancia Finance Transformation Insights</title>
+  <meta name="description" content="Expert insights on finance transformation, EPM, ERP, AI, and technology from Constancia consultants.">
+  <link rel="canonical" href="https://constancia.io/blog">
   
   <meta property="og:type" content="website">
-  <meta property="og:title" content="1QG Blog - Finance Transformation Insights">
+  <meta property="og:title" content="Constancia Blog - Finance Transformation Insights">
   <meta property="og:description" content="Expert insights on finance transformation, EPM, ERP, AI, and technology.">
   
   <link rel="stylesheet" href="../style.css">
@@ -3409,7 +3418,7 @@ function generateBlogIndexHTML(posts: Array<{ title: string; slug: string; excer
     <nav class="nav-container">
       <a href="../index.html" class="logo">
         <div class="logo-icon">1Q</div>
-        <span class="logo-text">1QG</span>
+        <span class="logo-text">Constancia</span>
       </a>
       <div class="nav-links">
         <a href="../index.html#services">Services</a>
@@ -3424,7 +3433,7 @@ function generateBlogIndexHTML(posts: Array<{ title: string; slug: string; excer
     <section class="blog-hero">
       <div class="container">
         <span class="badge">Insights & Research</span>
-        <h1>1QG Blog</h1>
+        <h1>Constancia Blog</h1>
         <p>Expert analysis on finance transformation, EPM, ERP, and AI from our team of consultants.</p>
       </div>
     </section>
@@ -3453,9 +3462,9 @@ function generateBlogIndexHTML(posts: Array<{ title: string; slug: string; excer
   <footer class="site-footer">
     <div class="container">
       <div class="footer-bottom">
-        <p>&copy; ${new Date().getFullYear()} 1QG. All rights reserved.</p>
+        <p>&copy; ${new Date().getFullYear()} Constancia. All rights reserved.</p>
         <div class="footer-meta">
-          <a href="https://1qg.com">1qg.com</a>
+          <a href="https://constancia.io">constancia.io</a>
         </div>
       </div>
     </div>
@@ -3472,9 +3481,9 @@ function generateResourcesIndexHTML(resources: Array<{ title: string; slug: stri
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Resources | 1QG Finance Transformation Downloads</title>
-  <meta name="description" content="Download free guides, frameworks, playbooks, and templates for finance transformation, EPM, and ERP from 1QG.">
-  <link rel="canonical" href="https://1qg.com/resources">
+  <title>Resources | Constancia Finance Transformation Downloads</title>
+  <meta name="description" content="Download free guides, frameworks, playbooks, and templates for finance transformation, EPM, and ERP from Constancia.">
+  <link rel="canonical" href="https://constancia.io/resources">
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -3482,7 +3491,7 @@ function generateResourcesIndexHTML(resources: Array<{ title: string; slug: stri
     <nav class="nav-container">
       <a href="../index.html" class="logo">
         <div class="logo-icon">1Q</div>
-        <span class="logo-text">1QG</span>
+        <span class="logo-text">Constancia</span>
       </a>
       <div class="nav-links">
         <a href="../index.html#services">Services</a>
@@ -3496,13 +3505,13 @@ function generateResourcesIndexHTML(resources: Array<{ title: string; slug: stri
     <section class="blog-hero">
       <div class="container">
         <span class="badge">Free Downloads</span>
-        <h1>1QG Resources</h1>
+        <h1>Constancia Resources</h1>
         <p>Guides, frameworks, playbooks, and templates to accelerate your finance transformation.</p>
       </div>
     </section>
     ${categories.map(category => `
       <section class="container" style="padding: 2rem 0;">
-        <h2 style="color: #02205B; margin-bottom: 1.5rem; border-bottom: 2px solid #12EBFC; padding-bottom: 0.5rem;">${category}</h2>
+        <h2 style="color: #12161D; margin-bottom: 1.5rem; border-bottom: 2px solid #C77A93; padding-bottom: 0.5rem;">${category}</h2>
         <div class="blog-grid">
           ${resources.filter(r => r.category === category).map(resource => `
             <article class="blog-card">
@@ -3524,7 +3533,7 @@ function generateResourcesIndexHTML(resources: Array<{ title: string; slug: stri
   <footer class="site-footer">
     <div class="container">
       <div class="footer-bottom">
-        <p>&copy; ${new Date().getFullYear()} 1QG. All rights reserved.</p>
+        <p>&copy; ${new Date().getFullYear()} Constancia. All rights reserved.</p>
       </div>
     </div>
   </footer>
@@ -3538,9 +3547,9 @@ function generateResourcePageHTML(resource: { title: string; slug: string; descr
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${resource.title} | 1QG Resources</title>
+  <title>${resource.title} | Constancia Resources</title>
   <meta name="description" content="${resource.description}">
-  <link rel="canonical" href="https://1qg.com/resources/${resource.slug}">
+  <link rel="canonical" href="https://constancia.io/resources/${resource.slug}">
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -3548,7 +3557,7 @@ function generateResourcePageHTML(resource: { title: string; slug: string; descr
     <nav class="nav-container">
       <a href="../index.html" class="logo">
         <div class="logo-icon">1Q</div>
-        <span class="logo-text">1QG</span>
+        <span class="logo-text">Constancia</span>
       </a>
       <div class="nav-links">
         <a href="../index.html#services">Services</a>
@@ -3601,7 +3610,7 @@ function generateResourcePageHTML(resource: { title: string; slug: string; descr
   <footer class="site-footer">
     <div class="container">
       <div class="footer-bottom">
-        <p>&copy; ${new Date().getFullYear()} 1QG. All rights reserved.</p>
+        <p>&copy; ${new Date().getFullYear()} Constancia. All rights reserved.</p>
       </div>
     </div>
   </footer>
@@ -3625,12 +3634,12 @@ function generateWordPressWXR(
   xmlns:dc="http://purl.org/dc/elements/1.1/"
   xmlns:wp="http://wordpress.org/export/1.2/">
 <channel>
-  <title>1QG</title>
-  <link>https://1qg.com</link>
+  <title>Constancia</title>
+  <link>https://constancia.io</link>
   <description>Finance Transformation and ERP/EPM Consultancy</description>
   <language>en-GB</language>
   <wp:wxr_version>1.2</wp:wxr_version>
-  <wp:base_site_url>https://1qg.com</wp:base_site_url>
+  <wp:base_site_url>https://constancia.io</wp:base_site_url>
   ${categories.map(cat => `
   <wp:category>
     <wp:term_id>${cat.id}</wp:term_id>
@@ -3644,10 +3653,10 @@ function generateWordPressWXR(
     return `
   <item>
     <title><![CDATA[${post.title}]]></title>
-    <link>https://1qg.com/blog/${post.slug}</link>
+    <link>https://constancia.io/blog/${post.slug}</link>
     <pubDate>${new Date(post.publishedAt).toUTCString()}</pubDate>
     <dc:creator><![CDATA[${post.author}]]></dc:creator>
-    <guid isPermaLink="false">https://1qg.com/?p=${id}</guid>
+    <guid isPermaLink="false">https://constancia.io/?p=${id}</guid>
     <description><![CDATA[${post.excerpt}]]></description>
     <content:encoded><![CDATA[${contentHtml}]]></content:encoded>
     <excerpt:encoded><![CDATA[${post.excerpt}]]></excerpt:encoded>
@@ -3669,17 +3678,17 @@ function generateWordPressWXR(
     return `
   <item>
     <title><![CDATA[${resource.title}]]></title>
-    <link>https://1qg.com/resources/${resource.slug}</link>
+    <link>https://constancia.io/resources/${resource.slug}</link>
     <pubDate>${new Date(resource.publishedAt).toUTCString()}</pubDate>
-    <dc:creator><![CDATA[1QG Team]]></dc:creator>
-    <guid isPermaLink="false">https://1qg.com/?p=${id}</guid>
+    <dc:creator><![CDATA[Constancia Team]]></dc:creator>
+    <guid isPermaLink="false">https://constancia.io/?p=${id}</guid>
     <description><![CDATA[${resource.description}]]></description>
     <content:encoded><![CDATA[
-      <div style="background: linear-gradient(135deg, rgba(18, 235, 252, 0.1) 0%, rgba(8, 132, 170, 0.1) 100%); border-left: 4px solid #12EBFC; padding: 2rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0; text-align: center;">
-        <h3 style="margin-top: 0; color: #02205B;">Download This Resource</h3>
+      <div style="background: linear-gradient(135deg, rgba(18, 235, 252, 0.1) 0%, rgba(8, 132, 170, 0.1) 100%); border-left: 4px solid #C77A93; padding: 2rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0; text-align: center;">
+        <h3 style="margin-top: 0; color: #12161D;">Download This Resource</h3>
         <p>${resource.description}</p>
         <p><strong>File Type:</strong> ${resource.fileType.toUpperCase()} | <strong>Size:</strong> ${resource.fileSize}</p>
-        <a href="${resource.fileUrl}" style="display: inline-block; background: #02205B; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 600;">Download ${resource.fileType.toUpperCase()}</a>
+        <a href="${resource.fileUrl}" style="display: inline-block; background: #12161D; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 600;">Download ${resource.fileType.toUpperCase()}</a>
       </div>
     ]]></content:encoded>
     <excerpt:encoded><![CDATA[${resource.description}]]></excerpt:encoded>
@@ -3699,15 +3708,15 @@ function generateWordPressWXR(
 function convertMarkdownToEnrichedHTML(content: string): string {
   let html = content;
   
-  html = html.replace(/^#### (.+)$/gm, '<h4 style="font-size: 1.1rem; margin-top: 1rem; margin-bottom: 0.5rem; color: #02205B;">$1</h4>');
-  html = html.replace(/^### (.+)$/gm, '<h3 style="font-size: 1.25rem; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #0884AA;">$1</h3>');
-  html = html.replace(/^## (.+)$/gm, '<h2 style="font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; color: #02205B; border-bottom: 2px solid #12EBFC; padding-bottom: 0.5rem;">$1</h2>');
-  html = html.replace(/^# (.+)$/gm, '<h1 style="font-size: 2rem; margin-top: 2rem; margin-bottom: 1rem; color: #02205B;">$1</h1>');
+  html = html.replace(/^#### (.+)$/gm, '<h4 style="font-size: 1.1rem; margin-top: 1rem; margin-bottom: 0.5rem; color: #12161D;">$1</h4>');
+  html = html.replace(/^### (.+)$/gm, '<h3 style="font-size: 1.25rem; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #7FB8A3;">$1</h3>');
+  html = html.replace(/^## (.+)$/gm, '<h2 style="font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; color: #12161D; border-bottom: 2px solid #C77A93; padding-bottom: 0.5rem;">$1</h2>');
+  html = html.replace(/^# (.+)$/gm, '<h1 style="font-size: 2rem; margin-top: 2rem; margin-bottom: 1rem; color: #12161D;">$1</h1>');
   
   html = html.replace(/\*\*Potential Impact\*\*:(.+)$/gm, '<div style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%); border-left: 4px solid #22c55e; padding: 1rem; margin: 1rem 0; border-radius: 0 8px 8px 0;"><strong style="color: #22c55e;">Potential Impact:</strong>$1</div>');
-  html = html.replace(/\*\*Key Takeaway\*\*:(.+)$/gm, '<div style="background: linear-gradient(135deg, rgba(2, 32, 91, 0.05) 0%, rgba(8, 132, 170, 0.1) 100%); border-left: 4px solid #12EBFC; padding: 1.5rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0;"><strong style="color: #12EBFC;">Key Takeaway:</strong>$1</div>');
+  html = html.replace(/\*\*Key Takeaway\*\*:(.+)$/gm, '<div style="background: linear-gradient(135deg, rgba(2, 32, 91, 0.05) 0%, rgba(8, 132, 170, 0.1) 100%); border-left: 4px solid #C77A93; padding: 1.5rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0;"><strong style="color: #C77A93;">Key Takeaway:</strong>$1</div>');
   
-  html = html.replace(/\*\*([^*]+)\*\*/g, '<strong style="color: #02205B;">$1</strong>');
+  html = html.replace(/\*\*([^*]+)\*\*/g, '<strong style="color: #12161D;">$1</strong>');
   html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
   
   html = html.replace(/^\| (.+) \|$/gm, (match, rowContent) => {
@@ -3721,7 +3730,7 @@ function convertMarkdownToEnrichedHTML(content: string): string {
   html = html.replace(new RegExp('(<li[^>]*>.*</li>\\s*)+', 'gm'), '<ul style="margin-bottom: 1rem; padding-left: 2rem;">$&</ul>');
   
   html = html.replace(/^\d+\. (.+)$/gm, '<li style="margin-bottom: 0.5rem;">$1</li>');
-  html = html.replace(/^> (.+)$/gm, '<blockquote style="border-left: 4px solid #12EBFC; padding: 1rem; margin: 1.5rem 0; background: rgba(18, 235, 252, 0.05); border-radius: 0 8px 8px 0; font-style: italic;">$1</blockquote>');
+  html = html.replace(/^> (.+)$/gm, '<blockquote style="border-left: 4px solid #C77A93; padding: 1rem; margin: 1.5rem 0; background: rgba(18, 235, 252, 0.05); border-radius: 0 8px 8px 0; font-style: italic;">$1</blockquote>');
   
   const lines = html.split('\n');
   const result: string[] = [];
