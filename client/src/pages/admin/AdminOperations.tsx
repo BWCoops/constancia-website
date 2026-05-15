@@ -1,6 +1,7 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import AdminLayout from "./AdminLayout";
+import { AdminQueryErrorBanner } from "./components/AdminQueryErrorBanner";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
@@ -243,7 +244,7 @@ export default function AdminOperations() {
 
   // Aggregate query errors so the admin knows when something's broken instead
   // of staring at infinite skeletons. Auth failures (401/403) are by far the
-  // most common cause — surface them up front.
+  // most common cause — surface them up front via AdminQueryErrorBanner.
   const queryErrors = [
     { label: "System health",     error: healthError },
     { label: "Request logs",      error: logsError },
@@ -254,9 +255,7 @@ export default function AdminOperations() {
     { label: "AI grounding",      error: groundingError },
     { label: "AI knowledge base", error: kbError },
     { label: "AI followups",      error: followupError },
-  ].filter((e) => e.error != null);
-  const firstErrMsg = queryErrors[0]?.error instanceof Error ? queryErrors[0].error.message : "";
-  const looksLikeAuth = firstErrMsg.startsWith("401") || firstErrMsg.startsWith("403");
+  ];
 
   // Mutations
   const toggleActiveMutation = useMutation({
@@ -377,40 +376,7 @@ export default function AdminOperations() {
           </Button>
         </div>
 
-        {queryErrors.length > 0 && (
-          <Card className="border-destructive/40 bg-destructive/5" data-testid="banner-operations-errors">
-            <CardContent className="pt-6">
-              <div className="flex items-start gap-3">
-                <AlertTriangle className="h-5 w-5 text-destructive mt-0.5 flex-shrink-0" aria-hidden="true" />
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-destructive mb-1">
-                    {looksLikeAuth
-                      ? "Admin access required"
-                      : `${queryErrors.length} of 9 endpoints failed to load`}
-                  </h3>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    {looksLikeAuth
-                      ? "You're signed in but Clerk doesn't see you as an admin. Set publicMetadata.role='admin' on your user in the Clerk dashboard, then sign out and back in."
-                      : "Server reachable but some queries returned errors. Try Refresh All — if errors persist, check server logs."}
-                  </p>
-                  <details className="text-xs text-muted-foreground/80">
-                    <summary className="cursor-pointer hover:text-muted-foreground">
-                      Failed endpoints ({queryErrors.length})
-                    </summary>
-                    <ul className="mt-2 space-y-1 pl-4">
-                      {queryErrors.map((e) => (
-                        <li key={e.label}>
-                          <span className="font-medium">{e.label}:</span>{" "}
-                          {e.error instanceof Error ? e.error.message : String(e.error)}
-                        </li>
-                      ))}
-                    </ul>
-                  </details>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        )}
+        <AdminQueryErrorBanner errors={queryErrors} totalQueries={queryErrors.length} />
 
         <Tabs defaultValue="health" className="space-y-4">
           <TabsList className="flex-wrap h-auto gap-1" data-testid="tabs-operations">
