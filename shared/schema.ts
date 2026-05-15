@@ -30,6 +30,9 @@ export type User = typeof users.$inferSelect;
 
 export const contactSubmissions = pgTable("contact_submissions", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  // Clerk user id (null for anonymous submissions, set for Clerk-authed leads).
+  // Used by /api/leads/sync as the canonical dedupe key. Indexed in DB.
+  clerkUserId: text("clerk_user_id"),
   firstName: text("first_name").notNull(),
   lastName: text("last_name").notNull(),
   email: text("email").notNull(),

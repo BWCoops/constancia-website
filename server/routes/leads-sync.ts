@@ -13,7 +13,7 @@ import { Router, type Request, type Response } from "express";
 import { z } from "zod";
 import { db } from "../db";
 import { contactSubmissions } from "@shared/schema";
-import { eq, sql } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { requireAuthOrFallback, getUserId } from "../middleware/clerk-auth";
 import { isAuthenticated } from "../replitAuth";
 import { createChildLogger } from "../lib/logger";
@@ -47,14 +47,12 @@ router.post("/sync", requireAuthOrFallback(isAuthenticated), async (req: Request
   const { email, firstName, lastName, company, jobTitle, consentMarketing, clerkUserId } = parsed.data;
 
   try {
-    // Look up by Clerk user id stored in pageUrl as a tag (cheap dedupe key
-    // without a schema change). For a future migration, add `clerk_user_id`
-    // column to contact_submissions and swap to that.
-    const lookupKey = `clerk:${clerkUserId}`;
+    // Dedupe by clerk_user_id — proper canonical column.
+    // (After running `npm run db:push` to add the column to the DB.)
     const existing = await db
       .select()
       .from(contactSubmissions)
-      .where(sql`${contactSubmissions.referrer} = ${lookupKey}`)
+      .where(eq(contactSubmissions.clerkUserId, clerkUserId))
       .limit(1);
 
     if (existing[0]) {
@@ -77,6 +75,7 @@ router.post("/sync", requireAuthOrFallback(isAuthenticated), async (req: Request
     }
 
     const [created] = await db.insert(contactSubmissions).values({
+      clerkUserId,
       firstName,
       lastName,
       email,
@@ -86,8 +85,6 @@ router.post("/sync", requireAuthOrFallback(isAuthenticated), async (req: Request
       consentMarketing,
       verified:   true,
       verifiedAt: new Date(),
-      // Stash the clerk id here so we can dedupe on next sync
-      referrer:   lookupKey,
       ipAddress:  (req.headers["x-forwarded-for"] as string)?.split(",")[0] ?? req.socket.remoteAddress ?? null,
       userAgent:  req.headers["user-agent"] ?? null,
     }).returning();
