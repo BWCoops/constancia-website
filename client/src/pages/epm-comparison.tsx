@@ -133,7 +133,7 @@ import { useFeatureFlags } from "@/lib/feature-flags";
 import { Footer } from "@/components/footer";
 import { SEOHead } from "@/components/seo-head";
 import { CookiePreferencesIcon } from "@/components/cookie-consent";
-import { DownloadGateModal } from "@/components/download-gate-modal";
+import { useModal } from "@/lib/modals/store";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
@@ -3139,11 +3139,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
   const [expandedPlatform, setExpandedPlatform] = useState<string | null>(null);
   const [isExportingPDF, setIsExportingPDF] = useState(false);
   const [isExportingExcel, setIsExportingExcel] = useState(false);
-  const [exportModalOpen, setExportModalOpen] = useState(false);
-  const [pendingExportFn, setPendingExportFn] = useState<(() => Promise<void>) | undefined>(undefined);
-  const [pendingExportTitle, setPendingExportTitle] = useState<string>("");
-  const [pendingExportDescription, setPendingExportDescription] = useState<string>("");
-  const [requireFreshVerification, setRequireFreshVerification] = useState(false);
+  const { open: openModal } = useModal();
   
   const [companyProfile, setCompanyProfile] = useState<CompanyProfile>({
     revenue: null,
@@ -3935,13 +3931,13 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
   };
 
   const handleExportPDF = () => {
-    const exportFn = createExportFunction("pdf");
-    setPendingExportFn(() => exportFn);
-    setPendingExportTitle(`${categoryType.toUpperCase()} Platform Comparison - PDF`);
-    setPendingExportDescription("Professional PDF report with charts and analysis");
-    setRequireFreshVerification(false); // PDF exports use session-based verification
-    setExportModalOpen(true);
-    // Track export action (active engagement)
+    openModal('download-gate', {
+      resource: null,
+      customExportFn: createExportFunction("pdf"),
+      customExportTitle: `${categoryType.toUpperCase()} Platform Comparison - PDF`,
+      customExportDescription: "Professional PDF report with charts and analysis",
+      requireFreshVerification: false, // session-based verification is enough for PDFs
+    });
     trackComparisonEvent("export_initiated", {
       category: categoryType,
       format: "pdf",
@@ -3953,13 +3949,13 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
   };
 
   const handleExportExcel = () => {
-    const exportFn = createExportFunction("excel");
-    setPendingExportFn(() => exportFn);
-    setPendingExportTitle(`${categoryType.toUpperCase()} Platform Comparison - Excel`);
-    setPendingExportDescription("Detailed spreadsheet with all comparison data and formulas");
-    setRequireFreshVerification(true); // Excel exports require fresh OTP verification
-    setExportModalOpen(true);
-    // Track export action (active engagement)
+    openModal('download-gate', {
+      resource: null,
+      customExportFn: createExportFunction("excel"),
+      customExportTitle: `${categoryType.toUpperCase()} Platform Comparison - Excel`,
+      customExportDescription: "Detailed spreadsheet with all comparison data and formulas",
+      requireFreshVerification: true, // higher-friction asset → fresh OTP
+    });
     trackComparisonEvent("export_initiated", {
       category: categoryType,
       format: "excel",
@@ -6625,15 +6621,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
         </div>
       )}
 
-      <DownloadGateModal
-        resource={null}
-        open={exportModalOpen}
-        onOpenChange={setExportModalOpen}
-        customExportFn={pendingExportFn}
-        customExportTitle={pendingExportTitle}
-        customExportDescription={pendingExportDescription}
-        requireFreshVerification={requireFreshVerification}
-      />
+      {/* Download gate is now rendered by GlobalModalHost — opened via openModal('download-gate', ...) */}
         </>
       )}
     </div>
