@@ -1,44 +1,63 @@
 /**
  * Clerk auth middleware for the Constancia API.
+ * ─────────────────────────────────────────────────────────────────
+ * Defensive import: if @clerk/express isn't installed yet OR the env
+ * vars throw at module load, the server still boots — Clerk middleware
+ * just becomes a no-op and routes fall back to legacy auth.
  *
- * Replaces:
- *   ✗ server/replitAuth.ts (Replit OIDC + Passport)
- *   ✗ server/services/admin-security.ts (email + password + TOTP)
- *   ✗ server/finance-compass/otp-service.ts (email-OTP gating)
- *
- * Required env:
+ * Required env (when enabling Clerk):
  *   CLERK_SECRET_KEY        — sk_live_… or sk_test_…
- *   CLERK_PUBLISHABLE_KEY   — pk_live_… or pk_test_… (mirrors VITE_ for SSR)
+ *   CLERK_PUBLISHABLE_KEY   — pk_live_… or pk_test_…
  *
  * Usage:
- *   import { requireAuth, requireAdmin } from './middleware/clerk-auth';
- *   app.get('/api/me',           requireAuth,  handler);
- *   app.get('/api/admin/whoami', requireAdmin, handler);
+ *   import { clerkSessionMiddleware, requireAdminOrFallback } from './middleware/clerk-auth';
+ *   app.use(clerkSessionMiddleware);                          // mount once
+ *   router.use(requireAdminOrFallback(legacyMiddleware));     // per-router
  *
- * Admin role: set publicMetadata.role = 'admin' in the Clerk dashboard.
+ * Admin role: set publicMetadata.role = 'admin' in Clerk dashboard.
  */
 
-import { clerkMiddleware, getAuth, requireAuth as clerkRequireAuth } from '@clerk/express';
 import type { Request, Response, NextFunction, RequestHandler } from 'express';
 
 export const CLERK_ENABLED = Boolean(process.env.CLERK_SECRET_KEY);
+
+// ── Defensive load of @clerk/express ──────────────────────────────
+// This runs at module load. If the package is missing or its top-level
+// initialisation throws, we fall back to no-op handlers and log once.
+type ClerkModule = typeof import('@clerk/express');
+let clerk: ClerkModule | null = null;
+let clerkLoadError: string | null = null;
+
+if (CLERK_ENABLED) {
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    clerk = require('@clerk/express') as ClerkModule;
+  } catch (err) {
+    clerkLoadError = err instanceof Error ? err.message : String(err);
+    // eslint-disable-next-line no-console
+    console.warn('[clerk-auth] CLERK_SECRET_KEY set but @clerk/express failed to load:', clerkLoadError);
+  }
+}
+
+const isClerkActive = CLERK_ENABLED && clerk !== null;
+
+const noopMiddleware: RequestHandler = (_req, _res, next) => next();
 
 /**
  * Mount once near the top of the express app — runs on every request,
  * resolves Clerk session if any but does NOT enforce auth.
  */
-export const clerkSessionMiddleware: RequestHandler = CLERK_ENABLED
-  ? clerkMiddleware()
-  : ((_req, _res, next) => next());
+export const clerkSessionMiddleware: RequestHandler = isClerkActive && clerk
+  ? clerk.clerkMiddleware()
+  : noopMiddleware;
 
 /**
  * Require any signed-in Clerk user. 401 if not authenticated.
- * Use for FinanceCompass-protected endpoints (downloads, assessments, etc).
  */
-export const requireAuth: RequestHandler = CLERK_ENABLED
-  ? clerkRequireAuth({ signInUrl: '/sign-in' })
+export const requireAuth: RequestHandler = isClerkActive && clerk
+  ? clerk.requireAuth({ signInUrl: '/sign-in' })
   : ((_req, res, _next) => {
-      res.status(503).json({ error: 'Authentication is not configured (CLERK_SECRET_KEY missing).' });
+      res.status(503).json({ error: 'Authentication is not configured (CLERK_SECRET_KEY missing or Clerk failed to load).' });
     });
 
 /**
@@ -46,11 +65,11 @@ export const requireAuth: RequestHandler = CLERK_ENABLED
  * 403 if signed in but not admin; 401 if not signed in at all.
  */
 export const requireAdmin: RequestHandler = (req: Request, res: Response, next: NextFunction) => {
-  if (!CLERK_ENABLED) {
-    res.status(503).json({ error: 'Admin authentication is not configured (CLERK_SECRET_KEY missing).' });
+  if (!isClerkActive || !clerk) {
+    res.status(503).json({ error: 'Admin authentication is not configured (Clerk unavailable).' });
     return;
   }
-  const auth = getAuth(req);
+  const auth = clerk.getAuth(req);
   if (!auth.userId) {
     res.status(401).json({ error: 'Authentication required.' });
     return;
@@ -68,37 +87,27 @@ export const requireAdmin: RequestHandler = (req: Request, res: Response, next: 
  * Helper: get the signed-in user's ID, or null. No throw.
  */
 export function getUserId(req: Request): string | null {
-  if (!CLERK_ENABLED) return null;
-  return getAuth(req).userId ?? null;
+  if (!isClerkActive || !clerk) return null;
+  return clerk.getAuth(req).userId ?? null;
 }
 
 /**
- * Adapter middleware for the migration period:
- *   - If Clerk is configured: use Clerk's requireAdmin
- *   - Else: fall through to the legacy auth middleware passed in
- *
- * Use in admin route files so the cutover happens automatically once
- * CLERK_SECRET_KEY is set, without redeploying.
- *
- *   router.use(requireAdminOrFallback(isAuthenticated));
- *   router.use(requireAdminOrFallback(legacyRequireAdmin));
+ * Adapter for the migration period:
+ *   - If Clerk is configured + loaded: use Clerk's requireAdmin
+ *   - Else: fall through to the legacy auth middleware
  */
 export function requireAdminOrFallback(legacy: RequestHandler): RequestHandler {
   return (req, res, next) => {
-    if (CLERK_ENABLED) {
+    if (isClerkActive) {
       return requireAdmin(req, res, next);
     }
     return legacy(req, res, next);
   };
 }
 
-/**
- * Same pattern for any-auth (FC users):
- *   router.use(requireAuthOrFallback(isAuthenticated));
- */
 export function requireAuthOrFallback(legacy: RequestHandler): RequestHandler {
   return (req, res, next) => {
-    if (CLERK_ENABLED) {
+    if (isClerkActive) {
       return requireAuth(req, res, next);
     }
     return legacy(req, res, next);
