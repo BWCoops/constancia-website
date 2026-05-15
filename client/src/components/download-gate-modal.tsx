@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useClerkLead, syncLead } from "@/lib/clerk-lead-sync";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -113,6 +114,11 @@ export function DownloadGateModal({
   const [sessionInfo, setSessionInfo] = useState<SessionStatus | null>(null);
   const [isCheckingSession, setIsCheckingSession] = useState(false);
   const { toast } = useToast();
+
+  // Clerk fast-path: when a signed-in user with a complete profile opens
+  // the modal, we skip the email + OTP flow entirely (Clerk has verified
+  // the email already, and we have the lead fields stored in unsafeMetadata).
+  const clerkLead = useClerkLead();
   
   // Use ref to always have latest customExportFn available (avoids stale closures in setTimeout)
   const customExportFnRef = useRef(customExportFn);
@@ -140,13 +146,49 @@ export function DownloadGateModal({
         setStep("form");
         return;
       }
-      // Small delay to ensure React state updates have propagated
+
+      // Clerk fast-path: signed-in user with complete profile gets the
+      // download immediately, no email/OTP gate.
+      if (clerkLead.isLoaded && clerkLead.isSignedIn && clerkLead.isProfileComplete && clerkLead.profile) {
+        const profile = clerkLead.profile;
+        setEmail(profile.email);
+        // Background sync to keep our lead row up-to-date — non-blocking,
+        // fire-and-forget so the download isn't held up.
+        syncLead(profile).catch((err) => {
+          // eslint-disable-next-line no-console
+          console.warn("[DownloadGateModal] Lead sync failed (non-blocking):", err);
+        });
+        setSessionInfo({
+          verified:  true,
+          leadId:    profile.clerkUserId,
+          firstName: profile.firstName,
+          lastName:  profile.lastName,
+          email:     profile.email,
+        });
+        setLeadId(profile.clerkUserId);
+        setStep("session");
+        // Trigger download via the existing path
+        const t = setTimeout(() => {
+          performSessionDownload();
+        }, 50);
+        return () => clearTimeout(t);
+      }
+
+      // Signed-in but profile incomplete — bounce to onboarding so we collect
+      // company + jobTitle first, then return here.
+      if (clerkLead.isLoaded && clerkLead.isSignedIn && !clerkLead.isProfileComplete) {
+        const ret = encodeURIComponent(window.location.pathname + window.location.search);
+        window.location.href = `/onboarding?return=${ret}`;
+        return;
+      }
+
+      // Otherwise: standard session check + lead capture flow
       const timer = setTimeout(() => {
         checkSession();
       }, 50);
       return () => clearTimeout(timer);
     }
-  }, [open, resource, customExportFn, requireFreshVerification]);
+  }, [open, resource, customExportFn, requireFreshVerification, clerkLead.isLoaded, clerkLead.isSignedIn, clerkLead.isProfileComplete]);
 
   // Helper to wait for export function to be set (polls until available or timeout)
   const waitForExportFn = (): Promise<(() => Promise<void>) | null> => {

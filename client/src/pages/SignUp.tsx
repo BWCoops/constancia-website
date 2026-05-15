@@ -34,7 +34,8 @@ export default function SignUpPage() {
           path="/sign-up"
           routing="path"
           signInUrl="/sign-in"
-          fallbackRedirectUrl="/finance-compass"
+          // After Clerk sign-up, route to /onboarding to capture company + jobTitle
+          fallbackRedirectUrl="/onboarding?return=/finance-compass"
         />
       ) : (
         <div className="max-w-md text-center text-[#F6F3EE]/80">

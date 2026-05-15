@@ -657,6 +657,15 @@ export async function registerRoutes(
   // ============================================
   app.use("/api", modularRoutes);
   log.info("modular domain routes registered");
+
+  // ============================================
+  // CLERK LEADS SYNC — POST /api/leads/sync
+  // Bridges Clerk user sign-up data into the leads/contact_submissions table.
+  // See server/routes/leads-sync.ts and client/src/lib/clerk-lead-sync.ts.
+  // ============================================
+  const { default: leadsSyncRouter } = await import("./routes/leads-sync");
+  app.use("/api/leads", leadsSyncRouter);
+  log.info("Clerk leads sync route registered (/api/leads/sync)");
   
   // ============================================
   // FEATURE FLAGS API ENDPOINTS

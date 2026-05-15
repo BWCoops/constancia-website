@@ -41,6 +41,7 @@ const AdminLogin = lazy(() => import("@/pages/admin/AdminLogin"));
 const AdminSignIn = lazy(() => import("@/pages/admin/AdminSignIn"));
 const SignInPage = lazy(() => import("@/pages/SignIn"));
 const SignUpPage = lazy(() => import("@/pages/SignUp"));
+const OnboardingPage = lazy(() => import("@/pages/Onboarding"));
 const AdminAccessDenied = lazy(() => import("@/pages/admin/AdminAccessDenied"));
 const AdminHub = lazy(() => import("@/pages/admin/AdminHub"));
 const AdminDashboard = lazy(() => import("@/pages/admin/AdminDashboard"));
@@ -295,6 +296,7 @@ function Router() {
           <Route path="/sign-in/:rest*" component={SignInPage} />
           <Route path="/sign-up" component={SignUpPage} />
           <Route path="/sign-up/:rest*" component={SignUpPage} />
+          <Route path="/onboarding" component={OnboardingPage} />
           <Route path="/admin/sign-in" component={AdminSignIn} />
           <Route path="/admin/sign-in/:rest*" component={AdminSignIn} />
 
