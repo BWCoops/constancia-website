@@ -22,14 +22,28 @@ interface SphereProps {
   color: string;
   radius?: number;
   rotateSpeed?: number;
+  /** Phase offset so paired spheres breathe out-of-phase. Radians. */
+  breathPhase?: number;
 }
 
-function BrandSphere({ position, color, radius = 1.6, rotateSpeed = 0.08 }: SphereProps) {
+function BrandSphere({
+  position,
+  color,
+  radius = 1.6,
+  rotateSpeed = 0.08,
+  breathPhase = 0,
+}: SphereProps) {
   const ref = useRef<Mesh>(null);
-  useFrame((_, delta) => {
+  useFrame((state, delta) => {
     if (!ref.current) return;
+    // Slow rotation
     ref.current.rotation.x += delta * rotateSpeed;
     ref.current.rotation.y += delta * rotateSpeed * 0.65;
+    // Editorial "breathing" — subtle scale modulation, not a wobble.
+    // Period ≈ 9s, amplitude 1.5% — enough to feel alive, not enough to draw the eye.
+    const t = state.clock.elapsedTime * 0.7 + breathPhase;
+    const scale = 1 + Math.sin(t) * 0.015;
+    ref.current.scale.setScalar(scale);
   });
   return (
     <mesh ref={ref} position={position}>
@@ -72,12 +86,13 @@ function Scene() {
 
       {/* Deep berry sphere — upper-left, the grounded primary */}
       <Float speed={0.4} rotationIntensity={0.25} floatIntensity={0.7}>
-        <BrandSphere position={[-1.0, 0.6, 0]} color="#8E4F67" radius={1.75} />
+        <BrandSphere position={[-1.0, 0.6, 0]} color="#8E4F67" radius={1.75} breathPhase={0} />
       </Float>
 
-      {/* Deep mint sphere — lower-right, overlapping */}
+      {/* Deep mint sphere — lower-right, overlapping. Out of phase by π so the pair breathes
+          alternately, never simultaneously — feels organic, not mechanical. */}
       <Float speed={0.35} rotationIntensity={0.2} floatIntensity={0.6}>
-        <BrandSphere position={[0.9, -0.5, 0.35]} color="#5E8D7A" radius={1.75} rotateSpeed={0.06} />
+        <BrandSphere position={[0.9, -0.5, 0.35]} color="#5E8D7A" radius={1.75} rotateSpeed={0.06} breathPhase={Math.PI} />
       </Float>
     </>
   );
