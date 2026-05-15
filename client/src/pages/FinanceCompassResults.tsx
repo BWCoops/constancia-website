@@ -1,7 +1,12 @@
 import { useParams, useLocation, Link } from "wouter";
 import { motion } from "framer-motion";
 import { useQuery, useMutation, keepPreviousData } from "@tanstack/react-query";
-import { useState, useEffect, useCallback, useRef, useMemo } from "react";
+import { lazy, Suspense, useState, useEffect, useCallback, useRef, useMemo } from "react";
+
+// Lazy-load WebGL ambient scene only when results render
+const AmbientScene3D = lazy(() =>
+  import("@/components/3d/AmbientScene3D").then((m) => ({ default: m.AmbientScene3D })),
+);
 import { trackResultsView, trackReportDownload } from "@/lib/funnel-analytics";
 import { 
   CheckCircle2, 
@@ -830,8 +835,15 @@ export default function FinanceCompassResults() {
           </motion.div>
         )}
         
-        <section className="bg-gradient-to-r from-[#12161D] via-[#1E2630] to-[#7FB8A3] py-8 sm:py-12 md:py-16">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <section className="relative overflow-hidden bg-gradient-to-r from-[#12161D] via-[#1E2630] to-[#7FB8A3] py-8 sm:py-12 md:py-16">
+          {/* Editorial 3D ambient — drifts behind the hero gradient */}
+          <div className="absolute inset-0 pointer-events-none opacity-50">
+            <Suspense fallback={null}>
+              <AmbientScene3D intensity={0.55} variant="rose-mint" />
+            </Suspense>
+          </div>
+
+          <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

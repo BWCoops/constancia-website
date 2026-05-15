@@ -1,6 +1,11 @@
-import { memo, useCallback, useMemo, useState } from "react";
+import { lazy, memo, Suspense, useCallback, useMemo, useState } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
+
+// Lazy-load WebGL ambient scene only when dashboard mounts
+const AmbientScene3D = lazy(() =>
+  import("@/components/3d/AmbientScene3D").then((m) => ({ default: m.AmbientScene3D })),
+);
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
@@ -2187,33 +2192,42 @@ export default function FinanceCompassDashboard() {
             </Link>
           </nav>
 
-          <motion.header
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mb-8"
-          >
-            <div className="flex items-start gap-4 flex-wrap">
-              <div className="h-14 w-14 flex items-center justify-center rounded-xl bg-gradient-to-br from-[#12161D] to-[#7FB8A3] shadow-lg" aria-hidden="true">
-                <CompassIcon className="h-7 w-7 text-white" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-3 flex-wrap mb-1">
-                  <h1 className="text-2xl md:text-3xl font-bold text-[#12161D] dark:text-white" data-testid="text-welcome-message">
-                    Welcome back, {sessionData?.firstName}!
-                  </h1>
-                  <Badge className="bg-[#7FB8A3]/10 text-brand-teal border-[#7FB8A3]/30">
-                    <CheckCircle2 className="h-3 w-3 mr-1" aria-hidden="true" />
-                    Verified
-                  </Badge>
-                </div>
-                <p className="text-muted-foreground flex items-center gap-2 text-sm" data-testid="text-user-email">
-                  <Mail className="h-4 w-4" aria-hidden="true" />
-                  {sessionData?.email}
-                </p>
-              </div>
+          <div className="relative mb-8 overflow-hidden rounded-2xl border border-[#12161D]/5 bg-gradient-to-br from-white via-white to-[#F6F3EE]/40 px-6 py-6 sm:px-8 sm:py-8 dark:from-[#1A1F28] dark:via-[#1A1F28] dark:to-[#12161D]/40 dark:border-white/5">
+            {/* Editorial 3D ambient — sits behind the header card */}
+            <div className="absolute inset-0 pointer-events-none opacity-40">
+              <Suspense fallback={null}>
+                <AmbientScene3D intensity={0.4} variant="rose-mint" />
+              </Suspense>
             </div>
-          </motion.header>
+
+            <motion.header
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="relative z-10"
+            >
+              <div className="flex items-start gap-4 flex-wrap">
+                <div className="h-14 w-14 flex items-center justify-center rounded-xl bg-gradient-to-br from-[#12161D] to-[#7FB8A3] shadow-lg" aria-hidden="true">
+                  <CompassIcon className="h-7 w-7 text-white" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-3 flex-wrap mb-1">
+                    <h1 className="text-2xl md:text-3xl font-bold text-[#12161D] dark:text-white" data-testid="text-welcome-message">
+                      Welcome back, {sessionData?.firstName}!
+                    </h1>
+                    <Badge className="bg-[#7FB8A3]/10 text-brand-teal border-[#7FB8A3]/30">
+                      <CheckCircle2 className="h-3 w-3 mr-1" aria-hidden="true" />
+                      Verified
+                    </Badge>
+                  </div>
+                  <p className="text-muted-foreground flex items-center gap-2 text-sm" data-testid="text-user-email">
+                    <Mail className="h-4 w-4" aria-hidden="true" />
+                    {sessionData?.email}
+                  </p>
+                </div>
+              </div>
+            </motion.header>
+          </div>
 
           <AnalyticsDashboard
             assessments={assessments}
