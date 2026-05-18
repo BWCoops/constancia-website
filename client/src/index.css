@@ -15,37 +15,37 @@
 /* ── 1. Brand tokens (always available, every context) ─────────────── */
 :root {
   /* Backgrounds */
-  --brand-bg-primary:       #0C1E3B;
-  --brand-bg-secondary:     #011630;
-  --brand-bg-surface:       rgba(255,255,255,0.025);
-  --brand-bg-surface-hover: rgba(8,132,170,0.05);
+  --brand-bg-primary:       #15355C;
+  --brand-bg-secondary:     #0B2548;
+  --brand-bg-surface:       rgba(255,255,255,0.035);
+  --brand-bg-surface-hover: rgba(8,132,170,0.07);
 
   /* Borders */
-  --brand-border:           rgba(255,255,255,0.07);
-  --brand-border-hover:     rgba(8,132,170,0.28);
-  --brand-border-muted:     rgba(255,255,255,0.05);
-  --brand-border-strong:    rgba(255,255,255,0.14);
+  --brand-border:           rgba(255,255,255,0.09);
+  --brand-border-hover:     rgba(8,132,170,0.32);
+  --brand-border-muted:     rgba(255,255,255,0.06);
+  --brand-border-strong:    rgba(255,255,255,0.18);
 
   /* Text */
   --brand-text-primary:     #FEFFF3;
-  --brand-text-secondary:   rgba(254,255,243,0.55);
-  --brand-text-muted:       rgba(254,255,243,0.28);
-  --brand-text-tertiary:    rgba(254,255,243,0.22);
+  --brand-text-secondary:   rgba(254,255,243,0.62);
+  --brand-text-muted:       rgba(254,255,243,0.34);
+  --brand-text-tertiary:    rgba(254,255,243,0.26);
 
   /* Accent colours */
   --brand-teal:             #0884AA;
   --brand-teal-accessible:  #0A6688;   /* darker teal — 4.6:1 on white, WCAG AA for light backgrounds */
   --brand-cyan:             #12EBFC;
-  --brand-navy:             #02205B;
+  --brand-navy:             #1B3D7A;
   --brand-cream:            #FEFFF3;
 
   /* Gradient shorthands */
-  --brand-gradient-banner:  linear-gradient(135deg, #02205B 0%, #0070C0 60%, #0884AA 100%);
-  --brand-gradient-hero:    linear-gradient(135deg, #010E2A 0%, #02205B 100%);
+  --brand-gradient-banner:  linear-gradient(135deg, #1B3D7A 0%, #0F7BC8 60%, #0A98C4 100%);
+  --brand-gradient-hero:    linear-gradient(135deg, #0E2547 0%, #1B3D7A 100%);
 
   /* Info box (cyan tint) */
-  --brand-info-bg:          rgba(18,235,252,0.05);
-  --brand-info-border:      rgba(18,235,252,0.12);
+  --brand-info-bg:          rgba(18,235,252,0.06);
+  --brand-info-border:      rgba(18,235,252,0.16);
 
   /* Typography */
   --brand-font-sans:        'DM Sans', system-ui, sans-serif;
@@ -245,22 +245,22 @@
 
 /* ── 5. page-dark — applies brand dark system to any public page ────── */
 .page-dark {
-  --background:           220 96% 5%;
+  --background:           215 62% 22%;
   --foreground:           60  33% 97%;
-  --border:               220 30% 16%;
-  --input:                220 30% 14%;
+  --border:               215 35% 28%;
+  --input:                215 35% 24%;
   --ring:                 197 100% 52%;
-  --card:                 220 60% 8%;
+  --card:                 215 55% 18%;
   --card-foreground:      60  33% 97%;
-  --card-border:          220 30% 16%;
-  --popover:              220 60% 8%;
+  --card-border:          215 35% 28%;
+  --popover:              215 55% 18%;
   --popover-foreground:   60  33% 97%;
-  --popover-border:       220 30% 16%;
-  --muted:                220 30% 14%;
-  --muted-foreground:     200 12% 52%;
-  --secondary:            220 30% 14%;
+  --popover-border:       215 35% 28%;
+  --muted:                215 35% 24%;
+  --muted-foreground:     200 14% 62%;
+  --secondary:            215 35% 24%;
   --secondary-foreground: 60 33% 97%;
-  --accent:               193 93% 35%;
+  --accent:               193 93% 38%;
   --accent-foreground:    60  33% 97%;
 
   background:  var(--brand-bg-primary);
@@ -427,7 +427,7 @@
 
   /* Stats banner section */
   .section-stats-banner {
-    background: linear-gradient(to right, var(--brand-navy), #0070C0, var(--brand-teal));
+    background: linear-gradient(to right, var(--brand-navy), #0F7BC8, var(--brand-teal));
     color:       var(--brand-cream);
     padding:     var(--brand-section-py) 0;
   }

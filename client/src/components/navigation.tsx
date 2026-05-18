@@ -92,7 +92,7 @@ function NavDropdownMenu({ item, location }: { item: NavDropdown; location: stri
       </button>
 
       <div
-        className={`absolute top-full left-0 mt-1 w-52 rounded-lg border border-white/[0.08] bg-[#010E2A]/97 backdrop-blur-md shadow-lg py-1 z-50 transition-all duration-150 origin-top ${
+        className={`absolute top-full left-0 mt-1 w-52 rounded-lg border border-white/[0.08] bg-[#15355C]/95 backdrop-blur-md shadow-lg py-1 z-50 transition-all duration-150 origin-top ${
           open
             ? "opacity-100 scale-y-100 pointer-events-auto"
             : "opacity-0 scale-y-95 pointer-events-none"
@@ -130,7 +130,7 @@ export function Navigation() {
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 bg-[#010E2A]/97 backdrop-blur-md border-b border-white/[0.05]"
+      className="fixed top-0 left-0 right-0 z-50 bg-[#15355C]/95 backdrop-blur-md border-b border-white/[0.05]"
       role="banner"
     >
       <nav
@@ -192,7 +192,7 @@ export function Navigation() {
       </nav>
 
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-[#010E2A]/97 backdrop-blur-md border-b border-white/[0.05] nav-slide-down">
+        <div className="lg:hidden bg-[#15355C]/95 backdrop-blur-md border-b border-white/[0.05] nav-slide-down">
           <div className="px-6 py-4 space-y-1">
             {enabledItems.map((item) => {
               if (isDropdown(item)) {

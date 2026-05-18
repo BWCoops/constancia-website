@@ -20,7 +20,7 @@ export function HomeTicker() {
     <div
       className="h-[34px] overflow-hidden flex items-center"
       style={{
-        background: '#010E2A',
+        background: 'var(--brand-bg-primary)',
         borderBottom: '1px solid rgba(18,235,252,0.12)',
       }}
     >

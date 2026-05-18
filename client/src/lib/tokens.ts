@@ -19,35 +19,35 @@
 
 export const COLOR = {
   // Backgrounds — dark first, used on every public page
-  bgPrimary:        '#010E2A',   // deepest navy, outer / odd sections
-  bgSecondary:      '#011630',   // slightly lighter, even sections
-  bgSurface:        'rgba(255,255,255,0.025)', // glass card fill
-  bgSurfaceHover:   'rgba(8,132,170,0.05)',    // glass card hover fill
+  bgPrimary:        '#15355C',   // deepest navy, outer / odd sections
+  bgSecondary:      '#0B2548',   // slightly lighter, even sections
+  bgSurface:        'rgba(255,255,255,0.035)', // glass card fill
+  bgSurfaceHover:   'rgba(8,132,170,0.07)',    // glass card hover fill
 
   // Borders
-  border:           'rgba(255,255,255,0.07)',  // default card / divider
-  borderHover:      'rgba(8,132,170,0.28)',    // card hover state
-  borderMuted:      'rgba(255,255,255,0.05)',  // section dividers
-  borderStrong:     'rgba(255,255,255,0.14)',  // btn-brand full border
+  border:           'rgba(255,255,255,0.09)',  // default card / divider
+  borderHover:      'rgba(8,132,170,0.32)',    // card hover state
+  borderMuted:      'rgba(255,255,255,0.06)',  // section dividers
+  borderStrong:     'rgba(255,255,255,0.18)',  // btn-brand full border
 
   // Text
   textPrimary:      '#FEFFF3',                        // headings, strong copy
-  textSecondary:    'rgba(254,255,243,0.55)',          // body, descriptions
-  textMuted:        'rgba(254,255,243,0.28)',          // labels
-  textTertiary:     'rgba(254,255,243,0.22)',          // mono captions
+  textSecondary:    'rgba(254,255,243,0.62)',          // body, descriptions
+  textMuted:        'rgba(254,255,243,0.34)',          // labels
+  textTertiary:     'rgba(254,255,243,0.26)',          // mono captions
 
   // Brand accents
   teal:             '#0884AA',   // primary CTA, active nav, icons
   cyan:             '#12EBFC',   // highlights, btn accent bar, hover
-  navy:             '#02205B',   // deep gradient start, footer bg
+  navy:             '#1B3D7A',   // mid-navy gradient anchor
   cream:            '#FEFFF3',   // primary text on dark
 
   // Gradient stops
-  gradientBannerFrom:   '#02205B',
-  gradientBannerMid:    '#0070C0',
-  gradientBannerTo:     '#0884AA',
-  gradientHeroFrom:     '#010E2A',
-  gradientHeroTo:       '#02205B',
+  gradientBannerFrom:   '#1B3D7A',
+  gradientBannerMid:    '#0F7BC8',
+  gradientBannerTo:     '#0A98C4',
+  gradientHeroFrom:     '#0E2547',
+  gradientHeroTo:       '#1B3D7A',
 
   // Cyan info box (used in careers, legal pages)
   infoBg:           'rgba(18,235,252,0.05)',
