@@ -11,8 +11,8 @@ import constanciaLogo from "@assets/constancia-logo.png";
 // to give us scroll runway.
 // =============================================================================
 
-const STOPS = [0.05, 0.27, 0.47, 0.70, 0.95];
-const SECTION = 0.20;
+const STOPS = [0.04, 0.15, 0.26, 0.37, 0.48, 0.59, 0.70, 0.82, 0.94];
+const SECTION = 0.16;
 
 const LETTER_FLY = [
   { dx: -360, dy: -280, rot: -10 },
@@ -32,26 +32,36 @@ const ROSE_BAR_FLY = { dx: 0, dy: -380, scale: 1.8, rot: 6 };
 
 type Frame = { p: number; top: number; left: number; size: number; op: number };
 
+// 9-panel choreography. Compositions always push circles to opposite
+// corners or edges so the centered text reads on clean cream.
 const CIRCLE_FRAMES: { rose: Frame[]; mint: Frame[] } = {
   rose: [
-    { p: 0.0, top: 22, left: 54, size: 16, op: 0.78 },
-    { p: 0.1, top: 22, left: 54, size: 16, op: 0.78 },
-    { p: 0.25, top: 20, left: 84, size: 36, op: 0.5 },
-    { p: 0.45, top: 78, left: 18, size: 40, op: 0.52 },
-    { p: 0.65, top: 22, left: 18, size: 42, op: 0.5 },
-    { p: 0.85, top: 78, left: 82, size: 38, op: 0.52 },
-    { p: 0.96, top: 22, left: 54, size: 16, op: 0.78 },
-    { p: 1.0, top: 22, left: 54, size: 16, op: 0.78 },
+    { p: 0.00, top: 22, left: 54, size: 16, op: 0.78 },   // lockup
+    { p: 0.05, top: 22, left: 54, size: 16, op: 0.78 },
+    { p: 0.15, top: 22, left: 82, size: 32, op: 0.50 },   // 01 Senior — top-right
+    { p: 0.26, top: 78, left: 20, size: 38, op: 0.52 },   // 02 Fixed — bottom-left
+    { p: 0.37, top: 22, left: 18, size: 40, op: 0.50 },   // 03 AI — top-left
+    { p: 0.48, top: 22, left: 82, size: 36, op: 0.50 },   // 04 Platforms — top-right
+    { p: 0.59, top: 50, left: 12, size: 38, op: 0.42 },   // 05 Track record — left frame
+    { p: 0.70, top: 78, left: 82, size: 40, op: 0.50 },   // 06 Programmes — bottom-right
+    { p: 0.82, top: 78, left: 20, size: 36, op: 0.52 },   // 07 FinanceCompass — bottom-left
+    { p: 0.94, top: 30, left: 70, size: 26, op: 0.62 },   // 08 Outro — settling
+    { p: 0.97, top: 22, left: 54, size: 16, op: 0.78 },   // reassembled
+    { p: 1.00, top: 22, left: 54, size: 16, op: 0.78 },
   ],
   mint: [
-    { p: 0.0, top: 24, left: 57, size: 14, op: 0.78 },
-    { p: 0.1, top: 24, left: 57, size: 14, op: 0.78 },
-    { p: 0.25, top: 80, left: 18, size: 32, op: 0.5 },
-    { p: 0.45, top: 22, left: 82, size: 34, op: 0.52 },
-    { p: 0.65, top: 80, left: 82, size: 38, op: 0.5 },
-    { p: 0.85, top: 22, left: 18, size: 36, op: 0.52 },
-    { p: 0.96, top: 24, left: 57, size: 14, op: 0.78 },
-    { p: 1.0, top: 24, left: 57, size: 14, op: 0.78 },
+    { p: 0.00, top: 24, left: 57, size: 14, op: 0.78 },
+    { p: 0.05, top: 24, left: 57, size: 14, op: 0.78 },
+    { p: 0.15, top: 78, left: 20, size: 30, op: 0.50 },   // bottom-left
+    { p: 0.26, top: 22, left: 80, size: 32, op: 0.52 },   // top-right
+    { p: 0.37, top: 78, left: 80, size: 34, op: 0.50 },   // bottom-right
+    { p: 0.48, top: 22, left: 18, size: 32, op: 0.50 },   // top-left
+    { p: 0.59, top: 50, left: 88, size: 38, op: 0.42 },   // right frame
+    { p: 0.70, top: 22, left: 18, size: 34, op: 0.50 },   // top-left
+    { p: 0.82, top: 22, left: 80, size: 32, op: 0.52 },   // top-right
+    { p: 0.94, top: 70, left: 32, size: 24, op: 0.62 },   // settling
+    { p: 0.97, top: 24, left: 57, size: 14, op: 0.78 },
+    { p: 1.00, top: 24, left: 57, size: 14, op: 0.78 },
   ],
 };
 
@@ -123,14 +133,6 @@ export function HeroSectionStatic() {
     const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 200);
     camera.position.set(0, 0.9, 5.0);
     camera.lookAt(0, 0, 0);
-
-    function resize() {
-      const w = window.innerWidth, h = window.innerHeight;
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.setSize(w, h, false);
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-    }
 
     const VERT = `
       uniform float uTime; uniform float uPhase; uniform float uAmp;
@@ -223,16 +225,31 @@ export function HeroSectionStatic() {
       return mesh;
     }
 
+    // Mobile gets a slightly trimmed mesh and tighter pixel ratio cap so the
+    // shader still runs at 60fps on iPhone 12 / Pixel 6 class hardware — but
+    // keeps the same 5-layer depth so the "wow" reads identically.
+    const isMobile = window.innerWidth <= 768;
+    const segScale = isMobile ? 0.55 : 1;
+    const seg = (n: number) => Math.max(48, Math.floor(n * segScale));
+
     const LAYERS = [
-      makeFabric({ size: 10.0, segs: 200, amp: 0.85, phase: 2.4, posY: -0.20, posZ:  0.4,   rotX: -Math.PI * 0.50, rotZ: -0.04, baseOpacity: 0.30 }),
-      makeFabric({ size: 11.0, segs: 180, amp: 0.95, phase: 0.0, posY: -0.30, posZ: -2.5,   rotX: -Math.PI * 0.46, rotZ:  0.08, baseOpacity: 0.42 }),
-      makeFabric({ size: 12.0, segs: 160, amp: 1.00, phase: 1.1, posY: -0.45, posZ: -5.5,   rotX: -Math.PI * 0.52, rotZ: -0.06, baseOpacity: 0.52 }),
-      makeFabric({ size: 13.0, segs: 140, amp: 1.05, phase: 3.0, posY: -0.55, posZ: -8.5,   rotX: -Math.PI * 0.44, rotZ:  0.05, baseOpacity: 0.60 }),
-      makeFabric({ size: 14.0, segs: 120, amp: 1.10, phase: 4.2, posY: -0.65, posZ: -11.5,  rotX: -Math.PI * 0.50, rotZ: -0.03, baseOpacity: 0.62 }),
+      makeFabric({ size: 10.0, segs: seg(200), amp: 0.85, phase: 2.4, posY: -0.20, posZ:  0.4,   rotX: -Math.PI * 0.50, rotZ: -0.04, baseOpacity: 0.30 }),
+      makeFabric({ size: 11.0, segs: seg(180), amp: 0.95, phase: 0.0, posY: -0.30, posZ: -2.5,   rotX: -Math.PI * 0.46, rotZ:  0.08, baseOpacity: 0.42 }),
+      makeFabric({ size: 12.0, segs: seg(160), amp: 1.00, phase: 1.1, posY: -0.45, posZ: -5.5,   rotX: -Math.PI * 0.52, rotZ: -0.06, baseOpacity: 0.52 }),
+      makeFabric({ size: 13.0, segs: seg(140), amp: 1.05, phase: 3.0, posY: -0.55, posZ: -8.5,   rotX: -Math.PI * 0.44, rotZ:  0.05, baseOpacity: 0.60 }),
+      makeFabric({ size: 14.0, segs: seg(120), amp: 1.10, phase: 4.2, posY: -0.65, posZ: -11.5,  rotX: -Math.PI * 0.50, rotZ: -0.03, baseOpacity: 0.62 }),
     ];
 
-    resize();
-    window.addEventListener("resize", resize);
+    function resizeWithDpr() {
+      const w = window.innerWidth, h = window.innerHeight;
+      const dprCap = window.innerWidth <= 768 ? 1.5 : 2;
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, dprCap));
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    resizeWithDpr();
+    window.addEventListener("resize", resizeWithDpr);
 
     let mxSmooth = 0, mySmooth = 0, tx = 0.5, ty = 0.5;
     function onMove(e: PointerEvent) {
@@ -408,7 +425,7 @@ export function HeroSectionStatic() {
 
     return () => {
       cancelAnimationFrame(rafId);
-      window.removeEventListener("resize", resize);
+      window.removeEventListener("resize", resizeWithDpr);
       window.removeEventListener("pointermove", onMove);
       LAYERS.forEach((mesh) => {
         mesh.geometry.dispose();
@@ -434,8 +451,8 @@ export function HeroSectionStatic() {
       style={{
         position: "relative",
         width: "100%",
-        // 5× viewport scroll runway — enough room for the dive sequence
-        height: "500vh",
+        // 9× viewport scroll runway — 9 panels at ~100vh each
+        height: "900vh",
         background: "var(--brand-bg-primary)",
         fontFamily: "var(--brand-font-sans)",
       }}
@@ -531,7 +548,48 @@ export function HeroSectionStatic() {
           </div>
 
           <div ref={panelRef(4)} className="hero-panel">
-            <div className="hero-num stagger">04 · Start here</div>
+            <div className="hero-num stagger">04 · Platforms we know</div>
+            <h2 className="hero-h2 hero-h2--list stagger">
+              OneStream · Anaplan<br />
+              Abacum · Workday Adaptive<br />
+              Pigment · Cube · Vena
+            </h2>
+            <p className="hero-body stagger">
+              Independent. We recommend the platform that fits your business — not the one that fits our pipeline.
+            </p>
+          </div>
+
+          <div ref={panelRef(5)} className="hero-panel">
+            <div className="hero-num stagger">05 · Track record</div>
+            <div className="hero-stats stagger">
+              <div className="hero-stat">
+                <div className="hero-stat-num">40<span>+</span></div>
+                <div className="hero-stat-label">Years combined EPM delivery experience</div>
+              </div>
+              <div className="hero-stat">
+                <div className="hero-stat-num">£100<span>m+</span></div>
+                <div className="hero-stat-label">Finance technology programmes delivered</div>
+              </div>
+              <div className="hero-stat">
+                <div className="hero-stat-num">3<span>×</span></div>
+                <div className="hero-stat-label">Faster through AI-augmented delivery</div>
+              </div>
+            </div>
+          </div>
+
+          <div ref={panelRef(6)} className="hero-panel">
+            <div className="hero-num stagger">06 · Delivered for</div>
+            <h2 className="hero-h2 hero-h2--list stagger">
+              AerCap · Howden<br />
+              Reckitt Benckiser · BAT
+            </h2>
+            <p className="hero-body stagger">
+              Some of the world's most complex finance functions. We know what good looks like — and what it costs to get there.
+            </p>
+          </div>
+
+          <div ref={panelRef(7)} className="hero-panel">
+            <div className="hero-num stagger">07 · Start here</div>
             <h2 className="hero-h2 stagger">
               Know where you sit <span className="hero-rose-mark">today</span>
               <span className="hero-period" />
@@ -546,6 +604,34 @@ export function HeroSectionStatic() {
                 </Link>
               </div>
             )}
+          </div>
+
+          <div ref={panelRef(8)} className="hero-panel">
+            <div className="hero-num stagger">08 · Let's talk</div>
+            <h2 className="hero-h2 stagger">
+              Ready to <em>talk</em>
+              <span className="hero-period" />
+            </h2>
+            <p className="hero-body stagger">
+              No pitch. No commitment. Just someone who's done this before.
+            </p>
+            <div className="hero-ctas stagger">
+              {flags.financeCompass && (
+                <Link href="/finance-compass" className="hero-btn">
+                  Start your assessment <span className="hero-arrow">→</span>
+                </Link>
+              )}
+              {flags.comparisonTools && (
+                <Link href="/tools/epm-comparison" className="hero-btn hero-btn--ghost">
+                  Compare platforms
+                </Link>
+              )}
+              {flags.contact && (
+                <Link href="/contact" className="hero-btn hero-btn--ghost">
+                  Get in touch
+                </Link>
+              )}
+            </div>
           </div>
         </div>
 

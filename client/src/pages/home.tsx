@@ -1,14 +1,10 @@
-import { useEffect, lazy, Suspense } from "react";
+import { useEffect } from "react";
 import { Navigation } from "@/components/navigation";
 import { HeroSectionStatic } from "@/components/hero-section-static";
 import { Footer } from "@/components/footer";
 import { CookiePreferencesIcon } from "@/components/cookie-consent";
 import { SEOHead } from "@/components/seo-head";
 import { trackPageView, setupScrollTracking, setupDwellTimeTracking } from "@/lib/funnel-analytics";
-
-const BelowFoldSections = lazy(() =>
-  import("@/components/home/BelowFoldSections").then(m => ({ default: m.BelowFoldSections }))
-);
 
 export default function Home() {
   useEffect(() => {
@@ -48,10 +44,6 @@ export default function Home() {
 
       <main id="main-content">
         <HeroSectionStatic />
-
-        <Suspense fallback={null}>
-          <BelowFoldSections />
-        </Suspense>
       </main>
 
       <Footer />

@@ -812,6 +812,72 @@
   background: linear-gradient(90deg, var(--brand-mint), var(--brand-rose));
 }
 
+/* Platforms / Programmes list panels — bigger inter-line breathing */
+.hero-h2--list {
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+}
+
+/* Track-record stats panel */
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px 56px;
+  margin-top: 12px;
+  max-width: 900px;
+  margin-left: auto; margin-right: auto;
+}
+.hero-stat { text-align: center; }
+.hero-stat-num {
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 300;
+  font-size: clamp(56px, 8vw, 110px);
+  line-height: 1;
+  letter-spacing: -0.045em;
+  color: var(--brand-graphite);
+  white-space: nowrap;
+}
+.hero-stat-num span {
+  color: var(--brand-berry);
+  font-size: 0.55em;
+  margin-left: 0.04em;
+  vertical-align: 0.1em;
+  font-weight: 400;
+}
+.hero-stat-label {
+  margin-top: 14px;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--brand-slate);
+  opacity: 0.78;
+  max-width: 220px;
+  margin-left: auto; margin-right: auto;
+}
+
+/* Mobile — keep the cinematic, just tune type & layout */
+@media (max-width: 768px) {
+  .hero-eyebrow { font-size: 12px; letter-spacing: 0.14em; gap: 10px; margin-bottom: 22px; }
+  .hero-eyebrow::before { width: 24px; }
+  .hero-num { font-size: 12px; letter-spacing: 0.14em; gap: 10px; margin-bottom: 24px; }
+  .hero-num::before { width: 24px; }
+  .hero-body { font-size: 16px; margin-top: 18px; max-width: 92vw; }
+  .hero-stats { grid-template-columns: 1fr; gap: 28px; }
+  .hero-stat-label { font-size: 13px; max-width: 260px; }
+  .hero-stat-num { font-size: clamp(64px, 22vw, 92px); }
+  .hero-ctas { gap: 10px; flex-direction: column; align-items: stretch; max-width: 320px; margin-left: auto; margin-right: auto; }
+  .hero-ctas .hero-btn { justify-content: center; padding: 14px 22px; }
+  .hero-logo-pieces { font-size: 36px; }
+  .hero-logo-pieces .hero-rose-bar { width: 2px !important; height: 20px !important; }
+  .hero-logo-pieces .hero-mint-dot { width: 11px !important; height: 11px !important; }
+}
+
+@media (max-width: 420px) {
+  .hero-h1 { font-size: clamp(36px, 11vw, 56px); }
+  .hero-h2 { font-size: clamp(28px, 9vw, 44px); }
+  .hero-logo-real { width: clamp(180px, 56vw, 260px); }
+}
+
 /* ── 11. Third-party overrides ───────────────────────────────────────── */
 #hubspot-messages-iframe-container,
 [data-testid="hs-chat-widget"],
