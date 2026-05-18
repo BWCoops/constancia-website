@@ -1,90 +1,102 @@
 /**
- * 1QG Design Tokens
+ * Constancia Design Tokens
  * ─────────────────────────────────────────────────────────────────
  * Single source of truth for every brand value used across the app.
  *
- * HOW TO USE
- *  • CSS variables  → index.css references these as string literals
- *  • Tailwind       → tailwind.config.ts maps them via `var(--brand-*)`
- *  • Components     → never import this file directly; use CSS vars or
- *                     Tailwind utilities instead. This file exists so
- *                     there is ONE place to change a colour and have it
- *                     cascade everywhere automatically.
- *
- * NEVER hardcode a hex value, rgba, or pixel measurement anywhere else
- * in the codebase. Add it here first, then reference it as a variable.
+ * Palette per Constancia brand sheet (2026):
+ *  • Primary Dark   — graphite text, dark surfaces
+ *  • Secondary Dark — slate for borders, layered panels
+ *  • Main Light     — warm cream, dominant background
+ *  • Support Neutral — muted stone for subtle support surfaces
+ *  • Muted Rose     — pink accent (sparingly)
+ *  • Deep Berry     — stronger rose for moments / hover
+ *  • Mineral Green  — fresh mint accent (sparingly)
+ *  • Deep Mint      — grounded mint
  */
 
 // ─── Colour palette ──────────────────────────────────────────────────────────
 
 export const COLOR = {
-  // Backgrounds — dark first, used on every public page
-  bgPrimary:        '#010E2A',   // deepest navy, outer / odd sections
-  bgSecondary:      '#011630',   // slightly lighter, even sections
-  bgSurface:        'rgba(255,255,255,0.025)', // glass card fill
-  bgSurfaceHover:   'rgba(8,132,170,0.05)',    // glass card hover fill
+  // Primary brand — Constancia
+  graphite:        '#12161D',
+  slate:           '#1E2630',
+  cream:           '#F6F3EE',
+  stone:           '#D8D0C6',
+  rose:            '#C77A93',
+  berry:           '#8E4F67',
+  mint:            '#7FB8A3',
+  deepMint:        '#5E8D7A',
+
+  // Surface helpers (composed against cream)
+  bgPrimary:        '#F6F3EE',
+  bgSecondary:      '#EFEAE0',
+  bgSurface:        'rgba(18,22,29,0.025)',
+  bgSurfaceHover:   'rgba(199,122,147,0.06)',
 
   // Borders
-  border:           'rgba(255,255,255,0.07)',  // default card / divider
-  borderHover:      'rgba(8,132,170,0.28)',    // card hover state
-  borderMuted:      'rgba(255,255,255,0.05)',  // section dividers
-  borderStrong:     'rgba(255,255,255,0.14)',  // btn-brand full border
+  border:           'rgba(18,22,29,0.08)',
+  borderHover:      'rgba(142,79,103,0.30)',
+  borderMuted:      'rgba(18,22,29,0.05)',
+  borderStrong:     'rgba(18,22,29,0.16)',
 
   // Text
-  textPrimary:      '#FEFFF3',                        // headings, strong copy
-  textSecondary:    'rgba(254,255,243,0.55)',          // body, descriptions
-  textMuted:        'rgba(254,255,243,0.28)',          // labels
-  textTertiary:     'rgba(254,255,243,0.22)',          // mono captions
+  textPrimary:      '#12161D',
+  textSecondary:    'rgba(18,22,29,0.66)',
+  textMuted:        'rgba(18,22,29,0.42)',
+  textTertiary:     'rgba(18,22,29,0.30)',
 
-  // Brand accents
-  teal:             '#0884AA',   // primary CTA, active nav, icons
-  cyan:             '#12EBFC',   // highlights, btn accent bar, hover
-  navy:             '#02205B',   // deep gradient start, footer bg
-  cream:            '#FEFFF3',   // primary text on dark
+  // Translucent rose / mint for circles and overlays
+  roseSoft:         'rgba(199,122,147,0.55)',
+  mintSoft:         'rgba(127,184,163,0.55)',
+  infoBg:           'rgba(127,184,163,0.08)',
+  infoBorder:       'rgba(127,184,163,0.18)',
 
-  // Gradient stops
-  gradientBannerFrom:   '#02205B',
-  gradientBannerMid:    '#0070C0',
-  gradientBannerTo:     '#0884AA',
-  gradientHeroFrom:     '#010E2A',
-  gradientHeroTo:       '#02205B',
+  // ─── LEGACY ALIASES ─────────────────────────────────────────────────
+  // Kept so existing components compiled against the previous palette
+  // still resolve. Map onto the closest Constancia equivalent.
+  teal:             '#5E8D7A',
+  cyan:             '#7FB8A3',
+  navy:             '#12161D',
 
-  // Cyan info box (used in careers, legal pages)
-  infoBg:           'rgba(18,235,252,0.05)',
-  infoBorder:       'rgba(18,235,252,0.12)',
+  gradientBannerFrom:   '#1E2630',
+  gradientBannerMid:    '#5E8D7A',
+  gradientBannerTo:     '#7FB8A3',
+  gradientHeroFrom:     '#F6F3EE',
+  gradientHeroTo:       '#EFEAE0',
 } as const;
 
 // ─── Typography ──────────────────────────────────────────────────────────────
 
 export const FONT = {
-  sans: "'DM Sans', system-ui, sans-serif",
+  sans: "'Noto Sans', 'DM Sans', system-ui, sans-serif",
   mono: "'IBM Plex Mono', monospace",
 } as const;
 
 // ─── Spacing ─────────────────────────────────────────────────────────────────
 
 export const SPACING = {
-  sectionPy:     '72px',  // full section vertical padding
-  sectionPySm:   '40px',  // reduced on mobile
-  navHeight:     '64px',  // sticky nav height — used for pt-nav offsets
-  maxWidth:      '80rem', // max-w-7xl = 1280px
-  containerPx:   '1.5rem', // px-6
+  sectionPy:     '72px',
+  sectionPySm:   '40px',
+  navHeight:     '64px',
+  maxWidth:      '80rem',
+  containerPx:   '1.5rem',
 } as const;
 
 // ─── Border radius ───────────────────────────────────────────────────────────
 
 export const RADIUS = {
-  sm:      '3px',   // pill tags, small badges
-  md:      '8px',   // form elements, dropdown items
-  lg:      '12px',  // cards
-  none:    '0px',   // brand buttons (Option D style)
+  sm:      '4px',
+  md:      '8px',
+  lg:      '16px',
+  full:    '999px',
+  none:    '0px',
 } as const;
 
 // ─── Shadows ─────────────────────────────────────────────────────────────────
 
 export const SHADOW = {
-  card:    '0 0 0 1px rgba(8,132,170,0.1)',
-  glow:    '0 0 24px rgba(18,235,252,0.08)',
+  card:    '0 1px 0 rgba(18,22,29,0.04), 0 8px 24px -12px rgba(18,22,29,0.06)',
+  glow:    '0 0 24px rgba(199,122,147,0.10)',
 } as const;
 
 // ─── Animation ───────────────────────────────────────────────────────────────

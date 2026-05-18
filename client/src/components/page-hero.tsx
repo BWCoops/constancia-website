@@ -103,7 +103,7 @@ const PageHeroComponent = ({
       </section>
       
       <div 
-        className="absolute bottom-0 left-0 right-0 h-32 md:h-40 bg-gradient-to-b from-transparent to-[#010E2A] pointer-events-none" 
+        className="absolute bottom-0 left-0 right-0 h-32 md:h-40 bg-gradient-to-b from-transparent to-[#15355C] pointer-events-none"
         aria-hidden="true" 
       />
     </div>

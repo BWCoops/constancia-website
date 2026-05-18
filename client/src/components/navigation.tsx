@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { preloadRoute } from "@/lib/preload";
 import { useFeatureFlags } from "@/lib/feature-flags";
 import type { FeatureFlags } from "@shared/feature-flags";
-import iconDarkToLight from "@assets/1QG-Icon-96.png";
+import constanciaLogo from "@assets/constancia-logo.png";
 
 interface NavLink {
   href: string;
@@ -81,7 +81,7 @@ function NavDropdownMenu({ item, location }: { item: NavDropdown; location: stri
       <button
         onClick={() => setOpen((o) => !o)}
         className={`relative flex items-center gap-1 px-4 py-2 text-sm rounded-lg transition-colors duration-200 ${
-          isChildActive ? "text-brand-teal font-semibold" : "text-[#FEFFF3]/60 font-medium hover:text-brand-teal"
+          isChildActive ? "text-[#8E4F67] font-semibold" : "text-[#1E2630]/70 font-medium hover:text-[#8E4F67]"
         }`}
         data-testid="button-nav-tools-dropdown"
         aria-expanded={open}
@@ -92,7 +92,7 @@ function NavDropdownMenu({ item, location }: { item: NavDropdown; location: stri
       </button>
 
       <div
-        className={`absolute top-full left-0 mt-1 w-52 rounded-lg border border-white/[0.08] bg-[#010E2A]/97 backdrop-blur-md shadow-lg py-1 z-50 transition-all duration-150 origin-top ${
+        className={`absolute top-full left-0 mt-1 w-52 rounded-lg border border-[#12161D]/[0.08] bg-[#F6F3EE]/85 backdrop-blur-xl shadow-lg py-1 z-50 transition-all duration-150 origin-top ${
           open
             ? "opacity-100 scale-y-100 pointer-events-auto"
             : "opacity-0 scale-y-95 pointer-events-none"
@@ -107,8 +107,8 @@ function NavDropdownMenu({ item, location }: { item: NavDropdown; location: stri
             onClick={() => setOpen(false)}
             className={`block px-4 py-2.5 text-sm transition-colors ${
               location === child.href || location.startsWith(child.href + "/")
-                ? "text-brand-teal bg-white/[0.06]"
-                : "text-[#FEFFF3]/60 hover:text-brand-teal hover:bg-white/[0.04]"
+                ? "text-[#8E4F67] bg-[#C77A93]/[0.10]"
+                : "text-[#1E2630]/70 hover:text-[#8E4F67] hover:bg-[#12161D]/[0.04]"
             }`}
             data-testid={`link-nav-dropdown-${child.label.toLowerCase().replace(/\s+/g, "-")}`}
           >
@@ -130,7 +130,7 @@ export function Navigation() {
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 bg-[#010E2A]/97 backdrop-blur-md border-b border-white/[0.05]"
+      className="fixed top-0 left-0 right-0 z-50 bg-[#F6F3EE]/85 backdrop-blur-xl border-b border-[#12161D]/[0.05]"
       role="banner"
     >
       <nav
@@ -140,9 +140,9 @@ export function Navigation() {
       >
         <Link href="/" className="flex items-center" data-testid="link-logo">
           <img
-            src={iconDarkToLight}
-            alt="1QG®"
-            className="h-10 md:h-12 w-auto"
+            src={constanciaLogo}
+            alt="Constancia"
+            className="h-7 md:h-9 w-auto"
           />
         </Link>
 
@@ -159,8 +159,8 @@ export function Navigation() {
                 onMouseEnter={() => preloadRoute(item.href)}
                 className={`relative px-4 py-2 text-sm rounded-lg transition-colors duration-200 group ${
                   location === item.href
-                    ? "text-brand-teal font-semibold"
-                    : "text-[#FEFFF3]/60 font-medium hover:text-brand-teal"
+                    ? "text-[#8E4F67] font-semibold"
+                    : "text-[#1E2630]/70 font-medium hover:text-[#8E4F67]"
                 }`}
                 data-testid={`link-nav-${item.label.toLowerCase().replace(/\s+/g, "-")}`}
               >
@@ -183,16 +183,16 @@ export function Navigation() {
             data-testid="button-mobile-menu"
           >
             {isMobileMenuOpen ? (
-              <X className="h-5 w-5 text-brand-cream" />
+              <X className="h-5 w-5 text-[#12161D]" />
             ) : (
-              <Menu className="h-5 w-5 text-brand-cream" />
+              <Menu className="h-5 w-5 text-[#12161D]" />
             )}
           </Button>
         </div>
       </nav>
 
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-[#010E2A]/97 backdrop-blur-md border-b border-white/[0.05] nav-slide-down">
+        <div className="lg:hidden bg-[#F6F3EE]/85 backdrop-blur-xl border-b border-[#12161D]/[0.05] nav-slide-down">
           <div className="px-6 py-4 space-y-1">
             {enabledItems.map((item) => {
               if (isDropdown(item)) {
@@ -204,7 +204,7 @@ export function Navigation() {
                   <div key={item.label}>
                     <button
                       onClick={() => setMobileExpanded(isExpanded ? null : item.label)}
-                      className="flex items-center justify-between w-full px-4 py-3 rounded-lg text-left text-[#FEFFF3]/60 hover:text-brand-teal hover:bg-white/[0.04] transition-colors"
+                      className="flex items-center justify-between w-full px-4 py-3 rounded-lg text-left text-[#1E2630]/70 hover:text-[#8E4F67] hover:bg-[#12161D]/[0.04] transition-colors"
                       data-testid="button-mobile-tools-dropdown"
                     >
                       <span>{item.label}</span>
@@ -224,8 +224,8 @@ export function Navigation() {
                             onMouseEnter={() => preloadRoute(child.href)}
                             className={`block px-4 py-2.5 rounded-lg text-sm transition-colors ${
                               location === child.href
-                                ? "bg-white/[0.06] text-brand-teal"
-                                : "text-[#FEFFF3]/60 hover:text-brand-teal hover:bg-white/[0.04]"
+                                ? "bg-[#C77A93]/[0.10] text-[#8E4F67]"
+                                : "text-[#1E2630]/70 hover:text-[#8E4F67] hover:bg-[#12161D]/[0.04]"
                             }`}
                             data-testid={`link-mobile-nav-${child.label.toLowerCase().replace(/\s+/g, "-")}`}
                           >
@@ -246,8 +246,8 @@ export function Navigation() {
                   onMouseEnter={() => preloadRoute(item.href)}
                   className={`block w-full text-left px-4 py-3 rounded-lg transition-colors ${
                     location === item.href
-                      ? "bg-white/[0.06] text-brand-teal"
-                      : "text-[#FEFFF3]/60 hover:text-brand-teal hover:bg-white/[0.04]"
+                      ? "bg-[#C77A93]/[0.10] text-[#8E4F67]"
+                      : "text-[#1E2630]/70 hover:text-[#8E4F67] hover:bg-[#12161D]/[0.04]"
                   }`}
                   data-testid={`link-mobile-nav-${item.label.toLowerCase().replace(/\s+/g, "-")}`}
                 >
