@@ -2,76 +2,90 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Constancia brand fonts */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
 /*
  * ════════════════════════════════════════════════════════════════════
- *  1QG DESIGN SYSTEM — index.css
+ *  CONSTANCIA DESIGN SYSTEM — index.css
  *
- *  All values here correspond 1:1 with /src/lib/tokens.ts.
- *  To change a colour, update tokens.ts AND the matching var below.
- *  Never hardcode hex or rgba values in component files.
+ *  Values mirror /src/lib/tokens.ts. Cream-led, graphite type,
+ *  rose + mint as restrained accents per the brand guidelines.
  * ════════════════════════════════════════════════════════════════════
  */
 
-/* ── 1. Brand tokens (always available, every context) ─────────────── */
 :root {
   /* Backgrounds */
-  --brand-bg-primary:       #15355C;
-  --brand-bg-secondary:     #0B2548;
-  --brand-bg-surface:       rgba(255,255,255,0.035);
-  --brand-bg-surface-hover: rgba(8,132,170,0.07);
+  --brand-bg-primary:       #F6F3EE;
+  --brand-bg-secondary:     #EFEAE0;
+  --brand-bg-surface:       rgba(18,22,29,0.025);
+  --brand-bg-surface-hover: rgba(199,122,147,0.06);
 
   /* Borders */
-  --brand-border:           rgba(255,255,255,0.09);
-  --brand-border-hover:     rgba(8,132,170,0.32);
-  --brand-border-muted:     rgba(255,255,255,0.06);
-  --brand-border-strong:    rgba(255,255,255,0.18);
+  --brand-border:           rgba(18,22,29,0.08);
+  --brand-border-hover:     rgba(142,79,103,0.30);
+  --brand-border-muted:     rgba(18,22,29,0.05);
+  --brand-border-strong:    rgba(18,22,29,0.16);
 
   /* Text */
-  --brand-text-primary:     #FEFFF3;
-  --brand-text-secondary:   rgba(254,255,243,0.62);
-  --brand-text-muted:       rgba(254,255,243,0.34);
-  --brand-text-tertiary:    rgba(254,255,243,0.26);
+  --brand-text-primary:     #12161D;
+  --brand-text-secondary:   rgba(18,22,29,0.66);
+  --brand-text-muted:       rgba(18,22,29,0.42);
+  --brand-text-tertiary:    rgba(18,22,29,0.30);
 
-  /* Accent colours */
-  --brand-teal:             #0884AA;
-  --brand-teal-accessible:  #0A6688;   /* darker teal — 4.6:1 on white, WCAG AA for light backgrounds */
-  --brand-cyan:             #12EBFC;
-  --brand-navy:             #1B3D7A;
-  --brand-cream:            #FEFFF3;
+  /* Brand accents */
+  --brand-graphite:         #12161D;
+  --brand-slate:            #1E2630;
+  --brand-cream:            #F6F3EE;
+  --brand-stone:            #D8D0C6;
+  --brand-rose:             #C77A93;
+  --brand-berry:            #8E4F67;
+  --brand-mint:             #7FB8A3;
+  --brand-deep-mint:        #5E8D7A;
 
-  /* Gradient shorthands */
-  --brand-gradient-banner:  linear-gradient(135deg, #1B3D7A 0%, #0F7BC8 60%, #0A98C4 100%);
-  --brand-gradient-hero:    linear-gradient(135deg, #0E2547 0%, #1B3D7A 100%);
+  /* Translucent overlays */
+  --brand-rose-soft:        rgba(199,122,147,0.55);
+  --brand-mint-soft:        rgba(127,184,163,0.55);
 
-  /* Info box (cyan tint) */
-  --brand-info-bg:          rgba(18,235,252,0.06);
-  --brand-info-border:      rgba(18,235,252,0.16);
+  /* Legacy accent aliases mapped to Constancia equivalents */
+  --brand-teal:             #5E8D7A;
+  --brand-teal-accessible:  #5E8D7A;
+  --brand-cyan:             #7FB8A3;
+  --brand-navy:             #12161D;
+
+  /* Gradients */
+  --brand-gradient-banner:  linear-gradient(135deg, #1E2630 0%, #5E8D7A 60%, #7FB8A3 100%);
+  --brand-gradient-hero:    linear-gradient(180deg, #F6F3EE 0%, #EFEAE0 100%);
+
+  /* Info / callout */
+  --brand-info-bg:          rgba(127,184,163,0.08);
+  --brand-info-border:      rgba(127,184,163,0.18);
 
   /* Typography */
-  --brand-font-sans:        'DM Sans', system-ui, sans-serif;
+  --brand-font-sans:        'Noto Sans', 'DM Sans', system-ui, sans-serif;
   --brand-font-mono:        'IBM Plex Mono', monospace;
 
   /* Spacing */
   --brand-section-py:       72px;
   --brand-section-py-sm:    40px;
-  --brand-nav-height:       64px;
+  --brand-nav-height:       72px;
   --brand-max-width:        80rem;
 
   /* Border radius */
-  --brand-radius-sm:        3px;
+  --brand-radius-sm:        4px;
   --brand-radius-md:        8px;
-  --brand-radius-lg:        12px;
-  --brand-radius-btn:       0px;
+  --brand-radius-lg:        16px;
+  --brand-radius-btn:       999px;
 
-  /* Button — brand variant (Option D style) */
+  /* Button — Constancia variant */
   --brand-btn-border:           1px solid var(--brand-border-strong);
-  --brand-btn-accent-primary:   var(--brand-cyan);
-  --brand-btn-accent-secondary: rgba(255,255,255,0.12);
-  --brand-btn-font:             var(--brand-font-mono);
-  --brand-btn-tracking:         0.08em;
-  --brand-btn-size:             13px;
+  --brand-btn-accent-primary:   var(--brand-rose);
+  --brand-btn-accent-secondary: rgba(18,22,29,0.10);
+  --brand-btn-font:             var(--brand-font-sans);
+  --brand-btn-tracking:         0em;
+  --brand-btn-size:             14px;
 
-  /* Legacy aliases — kept so existing --hp-* references still resolve */
+  /* Legacy --hp-* aliases — kept so existing components still resolve */
   --hp-bg-primary:          var(--brand-bg-primary);
   --hp-bg-secondary:        var(--brand-bg-secondary);
   --hp-bg-surface:          var(--brand-bg-surface);
@@ -102,40 +116,40 @@
   --elevate-1:                       rgba(0,0,0,0.03);
   --elevate-2:                       rgba(0,0,0,0.08);
 
-  --background:         60 33% 99%;
-  --foreground:         220 5% 14%;
-  --border:             200 20% 90%;
-  --card:               0 0% 100%;
-  --card-foreground:    220 5% 14%;
-  --card-border:        200 20% 90%;
-  --popover:            0 0% 100%;
-  --popover-foreground: 220 5% 14%;
-  --popover-border:     200 20% 90%;
-  --primary:            215 97% 19%;
-  --primary-foreground: 60 33% 99%;
-  --secondary:          197 100% 52%;
-  --secondary-foreground: 220 5% 14%;
-  --muted:              200 20% 96%;
-  --muted-foreground:   200 10% 35%;
-  --accent:             193 93% 35%;
-  --accent-foreground:  60 33% 99%;
-  --destructive:        0 84% 60%;
-  --destructive-foreground: 0 0% 98%;
-  --input:              200 20% 90%;
-  --ring:               197 100% 52%;
-  --sidebar:            200 20% 97%;
-  --sidebar-foreground: 220 5% 14%;
-  --sidebar-border:     200 20% 90%;
-  --sidebar-primary:    197 100% 52%;
-  --sidebar-primary-foreground: 220 5% 14%;
-  --sidebar-accent:     197 80% 92%;
-  --sidebar-accent-foreground: 220 5% 14%;
-  --sidebar-ring:       197 100% 52%;
-  --chart-1: 215 97% 19%;
-  --chart-2: 197 100% 52%;
-  --chart-3: 193 93% 35%;
-  --chart-4: 204 100% 38%;
-  --chart-5: 197 95% 45%;
+  --background:         38 33% 95%;       /* cream #F6F3EE */
+  --foreground:         215 23% 9%;       /* graphite #12161D */
+  --border:             215 14% 88%;
+  --card:               38 33% 97%;
+  --card-foreground:    215 23% 9%;
+  --card-border:        215 14% 88%;
+  --popover:            38 33% 97%;
+  --popover-foreground: 215 23% 9%;
+  --popover-border:     215 14% 88%;
+  --primary:            215 23% 9%;       /* graphite as primary action */
+  --primary-foreground: 38 33% 95%;
+  --secondary:          156 23% 61%;      /* mint #7FB8A3 */
+  --secondary-foreground: 215 23% 9%;
+  --muted:              33 21% 85%;       /* stone #D8D0C6 */
+  --muted-foreground:   215 14% 38%;
+  --accent:             340 41% 63%;      /* rose #C77A93 */
+  --accent-foreground:  38 33% 95%;
+  --destructive:        0 64% 50%;
+  --destructive-foreground: 38 33% 98%;
+  --input:              215 14% 88%;
+  --ring:               340 41% 63%;
+  --sidebar:            38 33% 95%;
+  --sidebar-foreground: 215 23% 9%;
+  --sidebar-border:     215 14% 88%;
+  --sidebar-primary:    340 41% 63%;      /* rose */
+  --sidebar-primary-foreground: 38 33% 95%;
+  --sidebar-accent:     33 21% 92%;
+  --sidebar-accent-foreground: 215 23% 9%;
+  --sidebar-ring:       340 41% 63%;
+  --chart-1: 340 41% 63%;                  /* rose */
+  --chart-2: 156 23% 61%;                  /* mint */
+  --chart-3: 340 27% 43%;                  /* berry */
+  --chart-4: 156 19% 46%;                  /* deep mint */
+  --chart-5: 33 21% 75%;                   /* stone darker */
 
   --font-sans:   'DM Sans', Inter, system-ui, sans-serif;
   --font-serif:  Georgia, serif;
@@ -243,43 +257,26 @@
   body { @apply font-sans antialiased bg-background text-foreground; }
 }
 
-/* ── 5. page-dark — applies brand dark system to any public page ────── */
+/* ── 5. page-dark — kept as a class alias for legacy markup, now applies the
+        Constancia cream-led system rather than the old navy/cyan theme.       */
 .page-dark {
-  --background:           215 62% 22%;
-  --foreground:           60  33% 97%;
-  --border:               215 35% 28%;
-  --input:                215 35% 24%;
-  --ring:                 197 100% 52%;
-  --card:                 215 55% 18%;
-  --card-foreground:      60  33% 97%;
-  --card-border:          215 35% 28%;
-  --popover:              215 55% 18%;
-  --popover-foreground:   60  33% 97%;
-  --popover-border:       215 35% 28%;
-  --muted:                215 35% 24%;
-  --muted-foreground:     200 14% 62%;
-  --secondary:            215 35% 24%;
-  --secondary-foreground: 60 33% 97%;
-  --accent:               193 93% 38%;
-  --accent-foreground:    60  33% 97%;
-
   background:  var(--brand-bg-primary);
   color:       var(--brand-text-primary);
   font-family: var(--brand-font-sans);
 }
 
 .page-dark .prose {
-  --tw-prose-body:       rgba(254,255,243,0.65);
-  --tw-prose-headings:   rgba(254,255,243,0.95);
-  --tw-prose-links:      var(--brand-cyan);
-  --tw-prose-bold:       rgba(254,255,243,0.9);
-  --tw-prose-counters:   rgba(254,255,243,0.5);
-  --tw-prose-bullets:    rgba(254,255,243,0.4);
-  --tw-prose-hr:         rgba(255,255,255,0.1);
-  --tw-prose-quotes:     rgba(254,255,243,0.7);
-  --tw-prose-code:       var(--brand-cyan);
-  --tw-prose-th-borders: rgba(255,255,255,0.1);
-  --tw-prose-td-borders: rgba(255,255,255,0.06);
+  --tw-prose-body:       var(--brand-text-secondary);
+  --tw-prose-headings:   var(--brand-text-primary);
+  --tw-prose-links:      var(--brand-berry);
+  --tw-prose-bold:       var(--brand-text-primary);
+  --tw-prose-counters:   var(--brand-text-muted);
+  --tw-prose-bullets:    var(--brand-text-tertiary);
+  --tw-prose-hr:         var(--brand-border);
+  --tw-prose-quotes:     var(--brand-text-secondary);
+  --tw-prose-code:       var(--brand-berry);
+  --tw-prose-th-borders: var(--brand-border);
+  --tw-prose-td-borders: var(--brand-border-muted);
 }
 
 /* ── 6. Reusable layout utility classes ────────────────────────────── */
@@ -312,74 +309,71 @@
     padding:       1rem;
   }
 
-  /* Section tag pill (e.g. "What We Do") */
+  /* Section tag pill */
   .section-tag {
     display:        inline-block;
     padding:        0.375rem 1rem;
     border-radius:  9999px;
-    background:     rgba(18,235,252,0.08);
-    color:          var(--brand-cyan);
-    font-size:      0.75rem;
-    font-weight:    600;
-    letter-spacing: 0.06em;
+    background:     rgba(199,122,147,0.10);
+    color:          var(--brand-berry);
+    font-size:      0.8125rem;
+    font-weight:    500;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     font-family:    var(--brand-font-mono);
   }
 
-  /* Teal CTA button — replaces repeated inline style={{ background: 'var(--hp-teal)' }} */
+  /* Primary CTA — Constancia pill button */
   .btn-cta {
-    background: var(--brand-teal) !important;
-    color:      var(--brand-text-primary) !important;
+    background: var(--brand-graphite) !important;
+    color:      var(--brand-cream) !important;
     border:     none !important;
   }
 
-  /* Brand button base (Option D — zero radius, mono, left accent bar) */
+  /* Brand button base (Constancia pill style) */
   .btn-brand-base {
     display:         inline-flex;
     align-items:     center;
-    gap:             0.75rem;
-    padding:         0.875rem 1.75rem;
-    border-radius:   var(--brand-radius-btn);
+    gap:             0.5rem;
+    padding:         0.875rem 1.625rem;
+    border-radius:   999px;
     background:      transparent;
     font-size:       var(--brand-btn-size);
     font-weight:     500;
-    font-family:     var(--brand-font-mono);
+    font-family:     var(--brand-font-sans);
     letter-spacing:  var(--brand-btn-tracking);
-    text-transform:  uppercase;
+    text-transform:  none;
     cursor:          pointer;
-    transition:      background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    transition:      background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
     white-space:     nowrap;
     text-decoration: none;
   }
 
   .btn-brand {
     color:       var(--brand-cream);
-    border:      1px solid var(--brand-border-strong);
-    border-left: 3px solid var(--brand-cyan);
+    background:  var(--brand-graphite);
+    border:      none;
   }
   .btn-brand:hover {
-    background:        rgba(18,235,252,0.06);
-    border-color:      rgba(255,255,255,0.22);
-    border-left-color: var(--brand-cyan);
-    color:             #fff;
+    background:  var(--brand-berry);
+    transform:   translateY(-1px);
+    box-shadow:  0 8px 24px -8px rgba(142,79,103,0.40);
   }
-  .btn-brand:active { background: rgba(18,235,252,0.10); }
+  .btn-brand:active { transform: translateY(0); }
 
   .btn-brand-secondary {
-    color:       rgba(254,255,243,0.55);
-    border:      1px solid rgba(255,255,255,0.08);
-    border-left: 3px solid var(--brand-btn-accent-secondary);
+    color:       var(--brand-graphite);
+    background:  transparent;
+    border:      1px solid rgba(18,22,29,0.20);
   }
   .btn-brand-secondary:hover {
-    background:        rgba(255,255,255,0.03);
-    border-color:      rgba(255,255,255,0.16);
-    border-left-color: rgba(255,255,255,0.25);
-    color:             rgba(254,255,243,0.80);
+    background:        rgba(18,22,29,0.04);
+    border-color:      var(--brand-graphite);
   }
 
   .btn-brand-ghost {
     font-size:       0.8125rem;
-    color:           rgba(254,255,243,0.38);
+    color:           var(--brand-text-muted);
     background:      none;
     border:          none;
     cursor:          pointer;
@@ -388,19 +382,19 @@
     transition:      color 0.15s ease;
     text-decoration: none;
   }
-  .btn-brand-ghost:hover { color: rgba(254,255,243,0.65); }
+  .btn-brand-ghost:hover { color: var(--brand-berry); }
 
-  /* Nav link hover effects — source of truth for nav underline / glow */
+  /* Nav link hover effects */
   .nav-link-glow {
     background: linear-gradient(
       to right,
       transparent,
-      rgba(18,235,252,0.10),
+      rgba(199,122,147,0.10),
       transparent
     );
   }
   .nav-link-underline {
-    background: linear-gradient(to right, var(--brand-cyan), var(--brand-teal));
+    background: linear-gradient(to right, var(--brand-rose), var(--brand-berry));
   }
 
   /* hp-gradient-banner — used by existing hero / banner sections */
@@ -409,25 +403,25 @@
   /* Switch brand colour — data-attribute selectors need a real class, not arbitrary Tailwind */
   .switch-brand[data-state="checked"] { background: var(--brand-teal); }
 
-  /* Icon gradient wrappers (replaces inline linear-gradient styles) */
+  /* Icon gradient wrappers — Constancia rose-to-mint */
   .icon-gradient {
-    background: linear-gradient(135deg, var(--brand-navy), var(--brand-teal));
+    background: linear-gradient(135deg, var(--brand-rose), var(--brand-mint));
   }
   .icon-gradient-teal-cyan {
-    background: linear-gradient(135deg, var(--brand-teal), var(--brand-cyan));
+    background: linear-gradient(135deg, var(--brand-mint), var(--brand-deep-mint));
   }
   .icon-gradient-navy-cyan {
-    background: linear-gradient(135deg, var(--brand-navy), var(--brand-cyan));
+    background: linear-gradient(135deg, var(--brand-berry), var(--brand-rose));
   }
 
-  /* Stat icon wrapper — cyan-tinted circle used in stats section */
+  /* Stat icon wrapper — rose-tinted circle */
   .stat-icon-wrapper {
-    background: rgba(18,235,252,0.2);
+    background: rgba(199,122,147,0.15);
   }
 
   /* Stats banner section */
   .section-stats-banner {
-    background: linear-gradient(to right, var(--brand-navy), #0F7BC8, var(--brand-teal));
+    background: linear-gradient(to right, var(--brand-graphite), var(--brand-berry), var(--brand-rose));
     color:       var(--brand-cream);
     padding:     var(--brand-section-py) 0;
   }
@@ -626,6 +620,196 @@
     animation-iteration-count: 1 !important;
     transition-duration:       0.01ms !important;
   }
+}
+
+/* ── Hero (deconstruct + dive) ───────────────────────────────────────── */
+.hero-fixed-stage {
+  position: sticky; top: 0;
+  width: 100%; height: 100vh;
+  overflow: hidden;
+}
+.hero-fabric-canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  pointer-events: none;
+}
+.hero-grain {
+  position: absolute; inset: 0; pointer-events: none; z-index: 2;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.035 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.55; mix-blend-mode: multiply;
+}
+.hero-vignette {
+  position: absolute; inset: 0; pointer-events: none; z-index: 2;
+  background: radial-gradient(ellipse 110% 90% at 50% 50%, transparent 55%, rgba(18,22,29,0.06) 100%);
+}
+
+.hero-brand-circle {
+  position: absolute;
+  border-radius: 50%;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 3;
+  transform: translate(-50%, -50%);
+  will-change: top, left, width, height, opacity, transform;
+}
+.hero-brand-circle--rose { background: var(--brand-rose); }
+.hero-brand-circle--mint { background: var(--brand-mint); }
+
+.hero-logo-real {
+  position: absolute;
+  top: 22%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(220px, 22vmin, 360px);
+  z-index: 7;
+  pointer-events: none;
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+.hero-logo-pieces {
+  position: absolute;
+  top: 22%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 6;
+  display: inline-flex; align-items: baseline;
+  font-size: 48px;
+  letter-spacing: -0.022em;
+  font-weight: 300;
+  color: var(--brand-graphite);
+  line-height: 1;
+  pointer-events: none;
+  white-space: nowrap;
+  opacity: 0;
+}
+.hero-letter {
+  display: inline-block;
+  will-change: transform, opacity;
+  transform-origin: 50% 50%;
+}
+.hero-i-stack { position: relative; display: inline-block; }
+.hero-i-stack .hero-letter-i { color: transparent; }
+.hero-rose-bar {
+  position: absolute;
+  left: 50%; bottom: 2px;
+  width: 3px; height: 26px;
+  background: var(--brand-rose);
+  transform: translateX(-50%);
+  transform-origin: center bottom;
+  will-change: transform, opacity;
+}
+.hero-mint-dot {
+  display: inline-block;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--brand-mint);
+  margin-left: 4px;
+  transform: translateY(-2px);
+  will-change: transform, opacity;
+}
+
+.hero-panel-stack {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 32px;
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+  transform-style: preserve-3d;
+  z-index: 5;
+}
+.hero-panel {
+  position: absolute; max-width: 760px; text-align: center;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  pointer-events: none;
+  will-change: transform, opacity;
+  top: 62%;
+  transform: translateY(-50%);
+}
+.hero-panel .stagger { will-change: transform, opacity; }
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 14px;
+  font-family: 'IBM Plex Mono', monospace; font-size: 14px;
+  letter-spacing: 0.13em; text-transform: uppercase;
+  color: var(--brand-berry); margin-bottom: 28px;
+  font-weight: 500;
+}
+.hero-eyebrow::before {
+  content: ''; width: 36px; height: 1px; background: var(--brand-rose);
+}
+.hero-eyebrow-mint {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--brand-mint);
+}
+.hero-h1, .hero-h2 {
+  font-weight: 300; letter-spacing: -0.035em; line-height: 1.04;
+  color: var(--brand-graphite);
+  margin: 0;
+}
+.hero-h1 { font-size: clamp(44px, 6vw, 92px); }
+.hero-h2 { font-size: clamp(34px, 4.6vw, 64px); }
+.hero-h1 em, .hero-h2 em {
+  font-style: italic; font-weight: 300; color: var(--brand-berry);
+}
+.hero-rose-mark { position: relative; }
+.hero-rose-mark::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 8px;
+  height: 10px; background: var(--brand-rose); opacity: 0.32;
+  z-index: -1; border-radius: 2px;
+}
+.hero-period {
+  display: inline-block; width: 14px; height: 14px; border-radius: 50%;
+  background: var(--brand-mint); margin-left: 4px; transform: translateY(-2px);
+}
+.hero-body {
+  margin-top: 24px; font-size: 19px; line-height: 1.6;
+  color: var(--brand-slate);
+  max-width: 560px; margin-left: auto; margin-right: auto;
+}
+.hero-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 15px;
+  letter-spacing: 0.13em; text-transform: uppercase;
+  color: var(--brand-berry); opacity: 0.85;
+  margin-bottom: 36px;
+  display: inline-flex; align-items: center; gap: 14px;
+  font-weight: 500;
+}
+.hero-num::before {
+  content: ''; width: 36px; height: 1px; background: var(--brand-rose);
+}
+.hero-ctas {
+  display: inline-flex; gap: 14px; flex-wrap: wrap; margin-top: 32px;
+  justify-content: center;
+}
+.hero-btn {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 14px; font-weight: 500;
+  padding: 14px 26px; border-radius: 100px;
+  background: var(--brand-graphite); color: var(--brand-cream);
+  text-decoration: none; border: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+.hero-btn:hover {
+  background: var(--brand-berry); transform: translateY(-1px);
+  box-shadow: 0 8px 24px -8px rgba(142,79,103,0.4);
+}
+.hero-btn--ghost {
+  background: transparent; color: var(--brand-graphite);
+  border: 1px solid rgba(18,22,29,0.2);
+}
+.hero-btn--ghost:hover {
+  background: rgba(18,22,29,0.04); border-color: var(--brand-graphite);
+  box-shadow: none;
+}
+.hero-arrow { transition: transform 0.25s; }
+.hero-btn:hover .hero-arrow { transform: translateX(3px); }
+
+.hero-scroll-prog {
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: rgba(18,22,29,0.04); z-index: 40;
+}
+.hero-scroll-prog span {
+  display: block; height: 100%; width: 0;
+  background: linear-gradient(90deg, var(--brand-mint), var(--brand-rose));
 }
 
 /* ── 11. Third-party overrides ───────────────────────────────────────── */
