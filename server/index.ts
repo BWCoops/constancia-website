@@ -308,7 +308,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     "upgrade-insecure-requests",
     "block-all-mixed-content",
     // Allow service worker for performance (asset caching) - restricted to self origin only
-    "worker-src 'self'",
+    "worker-src 'self' blob:",
     // CSP violation reporting - both legacy report-uri and modern report-to
     "report-uri /api/csp-report",
     "report-to security-violations",

@@ -53,9 +53,17 @@ async function isEmailAuthorized(email: string | null | undefined): Promise<bool
  */
 export async function setupAuth(app: Express): Promise<void> {
   if (!process.env.CLERK_SECRET_KEY) {
-    throw new Error(
-      "CLERK_SECRET_KEY is not set. Add it to your environment (Replit Secrets / .env) before starting the server."
+    authLog.warn(
+      "CLERK_SECRET_KEY is not set — Clerk auth disabled. " +
+      "Admin routes will return 503 until the secret is added to Replit Secrets."
     );
+    // Install session middleware so req.session still works for non-admin routes,
+    // then bail out — do NOT install clerkMiddleware (it would crash without the key).
+    app.use(getSession());
+    app.use(["/api/admin", "/api/auth"], (_req: Request, res: Response) => {
+      res.status(503).json({ error: "auth_unavailable", message: "CLERK_SECRET_KEY not configured" });
+    });
+    return;
   }
 
   // Replit-friendly: if only VITE_CLERK_PUBLISHABLE_KEY is set, mirror it
