@@ -1,9 +1,10 @@
+/* Constancia brand fonts — must precede @tailwind directives (PostCSS rule:
+   @import has to come before any non-empty statement except @charset). */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Constancia brand fonts */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 /*
  * ════════════════════════════════════════════════════════════════════

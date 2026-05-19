@@ -107,11 +107,17 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   const [isOnline, setIsOnline] = useState(true);
   const queryClient = useQueryClient();
 
+  // Disable the probe entirely on routes that DON'T render through AdminLayout
+  // (the access-denied and login screens). Belt-and-braces: AdminLayout
+  // shouldn't be mounted on those routes in the first place, but if a hot
+  // reload or stale component tree keeps it alive, we don't want it polling.
+  const layoutShouldProbe = !location.startsWith("/admin/access-denied") &&
+                            !location.startsWith("/admin/login");
+
   const { data: session, isLoading, error, refetch } = useQuery<AdminSession>({
     queryKey: ["/api/admin/auth/session"],
+    enabled: layoutShouldProbe,
     // Do not retry on 4xx — auth state isn't going to change on a re-try.
-    // Specifically: 429s would otherwise cause a retry storm that escalates
-    // the redirect loop between /admin/login and /admin/dashboard.
     retry: (failureCount, err: unknown) => {
       const status = (err as { status?: number; response?: { status?: number } })?.status
         ?? (err as { response?: { status?: number } })?.response?.status;

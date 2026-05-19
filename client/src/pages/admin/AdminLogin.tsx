@@ -152,7 +152,11 @@ export default function AdminLogin() {
         <SignIn
           path="/admin/login"
           routing="path"
-          afterSignInUrl="/admin/dashboard"
+          /* No afterSignInUrl — if we set one, Clerk's <SignIn /> auto-redirects
+             to it the moment isSignedIn flips true, racing our server-side
+             allowlist check and creating the dashboard <-> login loop when
+             the email is denied. Our useEffect above probes the server and
+             redirects to /admin/dashboard or /admin/access-denied itself. */
           appearance={{
             elements: {
               rootBox: "w-full",
