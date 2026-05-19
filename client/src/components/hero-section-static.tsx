@@ -413,14 +413,18 @@ export function HeroSectionStatic() {
       });
       if (progBarRef.current) progBarRef.current.style.width = (scrollProg * 100).toFixed(2) + "%";
 
-      // Smooth hero fade-out — starts at 0.96 (after panel 8 centers at 0.94), ends at 1.0.
-      // With position:fixed the footer enters the viewport exactly at scrollProg=1.0,
-      // so by the time the hero is transparent the footer is already visible below.
+      // Fade-out during the sticky exit slide (not during the animation itself).
+      // With position:sticky the element slides upward once the section bottom exits
+      // the viewport. exitProg measures that slide: 0 when the slide starts, 1 when
+      // the section has fully left. Hero fades simultaneously so no blank cream shows.
       const heroStageEl = heroStageRef.current;
-      if (heroStageEl) {
-        const exitT = Math.max(0, (scrollProg - 0.96) / 0.04); // 0 at 96%, 1 at 100%
+      if (heroStageEl && stage) {
+        const rect2 = stage.getBoundingClientRect();
+        const h2 = stage.offsetHeight - window.innerHeight;
+        // exitT: 0 during animation, ramps 0→1 across the 1-viewport sticky exit slide
+        const exitRaw = (-rect2.top - h2) / Math.max(1, window.innerHeight);
+        const exitT = Math.max(0, Math.min(1, exitRaw));
         heroStageEl.style.opacity = (1 - exitT).toFixed(3);
-        // Remove pointer-events once fading so footer is fully interactive
         heroStageEl.style.pointerEvents = exitT > 0 ? 'none' : '';
       }
 
@@ -485,10 +489,8 @@ export function HeroSectionStatic() {
         position: "relative",
         width: "100%",
         // 9× viewport scroll runway — 9 panels at ~100vh each.
-        // Section is a transparent scroll spacer; the hero-fixed-stage (position:fixed)
-        // does the actual rendering. Footer enters viewport exactly at scrollProg=1.0.
         height: "900vh",
-        background: "transparent",
+        background: "var(--brand-bg-primary)",
         fontFamily: "var(--brand-font-sans)",
       }}
     >
