@@ -93,6 +93,21 @@ export default function AdminLogin() {
     );
   }
 
+  // Critical: if Clerk reports a signed-in session, do NOT render <SignIn/>.
+  // Clerk's component auto-redirects to afterSignInUrl ("/admin/dashboard") as
+  // soon as it sees an active session — which causes the dashboard <-> login
+  // ping-pong when the user's email isn't on the allowlist. Hold here with a
+  // "checking authorisation" state while the probedRef effect above runs the
+  // server allowlist check, then it'll setLocation us to dashboard or
+  // access-denied.
+  if (isSignedIn) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#F6F3EE]">
+        <div className="animate-pulse text-[#1E2630] text-lg">Checking authorisation…</div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#12161D] p-6 relative overflow-hidden">
       {/* Soft brand-circle backdrop */}

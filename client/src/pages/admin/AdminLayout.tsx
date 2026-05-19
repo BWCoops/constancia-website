@@ -148,13 +148,18 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   }, [refetch, queryClient]);
 
   useEffect(() => {
-    // Only redirect when the server has definitively said "not authenticated".
-    // Treating any error as unauthenticated caused a redirect loop with the
-    // global per-IP rate limit: 429 -> redirect -> login -> probe -> 429.
+    // Distinguish between "no Clerk session" and "Clerk session but the
+    // email isn't on the allowlist". The latter must NOT go to /admin/login,
+    // because Clerk's <SignIn /> auto-redirects to afterSignInUrl as soon as
+    // it sees a signed-in user — that creates the dashboard <-> login loop
+    // we kept hitting. Route to /admin/access-denied instead so the user can
+    // see why and sign out.
     if (!isLoading && session && session.authenticated === false) {
-      if (location !== "/admin/login") {
-        setLocation("/admin/login");
-      }
+      const target =
+        (session as AdminSession & { reason?: string }).reason === "email_not_authorized"
+          ? "/admin/access-denied"
+          : "/admin/login";
+      if (location !== target) setLocation(target);
     }
   }, [session, isLoading, setLocation, location]);
 
