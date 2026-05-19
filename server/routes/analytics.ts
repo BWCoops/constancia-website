@@ -4,11 +4,23 @@ import { createChildLogger } from "../lib/logger";
 import { db } from "../db";
 
 const log = createChildLogger("analytics");
-import { widgetAnalytics, widgetAbTests, abTestVariantSchema, pageAnalytics, funnelTargets, insertPageAnalyticsSchema } from "@shared/schema";
+import { widgetAnalytics, widgetAbTests, abTestVariantSchema, pageAnalytics, funnelTargets, insertPageAnalyticsSchema, analyticsInsights } from "@shared/schema";
 import { desc, gte, sql, eq, and, isNull, count, avg, between, lte, asc } from "drizzle-orm";
 import { sendEmailViaGraph, isEmailConfigured } from "../services/ms-graph-email";
 import { getEmailLogoHtml } from "../utils/email-logo";
 import { createOrUpdateContact, isHubSpotConnected, type HubSpotContactResult } from "../services/hubspot";
+import {
+  ANALYTICS_EVENTS,
+  canonicalEvent,
+  categoryForEvent,
+  CONVERSION_MODE,
+  LEAD_CAPTURE_EVENTS,
+  type ConversionMode,
+} from "@shared/analytics-taxonomy";
+import { computeFunnel } from "../services/analytics/funnel";
+import { refreshInsightCache } from "../services/analytics/insights";
+import { compareInsights } from "@shared/analytics-insights";
+import { hashIp } from "../services/analytics/ip-hash";
 
 const router = Router();
 
@@ -2090,9 +2102,15 @@ router.post("/page-event", async (req: Request, res: Response) => {
     }
     
     const data = pageEventSchema.parse(req.body);
-    
+
+    // Canonicalise legacy event names on write so the table converges on
+    // a single vocabulary; categorise so dashboards can group cheaply.
+    const canonical = canonicalEvent(data.eventType);
+    const category = categoryForEvent(canonical) ?? null;
+
     await db.insert(pageAnalytics).values({
-      eventType: data.eventType,
+      eventType: canonical,
+      eventCategory: category,
       page: data.page,
       sessionId: data.sessionId,
       visitorId: data.visitorId,
@@ -2115,6 +2133,7 @@ router.post("/page-event", async (req: Request, res: Response) => {
       metadata: data.metadata,
       userAgent: req.headers["user-agent"],
       ipAddress: clientIP,
+      ipHash: hashIp(clientIP),
     });
     
     res.json({ success: true });
@@ -2124,168 +2143,176 @@ router.post("/page-event", async (req: Request, res: Response) => {
   }
 });
 
-// GET /api/analytics/funnel-stats - Get aggregated funnel metrics
+// GET /api/analytics/funnel-stats - DB-backed funnel computation
+//
+// Stages are read from the funnel_stages table (seeded from
+// shared/analytics-taxonomy.ts on first boot). Event-type matching
+// canonicalises legacy aliases so historic rows still count. Both
+// stepwise and cumulative conversion rates are returned; low-N
+// stages are marked low-confidence rather than silently shown.
 router.get("/funnel-stats", async (req: Request, res: Response) => {
   try {
     const days = parseInt(req.query.days as string) || 30;
-    const startDate = new Date();
-    startDate.setDate(startDate.getDate() - days);
-    
-    // Get all events in the period (excluding admin IPs at query time)
-    const events = await db.select()
+    const mode: ConversionMode =
+      req.query.mode === CONVERSION_MODE.CUMULATIVE
+        ? CONVERSION_MODE.CUMULATIVE
+        : CONVERSION_MODE.STEPWISE;
+    const windowEnd = new Date();
+    const windowStart = new Date(windowEnd.getTime() - days * 24 * 60 * 60 * 1000);
+
+    const funnel = await computeFunnel({
+      windowStart,
+      windowEnd,
+      conversionMode: mode,
+      filter: {
+        deviceType: typeof req.query.device === "string" ? req.query.device : undefined,
+        utmSource: typeof req.query.source === "string" ? req.query.source : undefined,
+      },
+    });
+
+    // Build device + source breakdowns from the raw window (cheap second
+    // query, only needed when the user is on the segmentation tab).
+    const events = await db
+      .select({
+        deviceType: pageAnalytics.deviceType,
+        utmSource: pageAnalytics.utmSource,
+        referrer: pageAnalytics.referrer,
+        eventType: pageAnalytics.eventType,
+        sessionId: pageAnalytics.sessionId,
+      })
       .from(pageAnalytics)
-      .where(gte(pageAnalytics.createdAt, startDate))
-      .orderBy(desc(pageAnalytics.createdAt));
-    
-    const filteredEvents = excludeAdminIPsFilter(events);
-    
-    // Get unique sessions
-    const uniqueSessions = new Set(filteredEvents.map(e => e.sessionId));
-    const totalSessions = uniqueSessions.size;
-    
-    // Count events by type
-    const eventCounts: Record<string, number> = {};
-    const sessionsByEvent: Record<string, Set<string>> = {};
-    
-    filteredEvents.forEach(event => {
-      eventCounts[event.eventType] = (eventCounts[event.eventType] || 0) + 1;
-      if (!sessionsByEvent[event.eventType]) {
-        sessionsByEvent[event.eventType] = new Set();
-      }
-      sessionsByEvent[event.eventType].add(event.sessionId);
-    });
-    
-    // Build funnel stages with counts - ordered logically with realistic default targets
-    // Note: Stages flow in order - you must complete previous stages to reach later ones
-    const funnelStages = [
-      { name: "landing_page", label: "Landing Page", eventTypes: ["page_view"], defaultTarget: 100 },
-      { name: "widget_visible", label: "Widget Visible", eventTypes: ["widget_visible", "widget_loaded"], defaultTarget: 80 },
-      { name: "widget_interaction", label: "Widget Interaction", eventTypes: ["widget_interaction", "question_answered"], defaultTarget: 50 },
-      { name: "widget_complete", label: "Widget Complete", eventTypes: ["preview_completed", "widget_complete"], defaultTarget: 30 },
-      { name: "assessment_start", label: "Assessment Start", eventTypes: ["assessment_start", "assessment_page_view", "cta_clicked"], defaultTarget: 20 },
-      { name: "assessment_50", label: "Assessment 50%", eventTypes: ["assessment_progress_50", "assessment_progress_25"], defaultTarget: 15 },
-      { name: "assessment_complete", label: "Assessment Complete", eventTypes: ["assessment_complete", "assessment_progress_100", "assessment_progress_75"], defaultTarget: 10 },
-      { name: "lead_captured", label: "Lead Captured", eventTypes: ["lead_captured", "email_captured", "results_view", "results_page_view"], defaultTarget: 8 },
-      { name: "report_download", label: "Report / Tool Used", eventTypes: ["report_download", "report_view", "comparison_tool_opened", "comparison_export"], defaultTarget: 5 },
-    ];
-    
-    type FunnelStageData = {
-      name: string;
-      label: string;
-      count: number;
-      conversionRate: number;
-      dropOffRate: number;
-      previousCount: number;
-    };
-    
-    const funnelData: FunnelStageData[] = [];
-    for (let index = 0; index < funnelStages.length; index++) {
-      const stage = funnelStages[index];
-      const sessions = new Set<string>();
-      stage.eventTypes.forEach(et => {
-        sessionsByEvent[et]?.forEach(s => sessions.add(s));
-      });
-      
-      const uniqueCount = sessions.size;
-      const previousCount = index === 0 ? totalSessions : funnelData[index - 1]?.count || totalSessions;
-      const conversionRate = previousCount > 0 ? Math.round((uniqueCount / previousCount) * 100) : 0;
-      const dropOffRate = 100 - conversionRate;
-      
-      funnelData.push({
-        name: stage.name,
-        label: stage.label,
-        count: uniqueCount,
-        conversionRate,
-        dropOffRate,
-        previousCount,
-      });
-    }
-    
-    // Get targets for comparison
-    const targets = await db.select().from(funnelTargets).where(eq(funnelTargets.isActive, true)).orderBy(asc(funnelTargets.stageOrder));
-    
-    // Merge with targets - use stage defaults if no DB override
-    const funnelWithTargets = funnelData.map((stage, idx) => {
-      const stageConfig = funnelStages[idx];
-      const target = targets.find(t => t.stageName === stage.name);
-      const targetPct = target?.targetPercentage ?? stageConfig?.defaultTarget ?? 100;
-      const warningThreshold = target?.warningThreshold || 10;
-      
-      let status: "green" | "yellow" | "red" = "green";
-      if (stage.conversionRate < targetPct - warningThreshold) {
-        status = "red";
-      } else if (stage.conversionRate < targetPct) {
-        status = "yellow";
-      }
-      
-      return {
-        ...stage,
-        targetPercentage: targetPct,
-        status,
-        description: target?.description,
-      };
-    });
-    
-    // Device breakdown
-    const deviceBreakdown: Record<string, { count: number; completed: number }> = {};
-    filteredEvents.forEach(event => {
+      .where(and(gte(pageAnalytics.createdAt, windowStart), lte(pageAnalytics.createdAt, windowEnd)));
+
+    const filteredEvents = excludeAdminIPsFilter(events as any);
+
+    type SegmentAgg = { sessions: Set<string>; completed: Set<string> };
+    const completionEvents = new Set<string>([
+      ANALYTICS_EVENTS.ASSESSMENT_COMPLETED,
+      ANALYTICS_EVENTS.PREVIEW_COMPLETED,
+      ANALYTICS_EVENTS.WIDGET_COMPLETED,
+    ]);
+
+    const deviceAgg = new Map<string, SegmentAgg>();
+    const sourceAgg = new Map<string, SegmentAgg>();
+
+    for (const event of filteredEvents) {
       const device = event.deviceType || "unknown";
-      if (!deviceBreakdown[device]) {
-        deviceBreakdown[device] = { count: 0, completed: 0 };
-      }
-      deviceBreakdown[device].count++;
-      if (event.eventType === "assessment_complete" || event.eventType === "preview_completed") {
-        deviceBreakdown[device].completed++;
-      }
-    });
-    
-    // Traffic source breakdown
-    const sourceBreakdown: Record<string, { count: number; completed: number }> = {};
-    filteredEvents.forEach(event => {
       const source = event.utmSource || (event.referrer ? "organic" : "direct");
-      if (!sourceBreakdown[source]) {
-        sourceBreakdown[source] = { count: 0, completed: 0 };
+      const canonical = canonicalEvent(event.eventType);
+      const isCompletion = completionEvents.has(canonical as never);
+
+      let d = deviceAgg.get(device);
+      if (!d) {
+        d = { sessions: new Set(), completed: new Set() };
+        deviceAgg.set(device, d);
       }
-      sourceBreakdown[source].count++;
-      if (event.eventType === "assessment_complete" || event.eventType === "preview_completed") {
-        sourceBreakdown[source].completed++;
+      d.sessions.add(event.sessionId);
+      if (isCompletion) d.completed.add(event.sessionId);
+
+      let s = sourceAgg.get(source);
+      if (!s) {
+        s = { sessions: new Set(), completed: new Set() };
+        sourceAgg.set(source, s);
       }
-    });
-    
-    // Calculate biggest drop-offs
-    const dropOffs = funnelWithTargets
-      .filter(stage => stage.dropOffRate > 0 && stage.count > 0)
-      .map(stage => ({
-        from: funnelWithTargets[funnelWithTargets.indexOf(stage) - 1]?.label || "Entry",
-        to: stage.label,
-        dropOffRate: stage.dropOffRate,
-        targetDropOff: 100 - stage.targetPercentage,
-        severity: stage.status,
-      }))
-      .sort((a, b) => b.dropOffRate - a.dropOffRate)
-      .slice(0, 5);
-    
+      s.sessions.add(event.sessionId);
+      if (isCompletion) s.completed.add(event.sessionId);
+    }
+
+    const deviceBreakdown = Array.from(deviceAgg.entries()).map(([device, agg]) => ({
+      device,
+      count: agg.sessions.size,
+      completed: agg.completed.size,
+      completionRate: agg.sessions.size > 0 ? Math.round((agg.completed.size / agg.sessions.size) * 100) : 0,
+    }));
+    const sourceBreakdown = Array.from(sourceAgg.entries()).map(([source, agg]) => ({
+      source,
+      count: agg.sessions.size,
+      completed: agg.completed.size,
+      completionRate: agg.sessions.size > 0 ? Math.round((agg.completed.size / agg.sessions.size) * 100) : 0,
+    }));
+
     res.json({
       success: true,
-      period: { days, startDate: startDate.toISOString() },
-      totalSessions,
-      totalEvents: filteredEvents.length,
-      funnel: funnelWithTargets,
-      dropOffs,
-      deviceBreakdown: Object.entries(deviceBreakdown).map(([device, data]) => ({
-        device,
-        ...data,
-        completionRate: data.count > 0 ? Math.round((data.completed / data.count) * 100) : 0,
-      })),
-      sourceBreakdown: Object.entries(sourceBreakdown).map(([source, data]) => ({
-        source,
-        ...data,
-        completionRate: data.count > 0 ? Math.round((data.completed / data.count) * 100) : 0,
-      })),
+      period: { days, startDate: windowStart.toISOString(), endDate: windowEnd.toISOString() },
+      conversionMode: mode,
+      totalSessions: funnel.totalSessions,
+      totalEvents: funnel.totalEvents,
+      funnel: funnel.stages,
+      biggestDropOffs: funnel.biggestDropOffs,
+      deviceBreakdown,
+      sourceBreakdown,
     });
   } catch (error) {
     log.error({ err: error }, "Error getting funnel stats");
     res.status(500).json({ success: false, error: "Failed to get funnel stats" });
+  }
+});
+
+// GET /api/analytics/insights - Ranked insights for the dashboard.
+//
+// Reads from the analytics_insights cache (refreshed by the nightly
+// job). When ?refresh=1 is passed, regenerates first — useful from
+// the admin "refresh" button.
+router.get("/insights", async (req: Request, res: Response) => {
+  try {
+    if (req.query.refresh === "1") {
+      await refreshInsightCache();
+    }
+    const rows = await db
+      .select()
+      .from(analyticsInsights)
+      .where(isNull(analyticsInsights.dismissedAt))
+      .orderBy(desc(analyticsInsights.generatedAt));
+
+    const insights = rows
+      .map(r => ({
+        id: r.id,
+        kind: r.kind,
+        severity: r.severity,
+        headline: r.headline,
+        detail: r.detail,
+        recommendedAction: r.recommendedAction,
+        link: r.linkLabel && r.linkHref ? { label: r.linkLabel, href: r.linkHref } : undefined,
+        metrics: r.metrics as Record<string, number | string>,
+        generatedAt: r.generatedAt.toISOString(),
+        windowStart: r.windowStart.toISOString(),
+        windowEnd: r.windowEnd.toISOString(),
+        acknowledged: !!r.acknowledgedAt,
+      }))
+      .sort(compareInsights as any);
+
+    res.json({ success: true, insights });
+  } catch (error) {
+    log.error({ err: error }, "Error getting insights");
+    res.status(500).json({ success: false, error: "Failed to get insights" });
+  }
+});
+
+// POST /api/analytics/insights/:id/acknowledge - Mark an insight as seen.
+router.post("/insights/:id/acknowledge", async (req: Request, res: Response) => {
+  try {
+    await db
+      .update(analyticsInsights)
+      .set({ acknowledgedAt: new Date(), acknowledgedBy: (req as any).user?.claims?.email ?? "unknown" })
+      .where(eq(analyticsInsights.id, req.params.id));
+    res.json({ success: true });
+  } catch (error) {
+    log.error({ err: error }, "Error acknowledging insight");
+    res.status(500).json({ success: false, error: "Failed" });
+  }
+});
+
+// POST /api/analytics/insights/:id/dismiss - Hide an insight permanently.
+router.post("/insights/:id/dismiss", async (req: Request, res: Response) => {
+  try {
+    await db
+      .update(analyticsInsights)
+      .set({ dismissedAt: new Date(), acknowledgedBy: (req as any).user?.claims?.email ?? "unknown" })
+      .where(eq(analyticsInsights.id, req.params.id));
+    res.json({ success: true });
+  } catch (error) {
+    log.error({ err: error }, "Error dismissing insight");
+    res.status(500).json({ success: false, error: "Failed" });
   }
 });
 
@@ -2396,64 +2423,106 @@ router.get("/cohort-analysis", async (req: Request, res: Response) => {
   }
 });
 
-// GET /api/analytics/question-heatmap - Get question-level analytics
+// GET /api/analytics/question-heatmap - Question-level drop-off + dwell.
+//
+// Fixed from the previous implementation:
+//   - Each (sessionId, questionNumber) pair counts once. Re-edits no
+//     longer inflate the answered count.
+//   - Returns `sessionsReached` (denominator for survivorship-bias
+//     awareness) so the UI can show "10% drop-off but only 12 people
+//     ever got here" instead of treating it like a 1000-person signal.
+//   - Marks `lowConfidence` when the denominator is below the sample
+//     threshold; the UI greys these cells out rather than ranking by them.
+//   - Uses canonical event names — legacy aliases still match because
+//     of the canonicalisation step on insert.
 router.get("/question-heatmap", async (req: Request, res: Response) => {
   try {
     const days = parseInt(req.query.days as string) || 30;
-    const startDate = new Date();
-    startDate.setDate(startDate.getDate() - days);
-    
-    const events = await db.select()
+    const windowEnd = new Date();
+    const windowStart = new Date(windowEnd.getTime() - days * 24 * 60 * 60 * 1000);
+
+    const events = await db
+      .select({
+        eventType: pageAnalytics.eventType,
+        sessionId: pageAnalytics.sessionId,
+        questionNumber: pageAnalytics.questionNumber,
+        timeToEventMs: pageAnalytics.timeToEventMs,
+      })
       .from(pageAnalytics)
       .where(and(
-        gte(pageAnalytics.createdAt, startDate),
-        sql`${pageAnalytics.questionNumber} IS NOT NULL`
+        gte(pageAnalytics.createdAt, windowStart),
+        sql`${pageAnalytics.questionNumber} IS NOT NULL`,
       ))
       .orderBy(asc(pageAnalytics.questionNumber));
-    
-    const filtered = excludeAdminIPsFilter(events);
-    
-    // Group by question number
-    const questionData: Record<number, {
-      answered: number;
-      abandoned: number;
-      avgTimeMs: number;
-      sessions: Set<string>;
-    }> = {};
-    
-    filtered.forEach(event => {
-      const qNum = event.questionNumber!;
-      if (!questionData[qNum]) {
-        questionData[qNum] = { answered: 0, abandoned: 0, avgTimeMs: 0, sessions: new Set() };
-      }
-      
-      questionData[qNum].sessions.add(event.sessionId);
-      
-      if (event.eventType === "question_answered") {
-        questionData[qNum].answered++;
-        if (event.timeToEventMs) {
-          questionData[qNum].avgTimeMs = 
-            (questionData[qNum].avgTimeMs * (questionData[qNum].answered - 1) + event.timeToEventMs) 
-            / questionData[qNum].answered;
+
+    const filtered = excludeAdminIPsFilter(events as any) as typeof events;
+
+    // (sessionId, qNumber) dedup keys
+    const answeredKey = new Set<string>();
+    const abandonedKey = new Set<string>();
+    const reachedKey = new Set<string>();
+
+    const timesByQuestion = new Map<number, number[]>();
+
+    for (const ev of filtered) {
+      const qNum = ev.questionNumber!;
+      const key = `${ev.sessionId}|${qNum}`;
+      reachedKey.add(key);
+      const canonical = canonicalEvent(ev.eventType);
+      if (canonical === ANALYTICS_EVENTS.QUESTION_ANSWERED) {
+        if (!answeredKey.has(key)) {
+          answeredKey.add(key);
+          if (ev.timeToEventMs && ev.timeToEventMs > 0) {
+            const arr = timesByQuestion.get(qNum) ?? [];
+            arr.push(ev.timeToEventMs);
+            timesByQuestion.set(qNum, arr);
+          }
         }
+      } else if (
+        canonical === ANALYTICS_EVENTS.QUESTION_ABANDONED ||
+        canonical === ANALYTICS_EVENTS.ASSESSMENT_ABANDONED
+      ) {
+        abandonedKey.add(key);
       }
-      
-      if (event.eventType === "question_abandoned" || event.eventType === "assessment_abandoned") {
-        questionData[qNum].abandoned++;
+    }
+
+    const perQuestion = new Map<number, { reached: number; answered: number; abandoned: number }>();
+    const incr = (q: number, field: "reached" | "answered" | "abandoned") => {
+      let agg = perQuestion.get(q);
+      if (!agg) {
+        agg = { reached: 0, answered: 0, abandoned: 0 };
+        perQuestion.set(q, agg);
       }
-    });
-    
-    const heatmap = Object.entries(questionData).map(([qNum, data]) => ({
-      questionNumber: parseInt(qNum),
-      answered: data.answered,
-      abandoned: data.abandoned,
-      uniqueSessions: data.sessions.size,
-      avgTimeSeconds: Math.round(data.avgTimeMs / 1000),
-      abandonmentRate: data.answered + data.abandoned > 0 
-        ? Math.round((data.abandoned / (data.answered + data.abandoned)) * 100)
-        : 0,
-    })).sort((a, b) => a.questionNumber - b.questionNumber);
-    
+      agg[field]++;
+    };
+    reachedKey.forEach(k => incr(Number(k.split("|")[1]), "reached"));
+    answeredKey.forEach(k => incr(Number(k.split("|")[1]), "answered"));
+    abandonedKey.forEach(k => incr(Number(k.split("|")[1]), "abandoned"));
+
+    const { SAMPLE_SIZE } = await import("@shared/analytics-taxonomy");
+
+    const heatmap = Array.from(perQuestion.entries()).map(([qNum, d]) => {
+      const times = timesByQuestion.get(qNum) ?? [];
+      const sortedTimes = [...times].sort((a, b) => a - b);
+      const median = sortedTimes.length
+        ? sortedTimes[Math.floor(sortedTimes.length / 2)]
+        : null;
+      const mean = sortedTimes.length
+        ? Math.round(sortedTimes.reduce((a, c) => a + c, 0) / sortedTimes.length)
+        : null;
+      const denom = d.answered + d.abandoned;
+      return {
+        questionNumber: qNum,
+        sessionsReached: d.reached,
+        answered: d.answered,
+        abandoned: d.abandoned,
+        abandonmentRate: denom > 0 ? Math.round((d.abandoned / denom) * 1000) / 10 : 0,
+        meanTimeSeconds: mean !== null ? Math.round(mean / 1000) : null,
+        medianTimeSeconds: median !== null ? Math.round(median / 1000) : null,
+        lowConfidence: d.reached < SAMPLE_SIZE.HEATMAP_MIN_N,
+      };
+    }).sort((a, b) => a.questionNumber - b.questionNumber);
+
     res.json({ success: true, heatmap });
   } catch (error) {
     log.error({ err: error }, "Error getting question heatmap");
@@ -2461,69 +2530,101 @@ router.get("/question-heatmap", async (req: Request, res: Response) => {
   }
 });
 
-// GET /api/analytics/time-to-conversion - Get time-based conversion metrics
+// GET /api/analytics/time-to-conversion - Time from first event to milestone.
+//
+// Fixed:
+//   - Milestones matched against canonical event sets (not .includes()
+//     substring — that was matching things like "assessment_progress_50"
+//     against milestone "assessment_").
+//   - Returns the count of sessions that DIDN'T reach each milestone
+//     (`nonConverters`) alongside the timed sessions — the operator can
+//     see right-censoring rather than thinking the data is "n converters
+//     in 22s on average" without context.
+//   - p95 alongside mean/median.
 router.get("/time-to-conversion", async (req: Request, res: Response) => {
   try {
     const days = parseInt(req.query.days as string) || 30;
-    const startDate = new Date();
-    startDate.setDate(startDate.getDate() - days);
-    
+    const windowEnd = new Date();
+    const windowStart = new Date(windowEnd.getTime() - days * 24 * 60 * 60 * 1000);
+
     const events = await db.select()
       .from(pageAnalytics)
-      .where(gte(pageAnalytics.createdAt, startDate))
+      .where(and(gte(pageAnalytics.createdAt, windowStart), lte(pageAnalytics.createdAt, windowEnd)))
       .orderBy(asc(pageAnalytics.createdAt));
-    
-    const filtered = excludeAdminIPsFilter(events);
-    
-    // Group events by session
+
+    const filtered = excludeAdminIPsFilter(events as any) as typeof events;
+
     const sessionEvents: Record<string, typeof filtered> = {};
-    filtered.forEach(event => {
-      if (!sessionEvents[event.sessionId]) {
-        sessionEvents[event.sessionId] = [];
-      }
-      sessionEvents[event.sessionId].push(event);
-    });
-    
-    // Calculate time to each milestone
-    const milestones = [
-      { name: "widget_visible", label: "Time to Widget Visible" },
-      { name: "widget_complete", label: "Time to Widget Complete" },
-      { name: "assessment_start", label: "Time to Assessment Start" },
-      { name: "assessment_complete", label: "Time to Assessment Complete" },
-      { name: "lead_captured", label: "Time to Lead Capture" },
+    for (const ev of filtered) {
+      if (!sessionEvents[ev.sessionId]) sessionEvents[ev.sessionId] = [];
+      sessionEvents[ev.sessionId].push(ev);
+    }
+    const totalSessions = Object.keys(sessionEvents).length;
+
+    const milestones: Array<{ key: string; label: string; events: Set<string> }> = [
+      {
+        key: "widget_visible",
+        label: "Time to widget visible",
+        events: new Set([ANALYTICS_EVENTS.WIDGET_VISIBLE, ANALYTICS_EVENTS.WIDGET_LOADED]),
+      },
+      {
+        key: "widget_completed",
+        label: "Time to widget completed",
+        events: new Set([ANALYTICS_EVENTS.WIDGET_COMPLETED, ANALYTICS_EVENTS.PREVIEW_COMPLETED]),
+      },
+      {
+        key: "assessment_started",
+        label: "Time to assessment started",
+        events: new Set([ANALYTICS_EVENTS.ASSESSMENT_STARTED, ANALYTICS_EVENTS.ASSESSMENT_PAGE_VIEW]),
+      },
+      {
+        key: "assessment_completed",
+        label: "Time to assessment completed",
+        events: new Set([ANALYTICS_EVENTS.ASSESSMENT_COMPLETED, ANALYTICS_EVENTS.ASSESSMENT_PROGRESS_100]),
+      },
+      {
+        key: "lead_captured",
+        label: "Time to lead captured",
+        events: new Set(LEAD_CAPTURE_EVENTS),
+      },
     ];
-    
+
     const timeMetrics = milestones.map(milestone => {
       const times: number[] = [];
-      
-      Object.values(sessionEvents).forEach(events => {
-        const sortedEvents = events.sort((a, b) => 
-          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+      let nonConverters = 0;
+
+      for (const evts of Object.values(sessionEvents)) {
+        const sorted = evts.slice().sort((a, b) =>
+          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
         );
-        
-        const firstEvent = sortedEvents[0];
-        const milestoneEvent = sortedEvents.find(e => 
-          e.eventType.includes(milestone.name) || 
-          (milestone.name === "widget_complete" && e.eventType === "preview_completed")
-        );
-        
-        if (firstEvent && milestoneEvent) {
-          const timeDiff = new Date(milestoneEvent.createdAt).getTime() - new Date(firstEvent.createdAt).getTime();
-          if (timeDiff > 0 && timeDiff < 3600000) { // Less than 1 hour
-            times.push(timeDiff);
-          }
+        const firstEvent = sorted[0];
+        const milestoneEvent = sorted.find(e => milestone.events.has(canonicalEvent(e.eventType) as never));
+        if (!milestoneEvent) {
+          nonConverters++;
+          continue;
         }
-      });
-      
+        const dt = new Date(milestoneEvent.createdAt).getTime() - new Date(firstEvent.createdAt).getTime();
+        if (dt > 0 && dt < 3600 * 1000 * 24) times.push(dt); // 24h cutoff
+      }
+
+      const sortedTimes = times.slice().sort((a, b) => a - b);
+      const median = sortedTimes.length ? sortedTimes[Math.floor(sortedTimes.length / 2)] : null;
+      const p95 = sortedTimes.length ? sortedTimes[Math.floor(sortedTimes.length * 0.95)] : null;
+      const mean = sortedTimes.length ? Math.round(sortedTimes.reduce((a, c) => a + c, 0) / sortedTimes.length) : null;
+
       return {
-        milestone: milestone.name,
+        milestone: milestone.key,
         label: milestone.label,
-        avgSeconds: times.length > 0 ? Math.round(times.reduce((a, b) => a + b, 0) / times.length / 1000) : null,
-        medianSeconds: times.length > 0 ? Math.round(times.sort((a, b) => a - b)[Math.floor(times.length / 2)] / 1000) : null,
-        count: times.length,
+        converters: times.length,
+        nonConverters,
+        totalSessions,
+        conversionRate: totalSessions > 0 ? Math.round((times.length / totalSessions) * 1000) / 10 : 0,
+        meanSeconds: mean !== null ? Math.round(mean / 1000) : null,
+        medianSeconds: median !== null ? Math.round(median / 1000) : null,
+        p95Seconds: p95 !== null ? Math.round(p95 / 1000) : null,
       };
     });
-    
+
     res.json({ success: true, metrics: timeMetrics });
   } catch (error) {
     log.error({ err: error }, "Error getting time to conversion");
@@ -2531,62 +2632,80 @@ router.get("/time-to-conversion", async (req: Request, res: Response) => {
   }
 });
 
-// GET /api/analytics/trend-data - Get daily trend data for sparklines
+// GET /api/analytics/trend-data - Daily totals for sparklines.
+//
+// Fixed: every metric is "unique sessions that did X today" — no more
+// mixing raw event counts with deduplicated sessions in the same chart.
+// One session that emits 10 widget_completed events counts once.
 router.get("/trend-data", async (req: Request, res: Response) => {
   try {
     const days = parseInt(req.query.days as string) || 14;
-    const startDate = new Date();
-    startDate.setDate(startDate.getDate() - days);
-    
-    const events = await db.select()
+    const windowStart = new Date();
+    windowStart.setUTCHours(0, 0, 0, 0);
+    windowStart.setUTCDate(windowStart.getUTCDate() - days + 1);
+
+    const events = await db
+      .select({
+        eventType: pageAnalytics.eventType,
+        sessionId: pageAnalytics.sessionId,
+        createdAt: pageAnalytics.createdAt,
+      })
       .from(pageAnalytics)
-      .where(gte(pageAnalytics.createdAt, startDate))
+      .where(gte(pageAnalytics.createdAt, windowStart))
       .orderBy(asc(pageAnalytics.createdAt));
-    
-    const filtered = excludeAdminIPsFilter(events);
-    
-    // Group by date
+
+    const filtered = excludeAdminIPsFilter(events as any) as typeof events;
+
     const dailyData: Record<string, {
       sessions: Set<string>;
-      widgetComplete: number;
-      assessmentComplete: number;
-      leads: number;
+      widgetCompleted: Set<string>;
+      assessmentCompleted: Set<string>;
+      leads: Set<string>;
     }> = {};
-    
+
     for (let i = 0; i < days; i++) {
-      const date = new Date();
-      date.setDate(date.getDate() - i);
-      const dateStr = date.toISOString().split("T")[0];
-      dailyData[dateStr] = { sessions: new Set(), widgetComplete: 0, assessmentComplete: 0, leads: 0 };
+      const date = new Date(windowStart);
+      date.setUTCDate(date.getUTCDate() + i);
+      const key = date.toISOString().slice(0, 10);
+      dailyData[key] = {
+        sessions: new Set(),
+        widgetCompleted: new Set(),
+        assessmentCompleted: new Set(),
+        leads: new Set(),
+      };
     }
-    
-    filtered.forEach(event => {
-      const dateStr = new Date(event.createdAt).toISOString().split("T")[0];
-      if (dailyData[dateStr]) {
-        dailyData[dateStr].sessions.add(event.sessionId);
-        
-        if (event.eventType === "preview_completed" || event.eventType === "widget_complete") {
-          dailyData[dateStr].widgetComplete++;
-        }
-        if (event.eventType === "assessment_complete" || event.eventType === "assessment_progress_100") {
-          dailyData[dateStr].assessmentComplete++;
-        }
-        if (event.eventType === "lead_captured" || event.eventType === "email_captured") {
-          dailyData[dateStr].leads++;
-        }
-      }
-    });
-    
+
+    const widgetCompletionEvents = new Set<string>([
+      ANALYTICS_EVENTS.WIDGET_COMPLETED,
+      ANALYTICS_EVENTS.PREVIEW_COMPLETED,
+    ]);
+    const assessmentCompletionEvents = new Set<string>([
+      ANALYTICS_EVENTS.ASSESSMENT_COMPLETED,
+      ANALYTICS_EVENTS.ASSESSMENT_PROGRESS_100,
+    ]);
+    const leadEvents = new Set<string>(LEAD_CAPTURE_EVENTS);
+
+    for (const event of filtered) {
+      const dateStr = new Date(event.createdAt).toISOString().slice(0, 10);
+      const bucket = dailyData[dateStr];
+      if (!bucket) continue;
+      bucket.sessions.add(event.sessionId);
+      const canonical = canonicalEvent(event.eventType);
+      if (widgetCompletionEvents.has(canonical as never)) bucket.widgetCompleted.add(event.sessionId);
+      if (assessmentCompletionEvents.has(canonical as never)) bucket.assessmentCompleted.add(event.sessionId);
+      if (leadEvents.has(canonical as never)) bucket.leads.add(event.sessionId);
+    }
+
     const trendData = Object.entries(dailyData)
       .map(([date, data]) => ({
         date,
         sessions: data.sessions.size,
-        widgetComplete: data.widgetComplete,
-        assessmentComplete: data.assessmentComplete,
-        leads: data.leads,
+        widgetCompleted: data.widgetCompleted.size,
+        assessmentCompleted: data.assessmentCompleted.size,
+        leads: data.leads.size,
       }))
       .sort((a, b) => a.date.localeCompare(b.date));
-    
+
     res.json({ success: true, trendData });
   } catch (error) {
     log.error({ err: error }, "Error getting trend data");

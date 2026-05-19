@@ -692,6 +692,17 @@ app.use((req, res, next) => {
   const { initializeScheduler } = await import("./services/scan-scheduler");
   initializeScheduler();
 
+  // Initialize the analytics scheduler — seeds funnel stages, backfills
+  // rollups on first boot, and arms the nightly rollup + retention +
+  // insight refresh job. Idempotent on subsequent restarts.
+  try {
+    const { initAnalyticsScheduler } = await import("./services/analytics/scheduler");
+    await initAnalyticsScheduler();
+  } catch (err) {
+    // Don't crash boot if scheduler init fails — analytics is non-critical.
+    console.error("[analytics-scheduler] init failed:", err);
+  }
+
   // Auto-seed/sync FinanceCompass questions on every startup
   // Uses upsert logic so it's safe to run every time - creates new, updates existing
   try {

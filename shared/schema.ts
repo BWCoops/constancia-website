@@ -1833,6 +1833,7 @@ export type WidgetAbTest = typeof widgetAbTests.$inferSelect;
 export const pageAnalytics = pgTable("page_analytics", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   eventType: text("event_type").notNull(),
+  eventCategory: text("event_category"),
   page: text("page").notNull(),
   sessionId: text("session_id").notNull(),
   visitorId: text("visitor_id"),
@@ -1855,6 +1856,7 @@ export const pageAnalytics = pgTable("page_analytics", {
   metadata: jsonb("metadata"),
   userAgent: text("user_agent"),
   ipAddress: text("ip_address"),
+  ipHash: text("ip_hash"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 }, (table) => [
   index("idx_page_analytics_session").on(table.sessionId),
@@ -1862,6 +1864,8 @@ export const pageAnalytics = pgTable("page_analytics", {
   index("idx_page_analytics_page").on(table.page),
   index("idx_page_analytics_created").on(table.createdAt),
   index("idx_page_analytics_visitor").on(table.visitorId),
+  index("idx_page_analytics_created_event").on(table.createdAt, table.eventType),
+  index("idx_page_analytics_category").on(table.eventCategory),
 ]);
 
 export const insertPageAnalyticsSchema = createInsertSchema(pageAnalytics).omit({
@@ -1891,6 +1895,151 @@ export const insertFunnelTargetSchema = createInsertSchema(funnelTargets).omit({
 });
 export type InsertFunnelTarget = z.infer<typeof insertFunnelTargetSchema>;
 export type FunnelTarget = typeof funnelTargets.$inferSelect;
+
+// Funnel stage definitions — DB-backed source of truth for what events
+// roll up into which stage. Seeded from shared/analytics-taxonomy.ts on
+// first boot; after that, the operator can edit stages without a deploy.
+export const funnelStages = pgTable("funnel_stages", {
+  id: serial("id").primaryKey(),
+  stageKey: text("stage_key").notNull().unique(),
+  stageOrder: integer("stage_order").notNull(),
+  label: text("label").notNull(),
+  description: text("description"),
+  eventTypes: jsonb("event_types").$type<string[]>().notNull(),
+  targetConversionPct: integer("target_conversion_pct").notNull(),
+  warningPct: integer("warning_pct").notNull(),
+  isActive: boolean("is_active").default(true).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+}, (table) => [
+  index("idx_funnel_stages_order").on(table.stageOrder),
+]);
+
+export const insertFunnelStageSchema = createInsertSchema(funnelStages).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+export type InsertFunnelStage = z.infer<typeof insertFunnelStageSchema>;
+export type FunnelStage = typeof funnelStages.$inferSelect;
+
+// Daily rollups — populated by the nightly aggregation job (server/
+// services/analytics/rollup.ts). One row per (utc_day, page,
+// event_category, source_channel). Raw events are dropped after
+// RETENTION.RAW_DAYS; rollups never expire so YoY always works.
+export const analyticsDailyRollup = pgTable("analytics_daily_rollup", {
+  id: serial("id").primaryKey(),
+  utcDay: timestamp("utc_day").notNull(),
+  page: text("page"),
+  eventCategory: text("event_category"),
+  eventType: text("event_type"),
+  sourceChannel: text("source_channel"),
+  utmSource: text("utm_source"),
+  utmMedium: text("utm_medium"),
+  utmCampaign: text("utm_campaign"),
+  deviceType: text("device_type"),
+  countryCode: text("country_code"),
+  uniqueSessions: integer("unique_sessions").notNull().default(0),
+  uniqueVisitors: integer("unique_visitors").notNull().default(0),
+  eventCount: integer("event_count").notNull().default(0),
+  avgDwellMs: integer("avg_dwell_ms"),
+  medianDwellMs: integer("median_dwell_ms"),
+  isBotShare: integer("is_bot_share"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+}, (table) => [
+  index("idx_daily_rollup_day").on(table.utcDay),
+  index("idx_daily_rollup_day_category").on(table.utcDay, table.eventCategory),
+  index("idx_daily_rollup_day_source").on(table.utcDay, table.sourceChannel),
+  index("idx_daily_rollup_day_page").on(table.utcDay, table.page),
+]);
+
+export const insertAnalyticsDailyRollupSchema = createInsertSchema(analyticsDailyRollup).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+export type InsertAnalyticsDailyRollup = z.infer<typeof insertAnalyticsDailyRollupSchema>;
+export type AnalyticsDailyRollup = typeof analyticsDailyRollup.$inferSelect;
+
+// Monthly rollups — first-of-month rows aggregated from daily. The
+// permanent record for year-over-year. Stays compact; never expires.
+export const analyticsMonthlyRollup = pgTable("analytics_monthly_rollup", {
+  id: serial("id").primaryKey(),
+  utcMonth: timestamp("utc_month").notNull(),
+  eventCategory: text("event_category"),
+  sourceChannel: text("source_channel"),
+  uniqueSessions: integer("unique_sessions").notNull().default(0),
+  uniqueVisitors: integer("unique_visitors").notNull().default(0),
+  eventCount: integer("event_count").notNull().default(0),
+  leadCount: integer("lead_count").notNull().default(0),
+  assessmentCompletedCount: integer("assessment_completed_count").notNull().default(0),
+  reportDownloadedCount: integer("report_downloaded_count").notNull().default(0),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+}, (table) => [
+  index("idx_monthly_rollup_month").on(table.utcMonth),
+  index("idx_monthly_rollup_category").on(table.eventCategory),
+  index("idx_monthly_rollup_source").on(table.sourceChannel),
+]);
+
+export const insertAnalyticsMonthlyRollupSchema = createInsertSchema(analyticsMonthlyRollup).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+export type InsertAnalyticsMonthlyRollup = z.infer<typeof insertAnalyticsMonthlyRollupSchema>;
+export type AnalyticsMonthlyRollup = typeof analyticsMonthlyRollup.$inferSelect;
+
+// Generated insights — cached output of the insight rules. Refreshed by
+// the same nightly job that builds rollups. Dashboards read from here so
+// the page is fast and the ranked list is consistent across operators.
+export const analyticsInsights = pgTable("analytics_insights", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  kind: text("kind").notNull(),
+  severity: text("severity").notNull(),
+  headline: text("headline").notNull(),
+  detail: text("detail").notNull(),
+  recommendedAction: text("recommended_action").notNull(),
+  linkLabel: text("link_label"),
+  linkHref: text("link_href"),
+  metrics: jsonb("metrics").$type<Record<string, number | string>>().notNull(),
+  windowStart: timestamp("window_start").notNull(),
+  windowEnd: timestamp("window_end").notNull(),
+  generatedAt: timestamp("generated_at").defaultNow().notNull(),
+  acknowledgedAt: timestamp("acknowledged_at"),
+  acknowledgedBy: text("acknowledged_by"),
+  dismissedAt: timestamp("dismissed_at"),
+}, (table) => [
+  index("idx_insights_severity").on(table.severity),
+  index("idx_insights_kind").on(table.kind),
+  index("idx_insights_generated").on(table.generatedAt),
+]);
+
+export const insertAnalyticsInsightSchema = createInsertSchema(analyticsInsights).omit({
+  id: true,
+  generatedAt: true,
+});
+export type InsertAnalyticsInsight = z.infer<typeof insertAnalyticsInsightSchema>;
+export type AnalyticsInsight = typeof analyticsInsights.$inferSelect;
+
+// Tracks the last run of each scheduled analytics job. The rollup/
+// insights job uses this to avoid re-processing days it's already done.
+export const analyticsJobRuns = pgTable("analytics_job_runs", {
+  id: serial("id").primaryKey(),
+  jobName: text("job_name").notNull(),
+  windowStart: timestamp("window_start").notNull(),
+  windowEnd: timestamp("window_end").notNull(),
+  rowsProcessed: integer("rows_processed").notNull().default(0),
+  status: text("status").notNull(),
+  errorMessage: text("error_message"),
+  startedAt: timestamp("started_at").defaultNow().notNull(),
+  finishedAt: timestamp("finished_at"),
+}, (table) => [
+  index("idx_job_runs_job_started").on(table.jobName, table.startedAt),
+]);
+
+export type AnalyticsJobRun = typeof analyticsJobRuns.$inferSelect;
 
 export const talentSubmissions = pgTable("talent_submissions", {
   id: serial("id").primaryKey(),
