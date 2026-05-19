@@ -92,8 +92,20 @@ export async function setupAuth(app: Express): Promise<void> {
           { reason: (err as Error).message },
           "Clerk middleware error — clearing stale session cookies and continuing unauthenticated"
         );
-        res.clearCookie("__session");
-        res.clearCookie("__client_uat");
+        // Clear EVERY cookie Clerk might own. Different Clerk versions and
+        // instance modes (dev vs prod) use different cookie names; nuke them
+        // all so the next request starts clean.
+        for (const name of [
+          "__session",
+          "__client_uat",
+          "__client",
+          "__clerk_db_jwt",
+          "__clerk_active_org",
+          "__clerk_handshake",
+        ]) {
+          res.clearCookie(name);
+          res.clearCookie(name, { path: "/", sameSite: "strict", secure: true });
+        }
         return next();
       }
       next();
@@ -146,8 +158,24 @@ export async function setupAuth(app: Express): Promise<void> {
   });
 
   // Session probe endpoint — the admin client polls this on load.
+  //
+  // Possible response shapes (always HTTP 200 — clients should branch on
+  // the `reason` field, not the status code):
+  //   { authenticated: true,  user: {...} }
+  //   { authenticated: false }                                no Clerk session
+  //   { authenticated: false, reason: "email_not_authorized", email: "..." }
+  //   { authenticated: false, reason: "clerk_fetch_failed" }  transient — retry
+  //   { authenticated: false, reason: "session_expired" }     stale token
   app.get("/api/admin/auth/session", async (req: Request, res: Response) => {
-    const { userId } = getAuth(req);
+    let auth;
+    try {
+      auth = getAuth(req);
+    } catch (err) {
+      authLog.warn({ err: (err as Error).message }, "getAuth threw (likely stale token)");
+      return res.json({ authenticated: false, reason: "session_expired" });
+    }
+
+    const userId = auth?.userId;
     if (!userId) return res.json({ authenticated: false });
 
     try {
@@ -171,8 +199,12 @@ export async function setupAuth(app: Express): Promise<void> {
         },
       });
     } catch (err) {
-      authLog.error({ err }, "Failed to load Clerk user");
-      return res.status(500).json({ authenticated: false, reason: "clerk_fetch_failed" });
+      // Clerk API call failed (network / 5xx / rate-limited). Return 200 with
+      // an informational reason so the client can retry without hitting an
+      // error boundary. The user's auth state is unknown here, NOT "definitely
+      // unauthenticated" — clients must NOT redirect on this response.
+      authLog.error({ err }, "Failed to load Clerk user — clerk_fetch_failed (transient)");
+      return res.json({ authenticated: false, reason: "clerk_fetch_failed" });
     }
   });
 

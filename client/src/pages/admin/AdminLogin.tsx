@@ -17,42 +17,112 @@ export default function AdminLogin() {
     if (errorParam) setError(decodeURIComponent(errorParam));
   }, [search]);
 
-  // If Clerk reports the user is signed in, also verify the server-side
-  // session+allowlist check before redirecting into the dashboard.
-  // Probe the server session exactly ONCE per Clerk-signed-in transition.
-  // Without this guard, a brief flap in isSignedIn (during Clerk init or
-  // hot reload) would refire the effect, repoll the rate-limited endpoint,
-  // and feed the redirect loop with AdminLayout.
+  // Probe state — drives the hold-screen displayed when Clerk says signed-in
+  // but we haven't yet confirmed allowlist authorisation with the server.
+  const [probeState, setProbeState] = useState<
+    "idle" | "checking" | "retrying" | "stuck" | "transient_error"
+  >("idle");
   const probedRef = useRef(false);
+  const probeAttemptRef = useRef(0);
+
   useEffect(() => {
     if (!isLoaded) return;
-    if (!isSignedIn) { probedRef.current = false; return; }
+    if (!isSignedIn) {
+      probedRef.current = false;
+      probeAttemptRef.current = 0;
+      setProbeState("idle");
+      return;
+    }
     if (probedRef.current) return;
     probedRef.current = true;
 
     let cancelled = false;
-    (async () => {
+    const runProbe = async (attempt: number): Promise<void> => {
+      if (cancelled) return;
+      probeAttemptRef.current = attempt;
+      setProbeState(attempt === 0 ? "checking" : "retrying");
+
       try {
-        const res = await fetch("/api/admin/auth/session", { credentials: "include" });
+        const res = await fetch("/api/admin/auth/session", {
+          credentials: "include",
+          // Avoid the browser/CDN caching a stale "false" answer
+          cache: "no-store",
+        });
+
+        if (cancelled) return;
+
         if (res.status === 429) {
-          // Rate-limited — don't redirect, don't retry. Let AdminLayout handle
-          // it once the user lands on a protected route via Clerk's session.
+          // Rate-limited — surface as transient and retry with backoff.
+          if (attempt < 3) {
+            setTimeout(() => runProbe(attempt + 1), 1000 * (attempt + 1));
+          } else {
+            setProbeState("transient_error");
+          }
           return;
         }
-        if (!res.ok) return;
+        if (!res.ok) {
+          if (attempt < 3) {
+            setTimeout(() => runProbe(attempt + 1), 1500 * (attempt + 1));
+          } else {
+            setProbeState("transient_error");
+          }
+          return;
+        }
+
         const data = await res.json();
         if (cancelled) return;
-        if (data.authenticated) {
+
+        if (data.authenticated === true) {
           setLocation("/admin/dashboard");
-        } else if (data.reason === "email_not_authorized") {
-          setLocation("/admin/access-denied");
+          return;
         }
+        if (data.reason === "email_not_authorized") {
+          setLocation("/admin/access-denied");
+          return;
+        }
+        if (data.reason === "session_expired") {
+          // Clerk session is stale — reset probe state and let <SignIn /> re-mount.
+          probedRef.current = false;
+          setProbeState("idle");
+          return;
+        }
+        if (data.reason === "clerk_fetch_failed") {
+          // Server couldn't talk to Clerk's API. Retry with backoff.
+          if (attempt < 3) {
+            setTimeout(() => runProbe(attempt + 1), 2000 * (attempt + 1));
+          } else {
+            setProbeState("transient_error");
+          }
+          return;
+        }
+        // authenticated: false with no reason — stay on this page so user can sign in
+        setProbeState("idle");
       } catch (err) {
-        console.error("Session check failed:", err);
+        if (cancelled) return;
+        console.warn("Session probe failed:", err);
+        if (attempt < 3) {
+          setTimeout(() => runProbe(attempt + 1), 2000 * (attempt + 1));
+        } else {
+          setProbeState("transient_error");
+        }
       }
-    })();
+    };
+
+    runProbe(0);
     return () => { cancelled = true; };
   }, [isLoaded, isSignedIn, setLocation]);
+
+  // If the hold-screen has been showing for too long without resolving,
+  // give the user a way out instead of an infinite spinner.
+  const [probeStuck, setProbeStuck] = useState(false);
+  useEffect(() => {
+    if (probeState !== "checking" && probeState !== "retrying") {
+      setProbeStuck(false);
+      return;
+    }
+    const t = window.setTimeout(() => setProbeStuck(true), 12000);
+    return () => window.clearTimeout(t);
+  }, [probeState]);
 
   // Clerk-load timeout — if Clerk's runtime hasn't initialised within 6s
   // surface a useful error rather than spin forever. Usual causes: CSP
@@ -94,16 +164,78 @@ export default function AdminLogin() {
   }
 
   // Critical: if Clerk reports a signed-in session, do NOT render <SignIn/>.
-  // Clerk's component auto-redirects to afterSignInUrl ("/admin/dashboard") as
-  // soon as it sees an active session — which causes the dashboard <-> login
-  // ping-pong when the user's email isn't on the allowlist. Hold here with a
-  // "checking authorisation" state while the probedRef effect above runs the
-  // server allowlist check, then it'll setLocation us to dashboard or
-  // access-denied.
+  // Clerk's component auto-redirects to afterSignInUrl as soon as it sees an
+  // active session — which causes the dashboard <-> login ping-pong when the
+  // user's email isn't on the allowlist. Hold here with state-aware messages
+  // while the probe runs, then it'll setLocation us to the right destination.
   if (isSignedIn) {
+    if (probeState === "transient_error") {
+      return (
+        <div className="min-h-screen flex flex-col items-center justify-center bg-[#F6F3EE] p-6 text-center">
+          <div className="max-w-md space-y-4">
+            <h1 className="text-2xl font-light text-[#12161D]">Authentication check failed</h1>
+            <p className="text-[#1E2630] text-sm leading-relaxed">
+              The server couldn't confirm your authorisation after several
+              attempts. This usually means a transient network issue between
+              the server and Clerk's API, or rate-limiting from too many
+              recent attempts.
+            </p>
+            <p className="text-[#1E2630] text-xs">
+              Diagnostics: <a className="underline text-[#8E4F67]" href="/api/health/clerk">/api/health/clerk</a>
+            </p>
+            <div className="flex gap-3 justify-center pt-2">
+              <button
+                onClick={() => { probedRef.current = false; probeAttemptRef.current = 0; setProbeState("idle"); window.location.reload(); }}
+                className="px-4 py-2 rounded-full bg-[#12161D] text-[#F6F3EE] text-sm"
+              >
+                Retry
+              </button>
+              <button
+                onClick={() => (window.location.href = "/api/logout")}
+                className="px-4 py-2 rounded-full bg-transparent text-[#12161D] text-sm border border-[#12161D]/20"
+              >
+                Sign out
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+    }
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#F6F3EE]">
-        <div className="animate-pulse text-[#1E2630] text-lg">Checking authorisation…</div>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#F6F3EE] p-6 text-center">
+        <div className="animate-pulse text-[#1E2630] text-lg">
+          {probeState === "retrying"
+            ? `Checking authorisation… (retry ${probeAttemptRef.current})`
+            : "Checking authorisation…"}
+        </div>
+        {probeStuck && (
+          <div className="mt-6 max-w-md space-y-2">
+            <p className="text-[#1E2630] text-sm">
+              This is taking longer than expected. You can retry, sign out, or
+              check the server diagnostics.
+            </p>
+            <div className="flex gap-3 justify-center pt-2">
+              <button
+                onClick={() => window.location.reload()}
+                className="px-4 py-2 rounded-full bg-[#12161D] text-[#F6F3EE] text-sm"
+              >
+                Retry
+              </button>
+              <button
+                onClick={() => (window.location.href = "/api/logout")}
+                className="px-4 py-2 rounded-full bg-transparent text-[#12161D] text-sm border border-[#12161D]/20"
+              >
+                Sign out
+              </button>
+              <a
+                href="/api/health/clerk"
+                className="px-4 py-2 rounded-full bg-transparent text-[#8E4F67] text-sm underline"
+              >
+                Diagnostics
+              </a>
+            </div>
+          </div>
+        )}
       </div>
     );
   }

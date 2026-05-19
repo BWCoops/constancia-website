@@ -154,17 +154,17 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   }, [refetch, queryClient]);
 
   useEffect(() => {
-    // Distinguish between "no Clerk session" and "Clerk session but the
-    // email isn't on the allowlist". The latter must NOT go to /admin/login,
-    // because Clerk's <SignIn /> auto-redirects to afterSignInUrl as soon as
-    // it sees a signed-in user — that creates the dashboard <-> login loop
-    // we kept hitting. Route to /admin/access-denied instead so the user can
-    // see why and sign out.
+    // Route based on the server's reason field, not just authenticated:false:
+    //   email_not_authorized  -> /admin/access-denied (no auth UI, no loop)
+    //   clerk_fetch_failed    -> stay put, transient — useQuery will refetch
+    //   session_expired       -> /admin/login (Clerk session needs re-auth)
+    //   (none)                -> /admin/login (no Clerk session)
     if (!isLoading && session && session.authenticated === false) {
-      const target =
-        (session as AdminSession & { reason?: string }).reason === "email_not_authorized"
-          ? "/admin/access-denied"
-          : "/admin/login";
+      const reason = (session as AdminSession & { reason?: string }).reason;
+      if (reason === "clerk_fetch_failed") return; // transient, don't redirect
+      const target = reason === "email_not_authorized"
+        ? "/admin/access-denied"
+        : "/admin/login";
       if (location !== target) setLocation(target);
     }
   }, [session, isLoading, setLocation, location]);

@@ -74,13 +74,40 @@ import whiteLogo from "@assets/constancia-logo-dark.png";
 import gradientLogo from "@assets/constancia-logo.png";
 import iconWhite from "@assets/constancia-logo-dark.png";
 
-import peopleProfessional1 from "@assets/stock_images/professional_busines_5c31713e.jpg";
-import peopleProfessional2 from "@assets/stock_images/professional_busines_49e2d0d2.jpg";
-import peopleProfessional3 from "@assets/stock_images/professional_busines_3546fab3.jpg";
-import peopleTeam1 from "@assets/stock_images/diverse_business_tea_83f98d11.jpg";
-import peopleTeam2 from "@assets/stock_images/diverse_business_tea_23801e85.jpg";
-import peopleTeam3 from "@assets/stock_images/diverse_business_tea_6cce6ad5.jpg";
-import londonOffice from "@assets/stock_images/london_office.jpg";
+// Stock-image / marketing-asset placeholders. The original stock_images/
+// and marketing/ directories were never checked into the repo, so we alias
+// every name to the brand logo as a benign placeholder. Replace per-asset
+// when the real images are re-uploaded into attached_assets/.
+const peopleProfessional1 = whiteLogo;
+const peopleProfessional2 = whiteLogo;
+const peopleProfessional3 = whiteLogo;
+const peopleTeam1 = whiteLogo;
+const peopleTeam2 = whiteLogo;
+const peopleTeam3 = whiteLogo;
+const londonOffice = whiteLogo;
+const stockBusiness1 = whiteLogo;
+const stockBusiness2 = whiteLogo;
+const stockBusiness3 = whiteLogo;
+const stockData1 = whiteLogo;
+const stockData2 = whiteLogo;
+const stockData3 = whiteLogo;
+const stockCloud1 = whiteLogo;
+const stockCloud2 = whiteLogo;
+const stockCloud3 = whiteLogo;
+const stockExec1 = whiteLogo;
+const stockExec2 = whiteLogo;
+const stockExec3 = whiteLogo;
+const stockDigital1 = whiteLogo;
+const stockDigital2 = whiteLogo;
+const stockDigital3 = whiteLogo;
+const teamsGradient1 = whiteLogo;
+const teamsGradient2 = whiteLogo;
+const teamsGradient3 = whiteLogo;
+const teamsStock1 = whiteLogo;
+const teamsStock2 = whiteLogo;
+const teamsStock3 = whiteLogo;
+
+
 
 // Brand colors
 const BRAND = {
@@ -1014,30 +1041,9 @@ const gradientCovers: GradientCoverConfig[] = [
   },
 ];
 
-import stockBusiness1 from "@assets/stock_images/professional_busines_a4bf8f1b.jpg";
-import stockBusiness2 from "@assets/stock_images/professional_busines_d9c0c38d.jpg";
-import stockBusiness3 from "@assets/stock_images/professional_busines_007792e7.jpg";
-import stockData1 from "@assets/stock_images/futuristic_data_anal_ebcf564c.jpg";
-import stockData2 from "@assets/stock_images/futuristic_data_anal_a2c24830.jpg";
-import stockData3 from "@assets/stock_images/futuristic_data_anal_1d80b90f.jpg";
-import stockCloud1 from "@assets/stock_images/modern_enterprise_so_0831915b.jpg";
-import stockCloud2 from "@assets/stock_images/modern_enterprise_so_ba363fb6.jpg";
-import stockCloud3 from "@assets/stock_images/modern_enterprise_so_db14a38e.jpg";
-import stockExec1 from "@assets/stock_images/executive_business_s_7e8e0486.jpg";
-import stockExec2 from "@assets/stock_images/executive_business_s_a5ff739d.jpg";
-import stockExec3 from "@assets/stock_images/executive_business_s_d0cb4c73.jpg";
-import stockDigital1 from "@assets/stock_images/digital_transformati_b1c223bc.jpg";
-import stockDigital2 from "@assets/stock_images/digital_transformati_d50d6eb5.jpg";
-import stockDigital3 from "@assets/stock_images/digital_transformati_e8afb3dc.jpg";
 
 // Teams gradient backgrounds (AI-generated with logo and tagline included)
-import teamsGradient1 from "@assets/marketing/teams_gradient_1.png";
-import teamsGradient2 from "@assets/marketing/teams_gradient_2.png";
-import teamsGradient3 from "@assets/marketing/teams_gradient_3.png";
 // Stock photo backgrounds (branding added on download)
-import teamsStock1 from "@assets/marketing/teams_stock_1.jpg";
-import teamsStock2 from "@assets/marketing/teams_stock_2.jpg";
-import teamsStock3 from "@assets/marketing/teams_stock_3.jpg";
 
 interface TeamsBackgroundConfig {
   id: string;
