@@ -92,6 +92,20 @@ export async function setupAuth(app: Express): Promise<void> {
     });
   });
 
+  // Public config endpoint — the client fetches its Clerk publishable key
+  // from here on boot if it's not present in the build-time env (i.e. if
+  // VITE_CLERK_PUBLISHABLE_KEY wasn't set when Vite did its env transform).
+  // The publishable key is safe to expose; the secret is never returned.
+  app.get("/api/config/clerk", (_req: Request, res: Response) => {
+    res.json({
+      publishableKey:
+        process.env.CLERK_PUBLISHABLE_KEY ||
+        process.env.VITE_CLERK_PUBLISHABLE_KEY ||
+        process.env.CLERK_PUBLIC_KEY ||
+        null,
+    });
+  });
+
   // Diagnostic endpoint — confirms the server's Clerk wiring is OK and
   // surfaces the frontend API host so a stuck client knows what URL the
   // browser is trying (or failing) to load. Safe to expose publicly: no

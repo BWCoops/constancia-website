@@ -184,14 +184,38 @@ history.replaceState = function(...args: Parameters<typeof originalReplaceState>
   handleRouteChange();
 };
 
-createRoot(document.getElementById("root")!).render(
-  CLERK_PUBLISHABLE_KEY ? (
-    <ClerkBoundary fallback={<App />}>
-      <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY} afterSignOutUrl="/admin/login">
-        <App />
-      </ClerkProvider>
-    </ClerkBoundary>
-  ) : (
-    <App />
-  )
-);
+// Bootstrap the React tree. If the publishable key is present in
+// build-time env (VITE_CLERK_PUBLISHABLE_KEY), use it immediately. If not,
+// fetch from /api/config/clerk — covers the case where the key is only
+// available under the CLERK_PUBLIC_KEY env name (no VITE_ prefix) and
+// Vite never picked it up.
+async function bootstrap() {
+  let key = CLERK_PUBLISHABLE_KEY;
+  if (!key) {
+    try {
+      const res = await fetch("/api/config/clerk", { credentials: "include" });
+      if (res.ok) {
+        const data = await res.json();
+        if (data?.publishableKey) key = data.publishableKey;
+      }
+    } catch {
+      // Fall through — App renders without Clerk; admin routes show
+      // their "auth unavailable" state.
+    }
+  }
+
+  const root = createRoot(document.getElementById("root")!);
+  root.render(
+    key ? (
+      <ClerkBoundary fallback={<App />}>
+        <ClerkProvider publishableKey={key} afterSignOutUrl="/admin/login">
+          <App />
+        </ClerkProvider>
+      </ClerkBoundary>
+    ) : (
+      <App />
+    )
+  );
+}
+
+bootstrap();

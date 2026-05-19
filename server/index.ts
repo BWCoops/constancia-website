@@ -1,3 +1,8 @@
+// Side-effect import — must be first, before anything that reads CLERK_* env.
+// Bridges CLERK_SECRET / CLERK_PUBLIC_KEY -> the canonical names @clerk/express
+// and Vite expect. See server/env-bootstrap.ts.
+import "./env-bootstrap";
+
 import express, { type Request, Response, NextFunction } from "express";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
