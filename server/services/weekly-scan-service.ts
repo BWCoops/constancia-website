@@ -12,7 +12,7 @@ const log = createChildLogger("weekly-scan");
 const MS_GRAPH_CLIENT_ID = process.env.MS_GRAPH_CLIENT_ID;
 const MS_GRAPH_CLIENT_SECRET = process.env.MS_GRAPH_CLIENT_SECRET;
 const MS_GRAPH_TENANT_ID = process.env.MS_GRAPH_TENANT_ID;
-const SENDER_EMAIL = "info@1qg.com";
+const SENDER_EMAIL = "info@constancia.com";
 const ADMIN_EMAILS = ["grant.vanwyk@1qg.com", "bradley.cooper@1qg.com"];
 
 interface ScanSummary {
@@ -214,10 +214,10 @@ async function sendScanReportEmail(summary: ScanSummary): Promise<{ success: boo
   const criticalCount = summary.severeIssues.filter(i => i.severity === "critical").length;
 
   const subject = hasSevereIssues
-    ? `[${criticalCount > 0 ? "CRITICAL" : "WARNING"}] 1QG Weekly Content Scan Report - ${new Date().toLocaleDateString("en-GB")}`
-    : `1QG Weekly Content Scan Report - ${new Date().toLocaleDateString("en-GB")}`;
+    ? `[${criticalCount > 0 ? "CRITICAL" : "WARNING"}] Constancia Weekly Content Scan Report - ${new Date().toLocaleDateString("en-GB")}`
+    : `Constancia Weekly Content Scan Report - ${new Date().toLocaleDateString("en-GB")}`;
 
-  const adminBaseUrl = process.env.REPLIT_DOMAINS?.split(",")[0] || "https://1qg.com";
+  const adminBaseUrl = process.env.REPLIT_DOMAINS?.split(",")[0] || "https://constancia.com";
   
   const severeIssuesHtml = summary.severeIssues.length > 0 ? `
     <div style="background: #FEE2E2; border-left: 4px solid #DC2626; padding: 16px; margin: 16px 0; border-radius: 4px;">
@@ -242,7 +242,7 @@ async function sendScanReportEmail(summary: ScanSummary): Promise<{ success: boo
               </span>
             </td>
             <td style="padding: 8px; border-bottom: 1px solid #FECACA;">
-              <a href="${adminBaseUrl}/admin/${issue.contentType === 'blog' ? 'blog-posts' : 'resources'}" style="color: #0884AA; text-decoration: none;">View in Admin</a>
+              <a href="${adminBaseUrl}/admin/${issue.contentType === 'blog' ? 'blog-posts' : 'resources'}" style="color: #8E4F67; text-decoration: none;">View in Admin</a>
             </td>
           </tr>
         `).join("")}
@@ -285,7 +285,7 @@ async function sendScanReportEmail(summary: ScanSummary): Promise<{ success: boo
             </td>
             <td style="padding: 8px; border-bottom: 1px solid #DDD6FE;">${flag.humanScore}%</td>
             <td style="padding: 8px; border-bottom: 1px solid #DDD6FE;">
-              <a href="${adminBaseUrl}/admin/${flag.contentType === 'blog' ? 'blog-posts' : 'resources'}" style="color: #0884AA; text-decoration: none;">View in Admin</a>
+              <a href="${adminBaseUrl}/admin/${flag.contentType === 'blog' ? 'blog-posts' : 'resources'}" style="color: #8E4F67; text-decoration: none;">View in Admin</a>
             </td>
           </tr>
         `).join("")}
@@ -312,7 +312,7 @@ async function sendScanReportEmail(summary: ScanSummary): Promise<{ success: boo
               <span style="background: ${flag.plagiarismScore > 20 ? '#DC2626' : '#F59E0B'}; color: white; padding: 2px 8px; border-radius: 4px;">${flag.plagiarismScore}%</span>
             </td>
             <td style="padding: 8px; border-bottom: 1px solid #FECACA;">
-              <a href="${adminBaseUrl}/admin/${flag.contentType === 'blog' ? 'blog-posts' : 'resources'}" style="color: #0884AA; text-decoration: none;">View in Admin</a>
+              <a href="${adminBaseUrl}/admin/${flag.contentType === 'blog' ? 'blog-posts' : 'resources'}" style="color: #8E4F67; text-decoration: none;">View in Admin</a>
             </td>
           </tr>
         `).join("")}
@@ -322,9 +322,9 @@ async function sendScanReportEmail(summary: ScanSummary): Promise<{ success: boo
 
   const htmlContent = `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: 0 auto;">
-      <div style="background: linear-gradient(135deg, #02205B 0%, #0884AA 100%); padding: 24px; border-radius: 8px 8px 0 0;">
+      <div style="background: linear-gradient(135deg, #12161D 0%, #8E4F67 100%); padding: 24px; border-radius: 8px 8px 0 0;">
         <h1 style="color: white; margin: 0; font-size: 24px;">Weekly Content Scan Report</h1>
-        <p style="color: #12EBFC; margin: 8px 0 0 0;">Automated scan completed on ${new Date().toLocaleString("en-GB")}</p>
+        <p style="color: #7FB8A3; margin: 8px 0 0 0;">Automated scan completed on ${new Date().toLocaleString("en-GB")}</p>
       </div>
       
       <div style="background: #F8FAFC; padding: 24px; border: 1px solid #E2E8F0; border-top: none;">
@@ -332,11 +332,11 @@ async function sendScanReportEmail(summary: ScanSummary): Promise<{ success: boo
         
         <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px;">
           <div style="background: white; padding: 16px; border-radius: 8px; text-align: center; border: 1px solid #E2E8F0;">
-            <div style="font-size: 28px; font-weight: bold; color: #02205B;">${summary.scannedBlogs}</div>
+            <div style="font-size: 28px; font-weight: bold; color: #12161D;">${summary.scannedBlogs}</div>
             <div style="color: #64748B; font-size: 14px;">Blogs Scanned</div>
           </div>
           <div style="background: white; padding: 16px; border-radius: 8px; text-align: center; border: 1px solid #E2E8F0;">
-            <div style="font-size: 28px; font-weight: bold; color: #02205B;">${summary.scannedResources}</div>
+            <div style="font-size: 28px; font-weight: bold; color: #12161D;">${summary.scannedResources}</div>
             <div style="color: #64748B; font-size: 14px;">Resources Scanned</div>
           </div>
           <div style="background: white; padding: 16px; border-radius: 8px; text-align: center; border: 1px solid #E2E8F0;">
@@ -365,9 +365,9 @@ async function sendScanReportEmail(summary: ScanSummary): Promise<{ success: boo
         </div>
       </div>
       
-      <div style="background: #02205B; padding: 16px; border-radius: 0 0 8px 8px; text-align: center;">
+      <div style="background: #12161D; padding: 16px; border-radius: 0 0 8px 8px; text-align: center;">
         <p style="color: #9CA3AF; margin: 0; font-size: 12px;">
-          This is an automated report from the 1QG Admin Centre.
+          This is an automated report from the Constancia Admin Centre.
           <br />Questions? Contact the development team.
         </p>
       </div>

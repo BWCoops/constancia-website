@@ -21,7 +21,7 @@ export function getEmailLogoHtml(options: EmailLogoOptions): string {
   return `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto;">
   <tr>
     <td align="center" style="padding: 0;">
-      <img src="${logoSrc}" alt="1QG" border="0" style="display: block; ${maxWidthStyle} height: auto; ${marginStyle}" />
+      <img src="${logoSrc}" alt="Constancia" border="0" style="display: block; ${maxWidthStyle} height: auto; ${marginStyle}" />
     </td>
   </tr>
 </table>`;

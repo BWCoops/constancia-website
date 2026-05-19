@@ -6,10 +6,10 @@
 
 // Brand Colors - shared across all PDF generators
 export const PDF_BRAND_COLORS = {
-  navy: { hex: "#02205B", rgb: { r: 2, g: 32, b: 91 } },
-  cyan: { hex: "#12EBFC", rgb: { r: 18, g: 235, b: 252 } },
-  teal: { hex: "#0884AA", rgb: { r: 8, g: 132, b: 170 } },
-  cream: { hex: "#FEFFF3", rgb: { r: 254, g: 255, b: 243 } },
+  navy: { hex: "#12161D", rgb: { r: 2, g: 32, b: 91 } },
+  cyan: { hex: "#7FB8A3", rgb: { r: 18, g: 235, b: 252 } },
+  teal: { hex: "#8E4F67", rgb: { r: 8, g: 132, b: 170 } },
+  cream: { hex: "#F6F3EE", rgb: { r: 254, g: 255, b: 243 } },
   white: { hex: "#FFFFFF", rgb: { r: 255, g: 255, b: 255 } },
   lightGray: { hex: "#F8FAFC", rgb: { r: 248, g: 250, b: 252 } },
   darkGray: { hex: "#334155", rgb: { r: 51, g: 65, b: 85 } },
@@ -19,8 +19,8 @@ export const PDF_BRAND_COLORS = {
 // Contact Information
 export const PDF_CONTACT_INFO = {
   address: "86-90 Paul Street, London, EC2A 4NE, United Kingdom",
-  email: "info@1qg.com",
-  website: "https://1qg.com",
+  email: "info@constancia.com",
+  website: "https://constancia.com",
   linkedin: "linkedin.com/company/1qg-group-limited",
 };
 

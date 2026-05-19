@@ -68,8 +68,8 @@ function escapeHtml(text: string): string {
 
 export function generateCoverPage(options: CoverPageOptions): string {
   const logoHtml = LOGO_TURQUOISE_BASE64
-    ? `<img src="${LOGO_TURQUOISE_BASE64}" alt="1QG" class="cover-logo" />`
-    : `<div class="cover-logo-text">1QG</div>`;
+    ? `<img src="${LOGO_TURQUOISE_BASE64}" alt="Constancia" class="cover-logo" />`
+    : `<div class="cover-logo-text">Constancia</div>`;
 
   return `
     <div class="cover-page">
@@ -257,9 +257,9 @@ export function generateSection(section: SectionContent, index: number): string 
 export function generateAboutSection(): string {
   return `
     <div class="about-section no-break">
-      <h3 class="about-heading">About 1QG</h3>
+      <h3 class="about-heading">About Constancia</h3>
       <p class="about-content">
-        1QG is a leading technology consultancy specialising in Enterprise Performance Management (EPM), 
+        Constancia is a leading technology consultancy specialising in Enterprise Performance Management (EPM), 
         Enterprise Resource Planning (ERP), and AI-powered business solutions. With decades of combined 
         expertise across finance transformation, we help organisations navigate complex technology decisions 
         and implementations. Our independent approach ensures clients receive objective, tailored guidance 
@@ -273,7 +273,7 @@ export function generateAboutSection(): string {
         Use FinanceCompass to baseline your current state, understand TCO/ROI potential, 
         and build a compelling business case for transformation.
       </p>
-      <a href="https://1qg.com/finance-compass" class="cta-link">Try FinanceCompass Free</a>
+      <a href="https://constancia.com/finance-compass" class="cta-link">Try FinanceCompass Free</a>
       <p class="cta-contact">
         For independent selection support: <a href="mailto:${CONTACT_INFO.email}">${CONTACT_INFO.email}</a> | <a href="${CONTACT_INFO.website}">${CONTACT_INFO.website}</a>
       </p>
@@ -287,7 +287,7 @@ export function generateDisclaimer(): string {
       <div class="disclaimer-box">
         <h4 class="disclaimer-heading">Important Notice</h4>
         <p class="disclaimer-text">
-          This document has been prepared by 1QG Group Limited using publicly available information, 
+          This document has been prepared by Constancia Group Limited using publicly available information, 
           proprietary research, and extensive industry expertise. It is intended for general informational 
           and educational purposes only and does not constitute professional advice, a formal recommendation, 
           or an offer of services.
@@ -297,7 +297,7 @@ export function generateDisclaimer(): string {
           subject to change without notice as market conditions, vendor offerings, and regulatory requirements evolve.
         </p>
         <p class="disclaimer-text">
-          &copy; ${new Date().getFullYear()} 1QG Group Limited. All rights reserved.
+          &copy; ${new Date().getFullYear()} Constancia Group Limited. All rights reserved.
         </p>
       </div>
     </div>
@@ -848,7 +848,7 @@ export function generateFullDocument(options: DocumentOptions): string {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${escapeHtml(options.title)} - 1QG</title>
+  <title>${escapeHtml(options.title)} - Constancia</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="${TYPOGRAPHY.fontImport}" rel="stylesheet">

@@ -159,7 +159,7 @@ function getBlockedReason(category: keyof typeof BLOCKED_PATTERNS): string {
     case 'harmful':
       return "I can't assist with that type of request. I'm here to help with EPM and finance transformation topics.";
     case 'confidential':
-      return "I don't handle sensitive personal or confidential data. Please contact 1QG directly for such matters.";
+      return "I don't handle sensitive personal or confidential data. Please contact Constancia directly for such matters.";
     case 'competitor':
       return "As an independent advisory, I provide objective analysis rather than negative commentary. I can help you compare vendor capabilities factually.";
     case 'technical':
@@ -685,13 +685,13 @@ While I can provide more personalised guidance once you complete a FinanceCompas
 • General EPM platform comparisons and vendor insights
 • Finance transformation best practices
 • Understanding how to evaluate your organisation's readiness
-• Exploring 1QG's services and approach
+• Exploring Constancia's services and approach
 
 What would you like to know?`,
 
   error: `I apologise, but I'm having trouble processing that request right now. 
 
-Please try rephrasing your question, or contact 1QG directly if you need immediate assistance.`,
+Please try rephrasing your question, or contact Constancia directly if you need immediate assistance.`,
 
   tooComplex: `That's a comprehensive question that would benefit from a more detailed discussion.
 

@@ -1,9 +1,9 @@
 /*
- * 1QG UI Component barrel
+ * Constancia UI Component barrel
  * ─────────────────────────────────────────────────────────────────
  * Import all shared components from this single entry point:
  *
- *   import { GlassCard, PageSection, SectionHeading, ProofBar, InfoBox } from "@/components/ui/1qg"
+ *   import { GlassCard, PageSection, SectionHeading, ProofBar, InfoBox } from "@/components/ui/constancia"
  *
  * This keeps import paths clean and makes refactoring easier —
  * component file moves only require an update here, not across every consumer.

@@ -393,7 +393,7 @@ function Router() {
 
 function App() {
   return (
-    <ThemeProvider defaultTheme="light" storageKey="1qg-ui-theme">
+    <ThemeProvider defaultTheme="light" storageKey="constancia-ui-theme">
       <LazyMotionProvider>
         <QueryClientProvider client={queryClient}>
           <FeatureFlagProvider>

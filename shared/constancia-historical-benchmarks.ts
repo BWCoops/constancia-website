@@ -1,10 +1,10 @@
 /**
- * 1QG Historical Industry Benchmarks (2020-2024)
+ * Constancia Historical Industry Benchmarks (2020-2024)
  * 
- * Comprehensive benchmark data using 1QG terminology:
+ * Comprehensive benchmark data using Constancia terminology:
  * - "typical" = baseline/median performance
- * - "1qg_good" = top quartile, what good looks like
- * - "1qg_best" = digital world class
+ * - "constancia_good" = top quartile, what good looks like
+ * - "constancia_best" = digital world class
  * 
  * Sources: PwC Finance Benchmarking, Hackett Group, NAO Forecasting Studies, Working Capital Studies
  * Last Updated: December 2024
@@ -43,8 +43,8 @@ export interface YearOverYearChange {
   year: number;
   previousYear: number;
   typicalChange: number;
-  '1qg_good_change': number;
-  '1qg_best_change': number;
+  'constancia_good_change': number;
+  'constancia_best_change': number;
   direction: 'lower_is_better' | 'higher_is_better';
   improvementIndicator: 'improved' | 'stable' | 'declined';
 }
@@ -338,11 +338,11 @@ interface IndustryAdjustment {
   industryId: IndustryId;
   adjustments: Partial<Record<MetricId, {
     typicalMultiplier?: number;
-    '1qg_good_multiplier'?: number;
-    '1qg_best_multiplier'?: number;
+    'constancia_good_multiplier'?: number;
+    'constancia_best_multiplier'?: number;
     typicalOffset?: number;
-    '1qg_good_offset'?: number;
-    '1qg_best_offset'?: number;
+    'constancia_good_offset'?: number;
+    'constancia_best_offset'?: number;
   }>>;
 }
 
@@ -354,90 +354,90 @@ const INDUSTRY_ADJUSTMENTS: IndustryAdjustment[] = [
   {
     industryId: 'banking',
     adjustments: {
-      days_to_close: { typicalMultiplier: 0.85, '1qg_good_multiplier': 0.85, '1qg_best_multiplier': 0.8 },
-      finance_cost_pct_revenue: { typicalMultiplier: 1.1, '1qg_good_multiplier': 1.1 },
-      finance_ftes_per_1b: { typicalMultiplier: 1.15, '1qg_good_multiplier': 1.1 },
-      forecast_accuracy_pct: { typicalOffset: 1, '1qg_good_offset': 1 },
-      dso_days: { typicalMultiplier: 0.7, '1qg_good_multiplier': 0.7 },
-      reports_automated_pct: { typicalOffset: 5, '1qg_good_offset': 5 },
+      days_to_close: { typicalMultiplier: 0.85, 'constancia_good_multiplier': 0.85, 'constancia_best_multiplier': 0.8 },
+      finance_cost_pct_revenue: { typicalMultiplier: 1.1, 'constancia_good_multiplier': 1.1 },
+      finance_ftes_per_1b: { typicalMultiplier: 1.15, 'constancia_good_multiplier': 1.1 },
+      forecast_accuracy_pct: { typicalOffset: 1, 'constancia_good_offset': 1 },
+      dso_days: { typicalMultiplier: 0.7, 'constancia_good_multiplier': 0.7 },
+      reports_automated_pct: { typicalOffset: 5, 'constancia_good_offset': 5 },
     },
   },
   {
     industryId: 'utilities',
     adjustments: {
-      days_to_close: { typicalMultiplier: 1.1, '1qg_good_multiplier': 1.05 },
-      budget_cycle_days: { typicalMultiplier: 1.15, '1qg_good_multiplier': 1.1 },
-      dso_days: { typicalMultiplier: 0.8, '1qg_good_multiplier': 0.85 },
-      dpo_days: { typicalMultiplier: 1.1, '1qg_good_multiplier': 1.05 },
+      days_to_close: { typicalMultiplier: 1.1, 'constancia_good_multiplier': 1.05 },
+      budget_cycle_days: { typicalMultiplier: 1.15, 'constancia_good_multiplier': 1.1 },
+      dso_days: { typicalMultiplier: 0.8, 'constancia_good_multiplier': 0.85 },
+      dpo_days: { typicalMultiplier: 1.1, 'constancia_good_multiplier': 1.05 },
     },
   },
   {
     industryId: 'manufacturing',
     adjustments: {
-      dio_days: { typicalMultiplier: 1.3, '1qg_good_multiplier': 1.25, '1qg_best_multiplier': 1.2 },
-      cash_conversion_cycle: { typicalMultiplier: 1.2, '1qg_good_multiplier': 1.15 },
-      forecast_accuracy_pct: { typicalOffset: -2, '1qg_good_offset': -1 },
-      dpo_days: { typicalMultiplier: 0.9, '1qg_good_multiplier': 0.95 },
+      dio_days: { typicalMultiplier: 1.3, 'constancia_good_multiplier': 1.25, 'constancia_best_multiplier': 1.2 },
+      cash_conversion_cycle: { typicalMultiplier: 1.2, 'constancia_good_multiplier': 1.15 },
+      forecast_accuracy_pct: { typicalOffset: -2, 'constancia_good_offset': -1 },
+      dpo_days: { typicalMultiplier: 0.9, 'constancia_good_multiplier': 0.95 },
     },
   },
   {
     industryId: 'retail',
     adjustments: {
-      days_to_close: { typicalMultiplier: 0.9, '1qg_good_multiplier': 0.9 },
-      dio_days: { typicalMultiplier: 0.85, '1qg_good_multiplier': 0.85 },
-      dso_days: { typicalMultiplier: 0.6, '1qg_good_multiplier': 0.65 },
-      forecast_accuracy_pct: { typicalOffset: -1, '1qg_good_offset': -1 },
-      cash_conversion_cycle: { typicalMultiplier: 0.7, '1qg_good_multiplier': 0.75 },
+      days_to_close: { typicalMultiplier: 0.9, 'constancia_good_multiplier': 0.9 },
+      dio_days: { typicalMultiplier: 0.85, 'constancia_good_multiplier': 0.85 },
+      dso_days: { typicalMultiplier: 0.6, 'constancia_good_multiplier': 0.65 },
+      forecast_accuracy_pct: { typicalOffset: -1, 'constancia_good_offset': -1 },
+      cash_conversion_cycle: { typicalMultiplier: 0.7, 'constancia_good_multiplier': 0.75 },
     },
   },
   {
     industryId: 'software_saas',
     adjustments: {
-      days_to_close: { typicalMultiplier: 0.8, '1qg_good_multiplier': 0.75, '1qg_best_multiplier': 0.7 },
-      finance_cost_pct_revenue: { typicalMultiplier: 0.85, '1qg_good_multiplier': 0.85 },
-      finance_ftes_per_1b: { typicalMultiplier: 0.75, '1qg_good_multiplier': 0.75 },
-      reports_automated_pct: { typicalOffset: 10, '1qg_good_offset': 8, '1qg_best_offset': 5 },
-      self_service_adoption_pct: { typicalOffset: 10, '1qg_good_offset': 8, '1qg_best_offset': 5 },
-      forecast_cycle_days: { typicalMultiplier: 0.85, '1qg_good_multiplier': 0.85 },
-      dio_days: { typicalMultiplier: 0.1, '1qg_good_multiplier': 0.1, '1qg_best_multiplier': 0.1 },
+      days_to_close: { typicalMultiplier: 0.8, 'constancia_good_multiplier': 0.75, 'constancia_best_multiplier': 0.7 },
+      finance_cost_pct_revenue: { typicalMultiplier: 0.85, 'constancia_good_multiplier': 0.85 },
+      finance_ftes_per_1b: { typicalMultiplier: 0.75, 'constancia_good_multiplier': 0.75 },
+      reports_automated_pct: { typicalOffset: 10, 'constancia_good_offset': 8, 'constancia_best_offset': 5 },
+      self_service_adoption_pct: { typicalOffset: 10, 'constancia_good_offset': 8, 'constancia_best_offset': 5 },
+      forecast_cycle_days: { typicalMultiplier: 0.85, 'constancia_good_multiplier': 0.85 },
+      dio_days: { typicalMultiplier: 0.1, 'constancia_good_multiplier': 0.1, 'constancia_best_multiplier': 0.1 },
     },
   },
   {
     industryId: 'healthcare',
     adjustments: {
-      dso_days: { typicalMultiplier: 1.4, '1qg_good_multiplier': 1.35, '1qg_best_multiplier': 1.3 },
-      finance_cost_pct_revenue: { typicalMultiplier: 1.15, '1qg_good_multiplier': 1.1 },
-      budget_cycle_days: { typicalMultiplier: 1.1, '1qg_good_multiplier': 1.05 },
-      forecast_accuracy_pct: { typicalOffset: -1, '1qg_good_offset': -1 },
-      cash_conversion_cycle: { typicalMultiplier: 1.25, '1qg_good_multiplier': 1.2 },
+      dso_days: { typicalMultiplier: 1.4, 'constancia_good_multiplier': 1.35, 'constancia_best_multiplier': 1.3 },
+      finance_cost_pct_revenue: { typicalMultiplier: 1.15, 'constancia_good_multiplier': 1.1 },
+      budget_cycle_days: { typicalMultiplier: 1.1, 'constancia_good_multiplier': 1.05 },
+      forecast_accuracy_pct: { typicalOffset: -1, 'constancia_good_offset': -1 },
+      cash_conversion_cycle: { typicalMultiplier: 1.25, 'constancia_good_multiplier': 1.2 },
     },
   },
   {
     industryId: 'professional_services',
     adjustments: {
-      days_to_close: { typicalMultiplier: 0.85, '1qg_good_multiplier': 0.85 },
-      dso_days: { typicalMultiplier: 1.15, '1qg_good_multiplier': 1.1 },
-      dio_days: { typicalMultiplier: 0.1, '1qg_good_multiplier': 0.1, '1qg_best_multiplier': 0.1 },
-      finance_ftes_per_1b: { typicalMultiplier: 0.9, '1qg_good_multiplier': 0.9 },
-      forecast_accuracy_pct: { typicalOffset: 2, '1qg_good_offset': 1 },
+      days_to_close: { typicalMultiplier: 0.85, 'constancia_good_multiplier': 0.85 },
+      dso_days: { typicalMultiplier: 1.15, 'constancia_good_multiplier': 1.1 },
+      dio_days: { typicalMultiplier: 0.1, 'constancia_good_multiplier': 0.1, 'constancia_best_multiplier': 0.1 },
+      finance_ftes_per_1b: { typicalMultiplier: 0.9, 'constancia_good_multiplier': 0.9 },
+      forecast_accuracy_pct: { typicalOffset: 2, 'constancia_good_offset': 1 },
     },
   },
   {
     industryId: 'consumer_products',
     adjustments: {
-      dio_days: { typicalMultiplier: 1.15, '1qg_good_multiplier': 1.1 },
-      forecast_accuracy_pct: { typicalOffset: -2, '1qg_good_offset': -1 },
-      dpo_days: { typicalMultiplier: 1.05, '1qg_good_multiplier': 1.05 },
-      cash_conversion_cycle: { typicalMultiplier: 1.1, '1qg_good_multiplier': 1.05 },
+      dio_days: { typicalMultiplier: 1.15, 'constancia_good_multiplier': 1.1 },
+      forecast_accuracy_pct: { typicalOffset: -2, 'constancia_good_offset': -1 },
+      dpo_days: { typicalMultiplier: 1.05, 'constancia_good_multiplier': 1.05 },
+      cash_conversion_cycle: { typicalMultiplier: 1.1, 'constancia_good_multiplier': 1.05 },
     },
   },
   {
     industryId: 'distribution_transport',
     adjustments: {
-      dio_days: { typicalMultiplier: 0.7, '1qg_good_multiplier': 0.75 },
-      dso_days: { typicalMultiplier: 0.9, '1qg_good_multiplier': 0.9 },
-      cash_conversion_cycle: { typicalMultiplier: 0.85, '1qg_good_multiplier': 0.85 },
-      forecast_cycle_days: { typicalMultiplier: 1.1, '1qg_good_multiplier': 1.05 },
+      dio_days: { typicalMultiplier: 0.7, 'constancia_good_multiplier': 0.75 },
+      dso_days: { typicalMultiplier: 0.9, 'constancia_good_multiplier': 0.9 },
+      cash_conversion_cycle: { typicalMultiplier: 0.85, 'constancia_good_multiplier': 0.85 },
+      forecast_cycle_days: { typicalMultiplier: 1.1, 'constancia_good_multiplier': 1.05 },
       forecast_accuracy_pct: { typicalOffset: -1 },
     },
   },
@@ -640,12 +640,12 @@ function applyIndustryAdjustment(
       median: applyAdj(values.typical.median, adj.typicalMultiplier, adj.typicalOffset),
     },
     '1qg_good': {
-      min: applyAdj(values['1qg_good'].min, adj['1qg_good_multiplier'], adj['1qg_good_offset']),
-      max: applyAdj(values['1qg_good'].max, adj['1qg_good_multiplier'], adj['1qg_good_offset']),
+      min: applyAdj(values['1qg_good'].min, adj['constancia_good_multiplier'], adj['constancia_good_offset']),
+      max: applyAdj(values['1qg_good'].max, adj['constancia_good_multiplier'], adj['constancia_good_offset']),
     },
     '1qg_best': {
-      min: applyAdj(values['1qg_best'].min, adj['1qg_best_multiplier'], adj['1qg_best_offset']),
-      max: applyAdj(values['1qg_best'].max, adj['1qg_best_multiplier'], adj['1qg_best_offset']),
+      min: applyAdj(values['1qg_best'].min, adj['constancia_best_multiplier'], adj['constancia_best_offset']),
+      max: applyAdj(values['1qg_best'].max, adj['constancia_best_multiplier'], adj['constancia_best_offset']),
     },
   };
 }
@@ -869,8 +869,8 @@ export function getYearOverYearComparison(
       year: currentYear,
       previousYear,
       typicalChange,
-      '1qg_good_change': goodChange,
-      '1qg_best_change': bestChange,
+      'constancia_good_change': goodChange,
+      'constancia_best_change': bestChange,
       direction: baseDef.direction,
       improvementIndicator,
     });

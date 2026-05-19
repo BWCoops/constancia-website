@@ -352,7 +352,7 @@ function DashboardContent() {
         <div>
           <h1 className="text-2xl sm:text-3xl font-semibold" data-testid="text-page-title">Dashboard</h1>
           <p className="text-muted-foreground mt-1 text-sm sm:text-base">
-            Overview of your 1QG Admin Centre
+            Overview of your Constancia Admin Centre
           </p>
         </div>
         {!hasAnalyticsData && (

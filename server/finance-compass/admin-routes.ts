@@ -556,7 +556,7 @@ router.get("/assessments/:id/responses/export", ensureFinanceCompassAccess("fc:a
     
     // Create workbook
     const workbook = new ExcelJS.Workbook();
-    workbook.creator = "1QG FinanceCompass";
+    workbook.creator = "Constancia FinanceCompass";
     workbook.created = new Date();
     
     const worksheet = workbook.addWorksheet("Assessment Responses");
@@ -2915,7 +2915,7 @@ router.get("/scoring-logic/export", ensureFinanceCompassAccess("fc:view"), async
     
     // Create workbook
     const workbook = new ExcelJS.Workbook();
-    workbook.creator = "1QG FinanceCompass";
+    workbook.creator = "Constancia FinanceCompass";
     workbook.created = new Date();
     
     // Sheet 1: Scoring Logic Overview

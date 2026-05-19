@@ -448,8 +448,8 @@ export const BLOCKED_EMAIL_DOMAINS = [
 export function isBusinessEmail(email: string): boolean {
   const domain = email.split("@")[1]?.toLowerCase();
   if (!domain) return false;
-  // Allow 1qg domains
-  if (domain.includes("1qg")) return true;
+  // Allow constancia domains
+  if (domain.includes("constancia")) return true;
   return !BLOCKED_EMAIL_DOMAINS.includes(domain);
 }
 
@@ -1685,7 +1685,7 @@ export type LinkChangeLog = typeof linkChangeLogs.$inferSelect;
 
 export const linkHealthConfig = pgTable("link_health_config", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
-  primaryDomain: text("primary_domain").notNull().default("1qg.co.uk"),
+  primaryDomain: text("primary_domain").notNull().default("constancia.co.uk"),
   whitelistedDomains: text("whitelisted_domains").array().default(sql`'{}'::text[]`),
   excludedPaths: text("excluded_paths").array().default(sql`'{}'::text[]`),
   rule1Enabled: boolean("rule1_enabled").notNull().default(true),

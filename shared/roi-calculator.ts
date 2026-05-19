@@ -12,7 +12,7 @@ import {
   calculateAsIsVsToBe,
   type BenchmarkRange,
 } from "./epm-benchmarks";
-import { getHistoricalBenchmark, BENCHMARK_YEARS, type BenchmarkYear, type IndustryId, type MetricId } from './1qg-historical-benchmarks';
+import { getHistoricalBenchmark, BENCHMARK_YEARS, type BenchmarkYear, type IndustryId, type MetricId } from './constancia-historical-benchmarks';
 
 export interface RoiMetrics {
   totalImplementationCost: number;
@@ -719,7 +719,7 @@ function computeHistoricalComparison(
   };
   const oneQgBest = historicalData['1qg_best'];
 
-  // Calculate gap to 1qg_good target
+  // Calculate gap to constancia_good target
   const targetValue = lowerIsBetter ? oneQgGood.max : oneQgGood.min;
   const gap = lowerIsBetter ? current - targetValue : targetValue - current;
   const gapPct = targetValue !== 0 ? (gap / targetValue) * 100 : 0;

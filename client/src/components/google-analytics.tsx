@@ -17,7 +17,7 @@ function isProductionEnvironment(): boolean {
   const hostname = window.location.hostname;
   
   // Only enable analytics on the production domain
-  return hostname === '1qg.com' || hostname === 'www.1qg.com';
+  return hostname === 'constancia.io' || hostname === 'www.constancia.io';
 }
 
 export function GoogleAnalytics({ measurementId }: GoogleAnalyticsProps) {

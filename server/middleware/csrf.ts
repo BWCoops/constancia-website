@@ -5,7 +5,7 @@ import { redactIp } from "../utils/log-privacy";
 
 const log = createChildLogger("csrf");
 
-const CSRF_COOKIE_NAME = "1qg_csrf";
+const CSRF_COOKIE_NAME = "constancia_csrf";
 const CSRF_HEADER_NAME = "x-csrf-token";
 const CSRF_TOKEN_LENGTH = 32;
 

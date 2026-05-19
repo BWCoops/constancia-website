@@ -54,7 +54,7 @@ interface FeatureFlagsApiResponse {
 
 const featureDescriptions: Record<string, string> = {
   about: "About Us page and company information",
-  services: "Services section showcasing 1QG offerings",
+  services: "Services section showcasing Constancia offerings",
   solutions: "Industry solutions and use cases",
   comparisonTools: "EPM, ERP, and AI comparison tools",
   financeCompass: "AI-enabled finance technology & maturity assessment platform",

@@ -37,7 +37,7 @@ const envSchema = z.object({
   
   UNSPLASH_ACCESS_KEY: z.string().optional(),
   
-  SITE_URL: z.string().url().optional().default("https://1qg.com"),
+  SITE_URL: z.string().url().optional().default("https://constancia.com"),
   
   ADMIN_EMAIL: z.string().email().optional(),
   

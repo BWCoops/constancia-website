@@ -7,10 +7,10 @@
 import { LOGO_TURQUOISE_BASE64, ICON_WHITE_BASE64 } from '../../pdf-logo-base64';
 
 const BRAND = {
-  navy: '#02205B',
-  cyan: '#12EBFC',
-  teal: '#0884AA',
-  cream: '#FEFFF3',
+  navy: '#12161D',
+  cyan: '#7FB8A3',
+  teal: '#8E4F67',
+  cream: '#F6F3EE',
   white: '#FFFFFF',
   muted: '#64748b',
   cardBg: '#f8fafc',
@@ -21,9 +21,9 @@ const BRAND = {
 };
 
 const IMPLEMENTATION_PHASES = [
-  { name: 'Discovery & Planning', startPct: 0, endPct: 0.15, color: '#02205B' },
-  { name: 'Design & Configuration', startPct: 0.12, endPct: 0.45, color: '#0884AA' },
-  { name: 'Build & Testing', startPct: 0.40, endPct: 0.75, color: '#12EBFC' },
+  { name: 'Discovery & Planning', startPct: 0, endPct: 0.15, color: '#12161D' },
+  { name: 'Design & Configuration', startPct: 0.12, endPct: 0.45, color: '#8E4F67' },
+  { name: 'Build & Testing', startPct: 0.40, endPct: 0.75, color: '#7FB8A3' },
   { name: 'Training & Go-Live', startPct: 0.70, endPct: 1.0, color: '#10b981' },
 ];
 
@@ -258,11 +258,11 @@ export function generateComparisonHTML(data: ComparisonExportData): string {
   const topThree = sortedPlatforms.slice(0, 3);
 
   const logoHtml = LOGO_TURQUOISE_BASE64
-    ? `<img src="${LOGO_TURQUOISE_BASE64}" alt="1QG" style="height: 24px;" />`
-    : `<span style="font-size: 18px; font-weight: bold; color: ${BRAND.cyan};">1QG</span>`;
+    ? `<img src="${LOGO_TURQUOISE_BASE64}" alt="Constancia" style="height: 24px;" />`
+    : `<span style="font-size: 18px; font-weight: bold; color: ${BRAND.cyan};">Constancia</span>`;
 
   const iconHtml = ICON_WHITE_BASE64
-    ? `<img src="${ICON_WHITE_BASE64}" alt="1QG" style="position: absolute; top: 20mm; right: 20mm; width: 30mm; opacity: 0.1;" />`
+    ? `<img src="${ICON_WHITE_BASE64}" alt="Constancia" style="position: absolute; top: 20mm; right: 20mm; width: 30mm; opacity: 0.1;" />`
     : '';
 
   const dateStr = new Date().toLocaleDateString('en-GB', { 
@@ -293,7 +293,7 @@ export function generateComparisonHTML(data: ComparisonExportData): string {
       margin: 12mm 15mm 20mm 15mm;
       
       @bottom-left {
-        content: "1QG | ${data.categoryType.toUpperCase()} Comparison Report";
+        content: "Constancia | ${data.categoryType.toUpperCase()} Comparison Report";
         font-family: 'Inter', Arial, sans-serif;
         font-size: 8pt;
         color: ${BRAND.navy};
@@ -301,7 +301,7 @@ export function generateComparisonHTML(data: ComparisonExportData): string {
         padding-top: 8pt;
       }
       @bottom-center {
-        content: "info@1qg.com | 1qg.com";
+        content: "info@constancia.com | constancia.com";
         font-family: 'Inter', Arial, sans-serif;
         font-size: 8pt;
         color: ${BRAND.teal};
@@ -1055,7 +1055,7 @@ export function generateComparisonHTML(data: ComparisonExportData): string {
     
     <div class="cover-footer">
       <div class="tagline">Finance Transformed. Designed for Change. <span class="highlight">Driven by Technology.</span></div>
-      <div class="cover-contact">info@1qg.com | 1qg.com | London, United Kingdom</div>
+      <div class="cover-contact">info@constancia.com | constancia.com | London, United Kingdom</div>
     </div>
   </div>
   
@@ -1318,12 +1318,12 @@ export function generateComparisonHTML(data: ComparisonExportData): string {
     
     <div class="cta-box">
       <div class="cta-title">Ready to take the next step?</div>
-      <div><a href="https://1qg.com/finance-compass" class="cta-link">Try FinanceCompass Free</a></div>
+      <div><a href="https://constancia.com/finance-compass" class="cta-link">Try FinanceCompass Free</a></div>
     </div>
     
     <div class="disclaimer">
       <div class="disclaimer-title">Disclaimer</div>
-      <p>This document has been prepared using publicly available information and is intended for general informational purposes only. It does not constitute professional advice or a formal recommendation. Scores, fit recommendations, and vendor comparisons are based on 1QG consultant experience and publicly available information including analyst reports and vendor materials. Always validate through vendor demonstrations, proof-of-concept evaluations, and reference checks specific to your requirements before making selection decisions. To discuss how 1QG can support your specific requirements, contact info@1qg.com or visit 1qg.com.</p>
+      <p>This document has been prepared using publicly available information and is intended for general informational purposes only. It does not constitute professional advice or a formal recommendation. Scores, fit recommendations, and vendor comparisons are based on Constancia consultant experience and publicly available information including analyst reports and vendor materials. Always validate through vendor demonstrations, proof-of-concept evaluations, and reference checks specific to your requirements before making selection decisions. To discuss how Constancia can support your specific requirements, contact info@constancia.com or visit constancia.com.</p>
     </div>
   </div>
 </body>

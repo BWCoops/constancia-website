@@ -1,7 +1,7 @@
 /**
  * Email Template Service
  * 
- * Renders email templates with 1QG branding.
+ * Renders email templates with Constancia branding.
  * Contains all email HTML templates and subject line logic.
  * 
  * @generated-by-ai (human-reviewed)
@@ -37,7 +37,7 @@ const DEFAULT_OTP_EXPIRY_MINUTES = 10;
 export class TemplateService implements IEmailTemplateService {
   private baseUrl: string;
 
-  constructor(baseUrl: string = 'https://1qg.com') {
+  constructor(baseUrl: string = 'https://constancia.com') {
     this.baseUrl = baseUrl;
   }
 
@@ -45,13 +45,13 @@ export class TemplateService implements IEmailTemplateService {
     const d = data as Record<string, unknown>;
     switch (template) {
       case EmailTemplate.OTP_VERIFICATION:
-        return 'Your 1QG Resource Access Code';
+        return 'Your Constancia Resource Access Code';
       
       case EmailTemplate.CONTACT_CONFIRMATION:
         return `New Contact Form Submission from ${d.firstName} ${d.lastName}`;
       
       case EmailTemplate.CONTACT_VERIFICATION:
-        return 'Verify your email - 1QG Contact';
+        return 'Verify your email - Constancia Contact';
       
       case EmailTemplate.LEAD_NOTIFICATION:
         return `New Verified Lead: ${d.firstName} ${d.lastName} from ${d.company}`;
@@ -60,13 +60,13 @@ export class TemplateService implements IEmailTemplateService {
         return `Resource Download: ${d.firstName} ${d.lastName}`;
       
       case EmailTemplate.NEWSLETTER_WELCOME:
-        return 'Welcome to 1QG Insights';
+        return 'Welcome to Constancia Insights';
       
       case EmailTemplate.PASSWORD_RESET:
-        return 'Reset Your 1QG Password';
+        return 'Reset Your Constancia Password';
       
       default:
-        return '1QG Notification';
+        return 'Constancia Notification';
     }
   }
 
@@ -111,7 +111,7 @@ export class TemplateService implements IEmailTemplateService {
       <p style="color: ${EMAIL_BRAND.darkGray}; font-size: 16px; margin: 0 0 20px 0;">Hi ${this.escapeHtml(data.firstName)},</p>
       
       <p style="color: ${EMAIL_BRAND.darkGray}; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
-        Thank you for your interest in 1QG resources. Please use the following code to access your download:
+        Thank you for your interest in Constancia resources. Please use the following code to access your download:
       </p>
       
       ${generateOtpBox(this.escapeHtml(data.otp))}
@@ -128,7 +128,7 @@ export class TemplateService implements IEmailTemplateService {
    * Render contact form confirmation email (sent to team)
    */
   private renderContactConfirmationTemplate(data: ContactEmailData): string {
-    const header = generateNotificationHeader({ title: 'New Contact Form Submission', subtitle: '1QG Website' });
+    const header = generateNotificationHeader({ title: 'New Contact Form Submission', subtitle: 'Constancia Website' });
     
     const contactTable = `
       <h2 style="color: ${EMAIL_BRAND.navy}; margin-top: 0;">Contact Details</h2>
@@ -172,7 +172,7 @@ export class TemplateService implements IEmailTemplateService {
         ${messageSection}
         <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
         <p style="color: ${EMAIL_BRAND.mutedGray}; font-size: 12px; text-align: center;">
-          This notification was sent from the 1QG website contact form.
+          This notification was sent from the Constancia website contact form.
           <br>
           Submitted: ${new Date().toLocaleString('en-GB', { dateStyle: 'full', timeStyle: 'short' })}
         </p>
@@ -192,7 +192,7 @@ export class TemplateService implements IEmailTemplateService {
       <p style="color: ${EMAIL_BRAND.darkGray}; font-size: 16px; margin: 0 0 20px 0;">Hi ${this.escapeHtml(data.firstName)},</p>
       
       <p style="color: ${EMAIL_BRAND.darkGray}; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
-        Thank you for contacting 1QG. Please verify your email address to confirm your enquiry.
+        Thank you for contacting Constancia. Please verify your email address to confirm your enquiry.
       </p>
       
       ${generateCtaButton('Verify Email Address', verificationLink)}
@@ -296,7 +296,7 @@ export class TemplateService implements IEmailTemplateService {
         <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
         
         <p style="color: ${EMAIL_BRAND.mutedGray}; font-size: 12px; text-align: center;">
-          This notification was sent automatically from the 1QG website.
+          This notification was sent automatically from the Constancia website.
           <br>
           Verified: ${new Date().toLocaleString('en-GB', { dateStyle: 'full', timeStyle: 'short' })}
         </p>

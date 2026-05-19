@@ -2,7 +2,7 @@
  * EPM/CPM Vendor Cost Benchmarks
  * 
  * Comprehensive vendor benchmarking data for EPM platform selection.
- * Sources: 1QG Benchmark Database, Gartner TCO Studies, UK Market Research 2024-2025
+ * Sources: Constancia Benchmark Database, Gartner TCO Studies, UK Market Research 2024-2025
  * All costs in £k (thousands GBP)
  * 
  * Organization Size Bands:

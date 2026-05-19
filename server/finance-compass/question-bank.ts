@@ -2047,7 +2047,7 @@ export const FULL_ASSESSMENT_QUESTIONS: QuestionDefinition[] = [
 
   // ============================================
   // FULL ASSESSMENT - Additional Questions (Q41-Q62)
-  // Added from 1QG_all_95_questions JSON full_assessment sections
+  // Added from Constancia_all_95_questions JSON full_assessment sections
   // ============================================
 
   // Dimension 1: Financial Planning & Analysis (Q1.4, Q1.5, Q1.6)
@@ -2111,7 +2111,7 @@ export const FULL_ASSESSMENT_QUESTIONS: QuestionDefinition[] = [
     order: 44,
     questionType: "single_select",
     questionText: "How many manual adjustments/journal entries are required to close each month?",
-    helpText: "1QG benchmark is <25 adjustments. High counts indicate data quality issues and can represent 5-10 FTE in rework.",
+    helpText: "Constancia benchmark is <25 adjustments. High counts indicate data quality issues and can represent 5-10 FTE in rework.",
     required: true,
     options: [
       { value: "very_high", label: "100+ manual adjustments" },
@@ -2751,21 +2751,21 @@ export const DIMENSION_CONFIG = {
     name: "Financial Planning & Analysis",
     shortName: "FP&A",
     icon: "TrendingUp",
-    color: "#0884AA",
+    color: "#8E4F67",
     description: "Budgeting, forecasting, scenario planning, and strategic finance"
   },
   management_reporting: {
     name: "Management Reporting",
     shortName: "Reporting",
     icon: "BarChart3",
-    color: "#12EBFC",
+    color: "#7FB8A3",
     description: "Dashboards, analytics, KPIs, and insight delivery"
   },
   consolidation_close: {
     name: "Consolidation & Close",
     shortName: "Close",
     icon: "RefreshCw",
-    color: "#02205B",
+    color: "#12161D",
     description: "Financial close, consolidation, intercompany, and period-end processes"
   },
   financial_controls_compliance: {

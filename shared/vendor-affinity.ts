@@ -4,7 +4,7 @@
  * Scores and ranks EPM vendors based on assessment dimension scores,
  * organization profile, technology preferences, and transformation ambition.
  * 
- * Sources: 1QG Benchmark Database, Vendor Capability Matrices
+ * Sources: Constancia Benchmark Database, Vendor Capability Matrices
  * Last Updated: December 2025
  */
 

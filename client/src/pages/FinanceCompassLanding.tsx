@@ -968,9 +968,9 @@ export default function FinanceCompassLanding() {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="FinanceCompass | AI-Powered Finance Technology & Maturity Assessment | 1QG"
+        title="FinanceCompass | AI-Powered Finance Technology & Maturity Assessment | Constancia"
         description="Get your finance readiness score and tailored transformation roadmap in minutes. Rigorous AI-powered assessment for CFOs and Finance Directors."
-        keywords={["finance transformation", "finance readiness assessment", "finance maturity", "CFO assessment", "finance function readiness", "finance modernisation", "1QG consulting"]}
+        keywords={["finance transformation", "finance readiness assessment", "finance maturity", "CFO assessment", "finance function readiness", "finance modernisation", "Constancia consulting"]}
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         "@context": "https://schema.org",
@@ -980,7 +980,7 @@ export default function FinanceCompassLanding() {
         "operatingSystem": "Web",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "GBP" },
         "description": "Finance function maturity assessment tool for CFOs and finance leaders. Benchmark across 7 dimensions and receive a personalised transformation roadmap.",
-        "url": "https://1qg.com/finance-compass"
+        "url": "https://constancia.com/finance-compass"
       }) }} />
       
       <Navigation />
@@ -1002,7 +1002,7 @@ export default function FinanceCompassLanding() {
                 </div>
                 <div className="text-left">
                   <h2 className="text-brand-cyan font-semibold text-base sm:text-lg">FinanceCompass</h2>
-                  <p className="text-white/70 text-xs sm:text-sm">by 1QG</p>
+                  <p className="text-white/70 text-xs sm:text-sm">by Constancia</p>
                 </div>
               </div>
               

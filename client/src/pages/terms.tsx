@@ -9,9 +9,9 @@ export default function TermsOfUsePage() {
   return (
     <div className="min-h-screen page-dark">
       <SEOHead
-        title="Terms of Use | 1QG"
-        description="Terms of Use for the 1QG GROUP LIMITED website. Conditions governing access to our advisory platform, tools, and resources for finance professionals."
-        keywords={["terms of use", "terms and conditions", "website terms", "1QG terms", "legal terms"]}
+        title="Terms of Use | Constancia"
+        description="Terms of Use for the Constancia website. Conditions governing access to our advisory platform, tools, and resources for finance professionals."
+        keywords={["terms of use", "terms and conditions", "website terms", "Constancia terms", "legal terms"]}
       />
       
       <Navigation />

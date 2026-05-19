@@ -129,7 +129,7 @@ export function serveStatic(app: Express) {
       res.sendFile(robotsPath);
     } else {
       res.type('text/plain');
-      res.send(`# 1QG Website - Robots.txt
+      res.send(`# Constancia Website - Robots.txt
 User-agent: *
 Allow: /
 Disallow: /admin
@@ -145,7 +145,7 @@ Disallow: /*.kml
 Disallow: /wp-admin
 Disallow: /wp-login
 
-Sitemap: https://1qg.com/sitemap.xml
+Sitemap: https://constancia.com/sitemap.xml
 `);
     }
   });

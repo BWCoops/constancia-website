@@ -120,7 +120,7 @@ export default function FilesPage() {
   return (
     <div className="min-h-screen page-dark">
       <SEOHead
-        title="1QG Resources - Guides, Frameworks & Downloads"
+        title="Constancia Resources - Guides, Frameworks & Downloads"
         description="Access guides, whitepapers, frameworks, and documentation for finance transformation. Download resources on EPM, ERP optimisation, and AI-driven solutions."
         keywords={[
           "AI resources",
@@ -136,7 +136,7 @@ export default function FilesPage() {
       <main className="pt-16 sm:pt-20 pb-16">
         <PageHero
           badge="Resources & Downloads"
-          title="1QG Resources"
+          title="Constancia Resources"
           description="Access guides, whitepapers, frameworks, and documentation to help you get the most out of your finance transformation."
         />
 

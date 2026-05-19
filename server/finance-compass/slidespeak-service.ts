@@ -179,7 +179,7 @@ ${top3PriorityAreas.map((area, i) => `${i + 1}. ${area.name}: ${area.score}% (${
 SLIDE 1 - COVER:
 - Title: "EPM Readiness Quick Assessment"
 - Subtitle: "${companyName} | ${assessmentDate}"
-- Footer: "1QG Finance Transformation Advisors | Confidential"
+- Footer: "Constancia Finance Transformation Advisors | Confidential"
 
 SLIDE 2 - ASSESSMENT COMPLETION SUMMARY:
 - Assessment Type: Pre-Assessment Diagnostic
@@ -208,17 +208,17 @@ SLIDE 6 - RECOMMENDED NEXT STEPS:
 - Proceed to Full Assessment for detailed analysis
 - Expected timeline: 2-4 weeks
 - Benefits: Detailed ROI, implementation roadmap, AI-powered insights
-- 1QG support options
+- Constancia support options
 
 SLIDE 7 - CONTACT INFORMATION:
 - Primary Contact: ${contactName}
 - Email: ${contact.email}
-- 1QG Enquiries: info@1qg.com
+- Constancia Enquiries: info@constancia.com
 - Next meeting suggestion
 
 ## DESIGN REQUIREMENTS
 - Professional, clean design
-- Dark navy (#02205B) and teal (#0891B2) accent colors
+- Dark navy (#12161D) and teal (#0891B2) accent colors
 - Maximum 3 bullets per slide
 - Scores as whole numbers with %
 - NO detailed dimension analysis
@@ -388,7 +388,7 @@ ${quickWins.slice(0, 4).map((q, i) => `${i + 1}. ${typeof q === "string" ? q : q
 SLIDE 1 - COVER:
 - Title: "Finance Technology & Maturity Assessment | Strategic Roadmap"
 - Subtitle: "${companyName} | ${assessmentDate}"
-- Footer: "1QG Finance Transformation Advisors | Confidential"
+- Footer: "Constancia Finance Transformation Advisors | Confidential"
 
 SLIDE 2 - TABLE OF CONTENTS:
 - Executive Summary
@@ -496,16 +496,16 @@ SLIDE 21 - NEXT STEPS & CONTACT:
 - Steering committee kickoff recommendation
 - Governance structure proposal
 - Contact Information: ${contactName}, ${contact.email}
-- 1QG Support: info@1qg.com
+- Constancia Support: info@constancia.com
 
 ## DESIGN REQUIREMENTS
 - Professional, executive-ready styling
-- Dark navy (#02205B) and teal (#0891B2) accent colors
+- Dark navy (#12161D) and teal (#0891B2) accent colors
 - Clean data visualizations with clear labels
 - Consistent header/footer on all slides
 - Page numbers on all slides except title
 - Confidential marking on each slide
-- 1QG branding subtle but present
+- Constancia branding subtle but present
 - Radar chart for dimension visualization
 - Color coding: Green (strength) | Amber (developing) | Red (gap)
 
@@ -524,7 +524,7 @@ This presentation should meet Big 4 consulting firm standards:
 - Actionable insights justify the assessment investment
 - ROI case is compelling and realistic
 - Implementation plan is achievable and detailed
-- Professional design reflecting 1QG premium brand
+- Professional design reflecting Constancia premium brand
 `;
 
   return prompt;
@@ -705,7 +705,7 @@ function buildSlideBySlidePresentation(data: AssessmentReportData): SlideDefinit
     title: "Next Steps & Contact",
     layout: "ITEMS",
     item_amount: 4,
-    content: `Schedule steering committee kickoff meeting. Review and prioritise recommendations. Develop detailed implementation plan. Contact: ${contactName} (${contact.email}). 1QG Support: info@1qg.com`
+    content: `Schedule steering committee kickoff meeting. Review and prioritise recommendations. Develop detailed implementation plan. Contact: ${contactName} (${contact.email}). Constancia Support: info@constancia.com`
   });
 
   return slides;
@@ -800,8 +800,8 @@ export async function triggerSlidesSpeakGeneration(
       controller.abort();
     }, 10 * 60 * 1000); // 10 minutes
 
-    // Use the 1QG branded template from SlideSpeak
-    const templateValue = "cmhujze6f00dll504qzet2gqm"; // 1QG - Slide Master Deck Final 2025.pptx
+    // Use the Constancia branded template from SlideSpeak
+    const templateValue = "cmhujze6f00dll504qzet2gqm"; // Constancia - Slide Master Deck Final 2025.pptx
     const isPreAssessment = assessment.tier === "pre_assessment";
     
     let response: Response;
@@ -903,7 +903,7 @@ export async function triggerSlidesSpeakGeneration(
       if (response.status === 401) {
         userMessage = "Authentication failed. Please contact support.";
       } else if (response.status === 402) {
-        userMessage = "Presentation service subscription required. Please contact 1QG to enable this feature.";
+        userMessage = "Presentation service subscription required. Please contact Constancia to enable this feature.";
         log.error("402 Payment Required - subscription needs to be upgraded");
       } else if (response.status === 403) {
         userMessage = "Access denied. Please contact support.";

@@ -21,10 +21,10 @@ interface SEOHeadProps {
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "1QG",
-  "alternateName": "1QG Group",
-  "url": "https://1qg.com",
-  "logo": "https://1qg.com/logo.png",
+  "name": "Constancia",
+  "alternateName": "Constancia",
+  "url": "https://constancia.io",
+  "logo": "https://constancia.io/logo.png",
   "description": "Independent ERP and EPM consultancy delivering AI-powered finance transformation across the UK and Ireland.",
   "address": {
     "@type": "PostalAddress",
@@ -36,7 +36,7 @@ const organizationSchema = {
   },
   "contactPoint": {
     "@type": "ContactPoint",
-    "email": "info@1qg.com",
+    "email": "info@constancia.io",
     "contactType": "customer service",
     "availableLanguage": "English"
   },
@@ -59,12 +59,12 @@ const organizationSchema = {
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "1QG",
-  "url": "https://1qg.com",
+  "name": "Constancia",
+  "url": "https://constancia.io",
   "description": "Independent ERP and EPM consultancy delivering AI-powered finance transformation.",
   "publisher": {
     "@type": "Organization",
-    "name": "1QG"
+    "name": "Constancia"
   }
 };
 
@@ -72,15 +72,15 @@ export function SEOHead({
   title,
   description,
   keywords = [],
-  ogImage = "https://1qg.com/og-image.png",
+  ogImage = "https://constancia.io/og-image.png",
   canonicalUrl,
   type = "website",
   article,
   includeOrganizationSchema = false,
   breadcrumbs,
 }: SEOHeadProps) {
-  const fullTitle = title.includes("1QG") ? title : `${title} | 1QG`;
-  const url = canonicalUrl || (typeof window !== "undefined" ? window.location.href : "https://1qg.com");
+  const fullTitle = title.includes("Constancia") ? title : `${title} | Constancia`;
+  const url = canonicalUrl || (typeof window !== "undefined" ? window.location.href : "https://constancia.io");
 
   useEffect(() => {
     document.title = fullTitle;
@@ -100,14 +100,14 @@ export function SEOHead({
     updateMeta("description", description);
     updateMeta("keywords", keywords.join(", "));
     updateMeta("robots", "index, follow");
-    updateMeta("author", "1QG");
+    updateMeta("author", "Constancia");
 
     updateMeta("og:type", type === "article" ? "article" : "website", true);
     updateMeta("og:url", url, true);
     updateMeta("og:title", fullTitle, true);
     updateMeta("og:description", description, true);
     updateMeta("og:image", ogImage, true);
-    updateMeta("og:site_name", "1QG", true);
+    updateMeta("og:site_name", "Constancia", true);
 
     updateMeta("twitter:card", "summary_large_image");
     updateMeta("twitter:url", url);

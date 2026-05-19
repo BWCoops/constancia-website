@@ -13,7 +13,7 @@ import { createOrUpdateContact, isHubSpotConnected, type HubSpotContactResult } 
 const router = Router();
 
 const HUBSPOT_PORTAL_ID = process.env.HUBSPOT_PORTAL_ID || "";
-const LEAD_NOTIFICATION_EMAIL = process.env.LEAD_NOTIFICATION_EMAIL || "info@1qg.com";
+const LEAD_NOTIFICATION_EMAIL = process.env.LEAD_NOTIFICATION_EMAIL || "info@constancia.com";
 
 const EXCLUDED_ANALYTICS_IPS = [
   "2a06:5906:1423:7000:8de0:ce1:adef:4e1",
@@ -185,7 +185,7 @@ function buildHubSpotContactUrl(data: {
   if (data.score !== undefined) assessmentParts.push(`Finance Readiness Score: ${data.score}%`);
   if (data.maturityLevel) assessmentParts.push(`Maturity Level: ${data.maturityLevel}`);
   if (assessmentParts.length > 0) {
-    params.set("hs_content_membership_notes", `[1QG FinanceCompass Assessment] ${assessmentParts.join(' | ')}`);
+    params.set("hs_content_membership_notes", `[Constancia FinanceCompass Assessment] ${assessmentParts.join(' | ')}`);
   }
   
   return `https://app.hubspot.com/contacts/${HUBSPOT_PORTAL_ID}/contact/new?${params.toString()}`;
@@ -224,7 +224,7 @@ function mapRevenueToValue(revenue: string): string {
 }
 
 /**
- * Build and send lead notification email to 1QG team
+ * Build and send lead notification email to Constancia team
  */
 async function sendWidgetLeadNotification(data: {
   email: string;
@@ -248,10 +248,10 @@ async function sendWidgetLeadNotification(data: {
   
   // Determine lead quality/priority
   let leadPriority = "Standard";
-  let priorityColor = "#0884AA";
+  let priorityColor = "#8E4F67";
   if (data.score >= 60 || ["cfo", "group_controller", "head_fpa"].includes(data.qualificationData.role)) {
     leadPriority = "High Priority";
-    priorityColor = "#12EBFC";
+    priorityColor = "#7FB8A3";
   } else if (data.score <= 40) {
     leadPriority = "High Potential";
     priorityColor = "#FF6B35";
@@ -318,62 +318,62 @@ async function sendWidgetLeadNotification(data: {
 </head>
 <body style="margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; background-color: #f5f5f5;">
   <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-    <div style="background: linear-gradient(135deg, #02205B 0%, #0884AA 100%); padding: 24px; border-radius: 12px 12px 0 0; text-align: center;">
+    <div style="background: linear-gradient(135deg, #12161D 0%, #8E4F67 100%); padding: 24px; border-radius: 12px 12px 0 0; text-align: center;">
       ${getEmailLogoHtml({ variant: 'white' })}
-      <h1 style="color: #12EBFC; margin: 16px 0 8px 0; font-size: 22px; font-weight: 600;">New Widget Lead</h1>
-      <span style="display: inline-block; background-color: ${priorityColor}; color: #02205B; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600;">${leadPriority}</span>
+      <h1 style="color: #7FB8A3; margin: 16px 0 8px 0; font-size: 22px; font-weight: 600;">New Widget Lead</h1>
+      <span style="display: inline-block; background-color: ${priorityColor}; color: #12161D; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600;">${leadPriority}</span>
     </div>
     
     <div style="background-color: #ffffff; padding: 24px; border-radius: 0 0 12px 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-      <h2 style="color: #02205B; margin: 0 0 16px 0; font-size: 18px; border-bottom: 2px solid #12EBFC; padding-bottom: 8px;">Contact Details</h2>
+      <h2 style="color: #12161D; margin: 0 0 16px 0; font-size: 18px; border-bottom: 2px solid #7FB8A3; padding-bottom: 8px;">Contact Details</h2>
       <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
         <tr>
           <td style="padding: 8px 0; color: #666; width: 140px;">Name:</td>
-          <td style="padding: 8px 0; color: #02205B; font-weight: 500;">${displayName}</td>
+          <td style="padding: 8px 0; color: #12161D; font-weight: 500;">${displayName}</td>
         </tr>
         <tr>
           <td style="padding: 8px 0; color: #666;">Email:</td>
-          <td style="padding: 8px 0; color: #02205B; font-weight: 500;"><a href="mailto:${data.email}" style="color: #0884AA;">${data.email}</a></td>
+          <td style="padding: 8px 0; color: #12161D; font-weight: 500;"><a href="mailto:${data.email}" style="color: #8E4F67;">${data.email}</a></td>
         </tr>
         <tr>
           <td style="padding: 8px 0; color: #666;">Company:</td>
-          <td style="padding: 8px 0; color: #02205B; font-weight: 500;">${company}${needsVerification ? ' <span style="color: #856404; font-size: 11px;">(verify)</span>' : ''}</td>
+          <td style="padding: 8px 0; color: #12161D; font-weight: 500;">${company}${needsVerification ? ' <span style="color: #856404; font-size: 11px;">(verify)</span>' : ''}</td>
         </tr>
         <tr>
           <td style="padding: 8px 0; color: #666;">Role:</td>
-          <td style="padding: 8px 0; color: #02205B; font-weight: 500;">${displayRole}</td>
+          <td style="padding: 8px 0; color: #12161D; font-weight: 500;">${displayRole}</td>
         </tr>
       </table>
       
-      <h2 style="color: #02205B; margin: 0 0 16px 0; font-size: 18px; border-bottom: 2px solid #12EBFC; padding-bottom: 8px;">Organisation Profile</h2>
+      <h2 style="color: #12161D; margin: 0 0 16px 0; font-size: 18px; border-bottom: 2px solid #7FB8A3; padding-bottom: 8px;">Organisation Profile</h2>
       <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
         <tr>
           <td style="padding: 8px 0; color: #666; width: 140px;">Industry:</td>
-          <td style="padding: 8px 0; color: #02205B; font-weight: 500;">${displayIndustry}</td>
+          <td style="padding: 8px 0; color: #12161D; font-weight: 500;">${displayIndustry}</td>
         </tr>
         <tr>
           <td style="padding: 8px 0; color: #666;">Company Size:</td>
-          <td style="padding: 8px 0; color: #02205B; font-weight: 500;">${displaySize}</td>
+          <td style="padding: 8px 0; color: #12161D; font-weight: 500;">${displaySize}</td>
         </tr>
         <tr>
           <td style="padding: 8px 0; color: #666;">Revenue:</td>
-          <td style="padding: 8px 0; color: #02205B; font-weight: 500;">${displayRevenue}</td>
+          <td style="padding: 8px 0; color: #12161D; font-weight: 500;">${displayRevenue}</td>
         </tr>
       </table>
       
-      <h2 style="color: #02205B; margin: 0 0 16px 0; font-size: 18px; border-bottom: 2px solid #12EBFC; padding-bottom: 8px;">Assessment Results</h2>
-      <div style="background: linear-gradient(135deg, #02205B 0%, #0884AA 100%); border-radius: 8px; padding: 16px; margin-bottom: 16px; text-align: center;">
-        <div style="font-size: 36px; font-weight: 700; color: #12EBFC;">${data.score}%</div>
+      <h2 style="color: #12161D; margin: 0 0 16px 0; font-size: 18px; border-bottom: 2px solid #7FB8A3; padding-bottom: 8px;">Assessment Results</h2>
+      <div style="background: linear-gradient(135deg, #12161D 0%, #8E4F67 100%); border-radius: 8px; padding: 16px; margin-bottom: 16px; text-align: center;">
+        <div style="font-size: 36px; font-weight: 700; color: #7FB8A3;">${data.score}%</div>
         <div style="color: #fff; font-size: 14px;">${data.maturityLevel}</div>
       </div>
       <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
         <tr>
           <td style="padding: 8px 0; color: #666; width: 140px;">Strongest Area:</td>
-          <td style="padding: 8px 0; color: #02205B; font-weight: 500;">${data.strongestArea.dimension} (${data.strongestArea.maturityLevel})</td>
+          <td style="padding: 8px 0; color: #12161D; font-weight: 500;">${data.strongestArea.dimension} (${data.strongestArea.maturityLevel})</td>
         </tr>
         <tr>
           <td style="padding: 8px 0; color: #666;">Weakest Area:</td>
-          <td style="padding: 8px 0; color: #02205B; font-weight: 500;">${data.weakestArea.dimension} (${data.weakestArea.maturityLevel})</td>
+          <td style="padding: 8px 0; color: #12161D; font-weight: 500;">${data.weakestArea.dimension} (${data.weakestArea.maturityLevel})</td>
         </tr>
       </table>
       
@@ -381,12 +381,12 @@ async function sendWidgetLeadNotification(data: {
       
       ${!hubspotResult.success ? `
       <div style="text-align: center; margin-top: 16px;">
-        <a href="${hubspotUrl}" style="display: inline-block; background: linear-gradient(135deg, #12EBFC 0%, #0884AA 100%); color: #02205B; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 16px;">
+        <a href="${hubspotUrl}" style="display: inline-block; background: linear-gradient(135deg, #7FB8A3 0%, #8E4F67 100%); color: #12161D; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 16px;">
           Add to HubSpot Manually
         </a>
       </div>` : `
       <div style="text-align: center; margin-top: 16px;">
-        <a href="https://app.hubspot.com/contacts" style="display: inline-block; background: linear-gradient(135deg, #0884AA 0%, #02205B 100%); color: #fff; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 500; font-size: 14px;">
+        <a href="https://app.hubspot.com/contacts" style="display: inline-block; background: linear-gradient(135deg, #8E4F67 0%, #12161D 100%); color: #fff; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 500; font-size: 14px;">
           View in HubSpot
         </a>
       </div>`}
@@ -967,7 +967,7 @@ function buildWidgetResultsEmailHtml(data: z.infer<typeof widgetEmailResultsSche
     <table role="presentation" style="width: 100%; margin-bottom: 24px; border-collapse: collapse;">
       <tr>
         <td style="padding: 20px; background-color: #f9fafb; border-radius: 8px;">
-          <h2 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 600; color: #02205B;">Your Organisation Profile</h2>
+          <h2 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 600; color: #12161D;">Your Organisation Profile</h2>
           <table role="presentation" style="width: 100%; border-collapse: collapse;">
             <tr>
               ${data.qualificationData.industry ? `
@@ -1006,8 +1006,8 @@ function buildWidgetResultsEmailHtml(data: z.infer<typeof widgetEmailResultsSche
   const industrySection = data.industryInsight ? `
     <table role="presentation" style="width: 100%; margin-bottom: 24px; border-collapse: collapse;">
       <tr>
-        <td style="padding: 20px; background-color: #eff6ff; border-radius: 8px; border-left: 4px solid #0884AA;">
-          <h2 style="margin: 0 0 12px 0; font-size: 18px; font-weight: 600; color: #02205B;">Industry Context</h2>
+        <td style="padding: 20px; background-color: #eff6ff; border-radius: 8px; border-left: 4px solid #8E4F67;">
+          <h2 style="margin: 0 0 12px 0; font-size: 18px; font-weight: 600; color: #12161D;">Industry Context</h2>
           <p style="margin: 0; font-size: 14px; color: #374151; line-height: 1.6;">
             ${data.industryInsight}
           </p>
@@ -1022,7 +1022,7 @@ function buildWidgetResultsEmailHtml(data: z.infer<typeof widgetEmailResultsSche
         <table role="presentation" style="width: 100%; border-collapse: collapse;">
           <tr>
             <td style="width: 32px; vertical-align: top; padding-right: 12px;">
-              <div style="width: 28px; height: 28px; background-color: #0884AA; border-radius: 50%; text-align: center; line-height: 28px; color: #ffffff; font-weight: 600; font-size: 14px;">
+              <div style="width: 28px; height: 28px; background-color: #8E4F67; border-radius: 50%; text-align: center; line-height: 28px; color: #ffffff; font-weight: 600; font-size: 14px;">
                 ${idx + 1}
               </div>
             </td>
@@ -1063,9 +1063,9 @@ function buildWidgetResultsEmailHtml(data: z.infer<typeof widgetEmailResultsSche
           
           <!-- Header with solid background (gradients don't work in all email clients) -->
           <tr>
-            <td align="center" style="background-color: #02205B; padding: 40px 30px;">
+            <td align="center" style="background-color: #12161D; padding: 40px 30px;">
               ${getEmailLogoHtml({ variant: "white", marginBottom: 20, maxWidth: 200 })}
-              <h1 style="margin: 0; font-size: 24px; font-weight: 600; color: #12EBFC; line-height: 1.3;">
+              <h1 style="margin: 0; font-size: 24px; font-weight: 600; color: #7FB8A3; line-height: 1.3;">
                 Your Finance Readiness Assessment Results
               </h1>
             </td>
@@ -1075,7 +1075,7 @@ function buildWidgetResultsEmailHtml(data: z.infer<typeof widgetEmailResultsSche
           <tr>
             <td style="padding: 40px 30px 24px 30px; text-align: center;">
               <div style="margin-bottom: 20px;">
-                <span style="font-size: 64px; font-weight: 700; color: #02205B; line-height: 1;">${data.score}</span>
+                <span style="font-size: 64px; font-weight: 700; color: #12161D; line-height: 1;">${data.score}</span>
                 <span style="font-size: 28px; color: #6b7280; font-weight: 400;">/100</span>
               </div>
               <div style="margin-bottom: 16px;">
@@ -1099,7 +1099,7 @@ function buildWidgetResultsEmailHtml(data: z.infer<typeof widgetEmailResultsSche
               <table role="presentation" style="width: 100%; margin-bottom: 24px; border-collapse: collapse;">
                 <tr>
                   <td>
-                    <h2 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 600; color: #02205B;">Dimension Breakdown</h2>
+                    <h2 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 600; color: #12161D;">Dimension Breakdown</h2>
                     <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden;">
                       <thead>
                         <tr style="background-color: #f9fafb;">
@@ -1148,7 +1148,7 @@ function buildWidgetResultsEmailHtml(data: z.infer<typeof widgetEmailResultsSche
               <table role="presentation" style="width: 100%; margin-bottom: 32px; border-collapse: collapse;">
                 <tr>
                   <td>
-                    <h2 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 600; color: #02205B;">Personalised Recommendations</h2>
+                    <h2 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 600; color: #12161D;">Personalised Recommendations</h2>
                     <table role="presentation" style="width: 100%; border-collapse: collapse;">
                       ${recommendationsList}
                     </table>
@@ -1160,12 +1160,12 @@ function buildWidgetResultsEmailHtml(data: z.infer<typeof widgetEmailResultsSche
               <!-- Call to Action -->
               <table role="presentation" style="width: 100%; margin-bottom: 24px; border-collapse: collapse;">
                 <tr>
-                  <td style="background-color: #02205B; border-radius: 12px; padding: 32px; text-align: center;">
-                    <h2 style="margin: 0 0 12px 0; font-size: 22px; font-weight: 600; color: #12EBFC;">Ready for Deeper Insights?</h2>
+                  <td style="background-color: #12161D; border-radius: 12px; padding: 32px; text-align: center;">
+                    <h2 style="margin: 0 0 12px 0; font-size: 22px; font-weight: 600; color: #7FB8A3;">Ready for Deeper Insights?</h2>
                     <p style="margin: 0 0 24px 0; font-size: 14px; color: #ffffff; line-height: 1.6;">
                       Get detailed analysis across 95+ questions with AI-powered recommendations tailored to your organisation.
                     </p>
-                    <a href="https://1qg.com/finance-compass" target="_blank" style="display: inline-block; padding: 16px 40px; background-color: #12EBFC; color: #02205B; font-size: 16px; font-weight: 600; text-decoration: none; border-radius: 8px;">
+                    <a href="https://constancia.com/finance-compass" target="_blank" style="display: inline-block; padding: 16px 40px; background-color: #7FB8A3; color: #12161D; font-size: 16px; font-weight: 600; text-decoration: none; border-radius: 8px;">
                       Start Your Full Assessment
                     </a>
                   </td>
@@ -1186,12 +1186,12 @@ function buildWidgetResultsEmailHtml(data: z.infer<typeof widgetEmailResultsSche
                       Finance Transformation & EPM Specialists
                     </p>
                     <p style="margin: 0 0 16px 0; font-size: 13px; color: #6b7280;">
-                      <a href="mailto:info@1qg.com" style="color: #0884AA; text-decoration: none;">info@1qg.com</a>
+                      <a href="mailto:info@constancia.com" style="color: #8E4F67; text-decoration: none;">info@constancia.com</a>
                       &nbsp;|&nbsp;
-                      <a href="https://1qg.com" style="color: #0884AA; text-decoration: none;">www.1qg.com</a>
+                      <a href="https://constancia.com" style="color: #8E4F67; text-decoration: none;">www.constancia.com</a>
                     </p>
                     <p style="margin: 0; font-size: 11px; color: #6b7280;">
-                      © ${new Date().getFullYear()} 1QG Group. All rights reserved.
+                      © ${new Date().getFullYear()} Constancia Group. All rights reserved.
                     </p>
                     <p style="margin: 8px 0 0 0; font-size: 11px; color: #6b7280;">
                       You received this email because you completed a Finance Readiness Assessment on our website.
@@ -1989,7 +1989,7 @@ router.post("/widget-email-results", async (req: Request, res: Response) => {
     }
 
     const htmlContent = buildWidgetResultsEmailHtml(data);
-    const subject = `Your Finance Readiness Score: ${data.score}% - ${data.maturityLevel} | 1QG`;
+    const subject = `Your Finance Readiness Score: ${data.score}% - ${data.maturityLevel} | Constancia`;
 
     // Save email HTML for debugging/inspection
     const fs = await import("fs");
@@ -2027,7 +2027,7 @@ router.post("/widget-email-results", async (req: Request, res: Response) => {
 
     log.info({ sessionId: data.sessionId, email: data.email.substring(0, 3) + "***", score: data.score, maturityLevel: data.maturityLevel }, "Widget results email sent");
 
-    // Send lead notification email to 1QG team (non-blocking)
+    // Send lead notification email to Constancia team (non-blocking)
     sendWidgetLeadNotification({
       email: data.email,
       sessionId: data.sessionId,

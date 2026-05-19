@@ -69,8 +69,8 @@ import {
 import type { RoiInputs } from "@shared/roi-calculator";
 
 const BRAND = {
-  navy: "#02205B",
-  cyan: "#12EBFC",
+  navy: "#12161D",
+  cyan: "#7FB8A3",
   teal: "#0891B2",
   darkGrey: "#374151",
   lightGrey: "#F3F4F6",
@@ -150,13 +150,13 @@ function addHeader(doc: jsPDFType, config: PDFConfig): number {
       doc.setFontSize(9);
       doc.setTextColor(...RGB.navy);
       doc.setFont("helvetica", "bold");
-      doc.text("1QG", margin, headerY);
+      doc.text("Constancia", margin, headerY);
     }
   } else {
     doc.setFontSize(9);
     doc.setTextColor(...RGB.navy);
     doc.setFont("helvetica", "bold");
-    doc.text("1QG", margin, headerY);
+    doc.text("Constancia", margin, headerY);
   }
   
   doc.setFontSize(8);
@@ -193,7 +193,7 @@ function addFooter(doc: jsPDFType, pageNum: number, totalPages: number): void {
   doc.text("Confidential", margin, footerY);
   
   const currentDate = formatDateUK();
-  doc.text(`© 1QG Finance Transformation | ${currentDate}`, pageWidth / 2, footerY, { align: "center" });
+  doc.text(`© Constancia Finance Transformation | ${currentDate}`, pageWidth / 2, footerY, { align: "center" });
   
   doc.text(`Page ${pageNum} of ${totalPages}`, pageWidth - margin, footerY, { align: "right" });
 }
@@ -1481,13 +1481,13 @@ function buildCoverPage(doc: jsPDFType, y: number, config: PDFConfig, narratives
       doc.setFontSize(28);
       doc.setTextColor(...RGB.cyan);
       doc.setFont("helvetica", "bold");
-      doc.text("1QG", margin, 40);
+      doc.text("Constancia", margin, 40);
     }
   } else {
     doc.setFontSize(28);
     doc.setTextColor(...RGB.cyan);
     doc.setFont("helvetica", "bold");
-    doc.text("1QG", margin, 40);
+    doc.text("Constancia", margin, 40);
   }
   
   doc.setFontSize(28);
@@ -1562,7 +1562,7 @@ function buildExecutiveSummarySection(doc: jsPDFType, y: number, config: PDFConf
   const opening = execSummary?.opening ?? "Assessment analysis is being processed. Please regenerate the report for complete analysis.";
   const keyInsights = execSummary?.keyInsights ?? [];
   const strategicContext = execSummary?.strategicContext ?? "Detailed strategic analysis will be available upon report regeneration.";
-  const callToAction = execSummary?.callToAction ?? "Contact 1QG to discuss your transformation journey.";
+  const callToAction = execSummary?.callToAction ?? "Contact Constancia to discuss your transformation journey.";
   
   doc.setFontSize(11);
   doc.setTextColor(...RGB.darkGrey);
@@ -2769,7 +2769,7 @@ function buildNextStepsSection(doc: jsPDFType, y: number, config: PDFConfig, nar
   
   const steps = [
     "Review this report with your leadership team to align on priorities",
-    "Engage with 1QG for a detailed discovery workshop to validate findings",
+    "Engage with Constancia for a detailed discovery workshop to validate findings",
     "Develop a detailed transformation roadmap with implementation timelines",
     "Establish governance and change management approach",
     "Begin with quick wins to build momentum and stakeholder confidence",
@@ -2803,8 +2803,8 @@ function buildNextStepsSection(doc: jsPDFType, y: number, config: PDFConfig, nar
   
   doc.setFontSize(10);
   doc.setTextColor(...RGB.cyan);
-  doc.text("Contact 1QG to discuss your transformation journey", pageWidth / 2, y + 25, { align: "center" });
-  doc.text("info@1qg.com | www.1qg.com", pageWidth / 2, y + 33, { align: "center" });
+  doc.text("Contact Constancia to discuss your transformation journey", pageWidth / 2, y + 25, { align: "center" });
+  doc.text("info@constancia.com | www.constancia.com", pageWidth / 2, y + 33, { align: "center" });
   
   return y + 50;
 }
@@ -2998,7 +2998,7 @@ export function generateGenerationReport(
   y += 45;
   doc.setFontSize(10);
   doc.setTextColor(...RGB.navy);
-  doc.text("Ready for a deeper analysis? Contact 1QG at info@1qg.com", 20, y);
+  doc.text("Ready for a deeper analysis? Contact Constancia at info@constancia.com", 20, y);
   
   addFooter(doc, 1, 1);
   
@@ -3082,7 +3082,7 @@ export function generateTier1PreAssessmentReport(
   doc.setFillColor(...RGB.navy);
   doc.rect(0, 0, pageWidth, pageHeight, "F");
   
-  // 1QG logo
+  // Constancia logo
   const preAssessmentLogo = getLogoTurquoise();
   if (preAssessmentLogo) {
     try {
@@ -3091,13 +3091,13 @@ export function generateTier1PreAssessmentReport(
       doc.setFontSize(32);
       doc.setTextColor(...RGB.cyan);
       doc.setFont("helvetica", "bold");
-      doc.text("1QG", margin, 40);
+      doc.text("Constancia", margin, 40);
     }
   } else {
     doc.setFontSize(32);
     doc.setTextColor(...RGB.cyan);
     doc.setFont("helvetica", "bold");
-    doc.text("1QG", margin, 40);
+    doc.text("Constancia", margin, 40);
   }
   
   // Main title
@@ -3148,7 +3148,7 @@ export function generateTier1PreAssessmentReport(
   doc.setFontSize(11);
   doc.setTextColor(...RGB.cream);
   doc.setFont("helvetica", "bold");
-  doc.text("Prepared by: 1QG Finance Transformation", margin, pageHeight - 70);
+  doc.text("Prepared by: Constancia Finance Transformation", margin, pageHeight - 70);
   
   doc.setFontSize(9);
   doc.setTextColor(...RGB.slateGray);
@@ -3671,8 +3671,8 @@ export function generateTier1PreAssessmentReport(
   const nextStepsTable = [
     { step: "1", action: "Review this pre-assessment", owner: "CFO", timeline: "This week" },
     { step: "2", action: "Decide to proceed with full assessment", owner: "CFO / Finance", timeline: "By end of week" },
-    { step: "3", action: "Schedule kickoff call", owner: "1QG", timeline: "Next week" },
-    { step: "4", action: "Full assessment delivery", owner: "1QG", timeline: "2-3 weeks after" },
+    { step: "3", action: "Schedule kickoff call", owner: "Constancia", timeline: "Next week" },
+    { step: "4", action: "Full assessment delivery", owner: "Constancia", timeline: "2-3 weeks after" },
     { step: "5", action: "Review findings and approve roadmap", owner: "CFO", timeline: "Week after delivery" },
   ];
   
@@ -3836,7 +3836,7 @@ export function generateTier1PreAssessmentReport(
   doc.setTextColor(...RGB.cream);
   doc.setFontSize(10);
   doc.setFont("helvetica", "normal");
-  doc.text("Contact 1QG to discuss your transformation journey", pageWidth / 2, y + 26, { align: "center" });
+  doc.text("Contact Constancia to discuss your transformation journey", pageWidth / 2, y + 26, { align: "center" });
   doc.text(`${PDF_CONTACT_INFO.email}  |  ${PDF_CONTACT_INFO.website}`, pageWidth / 2, y + 35, { align: "center" });
   
   // === BACK PAGE: CONTACT & CONFIDENTIALITY ===
@@ -3852,7 +3852,7 @@ export function generateTier1PreAssessmentReport(
   
   doc.setFontSize(20);
   doc.setTextColor(...RGB.cyan);
-  doc.text("1QG Finance Transformation", margin, 60);
+  doc.text("Constancia Finance Transformation", margin, 60);
   
   doc.setFontSize(11);
   doc.setTextColor(...RGB.cream);
@@ -3895,7 +3895,7 @@ export function generateTier1PreAssessmentReport(
   // Footer
   doc.setFontSize(8);
   doc.setTextColor(...RGB.slateGray);
-  doc.text(`© ${new Date().getFullYear()} 1QG Finance Transformation. All rights reserved.`, margin, pageHeight - 30);
+  doc.text(`© ${new Date().getFullYear()} Constancia Finance Transformation. All rights reserved.`, margin, pageHeight - 30);
   doc.text(`Report generated: ${formatDateUK()}`, margin, pageHeight - 20);
   
   // Add footers to content pages (pages 2-6)
@@ -4157,12 +4157,12 @@ export function generateFullAssessmentReport(
     } catch (e) {
       doc.setFontSize(32);
       doc.setTextColor(...RGB.cyan);
-      doc.text("1QG", margin, 40);
+      doc.text("Constancia", margin, 40);
     }
   } else {
     doc.setFontSize(32);
     doc.setTextColor(...RGB.cyan);
-    doc.text("1QG", margin, 40);
+    doc.text("Constancia", margin, 40);
   }
   
   doc.setFontSize(28);
@@ -5123,7 +5123,7 @@ export function generateFullAssessmentReport(
   doc.text("Ready to Transform Your Finance Function?", margin + 10, y + 15);
   doc.setFont("helvetica", "normal");
   doc.setFontSize(10);
-  doc.text("Contact 1QG to schedule your Discovery Workshop and begin your transformation journey.", margin + 10, y + 28);
+  doc.text("Contact Constancia to schedule your Discovery Workshop and begin your transformation journey.", margin + 10, y + 28);
   doc.setTextColor(...RGB.teal);
   doc.text(`${PDF_CONTACT_INFO.email}  |  ${PDF_CONTACT_INFO.website}`, margin + 10, y + 36);
 
@@ -5132,7 +5132,7 @@ export function generateFullAssessmentReport(
   doc.setFillColor(...RGB.navy);
   doc.rect(0, 0, pageWidth, pageHeight, "F");
   
-  // 1QG Logo
+  // Constancia Logo
   const backPageLogo = getLogoTurquoise();
   if (backPageLogo) {
     try {
@@ -5140,12 +5140,12 @@ export function generateFullAssessmentReport(
     } catch (e) {
       doc.setFontSize(36);
       doc.setTextColor(...RGB.cyan);
-      doc.text("1QG", pageWidth / 2, 50, { align: "center" });
+      doc.text("Constancia", pageWidth / 2, 50, { align: "center" });
     }
   } else {
     doc.setFontSize(36);
     doc.setTextColor(...RGB.cyan);
-    doc.text("1QG", pageWidth / 2, 50, { align: "center" });
+    doc.text("Constancia", pageWidth / 2, 50, { align: "center" });
   }
   
   // Tagline
@@ -5179,13 +5179,13 @@ export function generateFullAssessmentReport(
   
   doc.setFontSize(7);
   doc.setTextColor(...RGB.slateGray);
-  const disclaimerText = `This report is provided for informational purposes only and represents 1QG's assessment based on the information provided during the evaluation process. The findings, recommendations, and financial projections contained herein are estimates and should not be construed as guarantees of future performance.
+  const disclaimerText = `This report is provided for informational purposes only and represents Constancia's assessment based on the information provided during the evaluation process. The findings, recommendations, and financial projections contained herein are estimates and should not be construed as guarantees of future performance.
 
-The implementation of any recommendations should be undertaken in consultation with qualified professionals and subject to your organisation's specific circumstances, risk tolerance, and strategic objectives. 1QG accepts no liability for any decisions made based on this report.
+The implementation of any recommendations should be undertaken in consultation with qualified professionals and subject to your organisation's specific circumstances, risk tolerance, and strategic objectives. Constancia accepts no liability for any decisions made based on this report.
 
-This document is confidential and intended solely for the use of ${config.company.name}. Reproduction or distribution without written consent from 1QG is prohibited.
+This document is confidential and intended solely for the use of ${config.company.name}. Reproduction or distribution without written consent from Constancia is prohibited.
 
-© ${new Date().getFullYear()} 1QG Limited. All rights reserved.`;
+© ${new Date().getFullYear()} Constancia Limited. All rights reserved.`;
   
   const disclaimerLines = wrapText(doc, disclaimerText, pageWidth - 2 * margin - 10);
   doc.text(disclaimerLines, margin + 5, pageHeight - 78);

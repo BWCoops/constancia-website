@@ -19,7 +19,7 @@ export default function ChatPopupPage() {
     }
     
     // Set document title
-    document.title = "Astral - 1QG AI Assistant";
+    document.title = "Astral - Constancia AI Assistant";
   }, []);
 
   return (
@@ -164,7 +164,7 @@ function ChatbotWidgetPopup({ assessmentId }: { assessmentId?: string }) {
           </div>
           <div>
             <h3 className="font-semibold text-white text-sm">Astral</h3>
-            <p className="text-xs text-white/60">Powered by 1QG</p>
+            <p className="text-xs text-white/60">Powered by Constancia</p>
           </div>
         </div>
         <button

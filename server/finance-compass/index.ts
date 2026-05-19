@@ -2,7 +2,7 @@
  * FinanceCompass Module Entry Point
  * 
  * Ringfenced Finance Transformation Assessment Platform
- * Can be deployed independently from the main 1QG website.
+ * Can be deployed independently from the main Constancia website.
  */
 
 export { default as financeCompassRoutes, financeCompassAdminRoutes, financeCompassPublicRoutes } from "./routes";

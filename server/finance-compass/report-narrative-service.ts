@@ -1540,7 +1540,7 @@ Write a compelling, personalised executive summary with confidence-tagged insigh
     ],
     strategicContext: `The assessment reveals a balanced profile with clear opportunities to enhance finance effectiveness. Addressing the identified gaps could deliver efficiency improvements of 15-25% in key finance processes, with industry complexity factors suggesting a ${insightContext.benchmarkTimeline.industryMultiplier}x multiplier on standard timelines.`,
     implementationOutlook: `Based on vendor benchmarks for organisations of this size and sector, a typical transformation programme would span ${insightContext.benchmarkTimeline.typical} months across four phases: ${phaseSummary}. Investment range is typically £${insightContext.implementationCosts.min}k-£${insightContext.implementationCosts.max}k depending on scope and platform selection.`,
-    callToAction: `We recommend engaging with 1QG's expert consultants to develop a tailored transformation roadmap based on these findings.`,
+    callToAction: `We recommend engaging with Constancia's expert consultants to develop a tailored transformation roadmap based on these findings.`,
     isFallback: true,
   };
   setCache(assessment.id, cacheKey, fallback);
@@ -2932,7 +2932,7 @@ function normalizeStakeholderNarrative(narrative: StakeholderNarrative): Stakeho
   // Default actions when legacy data is empty
   const defaultPriorityActions: { action: string; rationale: string; timeframe: string; priority: "immediate" | "short-term" | "medium-term" }[] = [
     { action: "Review assessment findings with key stakeholders", rationale: "Ensure alignment on priorities before taking action", timeframe: "Within 2 weeks", priority: "immediate" },
-    { action: "Schedule consultation with 1QG to discuss recommendations", rationale: "Expert guidance can accelerate transformation planning", timeframe: "Within 30 days", priority: "short-term" },
+    { action: "Schedule consultation with Constancia to discuss recommendations", rationale: "Expert guidance can accelerate transformation planning", timeframe: "Within 30 days", priority: "short-term" },
   ];
   
   // Default risks when legacy data is empty
@@ -2971,7 +2971,7 @@ function normalizeStakeholderNarrative(narrative: StakeholderNarrative): Stakeho
       ? risksPrioritized.slice(0, 3).map((risk, i) => ({
           risk,
           likelihood: (i === 0 ? "high" : "medium") as "high" | "medium" | "low",
-          mitigation: "Develop mitigation strategy with 1QG support"
+          mitigation: "Develop mitigation strategy with Constancia support"
         }))
       : defaultRiskAssessment
     ),
@@ -2980,7 +2980,7 @@ function normalizeStakeholderNarrative(narrative: StakeholderNarrative): Stakeho
       "Process efficiency through targeted automation",
       "Risk reduction through better controls and visibility"
     ]),
-    callToAction: narrative.callToAction || "Schedule a consultation with 1QG to discuss next steps and develop your transformation roadmap.",
+    callToAction: narrative.callToAction || "Schedule a consultation with Constancia to discuss next steps and develop your transformation roadmap.",
   };
 }
 
@@ -3548,7 +3548,7 @@ function generateFallbackStakeholderNarrative(
         "Risk reduction through improved financial controls and visibility",
         `Typical ROI payback within ${Math.round(timeline.typical * 0.7)}-${Math.round(timeline.typical * 0.9)} months of go-live`
       ];
-      callToAction = `Schedule a strategic planning session with 1QG to develop a comprehensive transformation business case within ${foundationRange}.`;
+      callToAction = `Schedule a strategic planning session with Constancia to develop a comprehensive transformation business case within ${foundationRange}.`;
 
       // Legacy fields
       focusAreas = [
@@ -3613,7 +3613,7 @@ function generateFallbackStakeholderNarrative(
         `Close cycle reduction: Target 30-50% faster month-end close by optimisation phase`,
         "Enhanced analytical capability through integrated planning platform"
       ];
-      callToAction = `Schedule a process improvement workshop with 1QG during ${foundationRange} to map current processes and identify quick wins.`;
+      callToAction = `Schedule a process improvement workshop with Constancia during ${foundationRange} to map current processes and identify quick wins.`;
 
       // Legacy fields
       focusAreas = [
@@ -3681,7 +3681,7 @@ function generateFallbackStakeholderNarrative(
         `Technology debt reduction through modern architecture patterns`,
         `Enhanced security and compliance posture supporting regulatory requirements`
       ];
-      callToAction = `Schedule a technical architecture review with 1QG during ${foundationRange} to assess integration requirements and develop implementation roadmap.`;
+      callToAction = `Schedule a technical architecture review with Constancia during ${foundationRange} to assess integration requirements and develop implementation roadmap.`;
 
       // Legacy fields
       focusAreas = [

@@ -12,7 +12,7 @@ export const SUPPORTED_CURRENCIES: CurrencyConfig[] = [
   { code: "ZAR", symbol: "R", name: "South African Rand", locales: ["en-ZA", "af-ZA"] },
 ];
 
-const CURRENCY_STORAGE_KEY = "1qg_preferred_currency";
+const CURRENCY_STORAGE_KEY = "constancia_preferred_currency";
 
 export function detectCurrencyFromLocale(): string {
   try {

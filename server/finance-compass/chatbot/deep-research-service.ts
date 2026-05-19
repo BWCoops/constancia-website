@@ -319,12 +319,12 @@ export class DeepResearchService {
         enrichedQuery += `\n\nPrevious research findings for context:\n${previousFindings}`;
       }
 
-      const systemPrompt = `You are a senior EPM advisory expert conducting research for a finance transformation consultation on behalf of 1QG, an independent EPM advisory firm.
+      const systemPrompt = `You are a senior EPM advisory expert conducting research for a finance transformation consultation on behalf of Constancia, an independent EPM advisory firm.
 
 RESEARCH PHASE: ${phase.name}
 PURPOSE: ${phase.purpose}
 
-CONTEXT: This research is being conducted through 1QG's FinanceCompass platform, which provides:
+CONTEXT: This research is being conducted through Constancia's FinanceCompass platform, which provides:
 - Interactive EPM Comparison Tool (8+ vendors, 15 selection drivers)
 - ERP Comparison Tool (SAP, Oracle, Microsoft, Workday, NetSuite)
 - AI for Finance assessment tool
@@ -338,7 +338,7 @@ CRITICAL RULES:
 5. Be specific about vendor capabilities and avoid generic statements
 6. Include recent data from 2024-2026 where possible
 7. Acknowledge uncertainty with phrases like "Based on available data" rather than making absolute claims
-8. Do NOT say "no standardised tool exists" for vendor comparison - 1QG has developed comprehensive comparison tools`;
+8. Do NOT say "no standardised tool exists" for vendor comparison - Constancia has developed comprehensive comparison tools`;
 
       const response = await this.callPerplexityAPI(systemPrompt, enrichedQuery);
       
@@ -497,7 +497,7 @@ CRITICAL RULES:
 - Strongest Dimension: ${context.strongestDimension || 'Not specified'}
 `;
 
-      // Calculate vendor affinity for ALL question types to ground responses in 1QG's IP
+      // Calculate vendor affinity for ALL question types to ground responses in Constancia's IP
       // This ensures every response is informed by the comparison tool's vendor analysis
       if (context.dimensionScores) {
         try {
@@ -538,8 +538,8 @@ CRITICAL RULES:
               // Adjust framing based on question type
               const isVendorQuestion = questionType === 'VENDOR_TOOLING';
               vendorAffinitySection = `
-## 1QG EPM COMPARISON TOOL - VENDOR LANDSCAPE CONTEXT
-This analysis is derived from 1QG's proprietary EPM Comparison Tool and vendor matching algorithm.
+## Constancia EPM COMPARISON TOOL - VENDOR LANDSCAPE CONTEXT
+This analysis is derived from Constancia's proprietary EPM Comparison Tool and vendor matching algorithm.
 ${isVendorQuestion 
   ? 'IMPORTANT: Use these affinity scores as the PRIMARY basis for vendor recommendations.'
   : 'Use this vendor context to ground your response in practical implementation considerations and market realities.'}
@@ -561,7 +561,7 @@ When discussing implementation, timelines, or capabilities, reference these vend
           } else {
             log.info({ scoredDimensionCount, minRequired: MIN_DIMENSIONS_REQUIRED }, "Insufficient dimension scores for vendor affinity");
             vendorAffinitySection = `
-## 1QG COMPARISON TOOL NOTE
+## Constancia COMPARISON TOOL NOTE
 Limited assessment data available (${scoredDimensionCount} dimensions scored). 
 When discussing vendors or implementation specifics, encourage the user to complete their full assessment for more tailored guidance.
 `;
@@ -573,7 +573,7 @@ When discussing vendors or implementation specifics, encourage the user to compl
     }
 
     // Build the synthesis prompt
-    const systemPrompt = `You are a senior management consultant at 1QG, an independent Enterprise Performance Management (EPM) advisory firm. You bring 20+ years of finance transformation experience.
+    const systemPrompt = `You are a senior management consultant at Constancia, an independent Enterprise Performance Management (EPM) advisory firm. You bring 20+ years of finance transformation experience.
 
 ## COMMUNICATION STYLE
 - Executive-level discourse: Write as you would brief a CFO or Finance Director

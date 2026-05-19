@@ -145,7 +145,7 @@ export function Footer() {
 
         <div className="pt-8 border-t border-[#F6F3EE]/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-[#F6F3EE]/60">
-            {new Date().getFullYear()} 1QG®. All rights reserved.
+            {new Date().getFullYear()} Constancia. All rights reserved.
           </p>
           <div className="flex flex-wrap items-center gap-3 sm:gap-4 md:gap-6 text-sm text-[#F6F3EE]/60">
             {socialLinks.map((social) => (
@@ -161,9 +161,9 @@ export function Footer() {
                 <social.icon className="w-4 h-4" />
               </a>
             ))}
-            <a href="mailto:info@1qg.com" className="flex items-center gap-2 hover:text-brand-cyan transition-colors">
+            <a href="mailto:info@constancia.io" className="flex items-center gap-2 hover:text-brand-cyan transition-colors">
               <Mail className="w-4 h-4 flex-shrink-0" />
-              <span className="break-all">info@1qg.com</span>
+              <span className="break-all">info@constancia.io</span>
             </a>
             <span className="flex items-start gap-2">
               <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" />

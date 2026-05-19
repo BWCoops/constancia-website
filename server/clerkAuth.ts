@@ -16,6 +16,7 @@ import type { Express, RequestHandler, Request, Response } from "express";
 import { clerkMiddleware, getAuth, clerkClient } from "@clerk/express";
 import pino from "pino";
 import * as AdminSecurity from "./services/admin-security";
+import { getSession } from "./session";
 
 const authLog = pino({ name: "clerk-auth" });
 
@@ -66,6 +67,10 @@ export async function setupAuth(app: Express): Promise<void> {
   if (!process.env.CLERK_PUBLISHABLE_KEY) {
     authLog.warn("CLERK_PUBLISHABLE_KEY not set — falling back to secret-only mode (still works, but recommended to set both).");
   }
+
+  // Session middleware — needed by FinanceCompass OTP flow and any other
+  // route that reads req.session.* directly. Independent of Clerk.
+  app.use(getSession());
 
   app.use(clerkMiddleware());
 

@@ -305,7 +305,7 @@ function createLogoWatermarkHTML(options: WatermarkOptions): string {
 </head>
 <body>
   <div class="watermark">
-    <img src="${LOGO_TURQUOISE_BASE64}" alt="1QG" />
+    <img src="${LOGO_TURQUOISE_BASE64}" alt="Constancia" />
   </div>
 </body>
 </html>

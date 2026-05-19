@@ -1193,7 +1193,7 @@ export default function FinanceCompassResults() {
                                   </h4>
                                   <p className="text-sm text-[#8E4F67] dark:text-[#7FB8A3]">
                                     {scoreBreakdownData?.data?.methodology?.description || 
-                                      "Your scores are calculated using 1QG's proprietary Finance Transformation Framework."}
+                                      "Your scores are calculated using Constancia's proprietary Finance Transformation Framework."}
                                   </p>
                                 </div>
                               </div>
@@ -1203,7 +1203,7 @@ export default function FinanceCompassResults() {
                                   <div className="flex items-center gap-2 mb-2">
                                     <BarChart3 className="h-4 w-4 text-brand-teal" />
                                     <span className="text-sm font-medium text-[#12161D] dark:text-[#7FB8A3]">
-                                      {scoreBreakdownData?.data?.methodology?.benchmarkSource || "1QG Benchmark Database"}
+                                      {scoreBreakdownData?.data?.methodology?.benchmarkSource || "Constancia Benchmark Database"}
                                     </span>
                                   </div>
                                   <p className="text-xs text-[#8E4F67] dark:text-[#7FB8A3]">
@@ -1711,7 +1711,7 @@ export default function FinanceCompassResults() {
                                               <div className="text-sm text-muted-foreground">
                                                 <span className="font-medium text-foreground">How this is calculated: </span>
                                                 Your score is derived from responses to questions in this dimension, 
-                                                compared against 1QG's benchmark database of UK enterprise implementations. 
+                                                compared against Constancia's benchmark database of UK enterprise implementations. 
                                                 A percentile of P{comparison.percentileRank} means you outperform {comparison.percentileRank}% of organisations 
                                                 in this dimension.
                                               </div>
@@ -1723,7 +1723,7 @@ export default function FinanceCompassResults() {
                                               <div className="flex items-start gap-2">
                                                 <Lightbulb className="h-4 w-4 text-brand-teal mt-0.5 flex-shrink-0" />
                                                 <div className="text-sm text-foreground">
-                                                  <span className="font-medium">1QG Recommendation: </span>
+                                                  <span className="font-medium">Constancia Recommendation: </span>
                                                   {comparison.recommendation}
                                                 </div>
                                               </div>
@@ -3928,7 +3928,7 @@ export default function FinanceCompassResults() {
               <CardContent>
                 <div className="grid md:grid-cols-2 gap-4">
                   <a 
-                    href="mailto:info@1qg.com?subject=FinanceCompass%20Assessment%20Follow-up"
+                    href="mailto:info@constancia.com?subject=FinanceCompass%20Assessment%20Follow-up"
                     className="flex items-center gap-4 p-4 rounded-lg border hover-elevate transition-all"
                     data-testid="link-email-contact"
                   >
@@ -3937,7 +3937,7 @@ export default function FinanceCompassResults() {
                     </div>
                     <div>
                       <div className="font-medium">Email Us</div>
-                      <div className="text-sm text-muted-foreground">info@1qg.com</div>
+                      <div className="text-sm text-muted-foreground">info@constancia.com</div>
                     </div>
                   </a>
                   <Link href="/contact">

@@ -70,7 +70,7 @@ export async function sendTestEmail(toEmail: string): Promise<{ success: boolean
       <style>
         body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
         .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-        .header { background: #02205B; color: white; padding: 20px; text-align: center; }
+        .header { background: #12161D; color: white; padding: 20px; text-align: center; }
         .content { padding: 20px; background: #f9f9f9; }
         .footer { text-align: center; padding: 20px; font-size: 12px; color: #666; }
         .success { color: #22c55e; font-weight: bold; }
@@ -79,17 +79,17 @@ export async function sendTestEmail(toEmail: string): Promise<{ success: boolean
     <body>
       <div class="container">
         <div class="header">
-          <h2>1QG Email Configuration Test</h2>
+          <h2>Constancia Email Configuration Test</h2>
         </div>
         <div class="content">
           <p class="success">Email configuration is working correctly!</p>
-          <p>This is a test email sent from the 1QG Admin system to verify Microsoft Graph API email configuration.</p>
+          <p>This is a test email sent from the Constancia Admin system to verify Microsoft Graph API email configuration.</p>
           <p><strong>Timestamp:</strong> ${timestamp}</p>
           <p><strong>Recipient:</strong> ${toEmail}</p>
           <p><strong>Sender:</strong> ${SENDER_EMAIL}</p>
         </div>
         <div class="footer">
-          <p>This is an automated test email from 1QG Admin Centre.</p>
+          <p>This is an automated test email from Constancia Admin Centre.</p>
         </div>
       </div>
     </body>
@@ -97,7 +97,7 @@ export async function sendTestEmail(toEmail: string): Promise<{ success: boolean
   `;
 
   try {
-    await sendEmailViaGraph({ to: toEmail, subject: "[1QG] Email Configuration Test", htmlContent });
+    await sendEmailViaGraph({ to: toEmail, subject: "[Constancia] Email Configuration Test", htmlContent });
     log.info({ toEmail: redactEmail(toEmail) }, "Test email sent successfully");
     return { success: true, message: `Test email sent successfully to ${toEmail}` };
   } catch (error: any) {
@@ -121,7 +121,7 @@ export async function generateTotpSecret(
 
   const secret = authenticator.generateSecret(32);
   const accountName = admin.email || admin.displayName || adminId;
-  const otpauthUrl = authenticator.keyuri(accountName, "1QG Admin", secret);
+  const otpauthUrl = authenticator.keyuri(accountName, "Constancia Admin", secret);
 
   const encryptedSecret = encryptSecret(secret);
 
@@ -434,7 +434,7 @@ export async function requestEmergencyAccess(
   const admins = await db
     .select({ email: adminUsers.email, displayName: adminUsers.displayName })
     .from(adminUsers)
-    .where(and(eq(adminUsers.isActive, true), ne(adminUsers.email, "info@1qg.com")));
+    .where(and(eq(adminUsers.isActive, true), ne(adminUsers.email, "info@constancia.com")));
 
   const htmlContent = `
     <!DOCTYPE html>
@@ -465,7 +465,7 @@ export async function requestEmergencyAccess(
           <p style="margin-top: 20px; color: #B91C1C;"><strong>If this request was not authorised, revoke admin access immediately.</strong></p>
         </div>
         <div class="footer">
-          <p>This is an automated security alert from 1QG Admin Centre.</p>
+          <p>This is an automated security alert from Constancia Admin Centre.</p>
         </div>
       </div>
     </body>
@@ -477,7 +477,7 @@ export async function requestEmergencyAccess(
     try {
       await sendEmailViaGraph({
         to: admin.email,
-        subject: `[1QG Admin] EMERGENCY ACCESS REQUESTED by ${requestedBy}`,
+        subject: `[Constancia Admin] EMERGENCY ACCESS REQUESTED by ${requestedBy}`,
         htmlContent,
       });
     } catch (error) {
@@ -536,14 +536,14 @@ export async function sendLoginNotification(
     return;
   }
 
-  // Fetch all admin emails except info@1qg.com
+  // Fetch all admin emails except info@constancia.com
   const admins = await db
     .select({ email: adminUsers.email, displayName: adminUsers.displayName })
     .from(adminUsers)
     .where(
       and(
         eq(adminUsers.isActive, true),
-        ne(adminUsers.email, "info@1qg.com")
+        ne(adminUsers.email, "info@constancia.com")
       )
     );
 
@@ -561,10 +561,10 @@ export async function sendLoginNotification(
       <style>
         body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
         .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-        .header { background: #02205B; color: white; padding: 20px; text-align: center; }
+        .header { background: #12161D; color: white; padding: 20px; text-align: center; }
         .content { padding: 20px; background: #f9f9f9; }
         .detail { margin: 10px 0; }
-        .label { font-weight: bold; color: #02205B; }
+        .label { font-weight: bold; color: #12161D; }
         .footer { text-align: center; padding: 20px; font-size: 12px; color: #666; }
       </style>
     </head>
@@ -583,20 +583,20 @@ export async function sendLoginNotification(
           <p style="margin-top: 20px;">If this was not you, please take immediate action to secure the admin account.</p>
         </div>
         <div class="footer">
-          <p>This is an automated security notification from 1QG Admin Centre.</p>
+          <p>This is an automated security notification from Constancia Admin Centre.</p>
         </div>
       </div>
     </body>
     </html>
   `;
 
-  // Send to all active admins (except info@1qg.com)
+  // Send to all active admins (except info@constancia.com)
   for (const admin of admins) {
     if (!admin.email) continue;
     try {
       await sendEmailViaGraph({
         to: admin.email,
-        subject: `[1QG Admin] Login Alert: ${adminName}`,
+        subject: `[Constancia Admin] Login Alert: ${adminName}`,
         htmlContent,
       });
     } catch (error) {

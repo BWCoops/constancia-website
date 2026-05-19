@@ -57,8 +57,8 @@ const EXCEL_COLORS = {
 
 const CONTACT_INFO = {
   address: "86-90 Paul Street, London, EC2A 4NE, United Kingdom",
-  email: "info@1qg.com",
-  website: "https://1qg.com",
+  email: "info@constancia.io",
+  website: "https://constancia.io",
   linkedin: "linkedin.com/company/1qg-group-limited",
 };
 
@@ -440,7 +440,7 @@ export async function exportToPDF(data: ExportData, toast?: ToastFunction): Prom
     }
 
     const blob = await response.blob();
-    const fileName = `1QG-${data.categoryType.toUpperCase()}-Comparison-${new Date().toISOString().split("T")[0]}.pdf`;
+    const fileName = `Constancia-${data.categoryType.toUpperCase()}-Comparison-${new Date().toISOString().split("T")[0]}.pdf`;
 
     // Detect mobile/iOS for different download handling
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
@@ -524,7 +524,7 @@ async function _legacyExportToPDF(data: ExportData, toast?: ToastFunction): Prom
     console.warn("Failed to load white logo for PDF export:", e);
     doc.setFontSize(28);
     doc.setTextColor(BRAND_COLORS.cyan);
-    doc.text("1QG", margin, 35);
+    doc.text("Constancia", margin, 35);
   }
 
   // Title
@@ -615,7 +615,7 @@ async function _legacyExportToPDF(data: ExportData, toast?: ToastFunction): Prom
     console.warn("Failed to load blue logo for PDF export:", e);
     doc.setFontSize(16);
     doc.setTextColor(BRAND_COLORS.navy);
-    doc.text("1QG", margin, 18);
+    doc.text("Constancia", margin, 18);
   }
 
   doc.setFontSize(8);
@@ -1336,7 +1336,7 @@ async function _legacyExportToPDF(data: ExportData, toast?: ToastFunction): Prom
       console.warn("Failed to load blue logo for PDF export:", e);
       doc.setFontSize(16);
       doc.setTextColor(BRAND_COLORS.navy);
-      doc.text("1QG", margin, 18);
+      doc.text("Constancia", margin, 18);
     }
     
     doc.setFontSize(8);
@@ -1781,7 +1781,7 @@ async function _legacyExportToPDF(data: ExportData, toast?: ToastFunction): Prom
     { step: "1", title: "Validate Requirements", desc: "Review this analysis with your finance leadership team to confirm priorities align with strategic objectives." },
     { step: "2", title: "Arrange Vendor Demonstrations", desc: "Request tailored demonstrations from shortlisted vendors, focusing on your specific use cases and data scenarios." },
     { step: "3", title: "Conduct Reference Checks", desc: "Speak with organisations of similar size and industry who have implemented the platforms you are considering." },
-    { step: "4", title: "Engage Independent Advisory", desc: "Consider engaging 1QG for independent guidance on selection, business case development, and implementation planning." },
+    { step: "4", title: "Engage Independent Advisory", desc: "Consider engaging Constancia for independent guidance on selection, business case development, and implementation planning." },
   ];
   
   let stepY = yPos + 12;
@@ -1837,7 +1837,7 @@ async function _legacyExportToPDF(data: ExportData, toast?: ToastFunction): Prom
   
   doc.setFontSize(8);
   doc.setFont("helvetica", "normal");
-  doc.text(`Contact 1QG for a consultation: ${CONTACT_INFO.email}`, margin + 10, yPos + 20);
+  doc.text(`Contact Constancia for a consultation: ${CONTACT_INFO.email}`, margin + 10, yPos + 20);
   
   yPos += 40;
 
@@ -1865,7 +1865,7 @@ async function _legacyExportToPDF(data: ExportData, toast?: ToastFunction): Prom
   doc.setTextColor(100, 100, 100);
   doc.setFont("helvetica", "normal");
   const disclaimerText1 = "This document has been prepared using publicly available information and is intended for general informational purposes only. It does not constitute professional advice, a formal recommendation, or an offer of services. The content should not be relied upon as a substitute for tailored guidance specific to your organisation.";
-  const disclaimerText2 = `To discuss how 1QG can support your specific requirements, please contact us at ${CONTACT_INFO.email} or visit ${CONTACT_INFO.website} to arrange a consultation.`;
+  const disclaimerText2 = `To discuss how Constancia can support your specific requirements, please contact us at ${CONTACT_INFO.email} or visit ${CONTACT_INFO.website} to arrange a consultation.`;
   
   doc.text(disclaimerText1, margin + 10, yPos + 22, { maxWidth: pageWidth - margin * 2 - 20 });
   doc.text(disclaimerText2, margin + 10, yPos + 42, { maxWidth: pageWidth - margin * 2 - 20 });
@@ -1882,12 +1882,12 @@ async function _legacyExportToPDF(data: ExportData, toast?: ToastFunction): Prom
     // Footer text with full contact
     doc.setFontSize(7);
     doc.setTextColor(BRAND_COLORS.teal);
-    doc.text(`1QG  |  ${CONTACT_INFO.email}  |  ${CONTACT_INFO.website}  |  London, UK`, margin, pageHeight - 10);
+    doc.text(`Constancia  |  ${CONTACT_INFO.email}  |  ${CONTACT_INFO.website}  |  London, UK`, margin, pageHeight - 10);
     doc.text(`Page ${i - 1} of ${pageCount - 1}`, pageWidth - margin, pageHeight - 10, { align: "right" });
   }
 
   // Save PDF with mobile-compatible error handling
-  const fileName = `1QG-${data.categoryType.toUpperCase()}-Comparison-${new Date().toISOString().split("T")[0]}.pdf`;
+  const fileName = `Constancia-${data.categoryType.toUpperCase()}-Comparison-${new Date().toISOString().split("T")[0]}.pdf`;
   try {
     // Detect mobile/iOS for different download handling
     // iPadOS 13+ reports as MacIntel but has touch support, so check maxTouchPoints
@@ -2018,7 +2018,7 @@ export async function exportToExcel(data: ExportData, toast?: ToastFunction): Pr
     });
     return;
   }
-  workbook.creator = "1QG";
+  workbook.creator = "Constancia";
   workbook.created = new Date();
   workbook.modified = new Date();
 
@@ -2080,7 +2080,7 @@ export async function exportToExcel(data: ExportData, toast?: ToastFunction): Pr
   }
 
   // Brand header
-  const brandRow = coverSheet.addRow(["1QG"]);
+  const brandRow = coverSheet.addRow(["Constancia"]);
   brandRow.height = 40;
   brandRow.getCell(1).font = { size: 36, bold: true, color: { argb: EXCEL_COLORS.navy } };
   brandRow.getCell(1).alignment = { horizontal: "center", vertical: "middle" };
@@ -2117,12 +2117,12 @@ export async function exportToExcel(data: ExportData, toast?: ToastFunction): Pr
   for (let i = 0; i < 4; i++) coverSheet.addRow([""]);
 
   // About section
-  const aboutHeaderRow = coverSheet.addRow(["About 1QG"]);
+  const aboutHeaderRow = coverSheet.addRow(["About Constancia"]);
   aboutHeaderRow.getCell(1).font = { size: 12, bold: true, color: { argb: EXCEL_COLORS.navy } };
 
   coverSheet.addRow([""]);
 
-  const aboutText = "1QG is an independent EPM & ERP advisory firm helping finance leaders modernise through technology, process optimisation, and AI-driven insights. We provide vendor-agnostic guidance to help organisations select and implement the right enterprise solutions.";
+  const aboutText = "Constancia is an independent EPM & ERP advisory firm helping finance leaders modernise through technology, process optimisation, and AI-driven insights. We provide vendor-agnostic guidance to help organisations select and implement the right enterprise solutions.";
   const aboutRow = coverSheet.addRow([aboutText]);
   aboutRow.getCell(1).font = { size: 10, color: { argb: EXCEL_COLORS.darkGray } };
   aboutRow.getCell(1).alignment = { wrapText: true };
@@ -2142,14 +2142,14 @@ export async function exportToExcel(data: ExportData, toast?: ToastFunction): Pr
   const disclaimerHeaderRow = coverSheet.addRow(["Disclaimer"]);
   disclaimerHeaderRow.getCell(1).font = { size: 10, bold: true, color: { argb: EXCEL_COLORS.navy } };
 
-  const disclaimerText = "This document has been prepared using publicly available information and is intended for general informational purposes only. It does not constitute professional advice, a formal recommendation, or an offer of services. The content should not be relied upon as a substitute for tailored guidance specific to your organisation. To discuss how 1QG can support your specific requirements, please contact us.";
+  const disclaimerText = "This document has been prepared using publicly available information and is intended for general informational purposes only. It does not constitute professional advice, a formal recommendation, or an offer of services. The content should not be relied upon as a substitute for tailored guidance specific to your organisation. To discuss how Constancia can support your specific requirements, please contact us.";
   const disclaimerRow = coverSheet.addRow([disclaimerText]);
   disclaimerRow.getCell(1).font = { size: 9, color: { argb: "666666" } };
   disclaimerRow.getCell(1).alignment = { wrapText: true };
 
   // Add spacing and copyright
   for (let i = 0; i < 2; i++) coverSheet.addRow([""]);
-  const copyrightRow = coverSheet.addRow(["© 2025 1QG GROUP LIMITED. All rights reserved."]);
+  const copyrightRow = coverSheet.addRow(["© 2026 CONSTANCIA. All rights reserved."]);
   copyrightRow.getCell(1).font = { size: 9, color: { argb: "999999" } };
   copyrightRow.getCell(1).alignment = { horizontal: "center" };
 
@@ -2193,7 +2193,7 @@ export async function exportToExcel(data: ExportData, toast?: ToastFunction): Pr
     { step: "Step 3", sheet: "Benefit Drivers", description: "Quantify the expected benefits from your EPM/ERP implementation. Use the calculation helpers to convert time savings and efficiency gains into financial values. Be conservative - understating benefits strengthens your business case." },
     { step: "Step 4", sheet: "ROI Calculator", description: "Review the automatically calculated ROI, NPV, and payback period. Adjust assumptions and test sensitivity scenarios. The formulas pull from your Cost Drivers and Benefit Drivers inputs." },
     { step: "Step 5", sheet: "TCO Analysis", description: "Review the 5-year Total Cost of Ownership breakdown. Compare your TCO per user against industry benchmarks. Use this for vendor negotiations and budget planning." },
-    { step: "Step 6", sheet: "Comparison Scores", description: "Review the platform comparison scores based on 1QG's independent analysis. Adjust priority weights to reflect your organisation's specific requirements." },
+    { step: "Step 6", sheet: "Comparison Scores", description: "Review the platform comparison scores based on Constancia's independent analysis. Adjust priority weights to reflect your organisation's specific requirements." },
     { step: "Step 7", sheet: "Implementation Roadmap", description: "Use the template implementation timeline to plan your project. Adjust phases and durations based on your organisation's complexity and resource availability." },
     { step: "Step 8", sheet: "Risk Assessment", description: "Review common implementation risks and add your own. Score likelihood and impact to prioritise mitigation efforts. Assign owners to ensure accountability." },
   ];
@@ -3024,7 +3024,7 @@ export async function exportToExcel(data: ExportData, toast?: ToastFunction): Pr
     }
 
     // Header
-    const summaryHeaderRow = summarySheet.addRow(["1QG Executive Summary", ""]);
+    const summaryHeaderRow = summarySheet.addRow(["Constancia Executive Summary", ""]);
     summarySheet.mergeCells(summaryHeaderRow.number, 1, summaryHeaderRow.number, 2);
     applyHeaderStyle(summaryHeaderRow.getCell(1), true);
     summaryHeaderRow.height = 30;
@@ -5071,7 +5071,7 @@ export async function exportToExcel(data: ExportData, toast?: ToastFunction): Pr
     methodologySheet.addRow([""]);
     
     // Disclaimer
-    const disclaimerRow = methodologySheet.addRow(["Scores based on 1QG consulting experience and publicly available information."]);
+    const disclaimerRow = methodologySheet.addRow(["Scores based on Constancia consulting experience and publicly available information."]);
     disclaimerRow.getCell(1).font = { italic: true, size: 9, color: { argb: "666666" } };
   }
 
@@ -5142,7 +5142,7 @@ export async function exportToExcel(data: ExportData, toast?: ToastFunction): Pr
   addressRow.getCell(1).alignment = { horizontal: "center" };
 
   // Generate and download with error handling
-  const fileName = `1QG-${data.categoryType.toUpperCase()}-Comparison-${new Date().toISOString().split("T")[0]}.xlsx`;
+  const fileName = `Constancia-${data.categoryType.toUpperCase()}-Comparison-${new Date().toISOString().split("T")[0]}.xlsx`;
   
   console.log("[ExcelExport] Generating Excel buffer...");
   

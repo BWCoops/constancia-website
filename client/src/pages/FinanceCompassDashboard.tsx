@@ -2164,7 +2164,7 @@ export default function FinanceCompassDashboard() {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="My Dashboard | FinanceCompass | 1QG"
+        title="My Dashboard | FinanceCompass | Constancia"
         description="View and manage your finance transformation assessments. Track your progress, view results, and download reports."
         keywords={["finance dashboard", "EPM assessment", "finance transformation", "assessment results"]}
       />

@@ -498,7 +498,7 @@ export class WidgetQualityService {
     if (medium.includes("email") || source.includes("email")) {
       return "email";
     }
-    if (medium.includes("referral") || (ref && !ref.includes("1qg.com"))) {
+    if (medium.includes("referral") || (ref && !ref.includes("constancia.com"))) {
       return "referral";
     }
     if (source.includes("google") || source.includes("bing") || medium.includes("organic")) {
