@@ -180,24 +180,43 @@ business rules on GitHub. What exists:
 
 ---
 
-## Recommendation
+## Recommendation — locked
 
-1. **Primary baseline**: `supermemoryai/supermemory`. Read it cover to
-   cover. Lift the Drizzle schema shape and MCP tool conventions; do
-   not vendor it (Cloudflare Workers topology mismatch + unclear
-   self-host completeness).
-2. **Reference implementation of hybrid retrieval**: `vortex`. Two
-   evenings of reading; copy the RRF SQL and chunking parameters.
-3. **Eval harness pattern**: `Azure-Samples/rag-postgres-openai-python`.
-   Imitate, do not port.
-4. **Skip**: Mem0 (wrong shape), Letta (whole runtime), mcp-memory-service
-   (wrong DB), rag-memory-mcp (wrong DB, single-user).
-5. **Stay aware of**: TensorBlock/awesome-mcp-servers for connectors in
-   later phases.
+**Primary baseline: [`supermemoryai/supermemory`](https://github.com/supermemoryai/supermemory)**.
+Studied as a reference, **not** vendored. Concrete folder-by-folder
+"what we lift" guide lives in Appendix B of
+`enterprise-brain-architecture.md`. Short version: four folders, four
+hours of reading, before any of us writes the first Drizzle table:
 
-In short: there is no repo we can fork that drops in cleanly. The two
-that come closest — supermemory and vortex — together cover ~80% of
-what we need as worked references. The remaining 20% is glue: Clerk
-auth, R2 storage, our `kb_*` schema, and the OneStream/SQL-specific
-`kb_scripts` flow, which has no public precedent and must come from
-internal corpora.
+- `apps/mcp/`              → MCP tool surface conventions
+- `packages/memory-graph/` → graph model for our `kb_relationships`
+- `packages/validation/`   → Zod input shapes for the `brain.*` tools
+- `packages/ai-sdk/`       → embedding-provider abstraction
+
+**Secondary references** (consult as needed):
+
+1. `vortex` — copy the RRF + chunking SQL for our v1 hybrid search.
+2. `Azure-Samples/rag-postgres-openai-python` — imitate the `/evals`
+   harness in TypeScript when we get there.
+
+**Explicitly skipped**:
+
+| Repo                       | Reason                                                        |
+| -------------------------- | ------------------------------------------------------------- |
+| Mem0                       | Agent-loop memory shape, not a doc-corpus brain               |
+| Letta                      | Forces adopting a whole agent runtime                         |
+| doobidoo/mcp-memory-service| High quality, but SQLite/Milvus only — leaves Neon            |
+| ttommyth/rag-memory-mcp    | SQLite + single-user + local stdio                            |
+
+**Stay aware of**: `TensorBlock/awesome-mcp-servers` for connectors in
+phase 6.
+
+### Bottom line
+
+No repo we can fork drops in cleanly. supermemory is the unambiguous
+best reference because it is the only public project that combines all
+five of our locked decisions (TypeScript, Drizzle, Postgres, MCP,
+multi-tenant). We treat it as a pattern source, write our own thin
+implementation, and revisit vendoring only when a concrete need
+(AST-aware code chunking, self-hostable Drive/Notion connectors)
+makes it worth taking the dependency.

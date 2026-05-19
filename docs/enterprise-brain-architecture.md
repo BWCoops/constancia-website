@@ -18,6 +18,7 @@
 | Ingestion (v1)     | **Manual upload from laptops** — one-off batch first, then drag-and-drop UI |
 | Tenancy            | **Multi-tenant** — `team_id` on every `kb_*` row from day one  |
 | Embeddings         | **OpenAI `text-embedding-3-small`** — reuses existing API key  |
+| Baseline reference | **[supermemoryai/supermemory](https://github.com/supermemoryai/supermemory)** — 22.6k★, MIT, TypeScript + Drizzle + Postgres + MCP. Studied as reference, not vendored. See §B for what we lift. |
 
 Still open (see §13): OneStream seed corpus, hosting boundary (in-process vs split).
 
@@ -602,11 +603,14 @@ Four of the original six are now resolved (see §0). Two remain:
 - [ ] Pick embedding provider
 
 ### Phase 1 — core schema + ingestion (week 1)
+- [ ] Read the four supermemory folders listed in §B before writing any
+       Drizzle. Hour each, max.
 - [ ] `shared/brain-schema.ts` with all `kb_*` tables (`team_id` on every row)
 - [ ] `drizzle-kit push` migration against new `constancia-brain` Neon project
 - [ ] R2 bucket + signed-URL upload helper
 - [ ] `server/brain/ingestion/` — upload, store, extract, chunk, embed
-       (OpenAI `text-embedding-3-small`)
+       (OpenAI `text-embedding-3-small`). RRF SQL from `vortex` as
+       reference.
 - [ ] CLI `npm run brain:batch-ingest <dir>` for the initial laptop-to-brain
        sweep (each of us points it at our local `~/Documents/Constancia/`
        once, then we never look at those folders again)
@@ -670,3 +674,77 @@ Four of the original six are now resolved (see §0). Two remain:
 Read this, mark the questions in §13 and any sections you want changed,
 and I will turn the agreed plan into the actual schema, migrations and
 MCP server in the order laid out in §14.
+
+---
+
+## Appendix B — Working with supermemory as our baseline
+
+We chose **[supermemoryai/supermemory](https://github.com/supermemoryai/supermemory)**
+because it is the only public repo that combines all five of our locked
+choices: TypeScript, Drizzle ORM, Postgres, MCP server and multi-tenant
+ingestion. 22.6k stars, MIT, actively maintained.
+
+### Posture: reference, not dependency
+
+We **do not** vendor it, fork it or `npm install` from it on day one.
+Reasons:
+
+- It is built on Cloudflare Workers; we deploy on Node/Express. Topology
+  mismatch makes "drop in" infeasible without rewrites.
+- Its smartest connectors (Drive, Gmail, Notion webhooks) appear to lean
+  on their SaaS extraction pipeline. We need full self-host clarity
+  before assuming parity.
+- A direct dependency on a 22k-star research-velocity repo is heavier
+  than a one-off pattern read; the codebase moves fast.
+
+So: clone locally, read, lift patterns. Re-evaluate vendoring once we
+hit phase 4 (scripts) or phase 6 (connectors) and have a concrete need
+their code already solves.
+
+### Setup (one-off, ~5 minutes)
+
+```bash
+# Clone into a sibling directory, NOT inside our repo
+cd ~/code
+git clone https://github.com/supermemoryai/supermemory.git
+cd supermemory
+git log -1 --format="%h %s (%ad)" --date=short   # pin the commit we read
+```
+
+Record the commit hash in your phase-1 PR description so reviewers know
+which snapshot we studied.
+
+### The four folders to read before writing schema
+
+| Folder                    | Why we read it                                          | What we lift                                              |
+| ------------------------- | ------------------------------------------------------- | --------------------------------------------------------- |
+| `apps/mcp/`               | Their MCP server implementation                         | Tool surface conventions (names, args, error shape) for our §7.2 tools |
+| `packages/memory-graph/`  | Their graph-based memory model                          | Pattern for our `kb_relationships` + `kb_entities` edges  |
+| `packages/validation/`    | Zod schemas at the API boundary                         | Input-validation shape for the `brain.*` MCP tool args    |
+| `packages/ai-sdk/`        | Embedding / LLM provider abstraction                    | Provider-swap pattern so v1=OpenAI, v2=Voyage is one line |
+
+Time-box: one hour per folder, four hours total. Goal is not to
+understand every line — it is to absorb their naming and shape so our
+schema does not diverge gratuitously from a community convention.
+
+### What we do NOT take from supermemory
+
+- **Cloudflare Workers + KV** topology — we are on Node/Express.
+- **Remix + Vite frontend** — we already have React + Vite.
+- **Their connectors** — we have direct MS Graph access; we use it.
+- **`containerTag` model** — we use `team_id` explicitly; their
+  parameter naming is a vestige of multi-product tenancy we do not
+  need.
+
+### When to revisit "should we vendor it?"
+
+Three conditions, any one of which flips the decision:
+
+1. Phase 4 ships and the OneStream/SQL `kb_scripts` flow needs
+   AST-aware code chunking we have not built. Their AST chunker is
+   non-trivial; vendor it then.
+2. We need a Notion / Drive connector and theirs is fully self-hostable.
+3. Anthropic or supermemory announces a managed self-host option that
+   we trust more than rolling our own MCP server long-term.
+
+Until then: read it, learn from it, write our own.
