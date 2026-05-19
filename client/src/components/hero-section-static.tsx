@@ -413,11 +413,15 @@ export function HeroSectionStatic() {
       });
       if (progBarRef.current) progBarRef.current.style.width = (scrollProg * 100).toFixed(2) + "%";
 
-      // Smooth hero fade-out as user scrolls past last panel → footer transition
+      // Smooth hero fade-out — starts at 0.96 (after panel 8 centers at 0.94), ends at 1.0.
+      // With position:fixed the footer enters the viewport exactly at scrollProg=1.0,
+      // so by the time the hero is transparent the footer is already visible below.
       const heroStageEl = heroStageRef.current;
       if (heroStageEl) {
-        const exitT = Math.max(0, (scrollProg - 0.92) / 0.08); // 0 at 92%, 1 at 100%
+        const exitT = Math.max(0, (scrollProg - 0.96) / 0.04); // 0 at 96%, 1 at 100%
         heroStageEl.style.opacity = (1 - exitT).toFixed(3);
+        // Remove pointer-events once fading so footer is fully interactive
+        heroStageEl.style.pointerEvents = exitT > 0 ? 'none' : '';
       }
 
       // Camera dive + 3D rendering (only when WebGL is available)
@@ -480,9 +484,11 @@ export function HeroSectionStatic() {
       style={{
         position: "relative",
         width: "100%",
-        // 9× viewport scroll runway — 9 panels at ~100vh each
+        // 9× viewport scroll runway — 9 panels at ~100vh each.
+        // Section is a transparent scroll spacer; the hero-fixed-stage (position:fixed)
+        // does the actual rendering. Footer enters viewport exactly at scrollProg=1.0.
         height: "900vh",
-        background: "var(--brand-bg-primary)",
+        background: "transparent",
         fontFamily: "var(--brand-font-sans)",
       }}
     >
