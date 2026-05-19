@@ -40,10 +40,41 @@ export default function AdminLogin() {
     return () => { cancelled = true; };
   }, [isLoaded, isSignedIn, setLocation]);
 
+  // Clerk-load timeout — if Clerk's runtime hasn't initialised within 6s
+  // surface a useful error rather than spin forever. Usual causes: CSP
+  // blocking the script, deleted Clerk instance, network/DNS to clerk.dev.
+  const [clerkStuck, setClerkStuck] = useState(false);
+  useEffect(() => {
+    if (isLoaded) return;
+    const t = window.setTimeout(() => setClerkStuck(true), 6000);
+    return () => window.clearTimeout(t);
+  }, [isLoaded]);
+
   if (!isLoaded) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#F6F3EE]">
-        <div className="animate-pulse text-[#1E2630] text-lg">Loading…</div>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#F6F3EE] p-6 text-center">
+        {!clerkStuck ? (
+          <div className="animate-pulse text-[#1E2630] text-lg">Loading sign-in…</div>
+        ) : (
+          <div className="max-w-md space-y-4">
+            <h1 className="text-2xl font-light text-[#12161D]">Authentication unavailable</h1>
+            <p className="text-[#1E2630] text-sm leading-relaxed">
+              Clerk's runtime hasn't loaded after 6 seconds. The usual causes
+              are a blocked Content-Security-Policy origin, a rotated or
+              deleted Clerk instance, or a network issue between this browser
+              and <code className="text-[#8E4F67]">clerk.accounts.dev</code>.
+            </p>
+            <p className="text-[#1E2630] text-xs">
+              Server diagnostics: <a className="underline text-[#8E4F67]" href="/api/health/clerk">/api/health/clerk</a>
+            </p>
+            <button
+              onClick={() => window.location.reload()}
+              className="px-4 py-2 rounded-full bg-[#12161D] text-[#F6F3EE] text-sm"
+            >
+              Retry
+            </button>
+          </div>
+        )}
       </div>
     );
   }

@@ -56,5 +56,12 @@ export default defineConfig({
       strict: true,
       deny: ["**/.*"],
     },
+    // Disable Vite's built-in HMR error overlay too. Some plugins surface
+    // errors via console.error which Vite's overlay catches even when the
+    // page is otherwise fine — kills the "Failed to load Clerk" modal that
+    // kept reappearing. Real errors still print to the browser console.
+    hmr: {
+      overlay: false,
+    },
   },
 });

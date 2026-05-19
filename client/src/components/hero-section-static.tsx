@@ -11,11 +11,11 @@ import constanciaLogo from "@assets/constancia-logo.png";
 // to give us scroll runway.
 // =============================================================================
 
-// Outro stop pushed to 0.97 so the "Ready to talk" panel locks in right at
-// the end of the animation, then the natural sticky exit transitions
-// straight into the footer. Earlier stops kept evenly spaced.
-const STOPS = [0.04, 0.16, 0.28, 0.40, 0.52, 0.64, 0.76, 0.88, 0.97];
-const SECTION = 0.16;
+// Outro stop at 0.85 — gives the "Ready to talk" panel ~15% of scroll
+// to dwell fully visible before the sticky-exit slide carries it off-screen
+// and the footer rises into view. No premature opacity fade.
+const STOPS = [0.04, 0.14, 0.24, 0.34, 0.44, 0.54, 0.64, 0.74, 0.85];
+const SECTION = 0.14;
 
 const LETTER_FLY = [
   { dx: -360, dy: -280, rot: -10 },
@@ -39,29 +39,29 @@ type Frame = { p: number; top: number; left: number; size: number; op: number };
 // corners or edges so the centered text reads on clean cream.
 const CIRCLE_FRAMES: { rose: Frame[]; mint: Frame[] } = {
   rose: [
-    { p: 0.00, top: 22, left: 54, size: 16, op: 0.78 },   // lockup
-    { p: 0.04, top: 22, left: 54, size: 16, op: 0.78 },   // intro hold
-    { p: 0.16, top: 22, left: 82, size: 32, op: 0.50 },   // 01 Senior — top-right
-    { p: 0.28, top: 78, left: 20, size: 38, op: 0.52 },   // 02 Fixed — bottom-left
-    { p: 0.40, top: 22, left: 18, size: 40, op: 0.50 },   // 03 AI — top-left
-    { p: 0.52, top: 22, left: 82, size: 36, op: 0.50 },   // 04 Platforms — top-right
-    { p: 0.64, top: 50, left: 12, size: 38, op: 0.42 },   // 05 Track record — left frame
-    { p: 0.76, top: 78, left: 82, size: 40, op: 0.50 },   // 06 Programmes — bottom-right
-    { p: 0.88, top: 78, left: 20, size: 36, op: 0.52 },   // 07 FinanceCompass — bottom-left
-    { p: 0.97, top: 22, left: 54, size: 16, op: 0.78 },   // outro — reassembled lockup
-    { p: 1.00, top: 22, left: 54, size: 16, op: 0.78 },
+    { p: 0.00, top: 22, left: 54, size: 16, op: 0.78 },
+    { p: 0.04, top: 22, left: 54, size: 16, op: 0.78 },
+    { p: 0.14, top: 22, left: 82, size: 32, op: 0.50 },   // 01 Senior
+    { p: 0.24, top: 78, left: 20, size: 38, op: 0.52 },   // 02 Fixed
+    { p: 0.34, top: 22, left: 18, size: 40, op: 0.50 },   // 03 AI
+    { p: 0.44, top: 22, left: 82, size: 36, op: 0.50 },   // 04 Platforms
+    { p: 0.54, top: 50, left: 12, size: 38, op: 0.42 },   // 05 Track record
+    { p: 0.64, top: 78, left: 82, size: 40, op: 0.50 },   // 06 Programmes
+    { p: 0.74, top: 78, left: 20, size: 36, op: 0.52 },   // 07 FinanceCompass
+    { p: 0.85, top: 22, left: 54, size: 16, op: 0.78 },   // 08 outro — reassembled lockup
+    { p: 1.00, top: 22, left: 54, size: 16, op: 0.78 },   // hold through to footer
   ],
   mint: [
     { p: 0.00, top: 24, left: 57, size: 14, op: 0.78 },
     { p: 0.04, top: 24, left: 57, size: 14, op: 0.78 },
-    { p: 0.16, top: 78, left: 20, size: 30, op: 0.50 },   // bottom-left
-    { p: 0.28, top: 22, left: 80, size: 32, op: 0.52 },   // top-right
-    { p: 0.40, top: 78, left: 80, size: 34, op: 0.50 },   // bottom-right
-    { p: 0.52, top: 22, left: 18, size: 32, op: 0.50 },   // top-left
-    { p: 0.64, top: 50, left: 88, size: 38, op: 0.42 },   // right frame
-    { p: 0.76, top: 22, left: 18, size: 34, op: 0.50 },   // top-left
-    { p: 0.88, top: 22, left: 80, size: 32, op: 0.52 },   // top-right
-    { p: 0.97, top: 24, left: 57, size: 14, op: 0.78 },
+    { p: 0.14, top: 78, left: 20, size: 30, op: 0.50 },
+    { p: 0.24, top: 22, left: 80, size: 32, op: 0.52 },
+    { p: 0.34, top: 78, left: 80, size: 34, op: 0.50 },
+    { p: 0.44, top: 22, left: 18, size: 32, op: 0.50 },
+    { p: 0.54, top: 50, left: 88, size: 38, op: 0.42 },
+    { p: 0.64, top: 22, left: 18, size: 34, op: 0.50 },
+    { p: 0.74, top: 22, left: 80, size: 32, op: 0.52 },
+    { p: 0.85, top: 24, left: 57, size: 14, op: 0.78 },
     { p: 1.00, top: 24, left: 57, size: 14, op: 0.78 },
   ],
 };
@@ -420,24 +420,24 @@ export function HeroSectionStatic() {
       });
       if (progBarRef.current) progBarRef.current.style.width = (scrollProg * 100).toFixed(2) + "%";
 
-      // Exit fade — composed of two phases:
-      //   1) scrollProg 0.97 → 1.0: the outro is fully centred, we start
-      //      fading the hero so the footer can rise into view through it.
-      //   2) sticky exit slide that follows: completes the fade so by the
-      //      time the section bottom clears the viewport, opacity is 0.
-      // Combined effect: no dead-scroll between outro and footer.
+      // The outro panel (panel 8 at scrollProg 0.85) dwells fully visible
+      // through to scrollProg 1.0 — no opacity fade during that window.
+      // After the section ends, the natural sticky exit slide carries the
+      // stage upward; the footer rises in from below. Pointer-events drop
+      // once the stage starts physically sliding out of the viewport so
+      // the footer is interactive immediately.
       const heroStageEl = heroStageRef.current;
       if (heroStageEl && stage) {
-        const phaseA = Math.max(0, Math.min(1, (scrollProg - 0.97) / 0.03));
         const rect2 = stage.getBoundingClientRect();
         const h2 = stage.offsetHeight - window.innerHeight;
-        const phaseB = Math.max(
-          0,
-          Math.min(1, (-rect2.top - h2) / Math.max(1, window.innerHeight * 0.5))
-        );
-        const exitT = Math.max(phaseA, phaseB);
-        heroStageEl.style.opacity = (1 - exitT).toFixed(3);
-        heroStageEl.style.pointerEvents = exitT > 0.4 ? "none" : "";
+        // exitT 0 during animation + dwell. Ramps 0→1 as the section's
+        // bottom slides up past the viewport bottom (sticky exit slide).
+        const exitRaw = (-rect2.top - h2) / Math.max(1, window.innerHeight);
+        const exitT = Math.max(0, Math.min(1, exitRaw));
+        heroStageEl.style.pointerEvents = exitT > 0 ? "none" : "";
+        // Opacity stays at 1 — we let the natural slide do the visual exit
+        // so the outro is the last thing the user sees before the footer.
+        heroStageEl.style.opacity = "1";
       }
 
       // Camera dive

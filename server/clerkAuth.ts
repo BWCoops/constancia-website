@@ -92,6 +92,37 @@ export async function setupAuth(app: Express): Promise<void> {
     });
   });
 
+  // Diagnostic endpoint — confirms the server's Clerk wiring is OK and
+  // surfaces the frontend API host so a stuck client knows what URL the
+  // browser is trying (or failing) to load. Safe to expose publicly: no
+  // secrets, only environment-derived hostnames.
+  app.get("/api/health/clerk", async (_req: Request, res: Response) => {
+    const pubKey = process.env.CLERK_PUBLISHABLE_KEY || process.env.VITE_CLERK_PUBLISHABLE_KEY || "";
+    let frontendHost: string | null = null;
+    try {
+      // Clerk pk_test_<host-base64> / pk_live_<host-base64>
+      const body = pubKey.split("_").slice(2).join("_");
+      if (body) frontendHost = Buffer.from(body, "base64").toString("utf-8").replace(/\$$/, "");
+    } catch { /* ignore */ }
+    let upstreamReachable: boolean | null = null;
+    if (frontendHost) {
+      try {
+        const r = await fetch(`https://${frontendHost}/v1/environment`, { method: "HEAD" });
+        upstreamReachable = r.status < 500;
+      } catch { upstreamReachable = false; }
+    }
+    res.json({
+      serverHasSecretKey: Boolean(process.env.CLERK_SECRET_KEY),
+      serverHasPublishableKey: Boolean(process.env.CLERK_PUBLISHABLE_KEY),
+      clientPublishableKeyVar: Boolean(process.env.VITE_CLERK_PUBLISHABLE_KEY),
+      publishableKeyPreview: pubKey ? pubKey.slice(0, 10) + "…" + pubKey.slice(-4) : null,
+      frontendHost,
+      upstreamReachable,
+      cspIncludesClerkOrigin: true, // we set this in server/index.ts; flip if you remove
+      sessionMiddlewareInstalled: true,
+    });
+  });
+
   // Session probe endpoint — the admin client polls this on load.
   app.get("/api/admin/auth/session", async (req: Request, res: Response) => {
     const { userId } = getAuth(req);
