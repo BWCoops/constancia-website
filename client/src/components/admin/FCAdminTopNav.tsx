@@ -58,7 +58,7 @@ export function FCAdminTopNav() {
             animate={{ rotate: 360 }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           >
-            <Compass className="h-5 w-5 text-[#12EBFC]" />
+            <Compass className="h-5 w-5 text-[#7FB8A3]" />
           </motion.div>
           <span className="font-semibold text-xs sm:text-sm hidden xs:inline">FC</span>
           <span className="font-semibold text-sm hidden sm:inline">FinanceCompass</span>
@@ -79,7 +79,7 @@ export function FCAdminTopNav() {
                   flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium
                   transition-colors whitespace-nowrap shrink-0
                   ${isActive 
-                    ? "bg-[#12EBFC]/10 text-[#12EBFC] border border-[#12EBFC]/20" 
+                    ? "bg-[#7FB8A3]/10 text-[#7FB8A3] border border-[#7FB8A3]/20" 
                     : "text-muted-foreground hover:bg-muted hover:text-foreground border border-transparent"
                   }
                 `}

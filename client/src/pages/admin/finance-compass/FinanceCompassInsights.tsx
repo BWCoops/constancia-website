@@ -233,7 +233,7 @@ interface AnalyticsResponse {
 }
 
 const DIMENSION_COLORS: Record<string, string> = {
-  financial_planning_analysis: "#12EBFC",
+  financial_planning_analysis: "#7FB8A3",
   management_reporting: "#0EA5E9",
   consolidation_close: "#6366F1",
   transaction_processing: "#8B5CF6",
@@ -267,7 +267,7 @@ function getHeatmapColor(abandonmentRate: number): string {
 function getScoreColor(score: number | null): string {
   if (score === null) return "text-muted-foreground";
   if (score >= 4) return "text-green-600 dark:text-green-400";
-  if (score >= 3) return "text-cyan-600 dark:text-cyan-400";
+  if (score >= 3) return "text-[#8E4F67] dark:text-[#7FB8A3]";
   if (score >= 2) return "text-yellow-600 dark:text-yellow-400";
   return "text-red-600 dark:text-red-400";
 }
@@ -823,8 +823,8 @@ function InsightsContent() {
                       <p className="text-sm text-muted-foreground">Avg Overall Score</p>
                       <p className="text-2xl font-bold">{analytics.summary.avgOverallScore.toFixed(1)}</p>
                     </div>
-                    <div className="h-10 w-10 rounded-full bg-cyan-500/10 flex items-center justify-center">
-                      <TrendingUp className="h-5 w-5 text-cyan-500" />
+                    <div className="h-10 w-10 rounded-full bg-[#7FB8A3]/100/10 flex items-center justify-center">
+                      <TrendingUp className="h-5 w-5 text-[#7FB8A3]" />
                     </div>
                   </div>
                 </CardContent>
@@ -1071,8 +1071,8 @@ function InsightsContent() {
                           </div>
                         )}
                         
-                        <div className="p-3 rounded-lg bg-cyan-500/10 border border-cyan-500/20">
-                          <div className="text-sm font-medium text-cyan-700 dark:text-cyan-400">
+                        <div className="p-3 rounded-lg bg-[#7FB8A3]/100/10 border border-[#7FB8A3]/20">
+                          <div className="text-sm font-medium text-[#8E4F67] dark:text-[#7FB8A3]">
                             Data Coverage
                           </div>
                           <div className="text-sm text-muted-foreground mt-1">
@@ -1144,7 +1144,7 @@ function InsightsContent() {
                               <p className="text-sm text-muted-foreground">Total Events</p>
                               <p className="text-2xl font-bold">{widgetAnalytics.summary.totalEvents.toLocaleString()}</p>
                             </div>
-                            <Activity className="h-8 w-8 text-cyan-500 opacity-80" />
+                            <Activity className="h-8 w-8 text-[#7FB8A3] opacity-80" />
                           </div>
                         </CardContent>
                       </Card>
@@ -1256,11 +1256,11 @@ function InsightsContent() {
                                 type="monotone"
                                 dataKey="totalEvents"
                                 name="Total Events"
-                                fill="#12EBFC"
+                                fill="#7FB8A3"
                                 fillOpacity={0.2}
-                                stroke="#12EBFC"
+                                stroke="#7FB8A3"
                               />
-                              <Bar dataKey="questionAnsweredCount" name="Questions Answered" fill="#0884AA" />
+                              <Bar dataKey="questionAnsweredCount" name="Questions Answered" fill="#8E4F67" />
                               <Bar dataKey="qualificationCompletedCount" name="Qualifications" fill="#10B981" />
                             </ComposedChart>
                           </ResponsiveContainer>
@@ -1296,14 +1296,14 @@ function InsightsContent() {
                                     insight.type === 'critical' ? 'bg-red-500/10 border-red-500/30' :
                                     insight.type === 'warning' ? 'bg-amber-500/10 border-amber-500/30' :
                                     insight.type === 'success' ? 'bg-green-500/10 border-green-500/30' :
-                                    'bg-cyan-500/10 border-cyan-500/30'
+                                    'bg-[#7FB8A3]/100/10 border-[#7FB8A3]/30'
                                   }`}
                                 >
                                   <div className="flex items-start gap-2">
                                     {insight.type === 'critical' && <AlertTriangle className="h-4 w-4 text-red-500 mt-0.5 shrink-0" />}
                                     {insight.type === 'warning' && <AlertTriangle className="h-4 w-4 text-amber-500 mt-0.5 shrink-0" />}
                                     {insight.type === 'success' && <TrendingUp className="h-4 w-4 text-green-500 mt-0.5 shrink-0" />}
-                                    {insight.type === 'info' && <Lightbulb className="h-4 w-4 text-cyan-500 mt-0.5 shrink-0" />}
+                                    {insight.type === 'info' && <Lightbulb className="h-4 w-4 text-[#7FB8A3] mt-0.5 shrink-0" />}
                                     <div className="flex-1 min-w-0">
                                       <div className="text-sm font-medium">{insight.title}</div>
                                       <p className="text-xs text-muted-foreground mt-1">{insight.description}</p>
@@ -1466,7 +1466,7 @@ function InsightsContent() {
                           <Card>
                             <CardHeader>
                               <CardTitle className="flex items-center gap-2">
-                                <Building2 className="h-5 w-5 text-cyan-500" />
+                                <Building2 className="h-5 w-5 text-[#7FB8A3]" />
                                 By Industry
                               </CardTitle>
                               <CardDescription>

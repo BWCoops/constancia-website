@@ -82,7 +82,7 @@ function getStatusBadgeClass(status: string) {
     case "not_started":
       return "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300";
     case "in_progress":
-      return "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400";
+      return "bg-[#7FB8A3]/10 text-[#8E4F67] dark:bg-[#1E2630]/30 dark:text-[#7FB8A3]";
     case "initial_complete":
     case "followups_pending":
       return "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400";
@@ -297,8 +297,8 @@ function DashboardContent() {
       description: "View and manage all assessment submissions",
       icon: ClipboardList,
       url: "/admin/finance-compass/assessments",
-      color: "text-blue-500",
-      bgColor: "bg-blue-500/10",
+      color: "text-[#7FB8A3]",
+      bgColor: "bg-[#7FB8A3]/100/10",
       stats: dashboardData?.stats.totalAssessments ?? 0,
       statsLabel: "total"
     },
@@ -369,7 +369,7 @@ function DashboardContent() {
           return (
             <Link key={module.url} href={module.url}>
               <Card 
-                className="cursor-pointer transition-all hover:shadow-md hover:border-[#12EBFC]/30 h-full"
+                className="cursor-pointer transition-all hover:shadow-md hover:border-[#7FB8A3]/30 h-full"
                 data-testid={`card-module-${module.title.toLowerCase().replace(/\s+/g, "-")}`}
               >
                 <CardContent className="pt-5 pb-4">
@@ -501,7 +501,7 @@ function DashboardContent() {
             </div>
             <div className="p-3 sm:p-4 rounded-lg bg-muted/50">
               <div className="flex items-center gap-2 mb-2">
-                <TrendingUp className="h-4 w-4 text-blue-500 shrink-0" />
+                <TrendingUp className="h-4 w-4 text-[#7FB8A3] shrink-0" />
                 <span className="text-xs text-muted-foreground">Valid %</span>
               </div>
               {qualitySummaryLoading ? (
@@ -588,7 +588,7 @@ function DashboardContent() {
           <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
             <div className="p-3 sm:p-4 rounded-lg bg-muted/50">
               <div className="flex items-center gap-2 mb-2">
-                <Users className="h-4 w-4 text-blue-500 shrink-0" />
+                <Users className="h-4 w-4 text-[#7FB8A3] shrink-0" />
                 <span className="text-xs text-muted-foreground truncate">Sessions (24h)</span>
               </div>
               {widgetLoading ? (

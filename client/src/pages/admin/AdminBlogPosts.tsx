@@ -580,7 +580,7 @@ function SEOAnalysisSection({ title, excerpt, content, onCopySuggestions }: {
     const styles = {
       high: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
       medium: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400",
-      low: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"
+      low: "bg-[#7FB8A3]/10 text-[#8E4F67] dark:bg-[#1E2630]/30 dark:text-[#7FB8A3]"
     };
     return styles[priority];
   };
@@ -831,8 +831,8 @@ const CONTENT_MARKERS = [
     name: "Five Pillars",
     icon: Layers,
     description: "Display 5 interconnected pillars/principles",
-    color: "text-blue-500",
-    bgColor: "bg-blue-500/10",
+    color: "text-[#7FB8A3]",
+    bgColor: "bg-[#7FB8A3]/100/10",
     syntax: `[FIVE_PILLARS]{
   "title": "The Five Pillars",
   "pillars": [
@@ -861,8 +861,8 @@ const CONTENT_MARKERS = [
     name: "Resource Link",
     icon: ExternalLink,
     description: "Featured resource card with link",
-    color: "text-cyan-500",
-    bgColor: "bg-cyan-500/10",
+    color: "text-[#7FB8A3]",
+    bgColor: "bg-[#7FB8A3]/100/10",
     syntax: `[RESOURCE_LINK]{
   "title": "Related Resource",
   "description": "Download our comprehensive guide",
@@ -1855,7 +1855,7 @@ function BlogPostsContent() {
                               }
                               className={
                                 scan.status === "completed" ? "bg-emerald-600 hover:bg-emerald-600 text-white" :
-                                scan.status === "running" ? "bg-blue-600 hover:bg-blue-600 text-white" :
+                                scan.status === "running" ? "bg-[#8E4F67] hover:bg-[#8E4F67] text-white" :
                                 scan.status === "failed" ? "bg-red-600 hover:bg-red-600 text-white" : ""
                               }
                               data-testid={`badge-status-${scan.id}`}

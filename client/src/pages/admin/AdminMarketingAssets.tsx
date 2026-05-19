@@ -84,9 +84,9 @@ import londonOffice from "@assets/stock_images/london_office.jpg";
 
 // Brand colors
 const BRAND = {
-  navy: "#02205B",
-  cyan: "#12EBFC",
-  teal: "#0884AA",
+  navy: "#12161D",
+  cyan: "#7FB8A3",
+  teal: "#8E4F67",
 };
 
 // Tagline configuration (matches footer format exactly)
@@ -158,7 +158,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 90,
     colorStops: [
-      { color: "#010D24", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 40 },
       { color: BRAND.teal, position: 100 },
     ],
@@ -207,7 +207,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 45,
     colorStops: [
-      { color: "#010D24", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 30 },
       { color: BRAND.teal, position: 70 },
       { color: BRAND.cyan, position: 100 },
@@ -225,9 +225,9 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 90,
     colorStops: [
-      { color: "#01153D", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 50 },
-      { color: "#032B72", position: 100 },
+      { color: "#1E2630", position: 100 },
     ],
     logoPosition: "right",
     taglinePosition: "right",
@@ -259,7 +259,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 180,
     colorStops: [
-      { color: "#010D24", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 70 },
       { color: BRAND.teal, position: 100 },
     ],
@@ -433,7 +433,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 90,
     colorStops: [
-      { color: "#010D24", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 50 },
       { color: BRAND.teal, position: 100 },
     ],
@@ -502,7 +502,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 90,
     colorStops: [
-      { color: "#010D24", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 40 },
       { color: BRAND.cyan, position: 100 },
     ],
@@ -538,7 +538,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 160,
     colorStops: [
-      { color: "#010D24", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 60 },
       { color: BRAND.teal, position: 100 },
     ],
@@ -556,7 +556,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientAngle: 135,
     colorStops: [
       { color: BRAND.navy, position: 0 },
-      { color: "#032B72", position: 100 },
+      { color: "#1E2630", position: 100 },
     ],
     logoPosition: "center",
     taglinePosition: "center",
@@ -572,7 +572,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 180,
     colorStops: [
-      { color: "#010D24", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 50 },
       { color: BRAND.teal, position: 100 },
     ],
@@ -625,7 +625,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 135,
     colorStops: [
-      { color: "#010D24", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.teal, position: 50 },
       { color: BRAND.cyan, position: 100 },
     ],
@@ -677,7 +677,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 180,
     colorStops: [
-      { color: "#010D24", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 70 },
       { color: BRAND.teal, position: 100 },
     ],
@@ -729,7 +729,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 180,
     colorStops: [
-      { color: "#010D24", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 50 },
       { color: BRAND.teal, position: 100 },
     ],
@@ -748,7 +748,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientAngle: 135,
     colorStops: [
       { color: BRAND.navy, position: 0 },
-      { color: "#032B72", position: 100 },
+      { color: "#1E2630", position: 100 },
     ],
     logoPosition: "center",
     taglinePosition: "center",
@@ -782,7 +782,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 160,
     colorStops: [
-      { color: "#010D24", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 60 },
       { color: BRAND.teal, position: 100 },
     ],
@@ -799,7 +799,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 45,
     colorStops: [
-      { color: "#010D24", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 30 },
       { color: BRAND.teal, position: 70 },
       { color: BRAND.cyan, position: 100 },
@@ -886,7 +886,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 135,
     colorStops: [
-      { color: "#010D24", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 60 },
       { color: BRAND.teal, position: 100 },
     ],
@@ -903,9 +903,9 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 90,
     colorStops: [
-      { color: "#01153D", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 50 },
-      { color: "#032B72", position: 100 },
+      { color: "#1E2630", position: 100 },
     ],
     logoPosition: "center",
     taglinePosition: "center",
@@ -921,7 +921,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 135,
     colorStops: [
-      { color: "#010D24", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 40 },
       { color: BRAND.teal, position: 85 },
       { color: BRAND.cyan, position: 100 },
@@ -939,9 +939,9 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 180,
     colorStops: [
-      { color: "#010D24", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 60 },
-      { color: "#032B72", position: 100 },
+      { color: "#1E2630", position: 100 },
     ],
     logoPosition: "right",
     taglinePosition: "right",
@@ -973,7 +973,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientAngle: 90,
     colorStops: [
       { color: BRAND.navy, position: 0 },
-      { color: "#032B72", position: 100 },
+      { color: "#1E2630", position: 100 },
     ],
     logoPosition: "right",
     taglinePosition: "right",
@@ -987,7 +987,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 135,
     colorStops: [
-      { color: "#010D24", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 40 },
       { color: BRAND.teal, position: 85 },
       { color: BRAND.cyan, position: 100 },
@@ -1118,8 +1118,8 @@ interface AssetConfig {
 }
 
 const categoryInfo: Record<AssetCategory, { label: string; icon: typeof Building2; color: string }> = {
-  professional: { label: "Professional", icon: Building2, color: "bg-blue-500" },
-  technology: { label: "Technology", icon: Globe, color: "bg-cyan-500" },
+  professional: { label: "Professional", icon: Building2, color: "bg-[#7FB8A3]/100" },
+  technology: { label: "Technology", icon: Globe, color: "bg-[#7FB8A3]/100" },
   ai: { label: "AI & Innovation", icon: Brain, color: "bg-purple-500" },
   executive: { label: "Executive", icon: Star, color: "bg-amber-500" },
   digital: { label: "Digital Transform", icon: TrendingUp, color: "bg-emerald-500" },
@@ -2133,13 +2133,13 @@ function GradientCoverPreview({
               <div className="flex flex-col items-center" style={{ marginTop: '8px' }}>
                 <span 
                   className="font-medium tracking-wide drop-shadow-md text-center"
-                  style={{ fontSize: isSquare ? '0.6rem' : '0.5rem', lineHeight: 1.4, color: '#FEFFF3' }}
+                  style={{ fontSize: isSquare ? '0.6rem' : '0.5rem', lineHeight: 1.4, color: '#F6F3EE' }}
                 >
                   {TAGLINE.line1}
                 </span>
                 <span 
                   className="font-medium tracking-wide drop-shadow-md text-center"
-                  style={{ fontSize: isSquare ? '0.6rem' : '0.5rem', lineHeight: 1.4, color: '#FEFFF3' }}
+                  style={{ fontSize: isSquare ? '0.6rem' : '0.5rem', lineHeight: 1.4, color: '#F6F3EE' }}
                 >
                   {TAGLINE.line2}
                 </span>
@@ -2177,7 +2177,7 @@ function GradientCoverPreview({
             {getTypeLabel(cover.type)}
           </Badge>
           {cover.adFormat && (
-            <Badge className="text-xs bg-blue-600 text-white border-0">
+            <Badge className="text-xs bg-[#8E4F67] text-white border-0">
               {cover.adFormat}
             </Badge>
           )}
@@ -2401,17 +2401,17 @@ function VideoAssetPreview({
   const getPreviewGradient = () => {
     switch (video.style) {
       case "abstract":
-        return "bg-gradient-to-br from-[#02205B] via-[#0884AA] to-[#12EBFC]";
+        return "bg-gradient-to-br from-[#12161D] via-[#8E4F67] to-[#7FB8A3]";
       case "corporate":
-        return "bg-gradient-to-br from-[#02205B] via-[#0a3d7a] to-[#0884AA]";
+        return "bg-gradient-to-br from-[#12161D] via-[#0a3d7a] to-[#8E4F67]";
       case "data":
-        return "bg-gradient-to-br from-[#0884AA] via-[#12EBFC] to-[#02205B]";
+        return "bg-gradient-to-br from-[#8E4F67] via-[#7FB8A3] to-[#12161D]";
       case "technology":
-        return "bg-gradient-to-br from-[#12EBFC] via-[#0884AA] to-[#02205B]";
+        return "bg-gradient-to-br from-[#7FB8A3] via-[#8E4F67] to-[#12161D]";
       case "people":
         return "";
       default:
-        return "bg-gradient-to-br from-[#02205B] to-[#0884AA]";
+        return "bg-gradient-to-br from-[#12161D] to-[#8E4F67]";
     }
   };
 
@@ -2429,8 +2429,8 @@ function VideoAssetPreview({
                 alt={video.name}
                 className="absolute inset-0 w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#02205B]/80 via-[#02205B]/40 to-transparent" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#02205B]/60 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#12161D]/80 via-[#12161D]/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#12161D]/60 via-transparent to-transparent" />
             </>
           )}
           <div className="absolute inset-0 flex items-center justify-center">
@@ -2438,7 +2438,7 @@ function VideoAssetPreview({
               <div className="absolute inset-0 opacity-20">
                 <div className="absolute inset-0 animate-pulse">
                   <div className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full bg-white/10 blur-xl" />
-                  <div className="absolute bottom-1/3 right-1/4 w-24 h-24 rounded-full bg-cyan-400/20 blur-lg" />
+                  <div className="absolute bottom-1/3 right-1/4 w-24 h-24 rounded-full bg-[#5E8D7A]/20 blur-lg" />
                   <div className="absolute top-1/2 left-1/2 w-16 h-16 rounded-full bg-white/15 blur-md" />
                 </div>
               </div>
@@ -2446,9 +2446,9 @@ function VideoAssetPreview({
             {isPeopleStyle && (
               <div className="absolute inset-0 opacity-40">
                 <div className="absolute inset-0 animate-pulse">
-                  <div className="absolute top-1/4 right-1/4 w-24 h-24 rounded-full bg-[#12EBFC]/30 blur-xl" />
-                  <div className="absolute bottom-1/3 right-1/3 w-20 h-20 rounded-full bg-[#0884AA]/40 blur-lg" />
-                  <div className="absolute top-1/2 right-1/5 w-16 h-16 rounded-full bg-[#12EBFC]/20 blur-md" />
+                  <div className="absolute top-1/4 right-1/4 w-24 h-24 rounded-full bg-[#7FB8A3]/30 blur-xl" />
+                  <div className="absolute bottom-1/3 right-1/3 w-20 h-20 rounded-full bg-[#8E4F67]/40 blur-lg" />
+                  <div className="absolute top-1/2 right-1/5 w-16 h-16 rounded-full bg-[#7FB8A3]/20 blur-md" />
                 </div>
               </div>
             )}
@@ -2690,7 +2690,7 @@ function LibraryTabContent() {
 
   return (
     <>
-      <Card className="bg-gradient-to-r from-[#02205B] via-[#0884AA] to-[#12EBFC] text-white">
+      <Card className="bg-gradient-to-r from-[#12161D] via-[#8E4F67] to-[#7FB8A3] text-white">
         <CardContent className="py-6">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-4">
@@ -2937,7 +2937,7 @@ function LibraryTabContent() {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#02205B] to-[#0884AA]">
+                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#12161D] to-[#8E4F67]">
                     {typeIcons[asset.type] || <ImageIcon className="h-8 w-8 text-white/50" />}
                   </div>
                 )}
@@ -3923,7 +3923,7 @@ function MarketingAssetsContent() {
       ctx.shadowColor = 'rgba(0, 0, 0, 0.6)';
       ctx.shadowBlur = 8;
       
-      ctx.fillStyle = '#FEFFF3';
+      ctx.fillStyle = '#F6F3EE';
       ctx.font = `500 ${fontSize}px Inter, system-ui, sans-serif`;
       ctx.fillText(TAGLINE.line1, taglineCentreX, taglineStartY);
       ctx.fillText(TAGLINE.line2, taglineCentreX, taglineStartY + lineHeight);
@@ -4095,7 +4095,7 @@ function MarketingAssetsContent() {
         </p>
       </div>
 
-      <Card className="bg-gradient-to-r from-[#02205B] to-[#0884AA] text-white">
+      <Card className="bg-gradient-to-r from-[#12161D] to-[#8E4F67] text-white">
         <CardContent className="py-6">
           <div className="flex items-center gap-4">
             <div className="p-3 rounded-xl bg-white/10">
@@ -4184,7 +4184,7 @@ function MarketingAssetsContent() {
         </TabsList>
 
         <TabsContent value="gradient" className="space-y-6">
-          <Card className="bg-gradient-to-r from-[#02205B] via-[#0884AA] to-[#12EBFC] text-white">
+          <Card className="bg-gradient-to-r from-[#12161D] via-[#8E4F67] to-[#7FB8A3] text-white">
             <CardContent className="py-6">
               <div className="flex items-center gap-4">
                 <div className="p-3 rounded-xl bg-white/10">
@@ -4236,7 +4236,7 @@ function MarketingAssetsContent() {
           
           <div>
             <h3 className="font-semibold mb-4 flex items-center gap-2">
-              <Globe className="h-5 w-5 text-[#02205B]" />
+              <Globe className="h-5 w-5 text-[#12161D]" />
               Website & Email
             </h3>
             <div className="grid gap-6 md:grid-cols-2">
@@ -4255,7 +4255,7 @@ function MarketingAssetsContent() {
             <CardContent className="py-6">
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-lg bg-brand-navy/10">
-                  <Palette className="h-6 w-6 text-[#02205B]" />
+                  <Palette className="h-6 w-6 text-[#12161D]" />
                 </div>
                 <div>
                   <h3 className="font-medium mb-1">Your Brand Tagline</h3>
@@ -4333,7 +4333,7 @@ function MarketingAssetsContent() {
         </TabsContent>
 
         <TabsContent value="linkedin-ads" className="space-y-6">
-          <Card className="bg-gradient-to-r from-[#0077B5] to-[#00A0DC] text-white">
+          <Card className="bg-gradient-to-r from-[#0077B5] to-[#7FB8A3] text-white">
             <CardContent className="py-6">
               <div className="flex items-center gap-4">
                 <div className="p-3 rounded-xl bg-white/10">
@@ -4480,7 +4480,7 @@ function MarketingAssetsContent() {
             <CardContent className="py-6">
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-lg bg-brand-navy/10">
-                  <Globe className="h-6 w-6 text-[#02205B]" />
+                  <Globe className="h-6 w-6 text-[#12161D]" />
                 </div>
                 <div>
                   <h3 className="font-medium mb-1">Website Hero Banner Guidelines</h3>
@@ -4525,7 +4525,7 @@ function MarketingAssetsContent() {
         </TabsContent>
 
         <TabsContent value="videos" className="space-y-6">
-          <Card className="bg-gradient-to-r from-[#02205B] via-[#0884AA] to-[#12EBFC] text-white">
+          <Card className="bg-gradient-to-r from-[#12161D] via-[#8E4F67] to-[#7FB8A3] text-white">
             <CardContent className="py-6">
               <div className="flex items-center gap-4">
                 <div className="p-3 rounded-xl bg-white/10">
@@ -4595,7 +4595,7 @@ function MarketingAssetsContent() {
 
           <div>
             <h3 className="font-semibold mb-4 flex items-center gap-2">
-              <Globe className="h-5 w-5 text-[#02205B]" />
+              <Globe className="h-5 w-5 text-[#12161D]" />
               Website Videos
             </h3>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -4614,7 +4614,7 @@ function MarketingAssetsContent() {
             <CardContent className="py-6">
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-lg bg-brand-navy/10">
-                  <Video className="h-6 w-6 text-[#02205B]" />
+                  <Video className="h-6 w-6 text-[#12161D]" />
                 </div>
                 <div>
                   <h3 className="font-medium mb-1">Video Generation Guidelines</h3>
@@ -4630,7 +4630,7 @@ function MarketingAssetsContent() {
         </TabsContent>
 
         <TabsContent value="virtual-backgrounds" className="space-y-6">
-          <Card className="bg-gradient-to-r from-[#02205B] via-[#0884AA] to-[#12EBFC] text-white">
+          <Card className="bg-gradient-to-r from-[#12161D] via-[#8E4F67] to-[#7FB8A3] text-white">
             <CardContent className="py-6">
               <div className="flex items-center gap-4">
                 <div className="p-3 rounded-xl bg-white/10">
@@ -4665,7 +4665,7 @@ function MarketingAssetsContent() {
                       className="w-full h-full object-cover"
                     />
                     {bg.featured && (
-                      <Badge className="absolute top-2 left-2 bg-[#12EBFC] text-[#02205B]">
+                      <Badge className="absolute top-2 left-2 bg-[#7FB8A3] text-[#12161D]">
                         <Star className="h-3 w-3 mr-1" />
                         Featured
                       </Badge>
@@ -4682,8 +4682,8 @@ function MarketingAssetsContent() {
                         <span className="absolute -top-1 -right-3 text-white text-[8px] font-medium drop-shadow-lg">®</span>
                       </div>
                       <div className="text-center leading-snug drop-shadow-lg">
-                        <p className="text-sm font-medium" style={{ color: '#FEFFF3' }}>{TAGLINE.line1}</p>
-                        <p className="text-sm font-medium" style={{ color: '#FEFFF3' }}>{TAGLINE.line2}</p>
+                        <p className="text-sm font-medium" style={{ color: '#F6F3EE' }}>{TAGLINE.line1}</p>
+                        <p className="text-sm font-medium" style={{ color: '#F6F3EE' }}>{TAGLINE.line2}</p>
                         <p className="text-sm font-medium italic" style={{ color: BRAND.cyan }}>{TAGLINE.line3}</p>
                       </div>
                     </div>
@@ -4732,7 +4732,7 @@ function MarketingAssetsContent() {
                       className="w-full h-full object-cover"
                     />
                     {bg.featured && (
-                      <Badge className="absolute top-2 left-2 bg-[#12EBFC] text-[#02205B]">
+                      <Badge className="absolute top-2 left-2 bg-[#7FB8A3] text-[#12161D]">
                         <Star className="h-3 w-3 mr-1" />
                         Featured
                       </Badge>
@@ -4749,8 +4749,8 @@ function MarketingAssetsContent() {
                         <span className="absolute -top-1 -right-2 text-white text-[6px] font-medium drop-shadow-lg">®</span>
                       </div>
                       <div className="text-center leading-snug drop-shadow-lg">
-                        <p className="text-xs font-medium" style={{ color: '#FEFFF3' }}>{TAGLINE.line1}</p>
-                        <p className="text-xs font-medium" style={{ color: '#FEFFF3' }}>{TAGLINE.line2}</p>
+                        <p className="text-xs font-medium" style={{ color: '#F6F3EE' }}>{TAGLINE.line1}</p>
+                        <p className="text-xs font-medium" style={{ color: '#F6F3EE' }}>{TAGLINE.line2}</p>
                         <p className="text-xs font-medium italic" style={{ color: BRAND.cyan }}>{TAGLINE.line3}</p>
                       </div>
                     </div>

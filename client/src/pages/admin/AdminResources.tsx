@@ -134,7 +134,7 @@ function getFileTypeBadgeColor(fileType: string): string {
     case "xls":
       return "bg-green-500/10 text-green-600 dark:text-green-400";
     case "doc":
-      return "bg-blue-500/10 text-blue-600 dark:text-blue-400";
+      return "bg-[#7FB8A3]/100/10 text-[#8E4F67] dark:text-[#7FB8A3]";
     case "zip":
       return "bg-yellow-500/10 text-yellow-600 dark:text-yellow-400";
     default:

@@ -313,7 +313,7 @@ export default function AdminOperations() {
   const getMethodColor = (method: string) => {
     switch (method.toUpperCase()) {
       case "GET":
-        return "bg-blue-500/10 text-blue-500";
+        return "bg-[#7FB8A3]/100/10 text-[#7FB8A3]";
       case "POST":
         return "bg-green-500/10 text-green-500";
       case "PUT":
@@ -328,7 +328,7 @@ export default function AdminOperations() {
 
   const getStatusCodeColor = (code: number) => {
     if (code >= 200 && code < 300) return "text-green-500";
-    if (code >= 300 && code < 400) return "text-blue-500";
+    if (code >= 300 && code < 400) return "text-[#7FB8A3]";
     if (code >= 400 && code < 500) return "text-yellow-500";
     return "text-red-500";
   };

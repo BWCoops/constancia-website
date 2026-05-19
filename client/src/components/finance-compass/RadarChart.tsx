@@ -38,7 +38,7 @@ export function FinanceCompassRadarChart({
       <Card className="shadow-lg" data-testid="card-radar-chart">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-[#0884AA]" />
+            <div className="w-2 h-2 rounded-full bg-[#8E4F67]" />
             {title}
           </CardTitle>
           <CardDescription>{description}</CardDescription>
@@ -68,16 +68,16 @@ export function FinanceCompassRadarChart({
                 <Radar
                   name="Your Score"
                   dataKey="yourScore"
-                  stroke="#0884AA"
-                  fill="#0884AA"
+                  stroke="#8E4F67"
+                  fill="#8E4F67"
                   fillOpacity={0.4}
                   strokeWidth={2}
                 />
                 <Radar
                   name="Industry Benchmark"
                   dataKey="benchmark"
-                  stroke="#02205B"
-                  fill="#02205B"
+                  stroke="#12161D"
+                  fill="#12161D"
                   fillOpacity={0.2}
                   strokeWidth={2}
                   strokeDasharray="5 5"
@@ -85,7 +85,7 @@ export function FinanceCompassRadarChart({
                 <Radar
                   name="World Class (4.0)"
                   dataKey="worldClass"
-                  stroke="#12EBFC"
+                  stroke="#7FB8A3"
                   fill="transparent"
                   strokeWidth={1}
                   strokeDasharray="3 3"
@@ -104,11 +104,11 @@ export function FinanceCompassRadarChart({
                             </div>
                             <div className="flex justify-between gap-4">
                               <span className="text-muted-foreground">Benchmark:</span>
-                              <span className="font-medium text-[#02205B]">{dataPoint.benchmark.toFixed(2)}</span>
+                              <span className="font-medium text-[#12161D]">{dataPoint.benchmark.toFixed(2)}</span>
                             </div>
                             <div className="flex justify-between gap-4">
                               <span className="text-muted-foreground">World Class:</span>
-                              <span className="font-medium text-[#12EBFC]">4.00</span>
+                              <span className="font-medium text-[#7FB8A3]">4.00</span>
                             </div>
                           </div>
                         </div>
@@ -129,15 +129,15 @@ export function FinanceCompassRadarChart({
           <div className="mt-4 pt-4 border-t">
             <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-muted-foreground">
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-[#0884AA]" />
+                <div className="w-3 h-3 rounded-full bg-[#8E4F67]" />
                 <span>Your Performance</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-[#02205B]" />
+                <div className="w-3 h-3 rounded-full bg-[#12161D]" />
                 <span>Industry Benchmark</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full border-2 border-[#12EBFC]" />
+                <div className="w-3 h-3 rounded-full border-2 border-[#7FB8A3]" />
                 <span>World Class Target</span>
               </div>
             </div>

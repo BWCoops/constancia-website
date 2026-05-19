@@ -103,7 +103,7 @@ function getStatusBadgeClass(status: string) {
     case "not_started":
       return "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300";
     case "in_progress":
-      return "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400";
+      return "bg-[#7FB8A3]/10 text-[#8E4F67] dark:bg-[#1E2630]/30 dark:text-[#7FB8A3]";
     case "initial_complete":
     case "followups_pending":
       return "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400";
@@ -683,11 +683,11 @@ function AssessmentsContent() {
               </div>
 
               {selectedAssessment.contact && (
-                <Card className="border-[#0884AA]/30 bg-[#0884AA]/5">
+                <Card className="border-[#8E4F67]/30 bg-[#8E4F67]/5">
                   <CardContent className="pt-4">
                     <div className="flex items-center justify-between gap-4">
                       <div className="flex items-center gap-3">
-                        <div className="h-10 w-10 rounded-lg flex items-center justify-center bg-[#0884AA]/10">
+                        <div className="h-10 w-10 rounded-lg flex items-center justify-center bg-[#8E4F67]/10">
                           <Shield className="h-5 w-5 text-brand-teal" />
                         </div>
                         <div>
@@ -831,7 +831,7 @@ function AssessmentsContent() {
                                 )}
                                 {outputs?.pptx?.status === 'generating' && (
                                   <>
-                                    <Loader2 className="h-3 w-3 animate-spin text-blue-500" />
+                                    <Loader2 className="h-3 w-3 animate-spin text-[#7FB8A3]" />
                                     Generating presentation...
                                   </>
                                 )}
@@ -962,7 +962,7 @@ function AssessmentsContent() {
                                         </span>
                                       </div>
                                       {response?.score !== undefined && response?.score !== null && (
-                                        <Badge className="bg-[#0884AA]/10 text-brand-teal border-0">
+                                        <Badge className="bg-[#8E4F67]/10 text-brand-teal border-0">
                                           Score: {response.score}
                                         </Badge>
                                       )}

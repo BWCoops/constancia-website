@@ -62,8 +62,8 @@ const BENEFIT_CATEGORIES: BenefitCategory[] = [
     name: 'FTE Savings',
     icon: Users,
     description: 'Reduction in manual effort through automation',
-    color: '#0884AA',
-    bgClass: 'bg-[#0884AA]/10',
+    color: '#8E4F67',
+    bgClass: 'bg-[#8E4F67]/10',
     metrics: [
       { name: 'Data Collection', currentState: 'Manual', potentialRange: [30, 50], unit: '%', impactLevel: 'high', timeframe: '6-12 months' },
       { name: 'Report Generation', currentState: 'Semi-automated', potentialRange: [20, 40], unit: '%', impactLevel: 'high', timeframe: '3-6 months' },
@@ -132,8 +132,8 @@ const BENEFIT_CATEGORIES: BenefitCategory[] = [
     name: 'Strategic Value',
     icon: Target,
     description: 'Enhanced strategic decision support',
-    color: '#02205B',
-    bgClass: 'bg-[#02205B]/10',
+    color: '#12161D',
+    bgClass: 'bg-[#12161D]/10',
     metrics: [
       { name: 'Strategic Work Time', currentState: '<20%', potentialRange: [30, 50], unit: '% of FP&A time', impactLevel: 'high', timeframe: '18-24 months' },
       { name: 'Analytics Models', currentState: 'Basic', potentialRange: [3, 5], unit: 'x increase', impactLevel: 'medium', timeframe: '12-18 months' },
@@ -310,7 +310,7 @@ function PhasedBenefitsTimeline({
     <Card data-testid="card-phased-benefits">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Zap className="h-5 w-5 text-[#0884AA]" />
+          <Zap className="h-5 w-5 text-[#8E4F67]" />
           Phased Benefits Realisation
         </CardTitle>
         <CardDescription className="flex flex-wrap items-center gap-2">
@@ -344,9 +344,9 @@ function PhasedBenefitsTimeline({
                 <div className="flex items-start gap-4">
                   <div className="flex flex-col items-center">
                     <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold text-sm ${
-                      index === 0 ? 'bg-[#02205B]' :
-                      index === 1 ? 'bg-[#0884AA]' :
-                      index === 2 ? 'bg-[#12EBFC] text-[#02205B]' :
+                      index === 0 ? 'bg-[#12161D]' :
+                      index === 1 ? 'bg-[#8E4F67]' :
+                      index === 2 ? 'bg-[#7FB8A3] text-[#12161D]' :
                       'bg-green-500'
                     }`}>
                       {index + 1}
@@ -366,7 +366,7 @@ function PhasedBenefitsTimeline({
                         <Badge variant="outline" className="text-xs">
                           +{adjustedPercentage}% value
                         </Badge>
-                        <Badge className="bg-[#0884AA] text-xs">
+                        <Badge className="bg-[#8E4F67] text-xs">
                           {cumulativePercentage}% cumulative
                         </Badge>
                       </div>
@@ -409,7 +409,7 @@ function BenefitsSummaryCard({
     : maturityInfo.timeline;
   
   return (
-    <Card className="bg-gradient-to-br from-[#02205B] to-[#0884AA] text-white" data-testid="card-benefits-summary">
+    <Card className="bg-gradient-to-br from-[#12161D] to-[#8E4F67] text-white" data-testid="card-benefits-summary">
       <CardContent className="py-6">
         <div className="grid sm:grid-cols-3 gap-6">
           <div className="text-center">
@@ -417,21 +417,21 @@ function BenefitsSummaryCard({
               {Math.round(multiplier * 100)}%
             </div>
             <div className="text-sm text-white/70">Benefit Potential</div>
-            <div className="text-xs text-[#12EBFC] mt-1">{label}</div>
+            <div className="text-xs text-[#7FB8A3] mt-1">{label}</div>
           </div>
           <div className="text-center">
             <div className="text-3xl font-bold mb-1">
               {displayTimeline}
             </div>
             <div className="text-sm text-white/70">Value Realisation</div>
-            <div className="text-xs text-[#12EBFC] mt-1">
+            <div className="text-xs text-[#7FB8A3] mt-1">
               {implementationTimeline?.totalMonths ? 'Based on your profile' : 'Estimated timeline'}
             </div>
           </div>
           <div className="text-center">
             <div className="text-3xl font-bold mb-1">6</div>
             <div className="text-sm text-white/70">Benefit Categories</div>
-            <div className="text-xs text-[#12EBFC] mt-1">Across all dimensions</div>
+            <div className="text-xs text-[#7FB8A3] mt-1">Across all dimensions</div>
           </div>
         </div>
       </CardContent>

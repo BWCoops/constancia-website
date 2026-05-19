@@ -40,7 +40,7 @@ import {
 
 const VENDOR_TIER_COLORS: Record<string, string> = {
   tier1: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400",
-  tier2: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
+  tier2: "bg-[#7FB8A3]/10 text-[#8E4F67] dark:bg-[#1E2630]/30 dark:text-[#7FB8A3]",
   specialist: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400",
   legacy: "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400",
   none: "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300",
@@ -56,7 +56,7 @@ const VENDOR_TIER_SCORING = Object.fromEntries(
 const SCORING_TIER_ICONS = [Award, Star, Target, TrendingUp, ArrowDown];
 const SCORING_TIER_COLORS = [
   "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400",
-  "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
+  "bg-[#7FB8A3]/10 text-[#8E4F67] dark:bg-[#1E2630]/30 dark:text-[#7FB8A3]",
   "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400",
   "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400",
   "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
@@ -287,7 +287,7 @@ function ScoringLogicContent() {
                             <TableCell className="text-center">
                               <Badge className={
                                 data.score === 5 ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" :
-                                data.score === 4 ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400" :
+                                data.score === 4 ? "bg-[#7FB8A3]/10 text-[#8E4F67] dark:bg-[#1E2630]/30 dark:text-[#7FB8A3]" :
                                 data.score === 3 ? "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400" :
                                 data.score === 2 ? "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400" :
                                 "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"

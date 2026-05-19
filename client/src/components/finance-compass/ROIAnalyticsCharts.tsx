@@ -45,7 +45,7 @@ interface ROIAnalyticsChartsProps {
 }
 
 const BENEFIT_COLORS = {
-  fte: "#0884AA",
+  fte: "#8E4F67",
   efficiency: "#22c55e",
   risk: "#8b5cf6",
 };
@@ -150,7 +150,7 @@ export function ROIAnalyticsCharts({
       { 
         name: "Net Value", 
         value: netValue, 
-        fill: netValue >= 0 ? "#0884AA" : "#ef4444",
+        fill: netValue >= 0 ? "#8E4F67" : "#ef4444",
         isNegative: netValue < 0,
       },
     ];
@@ -233,7 +233,7 @@ export function ROIAnalyticsCharts({
           <Card className="h-full" data-testid="card-investment-returns">
             <CardHeader className="pb-2">
               <CardTitle className="text-base flex items-center gap-2">
-                <TrendingUp className="h-4 w-4 text-[#0884AA]" />
+                <TrendingUp className="h-4 w-4 text-[#8E4F67]" />
                 Investment vs Returns ({horizonYears}yr)
               </CardTitle>
               <CardDescription className="text-xs">
@@ -289,7 +289,7 @@ export function ROIAnalyticsCharts({
             <div className="flex items-center justify-between gap-4 flex-wrap">
               <div>
                 <CardTitle className="text-base flex items-center gap-2">
-                  <ArrowRight className="h-4 w-4 text-[#0884AA]" />
+                  <ArrowRight className="h-4 w-4 text-[#8E4F67]" />
                   Cumulative Cash Flow Projection
                 </CardTitle>
                 <CardDescription className="text-xs">
@@ -309,8 +309,8 @@ export function ROIAnalyticsCharts({
               <AreaChart data={cumulativeCashFlowData}>
                 <defs>
                   <linearGradient id="colorCumulative" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#0884AA" stopOpacity={0.3} />
-                    <stop offset="95%" stopColor="#0884AA" stopOpacity={0} />
+                    <stop offset="5%" stopColor="#8E4F67" stopOpacity={0.3} />
+                    <stop offset="95%" stopColor="#8E4F67" stopOpacity={0} />
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
@@ -341,17 +341,17 @@ export function ROIAnalyticsCharts({
                 <Area
                   type="monotone"
                   dataKey="cumulative"
-                  stroke="#0884AA"
+                  stroke="#8E4F67"
                   strokeWidth={2}
                   fill="url(#colorCumulative)"
-                  dot={{ fill: "#0884AA", strokeWidth: 0, r: 4 }}
+                  dot={{ fill: "#8E4F67", strokeWidth: 0, r: 4 }}
                   activeDot={{ r: 6, stroke: "#fff", strokeWidth: 2 }}
                 />
               </AreaChart>
             </ResponsiveContainer>
             <div className="flex items-center justify-center gap-6 mt-2 text-xs text-muted-foreground">
               <div className="flex items-center gap-1.5">
-                <div className="w-3 h-0.5 bg-[#0884AA] rounded" />
+                <div className="w-3 h-0.5 bg-[#8E4F67] rounded" />
                 <span>Cumulative Value</span>
               </div>
               <div className="flex items-center gap-1.5">

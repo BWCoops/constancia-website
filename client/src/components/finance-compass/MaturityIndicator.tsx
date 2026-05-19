@@ -119,7 +119,7 @@ export function MaturityIndicator({
         />
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Clock className="h-5 w-5 text-[#0884AA]" />
+            <Clock className="h-5 w-5 text-[#8E4F67]" />
             {title}
           </CardTitle>
           <CardDescription>{description}</CardDescription>
@@ -182,21 +182,21 @@ export function MaturityIndicator({
 
           {/* Key Metrics Grid */}
           <div className="grid grid-cols-3 gap-3 mb-4">
-            <div className="p-3 rounded-lg bg-[#02205B]/5 dark:bg-[#02205B]/20 text-center">
+            <div className="p-3 rounded-lg bg-[#12161D]/5 dark:bg-[#12161D]/20 text-center">
               <div className="text-xs text-muted-foreground mb-1">Gap to Next</div>
-              <div className="text-lg font-bold text-[#02205B] dark:text-white">
+              <div className="text-lg font-bold text-[#12161D] dark:text-white">
                 {maturityKey === 'ADVANCED' ? 'N/A' : `${Math.round(100 - progressValue)}%`}
               </div>
             </div>
-            <div className="p-3 rounded-lg bg-[#0884AA]/5 dark:bg-[#0884AA]/20 text-center">
+            <div className="p-3 rounded-lg bg-[#8E4F67]/5 dark:bg-[#8E4F67]/20 text-center">
               <div className="text-xs text-muted-foreground mb-1">Percentile</div>
-              <div className="text-lg font-bold text-[#0884AA]">
+              <div className="text-lg font-bold text-[#8E4F67]">
                 {score >= 70 ? 'Top 15%' : score >= 50 ? 'Top 40%' : score >= 35 ? 'Top 60%' : 'Top 80%'}
               </div>
             </div>
-            <div className="p-3 rounded-lg bg-[#12EBFC]/10 dark:bg-[#12EBFC]/20 text-center">
+            <div className="p-3 rounded-lg bg-[#7FB8A3]/10 dark:bg-[#7FB8A3]/20 text-center">
               <div className="text-xs text-muted-foreground mb-1">Dimensions</div>
-              <div className="text-lg font-bold text-[#0884AA]">
+              <div className="text-lg font-bold text-[#8E4F67]">
                 {hasDimensionData ? Object.keys(dimensionScores).length : 8}
               </div>
             </div>
@@ -206,7 +206,7 @@ export function MaturityIndicator({
             <div className="p-3 rounded-lg bg-muted/50 mb-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <Calendar className="h-5 w-5 text-[#0884AA]" />
+                  <Calendar className="h-5 w-5 text-[#8E4F67]" />
                   <div>
                     <div className="font-medium text-sm">Recommended Timeline</div>
                     <div className="text-xs text-muted-foreground">
@@ -238,7 +238,7 @@ export function MaturityIndicator({
                     transition={{ delay: 0.3 + index * 0.1 }}
                     className="flex items-start gap-2 text-sm text-muted-foreground"
                   >
-                    <CheckCircle className="h-4 w-4 text-[#0884AA] mt-0.5 flex-shrink-0" />
+                    <CheckCircle className="h-4 w-4 text-[#8E4F67] mt-0.5 flex-shrink-0" />
                     <span>{rec}</span>
                   </motion.li>
                 ))}
@@ -252,7 +252,7 @@ export function MaturityIndicator({
               <h4 className="text-sm font-medium mb-3">Dimension Summary</h4>
               <div className="grid grid-cols-4 gap-2">
                 {Object.entries(dimensionScores).slice(0, 8).map(([dim, dimScore]) => {
-                  const dimColor = dimScore >= 70 ? '#0884AA' : dimScore >= 50 ? '#02205B' : '#f59e0b';
+                  const dimColor = dimScore >= 70 ? '#8E4F67' : dimScore >= 50 ? '#12161D' : '#f59e0b';
                   return (
                     <div key={dim} className="text-center">
                       <div 

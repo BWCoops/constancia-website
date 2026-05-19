@@ -38,8 +38,8 @@ const categories: CategoryCard[] = [
     description: "Manage leads, content, blog posts, and downloadable resources",
     icon: LayoutDashboard,
     url: "/admin/dashboard",
-    color: "text-blue-500",
-    bgColor: "bg-blue-500/10",
+    color: "text-[#7FB8A3]",
+    bgColor: "bg-[#7FB8A3]/100/10",
     features: ["Leads", "Blog Posts", "Resources", "Downloads", "Enquiries"]
   },
   {
@@ -48,7 +48,7 @@ const categories: CategoryCard[] = [
     icon: Compass,
     url: "/admin/finance-compass",
     color: "text-brand-cyan",
-    bgColor: "bg-[#12EBFC]/10",
+    bgColor: "bg-[#7FB8A3]/10",
     features: ["Assessments", "Questions", "AI Config", "Tenants", "Knowledge Base"]
   },
   {
@@ -78,7 +78,7 @@ function CategoryCardComponent({ category }: { category: CategoryCard }) {
   return (
     <Link href={category.url} data-testid={testId}>
       <Card 
-        className="cursor-pointer transition-all hover:shadow-lg hover:border-[#12EBFC]/30 h-full group"
+        className="cursor-pointer transition-all hover:shadow-lg hover:border-[#7FB8A3]/30 h-full group"
         data-testid={`card-category-${category.title.toLowerCase().replace(/\s+/g, "-")}`}
       >
         <CardContent className="pt-6 pb-5">

@@ -388,7 +388,7 @@ function getEventBadgeClass(eventType: string) {
     case "widget_loaded":
       return "bg-slate-100 text-slate-700";
     case "qualification_answered":
-      return "bg-blue-100 text-blue-700";
+      return "bg-[#7FB8A3]/10 text-[#8E4F67]";
     case "qualification_completed":
       return "bg-indigo-100 text-indigo-700";
     case "question_answered":
@@ -400,7 +400,7 @@ function getEventBadgeClass(eventType: string) {
     case "preview_reset":
       return "bg-rose-100 text-rose-700";
     case "vendor_selected":
-      return "bg-cyan-100 text-cyan-700";
+      return "bg-[#7FB8A3]/10 text-[#8E4F67]";
     case "vendor_deselected":
       return "bg-orange-100 text-orange-700";
     case "driver_weight_changed":
@@ -566,14 +566,14 @@ function FunnelAnalysisTab({ data, isLoading }: { data: DimensionAnalysisData | 
   return (
     <div className="space-y-6">
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        <Card className="bg-gradient-to-br from-[#0D1B3E]/5 to-[#0884AA]/5 border-[#0884AA]/20">
+        <Card className="bg-gradient-to-br from-[#1E2630]/5 to-[#8E4F67]/5 border-[#8E4F67]/20">
           <CardContent className="p-3 sm:p-6">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-[#0884AA]/10 shrink-0">
+              <div className="p-2 rounded-lg bg-[#8E4F67]/10 shrink-0">
                 <Target className="h-5 w-5 text-brand-teal" />
               </div>
               <div className="min-w-0">
-                <p className="text-2xl sm:text-3xl font-bold text-[#0D1B3E] dark:text-white" data-testid="stat-completion-rate">
+                <p className="text-2xl sm:text-3xl font-bold text-[#1E2630] dark:text-white" data-testid="stat-completion-rate">
                   {overallCompletionRate}%
                 </p>
                 <p className="text-sm text-muted-foreground truncate">Overall Completion Rate</p>
@@ -583,14 +583,14 @@ function FunnelAnalysisTab({ data, isLoading }: { data: DimensionAnalysisData | 
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-[#0D1B3E]/5 to-[#00B8D9]/5 border-[#00B8D9]/20">
+        <Card className="bg-gradient-to-br from-[#1E2630]/5 to-[#7FB8A3]/5 border-[#7FB8A3]/20">
           <CardContent className="p-3 sm:p-6">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-[#00B8D9]/10 shrink-0">
-                <Users className="h-5 w-5 text-[#00B8D9]" />
+              <div className="p-2 rounded-lg bg-[#7FB8A3]/10 shrink-0">
+                <Users className="h-5 w-5 text-[#7FB8A3]" />
               </div>
               <div className="min-w-0">
-                <p className="text-2xl sm:text-3xl font-bold text-[#0D1B3E] dark:text-white" data-testid="stat-total-sessions">
+                <p className="text-2xl sm:text-3xl font-bold text-[#1E2630] dark:text-white" data-testid="stat-total-sessions">
                   {firstQuestionSessions}
                 </p>
                 <p className="text-sm text-muted-foreground truncate">Started Assessment</p>
@@ -667,7 +667,7 @@ function FunnelAnalysisTab({ data, isLoading }: { data: DimensionAnalysisData | 
           </div>
           <div className="mt-4 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[#0884AA] shrink-0" />
+              <div className="w-3 h-3 rounded bg-[#8E4F67] shrink-0" />
               <span className="text-muted-foreground whitespace-nowrap">Normal (&lt;20%)</span>
             </div>
             <div className="flex items-center gap-2">
@@ -811,7 +811,7 @@ function FunnelAnalysisTab({ data, isLoading }: { data: DimensionAnalysisData | 
                         </Badge>
                       )}
                       {q.dropoffRate > 10 && q.dropoffRate <= 20 && (
-                        <Badge className="bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-400">
+                        <Badge className="bg-[#7FB8A3]/10 text-[#8E4F67] dark:bg-[#1E2630]/30 dark:text-[#7FB8A3]">
                           Normal
                         </Badge>
                       )}
@@ -1379,7 +1379,7 @@ export default function WidgetAnalytics() {
       case 'completed':
         return 'bg-emerald-100 text-emerald-700';
       case 'in_progress':
-        return 'bg-blue-100 text-blue-700';
+        return 'bg-[#7FB8A3]/10 text-[#8E4F67]';
       case 'abandoned':
         return 'bg-rose-100 text-rose-700';
     }
@@ -1460,11 +1460,11 @@ export default function WidgetAnalytics() {
           <p className="text-sm text-muted-foreground">{pageDescription}</p>
         </div>
 
-        <Card className="mb-6 border-[#12EBFC]/30 bg-gradient-to-r from-[#02205B]/5 to-[#12EBFC]/5 dark:from-[#02205B]/20 dark:to-[#12EBFC]/10">
+        <Card className="mb-6 border-[#7FB8A3]/30 bg-gradient-to-r from-[#12161D]/5 to-[#7FB8A3]/5 dark:from-[#12161D]/20 dark:to-[#7FB8A3]/10">
           <CardContent className="py-4">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-[#12EBFC]/20">
+                <div className="p-2 rounded-lg bg-[#7FB8A3]/20">
                   <GitCompare className="h-5 w-5 text-brand-teal" />
                 </div>
                 <div>
@@ -1578,8 +1578,8 @@ export default function WidgetAnalytics() {
               <Card>
                 <CardContent className="p-3 sm:p-6">
                   <div className="flex items-center gap-2 sm:gap-3">
-                    <div className="p-1.5 sm:p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30 shrink-0">
-                      <Users className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 dark:text-blue-400" />
+                    <div className="p-1.5 sm:p-2 rounded-lg bg-[#7FB8A3]/10 dark:bg-[#1E2630]/30 shrink-0">
+                      <Users className="h-4 w-4 sm:h-5 sm:w-5 text-[#8E4F67] dark:text-[#7FB8A3]" />
                     </div>
                     <div className="min-w-0">
                       <p className="text-lg sm:text-2xl font-bold truncate" data-testid="stat-sessions">{filteredStats.sessions}</p>
@@ -1639,12 +1639,12 @@ export default function WidgetAnalytics() {
               </CardHeader>
               <CardContent>
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-                  <div className="flex items-center gap-3 p-3 rounded-lg border bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-900/20 dark:to-blue-800/10 border-blue-200 dark:border-blue-800/30">
-                    <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30">
-                      <Activity className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                  <div className="flex items-center gap-3 p-3 rounded-lg border bg-gradient-to-br from-[#7FB8A3]/10 to-[#7FB8A3]/10/50 dark:from-[#1E2630]/20 dark:to-[#1E2630]/10 border-[#7FB8A3] dark:border-[#12161D]/30">
+                    <div className="p-2 rounded-lg bg-[#7FB8A3]/10 dark:bg-[#1E2630]/30">
+                      <Activity className="h-5 w-5 text-[#8E4F67] dark:text-[#7FB8A3]" />
                     </div>
                     <div>
-                      <p className="text-2xl font-bold text-blue-700 dark:text-blue-400" data-testid="stat-active-sessions">{sessionStats.active}</p>
+                      <p className="text-2xl font-bold text-[#8E4F67] dark:text-[#7FB8A3]" data-testid="stat-active-sessions">{sessionStats.active}</p>
                       <p className="text-xs text-muted-foreground">Active Sessions</p>
                     </div>
                   </div>
@@ -2202,7 +2202,7 @@ export default function WidgetAnalytics() {
                           <p className="text-xs sm:text-sm text-muted-foreground truncate">Total Events</p>
                           <p className="text-lg sm:text-2xl font-bold truncate">{widgetTrends.summary.totalEvents.toLocaleString()}</p>
                         </div>
-                        <Activity className="h-6 w-6 sm:h-8 sm:w-8 text-cyan-500 opacity-80 shrink-0" />
+                        <Activity className="h-6 w-6 sm:h-8 sm:w-8 text-[#7FB8A3] opacity-80 shrink-0" />
                       </div>
                     </CardContent>
                   </Card>
@@ -2314,11 +2314,11 @@ export default function WidgetAnalytics() {
                             type="monotone"
                             dataKey="totalEvents"
                             name="Total Events"
-                            fill="#12EBFC"
+                            fill="#7FB8A3"
                             fillOpacity={0.2}
-                            stroke="#12EBFC"
+                            stroke="#7FB8A3"
                           />
-                          <Bar dataKey="questionAnsweredCount" name="Questions Answered" fill="#0884AA" />
+                          <Bar dataKey="questionAnsweredCount" name="Questions Answered" fill="#8E4F67" />
                           <Bar dataKey="qualificationCompletedCount" name="Qualifications" fill="#10B981" />
                         </ComposedChart>
                       </ResponsiveContainer>
@@ -2354,14 +2354,14 @@ export default function WidgetAnalytics() {
                                 insight.type === 'critical' ? 'bg-red-500/10 border-red-500/30' :
                                 insight.type === 'warning' ? 'bg-amber-500/10 border-amber-500/30' :
                                 insight.type === 'success' ? 'bg-green-500/10 border-green-500/30' :
-                                'bg-cyan-500/10 border-cyan-500/30'
+                                'bg-[#7FB8A3]/100/10 border-[#7FB8A3]/30'
                               }`}
                             >
                               <div className="flex items-start gap-2">
                                 {insight.type === 'critical' && <AlertTriangle className="h-4 w-4 text-red-500 mt-0.5 shrink-0" />}
                                 {insight.type === 'warning' && <AlertTriangle className="h-4 w-4 text-amber-500 mt-0.5 shrink-0" />}
                                 {insight.type === 'success' && <TrendingUp className="h-4 w-4 text-green-500 mt-0.5 shrink-0" />}
-                                {insight.type === 'info' && <Lightbulb className="h-4 w-4 text-cyan-500 mt-0.5 shrink-0" />}
+                                {insight.type === 'info' && <Lightbulb className="h-4 w-4 text-[#7FB8A3] mt-0.5 shrink-0" />}
                                 <div className="flex-1 min-w-0">
                                   <div className="text-sm font-medium">{insight.title}</div>
                                   <p className="text-xs text-muted-foreground mt-1">{insight.description}</p>
@@ -2524,7 +2524,7 @@ export default function WidgetAnalytics() {
                       <Card>
                         <CardHeader>
                           <CardTitle className="flex items-center gap-2">
-                            <Building2 className="h-5 w-5 text-cyan-500" />
+                            <Building2 className="h-5 w-5 text-[#7FB8A3]" />
                             By Industry
                           </CardTitle>
                           <CardDescription>
@@ -2811,14 +2811,14 @@ export default function WidgetAnalytics() {
                     </CardContent>
                   </Card>
 
-                  <Card className="bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-900/20 dark:to-blue-800/10 border-blue-200 dark:border-blue-800/30">
+                  <Card className="bg-gradient-to-br from-[#7FB8A3]/10 to-[#7FB8A3]/10/50 dark:from-[#1E2630]/20 dark:to-[#1E2630]/10 border-[#7FB8A3] dark:border-[#12161D]/30">
                     <CardContent className="p-3 sm:p-6">
                       <div className="flex items-center gap-2 sm:gap-3">
-                        <div className="p-1.5 sm:p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30 shrink-0">
-                          <Target className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 dark:text-blue-400" />
+                        <div className="p-1.5 sm:p-2 rounded-lg bg-[#7FB8A3]/10 dark:bg-[#1E2630]/30 shrink-0">
+                          <Target className="h-4 w-4 sm:h-5 sm:w-5 text-[#8E4F67] dark:text-[#7FB8A3]" />
                         </div>
                         <div className="min-w-0">
-                          <p className="text-lg sm:text-2xl font-bold text-blue-700 dark:text-blue-400" data-testid="stat-valid-percentage">
+                          <p className="text-lg sm:text-2xl font-bold text-[#8E4F67] dark:text-[#7FB8A3]" data-testid="stat-valid-percentage">
                             {widgetQualityStats.data.validPercentage}%
                           </p>
                           <p className="text-xs text-muted-foreground truncate">Valid Percentage</p>
@@ -3174,7 +3174,7 @@ export default function WidgetAnalytics() {
                 {selectedEvent.finalScore !== null && (
                   <div>
                     <h4 className="text-sm font-medium mb-2">Score</h4>
-                    <p className="text-2xl font-bold text-[#02205B]">{selectedEvent.finalScore}%</p>
+                    <p className="text-2xl font-bold text-[#12161D]">{selectedEvent.finalScore}%</p>
                   </div>
                 )}
 

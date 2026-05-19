@@ -89,7 +89,7 @@ export function AssessmentQuestion({ question, value, onChange, isAnimating, isG
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
-          className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gradient-to-r from-purple-500/10 to-[#0884AA]/10 border border-purple-500/20"
+          className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gradient-to-r from-purple-500/10 to-[#8E4F67]/10 border border-purple-500/20"
           data-testid="badge-ai-generated"
         >
           <Sparkles className="h-4 w-4 text-purple-500 flex-shrink-0" />
@@ -102,15 +102,15 @@ export function AssessmentQuestion({ question, value, onChange, isAnimating, isG
         <div className={cn(
           "p-1.5 sm:p-2 rounded-lg flex-shrink-0",
           isGenerated 
-            ? "bg-gradient-to-r from-purple-500/10 to-[#0884AA]/10 text-purple-500" 
-            : "bg-[#0884AA]/10 text-[#0884AA]"
+            ? "bg-gradient-to-r from-purple-500/10 to-[#8E4F67]/10 text-purple-500" 
+            : "bg-[#8E4F67]/10 text-[#8E4F67]"
         )}>
           <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
         </div>
         <div className="flex-1 space-y-1.5 sm:space-y-2 min-w-0">
           <h2 className="text-lg sm:text-xl font-semibold text-foreground leading-snug sm:leading-tight">
             {question.questionText}
-            {question.required && <span className="text-[#0884AA] ml-1">*</span>}
+            {question.required && <span className="text-[#8E4F67] ml-1">*</span>}
           </h2>
           {question.helpText && (
             <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{question.helpText}</p>
@@ -273,8 +273,8 @@ function SingleSelectInput({ value, onChange, question }: { value: any; onChange
               <Card className={cn(
                 "p-3 sm:p-4 transition-all border-2 min-h-[52px] active:scale-[0.98]",
                 isSelected 
-                  ? "border-[#0884AA] bg-[#0884AA]/5 shadow-md" 
-                  : "border-transparent hover:border-[#0884AA]/30 hover-elevate active:bg-muted/50"
+                  ? "border-[#8E4F67] bg-[#8E4F67]/5 shadow-md" 
+                  : "border-transparent hover:border-[#8E4F67]/30 hover-elevate active:bg-muted/50"
               )}>
                 <div className="flex items-start gap-3">
                   <div className="flex items-center justify-center min-h-[24px] min-w-[24px] mt-0.5">
@@ -294,7 +294,7 @@ function SingleSelectInput({ value, onChange, question }: { value: any; onChange
                     )}
                   </div>
                   {isSelected && (
-                    <CheckCircle2 className="h-5 w-5 text-[#0884AA] flex-shrink-0" />
+                    <CheckCircle2 className="h-5 w-5 text-[#8E4F67] flex-shrink-0" />
                   )}
                 </div>
               </Card>
@@ -383,7 +383,7 @@ function MultiSelectInput({ value, onChange, question }: { value: any; onChange:
     <div className="space-y-3 sm:space-y-4">
       {maxSelections && (
         <div className="flex flex-wrap items-center gap-2 text-sm">
-          <Badge variant={isMaxReached ? "default" : "outline"} className={isMaxReached ? "bg-[#0884AA]" : ""}>
+          <Badge variant={isMaxReached ? "default" : "outline"} className={isMaxReached ? "bg-[#8E4F67]" : ""}>
             {countableSelections.length}/{maxSelections} selected
           </Badge>
           {!isMaxReached && (
@@ -412,10 +412,10 @@ function MultiSelectInput({ value, onChange, question }: { value: any; onChange:
                 <Card className={cn(
                   "p-3 sm:p-4 transition-all border-2 min-h-[52px] active:scale-[0.98]",
                   isSelected 
-                    ? "border-[#0884AA] bg-[#0884AA]/5 shadow-md" 
+                    ? "border-[#8E4F67] bg-[#8E4F67]/5 shadow-md" 
                     : isDisabled
                       ? "border-transparent opacity-50"
-                      : "border-transparent hover:border-[#0884AA]/30 hover-elevate active:bg-muted/50"
+                      : "border-transparent hover:border-[#8E4F67]/30 hover-elevate active:bg-muted/50"
                 )}>
                   <div className="flex items-start gap-3">
                     <div className="flex items-center justify-center min-h-[24px] min-w-[24px] mt-0.5">
@@ -439,7 +439,7 @@ function MultiSelectInput({ value, onChange, question }: { value: any; onChange:
                       )}
                     </div>
                     {isSelected && (
-                      <CheckCircle2 className="h-5 w-5 text-[#0884AA] flex-shrink-0" />
+                      <CheckCircle2 className="h-5 w-5 text-[#8E4F67] flex-shrink-0" />
                     )}
                   </div>
                 </Card>
@@ -464,10 +464,10 @@ function MultiSelectInput({ value, onChange, question }: { value: any; onChange:
             <Card className={cn(
               "p-3 sm:p-4 transition-all border-2 min-h-[52px] active:scale-[0.98]",
               isOtherSelected 
-                ? "border-[#0884AA] bg-[#0884AA]/5 shadow-md" 
+                ? "border-[#8E4F67] bg-[#8E4F67]/5 shadow-md" 
                 : isNotApplicableSelected
                   ? "border-transparent opacity-50"
-                  : "border-transparent hover:border-[#0884AA]/30 hover-elevate active:bg-muted/50"
+                  : "border-transparent hover:border-[#8E4F67]/30 hover-elevate active:bg-muted/50"
             )}>
               <div className="flex items-start gap-3">
                 <div className="flex items-center justify-center min-h-[24px] min-w-[24px] mt-0.5">

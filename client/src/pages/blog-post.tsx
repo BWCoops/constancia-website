@@ -393,7 +393,7 @@ export default function BlogPostPage() {
             <div 
               className="flex flex-wrap items-center gap-2 mb-4"
             >
-              <Badge variant="secondary" className="bg-[#12EBFC]/10 text-brand-teal dark:text-brand-cyan">
+              <Badge variant="secondary" className="bg-[#7FB8A3]/10 text-brand-teal dark:text-brand-cyan">
                 {getCategoryName(post.categoryId)}
               </Badge>
               {post.featured && <Badge variant="outline">Featured</Badge>}
@@ -441,7 +441,7 @@ export default function BlogPostPage() {
             className="prose prose-lg dark:prose-invert max-w-none mb-12 
               prose-headings:text-foreground prose-headings:font-bold
               prose-h1:text-3xl prose-h1:mt-10 prose-h1:mb-6 prose-h1:border-b prose-h1:border-border prose-h1:pb-4
-              prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4 prose-h2:text-[#02205B] dark:prose-h2:text-brand-cyan
+              prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4 prose-h2:text-[#12161D] dark:prose-h2:text-brand-cyan
               prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3 prose-h3:text-brand-teal dark:prose-h3:text-brand-cyan/80
               prose-h4:text-lg prose-h4:mt-4 prose-h4:mb-2
               prose-p:text-muted-foreground prose-p:leading-relaxed prose-p:mb-4
@@ -449,7 +449,7 @@ export default function BlogPostPage() {
               prose-ul:my-4 prose-ol:my-4
               prose-strong:text-foreground prose-strong:font-semibold
               prose-a:text-brand-teal dark:prose-a:text-brand-cyan prose-a:no-underline hover:prose-a:underline
-              prose-blockquote:border-l-[#12EBFC] prose-blockquote:bg-muted/30 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-r-lg
+              prose-blockquote:border-l-[#7FB8A3] prose-blockquote:bg-muted/30 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-r-lg
               prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm
               prose-img:rounded-xl prose-img:shadow-lg prose-img:my-8"
             data-testid="text-post-content"
@@ -469,16 +469,16 @@ export default function BlogPostPage() {
                   }
                   return (
                     <h2 
-                      className="text-xl sm:text-2xl font-bold mt-12 mb-6 text-[#02205B] dark:text-brand-cyan relative pl-5"
+                      className="text-xl sm:text-2xl font-bold mt-12 mb-6 text-[#12161D] dark:text-brand-cyan relative pl-5"
                     >
-                      <span className="absolute left-0 top-0 bottom-0 w-1 rounded-full bg-gradient-to-b from-[#12EBFC] to-[#0884AA]" />
+                      <span className="absolute left-0 top-0 bottom-0 w-1 rounded-full bg-gradient-to-b from-[#7FB8A3] to-[#8E4F67]" />
                       {children}
                     </h2>
                   );
                 },
                 h3: ({children}) => (
                   <h3 
-                    className="text-lg sm:text-xl font-semibold mt-8 mb-4 text-brand-teal dark:text-brand-cyan/80 border-l-2 border-[#12EBFC]/50 pl-3"
+                    className="text-lg sm:text-xl font-semibold mt-8 mb-4 text-brand-teal dark:text-brand-cyan/80 border-l-2 border-[#7FB8A3]/50 pl-3"
                   >
                     {children}
                   </h3>
@@ -599,7 +599,7 @@ export default function BlogPostPage() {
                   const validItems = items.filter(item => item != null);
                   return (
                     <div 
-                      className="my-6 p-4 bg-gradient-to-br from-[#02205B]/5 via-transparent to-[#12EBFC]/5 dark:from-[#02205B]/15 dark:to-[#12EBFC]/10 border border-[#12EBFC]/20 rounded-xl"
+                      className="my-6 p-4 bg-gradient-to-br from-[#12161D]/5 via-transparent to-[#7FB8A3]/5 dark:from-[#12161D]/15 dark:to-[#7FB8A3]/10 border border-[#7FB8A3]/20 rounded-xl"
                     >
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                         {validItems}
@@ -612,7 +612,7 @@ export default function BlogPostPage() {
                   const validItems = items.filter(item => item != null);
                   return (
                     <div 
-                      className="my-6 p-4 bg-gradient-to-br from-[#02205B]/5 via-transparent to-[#12EBFC]/5 dark:from-[#02205B]/15 dark:to-[#12EBFC]/10 border border-[#12EBFC]/20 rounded-xl"
+                      className="my-6 p-4 bg-gradient-to-br from-[#12161D]/5 via-transparent to-[#7FB8A3]/5 dark:from-[#12161D]/15 dark:to-[#7FB8A3]/10 border border-[#7FB8A3]/20 rounded-xl"
                     >
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                         {validItems}
@@ -621,8 +621,8 @@ export default function BlogPostPage() {
                   );
                 },
                 li: ({children}) => (
-                  <div className="flex items-start gap-2 py-1.5 px-2 rounded-md hover:bg-[#12EBFC]/5 transition-colors group">
-                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gradient-to-br from-[#12EBFC] to-[#0884AA] flex items-center justify-center mt-0.5 shadow-sm">
+                  <div className="flex items-start gap-2 py-1.5 px-2 rounded-md hover:bg-[#7FB8A3]/5 transition-colors group">
+                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gradient-to-br from-[#7FB8A3] to-[#8E4F67] flex items-center justify-center mt-0.5 shadow-sm">
                       <CheckCircle2 className="w-3 h-3 text-white" />
                     </div>
                     <span className="text-sm text-foreground leading-relaxed flex-1">{children}</span>
@@ -630,7 +630,7 @@ export default function BlogPostPage() {
                 ),
                 blockquote: ({children}) => (
                   <blockquote 
-                    className="my-8 border-l-4 border-[#12EBFC] bg-gradient-to-r from-[#12EBFC]/5 to-transparent py-5 px-6 rounded-r-lg italic text-muted-foreground"
+                    className="my-8 border-l-4 border-[#7FB8A3] bg-gradient-to-r from-[#7FB8A3]/5 to-transparent py-5 px-6 rounded-r-lg italic text-muted-foreground"
                   >
                     {children}
                   </blockquote>
@@ -679,9 +679,9 @@ export default function BlogPostPage() {
                 },
                 hr: () => (
                   <div className="my-12 flex items-center gap-4">
-                    <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#12EBFC]/30 to-transparent" />
-                    <div className="w-2 h-2 rounded-full bg-[#12EBFC]/30" />
-                    <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#12EBFC]/30 to-transparent" />
+                    <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#7FB8A3]/30 to-transparent" />
+                    <div className="w-2 h-2 rounded-full bg-[#7FB8A3]/30" />
+                    <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#7FB8A3]/30 to-transparent" />
                   </div>
                 ),
                 code: ({className, children, ...props}) => {
@@ -717,7 +717,7 @@ export default function BlogPostPage() {
             className="flex flex-wrap gap-2 mb-12 pt-6 border-t border-border"
           >
             {post.tags.map(tag => (
-              <Badge key={tag} variant="outline" className="hover:bg-[#12EBFC]/10 transition-colors">
+              <Badge key={tag} variant="outline" className="hover:bg-[#7FB8A3]/10 transition-colors">
                 <Tag className="w-3 h-3 mr-1" />
                 {tag}
               </Badge>
@@ -729,7 +729,7 @@ export default function BlogPostPage() {
               className="pt-8 border-t border-border"
             >
               <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                <span className="w-1 h-8 bg-gradient-to-b from-[#12EBFC] to-[#0884AA] rounded-full" />
+                <span className="w-1 h-8 bg-gradient-to-b from-[#7FB8A3] to-[#8E4F67] rounded-full" />
                 Related Articles
               </h2>
               <div className="grid md:grid-cols-3 gap-6">

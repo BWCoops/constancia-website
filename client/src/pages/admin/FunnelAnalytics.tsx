@@ -252,8 +252,8 @@ function FunnelVisualization({ stages }: { stages: FunnelStage[] }) {
 
   const STAGE_COLORS = [
     { bg: "bg-primary", text: "text-primary-foreground" },
-    { bg: "bg-blue-500", text: "text-white" },
-    { bg: "bg-cyan-500", text: "text-white" },
+    { bg: "bg-[#7FB8A3]/100", text: "text-white" },
+    { bg: "bg-[#7FB8A3]/100", text: "text-white" },
     { bg: "bg-teal-500", text: "text-white" },
     { bg: "bg-emerald-500", text: "text-white" },
   ];
@@ -605,8 +605,8 @@ export default function FunnelAnalytics() {
                         {funnelStats.funnel.find(f => f.name === "assessment_complete")?.count.toLocaleString() || 0}
                       </p>
                     </div>
-                    <div className="h-8 w-8 md:h-10 md:w-10 rounded-full bg-cyan-500/10 flex items-center justify-center shrink-0">
-                      <FileText className="h-4 w-4 md:h-5 md:w-5 text-cyan-500" />
+                    <div className="h-8 w-8 md:h-10 md:w-10 rounded-full bg-[#7FB8A3]/100/10 flex items-center justify-center shrink-0">
+                      <FileText className="h-4 w-4 md:h-5 md:w-5 text-[#7FB8A3]" />
                     </div>
                   </div>
                   {trendData?.trendData && (
@@ -643,8 +643,8 @@ export default function FunnelAnalytics() {
               <Card className="bg-muted/50 border-dashed">
                 <CardContent className="py-6">
                   <div className="flex items-start gap-4">
-                    <div className="h-10 w-10 rounded-full bg-blue-500/10 flex items-center justify-center shrink-0">
-                      <Lightbulb className="h-5 w-5 text-blue-500" />
+                    <div className="h-10 w-10 rounded-full bg-[#7FB8A3]/100/10 flex items-center justify-center shrink-0">
+                      <Lightbulb className="h-5 w-5 text-[#7FB8A3]" />
                     </div>
                     <div>
                       <h3 className="font-medium mb-1">Getting Started with Funnel Analytics</h3>

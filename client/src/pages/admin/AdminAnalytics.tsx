@@ -200,7 +200,7 @@ interface WeeklyComparison {
   };
 }
 
-const COLORS = ['#12EBFC', '#0884AA', '#02205B', '#4ECDC4', '#45B7D1', '#FF6B6B', '#96CEB4'];
+const COLORS = ['#7FB8A3', '#8E4F67', '#12161D', '#4ECDC4', '#45B7D1', '#FF6B6B', '#96CEB4'];
 
 function TrendIndicator({ change, label }: { change: number; label: string }) {
   const isPositive = change >= 0;
@@ -822,17 +822,17 @@ function AnalyticsContent() {
                     <Line 
                       type="monotone" 
                       dataKey="views" 
-                      stroke="#12EBFC" 
+                      stroke="#7FB8A3" 
                       strokeWidth={2}
-                      dot={{ fill: "#12EBFC", strokeWidth: 0 }}
-                      activeDot={{ r: 6, fill: "#12EBFC" }}
+                      dot={{ fill: "#7FB8A3", strokeWidth: 0 }}
+                      activeDot={{ r: 6, fill: "#7FB8A3" }}
                       name="Page Views"
                     />
                     {(dailyStats?.length || 0) > 14 && (
                       <Brush 
                         dataKey="date" 
                         height={25} 
-                        stroke="#12EBFC"
+                        stroke="#7FB8A3"
                         tickFormatter={(value) => new Date(value).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}
                       />
                     )}
@@ -992,7 +992,7 @@ function AnalyticsContent() {
                             borderRadius: "8px"
                           }}
                         />
-                        <Bar dataKey="sessions" fill="#12EBFC" radius={[0, 4, 4, 0]} />
+                        <Bar dataKey="sessions" fill="#7FB8A3" radius={[0, 4, 4, 0]} />
                       </BarChart>
                     </ResponsiveContainer>
                   </div>
@@ -1126,7 +1126,7 @@ function AnalyticsContent() {
                             borderRadius: "8px"
                           }}
                         />
-                        <Bar dataKey="count" fill="#0884AA" radius={[4, 4, 0, 0]} />
+                        <Bar dataKey="count" fill="#8E4F67" radius={[4, 4, 0, 0]} />
                       </BarChart>
                     </ResponsiveContainer>
                   </div>

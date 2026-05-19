@@ -676,7 +676,7 @@ export default function AdminGuardrails() {
                               </div>
                               <p className="text-sm text-muted-foreground">{v.message}</p>
                               {v.suggestedFix && (
-                                <p className="text-sm text-blue-600 mt-1">
+                                <p className="text-sm text-[#8E4F67] mt-1">
                                   Suggested fix: {v.suggestedFix}
                                 </p>
                               )}

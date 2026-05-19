@@ -27,31 +27,31 @@ const PageHeroComponent = ({
         />
 
         <div 
-          className="absolute inset-0 bg-gradient-to-br from-[#02205B] via-[#041E52] to-[#0A2E6E]"
+          className="absolute inset-0 bg-gradient-to-br from-[#12161D] via-[#1E2630] to-[#1E2630]"
           aria-hidden="true"
         />
 
         <div
-          className="absolute top-0 right-0 w-[60%] h-full bg-gradient-to-l from-[#0884AA]/12 via-transparent to-transparent"
+          className="absolute top-0 right-0 w-[60%] h-full bg-gradient-to-l from-[#8E4F67]/12 via-transparent to-transparent"
           aria-hidden="true"
         />
 
         <div
-          className="absolute bottom-0 left-0 w-[50%] h-[60%] bg-gradient-to-tr from-[#12EBFC]/5 via-transparent to-transparent"
+          className="absolute bottom-0 left-0 w-[50%] h-[60%] bg-gradient-to-tr from-[#7FB8A3]/5 via-transparent to-transparent"
           aria-hidden="true"
         />
 
         <div
-          className="hidden md:block absolute top-[15%] right-[10%] w-[400px] h-[400px] rounded-full bg-[#0884AA]/8 blur-[100px]"
+          className="hidden md:block absolute top-[15%] right-[10%] w-[400px] h-[400px] rounded-full bg-[#8E4F67]/8 blur-[100px]"
           aria-hidden="true"
         />
         <div
-          className="hidden md:block absolute bottom-[20%] left-[5%] w-[300px] h-[300px] rounded-full bg-[#12EBFC]/5 blur-[80px]"
+          className="hidden md:block absolute bottom-[20%] left-[5%] w-[300px] h-[300px] rounded-full bg-[#7FB8A3]/5 blur-[80px]"
           aria-hidden="true"
         />
 
         <div
-          className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#12EBFC]/20 to-transparent"
+          className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#7FB8A3]/20 to-transparent"
           aria-hidden="true"
         />
 
@@ -67,7 +67,7 @@ const PageHeroComponent = ({
           </div>
 
           <div className="inline-flex items-center gap-2 sm:gap-2.5 px-4 sm:px-5 py-2 rounded-full bg-white/[0.06] backdrop-blur-sm border border-white/[0.08] mb-8 max-w-[90vw]">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#12EBFC] flex-shrink-0" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#7FB8A3] flex-shrink-0" />
             <span className="text-[10px] sm:text-xs font-medium text-white/70 tracking-wider sm:tracking-widest uppercase text-center leading-snug">{badge}</span>
           </div>
 
@@ -103,7 +103,7 @@ const PageHeroComponent = ({
       </section>
       
       <div 
-        className="absolute bottom-0 left-0 right-0 h-32 md:h-40 bg-gradient-to-b from-transparent to-[#15355C] pointer-events-none"
+        className="absolute bottom-0 left-0 right-0 h-32 md:h-40 bg-gradient-to-b from-transparent to-[#1E2630] pointer-events-none"
         aria-hidden="true" 
       />
     </div>

@@ -40,7 +40,7 @@ const fileTypeIcons: Record<string, typeof FileText> = {
 
 const fileTypeColors: Record<string, string> = {
   pdf: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
-  doc: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
+  doc: "bg-[#7FB8A3]/10 text-[#8E4F67] dark:bg-[#1E2630]/30 dark:text-[#7FB8A3]",
   xls: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
   zip: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400",
   video: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400",
@@ -174,7 +174,7 @@ export default function FilesPage() {
                       <div className="flex gap-2">
                         <Button 
                           size="sm" 
-                          className="flex-1 bg-gradient-to-r from-[#02205B] to-[#0884AA]"
+                          className="flex-1 bg-gradient-to-r from-[#12161D] to-[#8E4F67]"
                           onClick={() => handleDownload(file)}
                           data-testid={`button-download-${file.id}`}
                         >
@@ -220,7 +220,7 @@ export default function FilesPage() {
                       onClick={() => setSelectedCategory(null)}
                       className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
                         !selectedCategory 
-                          ? "bg-[#12EBFC]/10 text-brand-teal dark:text-brand-cyan" 
+                          ? "bg-[#7FB8A3]/10 text-brand-teal dark:text-brand-cyan" 
                           : "hover:bg-muted text-muted-foreground"
                       }`}
                       data-testid="button-file-category-all"
@@ -233,7 +233,7 @@ export default function FilesPage() {
                         onClick={() => setSelectedCategory(category)}
                         className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
                           selectedCategory === category 
-                            ? "bg-[#12EBFC]/10 text-brand-teal dark:text-brand-cyan" 
+                            ? "bg-[#7FB8A3]/10 text-brand-teal dark:text-brand-cyan" 
                             : "hover:bg-muted text-muted-foreground"
                         }`}
                         data-testid={`button-file-category-${category.toLowerCase().replace(/\s+/g, '-')}`}
@@ -332,7 +332,7 @@ export default function FilesPage() {
                           </Button>
                           <Button 
                             size="sm"
-                            className="bg-gradient-to-r from-[#02205B] to-[#0884AA]"
+                            className="bg-gradient-to-r from-[#12161D] to-[#8E4F67]"
                             onClick={() => handleDownload(file)}
                             data-testid={`button-download-${file.id}`}
                           >

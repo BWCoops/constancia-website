@@ -194,17 +194,17 @@ export default function SolutionsPage() {
                 >
                   <div className="flex gap-6 md:gap-8">
                     <div className="flex flex-col items-center">
-                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br from-brand-navy via-brand-teal to-brand-cyan flex items-center justify-center flex-shrink-0 shadow-xl shadow-[#0884AA]/30">
+                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br from-brand-navy via-brand-teal to-brand-cyan flex items-center justify-center flex-shrink-0 shadow-xl shadow-[#8E4F67]/30">
                         <step.icon className="w-8 h-8 md:w-10 md:h-10 text-white" />
                       </div>
                       {index < journeySteps.length - 1 && (
-                        <div className="w-1 flex-1 min-h-[40px] bg-gradient-to-b from-[#12EBFC] to-[#0884AA]/30 my-4 rounded-full" />
+                        <div className="w-1 flex-1 min-h-[40px] bg-gradient-to-b from-[#7FB8A3] to-[#8E4F67]/30 my-4 rounded-full" />
                       )}
                     </div>
                     
                     <div className="flex-1 pb-12">
                       <div className="flex items-center gap-3 mb-2">
-                        <span className="text-xs font-bold uppercase tracking-widest text-brand-teal bg-[#12EBFC]/10 px-3 py-1 rounded-full">
+                        <span className="text-xs font-bold uppercase tracking-widest text-brand-teal bg-[#7FB8A3]/10 px-3 py-1 rounded-full">
                           Step {step.number}
                         </span>
                       </div>
@@ -264,7 +264,7 @@ export default function SolutionsPage() {
         <section className="py-8 sm:py-16 lg:py-24 bg-hp-secondary" id="comparison-tools">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="text-center mb-12">
-              <Badge className="mb-4 bg-[#12EBFC]/10 text-brand-teal border-0">
+              <Badge className="mb-4 bg-[#7FB8A3]/10 text-brand-teal border-0">
                 Comparison Tools
               </Badge>
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -282,7 +282,7 @@ export default function SolutionsPage() {
                     <Card className="h-full hover-elevate cursor-pointer group relative overflow-visible border-0 shadow-md hover:shadow-xl transition-shadow">
                       {tool.highlight && (
                         <div className="absolute -top-3 left-4 z-10">
-                          <Badge className="bg-[#12EBFC] text-[#02205B] font-semibold text-xs px-3 py-1 shadow-sm">
+                          <Badge className="bg-[#7FB8A3] text-[#12161D] font-semibold text-xs px-3 py-1 shadow-sm">
                             {tool.highlight}
                           </Badge>
                         </div>
@@ -322,7 +322,7 @@ export default function SolutionsPage() {
         <section className="py-8 sm:py-16 lg:py-24" id="maturity-assessment">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="text-center mb-12">
-              <Badge className="mb-4 bg-[#12EBFC]/10 text-brand-teal border-0">
+              <Badge className="mb-4 bg-[#7FB8A3]/10 text-brand-teal border-0">
                 Maturity Assessment
               </Badge>
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -358,7 +358,7 @@ export default function SolutionsPage() {
                     <Link href="/finance-compass">
                       <Button
                         size="lg"
-                        className="bg-[#12EBFC] text-[#02205B] hover:bg-[#12EBFC]/90 font-semibold"
+                        className="bg-[#7FB8A3] text-[#12161D] hover:bg-[#7FB8A3]/90 font-semibold"
                         data-testid="button-maturity-assessment-cta"
                       >
                         Begin Assessment
@@ -386,9 +386,9 @@ export default function SolutionsPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
               {benefits.map((benefit) => (
                 <div key={benefit.title}>
-                  <Card className="h-full text-center hover-elevate bg-gradient-to-br from-background via-background to-[#0884AA]/5">
+                  <Card className="h-full text-center hover-elevate bg-gradient-to-br from-background via-background to-[#8E4F67]/5">
                     <CardHeader>
-                      <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-brand-navy via-brand-teal to-brand-cyan flex items-center justify-center mx-auto mb-4 shadow-lg shadow-[#0884AA]/20">
+                      <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-brand-navy via-brand-teal to-brand-cyan flex items-center justify-center mx-auto mb-4 shadow-lg shadow-[#8E4F67]/20">
                         <benefit.icon className="w-8 h-8 text-white" />
                       </div>
                       <CardTitle className="text-xl text-foreground">{benefit.title}</CardTitle>
@@ -419,9 +419,9 @@ export default function SolutionsPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
               {aiCapabilities.map((capability) => (
                 <div key={capability.title}>
-                  <Card className="h-full hover-elevate text-center bg-gradient-to-br from-background via-background to-[#12EBFC]/5">
+                  <Card className="h-full hover-elevate text-center bg-gradient-to-br from-background via-background to-[#7FB8A3]/5">
                     <CardHeader className="items-center">
-                      <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-brand-navy via-brand-teal to-brand-cyan flex items-center justify-center mb-4 shadow-lg shadow-[#12EBFC]/20">
+                      <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-brand-navy via-brand-teal to-brand-cyan flex items-center justify-center mb-4 shadow-lg shadow-[#7FB8A3]/20">
                         <capability.icon className="w-7 h-7 text-white" />
                       </div>
                       <CardTitle className="text-lg text-foreground">{capability.title}</CardTitle>

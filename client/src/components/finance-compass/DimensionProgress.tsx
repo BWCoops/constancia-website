@@ -47,9 +47,9 @@ const iconMap: Record<string, typeof TrendingUp> = {
 };
 
 const colorMap: Record<string, string> = {
-  "#0884AA": "text-[#0A6688] bg-[#0884AA]/10",
-  "#12EBFC": "text-[#12EBFC] bg-[#12EBFC]/10",
-  "#02205B": "text-[#02205B] bg-[#02205B]/10",
+  "#8E4F67": "text-[#0A6688] bg-[#8E4F67]/10",
+  "#7FB8A3": "text-[#7FB8A3] bg-[#7FB8A3]/10",
+  "#12161D": "text-[#12161D] bg-[#12161D]/10",
   "#6366F1": "text-indigo-500 bg-indigo-500/10",
   "#10B981": "text-emerald-500 bg-emerald-500/10",
   "#F59E0B": "text-amber-500 bg-amber-500/10",
@@ -105,7 +105,7 @@ export function DimensionProgress({
                 onClick={() => onDimensionClick?.(dimension.id)}
                 className={cn(
                   "w-full flex items-center gap-3 p-3 rounded-lg transition-all text-left",
-                  isCurrent && "bg-[#0884AA]/10 border border-[#0884AA]/30",
+                  isCurrent && "bg-[#8E4F67]/10 border border-[#8E4F67]/30",
                   !isCurrent && "hover-elevate",
                   dimension.isCompleted && "opacity-80"
                 )}
@@ -154,7 +154,7 @@ export function DimensionProgress({
                       transition={{ duration: 0.5, ease: "easeOut" }}
                       className={cn(
                         "h-full rounded-full",
-                        dimension.isCompleted ? "bg-emerald-500" : "bg-[#0884AA]"
+                        dimension.isCompleted ? "bg-emerald-500" : "bg-[#8E4F67]"
                       )}
                     />
                   </div>
@@ -177,7 +177,7 @@ export function DimensionProgress({
             exit={{ opacity: 0, y: -20 }}
             className="border-t pt-4"
           >
-            <div className="bg-gradient-to-r from-emerald-500/10 to-[#0884AA]/10 rounded-lg p-4 text-center">
+            <div className="bg-gradient-to-r from-emerald-500/10 to-[#8E4F67]/10 rounded-lg p-4 text-center">
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}

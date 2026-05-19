@@ -20,10 +20,10 @@ import type { TDocumentDefinitions, Content, TableCell, Style, StyleDictionary }
 
 // Brand colors matching 1QG guidelines
 const BRAND_COLORS = {
-  navy: "#02205B",
-  cyan: "#12EBFC",
-  teal: "#0884AA",
-  cream: "#FEFFF3",
+  navy: "#12161D",
+  cyan: "#7FB8A3",
+  teal: "#8E4F67",
+  cream: "#F6F3EE",
   white: "#FFFFFF",
   darkGray: "#333333",
   lightGray: "#F5F5F5",

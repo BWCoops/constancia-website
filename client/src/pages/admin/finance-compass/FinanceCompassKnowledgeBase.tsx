@@ -72,7 +72,7 @@ interface KnowledgeBaseEntry {
 function getContentTypeBadgeClass(contentType: string) {
   switch (contentType) {
     case "article":
-      return "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400";
+      return "bg-[#7FB8A3]/10 text-[#8E4F67] dark:bg-[#1E2630]/30 dark:text-[#7FB8A3]";
     case "faq":
       return "bg-teal-100 text-teal-700 dark:bg-teal-900/30 dark:text-teal-400";
     case "guide":
@@ -87,7 +87,7 @@ function getContentTypeBadgeClass(contentType: string) {
 function getCategoryBadgeClass(category: string) {
   switch (category) {
     case "epm":
-      return "bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-400";
+      return "bg-[#7FB8A3]/10 text-[#8E4F67] dark:bg-[#1E2630]/30 dark:text-[#7FB8A3]";
     case "erp":
       return "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400";
     case "finance":

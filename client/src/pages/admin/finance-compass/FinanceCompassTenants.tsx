@@ -64,7 +64,7 @@ function TenantsContent() {
     name: "",
     slug: "",
     domain: "",
-    primaryColor: "#12EBFC",
+    primaryColor: "#7FB8A3",
     active: true,
   });
   const { toast } = useToast();
@@ -80,7 +80,7 @@ function TenantsContent() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/admin/finance-compass/tenants"] });
       setIsCreateOpen(false);
-      setNewTenant({ name: "", slug: "", domain: "", primaryColor: "#12EBFC", active: true });
+      setNewTenant({ name: "", slug: "", domain: "", primaryColor: "#7FB8A3", active: true });
       toast({ title: "Tenant created successfully" });
     },
     onError: () => {
@@ -369,7 +369,7 @@ function TenantsContent() {
                 <Input
                   value={newTenant.primaryColor}
                   onChange={(e) => setNewTenant({ ...newTenant, primaryColor: e.target.value })}
-                  placeholder="#12EBFC"
+                  placeholder="#7FB8A3"
                   className="flex-1"
                 />
               </div>
