@@ -78,17 +78,30 @@ function scheduleDaily(): void {
 /**
  * Boot wiring. Idempotent — calling twice is a no-op for the seed and
  * cron; the rollup refresh will just re-process today's partial data.
+ *
+ * Tolerates a missing schema: if the new tables haven't been pushed
+ * via `npm run db:push` yet, every step logs and continues so the
+ * rest of the app starts fine.
  */
 export async function initAnalyticsScheduler(): Promise<void> {
-  await seedFunnelStages();
+  try {
+    await seedFunnelStages();
+  } catch (err) {
+    log.warn({ err: (err as Error).message }, "Seed funnel stages skipped (likely missing schema — run `npm run db:push`)");
+    return;
+  }
 
   // First-boot backfill: if daily_rollup is empty, populate the last 30
   // days from raw events. Cheap on a small site; on large data it's a
   // one-off cost. After that, the nightly job keeps it current.
-  const existing = await db.select().from(analyticsDailyRollup).limit(1);
-  if (existing.length === 0) {
-    log.info("No daily rollups present — backfilling last 60 days");
-    void backfillRollups(60).catch(err => log.error({ err }, "Initial backfill failed"));
+  try {
+    const existing = await db.select().from(analyticsDailyRollup).limit(1);
+    if (existing.length === 0) {
+      log.info("No daily rollups present — backfilling last 60 days");
+      void backfillRollups(60).catch(err => log.error({ err }, "Initial backfill failed"));
+    }
+  } catch (err) {
+    log.warn({ err: (err as Error).message }, "Rollup backfill check skipped — schema not ready");
   }
 
   // Refresh insights once shortly after boot so the dashboard isn't
