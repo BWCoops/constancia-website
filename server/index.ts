@@ -307,7 +307,10 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     "manifest-src 'self'",
     "upgrade-insecure-requests",
     "block-all-mixed-content",
-    // Allow service worker for performance (asset caching) - restricted to self origin only
+    // Allow workers from same-origin plus blob URLs. Same-origin covers the
+    // app's own service worker for asset caching; blob: is needed because
+    // Clerk spawns blob: workers for crypto and session refresh (the sign-in
+    // flow throws "Refused to create a worker from 'blob:'" without it).
     "worker-src 'self' blob:",
     // CSP violation reporting - both legacy report-uri and modern report-to
     "report-uri /api/csp-report",

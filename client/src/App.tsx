@@ -288,6 +288,12 @@ function Router() {
           <Route path="/admin/login" component={AdminLogin} />
           <Route path="/admin/access-denied" component={AdminAccessDenied} />
           <Route path="/admin/login/mfa-verify" component={AdminSecurityMfaVerify} />
+          {/* Clerk's <SignIn> uses sub-routes during multi-step / OAuth flows
+              (e.g. /admin/login/sso-callback, /admin/login/factor-one).
+              Wildcard keeps them all on AdminLogin so Clerk handles them
+              internally instead of bouncing to NotFound. Must come AFTER the
+              specific /admin/login/mfa-verify route above. */}
+          <Route path="/admin/login/:rest*" component={AdminLogin} />
           <Route path="/admin/dashboard">
             <AdminRoute component={AdminDashboard} />
           </Route>
