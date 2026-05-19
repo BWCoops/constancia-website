@@ -12,3 +12,9 @@ coverage/
 .upm/
 .cache/
 *.tsbuildinfo
+
+# Playwright MCP working dir + ad-hoc screenshots
+.playwright-mcp/
+constancia-current.png
+replit-block.png
+*-debug.png
