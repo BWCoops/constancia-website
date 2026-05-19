@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { Linkedin, Mail, MapPin, ArrowUpRight } from "@/lib/icons";
-import logoWhite from "@assets/constancia-logo.png";
+import logoWhite from "@assets/constancia-logo-dark.png";
 import { VisitorDataManager } from "@/components/visitor-data-manager";
 import { useFeatureFlags } from "@/lib/feature-flags";
 import type { FeatureFlags } from "@shared/feature-flags";

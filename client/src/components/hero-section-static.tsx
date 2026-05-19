@@ -162,6 +162,7 @@ export function HeroSectionStatic() {
     const FRAG = `
       uniform float uTime; uniform vec3 uMint; uniform vec3 uDeepMint;
       uniform vec3 uRose; uniform vec3 uBerry;
+      uniform vec3 uSlate; uniform vec3 uGraphite;
       uniform vec3 uLightDir; uniform vec3 uCamPos; uniform float uOpacity;
       uniform float uDissolve;
       varying vec2 vUv; varying float vEle; varying vec3 vNormal; varying vec3 vWorldPos;
@@ -175,6 +176,11 @@ export function HeroSectionStatic() {
         float ele = smoothstep(-0.45, 0.55, vEle);
         vec3 hueLit   = mix(uMint, uRose, ele);
         vec3 hueShade = mix(uDeepMint, uBerry, ele);
+        // Deep-shadow anchor — slate fading toward graphite. Pulled into the
+        // shaded side so the fabric has actual depth instead of flat mid-tones,
+        // especially in the dive sections further from camera.
+        vec3 deepShade = mix(uSlate, uGraphite, ele);
+        hueShade = mix(deepShade, hueShade, 0.55);
         vec3 col = mix(hueShade, hueLit, lit);
         float spec = pow(clamp(dot(N, H), 0.0, 1.0), 64.0);
         col += vec3(1.0, 0.97, 0.94) * spec * 0.22;
@@ -185,6 +191,9 @@ export function HeroSectionStatic() {
         float edge = edgeX * edgeY;
         float r = distance(vUv, vec2(0.5));
         float dissolveMask = smoothstep(uDissolve, max(uDissolve - 0.20, 0.001), r);
+        // Distance darkening: fabric in the back recedes into slate.
+        float depth = smoothstep(2.0, 14.0, length(vWorldPos.xz));
+        col = mix(col, uSlate * 0.45, depth * 0.32);
         float fog = smoothstep(22.0, 4.0, length(vWorldPos.xz));
         col = mix(vec3(0.965, 0.953, 0.933), col, fog * 0.88);
         gl_FragColor = vec4(col, edge * uOpacity * dissolveMask);
@@ -192,10 +201,12 @@ export function HeroSectionStatic() {
     `;
 
     const COL = {
-      MINT: new THREE.Color("#7FB8A3"),
+      MINT:     new THREE.Color("#7FB8A3"),
       DEEPMINT: new THREE.Color("#5E8D7A"),
-      ROSE: new THREE.Color("#C77A93"),
-      BERRY: new THREE.Color("#8E4F67"),
+      ROSE:     new THREE.Color("#C77A93"),
+      BERRY:    new THREE.Color("#8E4F67"),
+      SLATE:    new THREE.Color("#1E2630"),
+      GRAPHITE: new THREE.Color("#12161D"),
     };
     const LIGHT_DIR = new THREE.Vector3(0.6, 0.85, 0.7).normalize();
 
@@ -211,6 +222,7 @@ export function HeroSectionStatic() {
           uOpacity: { value: opts.baseOpacity },
           uMint: { value: COL.MINT }, uDeepMint: { value: COL.DEEPMINT },
           uRose: { value: COL.ROSE }, uBerry: { value: COL.BERRY },
+          uSlate: { value: COL.SLATE }, uGraphite: { value: COL.GRAPHITE },
           uLightDir: { value: LIGHT_DIR }, uCamPos: { value: camera.position },
           uDissolve: { value: 0 },
         },
