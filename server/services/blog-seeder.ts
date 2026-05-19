@@ -47,9 +47,18 @@ export async function seedBlogsOnStartup(forceReseed: boolean = false): Promise<
     }
 
     log.info("Checking blog seed data for missing posts...");
-    
-    const seedData: SeedData = await import("../scripts/blog-seed-data.json");
-    
+
+    let seedData: SeedData;
+    try {
+      seedData = (await import("../scripts/blog-seed-data.json")) as unknown as SeedData;
+    } catch (err) {
+      // The seed JSON is optional — when it's absent (current repo state) we
+      // skip seeding rather than crash the boot. Add server/scripts/blog-seed-data.json
+      // if you want canonical seed data on first boot.
+      log.info("No blog-seed-data.json present, skipping blog seed");
+      return;
+    }
+
     const categories = seedData.categories;
     const posts = seedData.posts;
     
