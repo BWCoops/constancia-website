@@ -642,7 +642,7 @@ export async function registerRoutes(
   // ============================================
   // REPLIT AUTH SETUP FOR ADMIN AUTHENTICATION
   // ============================================
-  const { setupAuth } = await import("./replitAuth");
+  const { setupAuth } = await import("./clerkAuth");
   await setupAuth(app);
   
   // ============================================
@@ -661,7 +661,7 @@ export async function registerRoutes(
   // ============================================
   // FEATURE FLAGS API ENDPOINTS
   // ============================================
-  const { isAuthenticated } = await import("./replitAuth");
+  const { isAuthenticated } = await import("./clerkAuth");
   
   app.get("/api/feature-flags", async (_req: Request, res: Response) => {
     try {

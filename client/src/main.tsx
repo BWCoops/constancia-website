@@ -1,7 +1,19 @@
 import { createRoot } from "react-dom/client";
+import { ClerkProvider } from "@clerk/clerk-react";
 import App from "./App";
 import "./index.css";
 import { initializeWebVitals } from "./lib/web-vitals";
+
+const CLERK_PUBLISHABLE_KEY =
+  import.meta.env.VITE_CLERK_PUBLISHABLE_KEY ||
+  import.meta.env.VITE_CLERK_KEY ||
+  "";
+
+if (!CLERK_PUBLISHABLE_KEY) {
+  console.warn(
+    "VITE_CLERK_PUBLISHABLE_KEY is not set. Admin routes will not be able to sign users in until this is provided."
+  );
+}
 
 // Initialize Web Vitals performance monitoring
 const isDevelopment = !import.meta.env.PROD;
@@ -115,4 +127,12 @@ history.replaceState = function(...args: Parameters<typeof originalReplaceState>
   handleRouteChange();
 };
 
-createRoot(document.getElementById("root")!).render(<App />);
+createRoot(document.getElementById("root")!).render(
+  CLERK_PUBLISHABLE_KEY ? (
+    <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY} afterSignOutUrl="/admin/login">
+      <App />
+    </ClerkProvider>
+  ) : (
+    <App />
+  )
+);

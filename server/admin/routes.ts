@@ -29,7 +29,7 @@ import {
 } from "@shared/schema";
 import { eq, desc, count, gte, sql, and, inArray } from "drizzle-orm";
 import rateLimit from "express-rate-limit";
-import { isAuthenticated } from "../replitAuth";
+import { isAuthenticated } from "../clerkAuth";
 import { scanBlogPost, getAllScans, getScanHistory } from "../services/winston-ai";
 import { 
   runScheduledScan, 
