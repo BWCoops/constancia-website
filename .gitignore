@@ -16,5 +16,6 @@ coverage/
 # Playwright MCP working dir + ad-hoc screenshots
 .playwright-mcp/
 constancia-current.png
-replit-block.png
+*-state.png
+*-block.png
 *-debug.png
