@@ -110,6 +110,7 @@ export function HeroSectionStatic() {
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const stageRef = useRef<HTMLDivElement | null>(null);
+  const heroStageRef = useRef<HTMLDivElement | null>(null);
   const logoRealRef = useRef<HTMLImageElement | null>(null);
   const heroLogoRef = useRef<HTMLDivElement | null>(null);
   const roseBarRef = useRef<HTMLSpanElement | null>(null);
@@ -273,12 +274,15 @@ export function HeroSectionStatic() {
     window.addEventListener("pointermove", onMove);
 
     const stage = stageRef.current;
-    const stageH = () => stage ? stage.offsetHeight : window.innerHeight;
+    // getBoundingClientRect is scroll-container agnostic — works whether the
+    // page scrolls via window.scrollY or via a parent div's scrollTop.
     function readScrollProg() {
       if (!stage) return 0;
-      const top = stage.offsetTop;
+      const rect = stage.getBoundingClientRect();
       const h = stage.offsetHeight - window.innerHeight;
-      return Math.min(1, Math.max(0, (window.scrollY - top) / Math.max(1, h)));
+      // rect.top is 0 when stage top is at viewport top → scrollProg = 0
+      // rect.top is -h when stage has scrolled h px → scrollProg = 1
+      return Math.min(1, Math.max(0, -rect.top / Math.max(1, h)));
     }
 
     const clock = new THREE.Clock();
@@ -409,6 +413,13 @@ export function HeroSectionStatic() {
       });
       if (progBarRef.current) progBarRef.current.style.width = (scrollProg * 100).toFixed(2) + "%";
 
+      // Smooth hero fade-out as user scrolls past last panel → footer transition
+      const heroStageEl = heroStageRef.current;
+      if (heroStageEl) {
+        const exitT = Math.max(0, (scrollProg - 0.92) / 0.08); // 0 at 92%, 1 at 100%
+        heroStageEl.style.opacity = (1 - exitT).toFixed(3);
+      }
+
       // Camera dive + 3D rendering (only when WebGL is available)
       if (camera && renderer && scene) {
         const camZ = 5.0 - scrollProg * 17;
@@ -476,7 +487,7 @@ export function HeroSectionStatic() {
       }}
     >
       {/* Fixed viewport stage that the scroll drives */}
-      <div className="hero-fixed-stage">
+      <div ref={heroStageRef} className="hero-fixed-stage">
         {/* Fabric canvas — full bleed atmosphere */}
         <canvas ref={canvasRef} className="hero-fabric-canvas" />
 

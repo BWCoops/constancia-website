@@ -37,7 +37,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden" style={{ fontFamily: 'var(--brand-font-sans)' }}>
+    <div className="min-h-screen bg-background" style={{ fontFamily: 'var(--brand-font-sans)', overflowX: 'clip' }}>
       <SEOHead
         title="Constancia | Independent Enterprise Performance Management Advisory"
         description="Independent Enterprise Performance Management advisory for finance leaders. Senior practitioners, AI-augmented tooling, fixed-fee delivery."
