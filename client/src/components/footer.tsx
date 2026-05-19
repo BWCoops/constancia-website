@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { Linkedin, Mail, MapPin, ArrowUpRight } from "@/lib/icons";
-import logoWhite from "@assets/1QG-TypeLogo-320.png";
+import logoWhite from "@assets/constancia-logo.png";
 import { VisitorDataManager } from "@/components/visitor-data-manager";
 import { useFeatureFlags } from "@/lib/feature-flags";
 import type { FeatureFlags } from "@shared/feature-flags";
@@ -61,7 +61,7 @@ export function Footer() {
             <Link href="/" className="inline-block mb-2 group" data-testid="link-footer-home">
               <img
                 src={logoWhite}
-                alt="1QG®"
+                alt="Constancia"
                 className="h-16 w-auto max-w-[200px]"
               />
             </Link>

@@ -2,8 +2,8 @@ import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
 import type { Workbook, Cell } from "exceljs";
 
-import logoWhite from "@assets/1QG - Type Logo (White)_1764415552032.png";
-import logoBlue from "@assets/1QG - Type Logo (Dark Blue)_1764415487342.png";
+import logoWhite from "@assets/constancia-logo.png";
+import logoBlue from "@assets/constancia-logo.png";
 
 import {
   PDF_MARGINS,
