@@ -361,7 +361,20 @@ const apiRateLimits = new Map<string, { count: number; resetAt: number }>();
 const API_RATE_LIMIT = 100; // requests per window
 const API_RATE_WINDOW = 60 * 1000; // 1 minute
 
+// Paths exempt from the per-IP API rate limit. These are high-frequency
+// poll/telemetry endpoints — rate-limiting them creates redirect loops
+// for legitimate authenticated users. Each handler enforces its own
+// auth + per-action limits internally.
+const RATE_LIMIT_EXEMPT_PATHS = new Set<string>([
+  "/admin/auth/session",  // polled by AdminLayout to keep auth state fresh
+  "/track/page-view",     // fired on every route change
+  "/health/clerk",        // diagnostic endpoint
+]);
+
 app.use("/api", (req: Request, res: Response, next: NextFunction) => {
+  // Skip exempt paths — they have their own per-action throttles
+  if (RATE_LIMIT_EXEMPT_PATHS.has(req.path)) return next();
+
   const ip = req.ip || req.socket.remoteAddress || "unknown";
   const now = Date.now();
   

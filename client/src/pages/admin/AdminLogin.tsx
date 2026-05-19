@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation, useSearch } from "wouter";
 import { SignIn, useAuth } from "@clerk/clerk-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -19,12 +19,26 @@ export default function AdminLogin() {
 
   // If Clerk reports the user is signed in, also verify the server-side
   // session+allowlist check before redirecting into the dashboard.
+  // Probe the server session exactly ONCE per Clerk-signed-in transition.
+  // Without this guard, a brief flap in isSignedIn (during Clerk init or
+  // hot reload) would refire the effect, repoll the rate-limited endpoint,
+  // and feed the redirect loop with AdminLayout.
+  const probedRef = useRef(false);
   useEffect(() => {
-    if (!isLoaded || !isSignedIn) return;
+    if (!isLoaded) return;
+    if (!isSignedIn) { probedRef.current = false; return; }
+    if (probedRef.current) return;
+    probedRef.current = true;
+
     let cancelled = false;
     (async () => {
       try {
         const res = await fetch("/api/admin/auth/session", { credentials: "include" });
+        if (res.status === 429) {
+          // Rate-limited — don't redirect, don't retry. Let AdminLayout handle
+          // it once the user lands on a protected route via Clerk's session.
+          return;
+        }
         if (!res.ok) return;
         const data = await res.json();
         if (cancelled) return;

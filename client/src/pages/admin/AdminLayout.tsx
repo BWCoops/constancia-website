@@ -109,11 +109,19 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
   const { data: session, isLoading, error, refetch } = useQuery<AdminSession>({
     queryKey: ["/api/admin/auth/session"],
-    retry: 2,
-    retryDelay: 1000,
-    refetchOnWindowFocus: true,
+    // Do not retry on 4xx — auth state isn't going to change on a re-try.
+    // Specifically: 429s would otherwise cause a retry storm that escalates
+    // the redirect loop between /admin/login and /admin/dashboard.
+    retry: (failureCount, err: unknown) => {
+      const status = (err as { status?: number; response?: { status?: number } })?.status
+        ?? (err as { response?: { status?: number } })?.response?.status;
+      if (typeof status === "number" && status >= 400 && status < 500) return false;
+      return failureCount < 1;
+    },
+    retryDelay: 1500,
+    refetchOnWindowFocus: false, // was true — caused redundant probes
     refetchOnReconnect: true,
-    staleTime: 5 * 60 * 1000,
+    staleTime: 10 * 60 * 1000,
   });
 
   useEffect(() => {
@@ -140,12 +148,15 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   }, [refetch, queryClient]);
 
   useEffect(() => {
-    if (!isLoading && (!session?.authenticated || error)) {
+    // Only redirect when the server has definitively said "not authenticated".
+    // Treating any error as unauthenticated caused a redirect loop with the
+    // global per-IP rate limit: 429 -> redirect -> login -> probe -> 429.
+    if (!isLoading && session && session.authenticated === false) {
       if (location !== "/admin/login") {
         setLocation("/admin/login");
       }
     }
-  }, [session, isLoading, error, setLocation, location]);
+  }, [session, isLoading, setLocation, location]);
 
   const handleLogout = () => {
     window.location.href = "/api/logout";
