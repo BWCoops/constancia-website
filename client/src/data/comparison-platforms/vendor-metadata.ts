@@ -1,5 +1,4 @@
-import sapLogoPath from "@assets/SAP_1772467905660.png";
-import ibmLogoPath from "@assets/IBM_logo.png";
+// SAP/IBM logo overrides removed — Google-favicons fallback in vendor-profile.tsx works fine for these public domains.
 
 export interface VendorMeta {
   website: string;
@@ -43,22 +42,18 @@ export const vendorMetadata: Record<string, VendorMeta> = {
   "sap-bpc": {
     website: "https://www.sap.com/products/financial-management/business-planning-consolidation.html",
     logoDomain: "sap.com",
-    logoOverride: sapLogoPath,
   },
   "sapbpc": {
     website: "https://www.sap.com/products/financial-management/business-planning-consolidation.html",
     logoDomain: "sap.com",
-    logoOverride: sapLogoPath,
   },
   "sap-sac": {
     website: "https://www.sap.com/products/technology-platform/cloud-analytics.html",
     logoDomain: "sap.com",
-    logoOverride: sapLogoPath,
   },
   "sap-sac-gr": {
     website: "https://www.sap.com/products/technology-platform/cloud-analytics.html",
     logoDomain: "sap.com",
-    logoOverride: sapLogoPath,
   },
   "cch-tagetik": {
     website: "https://www.wolterskluwer.com/en/solutions/cch-tagetik",
@@ -71,12 +66,10 @@ export const vendorMetadata: Record<string, VendorMeta> = {
   "ibm-tm1": {
     website: "https://www.ibm.com/products/planning-analytics",
     logoDomain: "ibm.com",
-    logoOverride: ibmLogoPath,
   },
   "ibm-planning-analytics": {
     website: "https://www.ibm.com/products/planning-analytics",
     logoDomain: "ibm.com",
-    logoOverride: ibmLogoPath,
   },
   "vena": {
     website: "https://www.venasolutions.com",
@@ -101,7 +94,6 @@ export const vendorMetadata: Record<string, VendorMeta> = {
   "sap-s4hana": {
     website: "https://www.sap.com/products/erp/s4hana.html",
     logoDomain: "sap.com",
-    logoOverride: sapLogoPath,
   },
   "dynamics-365": {
     website: "https://www.microsoft.com/en-gb/dynamics-365",
@@ -182,7 +174,6 @@ export const vendorMetadata: Record<string, VendorMeta> = {
   "watsonx": {
     website: "https://www.ibm.com/watsonx",
     logoDomain: "ibm.com",
-    logoOverride: ibmLogoPath,
   },
   "automation-anywhere": {
     website: "https://www.automationanywhere.com",
