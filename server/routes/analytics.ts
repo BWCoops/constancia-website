@@ -21,6 +21,7 @@ import { computeFunnel } from "../services/analytics/funnel";
 import { refreshInsightCache } from "../services/analytics/insights";
 import { compareInsights } from "@shared/analytics-insights";
 import { hashIp } from "../services/analytics/ip-hash";
+import { isAuthenticated } from "../replitAuth";
 
 const router = Router();
 
@@ -2289,7 +2290,7 @@ router.get("/insights", async (req: Request, res: Response) => {
 });
 
 // POST /api/analytics/insights/:id/acknowledge - Mark an insight as seen.
-router.post("/insights/:id/acknowledge", async (req: Request, res: Response) => {
+router.post("/insights/:id/acknowledge", isAuthenticated, async (req: Request, res: Response) => {
   try {
     await db
       .update(analyticsInsights)
@@ -2303,7 +2304,7 @@ router.post("/insights/:id/acknowledge", async (req: Request, res: Response) => 
 });
 
 // POST /api/analytics/insights/:id/dismiss - Hide an insight permanently.
-router.post("/insights/:id/dismiss", async (req: Request, res: Response) => {
+router.post("/insights/:id/dismiss", isAuthenticated, async (req: Request, res: Response) => {
   try {
     await db
       .update(analyticsInsights)

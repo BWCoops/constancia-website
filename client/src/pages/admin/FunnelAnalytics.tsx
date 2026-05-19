@@ -70,6 +70,7 @@ import {
 } from "recharts";
 import { InteractiveChart } from "@/components/ui/interactive-chart";
 import AdminLayout from "./AdminLayout";
+import { InsightsPanel } from "@/components/admin/InsightsPanel";
 import { apiRequest } from "@/lib/queryClient";
 
 interface FunnelStage {
@@ -541,7 +542,9 @@ export default function FunnelAnalytics() {
             </Button>
           </div>
         </div>
-        
+
+        <InsightsPanel filterByHref="/admin/funnel-analytics" />
+
         {loadingStats ? (
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
             {[...Array(4)].map((_, i) => (

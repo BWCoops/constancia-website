@@ -45,6 +45,7 @@ import {
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import AdminLayout from "./AdminLayout";
+import { InsightsPanel } from "@/components/admin/InsightsPanel";
 import { 
   LineChart, 
   Line, 
@@ -578,6 +579,8 @@ function AnalyticsContent() {
           </Select>
         </div>
       </div>
+
+      <InsightsPanel filterByHref="/admin/analytics" />
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card data-testid="card-page-views">

@@ -1,18 +1,22 @@
+/**
+ * Editorial content quality page.
+ *
+ * Replaces the old AI-detection-score view, which fingered everything as
+ * "AI generated" and never gave the editor anything to do about it. The
+ * new flow surfaces concrete, actionable issues (brand voice, generic
+ * phrases, unsourced claims, readability, heading hygiene) and offers a
+ * one-click rewrite pass that targets the specific issues found.
+ *
+ * The route URL stays /admin/content-checker for backwards link
+ * compatibility; everything inside is new.
+ */
+
 import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Progress } from "@/components/ui/progress";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import {
   Select,
   SelectContent,
@@ -21,420 +25,364 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { 
-  ShieldCheck, 
-  Bot, 
-  Search, 
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs";
+import {
+  AlertCircle,
   AlertTriangle,
   CheckCircle2,
-  XCircle,
+  FileText,
   Loader2,
-  FileText
+  Sparkles,
+  Copy,
+  Info,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { queryClient, apiRequest } from "@/lib/queryClient";
+import { apiRequest } from "@/lib/queryClient";
 import AdminLayout from "./AdminLayout";
 
 interface BlogPost {
   id: string;
   title: string;
   slug: string;
-  excerpt: string;
-  categoryId: string;
-  author: string;
+  content?: string;
   publishedAt: string;
   isPublished: boolean;
 }
 
-interface Scan {
-  id: string;
-  blogPostId: string;
-  scanType: string;
-  aiScore: number | null;
-  humanScore: number | null;
-  plagiarismScore: number | null;
-  creditsUsed: number | null;
-  status: string;
-  errorMessage: string | null;
-  createdAt: string;
-  completedAt: string | null;
+interface ContentIssue {
+  kind: string;
+  severity: "high" | "medium" | "low";
+  message: string;
+  excerpt?: string;
+  position?: number;
 }
 
-interface ScanResult {
-  scanId: string;
-  blogPostId: string;
-  scanType: string;
-  aiScore?: number;
-  humanScore?: number;
-  plagiarismScore?: number;
-  creditsUsed: number;
-  status: string;
-  errorMessage?: string;
+interface ContentQualityReport {
+  wordCount: number;
+  sentenceCount: number;
+  avgSentenceLength: number;
+  sentenceLengthVariance: number;
+  fleschReadingEase: number;
+  fleschKincaidGrade: number;
+  issues: ContentIssue[];
+  readabilitySummary: string;
+  overallGrade: "A" | "B" | "C" | "D" | "F";
 }
 
-function ContentCheckerContent() {
+const GRADE_COLOR: Record<string, string> = {
+  A: "text-[#5E8D7A] bg-[#5E8D7A]/10",
+  B: "text-[#5E8D7A] bg-[#5E8D7A]/10",
+  C: "text-[#C77A93] bg-[#C77A93]/10",
+  D: "text-[#8E4F67] bg-[#8E4F67]/10",
+  F: "text-[#8E4F67] bg-[#8E4F67]/20",
+};
+
+const SEVERITY_ICON = {
+  high: AlertCircle,
+  medium: AlertTriangle,
+  low: Info,
+} as const;
+
+const SEVERITY_BADGE: Record<string, string> = {
+  high: "bg-[#8E4F67] text-white",
+  medium: "bg-[#C77A93] text-white",
+  low: "bg-[#1E2630]/60 text-white",
+};
+
+function ContentQualityContent() {
   const { toast } = useToast();
-  const [selectedPost, setSelectedPost] = useState<string>("");
-  const [scanType, setScanType] = useState<"ai_detection" | "plagiarism" | "both">("both");
-  const [scanDialogOpen, setScanDialogOpen] = useState(false);
-  const [lastScanResults, setLastScanResults] = useState<ScanResult[]>([]);
+  const [selectedPostId, setSelectedPostId] = useState<string>("");
+  const [report, setReport] = useState<ContentQualityReport | null>(null);
+  const [rewritten, setRewritten] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState("analyze");
 
   const { data: posts, isLoading: postsLoading } = useQuery<BlogPost[]>({
     queryKey: ["/api/admin/blog-posts"],
   });
 
-  const { data: scans, isLoading: scansLoading } = useQuery<Scan[]>({
-    queryKey: ["/api/admin/scans"],
-  });
-
-  const scanMutation = useMutation({
-    mutationFn: async (data: { blogPostId: string; scanType: string }) => {
-      const response = await apiRequest("POST", "/api/admin/scans", data);
-      return response.json();
+  const analyzeMutation = useMutation({
+    mutationFn: async (blogPostId: string) => {
+      const res = await apiRequest("POST", "/api/admin/content-quality/analyze", { blogPostId });
+      return (await res.json()) as { success: boolean; report: ContentQualityReport };
     },
-    onSuccess: (data) => {
-      setLastScanResults(data.results || []);
-      setScanDialogOpen(true);
-      queryClient.invalidateQueries({ queryKey: ["/api/admin/scans"] });
-      toast({
-        title: "Scan Complete",
-        description: "Content has been analyzed successfully.",
-      });
+    onSuccess: data => {
+      setReport(data.report);
+      setRewritten(null);
+      setActiveTab("results");
     },
-    onError: (error: any) => {
-      toast({
-        title: "Scan Failed",
-        description: error.message || "Failed to scan content. Please try again.",
-        variant: "destructive",
-      });
+    onError: (err: any) => {
+      toast({ title: "Analysis failed", description: err.message ?? "Unknown error", variant: "destructive" });
     },
   });
 
-  const handleScan = () => {
-    if (!selectedPost) {
-      toast({
-        title: "Select a Post",
-        description: "Please select a blog post to scan.",
-        variant: "destructive",
-      });
+  const rewriteMutation = useMutation({
+    mutationFn: async ({ html, issues }: { html: string; issues: ContentIssue[] }) => {
+      const res = await apiRequest("POST", "/api/admin/content-quality/rewrite", { html, issues });
+      return (await res.json()) as { success: boolean; rewritten: string };
+    },
+    onSuccess: data => {
+      setRewritten(data.rewritten);
+      toast({ title: "Rewrite complete", description: "Review the proposed changes below before publishing." });
+    },
+    onError: (err: any) => {
+      toast({ title: "Rewrite failed", description: err.message ?? "Unknown error", variant: "destructive" });
+    },
+  });
+
+  const handleAnalyze = () => {
+    if (!selectedPostId) {
+      toast({ title: "Pick a post", description: "Select a post to analyse.", variant: "destructive" });
       return;
     }
-    scanMutation.mutate({ blogPostId: selectedPost, scanType });
+    analyzeMutation.mutate(selectedPostId);
   };
 
-  const getScoreColor = (score: number | null, type: "ai" | "plagiarism" | "human") => {
-    if (score === null) return "text-muted-foreground";
-    if (type === "human") {
-      if (score >= 80) return "text-emerald-600";
-      if (score >= 60) return "text-green-500";
-      if (score >= 40) return "text-yellow-500";
-      return "text-red-600";
+  const handleRewrite = async () => {
+    if (!selectedPostId || !report) return;
+    const post = posts?.find(p => p.id === selectedPostId);
+    if (!post?.content) {
+      toast({ title: "Source unavailable", description: "Could not load the post content.", variant: "destructive" });
+      return;
     }
-    if (type === "ai" || type === "plagiarism") {
-      if (score <= 20) return "text-emerald-600";
-      if (score <= 40) return "text-green-500";
-      if (score <= 60) return "text-yellow-500";
-      if (score <= 80) return "text-orange-500";
-      return "text-red-600";
-    }
-    return "text-muted-foreground";
+    rewriteMutation.mutate({ html: post.content, issues: report.issues });
   };
 
-  const getProgressColor = (score: number | null, type: "ai" | "plagiarism" | "human") => {
-    if (score === null) return "";
-    if (type === "human") {
-      if (score >= 80) return "[&>div]:bg-emerald-600";
-      if (score >= 60) return "[&>div]:bg-green-500";
-      if (score >= 40) return "[&>div]:bg-yellow-500";
-      return "[&>div]:bg-red-600";
-    }
-    if (type === "ai" || type === "plagiarism") {
-      if (score <= 20) return "[&>div]:bg-emerald-600";
-      if (score <= 40) return "[&>div]:bg-green-500";
-      if (score <= 60) return "[&>div]:bg-yellow-500";
-      if (score <= 80) return "[&>div]:bg-orange-500";
-      return "[&>div]:bg-red-600";
-    }
-    return "";
+  const handleCopyRewrite = () => {
+    if (!rewritten) return;
+    navigator.clipboard.writeText(rewritten);
+    toast({ title: "Copied", description: "Rewritten content copied to clipboard." });
   };
 
-  const getStatusBadge = (status: string) => {
-    switch (status) {
-      case "completed":
-        return <Badge variant="default" className="bg-green-600"><CheckCircle2 className="h-3 w-3 mr-1" />Complete</Badge>;
-      case "failed":
-        return <Badge variant="destructive"><XCircle className="h-3 w-3 mr-1" />Failed</Badge>;
-      case "pending":
-        return <Badge variant="secondary"><Loader2 className="h-3 w-3 mr-1 animate-spin" />Pending</Badge>;
-      default:
-        return <Badge variant="outline">{status}</Badge>;
-    }
-  };
-
-  const getPostTitle = (blogPostId: string) => {
-    const post = posts?.find(p => p.id === blogPostId);
-    return post?.title || "Unknown Post";
-  };
-
-  if (postsLoading || scansLoading) {
-    return (
-      <div className="space-y-6">
-        <Skeleton className="h-10 w-64" />
-        <Skeleton className="h-40 w-full" />
-        <Skeleton className="h-96 w-full" />
-      </div>
-    );
-  }
+  const issueGroups = report
+    ? {
+        high: report.issues.filter(i => i.severity === "high"),
+        medium: report.issues.filter(i => i.severity === "medium"),
+        low: report.issues.filter(i => i.severity === "low"),
+      }
+    : null;
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-semibold" data-testid="text-page-title">Content Checker</h1>
-        <p className="text-muted-foreground mt-1">
-          Scan blog posts for AI-generated content and plagiarism using Winston AI
+        <h1 className="text-2xl sm:text-3xl font-semibold" data-testid="text-page-title">Content quality</h1>
+        <p className="text-muted-foreground mt-1 text-sm">
+          Editorial review and humanisation. Replaces the AI-detection score with concrete, actionable issues an editor can fix.
         </p>
       </div>
 
-      <Card data-testid="card-scan-controls">
+      <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <ShieldCheck className="h-5 w-5 text-brand-cyan" />
-            New Scan
-          </CardTitle>
+          <CardTitle className="text-lg">What we check</CardTitle>
           <CardDescription>
-            Select a blog post and scan type to analyze content integrity
+            Deterministic editorial checks — no opaque "AI score". Each issue identifies a specific thing to fix.
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <div className="flex-1">
-              <Select value={selectedPost} onValueChange={setSelectedPost}>
-                <SelectTrigger data-testid="select-blog-post">
-                  <SelectValue placeholder="Select a blog post to scan" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+            <div className="flex items-start gap-2">
+              <CheckCircle2 className="h-4 w-4 mt-0.5 text-[#5E8D7A]" />
+              <div><b>Brand voice:</b> legacy "1QG" references, missing Constancia context.</div>
+            </div>
+            <div className="flex items-start gap-2">
+              <CheckCircle2 className="h-4 w-4 mt-0.5 text-[#5E8D7A]" />
+              <div><b>Generic LLM phrasing:</b> "delve into", "fast-paced world", "in conclusion", etc.</div>
+            </div>
+            <div className="flex items-start gap-2">
+              <CheckCircle2 className="h-4 w-4 mt-0.5 text-[#5E8D7A]" />
+              <div><b>Unsourced claims:</b> statistics without inline citations.</div>
+            </div>
+            <div className="flex items-start gap-2">
+              <CheckCircle2 className="h-4 w-4 mt-0.5 text-[#5E8D7A]" />
+              <div><b>Readability:</b> Flesch reading ease + Flesch-Kincaid grade level.</div>
+            </div>
+            <div className="flex items-start gap-2">
+              <CheckCircle2 className="h-4 w-4 mt-0.5 text-[#5E8D7A]" />
+              <div><b>Heading structure:</b> single H1, H2 cadence for long posts.</div>
+            </div>
+            <div className="flex items-start gap-2">
+              <CheckCircle2 className="h-4 w-4 mt-0.5 text-[#5E8D7A]" />
+              <div><b>Cadence:</b> low sentence-length variance flagged as robotic.</div>
+            </div>
+            <div className="flex items-start gap-2">
+              <CheckCircle2 className="h-4 w-4 mt-0.5 text-[#5E8D7A]" />
+              <div><b>Freshness:</b> posts &gt; 365 days old flagged for refresh.</div>
+            </div>
+            <div className="flex items-start gap-2">
+              <Sparkles className="h-4 w-4 mt-0.5 text-[#8E4F67]" />
+              <div><b>One-click rewrite:</b> LLM pass targeting the specific issues found, not generic "humanise".</div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Tabs value={activeTab} onValueChange={setActiveTab}>
+        <TabsList>
+          <TabsTrigger value="analyze" data-testid="tab-analyze">Analyse</TabsTrigger>
+          <TabsTrigger value="results" data-testid="tab-results" disabled={!report}>
+            Results{report ? ` (${report.issues.length})` : ""}
+          </TabsTrigger>
+          <TabsTrigger value="rewrite" data-testid="tab-rewrite" disabled={!rewritten}>
+            Rewrite{rewritten ? " ✓" : ""}
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="analyze" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-base">Pick a post</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <Select value={selectedPostId} onValueChange={setSelectedPostId}>
+                <SelectTrigger data-testid="select-post">
+                  <SelectValue placeholder={postsLoading ? "Loading posts…" : "Select a blog post"} />
                 </SelectTrigger>
                 <SelectContent>
-                  {posts?.map((post) => (
-                    <SelectItem key={post.id} value={post.id}>
-                      <div className="flex items-center gap-2">
-                        <FileText className="h-4 w-4" />
-                        <span className="truncate max-w-[300px]">{post.title}</span>
-                      </div>
+                  {(posts ?? []).map(p => (
+                    <SelectItem key={p.id} value={p.id}>
+                      <span className="flex items-center gap-2">
+                        {p.isPublished ? <Badge className="bg-[#5E8D7A] text-white">Live</Badge> : <Badge variant="outline">Draft</Badge>}
+                        <FileText className="h-3.5 w-3.5" />
+                        <span className="truncate">{p.title}</span>
+                      </span>
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
-            </div>
-            <div className="w-full sm:w-48">
-              <Select value={scanType} onValueChange={(v) => setScanType(v as typeof scanType)}>
-                <SelectTrigger data-testid="select-scan-type">
-                  <SelectValue placeholder="Scan type" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="both">Both Scans</SelectItem>
-                  <SelectItem value="ai_detection">AI Detection Only</SelectItem>
-                  <SelectItem value="plagiarism">Plagiarism Only</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <Button 
-              onClick={handleScan} 
-              disabled={!selectedPost || scanMutation.isPending}
-              data-testid="button-scan"
-            >
-              {scanMutation.isPending ? (
-                <>
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  Scanning...
-                </>
-              ) : (
-                <>
-                  <Search className="h-4 w-4 mr-2" />
-                  Scan Content
-                </>
-              )}
-            </Button>
-          </div>
-          <p className="text-xs text-muted-foreground mt-3">
-            Winston AI scans content for AI-generated text and plagiarism. Each scan uses API credits.
-          </p>
-        </CardContent>
-      </Card>
-
-      <Card data-testid="card-scan-history">
-        <CardHeader>
-          <CardTitle>Scan History</CardTitle>
-          <CardDescription>
-            Recent content integrity scans and their results
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          {scans && scans.length > 0 ? (
-            <div className="overflow-x-auto">
-            <Table className="min-w-[900px]">
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Blog Post</TableHead>
-                  <TableHead>Type</TableHead>
-                  <TableHead>Human Score</TableHead>
-                  <TableHead>AI Score</TableHead>
-                  <TableHead>Plagiarism</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Date</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {scans.slice(0, 20).map((scan) => (
-                  <TableRow key={scan.id} data-testid={`row-scan-${scan.id}`}>
-                    <TableCell className="font-medium max-w-[200px] truncate">
-                      {getPostTitle(scan.blogPostId)}
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant="outline">
-                        {scan.scanType === "ai_detection" ? (
-                          <><Bot className="h-3 w-3 mr-1" />AI</>
-                        ) : scan.scanType === "plagiarism" ? (
-                          <><Search className="h-3 w-3 mr-1" />Plagiarism</>
-                        ) : (
-                          "Both"
-                        )}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>
-                      {scan.humanScore !== null ? (
-                        <div className="flex items-center gap-2">
-                          <span className={`font-semibold min-w-[36px] ${getScoreColor(scan.humanScore, "human")}`}>
-                            {scan.humanScore}%
-                          </span>
-                          <Progress value={scan.humanScore} className={`w-16 h-2 ${getProgressColor(scan.humanScore, "human")}`} />
-                        </div>
-                      ) : (
-                        <span className="text-muted-foreground">-</span>
-                      )}
-                    </TableCell>
-                    <TableCell>
-                      {scan.aiScore !== null ? (
-                        <div className="flex items-center gap-2">
-                          <span className={`font-semibold min-w-[36px] ${getScoreColor(scan.aiScore, "ai")}`}>
-                            {scan.aiScore}%
-                          </span>
-                          <Progress value={scan.aiScore} className={`w-16 h-2 ${getProgressColor(scan.aiScore, "ai")}`} />
-                        </div>
-                      ) : (
-                        <span className="text-muted-foreground">-</span>
-                      )}
-                    </TableCell>
-                    <TableCell>
-                      {scan.plagiarismScore !== null ? (
-                        <div className="flex items-center gap-2">
-                          <span className={`font-semibold min-w-[36px] ${getScoreColor(scan.plagiarismScore, "plagiarism")}`}>
-                            {scan.plagiarismScore}%
-                          </span>
-                          <Progress value={scan.plagiarismScore} className={`w-16 h-2 ${getProgressColor(scan.plagiarismScore, "plagiarism")}`} />
-                        </div>
-                      ) : (
-                        <span className="text-muted-foreground">-</span>
-                      )}
-                    </TableCell>
-                    <TableCell>{getStatusBadge(scan.status)}</TableCell>
-                    <TableCell className="text-muted-foreground text-sm">
-                      {new Date(scan.createdAt).toLocaleDateString()}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-            </div>
-          ) : (
-            <div className="text-center py-8">
-              <ShieldCheck className="h-12 w-12 mx-auto text-muted-foreground/50 mb-4" />
-              <p className="text-muted-foreground" data-testid="text-no-scans">
-                No scans have been performed yet.
-              </p>
-              <p className="text-sm text-muted-foreground mt-1">
-                Select a blog post above to run your first content integrity scan.
-              </p>
-            </div>
-          )}
-        </CardContent>
-      </Card>
-
-      <Dialog open={scanDialogOpen} onOpenChange={setScanDialogOpen}>
-        <DialogContent className="sm:max-w-lg">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
-              <CheckCircle2 className="h-5 w-5 text-green-600" />
-              Scan Results
-            </DialogTitle>
-            <DialogDescription>
-              Content integrity analysis complete
-            </DialogDescription>
-          </DialogHeader>
-          <div className="space-y-4 pt-4">
-            {lastScanResults.map((result, index) => (
-              <div key={index} className="space-y-3 p-4 bg-muted/50 rounded-lg">
-                <div className="flex items-center justify-between">
-                  <span className="font-medium">
-                    {result.scanType === "ai_detection" ? "AI Detection" : "Plagiarism Check"}
-                  </span>
-                  {result.status === "completed" ? (
-                    <Badge variant="default" className="bg-green-600">Complete</Badge>
-                  ) : (
-                    <Badge variant="destructive">Failed</Badge>
-                  )}
-                </div>
-                
-                {result.status === "completed" && (
-                  <div className="grid grid-cols-2 gap-4">
-                    {result.humanScore !== undefined && (
-                      <div>
-                        <p className="text-sm text-muted-foreground">Human Score</p>
-                        <p className={`text-2xl font-bold ${getScoreColor(result.humanScore, "human")}`}>
-                          {result.humanScore}%
-                        </p>
-                      </div>
-                    )}
-                    {result.aiScore !== undefined && (
-                      <div>
-                        <p className="text-sm text-muted-foreground">AI Score</p>
-                        <p className={`text-2xl font-bold ${getScoreColor(result.aiScore, "ai")}`}>
-                          {result.aiScore}%
-                        </p>
-                      </div>
-                    )}
-                    {result.plagiarismScore !== undefined && (
-                      <div>
-                        <p className="text-sm text-muted-foreground">Plagiarism</p>
-                        <p className={`text-2xl font-bold ${getScoreColor(result.plagiarismScore, "plagiarism")}`}>
-                          {result.plagiarismScore}%
-                        </p>
-                      </div>
-                    )}
-                    {result.creditsUsed !== undefined && (
-                      <div>
-                        <p className="text-sm text-muted-foreground">Credits Used</p>
-                        <p className="text-lg font-medium">{result.creditsUsed}</p>
-                      </div>
-                    )}
-                  </div>
+              <Button
+                onClick={handleAnalyze}
+                disabled={!selectedPostId || analyzeMutation.isPending}
+                data-testid="button-analyze"
+              >
+                {analyzeMutation.isPending ? (
+                  <><Loader2 className="h-4 w-4 mr-2 animate-spin" /> Analysing…</>
+                ) : (
+                  <>Analyse content</>
                 )}
+              </Button>
+            </CardContent>
+          </Card>
+        </TabsContent>
 
-                {result.errorMessage && (
-                  <div className="flex items-start gap-2 text-destructive text-sm">
-                    <AlertTriangle className="h-4 w-4 mt-0.5" />
-                    <span>{result.errorMessage}</span>
-                  </div>
-                )}
+        <TabsContent value="results" className="space-y-4">
+          {report && issueGroups && (
+            <>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <Card>
+                  <CardContent className="pt-4">
+                    <div className="text-xs text-muted-foreground">Overall grade</div>
+                    <div className={`mt-1 inline-flex items-center justify-center h-12 w-12 rounded-lg text-2xl font-bold ${GRADE_COLOR[report.overallGrade]}`}>
+                      {report.overallGrade}
+                    </div>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="pt-4">
+                    <div className="text-xs text-muted-foreground">Reading ease</div>
+                    <div className="text-2xl font-semibold mt-1">{report.fleschReadingEase.toFixed(0)}</div>
+                    <div className="text-xs text-muted-foreground mt-0.5">{report.readabilitySummary}</div>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="pt-4">
+                    <div className="text-xs text-muted-foreground">Grade level</div>
+                    <div className="text-2xl font-semibold mt-1">{report.fleschKincaidGrade.toFixed(1)}</div>
+                    <div className="text-xs text-muted-foreground mt-0.5">Flesch-Kincaid</div>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="pt-4">
+                    <div className="text-xs text-muted-foreground">Word count</div>
+                    <div className="text-2xl font-semibold mt-1">{report.wordCount.toLocaleString()}</div>
+                    <div className="text-xs text-muted-foreground mt-0.5">
+                      Sentence avg {report.avgSentenceLength.toFixed(1)} (variance {report.sentenceLengthVariance.toFixed(0)})
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
-            ))}
-          </div>
-        </DialogContent>
-      </Dialog>
+
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0">
+                  <div>
+                    <CardTitle className="text-base">Issues ({report.issues.length})</CardTitle>
+                    <CardDescription>
+                      {issueGroups.high.length} high, {issueGroups.medium.length} medium, {issueGroups.low.length} low.
+                    </CardDescription>
+                  </div>
+                  <Button
+                    onClick={handleRewrite}
+                    disabled={rewriteMutation.isPending || report.issues.length === 0}
+                    data-testid="button-rewrite"
+                  >
+                    {rewriteMutation.isPending ? (
+                      <><Loader2 className="h-4 w-4 mr-2 animate-spin" /> Rewriting…</>
+                    ) : (
+                      <><Sparkles className="h-4 w-4 mr-2" /> Rewrite to fix issues</>
+                    )}
+                  </Button>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  {report.issues.length === 0 ? (
+                    <div className="flex items-center gap-2 text-sm text-[#5E8D7A]">
+                      <CheckCircle2 className="h-4 w-4" />
+                      Nothing to flag. Content meets editorial standards.
+                    </div>
+                  ) : (
+                    report.issues.map((issue, idx) => {
+                      const Icon = SEVERITY_ICON[issue.severity];
+                      return (
+                        <div key={idx} className="border rounded-lg p-3 space-y-1.5">
+                          <div className="flex items-start gap-2">
+                            <Icon className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                            <div className="flex-1">
+                              <div className="flex items-center gap-2 mb-1">
+                                <Badge className={SEVERITY_BADGE[issue.severity]}>{issue.severity}</Badge>
+                                <span className="text-xs text-muted-foreground">{issue.kind.replace(/_/g, " ")}</span>
+                              </div>
+                              <div className="text-sm text-[#1E2630]">{issue.message}</div>
+                              {issue.excerpt && (
+                                <div className="mt-1.5 text-xs italic text-muted-foreground bg-[#F6F3EE] rounded p-2">
+                                  …{issue.excerpt}…
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })
+                  )}
+                </CardContent>
+              </Card>
+            </>
+          )}
+        </TabsContent>
+
+        <TabsContent value="rewrite" className="space-y-4">
+          {rewritten && (
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0">
+                <div>
+                  <CardTitle className="text-base">Proposed rewrite</CardTitle>
+                  <CardDescription>
+                    Review carefully before publishing. The model targets the issues found but doesn't preserve every nuance.
+                  </CardDescription>
+                </div>
+                <Button variant="outline" size="sm" onClick={handleCopyRewrite}>
+                  <Copy className="h-4 w-4 mr-2" /> Copy
+                </Button>
+              </CardHeader>
+              <CardContent>
+                <pre className="text-sm whitespace-pre-wrap font-sans bg-[#F6F3EE] rounded p-4 max-h-[600px] overflow-y-auto">
+                  {rewritten}
+                </pre>
+              </CardContent>
+            </Card>
+          )}
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }
@@ -442,7 +390,7 @@ function ContentCheckerContent() {
 export default function AdminContentChecker() {
   return (
     <AdminLayout>
-      <ContentCheckerContent />
+      <ContentQualityContent />
     </AdminLayout>
   );
 }

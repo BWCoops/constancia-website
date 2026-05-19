@@ -1868,11 +1868,11 @@ router.post("/scans", async (req: Request, res: Response) => {
     const results = await scanBlogPost(blogPostId, adminId, scanType);
 
     await auditLog(
-      adminId, 
-      "CONTENT_SCANNED", 
-      "blog_post", 
-      blogPostId, 
-      JSON.stringify({ scanType, results: results.length }), 
+      adminId,
+      "CONTENT_SCANNED",
+      "blog_post",
+      blogPostId,
+      JSON.stringify({ scanType, results: results.length }),
       req
     );
 
@@ -1880,6 +1880,64 @@ router.post("/scans", async (req: Request, res: Response) => {
   } catch (error: any) {
     log.error({ err: error }, "Scan error");
     res.status(500).json({ error: error.message || "Failed to scan content" });
+  }
+});
+
+// ============ CONTENT QUALITY (replaces AI detection) ============
+//
+// Editorial analysis: deterministic checks an editor can act on, plus
+// an on-demand LLM rewrite pass that targets the specific issues
+// found. Old scans endpoint above is kept for transition but should be
+// considered deprecated — the new flow doesn't depend on Winston AI.
+
+router.post("/content-quality/analyze", async (req: Request, res: Response) => {
+  try {
+    const { blogPostId, html, publishedAt } = req.body;
+    let source = html;
+    let pubDate: Date | undefined;
+
+    if (!source && blogPostId) {
+      const { blogPosts } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+      const { db } = await import("../db");
+      const [post] = await db.select().from(blogPosts).where(eq(blogPosts.id, blogPostId));
+      if (!post) {
+        res.status(404).json({ error: "Blog post not found" });
+        return;
+      }
+      source = post.content;
+      pubDate = post.publishedAt ? new Date(post.publishedAt) : undefined;
+    } else if (publishedAt) {
+      pubDate = new Date(publishedAt);
+    }
+
+    if (!source) {
+      res.status(400).json({ error: "html or blogPostId is required" });
+      return;
+    }
+
+    const { analyzeContent } = await import("../services/content-quality");
+    const report = analyzeContent(source, { publishedAt: pubDate });
+    res.json({ success: true, report });
+  } catch (error: any) {
+    log.error({ err: error }, "content-quality analyze failed");
+    res.status(500).json({ error: error.message || "Failed to analyze content" });
+  }
+});
+
+router.post("/content-quality/rewrite", async (req: Request, res: Response) => {
+  try {
+    const { html, issues, tone } = req.body;
+    if (!html) {
+      res.status(400).json({ error: "html is required" });
+      return;
+    }
+    const { rewriteContent } = await import("../services/content-quality");
+    const rewritten = await rewriteContent(html, issues ?? [], { tone });
+    res.json({ success: true, rewritten });
+  } catch (error: any) {
+    log.error({ err: error }, "content-quality rewrite failed");
+    res.status(500).json({ error: error.message || "Failed to rewrite content" });
   }
 });
 

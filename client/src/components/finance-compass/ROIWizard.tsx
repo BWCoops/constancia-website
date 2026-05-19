@@ -2306,7 +2306,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                                     </div>
                                   </div>
                                   <div>
-                                    <div className="text-muted-foreground">1QG Good</div>
+                                    <div className="text-muted-foreground">Strong (target)</div>
                                     <div className="font-medium text-green-600 dark:text-green-400" data-testid={`benchmark-target-${metric.metricId}`}>
                                       {metric.oneQgGood ? `${metric.oneQgGood.min}-${metric.oneQgGood.max}` : 'N/A'}{metric.unit === 'percent' ? '%' : metric.unit === 'days' ? 'd' : ''}
                                     </div>
