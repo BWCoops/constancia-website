@@ -56,8 +56,15 @@ export async function setupAuth(app: Express): Promise<void> {
       "CLERK_SECRET_KEY is not set. Add it to your environment (Replit Secrets / .env) before starting the server."
     );
   }
-  if (!process.env.CLERK_PUBLISHABLE_KEY && !process.env.VITE_CLERK_PUBLISHABLE_KEY) {
-    authLog.warn("CLERK_PUBLISHABLE_KEY not set — client won't be able to mount <ClerkProvider>.");
+
+  // Replit-friendly: if only VITE_CLERK_PUBLISHABLE_KEY is set, mirror it
+  // into CLERK_PUBLISHABLE_KEY so @clerk/express picks it up automatically.
+  if (!process.env.CLERK_PUBLISHABLE_KEY && process.env.VITE_CLERK_PUBLISHABLE_KEY) {
+    process.env.CLERK_PUBLISHABLE_KEY = process.env.VITE_CLERK_PUBLISHABLE_KEY;
+  }
+
+  if (!process.env.CLERK_PUBLISHABLE_KEY) {
+    authLog.warn("CLERK_PUBLISHABLE_KEY not set — falling back to secret-only mode (still works, but recommended to set both).");
   }
 
   app.use(clerkMiddleware());
