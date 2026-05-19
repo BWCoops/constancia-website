@@ -1,8 +1,51 @@
+import { Component, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import { ClerkProvider } from "@clerk/clerk-react";
 import App from "./App";
 import "./index.css";
 import { initializeWebVitals } from "./lib/web-vitals";
+
+/**
+ * Error boundary around ClerkProvider. If Clerk's JS fails to load (CSP,
+ * network, deleted instance, etc.) we render the public App without auth
+ * rather than crash the whole tree. Admin routes will show "auth
+ * unavailable, retry" inside the boundary instead of a white screen.
+ */
+class ClerkBoundary extends Component<{ children: ReactNode; fallback: ReactNode }, { hasError: boolean }> {
+  state = { hasError: false };
+  static getDerivedStateFromError() { return { hasError: true }; }
+  componentDidCatch(err: Error) {
+    if (err?.message?.includes("Clerk")) {
+      console.warn("Clerk failed to initialise; rendering app without auth.", err);
+    } else {
+      console.error(err);
+    }
+  }
+  render() { return this.state.hasError ? this.props.fallback : this.props.children; }
+}
+
+// Catch script-load failures from the Clerk CDN before any error overlay
+// (Replit, Vite, or otherwise) picks them up.
+window.addEventListener("error", (e) => {
+  const src = (e.target as HTMLScriptElement | null)?.src || "";
+  if (src.includes("clerk.accounts.dev") || src.includes("clerk.dev")) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    console.warn("Clerk script failed to load:", src);
+  }
+}, true); // capture phase — fire before bubbling listeners
+
+window.addEventListener("unhandledrejection", (e) => {
+  const msg = typeof e.reason?.message === "string" ? e.reason.message : "";
+  if (
+    msg.includes("failed_to_load_clerk_js") ||
+    msg.includes("Failed to load Clerk") ||
+    msg.includes("clerk.accounts.dev")
+  ) {
+    e.preventDefault();
+    console.warn("Clerk promise rejected:", msg);
+  }
+});
 
 const CLERK_PUBLISHABLE_KEY =
   import.meta.env.VITE_CLERK_PUBLISHABLE_KEY ||
@@ -143,9 +186,11 @@ history.replaceState = function(...args: Parameters<typeof originalReplaceState>
 
 createRoot(document.getElementById("root")!).render(
   CLERK_PUBLISHABLE_KEY ? (
-    <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY} afterSignOutUrl="/admin/login">
-      <App />
-    </ClerkProvider>
+    <ClerkBoundary fallback={<App />}>
+      <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY} afterSignOutUrl="/admin/login">
+        <App />
+      </ClerkProvider>
+    </ClerkBoundary>
   ) : (
     <App />
   )

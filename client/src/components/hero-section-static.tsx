@@ -11,7 +11,10 @@ import constanciaLogo from "@assets/constancia-logo.png";
 // to give us scroll runway.
 // =============================================================================
 
-const STOPS = [0.04, 0.15, 0.26, 0.37, 0.48, 0.59, 0.70, 0.82, 0.94];
+// Outro stop pushed to 0.97 so the "Ready to talk" panel locks in right at
+// the end of the animation, then the natural sticky exit transitions
+// straight into the footer. Earlier stops kept evenly spaced.
+const STOPS = [0.04, 0.16, 0.28, 0.40, 0.52, 0.64, 0.76, 0.88, 0.97];
 const SECTION = 0.16;
 
 const LETTER_FLY = [
@@ -37,29 +40,27 @@ type Frame = { p: number; top: number; left: number; size: number; op: number };
 const CIRCLE_FRAMES: { rose: Frame[]; mint: Frame[] } = {
   rose: [
     { p: 0.00, top: 22, left: 54, size: 16, op: 0.78 },   // lockup
-    { p: 0.05, top: 22, left: 54, size: 16, op: 0.78 },
-    { p: 0.15, top: 22, left: 82, size: 32, op: 0.50 },   // 01 Senior — top-right
-    { p: 0.26, top: 78, left: 20, size: 38, op: 0.52 },   // 02 Fixed — bottom-left
-    { p: 0.37, top: 22, left: 18, size: 40, op: 0.50 },   // 03 AI — top-left
-    { p: 0.48, top: 22, left: 82, size: 36, op: 0.50 },   // 04 Platforms — top-right
-    { p: 0.59, top: 50, left: 12, size: 38, op: 0.42 },   // 05 Track record — left frame
-    { p: 0.70, top: 78, left: 82, size: 40, op: 0.50 },   // 06 Programmes — bottom-right
-    { p: 0.82, top: 78, left: 20, size: 36, op: 0.52 },   // 07 FinanceCompass — bottom-left
-    { p: 0.94, top: 30, left: 70, size: 26, op: 0.62 },   // 08 Outro — settling
-    { p: 0.97, top: 22, left: 54, size: 16, op: 0.78 },   // reassembled
+    { p: 0.04, top: 22, left: 54, size: 16, op: 0.78 },   // intro hold
+    { p: 0.16, top: 22, left: 82, size: 32, op: 0.50 },   // 01 Senior — top-right
+    { p: 0.28, top: 78, left: 20, size: 38, op: 0.52 },   // 02 Fixed — bottom-left
+    { p: 0.40, top: 22, left: 18, size: 40, op: 0.50 },   // 03 AI — top-left
+    { p: 0.52, top: 22, left: 82, size: 36, op: 0.50 },   // 04 Platforms — top-right
+    { p: 0.64, top: 50, left: 12, size: 38, op: 0.42 },   // 05 Track record — left frame
+    { p: 0.76, top: 78, left: 82, size: 40, op: 0.50 },   // 06 Programmes — bottom-right
+    { p: 0.88, top: 78, left: 20, size: 36, op: 0.52 },   // 07 FinanceCompass — bottom-left
+    { p: 0.97, top: 22, left: 54, size: 16, op: 0.78 },   // outro — reassembled lockup
     { p: 1.00, top: 22, left: 54, size: 16, op: 0.78 },
   ],
   mint: [
     { p: 0.00, top: 24, left: 57, size: 14, op: 0.78 },
-    { p: 0.05, top: 24, left: 57, size: 14, op: 0.78 },
-    { p: 0.15, top: 78, left: 20, size: 30, op: 0.50 },   // bottom-left
-    { p: 0.26, top: 22, left: 80, size: 32, op: 0.52 },   // top-right
-    { p: 0.37, top: 78, left: 80, size: 34, op: 0.50 },   // bottom-right
-    { p: 0.48, top: 22, left: 18, size: 32, op: 0.50 },   // top-left
-    { p: 0.59, top: 50, left: 88, size: 38, op: 0.42 },   // right frame
-    { p: 0.70, top: 22, left: 18, size: 34, op: 0.50 },   // top-left
-    { p: 0.82, top: 22, left: 80, size: 32, op: 0.52 },   // top-right
-    { p: 0.94, top: 70, left: 32, size: 24, op: 0.62 },   // settling
+    { p: 0.04, top: 24, left: 57, size: 14, op: 0.78 },
+    { p: 0.16, top: 78, left: 20, size: 30, op: 0.50 },   // bottom-left
+    { p: 0.28, top: 22, left: 80, size: 32, op: 0.52 },   // top-right
+    { p: 0.40, top: 78, left: 80, size: 34, op: 0.50 },   // bottom-right
+    { p: 0.52, top: 22, left: 18, size: 32, op: 0.50 },   // top-left
+    { p: 0.64, top: 50, left: 88, size: 38, op: 0.42 },   // right frame
+    { p: 0.76, top: 22, left: 18, size: 34, op: 0.50 },   // top-left
+    { p: 0.88, top: 22, left: 80, size: 32, op: 0.52 },   // top-right
     { p: 0.97, top: 24, left: 57, size: 14, op: 0.78 },
     { p: 1.00, top: 24, left: 57, size: 14, op: 0.78 },
   ],
@@ -419,20 +420,24 @@ export function HeroSectionStatic() {
       });
       if (progBarRef.current) progBarRef.current.style.width = (scrollProg * 100).toFixed(2) + "%";
 
-      // Exit fade — fires during the natural sticky exit slide, not against
-      // scrollProg. This eliminates the cream blank between the final panel
-      // and the footer becoming visible: as the stage slides up out of view,
-      // it fades from 1 → 0 so the footer reads through cleanly.
+      // Exit fade — composed of two phases:
+      //   1) scrollProg 0.97 → 1.0: the outro is fully centred, we start
+      //      fading the hero so the footer can rise into view through it.
+      //   2) sticky exit slide that follows: completes the fade so by the
+      //      time the section bottom clears the viewport, opacity is 0.
+      // Combined effect: no dead-scroll between outro and footer.
       const heroStageEl = heroStageRef.current;
       if (heroStageEl && stage) {
+        const phaseA = Math.max(0, Math.min(1, (scrollProg - 0.97) / 0.03));
         const rect2 = stage.getBoundingClientRect();
         const h2 = stage.offsetHeight - window.innerHeight;
-        // exitRaw: 0 while the animation is running, ramps 0→1 across the
-        // ~1-viewport sticky exit slide that follows.
-        const exitRaw = (-rect2.top - h2) / Math.max(1, window.innerHeight);
-        const exitT = Math.max(0, Math.min(1, exitRaw));
+        const phaseB = Math.max(
+          0,
+          Math.min(1, (-rect2.top - h2) / Math.max(1, window.innerHeight * 0.5))
+        );
+        const exitT = Math.max(phaseA, phaseB);
         heroStageEl.style.opacity = (1 - exitT).toFixed(3);
-        heroStageEl.style.pointerEvents = exitT > 0 ? "none" : "";
+        heroStageEl.style.pointerEvents = exitT > 0.4 ? "none" : "";
       }
 
       // Camera dive
@@ -491,8 +496,11 @@ export function HeroSectionStatic() {
       style={{
         position: "relative",
         width: "100%",
-        // 9× viewport scroll runway — 9 panels at ~100vh each
-        height: "900vh",
+        // 7× viewport scroll runway. Each of the 9 panels takes a slightly
+        // shorter scroll window, the outro locks centred at 0.97, and the
+        // sticky exit slide runs the last ~50vh straight into the footer
+        // — no dead space at the bottom.
+        height: "700vh",
         background: "var(--brand-bg-primary)",
         fontFamily: "var(--brand-font-sans)",
       }}

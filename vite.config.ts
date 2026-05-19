@@ -1,12 +1,16 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
-import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
+
+// Note: We deliberately do NOT load @replit/vite-plugin-runtime-error-modal.
+// That plugin renders a modal overlay for EVERY uncaught error including
+// transient third-party script failures (Clerk's CDN, etc). Real errors
+// still log to the browser console; this just stops the modal from
+// hijacking the dev preview when a non-fatal failure happens.
 
 export default defineConfig({
   plugins: [
     react(),
-    runtimeErrorOverlay(),
     ...(process.env.NODE_ENV !== "production" &&
     process.env.REPL_ID !== undefined
       ? [
