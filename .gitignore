@@ -12,3 +12,9 @@ coverage/
 .upm/
 .cache/
 *.tsbuildinfo
+
+.playwright-mcp/
+/*.png
+!attached_assets/**/*.png
+!client/public/**/*.png
+!client/src/**/*.png
