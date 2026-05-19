@@ -50,7 +50,9 @@ export async function seedBlogsOnStartup(forceReseed: boolean = false): Promise<
 
     let seedData: SeedData;
     try {
-      seedData = (await import("../scripts/blog-seed-data.json")) as unknown as SeedData;
+      // dynamic path string keeps TS from trying to resolve the JSON at compile time
+      const modPath = "../scripts/blog-seed-data.json";
+      seedData = (await import(/* @vite-ignore */ modPath)) as unknown as SeedData;
     } catch (err) {
       // The seed JSON is optional — when it's absent (current repo state) we
       // skip seeding rather than crash the boot. Add server/scripts/blog-seed-data.json

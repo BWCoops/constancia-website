@@ -110,6 +110,7 @@ export function HeroSectionStatic() {
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const stageRef = useRef<HTMLDivElement | null>(null);
+  const heroStageRef = useRef<HTMLDivElement | null>(null);
   const logoRealRef = useRef<HTMLImageElement | null>(null);
   const heroLogoRef = useRef<HTMLDivElement | null>(null);
   const roseBarRef = useRef<HTMLSpanElement | null>(null);
@@ -125,9 +126,16 @@ export function HeroSectionStatic() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-    renderer.outputColorSpace = THREE.SRGBColorSpace;
-    renderer.setClearColor(0xF6F3EE, 1);
+    // WebGL is optional — if the device can't allocate a context (rare,
+    // mostly headless / GPU-locked envs) the CSS scroll animation still runs.
+    let renderer: THREE.WebGLRenderer | null = null;
+    try {
+      renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.setClearColor(0xF6F3EE, 1);
+    } catch {
+      // continue without the 3D wave
+    }
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 200);
@@ -255,8 +263,10 @@ export function HeroSectionStatic() {
     function resizeWithDpr() {
       const w = window.innerWidth, h = window.innerHeight;
       const dprCap = window.innerWidth <= 768 ? 1.5 : 2;
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, dprCap));
-      renderer.setSize(w, h, false);
+      if (renderer) {
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, dprCap));
+        renderer.setSize(w, h, false);
+      }
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
     }
@@ -271,12 +281,14 @@ export function HeroSectionStatic() {
     window.addEventListener("pointermove", onMove);
 
     const stage = stageRef.current;
-    const stageH = () => stage ? stage.offsetHeight : window.innerHeight;
+    // getBoundingClientRect is scroll-container agnostic — works whether the
+    // page scrolls via window.scrollY or via a parent div's scrollTop. This
+    // also avoids any "double scroll" bug when an ancestor has overflow set.
     function readScrollProg() {
       if (!stage) return 0;
-      const top = stage.offsetTop;
+      const rect = stage.getBoundingClientRect();
       const h = stage.offsetHeight - window.innerHeight;
-      return Math.min(1, Math.max(0, (window.scrollY - top) / Math.max(1, h)));
+      return Math.min(1, Math.max(0, -rect.top / Math.max(1, h)));
     }
 
     const clock = new THREE.Clock();
@@ -407,6 +419,22 @@ export function HeroSectionStatic() {
       });
       if (progBarRef.current) progBarRef.current.style.width = (scrollProg * 100).toFixed(2) + "%";
 
+      // Exit fade — fires during the natural sticky exit slide, not against
+      // scrollProg. This eliminates the cream blank between the final panel
+      // and the footer becoming visible: as the stage slides up out of view,
+      // it fades from 1 → 0 so the footer reads through cleanly.
+      const heroStageEl = heroStageRef.current;
+      if (heroStageEl && stage) {
+        const rect2 = stage.getBoundingClientRect();
+        const h2 = stage.offsetHeight - window.innerHeight;
+        // exitRaw: 0 while the animation is running, ramps 0→1 across the
+        // ~1-viewport sticky exit slide that follows.
+        const exitRaw = (-rect2.top - h2) / Math.max(1, window.innerHeight);
+        const exitT = Math.max(0, Math.min(1, exitRaw));
+        heroStageEl.style.opacity = (1 - exitT).toFixed(3);
+        heroStageEl.style.pointerEvents = exitT > 0 ? "none" : "";
+      }
+
       // Camera dive
       const camZ = 5.0 - scrollProg * 17;
       camera.position.x = damp(camera.position.x, mxSmooth * 1.0, 8, dt);
@@ -430,7 +458,7 @@ export function HeroSectionStatic() {
         (u.uOpacity.value as number) = baseOp;
       });
 
-      renderer.render(scene, camera);
+      if (renderer) renderer.render(scene, camera);
       rafId = requestAnimationFrame(frame);
     }
     rafId = requestAnimationFrame(frame);
@@ -444,7 +472,7 @@ export function HeroSectionStatic() {
         (mesh.material as THREE.Material).dispose();
         scene.remove(mesh);
       });
-      renderer.dispose();
+      if (renderer) renderer.dispose();
     };
   }, []);
 
@@ -470,7 +498,7 @@ export function HeroSectionStatic() {
       }}
     >
       {/* Fixed viewport stage that the scroll drives */}
-      <div className="hero-fixed-stage">
+      <div ref={heroStageRef} className="hero-fixed-stage">
         {/* Fabric canvas — full bleed atmosphere */}
         <canvas ref={canvasRef} className="hero-fabric-canvas" />
 

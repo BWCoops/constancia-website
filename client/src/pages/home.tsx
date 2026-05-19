@@ -19,7 +19,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden" style={{ fontFamily: 'var(--brand-font-sans)' }}>
+    <div className="min-h-screen bg-background" style={{ fontFamily: 'var(--brand-font-sans)', overflowX: 'clip' }}>
       <SEOHead
         title="Constancia — AI-First EPM Advisory · Abacum + OneStream Partner"
         description="AI-first EPM advisory. Official Abacum partner for mid-market FP&A, OneStream partner for enterprise. Senior practitioners, fixed-fee delivery — no juniors, no time-and-materials."
