@@ -1,5 +1,5 @@
 import { memo } from "react";
-import logoWhite from "@assets/1QG-TypeLogo-320.png";
+import logo from "@assets/constancia-logo.png";
 
 interface PageHeroProps {
   badge: string;
@@ -58,8 +58,8 @@ const PageHeroComponent = ({
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-32 text-center">
           <div className="mb-8">
             <img
-              src={logoWhite}
-              alt="1QG"
+              src={logo}
+              alt="Constancia"
               className="h-14 md:h-16 mx-auto mb-6 opacity-90"
               loading="eager"
               {...{ fetchpriority: "high" } as any}

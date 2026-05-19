@@ -1,10 +1,28 @@
-import { useEffect } from "react";
+import { useEffect, Component } from "react";
 import { Navigation } from "@/components/navigation";
 import { HeroSectionStatic } from "@/components/hero-section-static";
 import { Footer } from "@/components/footer";
 import { CookiePreferencesIcon } from "@/components/cookie-consent";
 import { SEOHead } from "@/components/seo-head";
 import { trackPageView, setupScrollTracking, setupDwellTimeTracking } from "@/lib/funnel-analytics";
+
+class HeroErrorBoundary extends Component<{ children: React.ReactNode }, { failed: boolean }> {
+  state = { failed: false };
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+  render() {
+    if (this.state.failed) {
+      return (
+        <div
+          className="min-h-screen flex items-center justify-center"
+          style={{ background: '#F6F3EE' }}
+        />
+      );
+    }
+    return this.props.children;
+  }
+}
 
 export default function Home() {
   useEffect(() => {
@@ -43,7 +61,9 @@ export default function Home() {
       <Navigation />
 
       <main id="main-content">
-        <HeroSectionStatic />
+        <HeroErrorBoundary>
+          <HeroSectionStatic />
+        </HeroErrorBoundary>
       </main>
 
       <Footer />

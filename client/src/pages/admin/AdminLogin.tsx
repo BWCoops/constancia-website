@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertCircle, LogIn } from "lucide-react";
-import logo from "@assets/1QG - Type Logo (Dark Blue)_1764414916528.png";
+import logo from "@assets/constancia-logo.png";
 
 export default function AdminLogin() {
   const [, setLocation] = useLocation();

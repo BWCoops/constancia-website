@@ -125,7 +125,13 @@ export function HeroSectionStatic() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    } catch {
+      // WebGL unavailable in this environment — CSS-only hero renders fine without the 3D wave
+      return;
+    }
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.setClearColor(0xF6F3EE, 1);
 

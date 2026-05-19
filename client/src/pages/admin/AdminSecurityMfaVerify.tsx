@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { ShieldCheckIcon } from "lucide-react";
-import logo from "@assets/1QG-TypeLogo-320.png";
+import logo from "@assets/constancia-logo.png";
 
 export default function AdminSecurityMfaVerify() {
   const [_location, setLocation] = useLocation();
