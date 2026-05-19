@@ -26,7 +26,7 @@ import { isAuthenticated } from "../replitAuth";
 const router = Router();
 
 const HUBSPOT_PORTAL_ID = process.env.HUBSPOT_PORTAL_ID || "";
-const LEAD_NOTIFICATION_EMAIL = process.env.LEAD_NOTIFICATION_EMAIL || "info@1qg.com";
+const LEAD_NOTIFICATION_EMAIL = process.env.LEAD_NOTIFICATION_EMAIL || "info@constancia.io";
 
 const EXCLUDED_ANALYTICS_IPS = [
   "2a06:5906:1423:7000:8de0:ce1:adef:4e1",
@@ -1199,7 +1199,7 @@ function buildWidgetResultsEmailHtml(data: z.infer<typeof widgetEmailResultsSche
                       Finance Transformation & EPM Specialists
                     </p>
                     <p style="margin: 0 0 16px 0; font-size: 13px; color: #6b7280;">
-                      <a href="mailto:info@1qg.com" style="color: #0884AA; text-decoration: none;">info@1qg.com</a>
+                      <a href="mailto:info@constancia.io" style="color: #0884AA; text-decoration: none;">info@constancia.io</a>
                       &nbsp;|&nbsp;
                       <a href="https://1qg.com" style="color: #0884AA; text-decoration: none;">www.1qg.com</a>
                     </p>
@@ -2381,24 +2381,30 @@ router.get("/cohort-analysis", async (req: Request, res: Response) => {
       const filtered = excludeAdminIPsFilter(events);
       const sessions = new Set(filtered.map(e => e.sessionId));
       
-      const widgetComplete = new Set(filtered.filter(e => 
-        e.eventType === "preview_completed" || e.eventType === "widget_complete"
-      ).map(e => e.sessionId)).size;
-      
-      const assessmentStart = new Set(filtered.filter(e => 
-        e.eventType === "assessment_start" || e.eventType === "assessment_page_view"
-      ).map(e => e.sessionId)).size;
-      
-      const assessmentComplete = new Set(filtered.filter(e => 
-        e.eventType === "assessment_complete" || e.eventType === "assessment_progress_100"
-      ).map(e => e.sessionId)).size;
-      
-      const leadsCaptured = new Set(filtered.filter(e => 
-        e.eventType === "lead_captured" || e.eventType === "email_captured"
-      ).map(e => e.sessionId)).size;
-      
+      const matchEvent = (event: typeof filtered[number], canonicals: Set<string>) =>
+        canonicals.has(canonicalEvent(event.eventType));
+
+      const widgetCompleteEvents = new Set<string>([
+        ANALYTICS_EVENTS.WIDGET_COMPLETED,
+        ANALYTICS_EVENTS.PREVIEW_COMPLETED,
+      ]);
+      const assessmentStartEvents = new Set<string>([
+        ANALYTICS_EVENTS.ASSESSMENT_STARTED,
+        ANALYTICS_EVENTS.ASSESSMENT_PAGE_VIEW,
+      ]);
+      const assessmentCompleteEvents = new Set<string>([
+        ANALYTICS_EVENTS.ASSESSMENT_COMPLETED,
+        ANALYTICS_EVENTS.ASSESSMENT_PROGRESS_100,
+      ]);
+      const leadEvents = new Set<string>(LEAD_CAPTURE_EVENTS);
+
+      const widgetComplete = new Set(filtered.filter(e => matchEvent(e, widgetCompleteEvents)).map(e => e.sessionId)).size;
+      const assessmentStart = new Set(filtered.filter(e => matchEvent(e, assessmentStartEvents)).map(e => e.sessionId)).size;
+      const assessmentComplete = new Set(filtered.filter(e => matchEvent(e, assessmentCompleteEvents)).map(e => e.sessionId)).size;
+      const leadsCaptured = new Set(filtered.filter(e => matchEvent(e, leadEvents)).map(e => e.sessionId)).size;
+
       const completionTimes = filtered
-        .filter(e => e.eventType === "assessment_complete" && e.dwellTimeMs)
+        .filter(e => matchEvent(e, assessmentCompleteEvents) && e.dwellTimeMs)
         .map(e => e.dwellTimeMs!);
       
       const avgTimeToComplete = completionTimes.length > 0 
@@ -2773,12 +2779,14 @@ router.get("/comparison-stats", async (req: Request, res: Response) => {
       }
     });
     
-    // Identify bot-like sessions: completion in < 20 seconds is too fast to be human
-    const BOT_LIKE_THRESHOLD_SECONDS = 20;
+    // Identify bot-like sessions using the centralised heuristics from
+    // shared/analytics-taxonomy.ts. Anything below IMPOSSIBLE_COMPLETION_MS
+    // is dropped as bot; SUSPICIOUSLY_FAST_MS is the soft warning band.
+    const { BOT_HEURISTICS } = await import("@shared/analytics-taxonomy");
     const botLikeSessions = new Set<string>();
     sessionTimestamps.forEach((data, sessionId) => {
-      const durationSeconds = (data.last.getTime() - data.first.getTime()) / 1000;
-      if (data.hasCompletion && durationSeconds < BOT_LIKE_THRESHOLD_SECONDS) {
+      const durationMs = data.last.getTime() - data.first.getTime();
+      if (data.hasCompletion && durationMs < BOT_HEURISTICS.IMPOSSIBLE_COMPLETION_MS) {
         botLikeSessions.add(sessionId);
       }
     });

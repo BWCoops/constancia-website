@@ -73,24 +73,43 @@ import AdminLayout from "./AdminLayout";
 import { InsightsPanel } from "@/components/admin/InsightsPanel";
 import { apiRequest } from "@/lib/queryClient";
 
+// Matches FunnelStageResult from server/services/analytics/funnel.ts,
+// with legacy aliases populated by withLegacyAliases() so the
+// existing UI bindings keep working without a wholesale rewrite.
 interface FunnelStage {
-  name: string;
+  key: string;
   label: string;
+  description?: string;
+  order: number;
+  uniqueSessions: number;
+  stepwiseConversionPct: number;
+  cumulativeConversionPct: number;
+  absoluteDropOff: number;
+  targetConversionPct: number;
+  warningPct: number;
+  status: "green" | "yellow" | "red";
+  lowConfidence: boolean;
+  // Always populated by withLegacyAliases.
+  name: string;
   count: number;
   conversionRate: number;
   dropOffRate: number;
-  previousCount: number;
   targetPercentage: number;
-  status: "green" | "yellow" | "red";
-  description?: string;
 }
 
 interface DropOff {
-  from: string;
-  to: string;
-  dropOffRate: number;
-  targetDropOff: number;
-  severity: "green" | "yellow" | "red";
+  fromKey: string;
+  fromLabel: string;
+  toKey: string;
+  toLabel: string;
+  sessionsLost: number;
+  dropOffPct: number;
+  // Legacy aliases populated client-side in the query mapper.
+  from?: string;
+  to?: string;
+  dropOffRate?: number;
+  targetDropOff?: number;
+  severity?: "green" | "yellow" | "red";
 }
 
 interface DeviceBreakdown {
@@ -109,13 +128,31 @@ interface SourceBreakdown {
 
 interface FunnelStats {
   success: boolean;
-  period: { days: number; startDate: string };
+  period: { days: number; startDate: string; endDate?: string };
+  conversionMode?: string;
   totalSessions: number;
   totalEvents: number;
   funnel: FunnelStage[];
-  dropOffs: DropOff[];
+  biggestDropOffs?: DropOff[];
+  /** Legacy alias preserved for any external consumers. */
+  dropOffs?: DropOff[];
   deviceBreakdown: DeviceBreakdown[];
   sourceBreakdown: SourceBreakdown[];
+}
+
+/**
+ * Adds the legacy field aliases that the existing UI components read.
+ * Centralised so we don't sprinkle the mapping through the component tree.
+ */
+function withLegacyAliases(stage: FunnelStage): FunnelStage {
+  return {
+    ...stage,
+    name: stage.key,
+    count: stage.uniqueSessions,
+    conversionRate: Math.round(stage.stepwiseConversionPct),
+    dropOffRate: Math.round(Math.max(0, 100 - stage.stepwiseConversionPct)),
+    targetPercentage: stage.targetConversionPct,
+  };
 }
 
 interface CohortData {
@@ -132,26 +169,41 @@ interface CohortData {
 interface TimeMetric {
   milestone: string;
   label: string;
-  avgSeconds: number | null;
+  converters: number;
+  nonConverters: number;
+  totalSessions: number;
+  conversionRate: number;
+  meanSeconds: number | null;
   medianSeconds: number | null;
-  count: number;
+  p95Seconds: number | null;
+  /** Legacy alias for old UI bindings. */
+  count?: number;
+  avgSeconds?: number | null;
 }
 
 interface QuestionHeatmapData {
   questionNumber: number;
+  sessionsReached: number;
   answered: number;
   abandoned: number;
-  uniqueSessions: number;
-  avgTimeSeconds: number;
   abandonmentRate: number;
+  meanTimeSeconds: number | null;
+  medianTimeSeconds: number | null;
+  lowConfidence: boolean;
+  /** Legacy aliases for old UI bindings. */
+  uniqueSessions?: number;
+  avgTimeSeconds?: number;
 }
 
 interface TrendData {
   date: string;
   sessions: number;
-  widgetComplete: number;
-  assessmentComplete: number;
+  widgetCompleted: number;
+  assessmentCompleted: number;
   leads: number;
+  /** Legacy alias for old UI bindings. */
+  widgetComplete?: number;
+  assessmentComplete?: number;
 }
 
 interface FunnelTarget {
@@ -424,9 +476,24 @@ export default function FunnelAnalytics() {
     queryKey: ["/api/analytics/funnel-stats", { days: timeRange }],
     queryFn: async () => {
       const res = await fetch(`/api/analytics/funnel-stats?days=${timeRange}`);
-      return res.json();
+      const data = await res.json();
+      if (data?.funnel) {
+        data.funnel = data.funnel.map(withLegacyAliases);
+      }
+      // The server now returns biggestDropOffs; map to legacy `dropOffs`
+      // shape (used by older UI code) without losing the new fields.
+      if (data?.biggestDropOffs && !data.dropOffs) {
+        data.dropOffs = data.biggestDropOffs.map((d: DropOff) => ({
+          ...d,
+          from: d.fromLabel,
+          to: d.toLabel,
+          dropOffRate: d.dropOffPct,
+          severity: "yellow",
+        }));
+      }
+      return data;
     },
-    staleTime: 60000, // Data considered fresh for 1 minute
+    staleTime: 60000,
     refetchInterval: 60000,
   });
   
@@ -443,27 +510,54 @@ export default function FunnelAnalytics() {
     queryKey: ["/api/analytics/time-to-conversion", { days: timeRange }],
     queryFn: async () => {
       const res = await fetch(`/api/analytics/time-to-conversion?days=${timeRange}`);
-      return res.json();
+      const data = await res.json();
+      if (data?.metrics) {
+        // Map new server field names back to legacy aliases so older UI
+        // components don't have to change. Drop the alias once the UI
+        // is rebuilt to use the new fields directly.
+        data.metrics = data.metrics.map((m: TimeMetric) => ({
+          ...m,
+          avgSeconds: m.meanSeconds,
+          count: m.converters,
+        }));
+      }
+      return data;
     },
-    staleTime: 60000, // Data considered fresh for 1 minute
+    staleTime: 60000,
   });
-  
+
   const { data: questionHeatmap, isLoading: loadingHeatmap } = useQuery<{ heatmap: QuestionHeatmapData[] }>({
     queryKey: ["/api/analytics/question-heatmap", { days: timeRange }],
     queryFn: async () => {
       const res = await fetch(`/api/analytics/question-heatmap?days=${timeRange}`);
-      return res.json();
+      const data = await res.json();
+      if (data?.heatmap) {
+        data.heatmap = data.heatmap.map((q: QuestionHeatmapData) => ({
+          ...q,
+          uniqueSessions: q.sessionsReached,
+          avgTimeSeconds: q.meanTimeSeconds ?? 0,
+        }));
+      }
+      return data;
     },
-    staleTime: 60000, // Data considered fresh for 1 minute
+    staleTime: 60000,
   });
-  
+
   const { data: trendData, isLoading: loadingTrends } = useQuery<{ trendData: TrendData[] }>({
     queryKey: ["/api/analytics/trend-data", { days: "14" }],
     queryFn: async () => {
       const res = await fetch("/api/analytics/trend-data?days=14");
-      return res.json();
+      const data = await res.json();
+      if (data?.trendData) {
+        data.trendData = data.trendData.map((t: TrendData) => ({
+          ...t,
+          widgetComplete: t.widgetCompleted,
+          assessmentComplete: t.assessmentCompleted,
+        }));
+      }
+      return data;
     },
-    staleTime: 60000, // Data considered fresh for 1 minute
+    staleTime: 60000,
   });
   
   const { data: targetsData } = useQuery<{ targets: FunnelTarget[] }>({
@@ -728,9 +822,9 @@ export default function FunnelAnalytics() {
                                 <span className="text-sm">{metric.label}</span>
                               </div>
                               <div className="text-right">
-                                <span className="font-medium">{formatTime(metric.avgSeconds)}</span>
+                                <span className="font-medium">{formatTime(metric.avgSeconds ?? null)}</span>
                                 <span className="text-xs text-muted-foreground ml-2">
-                                  ({metric.count} users)
+                                  ({metric.count ?? 0} users)
                                 </span>
                               </div>
                             </div>
@@ -804,38 +898,41 @@ export default function FunnelAnalytics() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    {funnelStats.dropOffs.length === 0 ? (
+                    {(funnelStats.dropOffs ?? []).length === 0 ? (
                       <p className="text-muted-foreground">No drop-offs detected yet</p>
                     ) : (
                       <div className="space-y-4">
-                        {funnelStats.dropOffs.map((dropoff, index) => {
-                          const colors = STATUS_COLORS[dropoff.severity];
-                          const isOverTarget = dropoff.dropOffRate > dropoff.targetDropOff;
-                          
+                        {(funnelStats.dropOffs ?? []).map((dropoff, index) => {
+                          const severity = (dropoff.severity ?? "yellow") as "green" | "yellow" | "red";
+                          const colors = STATUS_COLORS[severity];
+                          const dropPct = dropoff.dropOffRate ?? dropoff.dropOffPct;
+                          const targetDrop = dropoff.targetDropOff ?? 0;
+                          const isOverTarget = dropPct > targetDrop;
+
                           return (
-                            <div 
-                              key={index} 
+                            <div
+                              key={index}
                               className={`p-4 rounded-lg border-l-4 ${colors.border} ${colors.bg}`}
                             >
                               <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-3">
                                   <div className="flex items-center gap-2">
-                                    <span className="font-medium">{dropoff.from}</span>
+                                    <span className="font-medium">{dropoff.from ?? dropoff.fromLabel}</span>
                                     <ArrowRight className="h-4 w-4 text-muted-foreground" />
-                                    <span className="font-medium">{dropoff.to}</span>
+                                    <span className="font-medium">{dropoff.to ?? dropoff.toLabel}</span>
                                   </div>
-                                  <StatusBadge status={dropoff.severity} />
+                                  <StatusBadge status={severity} />
                                 </div>
                                 <div className="text-right">
                                   <span className={`text-xl font-bold ${colors.text}`}>
-                                    {dropoff.dropOffRate}%
+                                    {dropPct}%
                                   </span>
                                   <span className="text-sm text-muted-foreground ml-2">
-                                    drop-off
+                                    drop-off ({dropoff.sessionsLost} sessions)
                                   </span>
                                   {isOverTarget && (
                                     <p className="text-xs text-muted-foreground">
-                                      Target: {dropoff.targetDropOff}%
+                                      Target: {targetDrop}%
                                     </p>
                                   )}
                                 </div>
