@@ -1,12 +1,25 @@
 # Constancia Enterprise Brain — Architecture & Remediation Plan
 
-> Status: Draft for review
+> Status: Draft for review — four design choices locked (see §0)
 > Branch: `claude/setup-enterprise-database-X3RS9`
 > Owner: Engineering
 > Scope: Shared institutional memory for every Claude Code cloud instance,
 > consumable from chat, code and co-work sessions; ingestion of SOWs, RTMs,
 > technical/functional specs, OneStream and SQL scripts, best-practice
 > artefacts; full data dictionary; no local file silos.
+
+---
+
+## 0. Decisions locked
+
+| Decision           | Chosen                                                         |
+| ------------------ | -------------------------------------------------------------- |
+| Object storage     | **Cloudflare R2** (S3 API, zero egress, no NDA constraint)     |
+| Ingestion (v1)     | **Manual upload from laptops** — one-off batch first, then drag-and-drop UI |
+| Tenancy            | **Multi-tenant** — `team_id` on every `kb_*` row from day one  |
+| Embeddings         | **OpenAI `text-embedding-3-small`** — reuses existing API key  |
+
+Still open (see §13): OneStream seed corpus, hosting boundary (in-process vs split).
 
 ---
 
@@ -565,27 +578,19 @@ is an additive change, not a rewrite.
 
 ## 13. Open questions for you
 
-1. **Confidentiality bar** — are any client SOWs/RTMs under NDAs that
-   forbid storage outside Microsoft 365? If yes, Azure Blob Storage
-   replaces R2 (slightly more expensive but tenant-aligned).
-2. **Source of truth migration** — where do these documents live today
-   (SharePoint? Google Drive? local laptops?). The ingestion design
-   changes depending on whether v1 is "drag-and-drop upload" or
-   "connect to SharePoint and pull".
-3. **Embedding-provider preference** — OpenAI for pragmatism, or Voyage
-   for Anthropic-alignment?
-4. **OneStream specifics** — do we have a corpus of business rules /
-   data management sequences we can seed with on day one? That would
-   let us validate the `kb_scripts` design end-to-end.
-5. **Multi-tenant from day one, or not?** — if Constancia will ever
-   resell this brain pattern to clients, we add `kb_teams.id` everywhere
-   now. If it is strictly internal forever, we can skip the tenant
-   column. Recommend keeping it — costs nothing now, expensive to add
-   later.
-6. **Hosting** — keep the brain inside the existing Constancia website
-   process (simplest), or split into its own deploy? Recommend keeping
-   it in-process for v1 with a clean module boundary at
-   `server/brain/`.
+Four of the original six are now resolved (see §0). Two remain:
+
+1. **OneStream seed corpus** — do we have a starter set of business
+   rules / data-management sequences / load files we can ingest on day
+   one? Having even 10–20 real scripts lets us validate the
+   `kb_scripts` design end-to-end (parameter extraction, dialect
+   detection, risk-level surfacing) instead of mocking them.
+2. **Hosting boundary** — keep the brain inside the existing Constancia
+   website Express process (simplest, reuses Clerk and Drizzle as-is),
+   or split into its own deploy on day one? Recommend in-process for
+   v1 with a clean module boundary at `server/brain/`; lift to its own
+   service only if/when the website's deploy cadence starts to fight
+   the brain's.
 
 ---
 
@@ -597,10 +602,15 @@ is an additive change, not a rewrite.
 - [ ] Pick embedding provider
 
 ### Phase 1 — core schema + ingestion (week 1)
-- [ ] `shared/brain-schema.ts` with all `kb_*` tables
-- [ ] `drizzle-kit push` migration
+- [ ] `shared/brain-schema.ts` with all `kb_*` tables (`team_id` on every row)
+- [ ] `drizzle-kit push` migration against new `constancia-brain` Neon project
+- [ ] R2 bucket + signed-URL upload helper
 - [ ] `server/brain/ingestion/` — upload, store, extract, chunk, embed
-- [ ] Minimal admin UI to upload a file and see it indexed
+       (OpenAI `text-embedding-3-small`)
+- [ ] CLI `npm run brain:batch-ingest <dir>` for the initial laptop-to-brain
+       sweep (each of us points it at our local `~/Documents/Constancia/`
+       once, then we never look at those folders again)
+- [ ] Minimal admin UI to drag-and-drop a file and see it indexed
 - [ ] Seed `kb_dictionary_terms` with ~30 starter terms
 
 ### Phase 2 — MCP server (week 2)
