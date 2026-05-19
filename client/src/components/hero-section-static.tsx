@@ -125,20 +125,21 @@ export function HeroSectionStatic() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    let renderer: THREE.WebGLRenderer;
+    // WebGL is optional — CSS scroll animation always runs even without it
+    let renderer: THREE.WebGLRenderer | null = null;
+    let scene: THREE.Scene | null = null;
+    let camera: THREE.PerspectiveCamera | null = null;
+    let LAYERS: THREE.Mesh[] = [];
+
     try {
       renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-    } catch {
-      // WebGL unavailable in this environment — CSS-only hero renders fine without the 3D wave
-      return;
-    }
-    renderer.outputColorSpace = THREE.SRGBColorSpace;
-    renderer.setClearColor(0xF6F3EE, 1);
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.setClearColor(0xF6F3EE, 1);
 
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 200);
-    camera.position.set(0, 0.9, 5.0);
-    camera.lookAt(0, 0, 0);
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(42, 1, 0.1, 200);
+      camera.position.set(0, 0.9, 5.0);
+      camera.lookAt(0, 0, 0);
 
     const VERT = `
       uniform float uTime; uniform float uPhase; uniform float uAmp;
@@ -244,15 +245,22 @@ export function HeroSectionStatic() {
       makeFabric({ size: 12.0, segs: seg(160), amp: 1.00, phase: 1.1, posY: -0.45, posZ: -5.5,   rotX: -Math.PI * 0.52, rotZ: -0.06, baseOpacity: 0.52 }),
       makeFabric({ size: 13.0, segs: seg(140), amp: 1.05, phase: 3.0, posY: -0.55, posZ: -8.5,   rotX: -Math.PI * 0.44, rotZ:  0.05, baseOpacity: 0.60 }),
       makeFabric({ size: 14.0, segs: seg(120), amp: 1.10, phase: 4.2, posY: -0.65, posZ: -11.5,  rotX: -Math.PI * 0.50, rotZ: -0.03, baseOpacity: 0.62 }),
-    ];
+      ];
+    } catch {
+      // WebGL unavailable — 3D wave disabled, CSS scroll animation continues below
+    }
 
     function resizeWithDpr() {
       const w = window.innerWidth, h = window.innerHeight;
       const dprCap = window.innerWidth <= 768 ? 1.5 : 2;
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, dprCap));
-      renderer.setSize(w, h, false);
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
+      if (renderer) {
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, dprCap));
+        renderer.setSize(w, h, false);
+      }
+      if (camera) {
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      }
     }
     resizeWithDpr();
     window.addEventListener("resize", resizeWithDpr);
@@ -401,30 +409,32 @@ export function HeroSectionStatic() {
       });
       if (progBarRef.current) progBarRef.current.style.width = (scrollProg * 100).toFixed(2) + "%";
 
-      // Camera dive
-      const camZ = 5.0 - scrollProg * 17;
-      camera.position.x = damp(camera.position.x, mxSmooth * 1.0, 8, dt);
-      camera.position.y = damp(camera.position.y, 0.9 - mySmooth * 0.5 + Math.cos(t * 0.10) * 0.06, 8, dt);
-      camera.position.z = camZ;
-      camera.rotation.z = damp(camera.rotation.z, Math.sin(scrollProg * Math.PI * 1.4) * 0.04 + mxSmooth * 0.03, 6, dt);
-      camera.lookAt(camera.position.x * 0.25, 0, camera.position.z - 5);
+      // Camera dive + 3D rendering (only when WebGL is available)
+      if (camera && renderer && scene) {
+        const camZ = 5.0 - scrollProg * 17;
+        camera.position.x = damp(camera.position.x, mxSmooth * 1.0, 8, dt);
+        camera.position.y = damp(camera.position.y, 0.9 - mySmooth * 0.5 + Math.cos(t * 0.10) * 0.06, 8, dt);
+        camera.position.z = camZ;
+        camera.rotation.z = damp(camera.rotation.z, Math.sin(scrollProg * Math.PI * 1.4) * 0.04 + mxSmooth * 0.03, 6, dt);
+        camera.lookAt(camera.position.x * 0.25, 0, camera.position.z - 5);
 
-      LAYERS.forEach((mesh) => {
-        const u = mesh.material.uniforms as Record<string, { value: unknown }>;
-        (u.uTime.value as number) = t;
-        u.uCamPos.value = camera.position;
-        const dist = camera.position.z - mesh.position.z;
-        let dissolve = 0;
-        if (dist < 1.6) dissolve = 1 - Math.max(0, dist / 1.6);
-        if (dist < 0) dissolve = 1;
-        (u.uDissolve.value as number) = dissolve;
-        let baseOp = (mesh.userData.baseOpacity as number);
-        if (dist > 12) baseOp *= Math.max(0, 1 - (dist - 12) / 8);
-        if (dist < 0) baseOp *= Math.max(0, 1 + dist / 2);
-        (u.uOpacity.value as number) = baseOp;
-      });
+        LAYERS.forEach((mesh) => {
+          const u = mesh.material.uniforms as Record<string, { value: unknown }>;
+          (u.uTime.value as number) = t;
+          u.uCamPos.value = camera!.position;
+          const dist = camera!.position.z - mesh.position.z;
+          let dissolve = 0;
+          if (dist < 1.6) dissolve = 1 - Math.max(0, dist / 1.6);
+          if (dist < 0) dissolve = 1;
+          (u.uDissolve.value as number) = dissolve;
+          let baseOp = (mesh.userData.baseOpacity as number);
+          if (dist > 12) baseOp *= Math.max(0, 1 - (dist - 12) / 8);
+          if (dist < 0) baseOp *= Math.max(0, 1 + dist / 2);
+          (u.uOpacity.value as number) = baseOp;
+        });
 
-      renderer.render(scene, camera);
+        renderer.render(scene, camera);
+      }
       rafId = requestAnimationFrame(frame);
     }
     rafId = requestAnimationFrame(frame);
@@ -433,12 +443,14 @@ export function HeroSectionStatic() {
       cancelAnimationFrame(rafId);
       window.removeEventListener("resize", resizeWithDpr);
       window.removeEventListener("pointermove", onMove);
-      LAYERS.forEach((mesh) => {
-        mesh.geometry.dispose();
-        (mesh.material as THREE.Material).dispose();
-        scene.remove(mesh);
-      });
-      renderer.dispose();
+      if (renderer && scene) {
+        LAYERS.forEach((mesh) => {
+          mesh.geometry.dispose();
+          (mesh.material as THREE.Material).dispose();
+          scene!.remove(mesh);
+        });
+        renderer.dispose();
+      }
     };
   }, []);
 
