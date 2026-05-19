@@ -119,15 +119,33 @@ export function HeroSectionStatic() {
   const lettersRef = useRef<HTMLSpanElement[]>([]);
   const panelsRef = useRef<HTMLDivElement[]>([]);
   const progBarRef = useRef<HTMLSpanElement | null>(null);
+  const heroStageRef = useRef<HTMLDivElement | null>(null);
 
   // Three.js setup + scroll loop in a single effect
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-    renderer.outputColorSpace = THREE.SRGBColorSpace;
-    renderer.setClearColor(0xF6F3EE, 1);
+    // Pre-check WebGL support on a throw-away canvas so THREE.WebGLRenderer's
+    // internal console.error + throw never fires (Vite's runtime-error-plugin
+    // intercepts console.error at the module level before we can silence it).
+    let renderer: THREE.WebGLRenderer | null = null;
+    // failIfMajorPerformanceCaveat:true mirrors THREE.js's requirements —
+    // it returns null when only a software/CPU renderer is available,
+    // which is what the Replit sandbox has (no GPU).
+    const probe = document.createElement('canvas');
+    const ctxOpts = { failIfMajorPerformanceCaveat: true } as WebGLContextAttributes;
+    const hasWebGL = !!(probe.getContext('webgl2', ctxOpts) || probe.getContext('webgl', ctxOpts));
+    if (hasWebGL) {
+      try {
+        renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+        renderer.outputColorSpace = THREE.SRGBColorSpace;
+        renderer.setClearColor(0xF6F3EE, 1);
+      } catch (_e) {
+        renderer = null;
+      }
+    }
+    // renderer === null → CSS scroll animation runs without 3D fabric
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 200);
@@ -255,8 +273,10 @@ export function HeroSectionStatic() {
     function resizeWithDpr() {
       const w = window.innerWidth, h = window.innerHeight;
       const dprCap = window.innerWidth <= 768 ? 1.5 : 2;
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, dprCap));
-      renderer.setSize(w, h, false);
+      if (renderer) {
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, dprCap));
+        renderer.setSize(w, h, false);
+      }
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
     }
@@ -274,9 +294,9 @@ export function HeroSectionStatic() {
     const stageH = () => stage ? stage.offsetHeight : window.innerHeight;
     function readScrollProg() {
       if (!stage) return 0;
-      const top = stage.offsetTop;
+      const rect = stage.getBoundingClientRect();
       const h = stage.offsetHeight - window.innerHeight;
-      return Math.min(1, Math.max(0, (window.scrollY - top) / Math.max(1, h)));
+      return Math.min(1, Math.max(0, -rect.top / Math.max(1, h)));
     }
 
     const clock = new THREE.Clock();
@@ -407,30 +427,45 @@ export function HeroSectionStatic() {
       });
       if (progBarRef.current) progBarRef.current.style.width = (scrollProg * 100).toFixed(2) + "%";
 
-      // Camera dive
-      const camZ = 5.0 - scrollProg * 17;
-      camera.position.x = damp(camera.position.x, mxSmooth * 1.0, 8, dt);
-      camera.position.y = damp(camera.position.y, 0.9 - mySmooth * 0.5 + Math.cos(t * 0.10) * 0.06, 8, dt);
-      camera.position.z = camZ;
-      camera.rotation.z = damp(camera.rotation.z, Math.sin(scrollProg * Math.PI * 1.4) * 0.04 + mxSmooth * 0.03, 6, dt);
-      camera.lookAt(camera.position.x * 0.25, 0, camera.position.z - 5);
+      // Hero fade-out during sticky exit — position:sticky slides the stage
+      // upward as the section exits the viewport. exitT ramps 0→1 during that
+      // 1-viewport slide so the hero fades as it departs, not before.
+      const heroStageEl = heroStageRef.current;
+      if (heroStageEl && stage) {
+        const rect2 = stage.getBoundingClientRect();
+        const h2 = stage.offsetHeight - window.innerHeight;
+        const exitRaw = (-rect2.top - h2) / Math.max(1, window.innerHeight);
+        const exitT = Math.max(0, Math.min(1, exitRaw));
+        heroStageEl.style.opacity = (1 - exitT).toFixed(3);
+        heroStageEl.style.pointerEvents = exitT > 0 ? 'none' : '';
+      }
 
-      LAYERS.forEach((mesh) => {
-        const u = mesh.material.uniforms as Record<string, { value: unknown }>;
-        (u.uTime.value as number) = t;
-        u.uCamPos.value = camera.position;
-        const dist = camera.position.z - mesh.position.z;
-        let dissolve = 0;
-        if (dist < 1.6) dissolve = 1 - Math.max(0, dist / 1.6);
-        if (dist < 0) dissolve = 1;
-        (u.uDissolve.value as number) = dissolve;
-        let baseOp = (mesh.userData.baseOpacity as number);
-        if (dist > 12) baseOp *= Math.max(0, 1 - (dist - 12) / 8);
-        if (dist < 0) baseOp *= Math.max(0, 1 + dist / 2);
-        (u.uOpacity.value as number) = baseOp;
-      });
+      // Camera dive + 3D rendering (only when WebGL is available)
+      if (renderer) {
+        const camZ = 5.0 - scrollProg * 17;
+        camera.position.x = damp(camera.position.x, mxSmooth * 1.0, 8, dt);
+        camera.position.y = damp(camera.position.y, 0.9 - mySmooth * 0.5 + Math.cos(t * 0.10) * 0.06, 8, dt);
+        camera.position.z = camZ;
+        camera.rotation.z = damp(camera.rotation.z, Math.sin(scrollProg * Math.PI * 1.4) * 0.04 + mxSmooth * 0.03, 6, dt);
+        camera.lookAt(camera.position.x * 0.25, 0, camera.position.z - 5);
 
-      renderer.render(scene, camera);
+        LAYERS.forEach((mesh) => {
+          const u = mesh.material.uniforms as Record<string, { value: unknown }>;
+          (u.uTime.value as number) = t;
+          u.uCamPos.value = camera.position;
+          const dist = camera.position.z - mesh.position.z;
+          let dissolve = 0;
+          if (dist < 1.6) dissolve = 1 - Math.max(0, dist / 1.6);
+          if (dist < 0) dissolve = 1;
+          (u.uDissolve.value as number) = dissolve;
+          let baseOp = (mesh.userData.baseOpacity as number);
+          if (dist > 12) baseOp *= Math.max(0, 1 - (dist - 12) / 8);
+          if (dist < 0) baseOp *= Math.max(0, 1 + dist / 2);
+          (u.uOpacity.value as number) = baseOp;
+        });
+
+        renderer.render(scene, camera);
+      }
       rafId = requestAnimationFrame(frame);
     }
     rafId = requestAnimationFrame(frame);
@@ -444,7 +479,7 @@ export function HeroSectionStatic() {
         (mesh.material as THREE.Material).dispose();
         scene.remove(mesh);
       });
-      renderer.dispose();
+      if (renderer) renderer.dispose();
     };
   }, []);
 
@@ -470,7 +505,7 @@ export function HeroSectionStatic() {
       }}
     >
       {/* Fixed viewport stage that the scroll drives */}
-      <div className="hero-fixed-stage">
+      <div ref={heroStageRef} className="hero-fixed-stage">
         {/* Fabric canvas — full bleed atmosphere */}
         <canvas ref={canvasRef} className="hero-fabric-canvas" />
 

@@ -15,6 +15,19 @@ if (!CLERK_PUBLISHABLE_KEY) {
   );
 }
 
+// Suppress Clerk JS load failures from appearing as Vite error overlays.
+// The public site works without Clerk; only admin routes require it.
+// When Clerk's CDN is unreachable (network/CSP) the overlay would otherwise
+// block the entire dev preview for non-admin visitors.
+window.addEventListener('unhandledrejection', (e) => {
+  if (
+    typeof e.reason?.message === 'string' &&
+    e.reason.message.includes('failed_to_load_clerk_js')
+  ) {
+    e.preventDefault();
+  }
+});
+
 // Initialize Web Vitals performance monitoring
 const isDevelopment = !import.meta.env.PROD;
 initializeWebVitals(isDevelopment);

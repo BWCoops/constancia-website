@@ -12,7 +12,7 @@
  *                                  the DB whitelist is empty)
  */
 
-import type { Express, RequestHandler, Request, Response } from "express";
+import type { Express, RequestHandler, Request, Response, NextFunction } from "express";
 import { clerkMiddleware, getAuth, clerkClient } from "@clerk/express";
 import pino from "pino";
 import * as AdminSecurity from "./services/admin-security";
@@ -72,7 +72,24 @@ export async function setupAuth(app: Express): Promise<void> {
   // route that reads req.session.* directly. Independent of Clerk.
   app.use(getSession());
 
-  app.use(clerkMiddleware());
+  // Wrap clerkMiddleware so a stale / mismatched session cookie (e.g. left over
+  // from a different Clerk instance) clears gracefully instead of crashing with
+  // a 500. The bad cookie is deleted and the request continues unauthenticated.
+  const _clerkMw = clerkMiddleware();
+  app.use((req: Request, res: Response, next: NextFunction) => {
+    _clerkMw(req, res, (err?: any) => {
+      if (err) {
+        authLog.warn(
+          { reason: (err as Error).message },
+          "Clerk middleware error — clearing stale session cookie and continuing unauthenticated"
+        );
+        res.clearCookie("__session");
+        res.clearCookie("__client_uat");
+        return next();
+      }
+      next();
+    });
+  });
 
   // Session probe endpoint — the admin client polls this on load.
   app.get("/api/admin/auth/session", async (req: Request, res: Response) => {
