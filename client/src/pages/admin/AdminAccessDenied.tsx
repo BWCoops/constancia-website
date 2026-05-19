@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ShieldX, ArrowLeft, Mail } from "lucide-react";
-import logo from "@assets/constancia-logo.png";
+import logo from "@assets/constancia-logo-dark.png";
 
 export default function AdminAccessDenied() {
   const handleBack = () => {

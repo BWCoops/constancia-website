@@ -2,7 +2,7 @@ import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
 import type { Workbook, Cell } from "exceljs";
 
-import logoWhite from "@assets/constancia-logo.png";
+import logoWhite from "@assets/constancia-logo-dark.png";
 import logoBlue from "@assets/constancia-logo.png";
 
 import {

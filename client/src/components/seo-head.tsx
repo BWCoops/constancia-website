@@ -25,7 +25,7 @@ const organizationSchema = {
   "alternateName": "Constancia",
   "url": "https://constancia.io",
   "logo": "https://constancia.io/logo.png",
-  "description": "Independent ERP and EPM consultancy delivering AI-powered finance transformation across the UK and Ireland.",
+  "description": "AI-first finance technology advisory. Official Abacum partner for mid-market FP&A and OneStream partner for enterprise EPM. Independent vendor profiles and comparison tools, fixed-fee delivery from senior practitioners.",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "86-90 Paul Street",
@@ -45,14 +45,14 @@ const organizationSchema = {
   ],
   "areaServed": ["GB", "IE", "ZA", "US", "CA", "150"],
   "knowsAbout": [
-    "Enterprise Resource Planning",
     "Enterprise Performance Management",
-    "Finance Transformation",
-    "Artificial Intelligence",
-    "Oracle Cloud",
-    "Anaplan",
+    "FP&A Transformation",
+    "AI in Finance",
+    "Abacum",
     "OneStream",
-    "Board"
+    "Finance Operating Model",
+    "Vendor Selection",
+    "Cost Optimisation"
   ]
 };
 
@@ -61,7 +61,7 @@ const websiteSchema = {
   "@type": "WebSite",
   "name": "Constancia",
   "url": "https://constancia.io",
-  "description": "Independent ERP and EPM consultancy delivering AI-powered finance transformation.",
+  "description": "AI-first finance technology advisory. Abacum and OneStream partner. Senior practitioners, fixed fees, independent comparison tools.",
   "publisher": {
     "@type": "Organization",
     "name": "Constancia"

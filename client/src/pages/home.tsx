@@ -21,14 +21,17 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background overflow-x-hidden" style={{ fontFamily: 'var(--brand-font-sans)' }}>
       <SEOHead
-        title="Constancia | Independent Enterprise Performance Management Advisory"
-        description="Independent Enterprise Performance Management advisory for finance leaders. Senior practitioners, AI-augmented tooling, fixed-fee delivery."
+        title="Constancia — AI-First EPM Advisory · Abacum + OneStream Partner"
+        description="AI-first EPM advisory. Official Abacum partner for mid-market FP&A, OneStream partner for enterprise. Senior practitioners, fixed-fee delivery — no juniors, no time-and-materials."
         keywords={[
+          "Abacum partner",
+          "OneStream partner",
+          "AI-first EPM",
           "Enterprise Performance Management",
           "finance transformation",
-          "EPM comparison tools",
-          "fractional advisory",
-          "independent advisory"
+          "FP&A advisory",
+          "fixed-fee consulting",
+          "EPM platform selection"
         ]}
         includeOrganizationSchema={true}
       />

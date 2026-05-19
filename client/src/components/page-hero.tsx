@@ -1,5 +1,5 @@
 import { memo } from "react";
-import logoWhite from "@assets/constancia-logo.png";
+import logoWhite from "@assets/constancia-logo-dark.png";
 
 interface PageHeroProps {
   badge: string;

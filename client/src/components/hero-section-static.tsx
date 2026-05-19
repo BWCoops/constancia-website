@@ -560,14 +560,14 @@ export function HeroSectionStatic() {
           </div>
 
           <div ref={panelRef(4)} className="hero-panel">
-            <div className="hero-num stagger">04 · Platforms we know</div>
-            <h2 className="hero-h2 hero-h2--list stagger">
-              OneStream · Anaplan<br />
-              Abacum · Workday Adaptive<br />
-              Pigment · Cube · Vena
+            <div className="hero-num stagger">04 · Our partners</div>
+            <h2 className="hero-h2 stagger">
+              <em>Abacum</em> for mid-market.<br />
+              <em>OneStream</em> for enterprise.
+              <span className="hero-period" />
             </h2>
             <p className="hero-body stagger">
-              Independent. We recommend the platform that fits your business — not the one that fits our pipeline.
+              An <span className="hero-rose-mark">AI-first</span> EPM advisory built on a deliberate pair of platforms — both designed for finance teams who want delivery, not slideware. Independent on every other vendor, with deep capability across the market for when you need an objective comparison.
             </p>
           </div>
 

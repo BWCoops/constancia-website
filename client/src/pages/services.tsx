@@ -88,7 +88,7 @@ export default function ServicesPage() {
   return (
     <div className="min-h-screen page-dark">
       <SEOHead
-        title="EPM Implementation & Platform Selection | Constancia Services"
+        title="EPM Services — Abacum + OneStream Implementation, AI-First Delivery | Constancia"
         description="Senior EPM implementation, platform selection, AI for finance, and finance transformation services. Fixed fee. Scoped upfront. Delivered by practitioners, not graduates."
         keywords={["EPM implementation", "platform selection advisory", "OneStream consulting", "Abacum implementation", "FP&A tools", "finance transformation advisory"]}
       />

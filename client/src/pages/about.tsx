@@ -64,8 +64,8 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen page-dark">
       <SEOHead
-        title="About Us | Constancia - Senior EPM Practitioners, Not Theorists"
-        description="Constancia is a senior EPM advisory built by practitioners who have delivered finance transformation programmes at AerCap, Howden, Reckitt Benckiser, and BAT. Fixed fee. No vendor agenda."
+        title="About Constancia — AI-First EPM Advisory · Abacum + OneStream Partner"
+        description="Constancia is an AI-first EPM advisory. Official Abacum partner for mid-market FP&A, OneStream partner for enterprise. Built by senior practitioners who shipped finance transformation at AerCap, Howden, Reckitt Benckiser and BAT. Fixed fee, no time-and-materials."
         keywords={["about Constancia", "EPM consultancy London", "senior EPM consultants", "finance technology advisory", "EPM practitioners"]}
       />
       
