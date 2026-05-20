@@ -65,6 +65,7 @@ import { FinanceCompassRadarChart } from "@/components/finance-compass/RadarChar
 import { MaturityIndicator, MaturityBadge } from "@/components/finance-compass/MaturityIndicator";
 import { GaugeGrid, GaugeChart } from "@/components/finance-compass/GaugeChart";
 import { BenchmarkComparison } from "@/components/finance-compass/BenchmarkComparison";
+import { ScoringTransparency } from "@/components/finance-compass/ScoringTransparency";
 import { BenefitsTrackingDashboard } from "@/components/finance-compass/BenefitsTrackingDashboard";
 import { ROIAnalyticsCharts } from "@/components/finance-compass/ROIAnalyticsCharts";
 import { ChatbotWidget } from "@/components/finance-compass/ChatbotWidget";
@@ -1104,18 +1105,22 @@ export default function FinanceCompassResults() {
 
                 <TabsContent value="radar" className="space-y-6">
                   <div className="grid lg:grid-cols-2 gap-6">
-                    <FinanceCompassRadarChart 
+                    <FinanceCompassRadarChart
                       dimensionScores={safeAssessment.dimensionScores!}
                       title="Dimension Comparison"
                       description="Your scores vs industry benchmarks and world-class targets"
                     />
-                    <BenchmarkComparison 
+                    <BenchmarkComparison
                       dimensionScores={safeAssessment.dimensionScores!}
                       variant="chart"
                       title="Bar Chart Comparison"
                       description="Horizontal view of your performance"
                     />
                   </div>
+                  <ScoringTransparency
+                    industry={(safeAssessment as { industry?: string | null }).industry ?? null}
+                    dimensionScores={safeAssessment.dimensionScores}
+                  />
                 </TabsContent>
 
 

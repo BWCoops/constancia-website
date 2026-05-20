@@ -242,6 +242,9 @@ const roiFormSchema = z.object({
   contingency: z.coerce.number().min(0).default(0),
   processEfficiencyPercent: z.coerce.number().min(0).max(100).default(0),
   headcountDelta: z.coerce.number().min(0).default(0),
+  /** Average fully-loaded finance FTE cost in £k. £80k default; user
+   *  can override to model different geographies/seniority mixes. */
+  avgFteCostK: z.coerce.number().min(20).max(500).default(80),
   closeAccelerationDays: z.coerce.number().min(0).default(0),
   closeAccelerationValue: z.coerce.number().min(0).default(0),
   complianceRiskAvoidance: z.coerce.number().min(0).default(0),
@@ -439,6 +442,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
       contingency: 0,
       processEfficiencyPercent: 0,
       headcountDelta: 0,
+      avgFteCostK: 80,
       closeAccelerationDays: 0,
       closeAccelerationValue: 0,
       complianceRiskAvoidance: 0,
@@ -477,6 +481,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
         contingency: profile.contingency || 0,
         processEfficiencyPercent: profile.processEfficiencyPercent || 0,
         headcountDelta: profile.headcountDelta || 0,
+        avgFteCostK: (profile as { avgFteCostK?: number }).avgFteCostK ?? 80,
         closeAccelerationDays: profile.closeAccelerationDays || 0,
         closeAccelerationValue: profile.closeAccelerationValue || 0,
         complianceRiskAvoidance: profile.complianceRiskAvoidance || 0,
@@ -1634,7 +1639,20 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                                       <FormControl>
                                         <NumericInput field={field} min={0} data-testid="input-headcount-delta" />
                                       </FormControl>
-                                      <FormDescription>FTEs freed up (valued at £80k/FTE). Typical: 1-5 for mid-market</FormDescription>
+                                      <FormDescription>FTEs freed up. Typical: 1-5 for mid-market</FormDescription>
+                                    </FormItem>
+                                  )}
+                                />
+                                <FormField
+                                  control={form.control}
+                                  name="avgFteCostK"
+                                  render={({ field }) => (
+                                    <FormItem>
+                                      <FormLabel>Avg. fully-loaded FTE cost (£k)</FormLabel>
+                                      <FormControl>
+                                        <NumericInput field={field} min={20} max={500} data-testid="input-avg-fte-cost" />
+                                      </FormControl>
+                                      <FormDescription>Default £80k (UK mid-market finance FTE). Lower for India/SE Asia; higher for senior London roles.</FormDescription>
                                     </FormItem>
                                   )}
                                 />
