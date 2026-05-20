@@ -21,8 +21,8 @@ const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "info@constancia.io",
-    href: "mailto:info@constancia.io",
+    value: "info@constancia.com",
+    href: "mailto:info@constancia.com",
   },
   {
     icon: MapPin,
@@ -33,8 +33,8 @@ const contactInfo = [
   {
     icon: Globe,
     label: "Website",
-    value: "constancia.io",
-    href: "https://constancia.io",
+    value: "constancia.com",
+    href: "https://constancia.com",
   },
 ];
 

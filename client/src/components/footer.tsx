@@ -163,7 +163,7 @@ export function Footer() {
             ))}
             <a href="mailto:info@1qg.com" className="flex items-center gap-2 hover:text-brand-cyan transition-colors">
               <Mail className="w-4 h-4 flex-shrink-0" />
-              <span className="break-all">info@constancia.io</span>
+              <span className="break-all">info@constancia.com</span>
             </a>
             <span className="flex items-start gap-2">
               <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" />

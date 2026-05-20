@@ -359,7 +359,7 @@ async function sendOtpEmail(email: string, firstName: string, otp: string): Prom
             <br><br>
             Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ
             <br>
-            <a href="https://constancia.io" style="color: #0884AA;">constancia.io</a>
+            <a href="https://constancia.com" style="color: #0884AA;">constancia.com</a>
           </p>
         </div>
       `
@@ -381,7 +381,7 @@ async function sendOtpEmail(email: string, firstName: string, otp: string): Prom
  */
 async function sendContactVerificationEmail(to: string, firstName: string, token: string): Promise<boolean> {
   try {
-    const baseUrl = process.env.BASE_URL || 'https://constancia.io';
+    const baseUrl = process.env.BASE_URL || 'https://constancia.com';
     const verificationLink = `${baseUrl}/api/contact/verify?token=${token}`;
     
     await sendEmailViaGraph(
@@ -438,7 +438,7 @@ async function sendContactVerificationEmail(to: string, firstName: string, token
             <p style="color: #aaaaaa; font-size: 12px; margin: 0 0 10px 0;">
               Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ
             </p>
-            <a href="https://constancia.io" style="color: #12EBFC; font-size: 12px; text-decoration: none;">constancia.io</a>
+            <a href="https://constancia.com" style="color: #12EBFC; font-size: 12px; text-decoration: none;">constancia.com</a>
           </div>
         </div>
       `
@@ -2098,8 +2098,8 @@ export async function registerRoutes(
         "@context": "https://schema.org",
         "@type": "Organization",
         name: "Constancia",
-        url: "https://constancia.io",
-        logo: "https://constancia.io/logo.png"
+        url: "https://constancia.com",
+        logo: "https://constancia.com/logo.png"
       };
       res.json(schema);
     } catch (error: any) {
@@ -2221,23 +2221,23 @@ function generateWordPressHTML(): string {
   <meta name="keywords" content="EPM advisory, FP&amp;A, finance transformation, Abacum partner, OneStream partner, AI finance, CFO advisory">
   <meta name="author" content="Constancia">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://constancia.io/">
+  <link rel="canonical" href="https://constancia.com/">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://constancia.io/">
+  <meta property="og:url" content="https://constancia.com/">
   <meta property="og:title" content="Constancia | AI-first EPM Advisory">
   <meta property="og:description" content="AI-first EPM advisory. Official Abacum and OneStream partner.">
-  <meta property="og:image" content="https://constancia.io/og-image.png">
+  <meta property="og:image" content="https://constancia.com/og-image.png">
   <meta property="og:site_name" content="Constancia">
   <meta property="og:locale" content="en_GB">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://constancia.io/">
+  <meta name="twitter:url" content="https://constancia.com/">
   <meta name="twitter:title" content="Constancia | AI-first EPM Advisory">
   <meta name="twitter:description" content="AI-first EPM advisory. Official Abacum and OneStream partner.">
-  <meta name="twitter:image" content="https://constancia.io/og-image.png">
+  <meta name="twitter:image" content="https://constancia.com/og-image.png">
 
   <meta name="theme-color" content="#12161D">
   
@@ -2250,8 +2250,8 @@ function generateWordPressHTML(): string {
     "@type": "Organization",
     "name": "Constancia",
     "legalName": "Constancia Holdings Limited",
-    "url": "https://constancia.io",
-    "logo": "https://constancia.io/logo.png",
+    "url": "https://constancia.com",
+    "logo": "https://constancia.com/logo.png",
     "description": "AI-first EPM advisory. Official Abacum and OneStream partner.",
     "address": {
       "@type": "PostalAddress",
@@ -2263,7 +2263,7 @@ function generateWordPressHTML(): string {
     },
     "contactPoint": {
       "@type": "ContactPoint",
-      "email": "info@constancia.io",
+      "email": "info@constancia.com",
       "contactType": "customer service",
       "availableLanguage": "English"
     },
@@ -2276,7 +2276,7 @@ function generateWordPressHTML(): string {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Constancia",
-    "url": "https://constancia.io",
+    "url": "https://constancia.com",
     "description": "AI-first EPM advisory."
   }
   </script>
@@ -2432,7 +2432,7 @@ function generateWordPressHTML(): string {
             <h3>Contact Information</h3>
             <div class="contact-item">
               <span>Email:</span>
-              <a href="mailto:info@constancia.io">info@constancia.io</a>
+              <a href="mailto:info@constancia.com">info@constancia.com</a>
             </div>
             <div class="contact-item">
               <span>Address:</span>
@@ -3286,7 +3286,7 @@ function generateBlogPostHTML(post: { title: string; slug: string; excerpt: stri
   <meta name="description" content="${post.excerpt}">
   <meta name="keywords" content="${post.tags.join(', ')}">
   <meta name="author" content="${post.author}">
-  <link rel="canonical" href="https://constancia.io/blog/${post.slug}">
+  <link rel="canonical" href="https://constancia.com/blog/${post.slug}">
   
   <meta property="og:type" content="article">
   <meta property="og:title" content="${post.title}">
@@ -3318,7 +3318,7 @@ function generateBlogPostHTML(post: { title: string; slug: string; excerpt: stri
       "name": "Constancia",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://constancia.io/logo.png"
+        "url": "https://constancia.com/logo.png"
       }
     },
     "datePublished": "${post.publishedAt}",
@@ -3378,7 +3378,7 @@ function generateBlogPostHTML(post: { title: string; slug: string; excerpt: stri
       <div class="footer-bottom">
         <p>&copy; ${new Date().getFullYear()} Constancia Holdings Limited. All rights reserved.</p>
         <div class="footer-meta">
-          <a href="https://constancia.io">constancia.io</a>
+          <a href="https://constancia.com">constancia.com</a>
         </div>
       </div>
     </div>
@@ -3397,7 +3397,7 @@ function generateBlogIndexHTML(posts: Array<{ title: string; slug: string; excer
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blog | Constancia Finance Transformation Insights</title>
   <meta name="description" content="Expert insights on finance transformation, EPM, ERP, AI, and technology from Constancia advisors.">
-  <link rel="canonical" href="https://constancia.io/blog">
+  <link rel="canonical" href="https://constancia.com/blog">
   
   <meta property="og:type" content="website">
   <meta property="og:title" content="Constancia Blog - Finance Transformation Insights">
@@ -3456,7 +3456,7 @@ function generateBlogIndexHTML(posts: Array<{ title: string; slug: string; excer
       <div class="footer-bottom">
         <p>&copy; ${new Date().getFullYear()} Constancia Holdings Limited. All rights reserved.</p>
         <div class="footer-meta">
-          <a href="https://constancia.io">constancia.io</a>
+          <a href="https://constancia.com">constancia.com</a>
         </div>
       </div>
     </div>
@@ -3475,7 +3475,7 @@ function generateResourcesIndexHTML(resources: Array<{ title: string; slug: stri
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Resources | Constancia Finance Transformation Downloads</title>
   <meta name="description" content="Download free guides, frameworks, playbooks, and templates for finance transformation, EPM, and ERP from Constancia.">
-  <link rel="canonical" href="https://constancia.io/resources">
+  <link rel="canonical" href="https://constancia.com/resources">
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -3541,7 +3541,7 @@ function generateResourcePageHTML(resource: { title: string; slug: string; descr
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${resource.title} | Constancia Resources</title>
   <meta name="description" content="${resource.description}">
-  <link rel="canonical" href="https://constancia.io/resources/${resource.slug}">
+  <link rel="canonical" href="https://constancia.com/resources/${resource.slug}">
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -3627,11 +3627,11 @@ function generateWordPressWXR(
   xmlns:wp="http://wordpress.org/export/1.2/">
 <channel>
   <title>Constancia</title>
-  <link>https://constancia.io</link>
+  <link>https://constancia.com</link>
   <description>Finance Transformation and ERP/EPM Consultancy</description>
   <language>en-GB</language>
   <wp:wxr_version>1.2</wp:wxr_version>
-  <wp:base_site_url>https://constancia.io</wp:base_site_url>
+  <wp:base_site_url>https://constancia.com</wp:base_site_url>
   ${categories.map(cat => `
   <wp:category>
     <wp:term_id>${cat.id}</wp:term_id>
@@ -3645,10 +3645,10 @@ function generateWordPressWXR(
     return `
   <item>
     <title><![CDATA[${post.title}]]></title>
-    <link>https://constancia.io/blog/${post.slug}</link>
+    <link>https://constancia.com/blog/${post.slug}</link>
     <pubDate>${new Date(post.publishedAt).toUTCString()}</pubDate>
     <dc:creator><![CDATA[${post.author}]]></dc:creator>
-    <guid isPermaLink="false">https://constancia.io/?p=${id}</guid>
+    <guid isPermaLink="false">https://constancia.com/?p=${id}</guid>
     <description><![CDATA[${post.excerpt}]]></description>
     <content:encoded><![CDATA[${contentHtml}]]></content:encoded>
     <excerpt:encoded><![CDATA[${post.excerpt}]]></excerpt:encoded>
@@ -3670,10 +3670,10 @@ function generateWordPressWXR(
     return `
   <item>
     <title><![CDATA[${resource.title}]]></title>
-    <link>https://constancia.io/resources/${resource.slug}</link>
+    <link>https://constancia.com/resources/${resource.slug}</link>
     <pubDate>${new Date(resource.publishedAt).toUTCString()}</pubDate>
     <dc:creator><![CDATA[Constancia Team]]></dc:creator>
-    <guid isPermaLink="false">https://constancia.io/?p=${id}</guid>
+    <guid isPermaLink="false">https://constancia.com/?p=${id}</guid>
     <description><![CDATA[${resource.description}]]></description>
     <content:encoded><![CDATA[
       <div style="background: linear-gradient(135deg, rgba(18, 235, 252, 0.1) 0%, rgba(8, 132, 170, 0.1) 100%); border-left: 4px solid #12EBFC; padding: 2rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0; text-align: center;">

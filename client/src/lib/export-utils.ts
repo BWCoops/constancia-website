@@ -59,8 +59,8 @@ const CONTACT_INFO = {
   legalName: "Constancia Holdings Limited",
   companyNumber: "17227112",
   address: "Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ, United Kingdom",
-  email: "info@constancia.io",
-  website: "https://constancia.io",
+  email: "info@constancia.com",
+  website: "https://constancia.com",
   linkedin: "linkedin.com/company/constancia-group",
 };
 
