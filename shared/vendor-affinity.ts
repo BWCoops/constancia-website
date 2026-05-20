@@ -77,11 +77,14 @@ export interface VendorRecommendation {
  * Vendors with AI embedded in their core platform architecture — not bolt-on.
  * These receive a meaningful affinity bonus when an organisation shows high AI/ML readiness.
  */
-const AI_NATIVE_VENDORS = new Set([
-  'abacum',          // AI-first FP&A: forecasting, anomaly detection, and workflow automation in core data model
-  'anaplan',         // Connected planning with ML-driven demand sensing and predictive modelling
-  'workday_adaptive', // ML-native workforce and financial planning with embedded predictive insights
-]);
+// AI-native vendor list is now declared in shared/scoring-engine.ts
+// (single source of truth) and includes Pigment and OneStream alongside
+// the original three. The AI bonus magnitude is also imported from there.
+import {
+  AI_NATIVE_VENDORS,
+  VENDOR_AFFINITY as VENDOR_AFFINITY_CONFIG,
+  canonicalVendorId,
+} from "./scoring-engine";
 
 export const VENDOR_DIMENSION_WEIGHTS: Record<string, Record<FCDimension, number>> = {
   abacum: {
@@ -682,7 +685,7 @@ function generateRationales(
   }
 
   // Capability-specific rationales
-  if (AI_NATIVE_VENDORS.has(vendor.id)) {
+  if ((AI_NATIVE_VENDORS as Set<string>).has(canonicalVendorId(vendor.id))) {
     rationales.push(
       'AI embedded in core platform architecture — not a bolt-on module'
     );
@@ -705,9 +708,10 @@ function generateRationales(
  * Determine match quality based on total score.
  */
 function getMatchQuality(normalizedScore: number): 'excellent' | 'good' | 'moderate' | 'fair' {
-  if (normalizedScore >= 0.80) return 'excellent';
-  if (normalizedScore >= 0.65) return 'good';
-  if (normalizedScore >= 0.50) return 'moderate';
+  const cutoffs = VENDOR_AFFINITY_CONFIG.MATCH_QUALITY;
+  if (normalizedScore >= cutoffs.EXCELLENT) return 'excellent';
+  if (normalizedScore >= cutoffs.GOOD) return 'good';
+  if (normalizedScore >= cutoffs.MODERATE) return 'moderate';
   return 'fair';
 }
 
@@ -755,23 +759,23 @@ export function calculateVendorAffinity(
       dimensionScores.ai_machine_learning
     );
 
-    // AI-native bonus: vendors with AI in their core architecture receive a lift
-    // when the organisation demonstrates high AI/ML readiness (score >= 3.5 out of 5).
-    // This rewards genuine AI-native platforms over those where AI is a bolt-on layer.
+    // AI-native bonus: vendors that genuinely lead with AI in their core
+    // architecture (not a bolt-on add-on) get a lift when the user's AI/ML
+    // readiness is high. Bonus magnitude is now centralised in
+    // scoring-engine.ts — was 0.08 (basically invisible against the 0.40
+    // dimension weight); now 0.15 max, so an AI-native vendor surfaces
+    // meaningfully when the user is high on AI/ML.
     const aiMlScore = dimensionScores.ai_machine_learning ?? 0;
+    const canonicalId = canonicalVendorId(vendor.id);
+    // The Set is typed VendorId; check membership via string-level
+    // identity (the runtime Set is just strings).
     const aiNativeBonus =
-      AI_NATIVE_VENDORS.has(vendor.id) && aiMlScore >= 3.5
-        ? 0.08 * (aiMlScore / 5)  // Up to +0.08 at max AI readiness
+      (AI_NATIVE_VENDORS as Set<string>).has(canonicalId) &&
+      aiMlScore >= VENDOR_AFFINITY_CONFIG.AI_NATIVE_THRESHOLD
+        ? VENDOR_AFFINITY_CONFIG.AI_NATIVE_BONUS_MAX * (aiMlScore / 5)
         : 0;
 
-    // Calculate weighted total score
-    const weights = {
-      dimension: 0.40,
-      industry: 0.20,
-      size: 0.20,
-      techStack: 0.10,
-      ambition: 0.10,
-    };
+    const weights = VENDOR_AFFINITY_CONFIG.WEIGHTS;
 
     const totalScore =
       dimensionScore * weights.dimension +
@@ -814,17 +818,33 @@ export function calculateVendorAffinity(
     });
   }
 
-  // Sort by total score descending
+  // Sort by total score descending.
   results.sort((a, b) => b.totalScore - a.totalScore);
 
-  // Normalize scores and set ranks
-  const maxScore = results[0]?.totalScore || 1;
-  const minScore = results[results.length - 1]?.totalScore || 0;
-  const scoreRange = maxScore - minScore || 1;
+  // Normalise scores and set ranks. Two guards added vs the old code:
+  //   1. Empty-result guard: prevents the rest of the function from
+  //      reading off an empty array.
+  //   2. Range-floor guard: when all vendors cluster within
+  //      RANGE_NORM_FLOOR of each other, range normalisation
+  //      previously amplified tiny noise (0.01 gaps → 100% display
+  //      differences). When the range is below the floor, fall back
+  //      to absolute scores so ranking reflects real differences.
+  if (results.length === 0) return results;
+
+  const maxScore = results[0].totalScore;
+  const minScore = results[results.length - 1].totalScore;
+  const range = maxScore - minScore;
+  const useAbsolute = range < VENDOR_AFFINITY_CONFIG.RANGE_NORM_FLOOR;
 
   results.forEach((result, index) => {
     result.rank = index + 1;
-    result.normalizedScore = (result.totalScore - minScore) / scoreRange;
+    if (useAbsolute) {
+      // Absolute normalisation: where would this score fall on the
+      // theoretical 0-1 range given the weight system?
+      result.normalizedScore = Math.max(0, Math.min(1, result.totalScore));
+    } else {
+      result.normalizedScore = (result.totalScore - minScore) / range;
+    }
     result.matchQuality = getMatchQuality(result.normalizedScore);
   });
 

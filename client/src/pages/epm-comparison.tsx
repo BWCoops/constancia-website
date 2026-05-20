@@ -131,6 +131,7 @@ import { Link } from "wouter";
 import { Navigation } from "@/components/navigation";
 import { useFeatureFlags } from "@/lib/feature-flags";
 import { Footer } from "@/components/footer";
+import { EPM_SCORING, affordabilityPenalty, normaliseWeights, clamp } from "@shared/scoring-engine";
 import { SEOHead } from "@/components/seo-head";
 import { CookiePreferencesIcon } from "@/components/cookie-consent";
 import { DownloadGateModal } from "@/components/download-gate-modal";
@@ -691,55 +692,23 @@ const erpSweetSpots: Record<string, SweetSpot> = {
   }
 };
 
-// Scoring constants - modular configuration for consistent scoring
+// Scoring config is now centralised in shared/scoring-engine.ts.
+// SCORING_CONFIG is preserved as a thin alias so the rest of the file
+// reads unchanged; affordability penalty also re-exported from there
+// (and uses max() semantics instead of stacking size + revenue).
 const SCORING_CONFIG = {
-  // Base modifiers for profile matches
-  SWEET_SPOT_MATCH: 0.4,
-  SWEET_SPOT_MISS: -0.4,
-  SWEET_SPOT_MISS_SMB: -0.15,  // Reduced penalty for SMB platforms
-  
-  // Price tier thresholds
-  EXPENSIVE_TIER: 3,
-  VERY_EXPENSIVE_TIER: 5,
-  
-  // Affordability penalties - scale with priceTier
-  // Formula: basePenalty * (priceTier - threshold) for graduated impact
-  AFFORDABILITY_BASE_PENALTY: 0.6,
-  
-  // Company size/revenue mismatch penalties
-  SIZE_REVENUE_MISMATCH_BASE: 1.0,
-  
-  // FP&A vs consolidation modifiers
-  FPA_FOCUS_BONUS: 1.5,
-  CONSOLIDATION_OVERHEAD_PENALTY: 1.8,
+  SWEET_SPOT_MATCH: EPM_SCORING.SWEET_SPOT_MATCH,
+  SWEET_SPOT_MISS: EPM_SCORING.SWEET_SPOT_MISS,
+  SWEET_SPOT_MISS_SMB: EPM_SCORING.SWEET_SPOT_MISS_SMB,
+  EXPENSIVE_TIER: EPM_SCORING.EXPENSIVE_TIER,
+  VERY_EXPENSIVE_TIER: EPM_SCORING.VERY_EXPENSIVE_TIER,
+  AFFORDABILITY_BASE_PENALTY: EPM_SCORING.AFFORDABILITY_BASE_PENALTY,
+  SIZE_REVENUE_MISMATCH_BASE: EPM_SCORING.SIZE_REVENUE_MISMATCH_BASE,
+  FPA_FOCUS_BONUS: EPM_SCORING.FPA_FOCUS_BONUS,
+  CONSOLIDATION_OVERHEAD_PENALTY: EPM_SCORING.CONSOLIDATION_OVERHEAD_PENALTY,
 };
 
-// Calculate affordability penalty based on priceTier and company size/revenue
-function calculateAffordabilityPenalty(
-  priceTier: number, 
-  isSmallCompany: boolean, 
-  isLowRevenue: boolean,
-  isMidMarket: boolean = false,
-  isMidRevenue: boolean = false
-): number {
-  if (priceTier < SCORING_CONFIG.EXPENSIVE_TIER) return 0;
-  
-  const tierDelta = priceTier - SCORING_CONFIG.EXPENSIVE_TIER + 1;
-  let penalty = 0;
-  
-  if (isSmallCompany) {
-    penalty += SCORING_CONFIG.AFFORDABILITY_BASE_PENALTY * tierDelta * 1.8;
-  } else if (isMidMarket) {
-    penalty += SCORING_CONFIG.AFFORDABILITY_BASE_PENALTY * tierDelta * 1.0;
-  }
-  if (isLowRevenue) {
-    penalty += SCORING_CONFIG.AFFORDABILITY_BASE_PENALTY * tierDelta * 1.5;
-  } else if (isMidRevenue) {
-    penalty += SCORING_CONFIG.AFFORDABILITY_BASE_PENALTY * tierDelta * 0.8;
-  }
-  
-  return penalty;
-}
+const calculateAffordabilityPenalty = affordabilityPenalty;
 
 function calculateFitScore(
   platformId: string,
@@ -1660,9 +1629,11 @@ function calculateFitScore(
     }
   }
 
-  // Cap the maximum positive modifier to prevent scores hitting 10
-  const cappedModifier = Math.min(1.2, Math.max(-5, modifier));
-  let adjustedScore = Math.min(9.8, Math.max(0, baseScore + cappedModifier));
+  // Cap the maximum positive modifier to prevent scores hitting 10.
+  // clamp() is NaN-safe — if modifier or baseScore drifts to NaN
+  // (e.g., empty weights), we fall back to 0 instead of propagating it.
+  const cappedModifier = clamp(modifier, -5, 1.2, 0);
+  let adjustedScore = clamp(baseScore + cappedModifier, EPM_SCORING.SCORE_FLOOR, 9.8, EPM_SCORING.SCORE_FLOOR);
   
   let fitLevel: 'excellent' | 'good' | 'fair' | 'poor';
   if (matchReasons.length >= 3 && concerns.length === 0) {
@@ -1802,21 +1773,26 @@ function calculateScoreBreakdown(
   categories: Category[],
   weights: Record<string, number>
 ): ScoreBreakdown[] {
-  const totalWeight = Object.values(weights).reduce((sum, w) => sum + w, 0);
-  
+  // Build a complete weights record (filling in defaults), then
+  // normalise to fractions that sum to 1. The all-zero case is
+  // handled inside normaliseWeights (equal fractions instead of NaN).
+  const completeWeights: Record<string, number> = {};
+  for (const category of categories) {
+    completeWeights[category.id] = weights[category.id] ?? category.weight;
+  }
+  const normalised = normaliseWeights(completeWeights);
+
   return categories.map(category => {
     const rawScore = platform.scores[category.id] ?? 0;
-    const weight = weights[category.id] ?? category.weight;
-    const normalizedWeight = (weight / totalWeight) * 100;
-    const contribution = (rawScore * weight) / totalWeight;
-    
+    const weight = completeWeights[category.id];
+    const fraction = normalised[category.id]; // 0..1
     return {
       categoryId: category.id,
       categoryName: category.name,
       rawScore,
       weight,
-      normalizedWeight,
-      contribution
+      normalizedWeight: fraction * 100,
+      contribution: rawScore * fraction,
     };
   }).sort((a, b) => b.contribution - a.contribution);
 }
@@ -2094,9 +2070,9 @@ function calculateAIContextualScore(
     totalModifier += easeMod;
   }
 
-  // Allow wider range for ERP synergies
-  totalModifier = Math.max(-30, Math.min(35, totalModifier));
-  const finalScore = Math.max(0, Math.min(100, Math.round(normalizedBase + totalModifier)));
+  // Allow wider range for ERP synergies. NaN-safe via clamp().
+  totalModifier = clamp(totalModifier, -30, 35, 0);
+  const finalScore = Math.round(clamp(normalizedBase + totalModifier, 0, 100, 0));
 
   return { score: finalScore, modifiers };
 }

@@ -13,6 +13,13 @@ import {
   type BenchmarkRange,
 } from "./epm-benchmarks";
 import { getHistoricalBenchmark, BENCHMARK_YEARS, type BenchmarkYear, type IndustryId, type MetricId } from './constancia-historical-benchmarks';
+import {
+  ROI_DEFAULTS,
+  clamp,
+  inflatedAnnualCost,
+  validateInRange,
+  validateNonNegative,
+} from './scoring-engine';
 
 export interface RoiMetrics {
   totalImplementationCost: number;
@@ -40,6 +47,14 @@ export interface RoiInputs {
   contingency?: number | null;
   processEfficiencyPercent?: number | null;
   headcountDelta?: number | null;
+  /**
+   * Fully-loaded average finance FTE cost in £k. Used to convert
+   * `headcountDelta` into a money figure. Defaults to ROI_DEFAULTS.
+   * AVG_SALARY_GBP / 1000 if not provided; the ROI wizard surfaces
+   * this as a user-editable input so geographies with different
+   * cost bases (UK vs India vs US) can model accurately.
+   */
+  avgFteCostK?: number | null;
   closeAccelerationDays?: number | null;
   closeAccelerationValue?: number | null;
   complianceRiskAvoidance?: number | null;
@@ -65,103 +80,128 @@ function toNumber(value: number | null | undefined, defaultValue = 0): number {
  * All monetary values are in £k (thousands).
  */
 export function calculateRoiMetrics(profile: RoiInputs | FcRoiProfile): RoiMetrics {
-  const horizonYears = toNumber(profile.horizonYears, 3);
-  const baselineOperatingCost = toNumber(profile.baselineOperatingCost);
-  
+  // Validate user inputs at the calculator boundary. Out-of-range or
+  // negative values fall back to safe defaults instead of producing
+  // NaN, Infinity, or absurd ROIs from typos.
+  const horizonYears = validateInRange(profile.horizonYears, 1, ROI_DEFAULTS.MAX_HORIZON_YEARS, 3);
+  const baselineOperatingCost = validateNonNegative(profile.baselineOperatingCost);
+
   // Implementation Costs (£k)
-  const softwareLicenses = toNumber(profile.softwareLicenses);
-  const integrationCosts = toNumber(profile.integrationCosts);
-  const dataMigration = toNumber(profile.dataMigration);
-  const changeManagement = toNumber(profile.changeManagement);
-  const internalFteCosts = toNumber(profile.internalFteCosts);
-  const trainingCosts = toNumber(profile.trainingCosts);
-  const contingency = toNumber(profile.contingency);
-  
-  const totalImplementationCost = 
-    softwareLicenses + 
-    integrationCosts + 
-    dataMigration + 
-    changeManagement + 
-    internalFteCosts + 
-    trainingCosts + 
+  const softwareLicenses = validateNonNegative(profile.softwareLicenses);
+  const integrationCosts = validateNonNegative(profile.integrationCosts);
+  const dataMigration = validateNonNegative(profile.dataMigration);
+  const changeManagement = validateNonNegative(profile.changeManagement);
+  const internalFteCosts = validateNonNegative(profile.internalFteCosts);
+  const trainingCosts = validateNonNegative(profile.trainingCosts);
+  const contingency = validateNonNegative(profile.contingency);
+
+  const totalImplementationCost =
+    softwareLicenses +
+    integrationCosts +
+    dataMigration +
+    changeManagement +
+    internalFteCosts +
+    trainingCosts +
     contingency;
-  
+
   // Benefit Streams (£k per year at full run-rate)
-  const processEfficiencyPercent = toNumber(profile.processEfficiencyPercent);
+  const processEfficiencyPercent = validateInRange(profile.processEfficiencyPercent, 0, 100, 0);
   const efficiencySavings = (processEfficiencyPercent / 100) * baselineOperatingCost;
-  
-  const headcountDelta = toNumber(profile.headcountDelta);
-  const avgSalaryWithOverhead = 80; // £80k average fully-loaded cost
-  const headcountSavings = headcountDelta * avgSalaryWithOverhead;
-  
-  const closeAccelerationValue = toNumber(profile.closeAccelerationValue);
-  const complianceRiskAvoidance = toNumber(profile.complianceRiskAvoidance);
-  const auditEfficiencySavings = toNumber(profile.auditEfficiencySavings);
-  const revenueEnablement = toNumber(profile.revenueEnablement);
-  const externalConsultingSavings = toNumber(profile.externalConsultingSavings);
-  
-  const totalAnnualBenefits = 
-    efficiencySavings + 
-    headcountSavings + 
-    closeAccelerationValue + 
-    complianceRiskAvoidance + 
-    auditEfficiencySavings + 
-    revenueEnablement + 
+
+  const headcountDelta = validateInRange(
+    profile.headcountDelta,
+    -ROI_DEFAULTS.MAX_HEADCOUNT_DELTA,
+    ROI_DEFAULTS.MAX_HEADCOUNT_DELTA,
+    0,
+  );
+  // Salary is now an input. Profile value (in £k) wins; otherwise we
+  // fall back to the ROI_DEFAULTS baseline. Negative or insane values
+  // are clamped via validateInRange.
+  // avgFteCostK isn't on the persisted FcRoiProfile type — only on
+  // RoiInputs — so we read it defensively from either shape.
+  const avgFteCostK = validateInRange(
+    (profile as RoiInputs).avgFteCostK,
+    20,
+    500,
+    ROI_DEFAULTS.AVG_SALARY_GBP / 1000,
+  );
+  const headcountSavings = headcountDelta * avgFteCostK;
+
+  const closeAccelerationValue = validateNonNegative(profile.closeAccelerationValue);
+  const complianceRiskAvoidance = validateNonNegative(profile.complianceRiskAvoidance);
+  const auditEfficiencySavings = validateNonNegative(profile.auditEfficiencySavings);
+  const revenueEnablement = validateNonNegative(profile.revenueEnablement);
+  const externalConsultingSavings = validateNonNegative(profile.externalConsultingSavings);
+
+  const totalAnnualBenefits =
+    efficiencySavings +
+    headcountSavings +
+    closeAccelerationValue +
+    complianceRiskAvoidance +
+    auditEfficiencySavings +
+    revenueEnablement +
     externalConsultingSavings;
-  
+
   // Operating Model Costs (Annual £k)
-  const runRateOpex = toNumber(profile.runRateOpex);
-  const supportCosts = toNumber(profile.supportCosts);
-  const depreciation = toNumber(profile.depreciation);
-  
+  const runRateOpex = validateNonNegative(profile.runRateOpex);
+  const supportCosts = validateNonNegative(profile.supportCosts);
+  const depreciation = validateNonNegative(profile.depreciation);
+
   const totalAnnualCosts = runRateOpex + supportCosts + depreciation;
-  
+
   // Net annual benefit (at full run-rate)
   const netAnnualBenefit = totalAnnualBenefits - totalAnnualCosts;
-  
-  // Ramp-up factors for benefit realisation
-  const discountRate = toNumber(profile.discountRate, 8) / 100;
-  const benefitRampYear1 = toNumber(profile.benefitRampYear1, 50) / 100;  // More realistic 50% Year 1
-  const benefitRampYear2 = toNumber(profile.benefitRampYear2, 85) / 100;  // 85% Year 2
-  const benefitRampYear3 = toNumber(profile.benefitRampYear3, 100) / 100; // 100% Year 3+
-  
-  // TCO = Implementation Cost + (Annual Costs × Horizon Years)
-  const totalCostOfOwnership = totalImplementationCost + (totalAnnualCosts * horizonYears);
-  
-  // Payback Months = (Implementation Cost / Net Annual Benefit at full rate) × 12
-  // Uses full run-rate benefit for payback calculation
-  const paybackMonths = netAnnualBenefit > 0 
-    ? (totalImplementationCost / netAnnualBenefit) * 12 
-    : 999; // Infinite payback if no net benefit
-  
-  // NPV Calculation with benefit ramp-up
-  // Cash flows occur at end of each year, discounted back to present
-  let npvValue = -totalImplementationCost; // Initial investment (Year 0)
+
+  // Ramp-up factors and macro rates.
+  const discountRate = validateInRange(profile.discountRate, 0, ROI_DEFAULTS.MAX_DISCOUNT_RATE * 100, 8) / 100;
+  const inflationRate = validateInRange(profile.inflationRate, -10, 20, 0) / 100;
+  const benefitRampYear1 = validateInRange(profile.benefitRampYear1, 0, 100, ROI_DEFAULTS.RAMP_FACTORS[0] * 100) / 100;
+  const benefitRampYear2 = validateInRange(profile.benefitRampYear2, 0, 100, ROI_DEFAULTS.RAMP_FACTORS[1] * 100) / 100;
+  const benefitRampYear3 = validateInRange(profile.benefitRampYear3, 0, 100, ROI_DEFAULTS.RAMP_FACTORS[2] * 100) / 100;
+
+  // TCO over the horizon. With inflation applied so the operating
+  // costs in year N reflect compounded price increases. Costs grow,
+  // benefits stay at their ramped £-figure (modelling the squeeze
+  // realistically).
+  let totalAnnualCostsOverHorizon = 0;
+  for (let year = 1; year <= horizonYears; year++) {
+    totalAnnualCostsOverHorizon += inflatedAnnualCost(totalAnnualCosts, inflationRate, year);
+  }
+  const totalCostOfOwnership = totalImplementationCost + totalAnnualCostsOverHorizon;
+
+  // Payback Months = (Implementation Cost / Net Annual Benefit at full rate) × 12.
+  // Uses full run-rate benefit for payback calculation.
+  const paybackMonths = netAnnualBenefit > 0
+    ? (totalImplementationCost / netAnnualBenefit) * 12
+    : 999;
+
+  // NPV Calculation with benefit ramp-up + inflated costs.
+  let npvValue = -totalImplementationCost;
   let totalBenefitsWithRamp = 0;
-  
+
   for (let year = 1; year <= horizonYears; year++) {
     let rampFactor: number;
     if (year === 1) rampFactor = benefitRampYear1;
     else if (year === 2) rampFactor = benefitRampYear2;
     else rampFactor = benefitRampYear3;
-    
+
     const yearlyBenefit = totalAnnualBenefits * rampFactor;
     totalBenefitsWithRamp += yearlyBenefit;
-    const yearlyNetCashFlow = yearlyBenefit - totalAnnualCosts;
+    const yearlyCost = inflatedAnnualCost(totalAnnualCosts, inflationRate, year);
+    const yearlyNetCashFlow = yearlyBenefit - yearlyCost;
     const discountFactor = Math.pow(1 + discountRate, year);
     npvValue += yearlyNetCashFlow / discountFactor;
   }
-  
-  // ROI % = (NPV / Implementation Cost) × 100
-  // This ensures ROI and NPV are always consistent (positive NPV = positive ROI)
-  const roiPercent = totalImplementationCost > 0 
-    ? (npvValue / totalImplementationCost) * 100 
+
+  // ROI % = (NPV / Implementation Cost) × 100 — finite-guarded.
+  const roiPercent = totalImplementationCost > 0
+    ? clamp((npvValue / totalImplementationCost) * 100, -10_000, 10_000, 0)
     : 0;
   
-  // Benefit-Cost Ratio = Total Benefits over horizon / Total Costs over horizon
-  const totalCostsOverHorizon = totalImplementationCost + (totalAnnualCosts * horizonYears);
-  const benefitCostRatio = totalCostsOverHorizon > 0 
-    ? totalBenefitsWithRamp / totalCostsOverHorizon 
+  // Benefit-Cost Ratio = Total Benefits over horizon / Total Costs over horizon (inflated).
+  const totalCostsOverHorizon = totalImplementationCost + totalAnnualCostsOverHorizon;
+  const benefitCostRatio = totalCostsOverHorizon > 0
+    ? totalBenefitsWithRamp / totalCostsOverHorizon
     : 0;
   
   return {
@@ -277,9 +317,16 @@ export function calculateDoNothingScenario(profile: RoiInputs): DoNothingScenari
   // Annual inefficiency cost = what you'd save with process efficiency gains
   const annualInefficiencyCost = (processEfficiencyPercent / 100) * baselineOperatingCost;
   
-  // Manual effort costs = FTE savings you're not getting
+  // Manual effort costs = FTE savings you're not getting. Salary
+  // taken from the user-editable input; falls back to the centralised
+  // default (£80k) if not supplied.
   const headcountDelta = toNumber(profile.headcountDelta);
-  const avgSalaryWithOverhead = 80; // £80k average fully-loaded cost
+  const avgSalaryWithOverhead = validateInRange(
+    (profile as RoiInputs).avgFteCostK,
+    20,
+    500,
+    ROI_DEFAULTS.AVG_SALARY_GBP / 1000,
+  );
   const annualManualEffortCost = headcountDelta * avgSalaryWithOverhead;
   
   // Risk exposure = compliance/audit costs you're still incurring
