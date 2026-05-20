@@ -209,11 +209,34 @@ export async function getAssessmentWithDetails(id: string): Promise<{
 }
 
 export async function updateAssessment(id: string, data: Partial<InsertFcAssessment>): Promise<FcAssessment | null> {
+  // Capture prior status so we can emit a funnel event on the
+  // transition. Without this bridge, FC assessment completions never
+  // surfaced in pageAnalytics and the main funnel under-reported.
+  let priorStatus: string | undefined;
+  if (data.status !== undefined) {
+    const [prior] = await db
+      .select({ status: fcAssessments.status })
+      .from(fcAssessments)
+      .where(eq(fcAssessments.id, id));
+    priorStatus = prior?.status;
+  }
+
   const [assessment] = await db
     .update(fcAssessments)
     .set({ ...data, updatedAt: new Date() })
     .where(eq(fcAssessments.id, id))
     .returning();
+
+  if (assessment && data.status && data.status !== priorStatus) {
+    // Best-effort emit — don't fail the update if analytics is unavailable.
+    try {
+      const { emitFcStatusEvent } = await import("../services/analytics/fc-bridge");
+      await emitFcStatusEvent(assessment, priorStatus);
+    } catch {
+      /* analytics failure is non-critical */
+    }
+  }
+
   return assessment || null;
 }
 

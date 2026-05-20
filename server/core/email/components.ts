@@ -1,6 +1,6 @@
 /**
  * Modular Email Components
- * 
+ *
  * Reusable HTML components for email templates with Constancia branding.
  * Includes headers with logo, footers, and common styling.
  */
@@ -8,10 +8,10 @@
 import { TYPE_LOGO_TURQUOISE_SMALL_BASE64, TYPE_LOGO_WHITE_SMALL_BASE64 } from '../../pdf-logo-base64';
 
 export const EMAIL_BRAND = {
-  navy: '#12161D',
-  cyan: '#7FB8A3',
-  teal: '#8E4F67',
-  cream: '#F6F3EE',
+  navy: '#02205B',
+  cyan: '#12EBFC',
+  teal: '#0884AA',
+  cream: '#FEFFF3',
   white: '#FFFFFF',
   lightGray: '#f8f9fa',
   mediumGray: '#e5e7eb',
@@ -20,10 +20,12 @@ export const EMAIL_BRAND = {
 };
 
 export const EMAIL_CONTACT = {
+  legalName: 'Constancia Holdings Limited',
+  companyNumber: '17227112',
   email: 'info@constancia.com',
   website: 'constancia.com',
   websiteUrl: 'https://constancia.com',
-  address: '86-90 Paul Street, London EC2A 4NE',
+  address: 'Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ',
   financeCompassUrl: 'https://constancia.com/finance-compass',
 };
 
@@ -65,7 +67,7 @@ export function generateEmailFooter(options: EmailFooterOptions = {}): string {
   const { 
     variant = 'dark',
     showFinanceCompass = false,
-    disclaimer = 'Constancia provides independent EPM, ERP, and AI advisory services for finance leaders.'
+    disclaimer = 'Constancia is an AI-first EPM advisory. Official Abacum partner for mid-market FP&A and OneStream partner for enterprise EPM.'
   } = options;
 
   const isDark = variant === 'dark';

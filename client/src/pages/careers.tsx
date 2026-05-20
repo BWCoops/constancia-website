@@ -391,7 +391,7 @@ export default function CareersPage() {
                         data-testid="link-linkedin-success"
                       >
                         <a
-                          href="https://www.linkedin.com/company/1qg-group-limited/"
+                          href="https://www.linkedin.com/company/constancia-group/"
                           target="_blank"
                           rel="nofollow noopener noreferrer"
                         >
@@ -561,7 +561,7 @@ export default function CareersPage() {
                   size="lg"
                 >
                   <a
-                    href="https://www.linkedin.com/company/1qg-group-limited/"
+                    href="https://www.linkedin.com/company/constancia-group/"
                     target="_blank"
                     rel="nofollow noopener noreferrer"
                     data-testid="link-linkedin"

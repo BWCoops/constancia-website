@@ -12,10 +12,12 @@ export const BRAND_COLORS = {
 };
 
 export const CONTACT_INFO = {
-  address: "86-90 Paul Street, London, EC2A 4NE, United Kingdom",
+  company: "Constancia Holdings Limited",
+  companyNumber: "17227112",
+  address: "Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ, United Kingdom",
   email: "info@constancia.com",
   website: "https://constancia.com",
-  linkedin: "linkedin.com/company/1qg-group-limited",
+  linkedin: "linkedin.com/company/constancia-group",
 };
 
 interface PDFTemplateOptions {
@@ -198,7 +200,7 @@ export function createBrandedPDF(options: PDFTemplateOptions): jsPDF {
     // Footer text
     doc.setFontSize(7);
     doc.setTextColor(BRAND_COLORS.teal.r, BRAND_COLORS.teal.g, BRAND_COLORS.teal.b);
-    doc.text(`Constancia  |  ${CONTACT_INFO.email}  |  ${CONTACT_INFO.website}  |  London, UK`, margin, pageHeight - 10);
+    doc.text(`Constancia  |  ${CONTACT_INFO.email}  |  ${CONTACT_INFO.website}  |  Telford, UK`, margin, pageHeight - 10);
     doc.text(`Page ${i - 1} of ${pageCount - 1}`, pageWidth - margin, pageHeight - 10, { align: "right" });
   }
 

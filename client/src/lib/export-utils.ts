@@ -2,7 +2,7 @@ import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
 import type { Workbook, Cell } from "exceljs";
 
-import logoWhite from "@assets/constancia-logo-dark.png";
+import logoWhite from "@assets/constancia-logo.png";
 import logoBlue from "@assets/constancia-logo.png";
 
 import {
@@ -34,10 +34,10 @@ import {
 } from "./pdf-helpers";
 
 const BRAND_COLORS = {
-  navy: "#12161D",
-  cyan: "#7FB8A3",
-  teal: "#8E4F67",
-  cream: "#F6F3EE",
+  navy: "#02205B",
+  cyan: "#12EBFC",
+  teal: "#0884AA",
+  cream: "#FEFFF3",
   white: "#FFFFFF",
 };
 
@@ -56,10 +56,12 @@ const EXCEL_COLORS = {
 };
 
 const CONTACT_INFO = {
-  address: "86-90 Paul Street, London, EC2A 4NE, United Kingdom",
-  email: "info@constancia.io",
-  website: "https://constancia.io",
-  linkedin: "linkedin.com/company/1qg-group-limited",
+  legalName: "Constancia Holdings Limited",
+  companyNumber: "17227112",
+  address: "Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ, United Kingdom",
+  email: "info@constancia.com",
+  website: "https://constancia.com",
+  linkedin: "linkedin.com/company/constancia-group",
 };
 
 interface AIModifier {
@@ -1781,7 +1783,7 @@ async function _legacyExportToPDF(data: ExportData, toast?: ToastFunction): Prom
     { step: "1", title: "Validate Requirements", desc: "Review this analysis with your finance leadership team to confirm priorities align with strategic objectives." },
     { step: "2", title: "Arrange Vendor Demonstrations", desc: "Request tailored demonstrations from shortlisted vendors, focusing on your specific use cases and data scenarios." },
     { step: "3", title: "Conduct Reference Checks", desc: "Speak with organisations of similar size and industry who have implemented the platforms you are considering." },
-    { step: "4", title: "Engage Independent Advisory", desc: "Consider engaging Constancia for independent guidance on selection, business case development, and implementation planning." },
+    { step: "4", title: "Engage Independent Advisory", desc: "Consider engaging Constancia for AI-first EPM advisory on selection, business case development, and implementation planning." },
   ];
   
   let stepY = yPos + 12;
@@ -1882,12 +1884,12 @@ async function _legacyExportToPDF(data: ExportData, toast?: ToastFunction): Prom
     // Footer text with full contact
     doc.setFontSize(7);
     doc.setTextColor(BRAND_COLORS.teal);
-    doc.text(`Constancia  |  ${CONTACT_INFO.email}  |  ${CONTACT_INFO.website}  |  London, UK`, margin, pageHeight - 10);
+    doc.text(`Constancia  |  ${CONTACT_INFO.email}  |  ${CONTACT_INFO.website}  |  Telford, UK`, margin, pageHeight - 10);
     doc.text(`Page ${i - 1} of ${pageCount - 1}`, pageWidth - margin, pageHeight - 10, { align: "right" });
   }
 
   // Save PDF with mobile-compatible error handling
-  const fileName = `Constancia-${data.categoryType.toUpperCase()}-Comparison-${new Date().toISOString().split("T")[0]}.pdf`;
+  const fileName = `1QG-${data.categoryType.toUpperCase()}-Comparison-${new Date().toISOString().split("T")[0]}.pdf`;
   try {
     // Detect mobile/iOS for different download handling
     // iPadOS 13+ reports as MacIntel but has touch support, so check maxTouchPoints
@@ -2122,7 +2124,7 @@ export async function exportToExcel(data: ExportData, toast?: ToastFunction): Pr
 
   coverSheet.addRow([""]);
 
-  const aboutText = "Constancia is an independent EPM & ERP advisory firm helping finance leaders modernise through technology, process optimisation, and AI-driven insights. We provide vendor-agnostic guidance to help organisations select and implement the right enterprise solutions.";
+  const aboutText = "Constancia is an AI-first EPM advisory helping finance leaders modernise through technology, process optimisation, and AI-driven insights. Official Abacum partner for mid-market FP&A and OneStream partner for enterprise EPM.";
   const aboutRow = coverSheet.addRow([aboutText]);
   aboutRow.getCell(1).font = { size: 10, color: { argb: EXCEL_COLORS.darkGray } };
   aboutRow.getCell(1).alignment = { wrapText: true };
@@ -2149,7 +2151,7 @@ export async function exportToExcel(data: ExportData, toast?: ToastFunction): Pr
 
   // Add spacing and copyright
   for (let i = 0; i < 2; i++) coverSheet.addRow([""]);
-  const copyrightRow = coverSheet.addRow(["© 2026 CONSTANCIA. All rights reserved."]);
+  const copyrightRow = coverSheet.addRow([`© ${new Date().getFullYear()} Constancia Holdings Limited. All rights reserved. Company number 17227112.`]);
   copyrightRow.getCell(1).font = { size: 9, color: { argb: "999999" } };
   copyrightRow.getCell(1).alignment = { horizontal: "center" };
 
@@ -5142,7 +5144,7 @@ export async function exportToExcel(data: ExportData, toast?: ToastFunction): Pr
   addressRow.getCell(1).alignment = { horizontal: "center" };
 
   // Generate and download with error handling
-  const fileName = `Constancia-${data.categoryType.toUpperCase()}-Comparison-${new Date().toISOString().split("T")[0]}.xlsx`;
+  const fileName = `1QG-${data.categoryType.toUpperCase()}-Comparison-${new Date().toISOString().split("T")[0]}.xlsx`;
   
   console.log("[ExcelExport] Generating Excel buffer...");
   

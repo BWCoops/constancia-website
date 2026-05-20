@@ -1,3 +1,5 @@
+import { ANALYTICS_EVENTS } from "@shared/analytics-taxonomy";
+
 const ANALYTICS_ENDPOINT = "/api/analytics/page-event";
 
 let sessionId: string | null = null;
@@ -125,53 +127,60 @@ async function sendEvent(eventType: string, page: string, data: Record<string, u
 export function trackPageView(page: string, metadata?: Record<string, unknown>): void {
   pageLoadTime = Date.now();
   scrollDepthTracked = new Set();
-  sendEvent("page_view", page, { metadata });
+  sendEvent(ANALYTICS_EVENTS.PAGE_VIEW, page, { metadata });
 }
 
 export function trackScrollDepth(page: string, depth: number): void {
-  const thresholds = [25, 50, 75, 100];
+  const thresholds = [25, 50, 75, 100] as const;
   const threshold = thresholds.find(t => depth >= t && !scrollDepthTracked.has(t));
-  
-  if (threshold) {
-    scrollDepthTracked.add(threshold);
-    sendEvent(`scroll_depth_${threshold}`, page, { scrollDepth: threshold });
-  }
+  if (!threshold) return;
+  scrollDepthTracked.add(threshold);
+  const eventByThreshold: Record<number, string> = {
+    25: ANALYTICS_EVENTS.SCROLL_DEPTH_25,
+    50: ANALYTICS_EVENTS.SCROLL_DEPTH_50,
+    75: ANALYTICS_EVENTS.SCROLL_DEPTH_75,
+    100: ANALYTICS_EVENTS.SCROLL_DEPTH_100,
+  };
+  sendEvent(eventByThreshold[threshold], page, { scrollDepth: threshold });
 }
 
 export function trackWidgetVisible(page: string): void {
-  sendEvent("widget_visible", page);
+  sendEvent(ANALYTICS_EVENTS.WIDGET_VISIBLE, page);
 }
 
 export function trackWidgetInteraction(page: string, action: string): void {
-  sendEvent("widget_interaction", page, { metadata: { action } });
+  sendEvent(ANALYTICS_EVENTS.WIDGET_INTERACTION, page, { metadata: { action } });
 }
 
 export function trackWidgetComplete(page: string, score?: number): void {
-  sendEvent("widget_complete", page, { currentScore: score });
+  sendEvent(ANALYTICS_EVENTS.WIDGET_COMPLETED, page, { currentScore: score });
 }
 
 export function trackCTAClicked(page: string, ctaType: string): void {
-  sendEvent("cta_clicked", page, { metadata: { ctaType } });
+  sendEvent(ANALYTICS_EVENTS.CTA_CLICKED, page, { metadata: { ctaType } });
 }
 
 export function trackAssessmentPageView(assessmentId?: string): void {
-  sendEvent("assessment_page_view", "fc_assess", { assessmentId });
+  sendEvent(ANALYTICS_EVENTS.ASSESSMENT_PAGE_VIEW, "fc_assess", { assessmentId });
 }
 
 export function trackAssessmentStart(assessmentId?: string): void {
-  sendEvent("assessment_start", "fc_assess", { assessmentId });
+  sendEvent(ANALYTICS_EVENTS.ASSESSMENT_STARTED, "fc_assess", { assessmentId });
 }
 
 export function trackAssessmentProgress(milestone: number, questionNumber: number, assessmentId?: string): void {
-  sendEvent(`assessment_progress_${milestone}`, "fc_assess", {
-    milestone,
-    questionNumber,
-    assessmentId,
-  });
+  const eventByMilestone: Record<number, string> = {
+    25: ANALYTICS_EVENTS.ASSESSMENT_PROGRESS_25,
+    50: ANALYTICS_EVENTS.ASSESSMENT_PROGRESS_50,
+    75: ANALYTICS_EVENTS.ASSESSMENT_PROGRESS_75,
+    100: ANALYTICS_EVENTS.ASSESSMENT_PROGRESS_100,
+  };
+  const eventName = eventByMilestone[milestone] ?? `assessment_progress_${milestone}`;
+  sendEvent(eventName, "fc_assess", { milestone, questionNumber, assessmentId });
 }
 
 export function trackQuestionAnswered(questionNumber: number, assessmentId?: string, timeToAnswerMs?: number): void {
-  sendEvent("question_answered", "fc_assess", {
+  sendEvent(ANALYTICS_EVENTS.QUESTION_ANSWERED, "fc_assess", {
     questionNumber,
     assessmentId,
     timeToEventMs: timeToAnswerMs,
@@ -179,7 +188,7 @@ export function trackQuestionAnswered(questionNumber: number, assessmentId?: str
 }
 
 export function trackAssessmentComplete(assessmentId?: string, totalTimeMs?: number, finalScore?: number): void {
-  sendEvent("assessment_complete", "fc_assess", {
+  sendEvent(ANALYTICS_EVENTS.ASSESSMENT_COMPLETED, "fc_assess", {
     assessmentId,
     dwellTimeMs: totalTimeMs,
     currentScore: finalScore,
@@ -187,38 +196,38 @@ export function trackAssessmentComplete(assessmentId?: string, totalTimeMs?: num
 }
 
 export function trackAssessmentAbandoned(questionNumber: number, assessmentId?: string): void {
-  sendEvent("assessment_abandoned", "fc_assess", {
+  sendEvent(ANALYTICS_EVENTS.ASSESSMENT_ABANDONED, "fc_assess", {
     questionNumber,
     assessmentId,
   });
 }
 
 export function trackResultsView(assessmentId?: string, score?: number): void {
-  sendEvent("results_view", "fc_results", { assessmentId, currentScore: score });
+  sendEvent(ANALYTICS_EVENTS.RESULTS_VIEWED, "fc_results", { assessmentId, currentScore: score });
 }
 
 export function trackReportDownload(assessmentId?: string, format?: string): void {
-  sendEvent("report_download", "fc_results", { assessmentId, metadata: { format } });
+  sendEvent(ANALYTICS_EVENTS.REPORT_DOWNLOADED, "fc_results", { assessmentId, metadata: { format } });
 }
 
 export function trackComparisonToolOpened(toolType: string): void {
-  sendEvent("comparison_tool_opened", "comparison", { metadata: { toolType } });
+  sendEvent(ANALYTICS_EVENTS.COMPARISON_OPENED, "comparison", { metadata: { toolType } });
 }
 
 export function trackComparisonExport(toolType: string, format: string): void {
-  sendEvent("comparison_export", "comparison", { metadata: { toolType, format } });
+  sendEvent(ANALYTICS_EVENTS.COMPARISON_EXPORTED, "comparison", { metadata: { toolType, format } });
 }
 
 export function trackLeadCaptured(source: string, metadata?: Record<string, unknown>): void {
-  sendEvent("lead_captured", source, { metadata });
+  sendEvent(ANALYTICS_EVENTS.LEAD_CAPTURED, source, { metadata });
 }
 
 export function trackEmailCaptured(source: string): void {
-  sendEvent("email_captured", source);
+  sendEvent(ANALYTICS_EVENTS.EMAIL_CAPTURED, source);
 }
 
 export function trackDwellTime(page: string, dwellTimeMs: number, useKeepalive = false): void {
-  sendEvent("dwell_time", page, { dwellTimeMs }, useKeepalive);
+  sendEvent(ANALYTICS_EVENTS.DWELL_TIME, page, { dwellTimeMs }, useKeepalive);
 }
 
 export function setupScrollTracking(page: string): () => void {

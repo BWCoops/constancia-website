@@ -275,7 +275,7 @@ function buildDocumentDefinition(data: ReportData): TDocumentDefinitions {
       return {
         columns: [
           { 
-            text: "Constancia Finance Transformation Advisors", 
+            text: "Constancia · AI-first EPM advisory",
             style: "footer", 
             width: "*",
             margin: [160, 0, 0, 0],
@@ -1479,11 +1479,11 @@ function buildAppendix(data: ReportData): Content[] {
           {
             width: "50%",
             stack: [
-              { text: "CONTACT Constancia", style: { fontSize: 10, bold: true, color: BRAND_COLORS.darkNavy } },
+              { text: "CONTACT CONSTANCIA", style: { fontSize: 10, bold: true, color: BRAND_COLORS.darkNavy } },
               { text: "info@constancia.com", style: { fontSize: 10, color: BRAND_COLORS.teal }, margin: [0, 4, 0, 0] },
               { text: "https://constancia.com", style: { fontSize: 10, color: BRAND_COLORS.teal } },
-              { text: "linkedin.com/company/1qg-group-limited", style: { fontSize: 10, color: BRAND_COLORS.teal } },
-              { text: "86-90 Paul Street, London, UK", style: { fontSize: 10, color: BRAND_COLORS.darkGray }, margin: [0, 4, 0, 0] },
+              { text: "linkedin.com/company/constancia-group", style: { fontSize: 10, color: BRAND_COLORS.teal } },
+              { text: "Blount House, Hall Court, Hall Park Way, Telford, TF3 4NQ, UK", style: { fontSize: 10, color: BRAND_COLORS.darkGray }, margin: [0, 4, 0, 0] },
             ],
           },
           {

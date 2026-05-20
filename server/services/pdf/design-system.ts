@@ -6,10 +6,10 @@
  */
 
 export const BRAND_COLORS = {
-  navy: '#12161D',
-  cyan: '#7FB8A3',
-  teal: '#8E4F67',
-  cream: '#F6F3EE',
+  navy: '#02205B',
+  cyan: '#12EBFC',
+  teal: '#0884AA',
+  cream: '#FEFFF3',
   white: '#FFFFFF',
   lightGray: '#F8FAFC',
   mediumGray: '#E2E8F0',
@@ -122,11 +122,12 @@ export const GRADIENTS = {
 };
 
 export const CONTACT_INFO = {
-  company: 'Constancia Group Limited',
-  address: '86-90 Paul Street, London, EC2A 4NE, United Kingdom',
+  company: 'Constancia Holdings Limited',
+  companyNumber: '17227112',
+  address: 'Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ, United Kingdom',
   email: 'info@constancia.com',
   website: 'https://constancia.com',
-  linkedin: 'linkedin.com/company/1qg-group-limited',
+  linkedin: 'linkedin.com/company/constancia-group',
 };
 
 export function generateBaseStyles(): string {

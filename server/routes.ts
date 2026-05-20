@@ -60,7 +60,7 @@ const OTP_EXPIRY_MINUTES = 10;
 
 // Resource session configuration
 const SESSION_EXPIRY_DAYS = 7;
-const SESSION_COOKIE_NAME = "constancia_resource_session";
+const SESSION_COOKIE_NAME = "1qg_resource_session";
 
 const MAX_OTP_ATTEMPTS = 5;
 
@@ -355,9 +355,9 @@ async function sendOtpEmail(email: string, firstName: string, otp: string): Prom
           <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
           
           <p style="color: #666; font-size: 12px;">
-            Constancia provides independent, vendor-agnostic EPM advisory services for finance leaders.
+            Constancia is an AI-first EPM advisory. Official Abacum partner for mid-market FP&amp;A and OneStream partner for enterprise EPM.
             <br><br>
-            86-90 Paul Street, London EC2A 4NE
+            Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ
             <br>
             <a href="https://constancia.com" style="color: #8E4F67;">constancia.com</a>
           </p>
@@ -391,7 +391,7 @@ async function sendContactVerificationEmail(to: string, firstName: string, token
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 0; background-color: #f5f5f5;">
           <!-- Header with Constancia branding -->
           <div style="background-color: #0A2540; padding: 30px 20px; text-align: center;">
-            <h1 style="color: #7FB8A3; margin: 0; font-size: 28px; font-weight: bold;">Constancia</h1>
+            <h1 style="color: #F6F3EE; margin: 0; font-size: 28px; font-weight: bold;">Constancia</h1>
             <p style="color: #ffffff; margin: 8px 0 0 0; font-size: 14px;">Enterprise Performance Management Advisory</p>
           </div>
           
@@ -433,10 +433,10 @@ async function sendContactVerificationEmail(to: string, firstName: string, token
           <!-- Footer -->
           <div style="background-color: #0A2540; padding: 25px 20px; text-align: center;">
             <p style="color: #ffffff; font-size: 12px; margin: 0 0 10px 0;">
-              Constancia provides independent, vendor-agnostic EPM advisory services for finance leaders.
+              Constancia is an AI-first EPM advisory. Official Abacum partner for mid-market FP&amp;A and OneStream partner for enterprise EPM.
             </p>
             <p style="color: #aaaaaa; font-size: 12px; margin: 0 0 10px 0;">
-              86-90 Paul Street, London EC2A 4NE
+              Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ
             </p>
             <a href="https://constancia.com" style="color: #7FB8A3; font-size: 12px; text-decoration: none;">constancia.com</a>
           </div>
@@ -2153,7 +2153,7 @@ export async function registerRoutes(
             type: "list" as const,
             content: "",
             items: [
-              { text: "Professional branding with Constancia colors", context: "Navy, cyan, and teal color palette" },
+              { text: "Professional branding with Constancia colours", context: "Graphite, cream, rose, mint palette" },
               { text: "Pixel-perfect typography using Inter font", context: "Consistent font weights and sizes" },
               { text: "Support for multiple content types", context: "Text, lists, tables, metrics" },
               "Adobe PDF Services API integration",
@@ -2215,30 +2215,30 @@ function generateWordPressHTML(): string {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <!-- Primary Meta Tags -->
-  <title>Constancia | Finance Transformation & ERP/EPM Consultancy</title>
-  <meta name="title" content="Constancia | Finance Transformation & ERP/EPM Consultancy">
-  <meta name="description" content="Constancia is an independent ERP and EPM consultancy helping finance leaders modernise their functions through technology, process optimisation, and AI-driven insights across the UK and Ireland.">
-  <meta name="keywords" content="ERP consultancy, EPM implementation, finance transformation, AI finance solutions, Oracle Cloud, Anaplan, OneStream, Board, CFO advisory">
+  <title>Constancia | AI-first EPM Advisory</title>
+  <meta name="title" content="Constancia | AI-first EPM Advisory">
+  <meta name="description" content="Constancia is an AI-first EPM advisory. Official Abacum partner for mid-market FP&amp;A and OneStream partner for enterprise EPM.">
+  <meta name="keywords" content="EPM advisory, FP&amp;A, finance transformation, Abacum partner, OneStream partner, AI finance, CFO advisory">
   <meta name="author" content="Constancia">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://constancia.com/">
-  
+
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://constancia.com/">
-  <meta property="og:title" content="Constancia | Finance Transformation & ERP/EPM Consultancy">
-  <meta property="og:description" content="Independent ERP and EPM consultancy delivering AI-powered finance transformation across the UK and Ireland.">
+  <meta property="og:title" content="Constancia | AI-first EPM Advisory">
+  <meta property="og:description" content="AI-first EPM advisory. Official Abacum and OneStream partner.">
   <meta property="og:image" content="https://constancia.com/og-image.png">
   <meta property="og:site_name" content="Constancia">
   <meta property="og:locale" content="en_GB">
-  
+
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://constancia.com/">
-  <meta name="twitter:title" content="Constancia | Finance Transformation & ERP/EPM Consultancy">
-  <meta name="twitter:description" content="Independent ERP and EPM consultancy delivering AI-powered finance transformation across the UK and Ireland.">
+  <meta name="twitter:title" content="Constancia | AI-first EPM Advisory">
+  <meta name="twitter:description" content="AI-first EPM advisory. Official Abacum and OneStream partner.">
   <meta name="twitter:image" content="https://constancia.com/og-image.png">
-  
+
   <meta name="theme-color" content="#12161D">
   
   <link rel="stylesheet" href="style.css">
@@ -2249,15 +2249,16 @@ function generateWordPressHTML(): string {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Constancia",
+    "legalName": "Constancia Holdings Limited",
     "url": "https://constancia.com",
     "logo": "https://constancia.com/logo.png",
-    "description": "Independent ERP and EPM consultancy delivering AI-powered finance transformation across the UK and Ireland.",
+    "description": "AI-first EPM advisory. Official Abacum and OneStream partner.",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "86-90 Paul Street",
-      "addressLocality": "London",
-      "addressRegion": "London",
-      "postalCode": "EC2A 4NE",
+      "streetAddress": "Blount House, Hall Court, Hall Park Way",
+      "addressLocality": "Telford",
+      "addressRegion": "Shropshire",
+      "postalCode": "TF3 4NQ",
       "addressCountry": "GB"
     },
     "contactPoint": {
@@ -2267,7 +2268,7 @@ function generateWordPressHTML(): string {
       "availableLanguage": "English"
     },
     "areaServed": ["GB", "IE"],
-    "knowsAbout": ["Enterprise Resource Planning", "Enterprise Performance Management", "Finance Transformation", "Oracle Cloud", "Anaplan", "OneStream", "Board"]
+    "knowsAbout": ["Enterprise Performance Management", "Financial Planning and Analysis", "Finance Transformation", "Abacum", "OneStream", "AI for Finance"]
   }
   </script>
   <script type="application/ld+json">
@@ -2276,7 +2277,7 @@ function generateWordPressHTML(): string {
     "@type": "WebSite",
     "name": "Constancia",
     "url": "https://constancia.com",
-    "description": "Independent ERP and EPM consultancy delivering AI-powered finance transformation."
+    "description": "AI-first EPM advisory."
   }
   </script>
 </head>
@@ -2304,7 +2305,7 @@ function generateWordPressHTML(): string {
       <div class="hero-content">
         <span class="badge">Independent Finance Consultancy</span>
         <h1 id="hero-heading">Modernise Your Finance Function with Confidence</h1>
-        <p class="hero-description">Constancia partners with CFOs and finance leaders to deliver intelligent ERP and EPM solutions that transform financial operations across the UK and Ireland.</p>
+        <p class="hero-description">Constancia partners with CFOs and finance leaders as an AI-first EPM advisory. Official Abacum partner for mid-market FP&amp;A and OneStream partner for enterprise EPM.</p>
         <div class="hero-buttons">
           <a href="#contact" class="btn btn-primary btn-lg">Start Your Transformation</a>
           <a href="#services" class="btn btn-outline btn-lg">Explore Services</a>
@@ -2351,7 +2352,7 @@ function generateWordPressHTML(): string {
       <div class="container">
         <span class="badge">About Constancia</span>
         <h2 id="about-heading">Your Trusted Finance Technology Partner</h2>
-        <p>Constancia is an independent consultancy dedicated to helping finance leaders modernise their functions. We combine deep technical expertise with practical business insight to deliver measurable outcomes.</p>
+        <p>Constancia is an AI-first EPM advisory. We combine deep technical expertise with practical business insight to deliver measurable outcomes for CFOs and finance transformation leaders.</p>
         
         <ul class="benefits-list">
           <li>Vendor-neutral advice focused on your organisation's needs</li>
@@ -2413,7 +2414,7 @@ function generateWordPressHTML(): string {
     <section class="cta" aria-labelledby="cta-heading">
       <div class="container">
         <h2 id="cta-heading">Ready to Transform Your Finance Function?</h2>
-        <p>Partner with Constancia for independent, expert guidance on your finance transformation journey.</p>
+        <p>Partner with Constancia for AI-first EPM advisory on your finance transformation journey.</p>
         <div class="cta-buttons">
           <a href="#contact" class="btn btn-white btn-lg">Schedule a Consultation</a>
           <a href="#contact" class="btn btn-outline-white btn-lg">Contact Us</a>
@@ -2435,7 +2436,7 @@ function generateWordPressHTML(): string {
             </div>
             <div class="contact-item">
               <span>Address:</span>
-              <address>86-90 Paul Street, London, EC2A 4NE</address>
+              <address>Blount House, Hall Court, Hall Park Way, Telford, TF3 4NQ</address>
             </div>
           </div>
           
@@ -2505,7 +2506,7 @@ function generateWordPressHTML(): string {
       </div>
       
       <div class="footer-bottom">
-        <p>&copy; 2024 Constancia. All rights reserved.</p>
+        <p>&copy; ${new Date().getFullYear()} Constancia Holdings Limited. All rights reserved. Company number 17227112.</p>
         <div class="footer-meta">
           <a href="/sitemap.xml">Sitemap</a>
           <a href="/robots.txt">Robots.txt</a>
@@ -3375,7 +3376,7 @@ function generateBlogPostHTML(post: { title: string; slug: string; excerpt: stri
   <footer class="site-footer">
     <div class="container">
       <div class="footer-bottom">
-        <p>&copy; ${new Date().getFullYear()} Constancia. All rights reserved.</p>
+        <p>&copy; ${new Date().getFullYear()} Constancia Holdings Limited. All rights reserved.</p>
         <div class="footer-meta">
           <a href="https://constancia.com">constancia.com</a>
         </div>
@@ -3395,7 +3396,7 @@ function generateBlogIndexHTML(posts: Array<{ title: string; slug: string; excer
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blog | Constancia Finance Transformation Insights</title>
-  <meta name="description" content="Expert insights on finance transformation, EPM, ERP, AI, and technology from Constancia consultants.">
+  <meta name="description" content="Expert insights on finance transformation, EPM, ERP, AI, and technology from Constancia advisors.">
   <link rel="canonical" href="https://constancia.com/blog">
   
   <meta property="og:type" content="website">
@@ -3453,7 +3454,7 @@ function generateBlogIndexHTML(posts: Array<{ title: string; slug: string; excer
   <footer class="site-footer">
     <div class="container">
       <div class="footer-bottom">
-        <p>&copy; ${new Date().getFullYear()} Constancia. All rights reserved.</p>
+        <p>&copy; ${new Date().getFullYear()} Constancia Holdings Limited. All rights reserved.</p>
         <div class="footer-meta">
           <a href="https://constancia.com">constancia.com</a>
         </div>
@@ -3524,7 +3525,7 @@ function generateResourcesIndexHTML(resources: Array<{ title: string; slug: stri
   <footer class="site-footer">
     <div class="container">
       <div class="footer-bottom">
-        <p>&copy; ${new Date().getFullYear()} Constancia. All rights reserved.</p>
+        <p>&copy; ${new Date().getFullYear()} Constancia Holdings Limited. All rights reserved.</p>
       </div>
     </div>
   </footer>
@@ -3601,7 +3602,7 @@ function generateResourcePageHTML(resource: { title: string; slug: string; descr
   <footer class="site-footer">
     <div class="container">
       <div class="footer-bottom">
-        <p>&copy; ${new Date().getFullYear()} Constancia. All rights reserved.</p>
+        <p>&copy; ${new Date().getFullYear()} Constancia Holdings Limited. All rights reserved.</p>
       </div>
     </div>
   </footer>

@@ -10,7 +10,7 @@ export default function CookiePolicyPage() {
     <div className="min-h-screen page-dark">
       <SEOHead
         title="Cookie Policy | Constancia"
-        description="How Constancia uses cookies and similar technologies on our website. Details on cookie categories, your choices, and UK data protection compliance."
+        description="How Constancia Holdings Limited uses cookies and similar technologies on our website. Details on cookie categories, your choices, and UK data protection compliance."
         keywords={["cookie policy", "cookies", "data protection", "website cookies", "Constancia cookies"]}
       />
       
@@ -53,7 +53,7 @@ export default function CookiePolicyPage() {
               <section className="mb-12" data-testid="section-about-cookies">
                 <h2 className="text-2xl font-bold text-foreground mb-4">About This Cookie Policy</h2>
                 <p className="text-muted-foreground mb-4">
-                  The website https://constancia.io/ (the Site) is operated by 1QG GROUP LIMITED (we, us, our), a company incorporated in England and Wales under company number 16121837. Our registered office is at 86-90 Paul Street, London, EC2A 4NE, United Kingdom.
+                  The website https://constancia.com/ (the Site) is operated by Constancia Holdings Limited (we, us, our), a company incorporated in England and Wales under company number 17227112. Our registered office is at Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ, United Kingdom.
                 </p>
                 <p className="text-muted-foreground mb-4">
                   We are committed to protecting your privacy and complying with our data protection obligations under the Data Protection Act 2018 (the DPA 2018), the UK General Data Protection Regulation 2016/679 (the UK GDPR) and any other applicable UK legislation (together, Data Protection Law).

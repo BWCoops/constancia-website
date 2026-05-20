@@ -13,8 +13,12 @@ coverage/
 .cache/
 *.tsbuildinfo
 
-# Playwright MCP working dir + ad-hoc screenshots
+# Playwright MCP working dir + ad-hoc screenshots (keep curated assets)
 .playwright-mcp/
+/*.png
+!attached_assets/**/*.png
+!client/public/**/*.png
+!client/src/**/*.png
 constancia-current.png
 *-state.png
 *-block.png

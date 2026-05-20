@@ -44,6 +44,7 @@ import {
   AlertCircle
 } from "lucide-react";
 import AdminLayout from "./AdminLayout";
+import { InsightsPanel } from "@/components/admin/InsightsPanel";
 
 function toNumber(value: unknown, fallback = 0): number {
   if (value === null || value === undefined || value === '') return fallback;
@@ -361,6 +362,8 @@ function DashboardContent() {
           </Badge>
         )}
       </div>
+
+      <InsightsPanel />
 
       {/* Key Metrics with Trends */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">

@@ -22,37 +22,38 @@ const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "Constancia",
-  "alternateName": "Constancia",
-  "url": "https://constancia.io",
-  "logo": "https://constancia.io/logo.png",
-  "description": "AI-first finance technology advisory. Official Abacum partner for mid-market FP&A and OneStream partner for enterprise EPM. Independent vendor profiles and comparison tools, fixed-fee delivery from senior practitioners.",
+  "legalName": "Constancia Holdings Limited",
+  "alternateName": "Constancia Holdings",
+  "url": "https://constancia.com",
+  "logo": "https://constancia.com/logo.png",
+  "description": "AI-first EPM advisory delivering finance transformation across the UK and Ireland. Official Abacum and OneStream partner.",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "86-90 Paul Street",
-    "addressLocality": "London",
-    "addressRegion": "London",
-    "postalCode": "EC2A 4NE",
+    "streetAddress": "Blount House, Hall Court, Hall Park Way",
+    "addressLocality": "Telford",
+    "addressRegion": "Shropshire",
+    "postalCode": "TF3 4NQ",
     "addressCountry": "GB"
   },
   "contactPoint": {
     "@type": "ContactPoint",
-    "email": "info@constancia.io",
+    "email": "info@constancia.com",
     "contactType": "customer service",
     "availableLanguage": "English"
   },
   "sameAs": [
-    "https://www.linkedin.com/company/1qg-group-limited/"
+    "https://www.linkedin.com/company/constancia-group/"
   ],
   "areaServed": ["GB", "IE", "ZA", "US", "CA", "150"],
   "knowsAbout": [
+    "Enterprise Resource Planning",
     "Enterprise Performance Management",
-    "FP&A Transformation",
-    "AI in Finance",
-    "Abacum",
+    "Finance Transformation",
+    "Artificial Intelligence",
+    "Oracle Cloud",
+    "Anaplan",
     "OneStream",
-    "Finance Operating Model",
-    "Vendor Selection",
-    "Cost Optimisation"
+    "Board"
   ]
 };
 
@@ -60,8 +61,8 @@ const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "Constancia",
-  "url": "https://constancia.io",
-  "description": "AI-first finance technology advisory. Abacum and OneStream partner. Senior practitioners, fixed fees, independent comparison tools.",
+  "url": "https://constancia.com",
+  "description": "AI-first EPM advisory delivering finance transformation. Official Abacum and OneStream partner.",
   "publisher": {
     "@type": "Organization",
     "name": "Constancia"
@@ -72,7 +73,7 @@ export function SEOHead({
   title,
   description,
   keywords = [],
-  ogImage = "https://constancia.io/og-image.png",
+  ogImage = "https://constancia.com/og-image.png",
   canonicalUrl,
   type = "website",
   article,
@@ -80,7 +81,7 @@ export function SEOHead({
   breadcrumbs,
 }: SEOHeadProps) {
   const fullTitle = title.includes("Constancia") ? title : `${title} | Constancia`;
-  const url = canonicalUrl || (typeof window !== "undefined" ? window.location.href : "https://constancia.io");
+  const url = canonicalUrl || (typeof window !== "undefined" ? window.location.href : "https://constancia.com");
 
   useEffect(() => {
     document.title = fullTitle;
