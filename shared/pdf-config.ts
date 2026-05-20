@@ -18,10 +18,12 @@ export const PDF_BRAND_COLORS = {
 
 // Contact Information
 export const PDF_CONTACT_INFO = {
-  address: "86-90 Paul Street, London, EC2A 4NE, United Kingdom",
-  email: "info@1qg.com",
-  website: "https://1qg.com",
-  linkedin: "linkedin.com/company/1qg-group-limited",
+  legalName: "Constancia Holdings Limited",
+  companyNumber: "17227112",
+  address: "Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ, United Kingdom",
+  email: "info@constancia.io",
+  website: "https://constancia.io",
+  linkedin: "linkedin.com/company/constancia-group",
 };
 
 // A4 Page Dimensions in mm

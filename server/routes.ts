@@ -237,7 +237,7 @@ async function sendLeadVerificationNotification(lead: {
           <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
           
           <p style="color: #666; font-size: 12px; text-align: center;">
-            This notification was sent automatically from the 1QG website.
+            This notification was sent automatically from the Constancia website.
             <br>
             Verified: ${new Date().toLocaleString('en-GB', { dateStyle: 'full', timeStyle: 'short' })}
           </p>
@@ -271,7 +271,7 @@ async function sendContactFormNotification(submission: {
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
           <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, #02205B 0%, #0884AA 100%); border-radius: 8px;">
             <h1 style="color: #12EBFC; margin: 0;">New Contact Form Submission</h1>
-            <p style="color: #fff; margin: 5px 0;">1QG Website</p>
+            <p style="color: #fff; margin: 5px 0;">Constancia Website</p>
           </div>
           
           <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
@@ -310,7 +310,7 @@ async function sendContactFormNotification(submission: {
           <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
           
           <p style="color: #666; font-size: 12px; text-align: center;">
-            This notification was sent from the 1QG website contact form.
+            This notification was sent from the Constancia website contact form.
             <br>
             Submitted: ${new Date().toLocaleString('en-GB', { dateStyle: 'full', timeStyle: 'short' })}
           </p>
@@ -334,17 +334,17 @@ async function sendOtpEmail(email: string, firstName: string, otp: string): Prom
   try {
     await sendEmailViaGraph(
       email,
-      "Your 1QG Resource Access Code",
+      "Your Constancia Resource Access Code",
       `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
           <div style="text-align: center; margin-bottom: 30px;">
-            <h1 style="color: #02205B; margin: 0;">1QG</h1>
+            <h1 style="color: #12161D; margin: 0;">Constancia</h1>
             <p style="color: #0884AA; margin: 5px 0;">Enterprise Performance Management Advisory</p>
           </div>
           
           <p style="color: #333;">Hi ${firstName},</p>
           
-          <p style="color: #333;">Thank you for your interest in 1QG resources. Please use the following code to access your download:</p>
+          <p style="color: #333;">Thank you for your interest in Constancia resources. Please use the following code to access your download:</p>
           
           <div style="background: linear-gradient(135deg, #02205B 0%, #0884AA 100%); padding: 20px; border-radius: 8px; text-align: center; margin: 30px 0;">
             <span style="font-size: 32px; font-weight: bold; letter-spacing: 8px; color: #12EBFC;">${otp}</span>
@@ -355,11 +355,11 @@ async function sendOtpEmail(email: string, firstName: string, otp: string): Prom
           <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
           
           <p style="color: #666; font-size: 12px;">
-            1QG provides independent, vendor-agnostic EPM advisory services for finance leaders.
+            Constancia is an AI-first EPM advisory. Official Abacum partner for mid-market FP&amp;A and OneStream partner for enterprise EPM.
             <br><br>
-            86-90 Paul Street, London EC2A 4NE
+            Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ
             <br>
-            <a href="https://1qg.com" style="color: #0884AA;">1qg.com</a>
+            <a href="https://constancia.io" style="color: #0884AA;">constancia.io</a>
           </p>
         </div>
       `
@@ -381,17 +381,17 @@ async function sendOtpEmail(email: string, firstName: string, otp: string): Prom
  */
 async function sendContactVerificationEmail(to: string, firstName: string, token: string): Promise<boolean> {
   try {
-    const baseUrl = process.env.BASE_URL || 'https://1qg.com';
+    const baseUrl = process.env.BASE_URL || 'https://constancia.io';
     const verificationLink = `${baseUrl}/api/contact/verify?token=${token}`;
     
     await sendEmailViaGraph(
       to,
-      `Verify your email - 1QG Contact`,
+      `Verify your email - Constancia Contact`,
       `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 0; background-color: #f5f5f5;">
-          <!-- Header with 1QG branding -->
+          <!-- Header with Constancia branding -->
           <div style="background-color: #0A2540; padding: 30px 20px; text-align: center;">
-            <h1 style="color: #12EBFC; margin: 0; font-size: 28px; font-weight: bold;">1QG</h1>
+            <h1 style="color: #F6F3EE; margin: 0; font-size: 28px; font-weight: bold;">Constancia</h1>
             <p style="color: #ffffff; margin: 8px 0 0 0; font-size: 14px;">Enterprise Performance Management Advisory</p>
           </div>
           
@@ -400,7 +400,7 @@ async function sendContactVerificationEmail(to: string, firstName: string, token
             <p style="color: #333333; font-size: 16px; margin: 0 0 20px 0;">Hi ${firstName},</p>
             
             <p style="color: #333333; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
-              Thank you for contacting 1QG. Please verify your email address to confirm your enquiry.
+              Thank you for contacting Constancia. Please verify your email address to confirm your enquiry.
             </p>
             
             <!-- CTA Button -->
@@ -433,12 +433,12 @@ async function sendContactVerificationEmail(to: string, firstName: string, token
           <!-- Footer -->
           <div style="background-color: #0A2540; padding: 25px 20px; text-align: center;">
             <p style="color: #ffffff; font-size: 12px; margin: 0 0 10px 0;">
-              1QG provides independent, vendor-agnostic EPM advisory services for finance leaders.
+              Constancia is an AI-first EPM advisory. Official Abacum partner for mid-market FP&amp;A and OneStream partner for enterprise EPM.
             </p>
             <p style="color: #aaaaaa; font-size: 12px; margin: 0 0 10px 0;">
-              86-90 Paul Street, London EC2A 4NE
+              Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ
             </p>
-            <a href="https://1qg.com" style="color: #12EBFC; font-size: 12px; text-decoration: none;">1qg.com</a>
+            <a href="https://constancia.io" style="color: #12EBFC; font-size: 12px; text-decoration: none;">constancia.io</a>
           </div>
         </div>
       `
@@ -490,7 +490,7 @@ async function syncLeadToHubSpot(lead: HubSpotLeadData): Promise<{ success: bool
 
   // Build message with all lead data in plain text
   const messageLines: string[] = [];
-  messageLines.push("Source: 1QG Website Resource Download");
+  messageLines.push("Source: Constancia Website Resource Download");
   
   // Include newsletter subscription preference
   messageLines.push(`Newsletter: ${lead.subscribeNewsletter !== false ? 'Yes' : 'No'}`);
@@ -898,7 +898,7 @@ export async function registerRoutes(
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
               <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, #02205B 0%, #0884AA 100%); border-radius: 8px;">
                 <h1 style="color: #12EBFC; margin: 0;">Talent Community Submission</h1>
-                <p style="color: #fff; margin: 5px 0;">1QG Careers</p>
+                <p style="color: #fff; margin: 5px 0;">Constancia Careers</p>
               </div>
               <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
                 <h2 style="color: #02205B; margin-top: 0;">Candidate Details</h2>
@@ -928,7 +928,7 @@ export async function registerRoutes(
               </div>
               <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
               <p style="color: #666; font-size: 12px; text-align: center;">
-                This notification was sent from the 1QG website careers form.
+                This notification was sent from the Constancia website careers form.
                 <br>
                 Submitted: ${new Date().toLocaleString("en-GB", { dateStyle: "full", timeStyle: "short" })}
               </p>
@@ -1576,8 +1576,8 @@ export async function registerRoutes(
         excerpt,
         content,
         heroImage,
-        author: generatedPost.author || "1QG Editorial Team",
-        authorAvatar: "/avatars/1qg-avatar.png",
+        author: generatedPost.author || "Constancia Editorial Team",
+        authorAvatar: "/avatars/constancia-avatar.png",
         readingTime,
         publishedAt: new Date().toISOString(),
         categoryId: categoryId || "",
@@ -2097,9 +2097,9 @@ export async function registerRoutes(
       const schema = {
         "@context": "https://schema.org",
         "@type": "Organization",
-        name: "1QG",
-        url: "https://1qg.com",
-        logo: "https://1qg.com/logo.png"
+        name: "Constancia",
+        url: "https://constancia.io",
+        logo: "https://constancia.io/logo.png"
       };
       res.json(schema);
     } catch (error: any) {
@@ -2153,7 +2153,7 @@ export async function registerRoutes(
             type: "list" as const,
             content: "",
             items: [
-              { text: "Professional branding with 1QG colors", context: "Navy, cyan, and teal color palette" },
+              { text: "Professional branding with Constancia colours", context: "Graphite, cream, rose, mint palette" },
               { text: "Pixel-perfect typography using Inter font", context: "Consistent font weights and sizes" },
               { text: "Support for multiple content types", context: "Text, lists, tables, metrics" },
               "Adobe PDF Services API integration",
@@ -2186,7 +2186,7 @@ export async function registerRoutes(
       });
       
       res.setHeader("Content-Type", "application/pdf");
-      res.setHeader("Content-Disposition", 'attachment; filename="1qg-pdf-test.pdf"');
+      res.setHeader("Content-Disposition", 'attachment; filename="constancia-pdf-test.pdf"');
       res.setHeader("X-PDF-Method", result.method);
       res.send(result.buffer);
     } catch (error: any) {
@@ -2215,31 +2215,31 @@ function generateWordPressHTML(): string {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <!-- Primary Meta Tags -->
-  <title>1QG | Finance Transformation & ERP/EPM Consultancy</title>
-  <meta name="title" content="1QG | Finance Transformation & ERP/EPM Consultancy">
-  <meta name="description" content="1QG is an independent ERP and EPM consultancy helping finance leaders modernise their functions through technology, process optimisation, and AI-driven insights across the UK and Ireland.">
-  <meta name="keywords" content="ERP consultancy, EPM implementation, finance transformation, AI finance solutions, Oracle Cloud, Anaplan, OneStream, Board, CFO advisory">
-  <meta name="author" content="1QG">
+  <title>Constancia | AI-first EPM Advisory</title>
+  <meta name="title" content="Constancia | AI-first EPM Advisory">
+  <meta name="description" content="Constancia is an AI-first EPM advisory. Official Abacum partner for mid-market FP&amp;A and OneStream partner for enterprise EPM.">
+  <meta name="keywords" content="EPM advisory, FP&amp;A, finance transformation, Abacum partner, OneStream partner, AI finance, CFO advisory">
+  <meta name="author" content="Constancia">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://1qg.com/">
-  
+  <link rel="canonical" href="https://constancia.io/">
+
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://1qg.com/">
-  <meta property="og:title" content="1QG | Finance Transformation & ERP/EPM Consultancy">
-  <meta property="og:description" content="Independent ERP and EPM consultancy delivering AI-powered finance transformation across the UK and Ireland.">
-  <meta property="og:image" content="https://1qg.com/og-image.png">
-  <meta property="og:site_name" content="1QG">
+  <meta property="og:url" content="https://constancia.io/">
+  <meta property="og:title" content="Constancia | AI-first EPM Advisory">
+  <meta property="og:description" content="AI-first EPM advisory. Official Abacum and OneStream partner.">
+  <meta property="og:image" content="https://constancia.io/og-image.png">
+  <meta property="og:site_name" content="Constancia">
   <meta property="og:locale" content="en_GB">
-  
+
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://1qg.com/">
-  <meta name="twitter:title" content="1QG | Finance Transformation & ERP/EPM Consultancy">
-  <meta name="twitter:description" content="Independent ERP and EPM consultancy delivering AI-powered finance transformation across the UK and Ireland.">
-  <meta name="twitter:image" content="https://1qg.com/og-image.png">
-  
-  <meta name="theme-color" content="#02205B">
+  <meta name="twitter:url" content="https://constancia.io/">
+  <meta name="twitter:title" content="Constancia | AI-first EPM Advisory">
+  <meta name="twitter:description" content="AI-first EPM advisory. Official Abacum and OneStream partner.">
+  <meta name="twitter:image" content="https://constancia.io/og-image.png">
+
+  <meta name="theme-color" content="#12161D">
   
   <link rel="stylesheet" href="style.css">
   
@@ -2248,35 +2248,36 @@ function generateWordPressHTML(): string {
   {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "1QG",
-    "url": "https://1qg.com",
-    "logo": "https://1qg.com/logo.png",
-    "description": "Independent ERP and EPM consultancy delivering AI-powered finance transformation across the UK and Ireland.",
+    "name": "Constancia",
+    "legalName": "Constancia Holdings Limited",
+    "url": "https://constancia.io",
+    "logo": "https://constancia.io/logo.png",
+    "description": "AI-first EPM advisory. Official Abacum and OneStream partner.",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "86-90 Paul Street",
-      "addressLocality": "London",
-      "addressRegion": "London",
-      "postalCode": "EC2A 4NE",
+      "streetAddress": "Blount House, Hall Court, Hall Park Way",
+      "addressLocality": "Telford",
+      "addressRegion": "Shropshire",
+      "postalCode": "TF3 4NQ",
       "addressCountry": "GB"
     },
     "contactPoint": {
       "@type": "ContactPoint",
-      "email": "info@1qg.com",
+      "email": "info@constancia.io",
       "contactType": "customer service",
       "availableLanguage": "English"
     },
     "areaServed": ["GB", "IE"],
-    "knowsAbout": ["Enterprise Resource Planning", "Enterprise Performance Management", "Finance Transformation", "Oracle Cloud", "Anaplan", "OneStream", "Board"]
+    "knowsAbout": ["Enterprise Performance Management", "Financial Planning and Analysis", "Finance Transformation", "Abacum", "OneStream", "AI for Finance"]
   }
   </script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "1QG",
-    "url": "https://1qg.com",
-    "description": "Independent ERP and EPM consultancy delivering AI-powered finance transformation."
+    "name": "Constancia",
+    "url": "https://constancia.io",
+    "description": "AI-first EPM advisory."
   }
   </script>
 </head>
@@ -2287,7 +2288,7 @@ function generateWordPressHTML(): string {
     <nav class="nav-container" role="navigation" aria-label="Main navigation">
       <a href="/" class="logo">
         <div class="logo-icon">1Q</div>
-        <span class="logo-text">1QG</span>
+        <span class="logo-text">Constancia</span>
       </a>
       <div class="nav-links">
         <a href="#services">Services</a>
@@ -2304,7 +2305,7 @@ function generateWordPressHTML(): string {
       <div class="hero-content">
         <span class="badge">Independent Finance Consultancy</span>
         <h1 id="hero-heading">Modernise Your Finance Function with Confidence</h1>
-        <p class="hero-description">1QG partners with CFOs and finance leaders to deliver intelligent ERP and EPM solutions that transform financial operations across the UK and Ireland.</p>
+        <p class="hero-description">Constancia partners with CFOs and finance leaders as an AI-first EPM advisory. Official Abacum partner for mid-market FP&amp;A and OneStream partner for enterprise EPM.</p>
         <div class="hero-buttons">
           <a href="#contact" class="btn btn-primary btn-lg">Start Your Transformation</a>
           <a href="#services" class="btn btn-outline btn-lg">Explore Services</a>
@@ -2349,9 +2350,9 @@ function generateWordPressHTML(): string {
 
     <section id="about" class="about" aria-labelledby="about-heading">
       <div class="container">
-        <span class="badge">About 1QG</span>
+        <span class="badge">About Constancia</span>
         <h2 id="about-heading">Your Trusted Finance Technology Partner</h2>
-        <p>1QG is an independent consultancy dedicated to helping finance leaders modernise their functions. We combine deep technical expertise with practical business insight to deliver measurable outcomes.</p>
+        <p>Constancia is an AI-first EPM advisory. We combine deep technical expertise with practical business insight to deliver measurable outcomes for CFOs and finance transformation leaders.</p>
         
         <ul class="benefits-list">
           <li>Vendor-neutral advice focused on your organisation's needs</li>
@@ -2413,7 +2414,7 @@ function generateWordPressHTML(): string {
     <section class="cta" aria-labelledby="cta-heading">
       <div class="container">
         <h2 id="cta-heading">Ready to Transform Your Finance Function?</h2>
-        <p>Partner with 1QG for independent, expert guidance on your finance transformation journey.</p>
+        <p>Partner with Constancia for AI-first EPM advisory on your finance transformation journey.</p>
         <div class="cta-buttons">
           <a href="#contact" class="btn btn-white btn-lg">Schedule a Consultation</a>
           <a href="#contact" class="btn btn-outline-white btn-lg">Contact Us</a>
@@ -2431,11 +2432,11 @@ function generateWordPressHTML(): string {
             <h3>Contact Information</h3>
             <div class="contact-item">
               <span>Email:</span>
-              <a href="mailto:info@1qg.com">info@1qg.com</a>
+              <a href="mailto:info@constancia.io">info@constancia.io</a>
             </div>
             <div class="contact-item">
               <span>Address:</span>
-              <address>86-90 Paul Street, London, EC2A 4NE</address>
+              <address>Blount House, Hall Court, Hall Park Way, Telford, TF3 4NQ</address>
             </div>
           </div>
           
@@ -2469,7 +2470,7 @@ function generateWordPressHTML(): string {
         <div class="footer-brand">
           <a href="/" class="logo">
             <div class="logo-icon">1Q</div>
-            <span class="logo-text">1QG</span>
+            <span class="logo-text">Constancia</span>
           </a>
           <p>Independent ERP and EPM consultancy delivering AI-powered finance transformation.</p>
         </div>
@@ -2505,7 +2506,7 @@ function generateWordPressHTML(): string {
       </div>
       
       <div class="footer-bottom">
-        <p>&copy; 2024 1QG. All rights reserved.</p>
+        <p>&copy; ${new Date().getFullYear()} Constancia Holdings Limited. All rights reserved. Company number 17227112.</p>
         <div class="footer-meta">
           <a href="/sitemap.xml">Sitemap</a>
           <a href="/robots.txt">Robots.txt</a>
@@ -2518,7 +2519,7 @@ function generateWordPressHTML(): string {
 }
 
 function generateWordPressCSS(): string {
-  return `/* 1QG WordPress Theme Styles */
+  return `/* Constancia WordPress Theme Styles */
 :root {
   --dark-navy: #02205B;
   --bright-cyan: #12EBFC;
@@ -3281,11 +3282,11 @@ function generateBlogPostHTML(post: { title: string; slug: string; excerpt: stri
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${post.title} | 1QG</title>
+  <title>${post.title} | Constancia</title>
   <meta name="description" content="${post.excerpt}">
   <meta name="keywords" content="${post.tags.join(', ')}">
   <meta name="author" content="${post.author}">
-  <link rel="canonical" href="https://1qg.com/blog/${post.slug}">
+  <link rel="canonical" href="https://constancia.io/blog/${post.slug}">
   
   <meta property="og:type" content="article">
   <meta property="og:title" content="${post.title}">
@@ -3314,10 +3315,10 @@ function generateBlogPostHTML(post: { title: string; slug: string; excerpt: stri
     },
     "publisher": {
       "@type": "Organization",
-      "name": "1QG",
+      "name": "Constancia",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://1qg.com/logo.png"
+        "url": "https://constancia.io/logo.png"
       }
     },
     "datePublished": "${post.publishedAt}",
@@ -3330,7 +3331,7 @@ function generateBlogPostHTML(post: { title: string; slug: string; excerpt: stri
     <nav class="nav-container">
       <a href="../index.html" class="logo">
         <div class="logo-icon">1Q</div>
-        <span class="logo-text">1QG</span>
+        <span class="logo-text">Constancia</span>
       </a>
       <div class="nav-links">
         <a href="../index.html#services">Services</a>
@@ -3375,9 +3376,9 @@ function generateBlogPostHTML(post: { title: string; slug: string; excerpt: stri
   <footer class="site-footer">
     <div class="container">
       <div class="footer-bottom">
-        <p>&copy; ${new Date().getFullYear()} 1QG. All rights reserved.</p>
+        <p>&copy; ${new Date().getFullYear()} Constancia Holdings Limited. All rights reserved.</p>
         <div class="footer-meta">
-          <a href="https://1qg.com">1qg.com</a>
+          <a href="https://constancia.io">constancia.io</a>
         </div>
       </div>
     </div>
@@ -3394,12 +3395,12 @@ function generateBlogIndexHTML(posts: Array<{ title: string; slug: string; excer
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog | 1QG Finance Transformation Insights</title>
-  <meta name="description" content="Expert insights on finance transformation, EPM, ERP, AI, and technology from 1QG consultants.">
-  <link rel="canonical" href="https://1qg.com/blog">
+  <title>Blog | Constancia Finance Transformation Insights</title>
+  <meta name="description" content="Expert insights on finance transformation, EPM, ERP, AI, and technology from Constancia advisors.">
+  <link rel="canonical" href="https://constancia.io/blog">
   
   <meta property="og:type" content="website">
-  <meta property="og:title" content="1QG Blog - Finance Transformation Insights">
+  <meta property="og:title" content="Constancia Blog - Finance Transformation Insights">
   <meta property="og:description" content="Expert insights on finance transformation, EPM, ERP, AI, and technology.">
   
   <link rel="stylesheet" href="../style.css">
@@ -3409,7 +3410,7 @@ function generateBlogIndexHTML(posts: Array<{ title: string; slug: string; excer
     <nav class="nav-container">
       <a href="../index.html" class="logo">
         <div class="logo-icon">1Q</div>
-        <span class="logo-text">1QG</span>
+        <span class="logo-text">Constancia</span>
       </a>
       <div class="nav-links">
         <a href="../index.html#services">Services</a>
@@ -3424,7 +3425,7 @@ function generateBlogIndexHTML(posts: Array<{ title: string; slug: string; excer
     <section class="blog-hero">
       <div class="container">
         <span class="badge">Insights & Research</span>
-        <h1>1QG Blog</h1>
+        <h1>Constancia Blog</h1>
         <p>Expert analysis on finance transformation, EPM, ERP, and AI from our team of consultants.</p>
       </div>
     </section>
@@ -3453,9 +3454,9 @@ function generateBlogIndexHTML(posts: Array<{ title: string; slug: string; excer
   <footer class="site-footer">
     <div class="container">
       <div class="footer-bottom">
-        <p>&copy; ${new Date().getFullYear()} 1QG. All rights reserved.</p>
+        <p>&copy; ${new Date().getFullYear()} Constancia Holdings Limited. All rights reserved.</p>
         <div class="footer-meta">
-          <a href="https://1qg.com">1qg.com</a>
+          <a href="https://constancia.io">constancia.io</a>
         </div>
       </div>
     </div>
@@ -3472,9 +3473,9 @@ function generateResourcesIndexHTML(resources: Array<{ title: string; slug: stri
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Resources | 1QG Finance Transformation Downloads</title>
-  <meta name="description" content="Download free guides, frameworks, playbooks, and templates for finance transformation, EPM, and ERP from 1QG.">
-  <link rel="canonical" href="https://1qg.com/resources">
+  <title>Resources | Constancia Finance Transformation Downloads</title>
+  <meta name="description" content="Download free guides, frameworks, playbooks, and templates for finance transformation, EPM, and ERP from Constancia.">
+  <link rel="canonical" href="https://constancia.io/resources">
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -3482,7 +3483,7 @@ function generateResourcesIndexHTML(resources: Array<{ title: string; slug: stri
     <nav class="nav-container">
       <a href="../index.html" class="logo">
         <div class="logo-icon">1Q</div>
-        <span class="logo-text">1QG</span>
+        <span class="logo-text">Constancia</span>
       </a>
       <div class="nav-links">
         <a href="../index.html#services">Services</a>
@@ -3496,7 +3497,7 @@ function generateResourcesIndexHTML(resources: Array<{ title: string; slug: stri
     <section class="blog-hero">
       <div class="container">
         <span class="badge">Free Downloads</span>
-        <h1>1QG Resources</h1>
+        <h1>Constancia Resources</h1>
         <p>Guides, frameworks, playbooks, and templates to accelerate your finance transformation.</p>
       </div>
     </section>
@@ -3524,7 +3525,7 @@ function generateResourcesIndexHTML(resources: Array<{ title: string; slug: stri
   <footer class="site-footer">
     <div class="container">
       <div class="footer-bottom">
-        <p>&copy; ${new Date().getFullYear()} 1QG. All rights reserved.</p>
+        <p>&copy; ${new Date().getFullYear()} Constancia Holdings Limited. All rights reserved.</p>
       </div>
     </div>
   </footer>
@@ -3538,9 +3539,9 @@ function generateResourcePageHTML(resource: { title: string; slug: string; descr
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${resource.title} | 1QG Resources</title>
+  <title>${resource.title} | Constancia Resources</title>
   <meta name="description" content="${resource.description}">
-  <link rel="canonical" href="https://1qg.com/resources/${resource.slug}">
+  <link rel="canonical" href="https://constancia.io/resources/${resource.slug}">
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -3548,7 +3549,7 @@ function generateResourcePageHTML(resource: { title: string; slug: string; descr
     <nav class="nav-container">
       <a href="../index.html" class="logo">
         <div class="logo-icon">1Q</div>
-        <span class="logo-text">1QG</span>
+        <span class="logo-text">Constancia</span>
       </a>
       <div class="nav-links">
         <a href="../index.html#services">Services</a>
@@ -3601,7 +3602,7 @@ function generateResourcePageHTML(resource: { title: string; slug: string; descr
   <footer class="site-footer">
     <div class="container">
       <div class="footer-bottom">
-        <p>&copy; ${new Date().getFullYear()} 1QG. All rights reserved.</p>
+        <p>&copy; ${new Date().getFullYear()} Constancia Holdings Limited. All rights reserved.</p>
       </div>
     </div>
   </footer>
@@ -3625,12 +3626,12 @@ function generateWordPressWXR(
   xmlns:dc="http://purl.org/dc/elements/1.1/"
   xmlns:wp="http://wordpress.org/export/1.2/">
 <channel>
-  <title>1QG</title>
-  <link>https://1qg.com</link>
+  <title>Constancia</title>
+  <link>https://constancia.io</link>
   <description>Finance Transformation and ERP/EPM Consultancy</description>
   <language>en-GB</language>
   <wp:wxr_version>1.2</wp:wxr_version>
-  <wp:base_site_url>https://1qg.com</wp:base_site_url>
+  <wp:base_site_url>https://constancia.io</wp:base_site_url>
   ${categories.map(cat => `
   <wp:category>
     <wp:term_id>${cat.id}</wp:term_id>
@@ -3644,10 +3645,10 @@ function generateWordPressWXR(
     return `
   <item>
     <title><![CDATA[${post.title}]]></title>
-    <link>https://1qg.com/blog/${post.slug}</link>
+    <link>https://constancia.io/blog/${post.slug}</link>
     <pubDate>${new Date(post.publishedAt).toUTCString()}</pubDate>
     <dc:creator><![CDATA[${post.author}]]></dc:creator>
-    <guid isPermaLink="false">https://1qg.com/?p=${id}</guid>
+    <guid isPermaLink="false">https://constancia.io/?p=${id}</guid>
     <description><![CDATA[${post.excerpt}]]></description>
     <content:encoded><![CDATA[${contentHtml}]]></content:encoded>
     <excerpt:encoded><![CDATA[${post.excerpt}]]></excerpt:encoded>
@@ -3669,10 +3670,10 @@ function generateWordPressWXR(
     return `
   <item>
     <title><![CDATA[${resource.title}]]></title>
-    <link>https://1qg.com/resources/${resource.slug}</link>
+    <link>https://constancia.io/resources/${resource.slug}</link>
     <pubDate>${new Date(resource.publishedAt).toUTCString()}</pubDate>
-    <dc:creator><![CDATA[1QG Team]]></dc:creator>
-    <guid isPermaLink="false">https://1qg.com/?p=${id}</guid>
+    <dc:creator><![CDATA[Constancia Team]]></dc:creator>
+    <guid isPermaLink="false">https://constancia.io/?p=${id}</guid>
     <description><![CDATA[${resource.description}]]></description>
     <content:encoded><![CDATA[
       <div style="background: linear-gradient(135deg, rgba(18, 235, 252, 0.1) 0%, rgba(8, 132, 170, 0.1) 100%); border-left: 4px solid #12EBFC; padding: 2rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0; text-align: center;">

@@ -21,20 +21,20 @@ const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "info@1qg.com",
-    href: "mailto:info@1qg.com",
+    value: "info@constancia.io",
+    href: "mailto:info@constancia.io",
   },
   {
     icon: MapPin,
     label: "Address",
-    value: "86-90 Paul Street, London, EC2A 4NE, United Kingdom",
-    href: "https://maps.google.com/?q=86-90+Paul+Street+London+EC2A+4NE",
+    value: "Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ, United Kingdom",
+    href: "https://maps.google.com/?q=Blount+House+Hall+Court+Hall+Park+Way+Telford+TF3+4NQ",
   },
   {
     icon: Globe,
     label: "Website",
-    value: "1qg.com",
-    href: "https://1qg.com",
+    value: "constancia.io",
+    href: "https://constancia.io",
   },
 ];
 
@@ -160,9 +160,9 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen page-dark">
       <SEOHead
-        title="Contact Us | 1QG - Get In Touch"
-        description="Get in touch with 1QG for independent Enterprise Performance Management advisory. Platform selection, transformation planning, and senior-level guidance for finance teams."
-        keywords={["contact 1QG", "Enterprise Performance Management", "finance transformation", "independent advisory"]}
+        title="Contact Us | Constancia — Get In Touch"
+        description="Get in touch with Constancia for AI-first EPM advisory. Platform selection, transformation planning, and senior-level guidance for finance teams. Official Abacum and OneStream partner."
+        keywords={["contact Constancia", "Enterprise Performance Management", "finance transformation", "AI-first advisory"]}
       />
       
       <Navigation />

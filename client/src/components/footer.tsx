@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { Linkedin, Mail, MapPin, ArrowUpRight } from "@/lib/icons";
-import logoWhite from "@assets/1QG-TypeLogo-320.png";
+import logoWhite from "@assets/constancia-logo.png";
 import { VisitorDataManager } from "@/components/visitor-data-manager";
 import { useFeatureFlags } from "@/lib/feature-flags";
 import type { FeatureFlags } from "@shared/feature-flags";
@@ -39,7 +39,7 @@ const footerLinks: Record<string, FooterLink[]> = {
 };
 
 const socialLinks = [
-  { icon: Linkedin, href: "https://www.linkedin.com/company/1qg-group-limited/", label: "LinkedIn" },
+  { icon: Linkedin, href: "https://www.linkedin.com/company/constancia-group/", label: "LinkedIn" },
 ];
 
 export function Footer() {
@@ -61,7 +61,7 @@ export function Footer() {
             <Link href="/" className="inline-block mb-2 group" data-testid="link-footer-home">
               <img
                 src={logoWhite}
-                alt="1QG®"
+                alt="Constancia"
                 className="h-16 w-auto max-w-[200px]"
               />
             </Link>
@@ -145,7 +145,7 @@ export function Footer() {
 
         <div className="pt-8 border-t border-[#FEFFF3]/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-[#FEFFF3]/60">
-            {new Date().getFullYear()} 1QG®. All rights reserved.
+            © {new Date().getFullYear()} Constancia Holdings Limited. All rights reserved. Company number 17227112.
           </p>
           <div className="flex flex-wrap items-center gap-3 sm:gap-4 md:gap-6 text-sm text-[#FEFFF3]/60">
             {socialLinks.map((social) => (
@@ -163,11 +163,11 @@ export function Footer() {
             ))}
             <a href="mailto:info@1qg.com" className="flex items-center gap-2 hover:text-brand-cyan transition-colors">
               <Mail className="w-4 h-4 flex-shrink-0" />
-              <span className="break-all">info@1qg.com</span>
+              <span className="break-all">info@constancia.io</span>
             </a>
             <span className="flex items-start gap-2">
               <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" />
-              <span>86-90 Paul Street, London, EC2A 4NE, UK</span>
+              <span>Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ, UK</span>
             </span>
           </div>
         </div>

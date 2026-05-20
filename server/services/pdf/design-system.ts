@@ -122,11 +122,12 @@ export const GRADIENTS = {
 };
 
 export const CONTACT_INFO = {
-  company: '1QG Group Limited',
-  address: '86-90 Paul Street, London, EC2A 4NE, United Kingdom',
-  email: 'info@1qg.com',
-  website: 'https://1qg.com',
-  linkedin: 'linkedin.com/company/1qg-group-limited',
+  company: 'Constancia Holdings Limited',
+  companyNumber: '17227112',
+  address: 'Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ, United Kingdom',
+  email: 'info@constancia.io',
+  website: 'https://constancia.io',
+  linkedin: 'linkedin.com/company/constancia-group',
 };
 
 export function generateBaseStyles(): string {
