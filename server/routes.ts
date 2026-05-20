@@ -657,6 +657,12 @@ export async function registerRoutes(
   // ============================================
   app.use("/api", modularRoutes);
   log.info("modular domain routes registered");
+
+  // ============================================
+  // CONSTANCIA BRAIN (enterprise institutional memory)
+  // ============================================
+  const { mountBrain } = await import("./brain");
+  mountBrain(app);
   
   // ============================================
   // FEATURE FLAGS API ENDPOINTS
