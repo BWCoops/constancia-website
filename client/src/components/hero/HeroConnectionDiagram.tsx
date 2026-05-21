@@ -99,20 +99,41 @@ const SUB_PHASE = {
   OUTPUT_END: 1.00,
 } as const;
 
-function cycleProgress(p: number): { localP: number; visible: boolean } {
+// Fade windows wrap each cycle so the diagram doesn't cut to
+// empty at the cycle boundary — it holds at its final state for a
+// fraction of scroll, then smoothly fades. The inner SVG content
+// keeps rendering during the fade so what the viewer sees softly
+// dissolves rather than instantly disappearing.
+const FADE_OUT_END = 0.20;   // after cycle 1, hold + fade complete
+const FADE_IN_START = 0.74;  // before cycle 2, fade in begins
+
+function cycleProgress(p: number): { localP: number; visible: boolean; alpha: number } {
   if (p <= CYCLE_ONE.end) {
+    // Cycle 1 in progress.
     return {
       localP: clamp01((p - CYCLE_ONE.start) / (CYCLE_ONE.end - CYCLE_ONE.start)),
       visible: true,
+      alpha: 1,
     };
+  }
+  if (p < FADE_OUT_END) {
+    // Cycle 1 fade-out — hold at final state, alpha eases 1→0.
+    const t = (p - CYCLE_ONE.end) / (FADE_OUT_END - CYCLE_ONE.end);
+    return { localP: 1, visible: true, alpha: 1 - smoothstep(t) };
   }
   if (p >= CYCLE_TWO.start) {
     return {
       localP: clamp01((p - CYCLE_TWO.start) / (CYCLE_TWO.end - CYCLE_TWO.start)),
       visible: true,
+      alpha: 1,
     };
   }
-  return { localP: 0, visible: false };
+  if (p >= FADE_IN_START) {
+    // Cycle 2 fade-in — start rendering at localP=0, alpha eases 0→1.
+    const t = (p - FADE_IN_START) / (CYCLE_TWO.start - FADE_IN_START);
+    return { localP: 0, visible: true, alpha: smoothstep(t) };
+  }
+  return { localP: 0, visible: false, alpha: 0 };
 }
 
 function clamp01(x: number) {
@@ -125,6 +146,21 @@ function ease(start: number, end: number, p: number): number {
   if (p <= start) return 0;
   if (p >= end) return 1;
   return smoothstep((p - start) / (end - start));
+}
+
+// Strong ease-in cubic — chips drift slowly from off-screen, then
+// accelerate hard as they approach the centre. Reads as "pulled in
+// by gravity" rather than constant-velocity. Pair with the Bézier
+// path so the motion is both curved AND accelerating.
+function easeInCubic(t: number): number {
+  return t * t * t;
+}
+
+// Ease-out for the wave/halo expansions — fast start that settles
+// into a slow drift outward. Pairs visually with the gravitational
+// pull of the chips moving the other direction.
+function easeOutQuart(t: number): number {
+  return 1 - Math.pow(1 - t, 4);
 }
 
 // Cubic Bézier evaluation for the arrival curves.
@@ -199,7 +235,11 @@ export function HeroConnectionDiagram({ progress, className }: HeroConnectionDia
     };
     const tick = () => {
       const next = readProgress();
-      if (Math.abs(next - lastValue) > 0.003) {
+      // Tighter threshold — 0.0015 — for visibly smoother chip motion
+      // during the assembly sequences. Updates ~660 per scroll of the
+      // hero (vs ~330 before). Still cheap because of the dead-zone
+      // skip below.
+      if (Math.abs(next - lastValue) > 0.0015) {
         lastValue = next;
         setInternalProgress(next);
       }
@@ -215,7 +255,7 @@ export function HeroConnectionDiagram({ progress, className }: HeroConnectionDia
   // Map global scroll into the local cycle (0-1 within cycle, or
   // 0 + invisible in the dead zone between cycles). The diagram
   // plays the SAME animation in cycle 1 and cycle 2.
-  const { localP, visible } = cycleProgress(p);
+  const { localP, visible, alpha } = cycleProgress(p);
 
   const chipsPhase = ease(SUB_PHASE.CHIPS_START, SUB_PHASE.CHIPS_END, localP);
   const beamsPhase = ease(SUB_PHASE.BEAMS_START, SUB_PHASE.BEAMS_END, localP);
@@ -235,9 +275,11 @@ export function HeroConnectionDiagram({ progress, className }: HeroConnectionDia
       className={`hero-connection-diagram ${className ?? ""}`}
       aria-hidden="true"
       style={{
-        opacity: visible ? 1 : 0,
+        opacity: alpha,
         pointerEvents: "none",
-        transition: visible ? "none" : "opacity 0.2s ease-out",
+        // alpha is computed every frame via cycleProgress() so the
+        // wrapper transitions via the JS value directly — no CSS
+        // transition needed (it would lag the rAF).
       }}
     >
       <svg
@@ -301,6 +343,37 @@ export function HeroConnectionDiagram({ progress, className }: HeroConnectionDia
           </filter>
         </defs>
 
+        {/* Everything below is skipped when the diagram is in the
+            dead zone (scroll 0.20-0.78). Saves ~12 chip Bézier
+            evaluations + ~12 beam paths + ~12 particles + halos
+            per frame for ~60% of the scroll runway. */}
+        {visible && <>
+        {/* 3D wave layer — three concentric rings radiating outward
+            from the centre, brand-coloured, slightly offset in phase.
+            Reads as energy waves pulling the chips in. Each ring's
+            radius grows with the local cycle phase via easeOutQuart,
+            so they expand fast initially and settle into a slow
+            outward drift. */}
+        {[0, 1, 2].map((i) => {
+          const phaseOffset = i * 0.33;
+          const waveLocal = clamp01((localP * 1.8 - phaseOffset) % 1);
+          const r = 60 + easeOutQuart(waveLocal) * 480;
+          const op = (1 - waveLocal) * 0.35;
+          const colors = ["#C77A93", "#7FB8A3", "#8E4F67"];
+          return (
+            <circle
+              key={`wave-${i}`}
+              cx={CENTRE.x}
+              cy={CENTRE.y}
+              r={r}
+              fill="none"
+              stroke={colors[i]}
+              strokeWidth={1.2}
+              opacity={op}
+            />
+          );
+        })}
+
         {/* Soft halo behind the Constancia mark. Pulses with the
             chips + beams + output sub-phases (averaged so the halo
             grows as data accumulates). */}
@@ -321,8 +394,12 @@ export function HeroConnectionDiagram({ progress, className }: HeroConnectionDia
             const beamLocal = clamp01((beamsPhase - v.delay) / Math.max(0.001, 1 - v.delay));
             if (chipLocal <= 0) return null;
 
-            // Current chip position along the arrival curve.
-            const t = chipLocal;
+            // Current chip position along the arrival curve. Use
+            // easeInCubic on the parameter so the chip drifts slowly
+            // from the left, then accelerates hard as it nears the
+            // centre — the "pulled in" feel. Bézier shapes the path;
+            // ease-in shapes the velocity along that path.
+            const t = easeInCubic(chipLocal);
             const cx = bezier3(t, v.startX, v.c1x, v.c2x, v.endX);
             const cy = bezier3(t, v.startY, v.c1y, v.c2y, v.endY);
 
@@ -399,7 +476,11 @@ export function HeroConnectionDiagram({ progress, className }: HeroConnectionDia
             const vendor = HERO_VENDORS[v.index];
             const local = clamp01((chipsPhase - v.delay) / (1 - v.delay));
             if (local <= 0) return null;
-            const t = smoothstep(local);
+            // Same ease-in curve as the beam-side computation above
+            // so the chip body and its beam stay in sync. Gives the
+            // unified "pulled in by gravity" motion across both
+            // visual layers.
+            const t = easeInCubic(local);
             const cx = bezier3(t, v.startX, v.c1x, v.c2x, v.endX);
             const cy = bezier3(t, v.startY, v.c1y, v.c2y, v.endY);
 
@@ -440,12 +521,12 @@ export function HeroConnectionDiagram({ progress, className }: HeroConnectionDia
                   strokeWidth={1.5}
                   filter="url(#chip-shadow)"
                 />
-                {/* Vendor logo */}
+                {/* Vendor logo — rendered via the new render(color)
+                    API so the colour drives both stroke and fill. */}
                 <g
-                  transform={`translate(${cx - half + 10}, ${cy - half + 10}) scale(${(chipSize - 20) / 48})`}
-                  style={{ color: logoColor }}
+                  transform={`translate(${cx - half + 6}, ${cy - half + 6}) scale(${(chipSize - 12) / 48})`}
                 >
-                  {vendor.svg}
+                  {vendor.render(logoColor)}
                 </g>
                 {/* Label sits below the chip */}
                 <text
@@ -464,53 +545,132 @@ export function HeroConnectionDiagram({ progress, className }: HeroConnectionDia
           })}
         </g>
 
-        {/* Output ribbon — emerges from the right side of the centre,
-            text appearing as the beam completes. */}
-        {outputPhase > 0 && (
-          <g
-            style={{
-              opacity: outputPhase,
-              transform: `translateX(${20 * (1 - outputPhase)}px)`,
-            }}
-          >
-            <text
-              x={OUTPUT_X}
-              y={OUTPUT_Y - 8}
-              textAnchor="end"
-              fontSize="34"
-              fontWeight={300}
-              letterSpacing="0.04em"
-              fontFamily="var(--brand-font-sans, system-ui)"
-              fill="#12161D"
-            >
-              Connected enterprise
-            </text>
-            <text
-              x={OUTPUT_X}
-              y={OUTPUT_Y + 36}
-              textAnchor="end"
-              fontSize="34"
-              fontWeight={500}
-              letterSpacing="0.04em"
-              fontFamily="var(--brand-font-sans, system-ui)"
-              fill="#8E4F67"
-            >
-              intelligence.
-            </text>
-            <text
-              x={OUTPUT_X}
-              y={OUTPUT_Y + 70}
-              textAnchor="end"
-              fontSize="14"
-              letterSpacing="0.18em"
-              fontFamily="var(--brand-font-sans, system-ui)"
-              fill="#1E2630"
-              opacity={0.65}
-            >
-              ONE SOURCE OF TRUTH
-            </text>
-          </g>
-        )}
+        {/* Cinematic end reveal. Three stages within the output
+            sub-phase:
+              0.00–0.40  shockwave ring expands from centre
+              0.30–0.80  word-by-word reveal of headline
+              0.60–1.00  underline draws + stat reveal
+            All driven by `outputPhase` (0–1). The shockwave fades
+            as it grows; the underline draws right-to-left as a
+            stroke-dash animation; the stat ticks up via a simple
+            interpolation. */}
+        {outputPhase > 0 && (() => {
+          // Sub-stages of the output reveal.
+          const shockwave = clamp01(outputPhase / 0.40);
+          const wordsP = clamp01((outputPhase - 0.30) / 0.50);
+          const underlineP = clamp01((outputPhase - 0.60) / 0.40);
+          const statP = clamp01((outputPhase - 0.70) / 0.30);
+
+          // Words reveal with stagger across all three.
+          const wordCount = 3;
+          const wordReveal = (i: number) => clamp01(wordsP * wordCount - i);
+          const words = ["Connected", "enterprise", "intelligence."];
+
+          // Tick the stat 1 → 12 as `statP` runs.
+          const statValue = Math.round(1 + statP * 11);
+
+          // Underline geometry — drawn under the second text line.
+          const ulX1 = OUTPUT_X - 360;
+          const ulX2 = OUTPUT_X;
+          const ulLen = ulX2 - ulX1;
+          const ulOffset = ulLen * (1 - underlineP);
+
+          return (
+            <g>
+              {/* Shockwave — single ring expanding outward from
+                  centre at the moment the output starts. Reads as
+                  the moment of resolution: "all those systems
+                  agree, here's the result". */}
+              {shockwave > 0 && shockwave < 1 && (
+                <circle
+                  cx={CENTRE.x}
+                  cy={CENTRE.y}
+                  r={40 + easeOutQuart(shockwave) * 320}
+                  fill="none"
+                  stroke="#7FB8A3"
+                  strokeWidth={2 * (1 - shockwave) + 0.5}
+                  opacity={(1 - shockwave) * 0.85}
+                />
+              )}
+
+              {/* Headline — three words, each fades + slides in
+                  with cubic easing, staggered. */}
+              {words.map((word, i) => {
+                const reveal = wordReveal(i);
+                const eased = smoothstep(reveal);
+                const yOffset = OUTPUT_Y - 30 + i * 42;
+                return (
+                  <text
+                    key={word}
+                    x={OUTPUT_X}
+                    y={yOffset}
+                    textAnchor="end"
+                    fontSize="38"
+                    fontWeight={i === wordCount - 1 ? 500 : 300}
+                    letterSpacing="0.02em"
+                    fontFamily="var(--brand-font-sans, system-ui)"
+                    fill={i === wordCount - 1 ? "#8E4F67" : "#12161D"}
+                    opacity={eased}
+                    style={{
+                      transform: `translateX(${30 * (1 - eased)}px)`,
+                    }}
+                  >
+                    {word}
+                  </text>
+                );
+              })}
+
+              {/* Underline beneath the final word, drawing in
+                  right-to-left as the headline finishes. */}
+              {underlineP > 0 && (
+                <line
+                  x1={ulX1}
+                  y1={OUTPUT_Y + 70}
+                  x2={ulX2}
+                  y2={OUTPUT_Y + 70}
+                  stroke="#7FB8A3"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeDasharray={ulLen}
+                  strokeDashoffset={ulOffset}
+                />
+              )}
+
+              {/* Stat — surfaces a tangible payoff number once the
+                  underline has drawn. Ticks up to 12 (the number
+                  of systems we're showing in the diagram). */}
+              {statP > 0 && (
+                <g style={{ opacity: statP }}>
+                  <text
+                    x={OUTPUT_X}
+                    y={OUTPUT_Y + 110}
+                    textAnchor="end"
+                    fontSize="60"
+                    fontWeight={300}
+                    letterSpacing="-0.02em"
+                    fontFamily="var(--brand-font-sans, system-ui)"
+                    fill="#12161D"
+                  >
+                    {statValue}
+                  </text>
+                  <text
+                    x={OUTPUT_X}
+                    y={OUTPUT_Y + 134}
+                    textAnchor="end"
+                    fontSize="12"
+                    letterSpacing="0.20em"
+                    fontFamily="var(--brand-font-sans, system-ui)"
+                    fill="#1E2630"
+                    opacity={0.65}
+                  >
+                    SYSTEMS · ONE TRUTH
+                  </text>
+                </g>
+              )}
+            </g>
+          );
+        })()}
+        </>}
       </svg>
     </div>
   );
