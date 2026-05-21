@@ -638,13 +638,11 @@
   opacity: 0.18;
 }
 
-/* New diagram is now the primary visual. Hide the legacy
-   deconstructing-wordmark layer so it doesn't compete. The JS
-   animation still runs (refs stay live) but is invisible — keeping
-   the cost of changing the layout small if we ever want to bring
-   it back. */
-.hero-logo-real,
-.hero-logo-pieces,
+/* Deconstructing wordmark is back, coordinated with the connection
+   diagram. Brand circles stay hidden — the diagram is now the
+   coloured-form layer; the wordmark plays the role of "the thing
+   that explodes outward into systems, then reassembles at the
+   contact panel". */
 .hero-brand-circle--rose,
 .hero-brand-circle--mint {
   display: none !important;
@@ -709,9 +707,13 @@
 
 .hero-logo-real {
   position: absolute;
-  top: 22%; left: 50%;
+  /* Centred vertically so the wordmark IS the brain of the
+     connection diagram. The chips fly toward it from the left and
+     the output beam emerges from its right side. Sits above the
+     diagram in z-index so the chips never visually cover it. */
+  top: 38%; left: 50%;
   transform: translate(-50%, -50%);
-  width: clamp(220px, 22vmin, 360px);
+  width: clamp(220px, 24vmin, 380px);
   z-index: 7;
   pointer-events: none;
   opacity: 0;
@@ -720,7 +722,9 @@
 
 .hero-logo-pieces {
   position: absolute;
-  top: 22%; left: 50%;
+  /* Matches .hero-logo-real so the deconstruct/reassemble
+     animation crossfades cleanly with the diagram's centre point. */
+  top: 38%; left: 50%;
   transform: translate(-50%, -50%);
   z-index: 6;
   display: inline-flex; align-items: baseline;

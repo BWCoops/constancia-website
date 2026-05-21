@@ -40,7 +40,6 @@
  */
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import constanciaLogo from "@assets/constancia-logo.png";
 import { HERO_VENDORS } from "./vendor-logos";
 
 interface HeroConnectionDiagramProps {
@@ -55,28 +54,38 @@ interface HeroConnectionDiagramProps {
 const VIEW_W = 1600;
 const VIEW_H = 900;
 
-// Centre is where Constancia sits.
-const CENTRE = { x: VIEW_W / 2, y: VIEW_H / 2 };
+// Centre is where Constancia sits. y is shifted up (38% of VIEW_H)
+// to align with the wordmark's top:38% in the parent layout — beams
+// converge on the real wordmark rather than empty space below it.
+const CENTRE = { x: VIEW_W / 2, y: VIEW_H * 0.38 };
 
 // Vendor chips originate from the left edge in a vertical column,
 // then fly to one of several insertion points around the centre.
 // Their "start" position lives just outside the visible area so
-// they slide IN, not appear.
-const LEFT_LANE_X = 80;
-const LEFT_LANE_Y_TOP = 110;
-const LEFT_LANE_Y_BOTTOM = VIEW_H - 110;
+// they slide IN, not appear. Lane vertical span is bracketed around
+// CENTRE.y rather than the full viewbox so the chips form a column
+// near the wordmark, not stretching to the very bottom of the SVG.
+const LEFT_LANE_Y_TOP = CENTRE.y - 240;
+const LEFT_LANE_Y_BOTTOM = CENTRE.y + 240;
 
-// Right output anchor.
+// Right output anchor — sits on the same line as the wordmark.
 const OUTPUT_X = VIEW_W - 120;
 const OUTPUT_Y = CENTRE.y;
 
+// Coordinated with the wordmark choreography in hero-section-static.
+// The logo explodes outward over 0.10-0.28 — the chips arrive in the
+// same window, so the viewer reads "logo decomposes into systems".
+// The diagram holds through 0.28-0.55 while body panels scroll past,
+// then fades 0.55-0.75 as the logo begins reassembling.
 const PHASE = {
   CHIPS_START: 0.10,
-  CHIPS_END: 0.45,
-  BEAMS_START: 0.30,
-  BEAMS_END: 0.60,
-  OUTPUT_START: 0.55,
-  OUTPUT_END: 0.85,
+  CHIPS_END: 0.30,
+  BEAMS_START: 0.22,
+  BEAMS_END: 0.45,
+  OUTPUT_START: 0.38,
+  OUTPUT_END: 0.55,
+  DIAGRAM_FADE_START: 0.62,
+  DIAGRAM_FADE_END: 0.78,
 } as const;
 
 function clamp01(x: number) {
@@ -192,11 +201,19 @@ export function HeroConnectionDiagram({ progress, className }: HeroConnectionDia
   // perceptible Y-wobble that follows scroll.
   const stageTransform = `perspective(1800px) rotateX(8deg) rotateY(${-2 + p * 4}deg)`;
 
+  // Diagram fade-out: once the body panels are well into the scroll,
+  // the wordmark begins reassembling. We dim the diagram so the
+  // logo can take the centre back without competing visuals. After
+  // the fade window, the diagram is fully invisible and the final
+  // contact panel reads on a clean stage with the reassembled mark.
+  const diagramFade = 1 - ease(PHASE.DIAGRAM_FADE_START, PHASE.DIAGRAM_FADE_END, p);
+
   return (
     <div
       ref={wrapperRef}
       className={`hero-connection-diagram ${className ?? ""}`}
       aria-hidden="true"
+      style={{ opacity: diagramFade }}
     >
       <svg
         viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
@@ -342,21 +359,12 @@ export function HeroConnectionDiagram({ progress, className }: HeroConnectionDia
           );
         })()}
 
-        {/* Constancia centre — the real wordmark PNG, embedded with
-            a subtle scale pulse driven by data load. */}
-        <g style={{
-          transformOrigin: `${CENTRE.x}px ${CENTRE.y}px`,
-          transform: `scale(${logoPulse})`,
-        }}>
-          <image
-            href={constanciaLogo}
-            x={CENTRE.x - 180}
-            y={CENTRE.y - 60}
-            width={360}
-            height={120}
-            preserveAspectRatio="xMidYMid meet"
-          />
-        </g>
+        {/* The wordmark itself is rendered by the parent hero
+            component (.hero-logo-real) at top:38%, which is the
+            same vertical anchor as the diagram's CENTRE. The
+            diagram converges its beams onto that point but doesn't
+            redraw the logo — avoids a double-wordmark on screen and
+            lets the parent's intact/exploded crossfade run cleanly. */}
 
         {/* Vendor chips — flying in from the left along Bézier arcs. */}
         <g>

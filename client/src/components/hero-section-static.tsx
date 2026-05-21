@@ -94,16 +94,26 @@ function sampleFrames(frames: Frame[], p: number): Frame {
   return frames[frames.length - 1];
 }
 function letterProg(p: number) {
-  if (p < 0.03) return 0;
-  if (p < 0.11) return smoothstep((p - 0.03) / 0.08);
-  if (p < 0.94) return 1;
-  return smoothstep(1 - (p - 0.94) / 0.06);
+  // New choreography (coordinated with the connection diagram):
+  //   0.00–0.10  letters intact, logo whole (intro state)
+  //   0.10–0.28  letters explode outward as system chips materialise
+  //              and fly in from the left ("the logo becomes the systems")
+  //   0.28–0.78  letters fully exploded — body panels read against the
+  //              connection diagram in this window
+  //   0.78–0.94  letters reassemble back toward the centre
+  //   0.94–1.00  whole again for the contact panel
+  if (p < 0.10) return 0;
+  if (p < 0.28) return smoothstep((p - 0.10) / 0.18);
+  if (p < 0.78) return 1;
+  if (p < 0.94) return smoothstep(1 - (p - 0.78) / 0.16);
+  return 0;
 }
 function intactness(p: number) {
-  if (p < 0.03) return 1;
-  if (p > 0.97) return 1;
-  if (p < 0.07) return smoothstep(1 - (p - 0.03) / 0.04);
-  if (p > 0.93) return smoothstep((p - 0.93) / 0.04);
+  // Mirror of letterProg expressed for the wordmark crossfade.
+  if (p < 0.10) return 1;
+  if (p > 0.94) return 1;
+  if (p < 0.18) return smoothstep(1 - (p - 0.10) / 0.08);
+  if (p > 0.86) return smoothstep((p - 0.86) / 0.08);
   return 0;
 }
 function damp(c: number, t: number, lambda: number, dt: number) {
