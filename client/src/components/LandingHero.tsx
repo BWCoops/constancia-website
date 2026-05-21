@@ -61,26 +61,50 @@ export function LandingHero() {
     return () => cancelIdle(id as unknown as number);
   }, []);
 
-  // Scroll-driven diagram. rAF loop reads stage position and calls
-  // setProgress imperatively — no React state during scroll.
+  // Scroll-driven diagram + auto-play intro. On mount we ease the
+  // diagram from 0 to ~0.15 over ~2 seconds so the user sees chips
+  // arriving even before they scroll (otherwise the hero looks
+  // static until they touch the wheel). Once the intro completes,
+  // the rAF loop hands control to scroll position.
   useEffect(() => {
     if (!diagramMounted) return;
     if (prefersReducedMotion) {
       diagramRef.current?.setProgress(0.18);
       return;
     }
+
     let rafId = 0;
     let lastProg = -1;
+    const introStart = performance.now();
+    const INTRO_DURATION_MS = 2200;
+    const INTRO_TARGET = 0.16;
+    let introDone = false;
+
     const tick = () => {
       const stage = stageRef.current;
+      let prog = 0;
       if (stage) {
         const rect = stage.getBoundingClientRect();
         const total = stage.offsetHeight - window.innerHeight;
-        const prog = total > 0 ? Math.max(0, Math.min(1, -rect.top / total)) : 0;
-        if (Math.abs(prog - lastProg) > 0.002) {
-          lastProg = prog;
-          diagramRef.current?.setProgress(prog);
+        prog = total > 0 ? Math.max(0, Math.min(1, -rect.top / total)) : 0;
+      }
+      // Intro auto-play overrides scroll until either the intro
+      // duration elapses or the user has scrolled past the intro
+      // target — whichever comes first. After that, scroll wins.
+      if (!introDone) {
+        const elapsed = performance.now() - introStart;
+        const introT = Math.min(1, elapsed / INTRO_DURATION_MS);
+        const introEased = introT * (2 - introT); // ease-out quadratic
+        const introProg = introEased * INTRO_TARGET;
+        if (introT >= 1 || prog >= INTRO_TARGET) {
+          introDone = true;
+        } else {
+          prog = Math.max(prog, introProg);
         }
+      }
+      if (Math.abs(prog - lastProg) > 0.002) {
+        lastProg = prog;
+        diagramRef.current?.setProgress(prog);
       }
       rafId = requestAnimationFrame(tick);
     };
@@ -99,7 +123,19 @@ export function LandingHero() {
         {/* Background: animated mesh waves. */}
         <MeshBackground className="landing-hero__mesh" />
 
-        {/* Connection diagram — scroll-driven, lazy-mounted. */}
+        {/* Continuous brand-coloured pulse rings — pure CSS,
+            always visible from first paint (not gated on the
+            diagram lazy-mount). Subtle waves radiate from the
+            wordmark position even before the user scrolls. */}
+        <div className="hero-wave-layer" aria-hidden="true">
+          <span className="hero-wave hero-wave--rose" />
+          <span className="hero-wave hero-wave--mint" />
+          <span className="hero-wave hero-wave--berry" />
+        </div>
+
+        {/* Connection diagram — scroll-driven + intro auto-play.
+            Lazy-mounted via requestIdleCallback so it doesn't
+            block first paint. */}
         {diagramMounted && (
           <div className="landing-hero__diagram">
             <HeroConnectionDiagram ref={diagramRef} />

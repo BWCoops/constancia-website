@@ -342,14 +342,9 @@ export const HeroConnectionDiagram = forwardRef<HeroDiagramHandle, HeroConnectio
           willChange: "opacity",
         }}
       >
-        {/* Wave rings — pure CSS keyframes (see .hero-wave-* in
-            index.css). Animate continuously, GPU-composited, zero JS
-            per frame. */}
-        <div className="hero-wave-layer" aria-hidden="true">
-          <span className="hero-wave hero-wave--rose" />
-          <span className="hero-wave hero-wave--mint" />
-          <span className="hero-wave hero-wave--berry" />
-        </div>
+        {/* Wave rings now render in LandingHero directly so they
+            appear from first paint, not gated on this component's
+            lazy mount. See .hero-wave-layer in index.css. */}
 
         <svg
           ref={svgRef}
