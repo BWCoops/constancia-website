@@ -1,11 +1,10 @@
-import { Compass, UserCheck, DollarSign, Zap, MessageSquare, Wrench, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Compass, UserCheck, DollarSign, Zap, MessageSquare, Wrench, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 import { Navigation } from "@/components/navigation";
 import { useFeatureFlags } from "@/lib/feature-flags";
 import { Footer } from "@/components/footer";
 import { SEOHead } from "@/components/seo-head";
 import { PageHero } from "@/components/page-hero";
-import { Button } from "@/components/ui/button";
 
 
 const howWeWork = [
@@ -47,13 +46,16 @@ const howWeWork = [
   },
 ];
 
-const differentiators = [
-  "The senior person, not the sales team",
-  "No vendor fees, no conflicts of interest",
-  "Fixed fee, agreed before we start",
-  "Straight advice, even when it's not what you want to hear",
-  "Platform recommendations that aren't shaped by referral payments",
-  "We've delivered this. Many times.",
+// Each pair becomes a "from / to" line in the Why-Work-With-Us
+// section, replacing the AI-default bulleted-check-mark list with
+// a contrast pattern that makes the differentiator visible by
+// stating what it isn't.
+const differentiatorContrasts: Array<{ before: string; after: string }> = [
+  { before: "The sales team you'll never see again", after: "The senior person who delivers it" },
+  { before: "Vendor referral kickbacks shaping the recommendation", after: "Independent on every platform except our two declared partners" },
+  { before: "Time-and-materials creeping past the budget", after: "Fixed fee, agreed before we start" },
+  { before: "Polite advice that doesn't change anything", after: "The straight version, even when it's awkward" },
+  { before: "Slideware demos and stock implementation playbooks", after: "Tools we built ourselves, used on real programmes" },
 ];
 
 export const aboutCoreValues = howWeWork;
@@ -136,53 +138,87 @@ export default function AboutPage() {
                 <p className="text-base text-muted-foreground mb-8 leading-relaxed">
                   We've spent years inside those firms. We know how the model works and where the value leaks out. Constancia is built on the premise that a small team of senior practitioners, armed with the right tools, can outdeliver a 20-person consulting team at a fraction of the cost. Our tools, FinanceCompass, the EPM Comparison Tool, and detailed Vendor Profiles, aren't sales aids. They're how we standardise the quality of our work and get you to the right answer faster.
                 </p>
-                <ul className="space-y-4">
-                  {differentiators.map((item) => (
-                    <li key={item} className="flex items-start gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-cyan mt-0.5 flex-shrink-0" />
-                      <span style={{ color: 'var(--hp-text-primary)' }}>{item}</span>
+                {/* From/to contrast list. Each row makes the
+                    differentiator visible by stating what we're not.
+                    No check-marks, no badges — just opposed type
+                    weights so the eye reads "this, not that". */}
+                <ul className="divide-y divide-[#1E2630]/8">
+                  {differentiatorContrasts.map((item) => (
+                    <li key={item.after} className="grid grid-cols-[1fr_auto_1fr] gap-3 sm:gap-5 items-baseline py-3">
+                      <span className="text-sm text-[#1E2630]/55 line-through decoration-[#8E4F67]/40 decoration-[1px]">
+                        {item.before}
+                      </span>
+                      <span className="font-mono text-[10px] uppercase tracking-widest text-[#8E4F67]">
+                        instead
+                      </span>
+                      <span className="text-sm font-medium text-[#12161D]">
+                        {item.after}
+                      </span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="p-4 sm:p-8 rounded-xl bg-gradient-to-br from-brand-navy to-brand-teal text-brand-cream">
-                <h3 className="text-2xl font-bold mb-6">Our Vision</h3>
-                <div className="space-y-4">
-                  <p className="leading-relaxed text-white/90">
-                    To make every finance system in your business agree with itself, so finance leaders decide on one truth rather than seven approximations.
+              {/* Vision panel — bespoke composition with a quote-mark
+                  graphic and the vision as a single declarative pull
+                  quote, followed by two supporting beats. Replaces
+                  the navy-teal gradient card from the old palette. */}
+              <div className="relative p-6 sm:p-10 bg-[#12161D] text-[#F6F3EE] rounded-2xl overflow-hidden">
+                <div
+                  aria-hidden="true"
+                  className="absolute -top-8 -right-12 text-[#8E4F67]/25 select-none pointer-events-none font-serif"
+                  style={{ fontSize: "240px", lineHeight: 1 }}
+                >
+                  &ldquo;
+                </div>
+                <div className="relative">
+                  <div className="font-mono text-[10px] uppercase tracking-widest text-[#7FB8A3] mb-6">
+                    Our vision
+                  </div>
+                  <p className="text-2xl sm:text-3xl font-light leading-snug text-[#F6F3EE] mb-8">
+                    Make every finance system in your business agree with itself.
                   </p>
-                  <p className="leading-relaxed text-white/80">
-                    Most businesses end up choosing between an expensive consultancy with a vendor incentive problem, or going it alone with a team that hasn't done it before. We're the third option.
-                  </p>
-                  <p className="leading-relaxed text-white/70">
-                    The person who scopes your programme is the person who delivers it. The fee is fixed before we start. The recommendation is based on what's right for your business, nothing else.
-                  </p>
+                  <div className="space-y-4 text-[#F6F3EE]/70 text-sm leading-relaxed border-l border-[#7FB8A3]/40 pl-4">
+                    <p>
+                      Most finance functions choose between an expensive consultancy with a vendor incentive problem and going it alone with a team that hasn't done it before.
+                    </p>
+                    <p>
+                      We're the third option. Senior. Independent on every vendor except our two declared partners. Fixed fee. Tools we built and use ourselves.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="py-8 sm:py-16 lg:py-24 lg:pb-40 bg-hp-primary">
+        {/* Closing band — bespoke composition with the offer on the
+            left and a single dominant link on the right. Replaces
+            the stock "centred CTA card with rounded button" pattern
+            that reads as AI-generated wherever it appears. */}
+        <section className="py-12 sm:py-20 lg:py-32 lg:pb-40 bg-[#F6F3EE]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="p-4 sm:p-8 lg:p-12 rounded-md bg-card border border-border text-center">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4" style={{ color: 'var(--hp-text-primary)' }}>
-                Let's Have a Conversation.
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-8">
-                Whether you're planning an EPM programme, evaluating platforms, or looking for a straight answer on whether your current approach is working, we're happy to talk. No pitch. No obligation.
-              </p>
+            <div className="grid lg:grid-cols-[1fr_auto] gap-10 items-end border-t border-[#1E2630]/15 pt-12">
+              <div>
+                <div className="font-mono text-[10px] uppercase tracking-widest text-[#8E4F67] mb-4">
+                  No pitch. No deck.
+                </div>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-light leading-tight text-[#12161D] max-w-2xl">
+                  When you're ready,<br />
+                  start the <em className="text-[#8E4F67] not-italic font-normal">conversation.</em>
+                </h2>
+              </div>
               {flags.contact && (
-                <Button
-                  variant="brand"
+                <Link
+                  href="/contact"
+                  className="group inline-flex items-baseline gap-3 text-[#12161D] hover:text-[#8E4F67] transition-colors"
                   data-testid="button-about-cta"
-                  asChild
                 >
-                  <Link href="/contact">
-                    Get in Touch
-                  </Link>
-                </Button>
+                  <span className="text-xl sm:text-2xl font-light underline decoration-[#8E4F67]/40 decoration-1 underline-offset-8 group-hover:decoration-[#8E4F67] group-hover:decoration-2">
+                    Talk to a partner
+                  </span>
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
               )}
             </div>
           </div>
