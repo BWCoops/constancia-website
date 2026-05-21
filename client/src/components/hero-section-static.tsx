@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { useFeatureFlags } from "@/lib/feature-flags";
 import * as THREE from "three";
 import constanciaLogo from "@assets/constancia-logo.png";
-import { HeroConnectionDiagram } from "./hero/HeroConnectionDiagram";
+import { HeroConnectionDiagram, type HeroDiagramHandle } from "./hero/HeroConnectionDiagram";
 
 // =============================================================================
 // HeroSectionStatic — Constancia deconstruct + dive hero
@@ -141,6 +141,10 @@ export function HeroSectionStatic() {
   const lettersRef = useRef<HTMLSpanElement[]>([]);
   const panelsRef = useRef<HTMLDivElement[]>([]);
   const progBarRef = useRef<HTMLSpanElement | null>(null);
+  // Imperative handle into the connection diagram. We drive it from
+  // the same rAF loop that animates the letters — one read of
+  // scroll position per frame, one set of DOM mutations.
+  const diagramRef = useRef<HeroDiagramHandle | null>(null);
 
   // Three.js setup + scroll loop in a single effect
   useEffect(() => {
@@ -324,6 +328,12 @@ export function HeroSectionStatic() {
       lastT = t;
 
       const scrollProg = readScrollProg();
+
+      // Drive the connection diagram from this same loop. The diagram
+      // mutates its own DOM imperatively in setProgress — no React
+      // state changes, no reconciliation. One scroll read per frame
+      // serves both the letter animation below and the diagram.
+      diagramRef.current?.setProgress(scrollProg);
 
       // Mouse parallax
       mxSmooth = damp(mxSmooth, tx - 0.5, 10, dt);
@@ -553,7 +563,7 @@ export function HeroSectionStatic() {
             flow → output text emerges). Sits behind the panel stack
             but above the canvas/grain. */}
         <div className="hero-connection-layer">
-          <HeroConnectionDiagram />
+          <HeroConnectionDiagram ref={diagramRef} />
         </div>
 
         {/* Brand circles (DOM, mix-blend) */}
