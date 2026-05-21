@@ -48,16 +48,9 @@ const CARDS: ServiceCardData[] = [
 
 export function ServicesQuadrant() {
   return (
-    <section id="services" className="services-quadrant" aria-labelledby="services-quadrant-heading">
+    <section id="services" className="services-quadrant" aria-label="Constancia Services">
       <MeshBackground className="services-quadrant__mesh" />
       <div className="services-quadrant__inner">
-        <header className="services-quadrant__header">
-          <div className="services-quadrant__eyebrow">Constancia Services</div>
-          <h2 id="services-quadrant-heading" className="services-quadrant__heading">
-            What we do, end to end.
-          </h2>
-        </header>
-
         <div className="services-quadrant__grid">
           {CARDS.map(({ icon: Icon, title, body }) => (
             <LiquidGlassCard key={title} variant="default" cornerRadius={20}>

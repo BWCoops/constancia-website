@@ -1,143 +1,136 @@
 /**
- * LandingHero — Liquid Glass treatment for the new home page.
+ * LandingHero — scroll-driven assembly + Liquid Glass mission card.
  *
- * Replaces the previous 1000vh sticky scroll-driven hero. New design
- * per the brief is intentionally calmer: an enlarged centred
- * wordmark, the mission statement in a Liquid Glass card directly
- * beneath, and a right-hand chapter-style nav (sticky scroll-spy)
- * jumping to the page's main sections.
+ * Restores the rich scroll hero (mesh waves, vendor chip assembly,
+ * deconstructing logo) underneath, with the mission statement
+ * layered on top in a Liquid Glass card. No right-hand chapter
+ * nav — top nav handles routing.
  *
- * Loading sequence (~1.2s total, skipped when prefers-reduced-motion):
- *   0-400ms    two circles converge into the wordmark
- *   300-700ms  wordmark fades in
- *   500-900ms  mesh background fades in
- *   800-1100ms mission statement fades up
- *   1000-1200ms right-hand chapter nav slides in from the right
+ * Layout:
  *
- * The connectivity diagram + deconstructing wordmark used to live
- * here. They've moved to /services (AI Development Partner section)
- * per the brief.
+ *   Outer section is a 500vh tall stage; the inner is sticky so
+ *   the composition stays fixed on screen while the outer scrolls.
+ *   The scroll progress through the stage drives the diagram
+ *   underneath, while the wordmark + mission card stay sticky in
+ *   the middle.
+ *
+ *   Below the hero stage, ConnectedBand / ServicesQuadrant /
+ *   Contact sections flow naturally (handled by home.tsx).
+ *
+ * Performance:
+ *   - HeroConnectionDiagram is lazy-mounted via requestIdleCallback
+ *     so it doesn't block first paint.
+ *   - Mesh blur reduced for cheaper compositing.
+ *   - rAF loop uses a 0.002 change threshold to avoid waste.
+ *   - The wordmark is the actual brand mark scaling into place —
+ *     no abstract converging dots.
  */
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import constanciaLogoDark from "@assets/constancia-logo-dark.png";
 import { MeshBackground } from "./MeshBackground";
 import { LiquidGlassCard } from "@/components/ui/LiquidGlassCard";
+import { HeroConnectionDiagram, type HeroDiagramHandle } from "./hero/HeroConnectionDiagram";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-
-interface Chapter {
-  id: string;
-  label: string;
-}
-
-const CHAPTERS: Chapter[] = [
-  { id: "who-we-are", label: "Who we are" },
-  { id: "partners",   label: "Partners" },
-  { id: "services",   label: "Services" },
-  { id: "contact",    label: "Contact" },
-];
 
 export function LandingHero() {
   const prefersReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
-  // Bumped to true at the end of the load sequence so CSS reveals
-  // the staged layers via the `.is-loaded` class.
   const [loaded, setLoaded] = useState(prefersReducedMotion);
-  const [activeChapter, setActiveChapter] = useState<string>(CHAPTERS[0].id);
+  const [diagramMounted, setDiagramMounted] = useState(false);
 
-  // Stage the loaded flag so CSS keyframes can pace themselves off
-  // the mount. With reduced motion the flag is true from the start
-  // and nothing animates.
+  const stageRef = useRef<HTMLDivElement | null>(null);
+  const diagramRef = useRef<HeroDiagramHandle | null>(null);
+
+  // Stage the loaded class after mount so the wordmark + mission
+  // card scale-fade-in sequence fires. With reduced motion the
+  // flag is true from the start and everything appears immediately.
   useEffect(() => {
     if (prefersReducedMotion) return;
-    const id = window.setTimeout(() => setLoaded(true), 50);
+    const id = window.setTimeout(() => setLoaded(true), 30);
     return () => window.clearTimeout(id);
   }, [prefersReducedMotion]);
 
-  // Sticky scroll-spy. IntersectionObserver fires whenever a chapter
-  // section enters / leaves the viewport; we pick whichever is
-  // closest to the top to drive the right-hand nav indicator.
+  // Defer the heavy connection diagram to idle so it doesn't block
+  // first paint of the wordmark + mission card.
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    const targets = CHAPTERS
-      .map(ch => document.getElementById(ch.id))
-      .filter((el): el is HTMLElement => el !== null);
-    if (targets.length === 0) return;
-
-    const observer = new IntersectionObserver(
-      entries => {
-        // Pick the section whose top is closest to the viewport top
-        // among those currently intersecting.
-        const visible = entries
-          .filter(e => e.isIntersecting)
-          .sort((a, b) => Math.abs(a.boundingClientRect.top) - Math.abs(b.boundingClientRect.top));
-        if (visible[0]) {
-          setActiveChapter(visible[0].target.id);
-        }
-      },
-      { rootMargin: "-40% 0px -50% 0px", threshold: 0 },
-    );
-    targets.forEach(t => observer.observe(t));
-    return () => observer.disconnect();
+    const idle = window.requestIdleCallback
+      ?? ((cb: () => void) => window.setTimeout(cb, 200));
+    const cancelIdle = window.cancelIdleCallback
+      ?? ((id: number) => window.clearTimeout(id));
+    const id = idle(() => setDiagramMounted(true)) as number;
+    return () => cancelIdle(id as unknown as number);
   }, []);
+
+  // Scroll-driven diagram. rAF loop reads stage position and calls
+  // setProgress imperatively — no React state during scroll.
+  useEffect(() => {
+    if (!diagramMounted) return;
+    if (prefersReducedMotion) {
+      diagramRef.current?.setProgress(0.18);
+      return;
+    }
+    let rafId = 0;
+    let lastProg = -1;
+    const tick = () => {
+      const stage = stageRef.current;
+      if (stage) {
+        const rect = stage.getBoundingClientRect();
+        const total = stage.offsetHeight - window.innerHeight;
+        const prog = total > 0 ? Math.max(0, Math.min(1, -rect.top / total)) : 0;
+        if (Math.abs(prog - lastProg) > 0.002) {
+          lastProg = prog;
+          diagramRef.current?.setProgress(prog);
+        }
+      }
+      rafId = requestAnimationFrame(tick);
+    };
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
+  }, [diagramMounted, prefersReducedMotion]);
 
   return (
     <section
+      ref={stageRef}
       className={`landing-hero ${loaded ? "is-loaded" : ""}`}
       aria-labelledby="hero-heading"
+      data-hero-stage
     >
-      {/* Background layers — mesh + grain. Sit at z-index 0. */}
-      <MeshBackground className="landing-hero__mesh" />
+      <div className="landing-hero__inner">
+        {/* Background: animated mesh waves. */}
+        <MeshBackground className="landing-hero__mesh" />
 
-      {/* Converging circles intro — purely decorative, faded out
-          once the wordmark is in. */}
-      <div className="landing-hero__intro" aria-hidden="true">
-        <span className="landing-hero__circle landing-hero__circle--rose" />
-        <span className="landing-hero__circle landing-hero__circle--mint" />
-      </div>
+        {/* Connection diagram — scroll-driven, lazy-mounted. */}
+        {diagramMounted && (
+          <div className="landing-hero__diagram">
+            <HeroConnectionDiagram ref={diagramRef} />
+          </div>
+        )}
 
-      {/* Centre stack: wordmark + Liquid Glass mission card. */}
-      <div className="landing-hero__content">
-        <img
-          src={constanciaLogoDark}
-          alt="Constancia"
-          className="landing-hero__wordmark"
-          id="hero-heading"
-        />
+        {/* Centre stack: wordmark scales into place from a small
+            point on load (the brand mark is the intro animation —
+            no abstract dots), then sits centred while the diagram
+            animates beneath. Mission statement floats below in a
+            Liquid Glass card. */}
+        <div className="landing-hero__content">
+          <img
+            src={constanciaLogoDark}
+            alt="Constancia"
+            className="landing-hero__wordmark"
+            id="hero-heading"
+            decoding="async"
+            fetchPriority="high"
+          />
 
-        <div className="landing-hero__mission">
-          <LiquidGlassCard variant="hero" cornerRadius={28}>
-            <div className="landing-hero__mission-inner">
-              <div className="landing-hero__mission-eyebrow">On a mission to deliver</div>
-              <div className="landing-hero__mission-lede">real-time enterprise intelligence.</div>
-            </div>
-          </LiquidGlassCard>
+          <div className="landing-hero__mission">
+            <LiquidGlassCard variant="hero" cornerRadius={28}>
+              <div className="landing-hero__mission-inner">
+                <div className="landing-hero__mission-eyebrow">On a mission to deliver</div>
+                <div className="landing-hero__mission-lede">real-time enterprise intelligence.</div>
+              </div>
+            </LiquidGlassCard>
+          </div>
         </div>
       </div>
-
-      {/* Right-hand sticky chapter nav. Keyboard-navigable. */}
-      <nav
-        className="landing-hero__chapters"
-        aria-label="Page sections"
-      >
-        <ol>
-          {CHAPTERS.map((ch, idx) => (
-            <li
-              key={ch.id}
-              className={ch.id === activeChapter ? "is-active" : ""}
-            >
-              <a
-                href={`#${ch.id}`}
-                aria-current={ch.id === activeChapter ? "true" : undefined}
-              >
-                <span className="landing-hero__chapter-num">
-                  {String(idx + 1).padStart(2, "0")}
-                </span>
-                <span className="landing-hero__chapter-label">{ch.label}</span>
-              </a>
-            </li>
-          ))}
-        </ol>
-      </nav>
     </section>
   );
 }
