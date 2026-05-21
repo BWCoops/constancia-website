@@ -161,8 +161,8 @@ export default function ContactPage() {
     <div className="min-h-screen page-dark">
       <SEOHead
         title="Contact Us | Constancia — Get In Touch"
-        description="Get in touch with Constancia for AI-first EPM advisory. Platform selection, transformation planning, and senior-level guidance for finance teams. Official Abacum and OneStream partner."
-        keywords={["contact Constancia", "Enterprise Performance Management", "finance transformation", "AI-first advisory"]}
+        description="Connect every finance system you own. Talk to Constancia about platform selection, integration, transformation planning, and senior-level guidance for finance teams. Official Abacum and OneStream partner."
+        keywords={["contact Constancia", "connected finance intelligence", "finance systems integration", "Enterprise Performance Management", "EPM partner"]}
       />
       
       <Navigation />

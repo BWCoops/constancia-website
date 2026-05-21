@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { useFeatureFlags } from "@/lib/feature-flags";
 import * as THREE from "three";
 import constanciaLogo from "@assets/constancia-logo.png";
+import { HeroConnectionDiagram } from "./hero/HeroConnectionDiagram";
 
 // =============================================================================
 // HeroSectionStatic — Constancia deconstruct + dive hero
@@ -496,6 +497,7 @@ export function HeroSectionStatic() {
     <section
       ref={stageRef}
       aria-labelledby="hero-heading"
+      data-hero-stage
       style={{
         position: "relative",
         width: "100%",
@@ -517,6 +519,15 @@ export function HeroSectionStatic() {
         <div className="hero-grain" aria-hidden="true" />
         {/* Vignette */}
         <div className="hero-vignette" aria-hidden="true" />
+
+        {/* Connection diagram — the new centrepiece. Reads scroll
+            progress from the [data-hero-stage] ancestor and animates
+            its own phases (icons appear → lines draw → particles
+            flow → output text emerges). Sits behind the panel stack
+            but above the canvas/grain. */}
+        <div className="hero-connection-layer">
+          <HeroConnectionDiagram />
+        </div>
 
         {/* Brand circles (DOM, mix-blend) */}
         <div ref={circleRoseRef} className="hero-brand-circle hero-brand-circle--rose" />

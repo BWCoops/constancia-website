@@ -468,7 +468,7 @@ export default function VendorDirectoryPage() {
           "EPM vendor comparison",
           "ERP platform directory",
           "AI for finance tools",
-          "vendor-agnostic platform profiles",
+          "independent platform profiles",
           "finance technology comparison",
           "independent EPM advisory",
         ]}
@@ -481,7 +481,7 @@ export default function VendorDirectoryPage() {
           badge="Platform Profiles"
           title="Independent Platform Profiles"
           highlightedText="Across EPM, ERP & AI"
-          description="Objective, vendor-agnostic profiles of leading finance technology platforms. No bias, no sponsorship. Built to help CFOs and finance leaders make informed decisions."
+          description="Objective, independent profiles of leading finance technology platforms — the systems Constancia connects across. No bias, no sponsorship. Built to help CFOs and finance leaders make informed decisions."
         />
 
         <section className="py-8 sm:py-12">

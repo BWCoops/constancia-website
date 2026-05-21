@@ -239,7 +239,7 @@ export default function VendorProfilePage() {
           `${platform.name} review`,
           `${TOOL_TYPE_LABELS[toolType]} comparison`,
           "independent platform review",
-          "vendor-agnostic analysis",
+          "independent analysis",
         ]}
         canonicalUrl={`https://constancia.com/vendors/${platform.id}`}
       />

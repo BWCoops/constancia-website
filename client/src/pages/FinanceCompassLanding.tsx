@@ -968,9 +968,9 @@ export default function FinanceCompassLanding() {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="FinanceCompass | AI-Powered Finance Technology & Maturity Assessment | Constancia"
-        description="Get your finance readiness score and tailored transformation roadmap in minutes. Rigorous AI-powered assessment for CFOs and Finance Directors."
-        keywords={["finance transformation", "finance readiness assessment", "finance maturity", "CFO assessment", "finance function readiness", "finance modernisation", "Constancia consulting"]}
+        title="FinanceCompass | Map every finance system you own | Constancia"
+        description="Where are your finance systems disconnected? FinanceCompass scores your finance function against 200+ benchmarks in 12 minutes and shows where the gaps cost you most. Free, no call required."
+        keywords={["connected finance intelligence", "finance systems integration", "finance readiness assessment", "finance maturity benchmark", "CFO diagnostic", "FP&A connectivity", "finance technology audit"]}
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         "@context": "https://schema.org",
@@ -1007,8 +1007,8 @@ export default function FinanceCompassLanding() {
               </div>
               
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 leading-tight max-w-4xl mx-auto">
-                Navigate Your Finance Transformation with{" "}
-                <span className="text-brand-cyan">AI-Powered Insights</span>
+                See where your finance systems are{" "}
+                <span className="text-brand-cyan">disconnected</span>
               </h1>
               
               <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-white/80 text-sm mb-6">
