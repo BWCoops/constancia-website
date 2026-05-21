@@ -1002,3 +1002,15 @@ iframe[src*="hubspot"],
 div[class*="hs-chat"] {
   display: none !important;
 }
+
+/* ── 12. Liquid Glass fallback for old browsers ─────────────────────────
+   `liquid-glass-react` already falls back to standard backdrop-blur on
+   Safari and Firefox. For ancient browsers that don't support
+   backdrop-filter at all, surfaces tagged with .glass-fallback get a
+   solid translucent panel so content stays legible. */
+@supports not (backdrop-filter: blur(1px)) {
+  .glass-fallback {
+    background: rgba(20, 25, 40, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+}
