@@ -1003,15 +1003,100 @@ div[class*="hs-chat"] {
   display: none !important;
 }
 
-/* ── 12. Liquid Glass fallback for old browsers ─────────────────────────
-   `liquid-glass-react` already falls back to standard backdrop-blur on
-   Safari and Firefox. For ancient browsers that don't support
-   backdrop-filter at all, surfaces tagged with .glass-fallback get a
-   solid translucent panel so content stays legible. */
-@supports not (backdrop-filter: blur(1px)) {
-  .glass-fallback {
+/* ── 12. Liquid Glass card (pure CSS, no npm dep) ───────────────────────
+   Replaces the `liquid-glass-react` dependency which required React 19
+   as a peer and broke Replit's npm install. Same visual goal achieved
+   with backdrop-filter, layered radial gradients for the inner specular
+   sheen, a 1px inset highlight + 1px outer rim for the frosted edge,
+   and a faint SVG noise pattern for film texture. Variant-specific
+   values come in via the CSS custom properties set on the element. */
+.lgc {
+  position: relative;
+  display: block;
+  width: 100%;
+  border-radius: var(--lgc-radius, 24px);
+  background: var(--lgc-bg, rgba(246, 243, 238, 0.05));
+  border: 1px solid var(--lgc-rim, rgba(246, 243, 238, 0.18));
+  box-shadow:
+    /* inner highlight along the top edge — the "wet glass" specular */
+    inset 0 1px 0 0 var(--lgc-inset, rgba(246, 243, 238, 0.10)),
+    /* very soft outer drop */
+    0 24px 60px -32px rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(var(--lgc-blur, 16px)) saturate(var(--lgc-saturate, 1.3));
+  -webkit-backdrop-filter: blur(var(--lgc-blur, 16px)) saturate(var(--lgc-saturate, 1.3));
+  overflow: hidden;
+  text-align: inherit;
+  color: inherit;
+  cursor: inherit;
+  transition: transform 280ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 280ms ease-out,
+              border-color 280ms ease-out;
+  isolation: isolate;
+}
+.lgc::before {
+  /* Inner radial sheen — the highlight near the top-left that
+     reads as "light catching the surface". Strength keyed to the
+     variant's --lgc-aberration so subtle/default/hero scale up. */
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    140% 90% at 18% 8%,
+    rgba(246, 243, 238, calc(0.12 * var(--lgc-aberration, 1))) 0%,
+    rgba(246, 243, 238, 0) 45%
+  );
+  border-radius: inherit;
+  z-index: 0;
+}
+.lgc::after {
+  /* Faint grain inside the card surface. Adds the film-texture
+     touch that makes the glass feel less plasticky on flat
+     mesh backgrounds. */
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.35;
+  mix-blend-mode: overlay;
+  border-radius: inherit;
+  z-index: 0;
+}
+.lgc__inner {
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+.lgc--interactive {
+  cursor: pointer;
+  appearance: none;
+  font: inherit;
+  padding: 0;
+}
+.lgc--interactive:hover,
+.lgc--interactive:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--lgc-rim, rgba(246, 243, 238, 0.32));
+  box-shadow:
+    inset 0 1px 0 0 var(--lgc-inset, rgba(246, 243, 238, 0.12)),
+    0 30px 64px -28px rgba(0, 0, 0, 0.7);
+}
+.lgc--reduced,
+.lgc--reduced:hover {
+  transform: none;
+  transition: none;
+}
+
+/* Browser fallback for engines without backdrop-filter support
+   (very old browsers). Surfaces tagged with .glass-fallback get a
+   solid translucent panel instead. Both .lgc and any ad-hoc glass
+   surface can carry the class. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass-fallback,
+  .lgc {
     background: rgba(20, 25, 40, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.08);
   }
 }
 
