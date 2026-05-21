@@ -34,15 +34,8 @@ const SERVICES = [
 
 export function ServicesQuadrant() {
   return (
-    <section id="services" className="services-quadrant" aria-labelledby="services-quadrant-heading">
+    <section id="services" className="services-quadrant" aria-label="Services">
       <div className="services-quadrant__inner">
-        <header className="services-quadrant__header">
-          <div className="services-quadrant__eyebrow">What we do</div>
-          <h2 id="services-quadrant-heading" className="services-quadrant__heading">
-            Four practices, one outcome.
-          </h2>
-        </header>
-
         <div className="services-quadrant__grid">
           {SERVICES.map(({ eyebrow, title, body }) => (
             <article key={title} className="services-quadrant__item">

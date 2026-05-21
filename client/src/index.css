@@ -975,37 +975,70 @@ div[class*="hs-chat"] {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 28px;
+  padding: 16px 24px;
   z-index: 50;
   pointer-events: none;
 }
+@media (max-width: 540px) {
+  .library-nav-bar { padding: 12px 16px; }
+}
 .library-nav-bar > * { pointer-events: auto; }
 .library-nav-bar__brand img {
-  height: 28px;
+  height: 26px;
   width: auto;
   display: block;
+  opacity: 0.92;
 }
+@media (max-width: 540px) {
+  .library-nav-bar__brand img { height: 22px; }
+}
+/* Frosted-glass pill so the trigger stays readable on the hero
+   fabric, on cream sub-pages, and on dark admin/finance pages. Min
+   44×44 touch target on mobile. */
 .library-nav-bar__trigger {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: transparent;
-  border: 1px solid currentColor;
+  min-height: 44px;
+  background: rgba(246, 243, 238, 0.72);
+  border: 1px solid rgba(18, 22, 29, 0.12);
   border-radius: 999px;
-  padding: 8px 16px;
+  padding: 10px 18px;
   font: inherit;
   font-size: 13px;
   letter-spacing: 0.04em;
   cursor: pointer;
-  border-color: currentColor;
-  opacity: 0.85;
-  transition: opacity 200ms, background 200ms;
+  color: #12161D;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.55) inset,
+    0 8px 24px -10px rgba(18, 22, 29, 0.22);
+  backdrop-filter: saturate(140%) blur(14px);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+  transition: background 200ms ease-out, transform 200ms ease-out, box-shadow 200ms;
+}
+.library-nav-bar--dark .library-nav-bar__trigger {
+  background: rgba(18, 22, 29, 0.55);
+  border-color: rgba(246, 243, 238, 0.22);
+  color: #F6F3EE;
+  box-shadow:
+    0 1px 0 rgba(246, 243, 238, 0.12) inset,
+    0 8px 24px -10px rgba(0, 0, 0, 0.55);
 }
 .library-nav-bar__trigger:hover,
 .library-nav-bar__trigger:focus-visible {
-  opacity: 1;
-  background: rgba(127, 184, 163, 0.10);
+  background: rgba(246, 243, 238, 0.92);
+  transform: translateY(-1px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.65) inset,
+    0 12px 28px -8px rgba(18, 22, 29, 0.30);
   outline: none;
+}
+.library-nav-bar--dark .library-nav-bar__trigger:hover,
+.library-nav-bar--dark .library-nav-bar__trigger:focus-visible {
+  background: rgba(30, 38, 48, 0.78);
+}
+@media (max-width: 540px) {
+  .library-nav-bar__trigger { padding: 10px 14px; }
 }
 .library-nav-bar__trigger-label {
   font-family: 'IBM Plex Mono', monospace;
@@ -1319,6 +1352,22 @@ div[class*="hs-chat"] {
   color: #12161D;
   isolation: isolate;
 }
+/* Cream-to-transparent fade across the top of the hero so the slate
+   deep-tones of the rear fabric layers never read as a "blue band"
+   under the nav bar. Sits above the fabric but below the wordmark/
+   mission stack. */
+.landing-hero__inner::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, #F6F3EE 0%, rgba(246, 243, 238, 0.65) 55%, rgba(246, 243, 238, 0) 100%);
+  z-index: 4;
+  pointer-events: none;
+}
+@media (max-width: 540px) {
+  .landing-hero__inner::before { height: 90px; }
+}
 .landing-hero__fabric {
   position: absolute;
   inset: 0;
@@ -1482,30 +1531,11 @@ div[class*="hs-chat"] {
   position: relative;
   background: #F6F3EE;
   color: #12161D;
-  padding: clamp(80px, 10vw, 120px) 24px;
+  padding: clamp(72px, 8vw, 104px) 24px;
 }
 .services-quadrant__inner {
   max-width: 1180px;
   margin: 0 auto;
-}
-.services-quadrant__header {
-  max-width: 720px;
-  margin-bottom: clamp(56px, 7vw, 88px);
-}
-.services-quadrant__eyebrow {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(30, 38, 48, 0.55);
-  margin-bottom: 18px;
-}
-.services-quadrant__heading {
-  font-size: clamp(32px, 4.4vw, 52px);
-  font-weight: 300;
-  line-height: 1.08;
-  letter-spacing: -0.012em;
-  color: #12161D;
 }
 .services-quadrant__grid {
   display: grid;

@@ -85,9 +85,17 @@ const FRAG = `
     float edgeY = smoothstep(0.0, 0.22, vUv.y) * smoothstep(1.0, 0.82, vUv.y);
     float edge = edgeX * edgeY;
     float depth = smoothstep(2.0, 14.0, length(vWorldPos.xz));
-    col = mix(col, uSlate * 0.45, depth * 0.32);
+    // Slate depth-tint dialled down (0.45→0.18, mix factor 0.32→0.18)
+    // so the rear fabric layers don't read as a navy/blue band at the
+    // top of the canvas. Per user feedback.
+    col = mix(col, uSlate * 0.18, depth * 0.18);
     float fog = smoothstep(22.0, 4.0, length(vWorldPos.xz));
     col = mix(vec3(0.965, 0.953, 0.933), col, fog * 0.88);
+    // Extra cream fade at the top edge of each plane in UV space so
+    // the top of the visible canvas always melts into the cream page,
+    // not into the deep slate of the rear layers.
+    float topFade = smoothstep(0.62, 1.0, vUv.y);
+    col = mix(col, vec3(0.965, 0.953, 0.933), topFade * 0.85);
     gl_FragColor = vec4(col, edge * uOpacity);
   }
 `;

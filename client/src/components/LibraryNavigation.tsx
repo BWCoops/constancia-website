@@ -77,14 +77,18 @@ export function LibraryNavigation({ variant = "light" }: LibraryNavigationProps)
   }, [open]);
 
   // Move focus into the drawer when it opens; return it to the
-  // trigger when it closes.
+  // trigger when it CLOSES (not on initial mount — focusing a fixed
+  // top-of-page element on mount caused Chrome to scroll to top even
+  // with preventScroll: true).
+  const wasOpenRef = useRef(false);
   useEffect(() => {
     if (open && drawerRef.current) {
       const first = drawerRef.current.querySelector<HTMLElement>("a, button");
       first?.focus();
-    } else if (!open && triggerRef.current) {
+    } else if (!open && wasOpenRef.current && triggerRef.current) {
       triggerRef.current.focus({ preventScroll: true });
     }
+    wasOpenRef.current = open;
   }, [open]);
 
   const handleItemClick = (href: string) => {
