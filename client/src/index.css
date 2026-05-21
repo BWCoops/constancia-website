@@ -632,6 +632,10 @@
 .hero-fabric-canvas {
   position: absolute; inset: 0; width: 100%; height: 100%;
   pointer-events: none;
+  /* Heavily dialled back — the Three.js wave was washing out the
+     panel copy. At 0.18 it reads as a faint atmospheric ripple
+     behind the diagram rather than competing with the text. */
+  opacity: 0.18;
 }
 
 /* New diagram is now the primary visual. Hide the legacy
@@ -646,23 +650,25 @@
   display: none !important;
 }
 
-/* Hosts the SVG connection diagram. Sits ABOVE the canvas/grain
-   (z-index 2) but BELOW the panel stack (panels rely on their own
-   stacking from .hero-panel-stack) and the brand circles. Slightly
-   indented so on mobile the SVG doesn't bleed under the side
-   margins of the copy panels. */
+/* Hosts the SVG connection diagram. Sits behind the panel stack
+   (panels are z-index 5) so copy always reads above the chips and
+   beams. The diagram pans wide so the chips on the left can
+   actually leave room for centred panel text in the middle. */
 .hero-connection-layer {
   position: absolute;
   inset: 0;
-  z-index: 3;
+  z-index: 2;
   pointer-events: none;
   display: flex;
   align-items: center;
   justify-content: center;
+  /* Slightly faded so the diagram reads as atmospheric depth
+     behind the copy, not as a competing foreground element. */
+  opacity: 0.92;
 }
 .hero-connection-layer > div {
-  width: min(95vw, 1100px);
-  height: min(80vh, 720px);
+  width: 100%;
+  height: 100%;
   /* Subtle floating animation independent of scroll — gives the
      diagram a sense of life when the user pauses mid-scroll. */
   animation: hero-diagram-float 16s ease-in-out infinite;
@@ -675,9 +681,9 @@
   .hero-connection-layer > div { animation: none; }
 }
 .hero-grain {
-  position: absolute; inset: 0; pointer-events: none; z-index: 2;
+  position: absolute; inset: 0; pointer-events: none; z-index: 1;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.035 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity: 0.30; mix-blend-mode: multiply;
+  opacity: 0.12; mix-blend-mode: multiply;
 }
 .hero-vignette {
   position: absolute; inset: 0; pointer-events: none; z-index: 2;
@@ -769,6 +775,21 @@
   will-change: transform, opacity;
   top: 62%;
   transform: translateY(-50%);
+  /* Frosted backdrop behind copy so panel text always reads against
+     the diagram + canvas layers underneath. Radial cream wash that
+     fades to transparent at the edges — no hard card boundary, just
+     a soft pool of legibility under the text. */
+  padding: 48px 56px;
+  background:
+    radial-gradient(ellipse 75% 65% at 50% 50%,
+      rgba(246,243,238,0.92) 0%,
+      rgba(246,243,238,0.78) 35%,
+      rgba(246,243,238,0.35) 70%,
+      rgba(246,243,238,0) 100%);
+  border-radius: 32px;
+}
+@media (max-width: 640px) {
+  .hero-panel { padding: 32px 24px; }
 }
 .hero-panel .stagger { will-change: transform, opacity; }
 
