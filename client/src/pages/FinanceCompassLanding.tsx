@@ -1212,12 +1212,11 @@ export default function FinanceCompassLanding() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <Badge className="mb-3 sm:mb-4 bg-white/20 text-white border-white/30">
-                <Sparkles className="h-3 w-3 mr-1" />
-                See What You'll Get
-              </Badge>
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3 px-2">
-                Your report, in plain English
+              <div className="font-mono text-[10px] uppercase tracking-widest text-[#7FB8A3] mb-4">
+                Your report
+              </div>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-light text-white mb-2 sm:mb-3 px-2">
+                In plain English. No scorecard theatre.
               </h2>
               <p className="text-sm sm:text-base text-white/70 max-w-2xl mx-auto px-2">
                 Finish the assessment and you get a scored breakdown across 7 dimensions, the gaps that matter most, and a sequenced roadmap that names the systems involved.
@@ -1272,16 +1271,14 @@ export default function FinanceCompassLanding() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <Badge className="mb-4 bg-brand-navy text-white border-0">
-                <Sparkles className="h-3 w-3 mr-1.5" />
-                Start Your Assessment
-              </Badge>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#12161D] dark:text-white mb-3">
-                Unlock £20k+ Worth of Consulting-Grade Insights
+              <div className="font-mono text-[10px] uppercase tracking-widest text-[#8E4F67] mb-4">
+                Start the assessment
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-light leading-tight text-[#12161D] dark:text-white mb-3">
+                The diagnostic a consulting firm would charge you<br className="hidden sm:inline" /> <em className="not-italic font-normal text-[#8E4F67]">five figures</em> to run.
               </h2>
-              <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mb-4">
-                Get the rigorous analysis that consulting firms charge thousands for, delivered in minutes. 
-                74 questions across 7 dimensions, tailored to your organisation's unique challenges.
+              <p className="text-base sm:text-lg text-[#1E2630]/75 dark:text-white/70 max-w-2xl mx-auto mb-4">
+                74 questions across 7 dimensions. AI-validated against 200+ EPM benchmarks. Done in 12 minutes. Yours, calibrated to your stack and your industry.
               </p>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7FB8A3]/10 border border-[#7FB8A3]/30">
                 <Zap className="h-4 w-4 text-brand-teal" />
@@ -1354,28 +1351,32 @@ export default function FinanceCompassLanding() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <p className="text-center text-sm font-medium text-muted-foreground mb-4">What you'll receive after completing the assessment</p>
-              <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
-                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-brand-navy/5 dark:bg-white/5">
-                  <CheckCircle2 className="h-4 w-4 text-brand-cyan" />
-                  <span className="text-sm text-[#12161D] dark:text-white">Readiness score</span>
-                </div>
-                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-brand-navy/5 dark:bg-white/5">
-                  <CheckCircle2 className="h-4 w-4 text-brand-cyan" />
-                  <span className="text-sm text-[#12161D] dark:text-white">Dimension analysis</span>
-                </div>
-                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-brand-navy/5 dark:bg-white/5">
-                  <CheckCircle2 className="h-4 w-4 text-brand-cyan" />
-                  <span className="text-sm text-[#12161D] dark:text-white">AI recommendations</span>
-                </div>
-                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-brand-navy/5 dark:bg-white/5">
-                  <CheckCircle2 className="h-4 w-4 text-brand-cyan" />
-                  <span className="text-sm text-[#12161D] dark:text-white">Industry benchmarks</span>
-                </div>
-                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-brand-navy/5 dark:bg-white/5">
-                  <CheckCircle2 className="h-4 w-4 text-brand-cyan" />
-                  <span className="text-sm text-[#12161D] dark:text-white">Action roadmap</span>
-                </div>
+              {/* What-you-get row. Old: five identical pill-shaped
+                  ✓ check-mark chips — the AI-pattern. New: an
+                  inline-text strip with mono numbering, each item
+                  separated by a thin divider. Reads as "here are
+                  the five deliverables" without the chip chrome. */}
+              <div className="font-mono text-[10px] uppercase tracking-widest text-[#8E4F67] text-center mb-5">
+                What you walk out with
+              </div>
+              <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-3 text-sm text-[#1E2630] dark:text-white/85">
+                {[
+                  "Readiness score",
+                  "Dimension breakdown",
+                  "AI-validated insights",
+                  "Peer benchmarks",
+                  "Sequenced roadmap",
+                ].map((item, idx, arr) => (
+                  <span key={item} className="flex items-center gap-3">
+                    <span className="font-mono text-[10px] text-[#8E4F67]/60 tabular-nums">
+                      {String(idx + 1).padStart(2, "0")}
+                    </span>
+                    <span className="font-medium">{item}</span>
+                    {idx < arr.length - 1 && (
+                      <span aria-hidden="true" className="text-[#1E2630]/25">·</span>
+                    )}
+                  </span>
+                ))}
               </div>
             </motion.div>
           </div>
