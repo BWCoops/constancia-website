@@ -36,11 +36,11 @@ const VERT = `
   uniform float uTime; uniform float uPhase; uniform float uAmp;
   varying vec2 vUv; varying float vEle; varying vec3 vNormal; varying vec3 vWorldPos;
   float wave(vec2 p, float t, float ph) {
-    return sin(p.x * 0.75 + t * 0.18 + ph)         * 0.40
-         + cos(p.y * 0.55 - t * 0.14 + ph * 1.3)    * 0.34
-         + sin((p.x + p.y) * 1.05 + t * 0.22 + ph)  * 0.18
-         + cos((p.x * 1.7 - p.y * 0.85) + t * 0.11) * 0.13
-         + sin((p.x * 0.4 + p.y * 1.2) - t * 0.16)  * 0.08;
+    return sin(p.x * 0.75 + t * 0.08 + ph)         * 0.40
+         + cos(p.y * 0.55 - t * 0.06 + ph * 1.3)    * 0.34
+         + sin((p.x + p.y) * 1.05 + t * 0.10 + ph)  * 0.18
+         + cos((p.x * 1.7 - p.y * 0.85) + t * 0.05) * 0.13
+         + sin((p.x * 0.4 + p.y * 1.2) - t * 0.07)  * 0.08;
   }
   void main() {
     vUv = uv;

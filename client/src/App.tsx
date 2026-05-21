@@ -1,4 +1,4 @@
-import { useEffect, lazy, Suspense } from "react";
+import { useEffect, useRef, lazy, Suspense } from "react";
 import { Switch, Route, useLocation, Redirect } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -7,6 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";
 import { LazyMotionProvider } from "@/components/lazy-motion-provider";
 import { CookieConsentBanner } from "@/components/cookie-consent";
+import { LibraryNavigation } from "@/components/LibraryNavigation";
 import { VisitorProvider } from "@/contexts/VisitorContext";
 import { initializeImagePreconnects, preloadCriticalImages, preloadPriorityRoutes, preloadHeavyRoutes } from "@/lib/preload";
 import { initAdClickTracker } from "@/lib/ad-click-tracker";
@@ -82,15 +83,43 @@ const ChatPopupPage = lazy(() => import("@/pages/finance-compass/chat-popup"));
 
 function ScrollToTop() {
   const [location] = useLocation();
-  
+  const isFirstMount = useRef(true);
+  const previousLocation = useRef(location);
+
   useEffect(() => {
+    // Don't fire on initial mount — the browser will restore the user's
+    // previous scroll position (or land at 0) on its own. Smooth scrolls
+    // here used to compete with user interaction in the hero and look
+    // like the page was "jumping to the top" when the user moved their
+    // mouse.
+    if (isFirstMount.current) {
+      isFirstMount.current = false;
+      previousLocation.current = location;
+      return;
+    }
+    if (location === previousLocation.current) return;
+    previousLocation.current = location;
     const hash = window.location.hash;
     if (!hash) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'auto' });
     }
   }, [location]);
-  
+
   return null;
+}
+
+/**
+ * GlobalNav — renders the LibraryNavigation drawer on every public
+ * page. Admin routes have their own AdminSidebar; FinanceCompass has
+ * its own header. Both are excluded so we don't double-stack nav.
+ */
+function GlobalNav() {
+  const [location] = useLocation();
+  const hideOn = ["/admin", "/finance-compass"];
+  if (hideOn.some((p) => location === p || location.startsWith(`${p}/`))) {
+    return null;
+  }
+  return <LibraryNavigation />;
 }
 
 function RoutePreloader() {
@@ -406,6 +435,7 @@ function App() {
             <VisitorProvider>
               <TooltipProvider>
                 <Toaster />
+                <GlobalNav />
                 <Router />
                 <CookieConsentBanner />
               </TooltipProvider>

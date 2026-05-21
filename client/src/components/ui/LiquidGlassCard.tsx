@@ -1,13 +1,12 @@
-import LiquidGlass from "liquid-glass-react";
+import LiquidGlass from "@/vendor/liquid-glass";
 import { useMemo, type ReactNode } from "react";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 /**
- * LiquidGlassCard — wraps `liquid-glass-react` with three preset
- * intensity variants. The library renders a real WebGL/shader
- * displacement map that produces Apple's actual Liquid Glass
- * refraction effect (the React 19 peer-dep mismatch that broke
- * Replit's install is now handled by .npmrc legacy-peer-deps=true).
+ * LiquidGlassCard — wraps the vendored liquid-glass component (see
+ * client/src/vendor/liquid-glass/) with three preset intensity
+ * variants. Renders a real WebGL/shader displacement map that
+ * produces Apple's actual Liquid Glass refraction effect.
  *
  * Hard cap: 5 instances per page. The shader is GPU-expensive; any
  * additional surfaces should use the plain

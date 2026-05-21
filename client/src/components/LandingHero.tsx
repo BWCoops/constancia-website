@@ -67,15 +67,7 @@ export function LandingHero() {
            cheap. WebGL failure is silent (no crash on weak GPUs). */}
         {fabricMounted && <HeroFabricCanvas className="landing-hero__fabric" />}
 
-        {/* 3. Continuous brand pulse rings — subtle and continuous,
-           rendered from first paint so the hero never looks dead. */}
-        <div className="hero-wave-layer" aria-hidden="true">
-          <span className="hero-wave hero-wave--rose" />
-          <span className="hero-wave hero-wave--mint" />
-          <span className="hero-wave hero-wave--berry" />
-        </div>
-
-        {/* 4. Centre stack: wordmark scales into place + Liquid
+        {/* 3. Centre stack: wordmark scales into place + Liquid
            Glass mission card refracts the fabric beneath. */}
         <div className="landing-hero__content">
           <img

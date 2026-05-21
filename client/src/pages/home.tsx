@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { Link } from "wouter";
-import { LibraryNavigation } from "@/components/LibraryNavigation";
 import { LandingHero } from "@/components/LandingHero";
 import { ConnectedBand } from "@/components/ConnectedBand";
 import { ServicesQuadrant } from "@/components/ServicesQuadrant";
@@ -57,13 +56,11 @@ export default function Home() {
         Skip to main content
       </a>
 
-      <LibraryNavigation />
-
       <main id="main-content">
         <LandingHero />
 
         {/* Who we are — short editorial intro on cream. */}
-        <section id="who-we-are" className="landing-who" aria-labelledby="landing-who-heading" style={{ contentVisibility: "auto" } as React.CSSProperties}>
+        <section id="who-we-are" className="landing-who" aria-labelledby="landing-who-heading">
           <div className="landing-who__inner">
             <div className="landing-who__eyebrow">Who we are</div>
             <h2 id="landing-who-heading" className="landing-who__heading">
@@ -84,15 +81,11 @@ export default function Home() {
           </div>
         </section>
 
-        <div style={{ contentVisibility: "auto", containIntrinsicSize: "1px 800px" } as React.CSSProperties}>
-          <ConnectedBand />
-        </div>
-        <div style={{ contentVisibility: "auto", containIntrinsicSize: "1px 900px" } as React.CSSProperties}>
-          <ServicesQuadrant />
-        </div>
+        <ConnectedBand />
+        <ServicesQuadrant />
 
         {/* Contact stub — full form lives at /contact. */}
-        <section id="contact" className="landing-contact" aria-labelledby="landing-contact-heading" style={{ contentVisibility: "auto" } as React.CSSProperties}>
+        <section id="contact" className="landing-contact" aria-labelledby="landing-contact-heading">
           <div className="landing-contact__inner">
             <div className="landing-contact__eyebrow">Contact</div>
             <h2 id="landing-contact-heading" className="landing-contact__heading">
