@@ -12,18 +12,19 @@ import { HeroConnectionDiagram } from "./hero/HeroConnectionDiagram";
 // to give us scroll runway.
 // =============================================================================
 
-// Panel stops aligned with the two-cycle diagram choreography.
-// Cycle 1 plays 0.00–0.15 (chips arrive, beams, output emerges).
-// Brief handoff 0.15–0.20. Body panels 0–7 then read on a clean
-// stage from ~0.20–0.78. Cycle 2 + the contact panel co-exist
-// from 0.85–1.00, where the diagram and panel 8 share the
-// viewport (different vertical bands — they never overlap).
+// Panel stops aligned with the slower, dwell-longer choreography.
+// Cycle 1 plays 0.00–0.12 (assembly), holds 0.12–0.22 fully
+// visible, fades 0.22–0.28. Body panels 0–7 then read on a clean
+// stage 0.30–0.72. Cycle 2 holds + assembles 0.72–1.00, with
+// panel 8 (contact) co-visible from 0.86 against the resolved
+// diagram (different vertical bands — they never overlap).
 //
-// STOPS spaced 0.07 apart, SECTION 0.035 → each panel's visibility
-// window EXACTLY abuts the next. No overlap zone where two
-// headlines briefly co-fade and become unreadable.
-const STOPS = [0.24, 0.31, 0.38, 0.45, 0.52, 0.59, 0.66, 0.73, 0.92];
-const SECTION = 0.035;
+// STOPS spaced 0.055 apart, SECTION 0.027 → each panel's
+// visibility window EXACTLY abuts the next. Plateau opacity
+// curve keeps the active panel at full opacity for the middle
+// of its window; transitions are quick and clean.
+const STOPS = [0.32, 0.38, 0.43, 0.49, 0.54, 0.60, 0.65, 0.71, 0.90];
+const SECTION = 0.027;
 
 const LETTER_FLY = [
   { dx: -360, dy: -280, rot: -10 },
@@ -101,23 +102,24 @@ function sampleFrames(frames: Frame[], p: number): Frame {
   return frames[frames.length - 1];
 }
 function letterProg(p: number) {
-  // Two-cycle choreography:
-  //   0.00–0.15  logo WHOLE — chips flow in, beams converge, output emerges
-  //   0.15–0.20  brief deconstruction before any body copy appears
-  //   0.20–0.78  letters scattered, body panels read on a clean stage
-  //   0.78–0.88  letters reassemble while chips flow in again (cycle 2)
-  //   0.88–1.00  WHOLE again for the contact panel
-  if (p < 0.15) return 0;
-  if (p < 0.20) return smoothstep((p - 0.15) / 0.05);
-  if (p < 0.78) return 1;
-  if (p < 0.88) return smoothstep(1 - (p - 0.78) / 0.10);
+  // Coordinated with the slower diagram choreography (cycle 1 +
+  // hold + fade-out window in HeroConnectionDiagram):
+  //   0.00–0.22  WHOLE — chips flow in, beams converge, hold
+  //   0.22–0.30  deconstruct (panels not yet visible)
+  //   0.30–0.66  scattered — body panels read on a clean stage
+  //   0.66–0.72  reassemble as cycle 2 fades in
+  //   0.72–1.00  WHOLE — cycle 2 assembly + contact panel
+  if (p < 0.22) return 0;
+  if (p < 0.30) return smoothstep((p - 0.22) / 0.08);
+  if (p < 0.66) return 1;
+  if (p < 0.72) return smoothstep(1 - (p - 0.66) / 0.06);
   return 0;
 }
 function intactness(p: number) {
-  if (p < 0.15) return 1;
-  if (p > 0.88) return 1;
-  if (p < 0.20) return smoothstep(1 - (p - 0.15) / 0.05);
-  if (p > 0.83) return smoothstep((p - 0.83) / 0.05);
+  if (p < 0.22) return 1;
+  if (p > 0.72) return 1;
+  if (p < 0.30) return smoothstep(1 - (p - 0.22) / 0.08);
+  if (p > 0.66) return smoothstep((p - 0.66) / 0.06);
   return 0;
 }
 function damp(c: number, t: number, lambda: number, dt: number) {
@@ -526,11 +528,11 @@ export function HeroSectionStatic() {
       style={{
         position: "relative",
         width: "100%",
-        // 7× viewport scroll runway. Each of the 9 panels takes a slightly
-        // shorter scroll window, the outro locks centred at 0.97, and the
-        // sticky exit slide runs the last ~50vh straight into the footer
-        // — no dead space at the bottom.
-        height: "700vh",
+        // 10× viewport scroll runway. Each phase of the diagram +
+        // each body panel gets meaningful dwell time at typical
+        // trackpad scroll speeds. Cycle 1 ~220vh, panel reading
+        // ~520vh, cycle 2 ~260vh.
+        height: "1000vh",
         background: "var(--brand-bg-primary)",
         fontFamily: "var(--brand-font-sans)",
       }}

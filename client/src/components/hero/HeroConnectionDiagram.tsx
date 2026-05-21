@@ -72,56 +72,67 @@ const LEFT_LANE_Y_BOTTOM = CENTRE.y + 180;
 const OUTPUT_X = VIEW_W - 120;
 const OUTPUT_Y = CENTRE.y;
 
-// Two-cycle choreography. The diagram plays the SAME assembly
-// sequence twice: once on intro (0.00-0.15 of scroll, while the
-// logo is still whole) and once on outro (0.78-1.00, as the logo
-// reassembles for the contact panel). Between the two cycles
-// (0.20-0.78) the diagram is fully hidden so body panels read on
-// a clean stage.
-//
-// Within each cycle the sub-phases run in the same order:
-//   0.00 → 0.55  chips fly in from the left
-//   0.40 → 0.85  beams draw toward the centre with particles
-//   0.65 → 1.00  output ribbon emerges on the right
-//
-// `cycleProgress()` maps the global 0-1 scroll into this 0-1 local
-// cycle phase, returning 0 (hidden) in the dead zone between.
+// Two-cycle choreography with HOLD windows so the assembled state
+// dwells visible for a meaningful slice of scroll, not just a
+// flash. Trace:
+//   0.00-0.12  CYCLE 1 — assembly plays (chips, beams, output)
+//   0.12-0.22  HOLD — diagram fully visible, no body panels yet
+//   0.22-0.28  FADE OUT — alpha smoothly decays
+//   0.30-0.72  body panels read on a clean stage
+//   0.66-0.72  FADE IN — diagram alpha rises back to 1
+//   0.72-1.00  CYCLE 2 — assembly replays for the contact panel,
+//                          panel 8 co-visible from 0.86
 
-const CYCLE_ONE = { start: 0.00, end: 0.15 } as const;
-const CYCLE_TWO = { start: 0.78, end: 1.00 } as const;
+const CYCLE_ONE = { start: 0.00, end: 0.12 } as const;
+const HOLD_ONE_END = 0.22;
+const FADE_OUT_END = 0.28;
+const FADE_IN_START = 0.66;
+const CYCLE_TWO = { start: 0.72, end: 1.00 } as const;
 
+// Internal sub-phase timings (within a 0–1 local cycle). Chips
+// finish their flight at 0.5 of the cycle so they reach their
+// resting position halfway through; the rest of the cycle is
+// dedicated to beams, particles, and the output reveal.
 const SUB_PHASE = {
   CHIPS_START: 0.00,
-  CHIPS_END: 0.55,
-  BEAMS_START: 0.40,
-  BEAMS_END: 0.85,
-  OUTPUT_START: 0.65,
+  CHIPS_END: 0.50,
+  BEAMS_START: 0.35,
+  BEAMS_END: 0.80,
+  OUTPUT_START: 0.55,
   OUTPUT_END: 1.00,
 } as const;
 
-// Fade windows wrap each cycle so the diagram doesn't cut to
-// empty at the cycle boundary — it holds at its final state for a
-// fraction of scroll, then smoothly fades. The inner SVG content
-// keeps rendering during the fade so what the viewer sees softly
-// dissolves rather than instantly disappearing.
-const FADE_OUT_END = 0.20;   // after cycle 1, hold + fade complete
-const FADE_IN_START = 0.74;  // before cycle 2, fade in begins
+// Cycle 1 assembly runs CYCLE_ONE.start → CYCLE_ONE.end (0.00–0.12).
+// Then a HOLD window keeps the diagram fully visible until
+// HOLD_ONE_END (0.22). Then alpha fades smoothly to 0 by
+// FADE_OUT_END (0.28). Cycle 2 mirrors on the way out:
+// FADE_IN_START (0.66) → CYCLE_TWO.start (0.72), then the
+// assembly replays through to scroll = 1.00. The inner SVG keeps
+// rendering during the fade windows so the viewer sees a smooth
+// dissolve rather than a hard cut.
 
 function cycleProgress(p: number): { localP: number; visible: boolean; alpha: number } {
   if (p <= CYCLE_ONE.end) {
-    // Cycle 1 in progress.
+    // Cycle 1 assembly in progress.
     return {
       localP: clamp01((p - CYCLE_ONE.start) / (CYCLE_ONE.end - CYCLE_ONE.start)),
       visible: true,
       alpha: 1,
     };
   }
+  if (p < HOLD_ONE_END) {
+    // HOLD — fully assembled, alpha stays at 1 so the user can
+    // see the resolved diagram before scrolling on.
+    return { localP: 1, visible: true, alpha: 1 };
+  }
   if (p < FADE_OUT_END) {
-    // Cycle 1 fade-out — hold at final state, alpha eases 1→0.
-    const t = (p - CYCLE_ONE.end) / (FADE_OUT_END - CYCLE_ONE.end);
+    // Cycle 1 fade-out — alpha eases 1→0 while the inner state
+    // remains at its resolved end.
+    const t = (p - HOLD_ONE_END) / (FADE_OUT_END - HOLD_ONE_END);
     return { localP: 1, visible: true, alpha: 1 - smoothstep(t) };
   }
   if (p >= CYCLE_TWO.start) {
+    // Cycle 2 assembly in progress.
     return {
       localP: clamp01((p - CYCLE_TWO.start) / (CYCLE_TWO.end - CYCLE_TWO.start)),
       visible: true,
@@ -129,7 +140,8 @@ function cycleProgress(p: number): { localP: number; visible: boolean; alpha: nu
     };
   }
   if (p >= FADE_IN_START) {
-    // Cycle 2 fade-in — start rendering at localP=0, alpha eases 0→1.
+    // Cycle 2 fade-in — render at localP=0, alpha eases 0→1
+    // before the assembly itself kicks off at CYCLE_TWO.start.
     const t = (p - FADE_IN_START) / (CYCLE_TWO.start - FADE_IN_START);
     return { localP: 0, visible: true, alpha: smoothstep(t) };
   }
