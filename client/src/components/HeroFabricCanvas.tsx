@@ -26,7 +26,7 @@
  */
 
 import { useEffect, useRef } from "react";
-import * as THREE from "three";
+import type * as THREENS from "three";
 
 interface HeroFabricCanvasProps {
   className?: string;
@@ -102,15 +102,33 @@ export function HeroFabricCanvas({ className }: HeroFabricCanvasProps) {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    let cleanup: (() => void) | null = null;
+    let cancelled = false;
+
+    // Three.js is heavy — dynamic-import it so the public landing
+    // bundle doesn't carry ~120KB of WebGL machinery on first paint.
+    // The canvas itself is already lazy-mounted via requestIdleCallback
+    // upstream, so by the time we get here first paint is past.
+    import("three").then((THREE) => {
+      if (cancelled || !canvas) return;
+      cleanup = boot(THREE);
+    });
+
+    return () => {
+      cancelled = true;
+      cleanup?.();
+    };
+
+    function boot(THREE: typeof THREENS): () => void {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    let renderer: THREE.WebGLRenderer | null = null;
+    let renderer: THREENS.WebGLRenderer | null = null;
     try {
-      renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+      renderer = new THREE.WebGLRenderer({ canvas: canvas!, antialias: true, alpha: true });
       renderer.outputColorSpace = THREE.SRGBColorSpace;
       renderer.setClearColor(0xF6F3EE, 0); // transparent so the mesh blobs show through
     } catch {
-      return; // silent fallback — no shader, just static page
+      return () => {}; // silent fallback — no shader, just static page
     }
 
     const scene = new THREE.Scene();
@@ -156,6 +174,10 @@ export function HeroFabricCanvas({ className }: HeroFabricCanvasProps) {
       mesh.rotation.x = opts.rotX;
       mesh.rotation.z = opts.rotZ;
       mesh.position.set(0, opts.posY, opts.posZ);
+      // Stash the resting transform on userData so the per-frame tick
+      // can offset from it without drift.
+      mesh.userData.posY = opts.posY;
+      mesh.userData.rotZ = opts.rotZ;
       scene.add(mesh);
       return mesh;
     }
@@ -195,6 +217,7 @@ export function HeroFabricCanvas({ className }: HeroFabricCanvasProps) {
     // over 220vh of scroll (since the inner is 100vh sticky).
     let scrollProgress = 0;
     function readScrollProgress() {
+      if (!canvas) return;
       const stage = canvas.parentElement; // .landing-hero__inner -> .landing-hero
       const hero = stage?.parentElement ?? null;
       if (!hero) return;
@@ -217,14 +240,17 @@ export function HeroFabricCanvas({ className }: HeroFabricCanvasProps) {
       // Map 0..1 to a -0.5..0.5 range for symmetric tilt about the
       // hero midpoint.
       const sx = pSmooth - 0.5;
-      LAYERS.forEach(mesh => {
-        const mat = mesh.material as THREE.ShaderMaterial;
+      LAYERS.forEach((mesh, i) => {
+        const mat = mesh.material as THREENS.ShaderMaterial;
         if (!reduced) mat.uniforms.uTime.value = t;
-        // Depth-parallax driven by scroll position — front layers
-        // drift more, back layers less.
-        mesh.rotation.y = sx * 0.10;
-        mesh.position.x = -sx * 0.6;
-        mesh.position.y = (mesh.userData.posY ?? mesh.position.y) - pSmooth * 0.35;
+        // Scroll-driven tilt only — no position shifts. The fabric
+        // stays anchored on screen across the whole 320vh scroll so
+        // scrolling up/down moves "through" the fabric (like looking
+        // through different angles of a folded sheet) instead of
+        // pushing it off the edges. Front layers tilt more than back.
+        const depthFactor = 1 - i * 0.12;
+        mesh.rotation.y = sx * 0.18 * depthFactor;
+        mesh.rotation.z = (mesh.userData.rotZ ?? mesh.rotation.z) + sx * 0.06 * depthFactor;
       });
       if (renderer) renderer.render(scene, camera);
       rafId = requestAnimationFrame(tick);
@@ -237,10 +263,11 @@ export function HeroFabricCanvas({ className }: HeroFabricCanvasProps) {
       window.removeEventListener("scroll", readScrollProgress);
       LAYERS.forEach(mesh => {
         mesh.geometry.dispose();
-        (mesh.material as THREE.ShaderMaterial).dispose();
+        (mesh.material as THREENS.ShaderMaterial).dispose();
       });
       renderer?.dispose();
     };
+    } // close boot()
   }, []);
 
   return (
