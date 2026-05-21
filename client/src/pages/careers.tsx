@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Linkedin, ArrowRight, Send, Loader2, CheckCircle2, Compass, BarChart3, Lightbulb, Info } from "lucide-react";
 import { Link } from "wouter";
-import { Navigation } from "@/components/navigation";
 import { useFeatureFlags } from "@/lib/feature-flags";
 import { Footer } from "@/components/footer";
 import { SEOHead } from "@/components/seo-head";
@@ -202,7 +201,6 @@ export default function CareersPage() {
         ]}
       />
 
-      <Navigation />
 
       <main className="pt-16 sm:pt-20">
         <PageHero

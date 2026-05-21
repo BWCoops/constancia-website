@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo, Children, isValidElement, useEffect, useRef } from "react";
 import { useFeatureFlags } from "@/lib/feature-flags";
 import { Calendar, Clock, Tag, ArrowLeft, Share2, Loader2, CheckCircle2, BarChart3 } from "lucide-react";
-import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -318,7 +317,6 @@ export default function BlogPostPage() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-background">
-        <Navigation />
         <div className="flex items-center justify-center min-h-screen">
           <Loader2 className="w-8 h-8 animate-spin text-brand-cyan" />
         </div>
@@ -329,7 +327,6 @@ export default function BlogPostPage() {
   if (!post) {
     return (
       <div className="min-h-screen bg-background">
-        <Navigation />
         <div className="flex flex-col items-center justify-center min-h-screen">
           <h1 className="text-2xl font-bold mb-4">Article Not Found</h1>
           {flags.blog && (
@@ -363,7 +360,6 @@ export default function BlogPostPage() {
           tags: post.tags,
         }}
       />
-      <Navigation />
       
       <main className="pt-16 sm:pt-20 pb-16">
         <article className="max-w-4xl mx-auto px-6">

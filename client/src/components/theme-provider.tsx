@@ -14,46 +14,36 @@ type ThemeProviderState = {
 };
 
 const initialState: ThemeProviderState = {
-  theme: "system",
+  theme: "light",
   setTheme: () => null,
 };
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
+/**
+ * Constancia public site is always light. The dark CSS variables exist
+ * for the admin shell only — and admin pages scope their own dark
+ * surfaces. We ignore localStorage / system preference here so a
+ * stale "dark" value from a previous session can't make the public
+ * landing render with a navy bg-background band at the top.
+ */
 export function ThemeProvider({
   children,
-  defaultTheme = "system",
-  storageKey = "constancia-ui-theme",
+  storageKey: _storageKey,
+  defaultTheme: _defaultTheme,
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
-  );
+  const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
     const root = window.document.documentElement;
-
     root.classList.remove("light", "dark");
-
-    if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
-        ? "dark"
-        : "light";
-
-      root.classList.add(systemTheme);
-      return;
-    }
-
-    root.classList.add(theme);
+    root.classList.add(theme === "dark" ? "dark" : "light");
   }, [theme]);
 
   const value = {
     theme,
-    setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme);
-      setTheme(theme);
-    },
+    setTheme,
   };
 
   return (

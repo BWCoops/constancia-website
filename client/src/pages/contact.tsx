@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Mail, MapPin, Send, Loader2, Globe, Briefcase, Sparkles, Rocket } from "lucide-react";
-import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { SEOHead } from "@/components/seo-head";
 import { PageHero } from "@/components/page-hero";
@@ -165,7 +164,6 @@ export default function ContactPage() {
         keywords={["contact Constancia", "connected finance intelligence", "finance systems integration", "Enterprise Performance Management", "EPM partner"]}
       />
       
-      <Navigation />
 
       <main className="pt-16 sm:pt-20">
         <PageHero

@@ -128,7 +128,6 @@ const loadExportUtils = () => import("@/lib/export-utils");
 import { ChartPopoutModal, captureChartToImage } from "@/components/chart-popout-modal";
 import { TablePopoutModal } from "@/components/table-popout-modal";
 import { Link } from "wouter";
-import { Navigation } from "@/components/navigation";
 import { useFeatureFlags } from "@/lib/feature-flags";
 import { Footer } from "@/components/footer";
 import { EPM_SCORING, affordabilityPenalty, normaliseWeights, clamp } from "@shared/scoring-engine";
@@ -6626,7 +6625,6 @@ const heroTechImages = [
 function ComparisonPageSkeleton() {
   return (
     <div className="min-h-screen bg-background">
-      <Navigation />
       <main className="pt-16 sm:pt-20">
         {/* Hero skeleton */}
         <section className="py-10 md:py-16 lg:py-24 bg-gradient-to-b from-[#12161D] to-[#8E4F67]">
@@ -6706,7 +6704,6 @@ export default function TechComparisonPage() {
         keywords={["EPM comparison", "ERP comparison", "AI for finance", "OneStream vs Anaplan", "Oracle ERP", "SAP S/4HANA", "Microsoft Copilot", "financial technology"]}
       />
       
-      <Navigation />
 
       <main className="pt-16 sm:pt-20">
         <section className="py-10 md:py-16 lg:py-24 bg-gradient-to-b from-[#12161D] to-[#8E4F67] relative overflow-hidden">

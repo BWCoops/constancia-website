@@ -91,11 +91,6 @@ const FRAG = `
     col = mix(col, uSlate * 0.18, depth * 0.18);
     float fog = smoothstep(22.0, 4.0, length(vWorldPos.xz));
     col = mix(vec3(0.965, 0.953, 0.933), col, fog * 0.88);
-    // Extra cream fade at the top edge of each plane in UV space so
-    // the top of the visible canvas always melts into the cream page,
-    // not into the deep slate of the rear layers.
-    float topFade = smoothstep(0.62, 1.0, vUv.y);
-    col = mix(col, vec3(0.965, 0.953, 0.933), topFade * 0.85);
     gl_FragColor = vec4(col, edge * uOpacity);
   }
 `;

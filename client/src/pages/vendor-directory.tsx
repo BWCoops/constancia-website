@@ -1,7 +1,6 @@
 import { useState, useEffect, useMemo, memo, useCallback } from "react";
 import { Search, ArrowRight, X, Building2, ExternalLink, BarChart3, BrainCircuit, Layers } from "lucide-react";
 import { Link, useLocation } from "wouter";
-import { Navigation } from "@/components/navigation";
 import { useFeatureFlags } from "@/lib/feature-flags";
 import { Footer } from "@/components/footer";
 import { SEOHead } from "@/components/seo-head";
@@ -474,7 +473,6 @@ export default function VendorDirectoryPage() {
         ]}
       />
 
-      <Navigation />
 
       <main className="pt-16 sm:pt-20">
         <PageHero

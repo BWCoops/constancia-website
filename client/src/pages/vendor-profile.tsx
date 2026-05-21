@@ -18,7 +18,6 @@ import {
   AlertTriangle,
 } from "lucide-react";
 import { Link, useParams } from "wouter";
-import { Navigation } from "@/components/navigation";
 import { useFeatureFlags } from "@/lib/feature-flags";
 import { Footer } from "@/components/footer";
 import { SEOHead } from "@/components/seo-head";
@@ -191,7 +190,6 @@ export default function VendorProfilePage() {
   if (!result) {
     return (
       <div className="min-h-screen bg-background">
-        <Navigation />
         <main className="pt-24 sm:pt-28 pb-20">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
             <h1
@@ -244,7 +242,6 @@ export default function VendorProfilePage() {
         canonicalUrl={`https://constancia.com/vendors/${platform.id}`}
       />
 
-      <Navigation />
 
       <main className="pt-20 sm:pt-24 pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">

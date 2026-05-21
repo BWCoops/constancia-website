@@ -1,6 +1,5 @@
 import { ArrowRight, Search, Target, Map, Rocket, Zap, BarChart3, LineChart, CheckCircle2, Brain, Globe, Cpu, TrendingUp } from "lucide-react";
 import { Link } from "wouter";
-import { Navigation } from "@/components/navigation";
 import { useFeatureFlags } from "@/lib/feature-flags";
 import { Footer } from "@/components/footer";
 import { SEOHead } from "@/components/seo-head";
@@ -165,7 +164,6 @@ export default function SolutionsPage() {
         keywords={["enterprise performance management", "EPM solutions", "finance transformation", "ERP solutions", "AI finance tools"]}
       />
       
-      <Navigation />
 
       <main className="pt-16 sm:pt-20">
         <PageHero

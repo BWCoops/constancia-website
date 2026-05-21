@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "wouter";
-import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { SEOHead } from "@/components/seo-head";
 
@@ -14,7 +13,6 @@ export default function CookiePolicyPage() {
         keywords={["cookie policy", "cookies", "data protection", "website cookies", "Constancia cookies"]}
       />
       
-      <Navigation />
 
       <main className="pt-16 sm:pt-20">
         <section className="py-12 bg-gradient-to-b from-brand-navy to-brand-teal">

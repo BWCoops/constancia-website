@@ -15,7 +15,6 @@ import {
   Eye,
   Lock
 } from "lucide-react";
-import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { PageHero } from "@/components/page-hero";
 import { DownloadGateModal } from "@/components/download-gate-modal";
@@ -130,7 +129,6 @@ export default function FilesPage() {
           "enterprise intelligence resources"
         ]}
       />
-      <Navigation />
 
       <main className="pt-16 sm:pt-20 pb-16">
         <PageHero

@@ -21,10 +21,8 @@
  */
 
 import { useEffect, useRef, useState } from "react";
-import { Link, useLocation } from "wouter";
+import { useLocation } from "wouter";
 import { useFeatureFlags } from "@/lib/feature-flags";
-import constanciaLogo from "@assets/constancia-logo.png";
-import constanciaLogoDark from "@assets/constancia-logo-dark.png";
 import { Menu, X } from "lucide-react";
 import type { FeatureFlags } from "@shared/feature-flags";
 
@@ -97,16 +95,15 @@ export function LibraryNavigation({ variant = "light" }: LibraryNavigationProps)
   };
 
   const items = LIBRARY.filter(i => i.featureKey === null || flags[i.featureKey]);
-  const wordmark = variant === "dark" ? constanciaLogoDark : constanciaLogo;
   const triggerColor = variant === "dark" ? "#F6F3EE" : "#12161D";
 
   return (
     <>
-      {/* Top bar — minimal: wordmark + Menu trigger. */}
+      {/* Top bar — Menu pill only. The wordmark used to sit on the
+          left here too but it duplicated the hero wordmark / page-hero
+          and read as redundant. The drawer's eyebrow brands the menu
+          surface itself. */}
       <header className={`library-nav-bar library-nav-bar--${variant}`}>
-        <Link href="/" className="library-nav-bar__brand" aria-label="Constancia home">
-          <img src={wordmark} alt="Constancia" />
-        </Link>
         <button
           ref={triggerRef}
           type="button"

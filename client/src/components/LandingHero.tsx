@@ -22,9 +22,9 @@
  */
 
 import { useEffect, useState } from "react";
-import constanciaLogoDark from "@assets/constancia-logo-dark.png";
 import { MeshBackground } from "./MeshBackground";
 import { HeroFabricCanvas } from "./HeroFabricCanvas";
+import { WordmarkIntro } from "./WordmarkIntro";
 import { LiquidGlassCard } from "@/components/ui/LiquidGlassCard";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
@@ -70,14 +70,7 @@ export function LandingHero() {
         {/* 3. Centre stack: wordmark scales into place + Liquid
            Glass mission card refracts the fabric beneath. */}
         <div className="landing-hero__content">
-          <img
-            src={constanciaLogoDark}
-            alt="Constancia"
-            className="landing-hero__wordmark"
-            id="hero-heading"
-            decoding="async"
-            fetchPriority="high"
-          />
+          <WordmarkIntro className="landing-hero__wordmark" />
 
           <div className="landing-hero__mission">
             <LiquidGlassCard variant="hero" cornerRadius={28}>

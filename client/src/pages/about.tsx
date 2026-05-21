@@ -1,6 +1,5 @@
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
-import { Navigation } from "@/components/navigation";
 import { useFeatureFlags } from "@/lib/feature-flags";
 import { Footer } from "@/components/footer";
 import { SEOHead } from "@/components/seo-head";
@@ -59,7 +58,6 @@ export default function AboutPage() {
         ]}
       />
 
-      <Navigation />
 
       <main className="pt-16 sm:pt-20">
         <PageHero

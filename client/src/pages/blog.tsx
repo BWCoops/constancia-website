@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { Search, Calendar, Clock, Tag, ArrowRight, Loader2 } from "lucide-react";
-import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { PageHero } from "@/components/page-hero";
 import { Input } from "@/components/ui/input";
@@ -63,7 +62,6 @@ export default function BlogPage() {
           "technology blog"
         ]}
       />
-      <Navigation />
       
       <main className="pt-16 sm:pt-20 pb-16">
         <PageHero

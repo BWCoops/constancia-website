@@ -971,10 +971,10 @@ div[class*="hs-chat"] {
    each route as a numbered, labelled, described entry. */
 .library-nav-bar {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: 0; right: 0;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 16px 24px;
   z-index: 50;
   pointer-events: none;
@@ -983,15 +983,6 @@ div[class*="hs-chat"] {
   .library-nav-bar { padding: 12px 16px; }
 }
 .library-nav-bar > * { pointer-events: auto; }
-.library-nav-bar__brand img {
-  height: 26px;
-  width: auto;
-  display: block;
-  opacity: 0.92;
-}
-@media (max-width: 540px) {
-  .library-nav-bar__brand img { height: 22px; }
-}
 /* Frosted-glass pill so the trigger stays readable on the hero
    fabric, on cream sub-pages, and on dark admin/finance pages. Min
    44×44 touch target on mobile. */
@@ -1352,21 +1343,20 @@ div[class*="hs-chat"] {
   color: #12161D;
   isolation: isolate;
 }
-/* Cream-to-transparent fade across the top of the hero so the slate
-   deep-tones of the rear fabric layers never read as a "blue band"
-   under the nav bar. Sits above the fabric but below the wordmark/
-   mission stack. */
+/* Soft cream fade across the very top so the menu pill always sits
+   on a calm cream tone, not a dark fabric band peeking through. Short
+   (72px) and gentle — too tall and it covers the wave pattern. */
 .landing-hero__inner::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 120px;
-  background: linear-gradient(to bottom, #F6F3EE 0%, rgba(246, 243, 238, 0.65) 55%, rgba(246, 243, 238, 0) 100%);
+  height: 72px;
+  background: linear-gradient(to bottom, rgba(246, 243, 238, 0.75) 0%, rgba(246, 243, 238, 0) 100%);
   z-index: 4;
   pointer-events: none;
 }
 @media (max-width: 540px) {
-  .landing-hero__inner::before { height: 90px; }
+  .landing-hero__inner::before { height: 56px; }
 }
 .landing-hero__fabric {
   position: absolute;
@@ -1424,15 +1414,91 @@ div[class*="hs-chat"] {
 .landing-hero__content > * { pointer-events: auto; }
 .landing-hero__wordmark {
   width: clamp(260px, 32vmin, 460px);
-  height: auto;
-  opacity: 0;
-  transform: scale(0.5);
-  transition: opacity 700ms ease-out 50ms, transform 800ms cubic-bezier(0.2, 0.8, 0.2, 1) 50ms;
+  position: relative;
+}
+
+/* — Wordmark intro animation (two glass-morph spheres fly in,
+     wordmark scales up through them, spheres dissolve). The spheres
+     are positioned absolutely inside .wordmark-intro and animate
+     between named phases set by the React component. — */
+.wordmark-intro {
+  position: relative;
+  display: block;
   filter: drop-shadow(0 4px 24px rgba(18, 22, 29, 0.10));
 }
-.landing-hero.is-loaded .landing-hero__wordmark {
-  opacity: 1;
-  transform: scale(1);
+.wordmark-intro__wordmark {
+  display: block;
+  width: 100%;
+  height: auto;
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transform: scale(0.4);
+  transition: opacity 700ms ease-out, transform 900ms cubic-bezier(0.18, 0.9, 0.22, 1.15);
+}
+.wordmark-intro__sphere {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: clamp(160px, 22vmin, 280px);
+  height: clamp(160px, 22vmin, 280px);
+  margin: calc(-1 * clamp(80px, 11vmin, 140px)) 0 0 calc(-1 * clamp(80px, 11vmin, 140px));
+  border-radius: 50%;
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 1200ms cubic-bezier(0.22, 0.9, 0.18, 1.05),
+    opacity 700ms ease-out,
+    filter 600ms ease-out;
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  mix-blend-mode: normal;
+}
+.wordmark-intro__sphere--rose {
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 35%),
+    radial-gradient(circle at 70% 70%, rgba(199, 122, 147, 0.85) 0%, rgba(142, 79, 103, 0.55) 60%, rgba(142, 79, 103, 0.10) 100%);
+  box-shadow:
+    inset 0 6px 22px rgba(255, 255, 255, 0.50),
+    inset 0 -8px 28px rgba(142, 79, 103, 0.35),
+    0 24px 60px -12px rgba(199, 122, 147, 0.45);
+}
+.wordmark-intro__sphere--mint {
+  background:
+    radial-gradient(circle at 35% 28%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 38%),
+    radial-gradient(circle at 65% 72%, rgba(127, 184, 163, 0.85) 0%, rgba(94, 141, 122, 0.55) 60%, rgba(94, 141, 122, 0.10) 100%);
+  box-shadow:
+    inset 0 6px 22px rgba(255, 255, 255, 0.55),
+    inset 0 -8px 28px rgba(94, 141, 122, 0.35),
+    0 24px 60px -12px rgba(127, 184, 163, 0.45);
+}
+
+/* Phase: init — both spheres parked off-screen, wordmark hidden. */
+.wordmark-intro--init .wordmark-intro__sphere--rose { transform: translate(70vw, -55vh) scale(1.15); opacity: 0; }
+.wordmark-intro--init .wordmark-intro__sphere--mint { transform: translate(-70vw, 55vh) scale(1.15); opacity: 0; }
+
+/* Phase: fly — spheres rush in from opposite corners, still oversized. */
+.wordmark-intro--fly .wordmark-intro__sphere--rose { transform: translate(18vw, -18vh) scale(1.05); opacity: 1; }
+.wordmark-intro--fly .wordmark-intro__sphere--mint { transform: translate(-18vw, 18vh) scale(1.05); opacity: 1; }
+
+/* Phase: settle — spheres converge to where the wordmark's brand
+   circles sit, wordmark scales up through them. */
+.wordmark-intro--settle .wordmark-intro__sphere--rose { transform: translate(2vw, -2vh) scale(0.45); opacity: 0.95; }
+.wordmark-intro--settle .wordmark-intro__sphere--mint { transform: translate(-2vw, 2vh) scale(0.45); opacity: 0.95; }
+.wordmark-intro--settle .wordmark-intro__wordmark,
+.wordmark-intro--dissolve .wordmark-intro__wordmark { opacity: 1; transform: scale(1); }
+
+/* Phase: dissolve — spheres fade into the wordmark's baked circles
+   and the logo stands alone. */
+.wordmark-intro--dissolve .wordmark-intro__sphere {
+  opacity: 0;
+  transform: translate(0, 0) scale(0.15);
+  filter: blur(8px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wordmark-intro__wordmark { opacity: 1; transform: none; transition: none; }
+  .wordmark-intro__sphere { opacity: 0; transition: none; }
 }
 .landing-hero__mission {
   max-width: 620px;
