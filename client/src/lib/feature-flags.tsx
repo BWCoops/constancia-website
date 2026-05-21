@@ -15,18 +15,22 @@ interface FeatureFlagContextValue {
   isFeatureEnabled: (feature: keyof FeatureFlags) => boolean;
 }
 
-// Default flags (all enabled) - used before API response
+// Default flags used before the API response settles. Aligned with
+// the May 2026 go-live brief: Solutions and Toolkit (resources) ship
+// hidden by default so they don't briefly appear in the nav during
+// the cold-start before the API confirms the DB overrides. Admins
+// can flip either on via /admin/feature-flags.
 const DEFAULT_FLAGS: FeatureFlags = {
   home: true,
   about: true,
   services: true,
-  solutions: true,
+  solutions: false, // hidden at go-live
   comparisonTools: true,
   financeCompass: true,
   blog: true,
-  resources: true,
+  resources: false, // Toolkit — hidden at go-live
   contact: true,
-  requireBusinessEmail: false, // Default to false - allow personal emails by default
+  requireBusinessEmail: false,
 };
 
 const FeatureFlagContext = createContext<FeatureFlagContextValue>({

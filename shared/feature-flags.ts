@@ -279,8 +279,8 @@ export const NAV_LINKS = [
   { href: '/tools/epm-comparison', label: 'Enterprise Technology Comparison', featureKey: 'comparisonTools' as keyof FeatureFlags },
   { href: '/vendors', label: 'Vendors', featureKey: 'comparisonTools' as keyof FeatureFlags },
   { href: '/finance-compass', label: 'FinanceCompass', featureKey: 'financeCompass' as keyof FeatureFlags },
-  { href: '/blog', label: 'Insights Hub', featureKey: 'blog' as keyof FeatureFlags },
-  { href: '/files', label: 'Resources', featureKey: 'resources' as keyof FeatureFlags },
+  { href: '/blog', label: 'Day to Day AI', featureKey: 'blog' as keyof FeatureFlags },
+  { href: '/files', label: 'Toolkit', featureKey: 'resources' as keyof FeatureFlags },
   { href: '/contact', label: 'Contact', featureKey: 'contact' as keyof FeatureFlags },
 ];
 

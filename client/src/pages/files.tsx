@@ -120,31 +120,30 @@ export default function FilesPage() {
   return (
     <div className="min-h-screen page-dark">
       <SEOHead
-        title="Constancia Resources - Guides, Frameworks & Downloads"
-        description="Access guides, whitepapers, frameworks, and documentation for finance transformation. Download resources on EPM, ERP optimisation, and AI-driven solutions."
+        title="Toolkit — Constancia Guides, Frameworks & Downloads"
+        description="Gated guides, frameworks, and templates from Constancia. Connected finance intelligence, EPM, AI for finance, and operating-model resources for finance and operations leaders."
         keywords={[
-          "AI resources",
-          "business whitepapers",
-          "automation guides",
-          "digital transformation tools",
-          "enterprise documentation",
-          "EPM downloads"
+          "Constancia toolkit",
+          "finance frameworks",
+          "EPM guides",
+          "AI for finance downloads",
+          "enterprise intelligence resources"
         ]}
       />
       <Navigation />
-      
+
       <main className="pt-16 sm:pt-20 pb-16">
         <PageHero
-          badge="Resources & Downloads"
-          title="Constancia Resources"
-          description="Access guides, whitepapers, frameworks, and documentation to help you get the most out of your finance transformation."
+          badge="Toolkit"
+          title="The Constancia Toolkit"
+          description="Frameworks, guides and templates from real programmes. Each download asks for a few details so we know who's using them."
         />
 
         <div className="max-w-7xl mx-auto px-6 pt-8">
 
           {featuredFiles.length > 0 && (
             <div className="mb-12">
-              <h2 className="text-2xl font-bold mb-6">Featured Resources</h2>
+              <h2 className="text-2xl font-bold mb-6">Featured Downloads</h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {featuredFiles.map(file => (
                   <Card 
@@ -205,7 +204,7 @@ export default function FilesPage() {
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                   <Input
-                    placeholder="Search resources..."
+                    placeholder="Search the toolkit..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="pl-10"
@@ -225,7 +224,7 @@ export default function FilesPage() {
                       }`}
                       data-testid="button-file-category-all"
                     >
-                      All Resources
+                      All downloads
                     </button>
                     {categories.map(category => (
                       <button
@@ -264,7 +263,7 @@ export default function FilesPage() {
             <div className="flex-1">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl font-semibold">
-                  {selectedCategory || "All Resources"}
+                  {selectedCategory || "All downloads"}
                 </h2>
                 <span className="text-sm text-muted-foreground">
                   {filteredFiles.length} resource{filteredFiles.length !== 1 ? "s" : ""}
@@ -277,7 +276,7 @@ export default function FilesPage() {
                 </div>
               ) : filteredFiles.length === 0 ? (
                 <div className="text-center py-12">
-                  <p className="text-muted-foreground">No resources found matching your criteria.</p>
+                  <p className="text-muted-foreground">Nothing in the toolkit matches that. Try a different filter.</p>
                 </div>
               ) : (
                 <div className="space-y-4">

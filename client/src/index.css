@@ -1014,3 +1014,595 @@ div[class*="hs-chat"] {
     border: 1px solid rgba(255, 255, 255, 0.08);
   }
 }
+
+/* ── 13. Animated mesh background (Liquid Glass refraction stage) ───────
+   Three large soft radial-gradient blobs slowly drifting + scaling on
+   a 45s loop. Provides the colour variance the Liquid Glass shader
+   needs to refract meaningfully. Pure CSS — composited on the GPU,
+   zero JS per frame. Respects prefers-reduced-motion. */
+.mesh-background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--mesh-a, #0a0d14);
+  pointer-events: none;
+  z-index: 0;
+}
+.mesh-blob {
+  position: absolute;
+  width: 70vmax;
+  height: 70vmax;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.55;
+  will-change: transform;
+}
+.mesh-blob--a {
+  background: radial-gradient(circle, var(--mesh-b, #11203a) 0%, transparent 60%);
+  top: -20%;
+  left: -10%;
+  animation: mesh-drift-a 45s ease-in-out infinite;
+}
+.mesh-blob--b {
+  background: radial-gradient(circle, var(--mesh-c, #0d1320) 0%, transparent 60%);
+  bottom: -30%;
+  right: -15%;
+  animation: mesh-drift-b 50s ease-in-out infinite;
+}
+.mesh-blob--c {
+  background: radial-gradient(circle, var(--mesh-b, #11203a) 0%, transparent 65%);
+  top: 30%;
+  left: 35%;
+  width: 50vmax;
+  height: 50vmax;
+  opacity: 0.35;
+  animation: mesh-drift-c 60s ease-in-out infinite;
+}
+.mesh-grain {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+}
+@keyframes mesh-drift-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(8vw, 6vh) scale(1.15); }
+}
+@keyframes mesh-drift-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(-7vw, -5vh) scale(1.1); }
+}
+@keyframes mesh-drift-c {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.35; }
+  50%      { transform: translate(-4vw, 4vh) scale(0.85); opacity: 0.55; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mesh-blob { animation: none; }
+}
+
+/* ── 14. Landing hero (Liquid Glass refresh) ────────────────────────────
+   New simpler hero per the May 2026 brief. Enlarged wordmark + mission
+   statement in a Liquid Glass card + right-hand chapter nav (sticky
+   scroll-spy). The mesh background lives behind. */
+.landing-hero {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: #0a0d14;
+  color: #F6F3EE;
+  isolation: isolate;
+}
+.landing-hero__mesh {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 700ms ease-out 400ms;
+}
+.landing-hero.is-loaded .landing-hero__mesh { opacity: 1; }
+
+/* Intro converging circles. Two small dots offset from the centre,
+   they animate toward the wordmark in the first 400ms then fade out. */
+.landing-hero__intro {
+  position: absolute;
+  top: 38%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 360px;
+  height: 360px;
+  z-index: 1;
+  pointer-events: none;
+}
+.landing-hero__circle {
+  position: absolute;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  top: 50%; left: 50%;
+  opacity: 0;
+}
+.landing-hero__circle--rose {
+  background: #C77A93;
+  transform: translate(-180px, -120px);
+  animation: hero-circle-converge-rose 700ms cubic-bezier(0.6, 0, 0.4, 1) forwards;
+}
+.landing-hero__circle--mint {
+  background: #7FB8A3;
+  transform: translate(180px, 120px);
+  animation: hero-circle-converge-mint 700ms cubic-bezier(0.6, 0, 0.4, 1) forwards;
+}
+@keyframes hero-circle-converge-rose {
+  0%   { transform: translate(-180px, -120px); opacity: 0; }
+  20%  { opacity: 0.9; }
+  80%  { transform: translate(-12px, -8px); opacity: 0.7; }
+  100% { transform: translate(-12px, -8px); opacity: 0; }
+}
+@keyframes hero-circle-converge-mint {
+  0%   { transform: translate(180px, 120px); opacity: 0; }
+  20%  { opacity: 0.9; }
+  80%  { transform: translate(12px, 8px); opacity: 0.7; }
+  100% { transform: translate(12px, 8px); opacity: 0; }
+}
+
+/* Main content stack — wordmark + mission. */
+.landing-hero__content {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  gap: 48px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.landing-hero__wordmark {
+  width: clamp(280px, 36vmin, 520px);
+  height: auto;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 600ms ease-out 300ms, transform 600ms ease-out 300ms;
+}
+.landing-hero.is-loaded .landing-hero__wordmark {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.landing-hero__mission {
+  max-width: 640px;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 600ms ease-out 800ms, transform 600ms ease-out 800ms;
+}
+.landing-hero.is-loaded .landing-hero__mission {
+  opacity: 1;
+  transform: translateY(0);
+}
+.landing-hero__mission-inner {
+  padding: 32px 40px;
+  text-align: center;
+  color: #F6F3EE;
+}
+.landing-hero__mission-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(246, 243, 238, 0.65);
+  margin-bottom: 10px;
+}
+.landing-hero__mission-lede {
+  font-size: clamp(22px, 3.2vw, 32px);
+  font-weight: 300;
+  line-height: 1.25;
+  color: #F6F3EE;
+}
+
+/* Right-hand chapter nav — sticky, scroll-spy driven. Hidden on
+   smaller widths where it would crunch the centre composition. */
+.landing-hero__chapters {
+  position: fixed;
+  top: 50%;
+  right: 32px;
+  transform: translateY(-50%) translateX(40px);
+  opacity: 0;
+  z-index: 30;
+  transition: opacity 400ms ease-out 1000ms, transform 400ms ease-out 1000ms;
+}
+.landing-hero.is-loaded ~ * .landing-hero__chapters,
+.landing-hero.is-loaded .landing-hero__chapters {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+.landing-hero__chapters ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.landing-hero__chapters a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: rgba(246, 243, 238, 0.55);
+  transition: color 200ms ease-out;
+  outline: none;
+}
+.landing-hero__chapters a:hover,
+.landing-hero__chapters a:focus-visible,
+.landing-hero__chapters li.is-active a {
+  color: #F6F3EE;
+}
+.landing-hero__chapters a:focus-visible {
+  outline: 2px solid #7FB8A3;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+.landing-hero__chapter-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  min-width: 22px;
+  color: rgba(127, 184, 163, 0.7);
+}
+.landing-hero__chapter-label {
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+.landing-hero li {
+  position: relative;
+  padding-right: 16px;
+}
+.landing-hero li::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(246, 243, 238, 0.25);
+  transition: background 200ms ease-out, transform 200ms ease-out;
+}
+.landing-hero li.is-active::after {
+  background: #C77A93;
+  transform: translateY(-50%) scale(1.6);
+}
+@media (max-width: 900px) {
+  .landing-hero__chapters { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .landing-hero__mesh,
+  .landing-hero__wordmark,
+  .landing-hero__mission,
+  .landing-hero__chapters,
+  .landing-hero__circle--rose,
+  .landing-hero__circle--mint { animation: none; transition: none; opacity: 1; transform: none; }
+  .landing-hero__chapters { transform: translateY(-50%); }
+}
+
+/* ── 15. Connected Enterprise Business Transformation band ─────────────
+   Replaces the "Connected Finance Intelligence · 2026" treatment. A
+   clean text band on cream, subtle dividers above + below. No Liquid
+   Glass here per brief. */
+.connected-band {
+  position: relative;
+  background: #F6F3EE;
+  color: #12161D;
+  padding: 96px 24px;
+  text-align: center;
+}
+.connected-band::before,
+.connected-band::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(560px, 60%);
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(18,22,29,0.18) 50%, transparent 100%);
+}
+.connected-band::before { top: 0; }
+.connected-band::after  { bottom: 0; }
+.connected-band__eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8E4F67;
+  margin-bottom: 18px;
+}
+.connected-band__heading {
+  font-size: clamp(32px, 4.5vw, 56px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  max-width: 980px;
+  margin: 0 auto 20px;
+}
+.connected-band__sub {
+  font-size: clamp(16px, 1.6vw, 18px);
+  color: rgba(30, 38, 48, 0.75);
+  margin-bottom: 32px;
+}
+.connected-band__body {
+  font-size: clamp(15px, 1.4vw, 17px);
+  color: rgba(30, 38, 48, 0.85);
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+/* ── 16. Constancia Services four-quadrant ─────────────────────────────
+   Dark stage so the Liquid Glass cards have something to refract.
+   2×2 desktop, stacked mobile. Each card uses LiquidGlassCard variant
+   "default" — that accounts for 4 of our 5-per-page budget; the hero
+   card is the 5th. */
+.services-quadrant {
+  position: relative;
+  background: #0a0d14;
+  color: #F6F3EE;
+  padding: 112px 24px;
+  isolation: isolate;
+  overflow: hidden;
+}
+.services-quadrant__mesh {
+  position: absolute;
+  inset: 0;
+  opacity: 0.85;
+}
+.services-quadrant__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.services-quadrant__header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.services-quadrant__eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(127, 184, 163, 0.85);
+  margin-bottom: 18px;
+}
+.services-quadrant__heading {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -0.005em;
+}
+.services-quadrant__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+@media (max-width: 768px) {
+  .services-quadrant__grid { grid-template-columns: 1fr; }
+}
+.services-quadrant__card-body {
+  padding: 28px 30px;
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  color: #F6F3EE;
+}
+.services-quadrant__card-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: rgba(246, 243, 238, 0.08);
+  color: #C77A93;
+  margin-bottom: 4px;
+}
+.services-quadrant__card-title {
+  font-size: clamp(18px, 1.8vw, 22px);
+  font-weight: 500;
+  line-height: 1.25;
+  color: #F6F3EE;
+}
+.services-quadrant__card-body p {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: rgba(246, 243, 238, 0.78);
+}
+
+/* ── 17. Landing "Who we are" + "Contact" sections ─────────────────────
+   Editorial bands flanking the connected/services dark stages. Cream
+   surface, generous whitespace, single declarative headline + CTA. */
+.landing-who,
+.landing-contact {
+  background: #F6F3EE;
+  color: #12161D;
+  padding: 96px 24px;
+}
+.landing-who__inner,
+.landing-contact__inner {
+  max-width: 880px;
+  margin: 0 auto;
+  text-align: center;
+}
+.landing-who__eyebrow,
+.landing-contact__eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8E4F67;
+  margin-bottom: 18px;
+}
+.landing-who__heading,
+.landing-contact__heading {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 300;
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+.landing-who__body,
+.landing-contact__body {
+  font-size: clamp(15px, 1.5vw, 17px);
+  line-height: 1.65;
+  color: rgba(30, 38, 48, 0.85);
+  max-width: 640px;
+  margin: 0 auto 24px;
+}
+.landing-who__link,
+.landing-contact__link {
+  display: inline-block;
+  font-size: 16px;
+  color: #12161D;
+  text-decoration: underline;
+  text-decoration-color: rgba(142, 79, 103, 0.4);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 8px;
+  transition: text-decoration-color 200ms, text-decoration-thickness 200ms;
+}
+.landing-who__link:hover,
+.landing-contact__link:hover,
+.landing-who__link:focus-visible,
+.landing-contact__link:focus-visible {
+  text-decoration-color: #8E4F67;
+  text-decoration-thickness: 2px;
+}
+
+/* ── 18. Connectivity showcase (Services page, AI Development band) ─────
+   Fixed-height container hosting the auto-looping HeroConnectionDiagram.
+   Mimics the home hero stage so the diagram's [data-hero-stage]
+   look-up succeeds and beams converge on the centre. */
+.connectivity-showcase {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  background: linear-gradient(180deg, #0a0d14 0%, #11203a 100%);
+  border-radius: 24px;
+  overflow: hidden;
+  isolation: isolate;
+}
+@media (max-width: 768px) {
+  .connectivity-showcase { height: 380px; }
+}
+
+/* ── 19. Services page (partner-led restructure) ────────────────────────
+   Three partner blocks (Abacum, OneStream, AI Development Partner). The
+   final block carries the connectivity showcase. Partner logos sit in
+   small `variant="subtle"` LiquidGlassCards; body copy stays outside
+   cards per the brief. */
+.partner-section {
+  padding: 96px 24px;
+  background: #F6F3EE;
+  color: #12161D;
+}
+.partner-section--dark {
+  background: #0a0d14;
+  color: #F6F3EE;
+}
+.partner-section__inner {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+.partner-section__layout {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 48px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .partner-section__layout { grid-template-columns: 1fr; gap: 32px; }
+}
+.partner-section__eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8E4F67;
+  margin-bottom: 14px;
+}
+.partner-section--dark .partner-section__eyebrow { color: #7FB8A3; }
+.partner-section__heading {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 300;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+.partner-section__sub {
+  font-size: clamp(15px, 1.4vw, 17px);
+  line-height: 1.6;
+  color: rgba(30, 38, 48, 0.78);
+  margin-bottom: 24px;
+}
+.partner-section--dark .partner-section__sub {
+  color: rgba(246, 243, 238, 0.78);
+}
+.partner-section__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(30, 38, 48, 0.7);
+  margin-bottom: 14px;
+}
+.partner-section--dark .partner-section__chip { color: rgba(246, 243, 238, 0.7); }
+.partner-section__partner-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  font-weight: 600;
+  color: #12161D;
+  font-size: 17px;
+  letter-spacing: 0.02em;
+}
+.partner-section--dark .partner-section__partner-card {
+  color: #F6F3EE;
+}
+.partner-section__deliverables {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 24px;
+  margin-top: 12px;
+}
+@media (max-width: 540px) {
+  .partner-section__deliverables { grid-template-columns: 1fr; }
+}
+.partner-section__deliverable {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.partner-section__deliverable-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: rgba(142, 79, 103, 0.7);
+  min-width: 22px;
+  padding-top: 2px;
+}
+.partner-section--dark .partner-section__deliverable-num {
+  color: rgba(127, 184, 163, 0.8);
+}
+.partner-section__divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(18,22,29,0.15) 50%, transparent 100%);
+}
+.partner-section--dark + .partner-section__divider,
+.partner-section + .partner-section__divider--dark {
+  background: linear-gradient(90deg, transparent 0%, rgba(246,243,238,0.15) 50%, transparent 100%);
+}

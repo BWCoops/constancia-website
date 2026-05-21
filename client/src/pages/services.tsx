@@ -1,178 +1,185 @@
-import { Compass, Brain, Sparkles, FileCheck, BookOpen, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
+import { ArrowRight } from "lucide-react";
 import { Navigation } from "@/components/navigation";
 import { useFeatureFlags } from "@/lib/feature-flags";
 import { Footer } from "@/components/footer";
 import { SEOHead } from "@/components/seo-head";
 import { PageHero } from "@/components/page-hero";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { LiquidGlassCard } from "@/components/ui/LiquidGlassCard";
+import { ConnectivityShowcase } from "@/components/ConnectivityShowcase";
 
+/**
+ * Services page — May 2026 partner-led restructure.
+ *
+ * Three sections: Abacum (mid-market FP&A), OneStream (enterprise
+ * EPM integration), AI Development Partner (custom build). The
+ * connectivity showcase that used to live on the home hero now
+ * anchors the AI Development Partner section.
+ *
+ * LiquidGlassCard usage on this page is restricted to partner-logo
+ * chips at variant="subtle" per the brief. Body copy sits outside
+ * cards.
+ */
 
-const services = [
-  {
-    icon: Compass,
-    title: "Platform Selection",
-    description: "The right platform before you're locked into the wrong one.",
-    details: [
-      "Business and data landscape assessment",
-      "Vendor shortlisting and evaluation",
-      "Demonstration facilitation",
-      "Reference client engagement",
-      "Commercial negotiation support",
-      "Business case development",
-    ],
-    outcome: "A clear, evidenced recommendation. Matched to your need, not our pipeline.",
-  },
-  {
-    icon: Brain,
-    title: "EPM Implementation",
-    description: "Delivered by the people who scoped it.",
-    details: [
-      "Programme design and configuration",
-      "Data migration and integration",
-      "User acceptance testing",
-      "Go-live support and hypercare",
-      "Post-implementation optimisation",
-      "Senior practitioners on every workstream",
-    ],
-    outcome: "A go-live that delivers what was promised, on the budget you signed off.",
-  },
-  {
-    icon: Sparkles,
-    title: "AI for Finance",
-    description: "Practical AI. Not AI theatre.",
-    details: [
-      "AI readiness assessment",
-      "Use case identification and prioritisation",
-      "Build and integration support",
-      "Change management for AI adoption",
-      "Measurable outcome definition",
-      "Embedded from day one, not retrofitted",
-    ],
-    outcome: "Live AI use cases that are measurable, adopted, and actually used by your finance team.",
-  },
-  {
-    icon: FileCheck,
-    title: "Finance Transformation",
-    description: "The technology is only part of it.",
-    details: [
-      "Operating model redesign",
-      "Process improvement and standardisation",
-      "Capability assessment and development",
-      "Change management",
-      "Technology and people alignment",
-      "Board-ready reporting design",
-    ],
-    outcome: "A finance function that works better. Not just one with a new tool installed.",
-  },
-  {
-    icon: BookOpen,
-    title: "Training and Enablement",
-    description: "So your team can run it without us.",
-    details: [
-      "Platform training design and delivery",
-      "Admin handover and documentation",
-      "Self-sufficiency planning",
-      "Ongoing support and upskilling",
-      "Written by the people who built it",
-      "Tailored to your team's capability level",
-    ],
-    outcome: "A finance team that owns its platform.",
-  },
-];
+interface PartnerDeliverable {
+  text: string;
+}
 
-export default function ServicesPage() {
-  const { flags } = useFeatureFlags();
-  
+interface PartnerSection {
+  id: string;
+  eyebrow: string;
+  partner: string;
+  heading: string;
+  sub: string;
+  deliverables: PartnerDeliverable[];
+}
+
+const ABACUM: PartnerSection = {
+  id: "abacum",
+  eyebrow: "Mid-market FP&A",
+  partner: "Abacum",
+  heading: "FP&A that finally keeps up with the business.",
+  sub: "Official Abacum partner. AI-augmented planning that connects to your ERP, HRIS and CRM without months of consultancy overhead.",
+  deliverables: [
+    { text: "Implementation, end to end." },
+    { text: "Data model design and integration." },
+    { text: "Driver-based planning configuration." },
+    { text: "Workforce planning and headcount modelling." },
+    { text: "Reporting and management pack design." },
+    { text: "Team enablement and admin handover." },
+  ],
+};
+
+const ONESTREAM: PartnerSection = {
+  id: "onestream",
+  eyebrow: "Enterprise EPM",
+  partner: "OneStream",
+  heading: "OneStream, integrated and adopted.",
+  sub: "Official OneStream partner. We deliver consolidation, planning, narrative reporting and account reconciliations on a single, governed platform — built by the senior people who scoped it.",
+  deliverables: [
+    { text: "Financial close and consolidation." },
+    { text: "Statutory and management reporting." },
+    { text: "Driver-based planning and forecasting." },
+    { text: "Account reconciliations and certifications." },
+    { text: "Narrative reporting and disclosure management." },
+    { text: "Hypercare, optimisation, and capability handover." },
+  ],
+};
+
+const AI_DEV: PartnerSection = {
+  id: "ai-development-partner",
+  eyebrow: "AI Development Partner",
+  partner: "Constancia AI Engineering",
+  heading: "When the off-the-shelf tool doesn't fit, we build the one that does.",
+  sub: "Edge-case AI use cases, custom model build, and applications that sit on top of your existing systems. Connected to your data, owned by your team.",
+  deliverables: [
+    { text: "Use case scoping and ROI modelling." },
+    { text: "Custom model build and fine-tuning." },
+    { text: "Retrieval and grounding architecture." },
+    { text: "Application development on your stack." },
+    { text: "Integration with ERP, EPM, CRM, warehouse." },
+    { text: "Production deployment and monitoring." },
+  ],
+};
+
+function PartnerBlock({ section, dark = false }: { section: PartnerSection; dark?: boolean }) {
   return (
-    <div className="min-h-screen page-dark">
-      <SEOHead
-        title="EPM Services — Abacum + OneStream Implementation, AI-First Delivery | Constancia"
-        description="Senior EPM implementation, platform selection, AI for finance, and finance transformation services. Fixed fee. Scoped upfront. Delivered by practitioners, not graduates."
-        keywords={["EPM implementation", "platform selection advisory", "OneStream consulting", "Abacum implementation", "FP&A tools", "finance transformation advisory"]}
-      />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "serviceType": "Connected Finance Intelligence",
-        "provider": { "@type": "Organization", "name": "Constancia", "url": "https://constancia.com" },
-        "areaServed": ["GB", "IE", "ZA", "AE"],
-        "description": "Connected finance intelligence: bringing ERP, EPM, HRIS, CRM, and data warehouse together so finance leaders get one source of truth. Platform selection, implementation, AI readiness, and ongoing intelligence delivery."
-      }) }} />
-      
-      <Navigation />
+    <section
+      id={section.id}
+      className={`partner-section ${dark ? "partner-section--dark" : ""}`}
+      aria-labelledby={`${section.id}-heading`}
+    >
+      <div className="partner-section__inner">
+        <div className="partner-section__layout">
+          <div>
+            <div className="partner-section__eyebrow">{section.eyebrow}</div>
+            <h2 id={`${section.id}-heading`} className="partner-section__heading">
+              {section.heading}
+            </h2>
+            <p className="partner-section__sub">{section.sub}</p>
+            <div style={{ display: "inline-block" }}>
+              <LiquidGlassCard variant="subtle" cornerRadius={14}>
+                <div className="partner-section__partner-card">{section.partner}</div>
+              </LiquidGlassCard>
+            </div>
+          </div>
 
-      <main className="pt-16 sm:pt-20">
-        <PageHero
-          badge="Our Services"
-          title="Senior EPM Delivery, Priced Upfront, with No Vendor Agenda."
-          description="We help finance leaders, from high-growth mid-market businesses to global enterprises, select, implement, and get real value from their EPM platforms."
-        />
-
-        <section className="py-8 sm:py-16 lg:py-24 bg-hp-primary">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="space-y-12">
-              {services.map((service, index) => (
-                <div
-                  key={service.title}
-                  data-testid={`service-detail-${index}`}
-                >
-                  <Card className="overflow-hidden">
-                    <div className="grid lg:grid-cols-5 gap-0">
-                      <CardHeader className="lg:col-span-2 bg-gradient-to-br from-brand-navy to-brand-teal text-white p-4 sm:p-8">
-                        <div className="w-16 h-16 rounded-xl bg-white/10 flex items-center justify-center mb-6">
-                          <service.icon className="w-8 h-8 text-brand-cyan" />
-                        </div>
-                        <CardTitle className="text-xl sm:text-2xl md:text-3xl text-white mb-4">
-                          {service.title}
-                        </CardTitle>
-                        <CardDescription className="text-white/80 text-base">
-                          {service.description}
-                        </CardDescription>
-                      </CardHeader>
-                      
-                      <CardContent className="lg:col-span-3 p-4 sm:p-8">
-                        <div className="font-mono text-[10px] uppercase tracking-widest text-[#8E4F67] mb-4">
-                          What you walk out with
-                        </div>
-                        {/* Numbered detail list — replaces the stock
-                            check-mark grid. The number itself does
-                            the visual work; no decorative icons. */}
-                        <ol className="grid sm:grid-cols-2 gap-x-6 gap-y-3 mb-6">
-                          {service.details.map((detail, idx) => (
-                            <li key={detail} className="flex items-start gap-3 text-sm text-[#1E2630]">
-                              <span className="font-mono text-[11px] text-[#8E4F67]/70 mt-0.5 tabular-nums">
-                                {String(idx + 1).padStart(2, "0")}
-                              </span>
-                              <span>{detail}</span>
-                            </li>
-                          ))}
-                        </ol>
-                        {/* Outcome callout — graphite text on a soft
-                            mint band so it visually pops without
-                            another generic "info box" border. */}
-                        <div className="border-l-2 border-[#7FB8A3] pl-4 py-2 bg-[#7FB8A3]/8">
-                          <div className="font-mono text-[10px] uppercase tracking-widest text-[#5E8D7A] mb-1">
-                            Outcome
-                          </div>
-                          <p className="text-[#12161D] text-sm leading-relaxed">
-                            {service.outcome}
-                          </p>
-                        </div>
-                      </CardContent>
-                    </div>
-                  </Card>
+          <div>
+            <div className="partner-section__chip">What we deliver</div>
+            <div className="partner-section__deliverables">
+              {section.deliverables.map((d, i) => (
+                <div key={d.text} className="partner-section__deliverable">
+                  <span className="partner-section__deliverable-num">{String(i + 1).padStart(2, "0")}</span>
+                  <span>{d.text}</span>
                 </div>
               ))}
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default function ServicesPage() {
+  const { flags } = useFeatureFlags();
+
+  return (
+    <div className="min-h-screen page-dark">
+      <SEOHead
+        title="Services — Abacum, OneStream, AI Development Partner | Constancia"
+        description="Constancia is an enterprise intelligence company. Official Abacum partner for mid-market FP&A, OneStream partner for enterprise EPM, and an AI development partner for custom build."
+        keywords={[
+          "Abacum partner",
+          "OneStream partner",
+          "AI development partner",
+          "Enterprise Performance Management",
+          "FP&A implementation",
+          "custom AI development",
+        ]}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            serviceType: "Enterprise Intelligence",
+            provider: { "@type": "Organization", name: "Constancia", url: "https://constancia.com" },
+            areaServed: ["GB", "IE", "ZA", "AE"],
+            description:
+              "Abacum (mid-market FP&A), OneStream (enterprise EPM) implementation, and AI development partner services. Connecting ERP, EPM, HRIS, CRM and data warehouse into one source of truth.",
+          }),
+        }}
+      />
+
+      <Navigation />
+
+      <main className="pt-16 sm:pt-20">
+        <PageHero
+          badge="Services"
+          title="Three ways we deliver enterprise intelligence."
+          description="A senior team, two declared platform partners, and a development practice for everything in between."
+        />
+
+        <PartnerBlock section={ABACUM} />
+        <PartnerBlock section={ONESTREAM} dark />
+        <PartnerBlock section={AI_DEV} />
+
+        {/* Connectivity showcase — anchored to AI Development Partner. */}
+        <section className="partner-section" style={{ paddingTop: 0 }}>
+          <div className="partner-section__inner">
+            <div className="partner-section__eyebrow" style={{ marginBottom: 24 }}>
+              Live integration view
+            </div>
+            <ConnectivityShowcase />
+            <p className="partner-section__sub" style={{ marginTop: 24, maxWidth: 760 }}>
+              Every system you already own — ERP, CRM, HRIS, procurement, data warehouse, spreadsheets — feeding one source of truth. Connected once, owned forever.
+            </p>
+          </div>
         </section>
 
-        {/* Closing band — replaces the standard centred-CTA card
-            with an asymmetric two-column layout. Left side states
-            the offer in plain language; right side shows the three
-            ways to actually start. Far less "AI-templated" than the
-            rounded card + headline + button pattern. */}
+        {/* Closing band — three ways to start. */}
         <section className="py-12 sm:py-20 lg:py-28 bg-[#12161D] text-[#F6F3EE]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="grid lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-16 items-start">
@@ -185,11 +192,14 @@ export default function ServicesPage() {
                   Just a real <em className="text-[#C77A93] not-italic font-normal">conversation.</em>
                 </h2>
                 <p className="text-[#F6F3EE]/70 leading-relaxed max-w-md">
-                  We don't put new prospects through a sales funnel. You start where it's most useful, and we work back from there.
+                  We start where it's most useful, and work back from there.
                 </p>
               </div>
               <div className="space-y-px">
-                <Link href="/finance-compass" className="group flex items-center justify-between gap-4 py-5 border-t border-[#F6F3EE]/15 hover:border-[#7FB8A3]/60 transition-colors">
+                <Link
+                  href="/finance-compass"
+                  className="group flex items-center justify-between gap-4 py-5 border-t border-[#F6F3EE]/15 hover:border-[#7FB8A3]/60 transition-colors"
+                >
                   <div>
                     <div className="text-xs font-mono uppercase tracking-widest text-[#7FB8A3] mb-1">01 — Diagnose</div>
                     <div className="text-lg font-medium">Run FinanceCompass</div>
@@ -197,7 +207,10 @@ export default function ServicesPage() {
                   </div>
                   <ArrowRight className="w-5 h-5 text-[#F6F3EE]/40 group-hover:text-[#7FB8A3] group-hover:translate-x-1 transition" />
                 </Link>
-                <Link href="/tools/epm-comparison" className="group flex items-center justify-between gap-4 py-5 border-t border-[#F6F3EE]/15 hover:border-[#7FB8A3]/60 transition-colors">
+                <Link
+                  href="/tools/epm-comparison"
+                  className="group flex items-center justify-between gap-4 py-5 border-t border-[#F6F3EE]/15 hover:border-[#7FB8A3]/60 transition-colors"
+                >
                   <div>
                     <div className="text-xs font-mono uppercase tracking-widest text-[#7FB8A3] mb-1">02 — Compare</div>
                     <div className="text-lg font-medium">Map your platform options</div>
@@ -206,7 +219,11 @@ export default function ServicesPage() {
                   <ArrowRight className="w-5 h-5 text-[#F6F3EE]/40 group-hover:text-[#7FB8A3] group-hover:translate-x-1 transition" />
                 </Link>
                 {flags.contact && (
-                  <Link href="/contact" className="group flex items-center justify-between gap-4 py-5 border-t border-b border-[#F6F3EE]/15 hover:border-[#7FB8A3]/60 transition-colors" data-testid="button-services-cta">
+                  <Link
+                    href="/contact"
+                    className="group flex items-center justify-between gap-4 py-5 border-t border-b border-[#F6F3EE]/15 hover:border-[#7FB8A3]/60 transition-colors"
+                    data-testid="button-services-cta"
+                  >
                     <div>
                       <div className="text-xs font-mono uppercase tracking-widest text-[#7FB8A3] mb-1">03 — Talk</div>
                       <div className="text-lg font-medium">Book a 30-min call</div>

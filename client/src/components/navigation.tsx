@@ -40,8 +40,8 @@ const navItems: NavItem[] = [
       { href: "/finance-compass", label: "FinanceCompass", featureKey: "financeCompass" },
     ],
   },
-  { href: "/blog", label: "Insights Hub", featureKey: "blog" },
-  { href: "/files", label: "Resources", featureKey: "resources" },
+  { href: "/blog", label: "Day to Day AI", featureKey: "blog" },
+  { href: "/files", label: "Toolkit", featureKey: "resources" },
   { href: "/contact", label: "Contact", featureKey: "contact" },
 ];
 
