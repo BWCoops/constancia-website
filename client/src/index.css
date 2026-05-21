@@ -636,7 +636,7 @@
 .hero-grain {
   position: absolute; inset: 0; pointer-events: none; z-index: 2;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.035 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity: 0.55; mix-blend-mode: multiply;
+  opacity: 0.30; mix-blend-mode: multiply;
 }
 .hero-vignette {
   position: absolute; inset: 0; pointer-events: none; z-index: 2;
@@ -646,7 +646,12 @@
 .hero-brand-circle {
   position: absolute;
   border-radius: 50%;
-  mix-blend-mode: multiply;
+  /* Softer than `multiply` — keeps the brand tint without darkening
+     the cream behind the text. Pair with the lighter JS-driven
+     opacity in CIRCLE_FRAMES for a more atmospheric, less heavy
+     scroll feel. */
+  mix-blend-mode: soft-light;
+  filter: blur(4px);
   pointer-events: none;
   z-index: 3;
   transform: translate(-50%, -50%);

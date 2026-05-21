@@ -65,7 +65,7 @@ export default function AboutPage() {
     <div className="min-h-screen page-dark">
       <SEOHead
         title="About Constancia — Connected Finance Intelligence · Abacum + OneStream Partner"
-        description="Constancia is a connected finance intelligence firm. We bring disparate finance systems together — ERP, EPM, HRIS, CRM, data warehouse, the spreadsheets nobody talks about — into one source of truth. Official Abacum partner for mid-market FP&A. OneStream partner for enterprise. Built by senior practitioners who shipped finance transformation at AerCap, Howden, Reckitt Benckiser and BAT."
+        description="Constancia is a connected finance intelligence firm. We bring disparate finance systems together — ERP, EPM, HRIS, CRM, data warehouse, the spreadsheets nobody talks about — into one source of truth. Official Abacum partner for mid-market FP&A. OneStream partner for enterprise. Built by senior practitioners with deep FTSE 100 finance transformation experience."
         keywords={["about Constancia", "connected finance intelligence", "EPM consultancy", "finance systems integration", "senior finance practitioners", "finance technology advisory"]}
       />
       

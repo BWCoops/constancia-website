@@ -37,32 +37,35 @@ type Frame = { p: number; top: number; left: number; size: number; op: number };
 
 // 9-panel choreography. Compositions always push circles to opposite
 // corners or edges so the centered text reads on clean cream.
+// Opacity reduced ~30% vs prior — the brand circles should support the
+// copy, not compete with it. Outro lockup is also softer than the live
+// hero state so the page exits gently into the footer.
 const CIRCLE_FRAMES: { rose: Frame[]; mint: Frame[] } = {
   rose: [
-    { p: 0.00, top: 22, left: 54, size: 16, op: 0.78 },
-    { p: 0.04, top: 22, left: 54, size: 16, op: 0.78 },
-    { p: 0.14, top: 22, left: 82, size: 32, op: 0.50 },   // 01 Senior
-    { p: 0.24, top: 78, left: 20, size: 38, op: 0.52 },   // 02 Fixed
-    { p: 0.34, top: 22, left: 18, size: 40, op: 0.50 },   // 03 AI
-    { p: 0.44, top: 22, left: 82, size: 36, op: 0.50 },   // 04 Platforms
-    { p: 0.54, top: 50, left: 12, size: 38, op: 0.42 },   // 05 Track record
-    { p: 0.64, top: 78, left: 82, size: 40, op: 0.50 },   // 06 Programmes
-    { p: 0.74, top: 78, left: 20, size: 36, op: 0.52 },   // 07 FinanceCompass
-    { p: 0.85, top: 22, left: 54, size: 16, op: 0.78 },   // 08 outro — reassembled lockup
-    { p: 1.00, top: 22, left: 54, size: 16, op: 0.78 },   // hold through to footer
+    { p: 0.00, top: 22, left: 54, size: 16, op: 0.55 },
+    { p: 0.04, top: 22, left: 54, size: 16, op: 0.55 },
+    { p: 0.14, top: 22, left: 82, size: 32, op: 0.34 },   // 01 Senior
+    { p: 0.24, top: 78, left: 20, size: 38, op: 0.36 },   // 02 Fixed
+    { p: 0.34, top: 22, left: 18, size: 40, op: 0.34 },   // 03 AI
+    { p: 0.44, top: 22, left: 82, size: 36, op: 0.34 },   // 04 Platforms
+    { p: 0.54, top: 50, left: 12, size: 38, op: 0.30 },   // 05 Track record
+    { p: 0.64, top: 78, left: 82, size: 40, op: 0.34 },   // 06 Programmes
+    { p: 0.74, top: 78, left: 20, size: 36, op: 0.36 },   // 07 FinanceCompass
+    { p: 0.85, top: 22, left: 54, size: 16, op: 0.55 },   // 08 outro — reassembled lockup
+    { p: 1.00, top: 22, left: 54, size: 16, op: 0.55 },   // hold through to footer
   ],
   mint: [
-    { p: 0.00, top: 24, left: 57, size: 14, op: 0.78 },
-    { p: 0.04, top: 24, left: 57, size: 14, op: 0.78 },
-    { p: 0.14, top: 78, left: 20, size: 30, op: 0.50 },
-    { p: 0.24, top: 22, left: 80, size: 32, op: 0.52 },
-    { p: 0.34, top: 78, left: 80, size: 34, op: 0.50 },
-    { p: 0.44, top: 22, left: 18, size: 32, op: 0.50 },
-    { p: 0.54, top: 50, left: 88, size: 38, op: 0.42 },
-    { p: 0.64, top: 22, left: 18, size: 34, op: 0.50 },
-    { p: 0.74, top: 22, left: 80, size: 32, op: 0.52 },
-    { p: 0.85, top: 24, left: 57, size: 14, op: 0.78 },
-    { p: 1.00, top: 24, left: 57, size: 14, op: 0.78 },
+    { p: 0.00, top: 24, left: 57, size: 14, op: 0.55 },
+    { p: 0.04, top: 24, left: 57, size: 14, op: 0.55 },
+    { p: 0.14, top: 78, left: 20, size: 30, op: 0.34 },
+    { p: 0.24, top: 22, left: 80, size: 32, op: 0.36 },
+    { p: 0.34, top: 78, left: 80, size: 34, op: 0.34 },
+    { p: 0.44, top: 22, left: 18, size: 32, op: 0.34 },
+    { p: 0.54, top: 50, left: 88, size: 38, op: 0.30 },
+    { p: 0.64, top: 22, left: 18, size: 34, op: 0.34 },
+    { p: 0.74, top: 22, left: 80, size: 32, op: 0.36 },
+    { p: 0.85, top: 24, left: 57, size: 14, op: 0.55 },
+    { p: 1.00, top: 24, left: 57, size: 14, op: 0.55 },
   ],
 };
 
@@ -626,13 +629,13 @@ export function HeroSectionStatic() {
           </div>
 
           <div ref={panelRef(6)} className="hero-panel">
-            <div className="hero-num stagger">06 · Delivered for</div>
+            <div className="hero-num stagger">06 · Delivered at scale</div>
             <h2 className="hero-h2 hero-h2--list stagger">
-              AerCap · Howden<br />
-              Reckitt Benckiser · BAT
+              FTSE 100 · global manufacturers<br />
+              insurers · cross-border groups
             </h2>
             <p className="hero-body stagger">
-              Some of the world's most complex finance functions. We know what good looks like — and what it takes to connect every system that's in the way of getting there.
+              The team behind Constancia has connected finance systems inside some of the most complex functions on the FTSE 100 — multi-entity, multi-ERP, multi-currency. We know what good looks like, and what it takes to get there.
             </p>
           </div>
 

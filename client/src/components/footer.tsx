@@ -1,6 +1,10 @@
 import { Link } from "wouter";
 import { Linkedin, Mail, MapPin, ArrowUpRight } from "@/lib/icons";
-import logoWhite from "@assets/constancia-logo.png";
+// `-dark.png` is the cream/light wordmark intended for use on dark
+// surfaces (the suffix names the *intended surface*, not the logo
+// colour itself). The footer sits on graphite, so this is the right
+// asset; using the graphite-on-cream logo here would render invisible.
+import logoWhite from "@assets/constancia-logo-dark.png";
 import { VisitorDataManager } from "@/components/visitor-data-manager";
 import { useFeatureFlags } from "@/lib/feature-flags";
 import type { FeatureFlags } from "@shared/feature-flags";
