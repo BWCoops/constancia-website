@@ -67,7 +67,7 @@ export function generateEmailFooter(options: EmailFooterOptions = {}): string {
   const { 
     variant = 'dark',
     showFinanceCompass = false,
-    disclaimer = 'Constancia is an AI-first EPM advisory. Official Abacum partner for mid-market FP&A and OneStream partner for enterprise EPM.'
+    disclaimer = 'Constancia delivers connected finance intelligence — bringing ERP, EPM, HRIS, CRM and your data warehouse into one source of truth. Official Abacum partner for mid-market FP&A. OneStream partner for enterprise EPM.'
   } = options;
 
   const isDark = variant === 'dark';

@@ -67,9 +67,9 @@ export function Footer() {
             </Link>
             
             <div className="mb-4 text-sm leading-relaxed">
-              <p className="text-brand-cream">Finance Transformed.</p>
-              <p className="text-brand-cream">Designed for Change.</p>
-              <p style={{ color: 'var(--hp-cyan)', fontStyle: 'italic' }}>Driven by Technology.</p>
+              <p className="text-brand-cream">Connected finance intelligence.</p>
+              <p className="text-brand-cream">Make sense of every system.</p>
+              <p style={{ color: 'var(--hp-cyan)', fontStyle: 'italic' }}>One source of truth.</p>
             </div>
           </div>
 

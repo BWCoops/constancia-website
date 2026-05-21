@@ -26,7 +26,7 @@ const organizationSchema = {
   "alternateName": "Constancia Holdings",
   "url": "https://constancia.com",
   "logo": "https://constancia.com/logo.png",
-  "description": "AI-first EPM advisory delivering finance transformation across the UK and Ireland. Official Abacum and OneStream partner.",
+  "description": "Connected finance intelligence. Make sense of your finance data — from ERP to EPM, and everything in between. Official Abacum partner for mid-market FP&A. OneStream partner for enterprise EPM.",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Blount House, Hall Court, Hall Park Way",
@@ -46,14 +46,16 @@ const organizationSchema = {
   ],
   "areaServed": ["GB", "IE", "ZA", "US", "CA", "150"],
   "knowsAbout": [
-    "Enterprise Resource Planning",
+    "Connected Finance Intelligence",
     "Enterprise Performance Management",
+    "Financial Planning and Analysis",
+    "Finance Systems Integration",
     "Finance Transformation",
-    "Artificial Intelligence",
-    "Oracle Cloud",
-    "Anaplan",
+    "Abacum",
     "OneStream",
-    "Board"
+    "AI for Finance",
+    "ERP to EPM Integration",
+    "Data Reconciliation"
   ]
 };
 
@@ -62,7 +64,7 @@ const websiteSchema = {
   "@type": "WebSite",
   "name": "Constancia",
   "url": "https://constancia.com",
-  "description": "AI-first EPM advisory delivering finance transformation. Official Abacum and OneStream partner.",
+  "description": "Connected finance intelligence. One source of truth across every system you own.",
   "publisher": {
     "@type": "Organization",
     "name": "Constancia"

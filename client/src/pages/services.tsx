@@ -95,10 +95,10 @@ export default function ServicesPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Service",
-        "serviceType": "Enterprise Performance Management Advisory",
+        "serviceType": "Connected Finance Intelligence",
         "provider": { "@type": "Organization", "name": "Constancia", "url": "https://constancia.com" },
         "areaServed": ["GB", "IE", "ZA", "AE"],
-        "description": "Senior EPM advisory, platform selection, implementation, AI readiness, and finance transformation services. Fixed fee, no vendor agenda."
+        "description": "Connected finance intelligence: bringing ERP, EPM, HRIS, CRM, and data warehouse together so finance leaders get one source of truth. Platform selection, implementation, AI readiness, and ongoing intelligence delivery."
       }) }} />
       
       <Navigation />

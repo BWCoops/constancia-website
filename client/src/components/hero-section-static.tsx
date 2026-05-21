@@ -544,66 +544,66 @@ export function HeroSectionStatic() {
         <div className="hero-panel-stack">
           <div ref={panelRef(0)} className="hero-panel">
             <div className="hero-eyebrow stagger">
-              EPM Advisory · 2026
+              Connected Finance Intelligence · 2026
               <span className="hero-eyebrow-mint" />
             </div>
             <h1 id="hero-heading" className="hero-h1 stagger">
-              The EPM firm<br />
-              that charges <span className="hero-rose-mark">less</span><br />
-              and <em>delivers more</em>
+              Your finance function<span className="hero-period" /><br />
+              <span className="hero-rose-mark">finally</span><br />
+              <em>connected</em>
               <span className="hero-period" />
             </h1>
             <p className="hero-body stagger">
-              Senior practitioners, AI-augmented tools, and a fixed-fee model
-              that removes the cost and uncertainty of a typical consulting engagement.
+              Make sense of your finance data — from ERP to EPM, and everything in between.
+              One source of truth across every system you own.
             </p>
             <div className="hero-ctas stagger">
               {flags.financeCompass && (
                 <Link href="/finance-compass" className="hero-btn">
-                  Start your assessment <span className="hero-arrow">→</span>
+                  Start with FinanceCompass <span className="hero-arrow">→</span>
                 </Link>
               )}
               {flags.comparisonTools && (
                 <Link href="/tools/epm-comparison" className="hero-btn hero-btn--ghost">
-                  Compare platforms
+                  Talk to a partner
                 </Link>
               )}
             </div>
           </div>
 
           <div ref={panelRef(1)} className="hero-panel">
-            <div className="hero-num stagger">01 · Senior practitioners</div>
-            <h2 className="hero-h2 stagger">No juniors learning <em>on your dime</em>.</h2>
+            <div className="hero-num stagger">01 · Constancia Intelligence</div>
+            <h2 className="hero-h2 stagger">Get answers from your <em>numbers</em>.</h2>
             <p className="hero-body stagger">
-              Every engagement is staffed entirely with people who have already shipped this work at scale. The first person you meet is the person who builds it.
+              Ask "why did Q3 miss?" and get the cross-system trace — ERP entries, EPM forecasts, headcount, pipeline — in one answer. Not a dashboard. A decision.
             </p>
           </div>
 
           <div ref={panelRef(2)} className="hero-panel">
-            <div className="hero-num stagger">02 · Fixed price</div>
-            <h2 className="hero-h2 stagger">One price. <em>No time-and-materials.</em></h2>
+            <div className="hero-num stagger">02 · Connect every system</div>
+            <h2 className="hero-h2 stagger">Whatever you've got, <em>we connect</em>.</h2>
             <p className="hero-body stagger">
-              You know what it costs before we start, and that number does not move. Scope changes are conversations, not invoices.
+              Oracle, SAP, NetSuite, Workday, Salesforce, Snowflake, your spreadsheets. They stop being islands and start agreeing with themselves.
             </p>
           </div>
 
           <div ref={panelRef(3)} className="hero-panel">
-            <div className="hero-num stagger">03 · AI-native delivery</div>
-            <h2 className="hero-h2 stagger">Tooling embedded from <em>day one</em>.</h2>
+            <div className="hero-num stagger">03 · Built for independence</div>
+            <h2 className="hero-h2 stagger">We pick what fits, <em>not what pays</em>.</h2>
             <p className="hero-body stagger">
-              Our delivery model and your operating model are built around AI from the first conversation — not stapled on at the end.
+              Official Abacum partner for mid-market FP&amp;A. Official OneStream partner for enterprise EPM. Independent on every other vendor — so the recommendation is always the right one, not the most lucrative one.
             </p>
           </div>
 
           <div ref={panelRef(4)} className="hero-panel">
-            <div className="hero-num stagger">04 · Our partners</div>
+            <div className="hero-num stagger">04 · Proactive drift</div>
             <h2 className="hero-h2 stagger">
-              <em>Abacum</em> for mid-market.<br />
-              <em>OneStream</em> for enterprise.
+              The variance you'd find <em>at month-end</em>,<br />
+              surfaced <span className="hero-rose-mark">today</span>
               <span className="hero-period" />
             </h2>
             <p className="hero-body stagger">
-              An <span className="hero-rose-mark">AI-first</span> EPM advisory built on a deliberate pair of platforms — both designed for finance teams who want delivery, not slideware. Independent on every other vendor, with deep capability across the market for when you need an objective comparison.
+              Forecast accuracy, cash, close cycle, headcount cost — watched across every connected system. Alerts arrive before the board meeting, not after.
             </p>
           </div>
 
@@ -632,7 +632,7 @@ export function HeroSectionStatic() {
               Reckitt Benckiser · BAT
             </h2>
             <p className="hero-body stagger">
-              Some of the world's most complex finance functions. We know what good looks like — and what it costs to get there.
+              Some of the world's most complex finance functions. We know what good looks like — and what it takes to connect every system that's in the way of getting there.
             </p>
           </div>
 
@@ -643,7 +643,7 @@ export function HeroSectionStatic() {
               <span className="hero-period" />
             </h2>
             <p className="hero-body stagger">
-              FinanceCompass scores your finance function against 200+ EPM benchmarks in 12 minutes. Free. No call required.
+              FinanceCompass maps your finance function against 200+ EPM benchmarks in 12 minutes — and shows you where your systems are disconnected. Free. No call required.
             </p>
             {flags.financeCompass && (
               <div className="hero-ctas stagger">
@@ -657,11 +657,11 @@ export function HeroSectionStatic() {
           <div ref={panelRef(8)} className="hero-panel">
             <div className="hero-num stagger">08 · Let's talk</div>
             <h2 className="hero-h2 stagger">
-              Ready to <em>talk</em>
+              Ready to <em>connect</em>
               <span className="hero-period" />
             </h2>
             <p className="hero-body stagger">
-              No pitch. No commitment. Just someone who's done this before.
+              No pitch. No commitment. Just someone who has connected every system you're staring at — and knows what good looks like on the other side.
             </p>
             <div className="hero-ctas stagger">
               {flags.financeCompass && (

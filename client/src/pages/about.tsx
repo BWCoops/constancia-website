@@ -64,9 +64,9 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen page-dark">
       <SEOHead
-        title="About Constancia — AI-First EPM Advisory · Abacum + OneStream Partner"
-        description="Constancia is an AI-first EPM advisory. Official Abacum partner for mid-market FP&A, OneStream partner for enterprise. Built by senior practitioners who shipped finance transformation at AerCap, Howden, Reckitt Benckiser and BAT. Fixed fee, no time-and-materials."
-        keywords={["about Constancia", "EPM consultancy London", "senior EPM consultants", "finance technology advisory", "EPM practitioners"]}
+        title="About Constancia — Connected Finance Intelligence · Abacum + OneStream Partner"
+        description="Constancia is a connected finance intelligence firm. We bring disparate finance systems together — ERP, EPM, HRIS, CRM, data warehouse, the spreadsheets nobody talks about — into one source of truth. Official Abacum partner for mid-market FP&A. OneStream partner for enterprise. Built by senior practitioners who shipped finance transformation at AerCap, Howden, Reckitt Benckiser and BAT."
+        keywords={["about Constancia", "connected finance intelligence", "EPM consultancy", "finance systems integration", "senior finance practitioners", "finance technology advisory"]}
       />
       
       <Navigation />
@@ -150,7 +150,7 @@ export default function AboutPage() {
                 <h3 className="text-2xl font-bold mb-6">Our Vision</h3>
                 <div className="space-y-4">
                   <p className="leading-relaxed text-white/90">
-                    To make senior EPM advisory accessible to mid-market finance leaders, not just the firms that can afford a Big 4 retainer.
+                    To make every finance system in your business agree with itself — so finance leaders make decisions on one truth, not seven approximations.
                   </p>
                   <p className="leading-relaxed text-white/80">
                     Most businesses end up choosing between an expensive consultancy with a vendor incentive problem, or going it alone with a team that hasn't done it before. We're the third option.

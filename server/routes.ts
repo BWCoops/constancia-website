@@ -355,7 +355,7 @@ async function sendOtpEmail(email: string, firstName: string, otp: string): Prom
           <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
           
           <p style="color: #666; font-size: 12px;">
-            Constancia is an AI-first EPM advisory. Official Abacum partner for mid-market FP&amp;A and OneStream partner for enterprise EPM.
+            Constancia delivers connected finance intelligence. We bring disparate finance systems together — ERP, EPM, HRIS, CRM, data warehouse — so finance leaders get one source of truth. Official Abacum partner for mid-market FP&amp;A. OneStream partner for enterprise EPM.
             <br><br>
             Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ
             <br>
@@ -433,7 +433,7 @@ async function sendContactVerificationEmail(to: string, firstName: string, token
           <!-- Footer -->
           <div style="background-color: #0A2540; padding: 25px 20px; text-align: center;">
             <p style="color: #ffffff; font-size: 12px; margin: 0 0 10px 0;">
-              Constancia is an AI-first EPM advisory. Official Abacum partner for mid-market FP&amp;A and OneStream partner for enterprise EPM.
+              Constancia delivers connected finance intelligence. We bring disparate finance systems together — ERP, EPM, HRIS, CRM, data warehouse — so finance leaders get one source of truth. Official Abacum partner for mid-market FP&amp;A. OneStream partner for enterprise EPM.
             </p>
             <p style="color: #aaaaaa; font-size: 12px; margin: 0 0 10px 0;">
               Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ
@@ -2215,9 +2215,9 @@ function generateWordPressHTML(): string {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <!-- Primary Meta Tags -->
-  <title>Constancia | AI-first EPM Advisory</title>
-  <meta name="title" content="Constancia | AI-first EPM Advisory">
-  <meta name="description" content="Constancia is an AI-first EPM advisory. Official Abacum partner for mid-market FP&amp;A and OneStream partner for enterprise EPM.">
+  <title>Constancia | Connected Finance Intelligence</title>
+  <meta name="title" content="Constancia | Connected Finance Intelligence">
+  <meta name="description" content="Constancia delivers connected finance intelligence. We bring disparate finance systems together — ERP, EPM, HRIS, CRM, data warehouse — so finance leaders get one source of truth. Official Abacum partner for mid-market FP&amp;A. OneStream partner for enterprise EPM.">
   <meta name="keywords" content="EPM advisory, FP&amp;A, finance transformation, Abacum partner, OneStream partner, AI finance, CFO advisory">
   <meta name="author" content="Constancia">
   <meta name="robots" content="index, follow">
@@ -2226,7 +2226,7 @@ function generateWordPressHTML(): string {
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://constancia.com/">
-  <meta property="og:title" content="Constancia | AI-first EPM Advisory">
+  <meta property="og:title" content="Constancia | Connected Finance Intelligence">
   <meta property="og:description" content="AI-first EPM advisory. Official Abacum and OneStream partner.">
   <meta property="og:image" content="https://constancia.com/og-image.png">
   <meta property="og:site_name" content="Constancia">
@@ -2235,7 +2235,7 @@ function generateWordPressHTML(): string {
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://constancia.com/">
-  <meta name="twitter:title" content="Constancia | AI-first EPM Advisory">
+  <meta name="twitter:title" content="Constancia | Connected Finance Intelligence">
   <meta name="twitter:description" content="AI-first EPM advisory. Official Abacum and OneStream partner.">
   <meta name="twitter:image" content="https://constancia.com/og-image.png">
 
@@ -2305,7 +2305,7 @@ function generateWordPressHTML(): string {
       <div class="hero-content">
         <span class="badge">Independent Finance Consultancy</span>
         <h1 id="hero-heading">Modernise Your Finance Function with Confidence</h1>
-        <p class="hero-description">Constancia partners with CFOs and finance leaders as an AI-first EPM advisory. Official Abacum partner for mid-market FP&amp;A and OneStream partner for enterprise EPM.</p>
+        <p class="hero-description">Your finance function, finally connected. Constancia brings disparate finance systems together so CFOs get one source of truth — from ERP to EPM, and everything in between. Official Abacum partner for mid-market FP&amp;A. OneStream partner for enterprise EPM.</p>
         <div class="hero-buttons">
           <a href="#contact" class="btn btn-primary btn-lg">Start Your Transformation</a>
           <a href="#services" class="btn btn-outline btn-lg">Explore Services</a>
@@ -2352,7 +2352,7 @@ function generateWordPressHTML(): string {
       <div class="container">
         <span class="badge">About Constancia</span>
         <h2 id="about-heading">Your Trusted Finance Technology Partner</h2>
-        <p>Constancia is an AI-first EPM advisory. We combine deep technical expertise with practical business insight to deliver measurable outcomes for CFOs and finance transformation leaders.</p>
+        <p>Constancia delivers connected finance intelligence. We bring every finance system together — ERP, EPM, HRIS, CRM, data warehouse, and the spreadsheets nobody talks about — into one source of truth, so CFOs decide on agreement instead of approximation.</p>
         
         <ul class="benefits-list">
           <li>Vendor-neutral advice focused on your organisation's needs</li>
