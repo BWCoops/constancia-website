@@ -1494,7 +1494,11 @@ div[class*="hs-chat"] {
 .wordmark-intro--settle .wordmark-intro__sphere--rose { transform: translate(2vw, -2vh) scale(0.45); opacity: 0.95; }
 .wordmark-intro--settle .wordmark-intro__sphere--mint { transform: translate(-2vw, 2vh) scale(0.45); opacity: 0.95; }
 .wordmark-intro--settle .wordmark-intro__wordmark,
-.wordmark-intro--dissolve .wordmark-intro__wordmark { opacity: 1; transform: scale(1); }
+.wordmark-intro--dissolve .wordmark-intro__wordmark {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+}
 
 /* Phase: dissolve — spheres fade into the wordmark's baked circles
    and the logo stands alone. */

@@ -188,29 +188,43 @@ export function HeroFabricCanvas({ className }: HeroFabricCanvasProps) {
     resizeWithDpr();
     window.addEventListener("resize", resizeWithDpr);
 
-    // Soft pointer parallax — tilts the fabric stack slightly with
-    // the cursor for a sense of depth. Disabled under reduced motion.
-    let mxSmooth = 0, mySmooth = 0, tx = 0.5, ty = 0.5;
-    function onMove(e: PointerEvent) {
-      tx = e.clientX / window.innerWidth;
-      ty = e.clientY / window.innerHeight;
+    // Scroll-driven parallax — the fabric stack tilts/drifts as the
+    // user scrolls through the hero. Replaces the previous pointer
+    // parallax, which felt like a mouse-tracker rather than a
+    // narrative. Hero is 320vh tall, so scrollProgress goes 0 → 1
+    // over 220vh of scroll (since the inner is 100vh sticky).
+    let scrollProgress = 0;
+    function readScrollProgress() {
+      const stage = canvas.parentElement; // .landing-hero__inner -> .landing-hero
+      const hero = stage?.parentElement ?? null;
+      if (!hero) return;
+      const rect = hero.getBoundingClientRect();
+      const total = Math.max(1, rect.height - window.innerHeight);
+      // 0 when hero top is at viewport top; 1 when hero bottom hits
+      // viewport bottom.
+      scrollProgress = Math.min(1, Math.max(0, -rect.top / total));
     }
-    if (!reduced) window.addEventListener("pointermove", onMove);
+    readScrollProgress();
+    window.addEventListener("scroll", readScrollProgress, { passive: true });
 
     const clock = new THREE.Clock();
     let rafId = 0;
+    let pSmooth = 0;
     function tick() {
       const t = clock.getElapsedTime();
-      // Smooth pointer toward target.
-      mxSmooth += ((tx - 0.5) - mxSmooth) * 0.06;
-      mySmooth += ((ty - 0.5) - mySmooth) * 0.06;
+      // Smooth the scroll progress so jumps don't snap.
+      pSmooth += (scrollProgress - pSmooth) * 0.08;
+      // Map 0..1 to a -0.5..0.5 range for symmetric tilt about the
+      // hero midpoint.
+      const sx = pSmooth - 0.5;
       LAYERS.forEach(mesh => {
         const mat = mesh.material as THREE.ShaderMaterial;
         if (!reduced) mat.uniforms.uTime.value = t;
-        // Light depth-parallax — back layers drift less, front layers more.
-        mesh.rotation.y = mxSmooth * 0.04;
-        mesh.position.x = -mxSmooth * 0.4;
-        mesh.position.y = (mesh.userData.posY ?? mesh.position.y) - mySmooth * 0.15;
+        // Depth-parallax driven by scroll position — front layers
+        // drift more, back layers less.
+        mesh.rotation.y = sx * 0.10;
+        mesh.position.x = -sx * 0.6;
+        mesh.position.y = (mesh.userData.posY ?? mesh.position.y) - pSmooth * 0.35;
       });
       if (renderer) renderer.render(scene, camera);
       rafId = requestAnimationFrame(tick);
@@ -220,7 +234,7 @@ export function HeroFabricCanvas({ className }: HeroFabricCanvasProps) {
     return () => {
       cancelAnimationFrame(rafId);
       window.removeEventListener("resize", resizeWithDpr);
-      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("scroll", readScrollProgress);
       LAYERS.forEach(mesh => {
         mesh.geometry.dispose();
         (mesh.material as THREE.ShaderMaterial).dispose();
