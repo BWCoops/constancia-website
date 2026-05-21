@@ -22,7 +22,7 @@ export default function Home() {
     <div className="min-h-screen bg-background" style={{ fontFamily: 'var(--brand-font-sans)', overflowX: 'clip' }}>
       <SEOHead
         title="Constancia — Connected Finance Intelligence · Abacum + OneStream Partner"
-        description="Connected finance intelligence. Make sense of your finance data — from ERP to EPM, and everything in between. Official Abacum partner for mid-market FP&A. OneStream partner for enterprise."
+        description="Connected finance intelligence. Make sense of your finance data, from ERP to EPM, and everything in between. Official Abacum partner for mid-market FP&A. OneStream partner for enterprise."
         keywords={[
           "connected finance intelligence",
           "enterprise finance intelligence",

@@ -65,7 +65,7 @@ export default function AboutPage() {
     <div className="min-h-screen page-dark">
       <SEOHead
         title="About Constancia — Connected Finance Intelligence · Abacum + OneStream Partner"
-        description="Constancia is a connected finance intelligence firm. We bring disparate finance systems together — ERP, EPM, HRIS, CRM, data warehouse, the spreadsheets nobody talks about — into one source of truth. Official Abacum partner for mid-market FP&A. OneStream partner for enterprise. Built by senior practitioners with deep FTSE 100 finance transformation experience."
+        description="Constancia is a connected finance intelligence firm. We bring every finance system you own into one source of truth: ERP, EPM, HRIS, CRM, data warehouse, and the spreadsheets nobody talks about. Official Abacum partner for mid-market FP&A. OneStream partner for enterprise. Built by senior practitioners with deep FTSE 100 finance experience."
         keywords={["about Constancia", "connected finance intelligence", "EPM consultancy", "finance systems integration", "senior finance practitioners", "finance technology advisory"]}
       />
       
@@ -150,7 +150,7 @@ export default function AboutPage() {
                 <h3 className="text-2xl font-bold mb-6">Our Vision</h3>
                 <div className="space-y-4">
                   <p className="leading-relaxed text-white/90">
-                    To make every finance system in your business agree with itself — so finance leaders make decisions on one truth, not seven approximations.
+                    To make every finance system in your business agree with itself, so finance leaders decide on one truth rather than seven approximations.
                   </p>
                   <p className="leading-relaxed text-white/80">
                     Most businesses end up choosing between an expensive consultancy with a vendor incentive problem, or going it alone with a team that hasn't done it before. We're the third option.

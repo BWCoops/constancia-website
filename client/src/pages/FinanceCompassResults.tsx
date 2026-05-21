@@ -3592,7 +3592,7 @@ export default function FinanceCompassResults() {
                                 medianScore: 45,
                                 actionableInsight: isLowScore
                                   ? "Assess current technology landscape and develop a consolidation roadmap"
-                                  : "Optimise integrations and leverage platform capabilities more fully",
+                                  : "Tighten the integrations and use more of what the platform already does.",
                                 businessImpact: "Technology optimisation typically delivers 20-35% reduction in system costs and complexity",
                                 icon: <Monitor className="h-4 w-4" />,
                               };

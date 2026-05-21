@@ -843,7 +843,7 @@ const AssessmentJourneyView = memo(function AssessmentJourneyView({
       duration: "Combined insights",
       status: isFinalReportReady ? "completed" : "locked",
       icon: FileText,
-      description: "AI-validated comprehensive report",
+      description: "Full report, AI-validated",
       actionLabel: isFinalReportReady ? "View Report" : "Complete Full Assessment",
       actionHref: isFinalReportReady && fullAssessment ? `/finance-compass/results/${fullAssessment.id}` : null,
       locked: !isFinalReportReady, // Locked until full assessment is analysed
@@ -1750,7 +1750,7 @@ const AnalyticsDashboard = memo(function AnalyticsDashboard({
           tooltipContent={{
             measures: "Composite score reflecting AI adoption, machine learning capabilities, data analytics maturity, and intelligent automation across finance.",
             goodIndicators: "75%+ indicates production AI use cases, ML-enhanced insights, and advanced analytics driving better decisions.",
-            improvementAreas: "Below 50% suggests early AI exploration phase with significant potential to leverage AI for competitive advantage."
+            improvementAreas: "Below 50% means you're early in your AI journey. Strong runway to use AI to get ahead of less prepared peers."
           }}
         />
         <KpiIndicator

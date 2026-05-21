@@ -155,7 +155,7 @@ const tiers = [
     id: "full",
     name: "Full Assessment",
     tagline: "Complete AI-Ready Transformation",
-    description: "Comprehensive 74-question analysis across 7 dimensions with AI-powered insights, execution tracking, and transformation roadmap",
+    description: "74 questions across 7 dimensions. AI-validated insights, execution tracking, and a sequenced roadmap. Built for finance leaders who want depth.",
     duration: "35-45 minutes",
     badge: "Premium",
     badgeVariant: "outline" as const,
@@ -693,7 +693,7 @@ export default function FinanceCompassLanding() {
           </div>
           <CardTitle className="text-xl text-[#12161D]">Continue to Full Assessment</CardTitle>
           <CardDescription>
-            Register to unlock your comprehensive 74-question assessment with AI-powered insights and transformation roadmap.
+            Register to run the full 74-question assessment. Get the deeper scoring, the AI analysis, and a roadmap that's actually about your stack.
           </CardDescription>
           {/* Progression indicator */}
           <div className="flex items-center gap-2 mt-3 text-xs">
@@ -1011,27 +1011,27 @@ export default function FinanceCompassLanding() {
                 <span className="text-brand-cyan">disconnected</span>
               </h1>
               
-              <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-white/80 text-sm mb-6">
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="h-4 w-4 text-brand-cyan" />
-                  <span>Personalised roadmap</span>
+              {/* Stat row: replaces the three identical "✓ feature"
+                  pills with something specific. Numbers feel real;
+                  generic check-marks read as filler. */}
+              <div className="grid grid-cols-3 max-w-2xl mx-auto mb-6 sm:mb-8 divide-x divide-white/15">
+                <div className="px-3 sm:px-6 text-center">
+                  <div className="text-2xl sm:text-3xl font-light text-brand-cyan">12<span className="text-sm sm:text-base text-white/60 ml-1">min</span></div>
+                  <div className="text-[11px] sm:text-xs text-white/65 uppercase tracking-wider mt-1">to a score</div>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="h-4 w-4 text-brand-cyan" />
-                  <span>Vendor recommendations</span>
+                <div className="px-3 sm:px-6 text-center">
+                  <div className="text-2xl sm:text-3xl font-light text-brand-cyan">200<span className="text-sm sm:text-base text-white/60 ml-0.5">+</span></div>
+                  <div className="text-[11px] sm:text-xs text-white/65 uppercase tracking-wider mt-1">EPM benchmarks</div>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="h-4 w-4 text-brand-cyan" />
-                  <span>ROI projections</span>
+                <div className="px-3 sm:px-6 text-center">
+                  <div className="text-2xl sm:text-3xl font-light text-brand-cyan">£0</div>
+                  <div className="text-[11px] sm:text-xs text-white/65 uppercase tracking-wider mt-1">no call required</div>
                 </div>
               </div>
-              
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-[#7FB8A3]/40">
-                <Zap className="h-4 w-4 text-brand-cyan" />
-                <span className="text-sm font-bold text-brand-cyan">Consulting-Grade Analysis</span>
-                <span className="text-white/40 hidden sm:inline">|</span>
-                <span className="text-sm text-white/90 hidden sm:inline">Worth £20k+</span>
-              </div>
+
+              <p className="text-white/75 text-sm sm:text-base max-w-xl mx-auto mb-8">
+                Run the diagnostic. See where your finance systems disagree with each other. Walk away with a sequenced roadmap, not a sales pitch.
+              </p>
             </div>
             
             <div className="mb-8 sm:mb-10">
@@ -1217,11 +1217,10 @@ export default function FinanceCompassLanding() {
                 See What You'll Get
               </Badge>
               <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3 px-2">
-                Your Personalised Finance Transformation Report
+                Your report, in plain English
               </h2>
               <p className="text-sm sm:text-base text-white/70 max-w-2xl mx-auto px-2">
-                Complete the assessment to receive a comprehensive analysis across 7 dimensions, 
-                with tailored recommendations and a roadmap for your finance transformation journey.
+                Finish the assessment and you get a scored breakdown across 7 dimensions, the gaps that matter most, and a sequenced roadmap that names the systems involved.
               </p>
             </motion.div>
 
@@ -1313,7 +1312,7 @@ export default function FinanceCompassLanding() {
                 </div>
                 <div>
                   <p className="font-semibold text-[#12161D] dark:text-white text-sm">7 Dimensions</p>
-                  <p className="text-xs text-muted-foreground">Comprehensive analysis</p>
+                  <p className="text-xs text-muted-foreground">Full diagnostic</p>
                 </div>
               </div>
               <div className="flex items-center gap-3 p-3 sm:p-4 rounded-xl bg-white dark:bg-card border border-border/50 shadow-sm">
@@ -1405,7 +1404,7 @@ export default function FinanceCompassLanding() {
               <p className="text-sm sm:text-base lg:text-lg text-muted-foreground max-w-3xl mx-auto px-2">
                 Our assessment platform evaluates your finance function across seven key dimensions, 
                 including Financial Planning & Analysis, Management Reporting, Technology Systems, and Data Analytics. 
-                You'll receive a comprehensive Finance Transformation Readiness score and a tailored transformation roadmap in minutes, not weeks.
+                You leave with a Finance Readiness score, the dimensions where you're disconnected, and a sequenced roadmap. Minutes, not weeks.
               </p>
             </motion.div>
 
@@ -1571,7 +1570,7 @@ export default function FinanceCompassLanding() {
                         Full Assessment
                       </CardTitle>
                       <CardDescription className="text-sm">
-                        Our most comprehensive assessment with dedicated consultant support and a personalised transformation roadmap.
+                        The deepest tier. A senior consultant works the diagnostic with you, and the roadmap is built around your stack, not a template.
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="pt-0 space-y-2">
