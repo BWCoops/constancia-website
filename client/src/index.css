@@ -707,11 +707,10 @@
 
 .hero-logo-real {
   position: absolute;
-  /* Centred vertically so the wordmark IS the brain of the
-     connection diagram. The chips fly toward it from the left and
-     the output beam emerges from its right side. Sits above the
-     diagram in z-index so the chips never visually cover it. */
-  top: 38%; left: 50%;
+  /* Sits in the upper third — high enough that the body panel copy
+     occupies the bottom 45% of the viewport without any vertical
+     overlap. Diagram beams converge on this point. */
+  top: 30%; left: 50%;
   transform: translate(-50%, -50%);
   width: clamp(220px, 24vmin, 380px);
   z-index: 7;
@@ -724,7 +723,7 @@
   position: absolute;
   /* Matches .hero-logo-real so the deconstruct/reassemble
      animation crossfades cleanly with the diagram's centre point. */
-  top: 38%; left: 50%;
+  top: 30%; left: 50%;
   transform: translate(-50%, -50%);
   z-index: 6;
   display: inline-flex; align-items: baseline;
@@ -777,23 +776,27 @@
   backface-visibility: hidden;
   pointer-events: none;
   will-change: transform, opacity;
-  top: 62%;
+  /* Lives in the lower half of the viewport. The wordmark + diagram
+     occupy the upper third (logo at top:30%, diagram centre ~30%);
+     panels are anchored at top:72% transform translateY(-50%), so
+     they span roughly 55%-90% vertically. Wordmark + panel never
+     occupy the same vertical band. */
+  top: 72%;
   transform: translateY(-50%);
-  /* Frosted backdrop behind copy so panel text always reads against
-     the diagram + canvas layers underneath. Radial cream wash that
-     fades to transparent at the edges — no hard card boundary, just
-     a soft pool of legibility under the text. */
-  padding: 48px 56px;
+  /* Frosted backdrop behind copy so panel text reads against any
+     ambient atmosphere (canvas, grain). Radial cream wash that
+     fades to transparent at the edges — no hard card boundary. */
+  padding: 36px 48px;
   background:
     radial-gradient(ellipse 75% 65% at 50% 50%,
-      rgba(246,243,238,0.92) 0%,
-      rgba(246,243,238,0.78) 35%,
-      rgba(246,243,238,0.35) 70%,
+      rgba(246,243,238,0.94) 0%,
+      rgba(246,243,238,0.82) 35%,
+      rgba(246,243,238,0.40) 70%,
       rgba(246,243,238,0) 100%);
   border-radius: 32px;
 }
 @media (max-width: 640px) {
-  .hero-panel { padding: 32px 24px; }
+  .hero-panel { padding: 28px 20px; }
 }
 .hero-panel .stagger { will-change: transform, opacity; }
 

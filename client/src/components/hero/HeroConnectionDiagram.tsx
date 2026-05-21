@@ -54,39 +54,66 @@ interface HeroConnectionDiagramProps {
 const VIEW_W = 1600;
 const VIEW_H = 900;
 
-// Centre is where Constancia sits. y is shifted up (38% of VIEW_H)
-// to align with the wordmark's top:38% in the parent layout — beams
-// converge on the real wordmark rather than empty space below it.
-const CENTRE = { x: VIEW_W / 2, y: VIEW_H * 0.38 };
+// Centre is where Constancia sits. y at 30% of VIEW_H to align
+// with the wordmark's top:30% in the parent layout — beams
+// converge on the real wordmark, panels (which sit at top:72%)
+// never overlap the diagram or the wordmark.
+const CENTRE = { x: VIEW_W / 2, y: VIEW_H * 0.30 };
 
 // Vendor chips originate from the left edge in a vertical column,
 // then fly to one of several insertion points around the centre.
-// Their "start" position lives just outside the visible area so
-// they slide IN, not appear. Lane vertical span is bracketed around
-// CENTRE.y rather than the full viewbox so the chips form a column
-// near the wordmark, not stretching to the very bottom of the SVG.
-const LEFT_LANE_Y_TOP = CENTRE.y - 240;
-const LEFT_LANE_Y_BOTTOM = CENTRE.y + 240;
+// Lane spans 180px above and below CENTRE.y so the column stays
+// in the upper third of the viewport, never reaching down into
+// the body-copy panel area.
+const LEFT_LANE_Y_TOP = CENTRE.y - 180;
+const LEFT_LANE_Y_BOTTOM = CENTRE.y + 180;
 
 // Right output anchor — sits on the same line as the wordmark.
 const OUTPUT_X = VIEW_W - 120;
 const OUTPUT_Y = CENTRE.y;
 
-// Coordinated with the wordmark choreography in hero-section-static.
-// The logo explodes outward over 0.10-0.28 — the chips arrive in the
-// same window, so the viewer reads "logo decomposes into systems".
-// The diagram holds through 0.28-0.55 while body panels scroll past,
-// then fades 0.55-0.75 as the logo begins reassembling.
-const PHASE = {
-  CHIPS_START: 0.10,
-  CHIPS_END: 0.30,
-  BEAMS_START: 0.22,
-  BEAMS_END: 0.45,
-  OUTPUT_START: 0.38,
-  OUTPUT_END: 0.55,
-  DIAGRAM_FADE_START: 0.62,
-  DIAGRAM_FADE_END: 0.78,
+// Two-cycle choreography. The diagram plays the SAME assembly
+// sequence twice: once on intro (0.00-0.15 of scroll, while the
+// logo is still whole) and once on outro (0.78-1.00, as the logo
+// reassembles for the contact panel). Between the two cycles
+// (0.20-0.78) the diagram is fully hidden so body panels read on
+// a clean stage.
+//
+// Within each cycle the sub-phases run in the same order:
+//   0.00 → 0.55  chips fly in from the left
+//   0.40 → 0.85  beams draw toward the centre with particles
+//   0.65 → 1.00  output ribbon emerges on the right
+//
+// `cycleProgress()` maps the global 0-1 scroll into this 0-1 local
+// cycle phase, returning 0 (hidden) in the dead zone between.
+
+const CYCLE_ONE = { start: 0.00, end: 0.15 } as const;
+const CYCLE_TWO = { start: 0.78, end: 1.00 } as const;
+
+const SUB_PHASE = {
+  CHIPS_START: 0.00,
+  CHIPS_END: 0.55,
+  BEAMS_START: 0.40,
+  BEAMS_END: 0.85,
+  OUTPUT_START: 0.65,
+  OUTPUT_END: 1.00,
 } as const;
+
+function cycleProgress(p: number): { localP: number; visible: boolean } {
+  if (p <= CYCLE_ONE.end) {
+    return {
+      localP: clamp01((p - CYCLE_ONE.start) / (CYCLE_ONE.end - CYCLE_ONE.start)),
+      visible: true,
+    };
+  }
+  if (p >= CYCLE_TWO.start) {
+    return {
+      localP: clamp01((p - CYCLE_TWO.start) / (CYCLE_TWO.end - CYCLE_TWO.start)),
+      visible: true,
+    };
+  }
+  return { localP: 0, visible: false };
+}
 
 function clamp01(x: number) {
   return Math.max(0, Math.min(1, x));
@@ -185,35 +212,33 @@ export function HeroConnectionDiagram({ progress, className }: HeroConnectionDia
   const p = clamp01(progress ?? internalProgress);
   const layout = useMemo(() => buildLayout(), []);
 
-  // Phase progress values.
-  const chipsPhase = ease(PHASE.CHIPS_START, PHASE.CHIPS_END, p);
-  const beamsPhase = ease(PHASE.BEAMS_START, PHASE.BEAMS_END, p);
-  const outputPhase = ease(PHASE.OUTPUT_START, PHASE.OUTPUT_END, p);
+  // Map global scroll into the local cycle (0-1 within cycle, or
+  // 0 + invisible in the dead zone between cycles). The diagram
+  // plays the SAME animation in cycle 1 and cycle 2.
+  const { localP, visible } = cycleProgress(p);
 
-  // Logo breathes throughout; pulses harder as data arrives.
-  const logoPulse = useMemo(() => {
-    const base = 1 + Math.sin(p * Math.PI * 3.5) * 0.014;
-    const dataLoad = (chipsPhase + beamsPhase + outputPhase) / 3;
-    return base * (1 + dataLoad * 0.05);
-  }, [p, chipsPhase, beamsPhase, outputPhase]);
+  const chipsPhase = ease(SUB_PHASE.CHIPS_START, SUB_PHASE.CHIPS_END, localP);
+  const beamsPhase = ease(SUB_PHASE.BEAMS_START, SUB_PHASE.BEAMS_END, localP);
+  const outputPhase = ease(SUB_PHASE.OUTPUT_START, SUB_PHASE.OUTPUT_END, localP);
 
-  // Wrapping perspective: slight rotateX for depth, plus a barely-
-  // perceptible Y-wobble that follows scroll.
-  const stageTransform = `perspective(1800px) rotateX(8deg) rotateY(${-2 + p * 4}deg)`;
+  // Wrapping perspective: subtle 3D tilt that follows the local
+  // cycle phase rather than global scroll, so both cycles get the
+  // same visual sweep.
+  const stageTransform = `perspective(1800px) rotateX(8deg) rotateY(${-2 + localP * 4}deg)`;
 
-  // Diagram fade-out: once the body panels are well into the scroll,
-  // the wordmark begins reassembling. We dim the diagram so the
-  // logo can take the centre back without competing visuals. After
-  // the fade window, the diagram is fully invisible and the final
-  // contact panel reads on a clean stage with the reassembled mark.
-  const diagramFade = 1 - ease(PHASE.DIAGRAM_FADE_START, PHASE.DIAGRAM_FADE_END, p);
-
+  // Layer visibility: hidden in the dead zone (0.20-0.78) so body
+  // copy panels read on a clean stage with no diagram artefacts
+  // bleeding through.
   return (
     <div
       ref={wrapperRef}
       className={`hero-connection-diagram ${className ?? ""}`}
       aria-hidden="true"
-      style={{ opacity: diagramFade }}
+      style={{
+        opacity: visible ? 1 : 0,
+        pointerEvents: "none",
+        transition: visible ? "none" : "opacity 0.2s ease-out",
+      }}
     >
       <svg
         viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
@@ -276,12 +301,14 @@ export function HeroConnectionDiagram({ progress, className }: HeroConnectionDia
           </filter>
         </defs>
 
-        {/* Soft halo behind the Constancia mark. Scales with data load. */}
+        {/* Soft halo behind the Constancia mark. Pulses with the
+            chips + beams + output sub-phases (averaged so the halo
+            grows as data accumulates). */}
         <ellipse
           cx={CENTRE.x}
           cy={CENTRE.y}
-          rx={260 * logoPulse}
-          ry={180 * logoPulse}
+          rx={260 * (1 + ((chipsPhase + beamsPhase + outputPhase) / 3) * 0.08)}
+          ry={180 * (1 + ((chipsPhase + beamsPhase + outputPhase) / 3) * 0.08)}
           fill="url(#logo-halo)"
         />
 
