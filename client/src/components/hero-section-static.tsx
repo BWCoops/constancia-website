@@ -12,11 +12,18 @@ import { HeroConnectionDiagram } from "./hero/HeroConnectionDiagram";
 // to give us scroll runway.
 // =============================================================================
 
-// Outro stop at 0.85 — gives the "Ready to talk" panel ~15% of scroll
-// to dwell fully visible before the sticky-exit slide carries it off-screen
-// and the footer rises into view. No premature opacity fade.
-const STOPS = [0.04, 0.14, 0.24, 0.34, 0.44, 0.54, 0.64, 0.74, 0.85];
-const SECTION = 0.14;
+// Panel stops aligned with the two-cycle diagram choreography.
+// Cycle 1 plays 0.00–0.15 (chips arrive, beams, output emerges).
+// Brief handoff 0.15–0.20. Body panels 0–7 then read on a clean
+// stage from ~0.20–0.78. Cycle 2 + the contact panel co-exist
+// from 0.85–1.00, where the diagram and panel 8 share the
+// viewport (different vertical bands — they never overlap).
+//
+// STOPS spaced 0.07 apart, SECTION 0.035 → each panel's visibility
+// window EXACTLY abuts the next. No overlap zone where two
+// headlines briefly co-fade and become unreadable.
+const STOPS = [0.24, 0.31, 0.38, 0.45, 0.52, 0.59, 0.66, 0.73, 0.92];
+const SECTION = 0.035;
 
 const LETTER_FLY = [
   { dx: -360, dy: -280, rot: -10 },
@@ -402,11 +409,22 @@ export function HeroSectionStatic() {
         if (i === STOPS.length - 1) offset = Math.min(0, offset);
         const absOffset = Math.abs(offset);
         if (absOffset < minAbs) { minAbs = absOffset; activeIdx = i; }
-        const cl = Math.max(-1.6, Math.min(1.6, offset));
-        const ty = -cl * 60;
-        const tz = cl > 0 ? cl * 380 : cl * 600;
-        const rx = -cl * 11;
-        const parentOpacity = Math.max(0, 1 - Math.pow(absOffset, 1.35));
+        // Tightened transform range so panels don't move dramatically
+        // across the viewport during the cross-fade. Smaller ty/tz/rx
+        // means transitions feel like punchier cuts rather than long
+        // animated slides where two headlines briefly overlap.
+        const cl = Math.max(-1.4, Math.min(1.4, offset));
+        const ty = -cl * 28;
+        const tz = cl > 0 ? cl * 160 : cl * 240;
+        const rx = -cl * 5;
+        // Plateau-then-fade opacity curve. Panel sits at full opacity
+        // for the central 70% of its window, fades hard at the edges.
+        // Combined with the STOPS spacing > SECTION, every scroll
+        // position renders ONE solid panel (or a clean cream gap
+        // between two panels — no muddy overlap of two headlines).
+        const parentOpacity = absOffset < 0.55
+          ? 1
+          : Math.max(0, 1 - (absOffset - 0.55) / 0.45);
         panel.style.transform = `translate(0, calc(-50% + ${ty.toFixed(2)}vh)) translate3d(0, 0, ${tz.toFixed(1)}px) rotateX(${rx.toFixed(2)}deg)`;
         panel.style.opacity = parentOpacity.toFixed(3);
         panel.style.pointerEvents = parentOpacity > 0.4 ? "auto" : "none";
