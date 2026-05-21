@@ -240,17 +240,24 @@ export function HeroFabricCanvas({ className }: HeroFabricCanvasProps) {
       // Map 0..1 to a -0.5..0.5 range for symmetric tilt about the
       // hero midpoint.
       const sx = pSmooth - 0.5;
+      // Camera dollies forward on scroll so the user feels they're
+      // moving through the stacked fabric layers. From z=5 (default)
+      // to z=-2 takes the camera past the first three planes
+      // (z = 0.4, -2.5, -5.5), revealing the back layers as the
+      // front ones slide overhead.
+      camera.position.z = 5.0 - pSmooth * 7.0;
+      // Subtle counter-tilt about the hero midpoint so the fabric
+      // still feels alive when you scroll. Small angle — too much
+      // here turns the dolly into a tumble.
+      camera.rotation.z = sx * 0.04;
+
       LAYERS.forEach((mesh, i) => {
         const mat = mesh.material as THREENS.ShaderMaterial;
         if (!reduced) mat.uniforms.uTime.value = t;
-        // Scroll-driven tilt only — no position shifts. The fabric
-        // stays anchored on screen across the whole 320vh scroll so
-        // scrolling up/down moves "through" the fabric (like looking
-        // through different angles of a folded sheet) instead of
-        // pushing it off the edges. Front layers tilt more than back.
+        // Each layer also tilts a touch in y for parallax body.
+        // Front layers tilt more than back, scaled by index.
         const depthFactor = 1 - i * 0.12;
-        mesh.rotation.y = sx * 0.18 * depthFactor;
-        mesh.rotation.z = (mesh.userData.rotZ ?? mesh.rotation.z) + sx * 0.06 * depthFactor;
+        mesh.rotation.y = sx * 0.10 * depthFactor;
       });
       if (renderer) renderer.render(scene, camera);
       rafId = requestAnimationFrame(tick);
