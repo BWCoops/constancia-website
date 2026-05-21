@@ -31,25 +31,29 @@ interface WordmarkIntroProps {
 
 export function WordmarkIntro({ className }: WordmarkIntroProps) {
   const prefersReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
-  const [phase, setPhase] = useState<"init" | "fly" | "settle" | "dissolve">("init");
+  const [phase, setPhase] = useState<"init" | "appear" | "fly" | "settle" | "dissolve">("init");
 
   useEffect(() => {
     if (prefersReducedMotion) {
       setPhase("dissolve");
       return;
     }
-    // Sequence the phases so the spheres lead the wordmark by ~400ms
-    // and then dissolve once the logo is on screen. Timing tuned for
-    // the fly-in to be visible to the user — quicker than this and
-    // the spheres just appear settled, slower and the page feels
-    // unresponsive.
-    const t1 = window.setTimeout(() => setPhase("fly"), 200);
-    const t2 = window.setTimeout(() => setPhase("settle"), 1600);
-    const t3 = window.setTimeout(() => setPhase("dissolve"), 2800);
+    // Sequence:
+    //   0 → 300ms     init      (everything hidden)
+    //   300 → 1300ms  appear    (wordmark fades + scales in on its own)
+    //   1300 → 2500ms fly       (spheres fly in from off-screen)
+    //   2500 → 3500ms settle    (spheres land on the wordmark's dot
+    //                            positions, completing the logo)
+    //   3500ms+       dissolve  (spheres fade into the logo)
+    const t1 = window.setTimeout(() => setPhase("appear"), 300);
+    const t2 = window.setTimeout(() => setPhase("fly"), 1300);
+    const t3 = window.setTimeout(() => setPhase("settle"), 2500);
+    const t4 = window.setTimeout(() => setPhase("dissolve"), 3500);
     return () => {
       window.clearTimeout(t1);
       window.clearTimeout(t2);
       window.clearTimeout(t3);
+      window.clearTimeout(t4);
     };
   }, [prefersReducedMotion]);
 

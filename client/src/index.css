@@ -1483,18 +1483,34 @@ div[class*="hs-chat"] {
 .wordmark-intro--init .wordmark-intro__sphere--rose { transform: translate(70vw, -55vh) scale(1.15); opacity: 0; }
 .wordmark-intro--init .wordmark-intro__sphere--mint { transform: translate(-70vw, 55vh) scale(1.15); opacity: 0; }
 
-/* Phase: fly — spheres rush in from opposite corners, still oversized. */
-.wordmark-intro--fly .wordmark-intro__sphere--rose { transform: translate(18vw, -18vh) scale(1.05); opacity: 1; }
-.wordmark-intro--fly .wordmark-intro__sphere--mint { transform: translate(-18vw, 18vh) scale(1.05); opacity: 1; }
-
-/* Phase: settle — spheres converge to where the wordmark's brand
-   circles sit, wordmark scales up through them. */
-.wordmark-intro--settle .wordmark-intro__sphere--rose { transform: translate(2vw, -2vh) scale(0.45); opacity: 0.95; }
-.wordmark-intro--settle .wordmark-intro__sphere--mint { transform: translate(-2vw, 2vh) scale(0.45); opacity: 0.95; }
+/* Phase: appear — wordmark fades + scales in on its own, spheres
+   stay parked off-screen (still in init position). The logo lands
+   first, then the circles come for it. */
+.wordmark-intro--appear .wordmark-intro__sphere--rose { transform: translate(70vw, -55vh) scale(1.15); opacity: 0; }
+.wordmark-intro--appear .wordmark-intro__sphere--mint { transform: translate(-70vw, 55vh) scale(1.15); opacity: 0; }
+.wordmark-intro--appear .wordmark-intro__wordmark,
+.wordmark-intro--fly .wordmark-intro__wordmark,
 .wordmark-intro--settle .wordmark-intro__wordmark,
 .wordmark-intro--dissolve .wordmark-intro__wordmark {
   opacity: 1;
   transform: scale(1);
+}
+
+/* Phase: fly — spheres rush in from opposite corners, still oversized. */
+.wordmark-intro--fly .wordmark-intro__sphere--rose { transform: translate(18vw, -14vh) scale(1.05); opacity: 1; }
+.wordmark-intro--fly .wordmark-intro__sphere--mint { transform: translate(-18vw, 14vh) scale(1.05); opacity: 1; }
+
+/* Phase: settle — spheres converge onto the logo's brand circles
+   (rose dot on the "i", mint dot near the period). Offsets tuned to
+   the logo PNG; sphere scale is smaller so they sit roughly on top
+   of the existing dots rather than smothering the text. */
+.wordmark-intro--settle .wordmark-intro__sphere--rose {
+  transform: translate(28%, -8%) scale(0.18);
+  opacity: 0.92;
+}
+.wordmark-intro--settle .wordmark-intro__sphere--mint {
+  transform: translate(36%, 12%) scale(0.16);
+  opacity: 0.92;
 }
 
 /* Phase: dissolve — spheres fade into the wordmark's baked circles
