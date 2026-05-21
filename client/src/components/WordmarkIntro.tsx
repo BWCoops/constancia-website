@@ -39,10 +39,13 @@ export function WordmarkIntro({ className }: WordmarkIntroProps) {
       return;
     }
     // Sequence the phases so the spheres lead the wordmark by ~400ms
-    // and then dissolve once the logo is on screen.
-    const t1 = window.setTimeout(() => setPhase("fly"), 60);
-    const t2 = window.setTimeout(() => setPhase("settle"), 1100);
-    const t3 = window.setTimeout(() => setPhase("dissolve"), 2200);
+    // and then dissolve once the logo is on screen. Timing tuned for
+    // the fly-in to be visible to the user — quicker than this and
+    // the spheres just appear settled, slower and the page feels
+    // unresponsive.
+    const t1 = window.setTimeout(() => setPhase("fly"), 200);
+    const t2 = window.setTimeout(() => setPhase("settle"), 1600);
+    const t3 = window.setTimeout(() => setPhase("dissolve"), 2800);
     return () => {
       window.clearTimeout(t1);
       window.clearTimeout(t2);

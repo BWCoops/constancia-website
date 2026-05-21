@@ -978,6 +978,7 @@ div[class*="hs-chat"] {
   padding: 16px 24px;
   z-index: 50;
   pointer-events: none;
+  background: transparent;
 }
 @media (max-width: 540px) {
   .library-nav-bar { padding: 12px 16px; }
@@ -1413,8 +1414,11 @@ div[class*="hs-chat"] {
 }
 .landing-hero__content > * { pointer-events: auto; }
 .landing-hero__wordmark {
-  width: clamp(260px, 32vmin, 460px);
+  /* Wrapper sizes itself to the IMG inside via inline-block so the
+     wordmark stays at its original clamp(260, 32vmin, 460) and the
+     two intro spheres orbit around that natural footprint. */
   position: relative;
+  display: inline-block;
 }
 
 /* — Wordmark intro animation (two glass-morph spheres fly in,
@@ -1423,18 +1427,22 @@ div[class*="hs-chat"] {
      between named phases set by the React component. — */
 .wordmark-intro {
   position: relative;
-  display: block;
-  filter: drop-shadow(0 4px 24px rgba(18, 22, 29, 0.10));
+  display: inline-block;
+  filter: drop-shadow(0 6px 32px rgba(18, 22, 29, 0.14));
 }
 .wordmark-intro__wordmark {
   display: block;
-  width: 100%;
+  width: clamp(260px, 32vmin, 460px);
   height: auto;
   position: relative;
   z-index: 2;
   opacity: 0;
-  transform: scale(0.4);
-  transition: opacity 700ms ease-out, transform 900ms cubic-bezier(0.18, 0.9, 0.22, 1.15);
+  transform: scale(0.35);
+  filter: blur(6px);
+  transition:
+    opacity 900ms ease-out,
+    transform 1100ms cubic-bezier(0.18, 0.9, 0.22, 1.15),
+    filter 700ms ease-out;
 }
 .wordmark-intro__sphere {
   position: absolute;
@@ -1447,8 +1455,8 @@ div[class*="hs-chat"] {
   opacity: 0;
   pointer-events: none;
   transition:
-    transform 1200ms cubic-bezier(0.22, 0.9, 0.18, 1.05),
-    opacity 700ms ease-out,
+    transform 1400ms cubic-bezier(0.22, 0.9, 0.18, 1.05),
+    opacity 900ms ease-out,
     filter 600ms ease-out;
   backdrop-filter: blur(28px) saturate(160%);
   -webkit-backdrop-filter: blur(28px) saturate(160%);
