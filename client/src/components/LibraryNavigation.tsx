@@ -135,7 +135,20 @@ export function LibraryNavigation({ variant = "light" }: LibraryNavigationProps)
         className={`library-nav-backdrop ${open ? "is-open" : ""}`}
         onClick={() => setOpen(false)}
         aria-hidden="true"
-      />
+      >
+        {/* Wordmark floats over the backdrop on the LEFT side, with
+            shimmer — so the brand sits proudly on the page while the
+            drawer slides in from the right. Click here closes the
+            drawer too (inherits the backdrop click handler). */}
+        <div className="library-nav-stamp" aria-hidden="true">
+          <img
+            src={constanciaLogoDark}
+            alt=""
+            className="library-nav-stamp__logo"
+          />
+          <span className="library-nav-stamp__shimmer" aria-hidden="true" />
+        </div>
+      </div>
       <aside
         ref={drawerRef}
         id="library-nav-drawer"
@@ -145,10 +158,7 @@ export function LibraryNavigation({ variant = "light" }: LibraryNavigationProps)
         aria-label="Site navigation"
       >
         <div className="library-nav-drawer__header">
-          <div className="library-nav-drawer__brand">
-            <img src={constanciaLogoDark} alt="Constancia" className="library-nav-drawer__logo" />
-            <span className="library-nav-drawer__eyebrow">Library</span>
-          </div>
+          <span className="library-nav-drawer__eyebrow">Library</span>
           <button
             type="button"
             className="library-nav-drawer__close"
