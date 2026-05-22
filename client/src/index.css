@@ -1153,9 +1153,91 @@ div[class*="hs-chat"] {
   color: rgba(37, 40, 38, 0.65);
   line-height: 1.45;
 }
+
+/* Expandable parent row (e.g. "Tools") — same grid as a link, with
+   a chevron in the right column that flips when open. */
+.library-nav-drawer__parent {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 36px 1fr auto;
+  grid-template-rows: auto auto;
+  column-gap: 16px;
+  row-gap: 4px;
+  padding: 18px 4px;
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  color: #252826;
+  font: inherit;
+  transition: background 220ms ease-out, padding 220ms ease-out;
+}
+.library-nav-drawer__parent:hover,
+.library-nav-drawer__parent:focus-visible {
+  background: rgba(199, 122, 147, 0.06);
+  padding-left: 8px;
+  outline: none;
+}
+.library-nav-drawer__parent .library-nav-drawer__num,
+.library-nav-drawer__parent .library-nav-drawer__chevron {
+  grid-row: 1 / 3;
+  align-self: center;
+}
+.library-nav-drawer__chevron {
+  color: rgba(37, 40, 38, 0.45);
+  transition: transform 220ms ease-out, color 220ms ease-out;
+}
+.library-nav-drawer__parent.is-open .library-nav-drawer__chevron {
+  transform: rotate(180deg);
+  color: #8E4F67;
+}
+
+/* Sublist — collapsed by default; animates open via max-height + opacity. */
+.library-nav-drawer__sub {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 36px;
+  display: flex;
+  flex-direction: column;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 320ms ease-out, opacity 220ms ease-out;
+}
+.library-nav-drawer__sub.is-open {
+  max-height: 800px;
+  opacity: 1;
+}
+.library-nav-drawer__sub li {
+  border-top: 1px dashed rgba(37, 40, 38, 0.10);
+}
+.library-nav-drawer__sub li:first-child { border-top: none; }
+.library-nav-drawer__sub li:last-child { border-bottom: none; }
+.library-nav-drawer__sub a {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 14px;
+  row-gap: 3px;
+  padding: 14px 4px;
+  color: #252826;
+  text-decoration: none;
+  transition: background 220ms ease-out, padding 220ms ease-out;
+}
+.library-nav-drawer__sub a:hover,
+.library-nav-drawer__sub a:focus-visible {
+  background: rgba(127, 184, 163, 0.07);
+  padding-left: 8px;
+  outline: none;
+}
+.library-nav-drawer__sub .library-nav-drawer__label { font-size: 18px; }
+.library-nav-drawer__sub .library-nav-drawer__num { font-size: 10px; color: #5E8D7A; }
+
 @media (prefers-reduced-motion: reduce) {
   .library-nav-drawer,
-  .library-nav-backdrop {
+  .library-nav-backdrop,
+  .library-nav-drawer__sub,
+  .library-nav-drawer__chevron {
     transition: none;
   }
 }
@@ -1825,6 +1907,177 @@ div[class*="hs-chat"] {
   flex-wrap: wrap;
   gap: 12px;
   justify-content: center;
+}
+
+/* ── Marketing stack — flowing glass tablets ──────────────────────────
+   Every public sub-page lays its content into a vertical stack of
+   .marketing-card tablets (each one a .glass-surface). One cream
+   canvas, no dark sub-sections, the same visual language as the
+   landing's scrolly tablets. */
+.marketing-stack {
+  position: relative;
+  z-index: 1;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: clamp(48px, 8vh, 96px) 24px clamp(96px, 14vh, 160px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 4vh, 56px);
+}
+.marketing-card {
+  padding: clamp(32px, 4.4vw, 56px) clamp(28px, 4vw, 52px);
+  text-align: center;
+  border-radius: 28px;
+  max-width: 720px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.marketing-card--wide {
+  max-width: 960px;
+}
+@media (max-width: 540px) {
+  .marketing-card { padding: 26px 22px; border-radius: 22px; }
+}
+.marketing-card__eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--brand-berry);
+  margin-bottom: 16px;
+}
+.marketing-card__lede {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: clamp(20px, 2.4vw, 28px);
+  font-weight: 300;
+  line-height: 1.35;
+  color: var(--brand-text-primary);
+  margin-bottom: 18px;
+  max-width: 56ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+.marketing-card__body {
+  font-size: clamp(15px, 1.55vw, 17px);
+  line-height: 1.65;
+  color: var(--brand-text-secondary);
+  max-width: 56ch;
+  margin: 0 auto 14px;
+}
+.marketing-card__body:last-child { margin-bottom: 0; }
+.marketing-card__heading {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: clamp(26px, 3.6vw, 42px);
+  font-weight: 300;
+  line-height: 1.12;
+  letter-spacing: -0.018em;
+  color: var(--brand-text-primary);
+  margin-bottom: 22px;
+  max-width: 28ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+.marketing-card__heading-accent {
+  color: var(--brand-berry);
+  font-style: normal;
+  font-weight: 400;
+}
+.marketing-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brand-berry);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(142, 79, 103, 0.4);
+  padding-bottom: 4px;
+  transition: color 200ms, border-color 200ms, gap 200ms;
+}
+.marketing-card__cta:hover,
+.marketing-card__cta:focus-visible {
+  color: #5E3A4D;
+  border-color: rgba(94, 58, 77, 0.7);
+  gap: 14px;
+  outline: none;
+}
+.marketing-card__cta-icon { width: 16px; height: 16px; }
+
+/* Founder grid — 2 columns desktop, stacked mobile. */
+.marketing-founders {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(28px, 4vw, 48px);
+  text-align: left;
+  margin-top: 12px;
+}
+@media (max-width: 640px) {
+  .marketing-founders { grid-template-columns: 1fr; gap: 28px; text-align: center; }
+}
+.marketing-founder {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+@media (max-width: 640px) {
+  .marketing-founder { align-items: center; }
+}
+.marketing-founder__avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 28px;
+  font-weight: 300;
+  color: #F6F3EE;
+  margin-bottom: 18px;
+  box-shadow: 0 12px 32px -10px rgba(37, 40, 38, 0.25);
+}
+.marketing-founder__name {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--brand-text-primary);
+  margin-bottom: 4px;
+}
+.marketing-founder__role {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--brand-deep-mint);
+  margin-bottom: 14px;
+}
+.marketing-founder__bio {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--brand-text-secondary);
+}
+
+/* Photo placeholder block inside a tablet. */
+.marketing-photo {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(37, 40, 38, 0.85) 0%, rgba(37, 40, 38, 0.95) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(246, 243, 238, 0.5);
+}
+.marketing-photo__caption { text-align: center; }
+.marketing-photo__caption-eye {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
 }
 
 /* ── 15. Connected Enterprise Business Transformation band ─────────────

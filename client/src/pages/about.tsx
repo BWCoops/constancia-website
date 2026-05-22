@@ -6,13 +6,9 @@ import { SEOHead } from "@/components/seo-head";
 import { PageHero } from "@/components/page-hero";
 
 /**
- * About — May 2026 editorial refresh.
- *
- * Leads with the approved Constancia overview copy, followed by a
- * short founders block and a closing image of Bradley, Alex and
- * the dogs. No Liquid Glass on this page per the brief; the design
- * stays clean and editorial. Placeholder portraits and dog photo
- * until supplied.
+ * About — single cream canvas with glass-morphic tablets. No dark
+ * banded sub-sections; every block flows through one continuous
+ * surface to match the landing's visual language.
  */
 
 interface Founder {
@@ -58,119 +54,92 @@ export default function AboutPage() {
         ]}
       />
 
-
-      <main className="pt-16 sm:pt-20">
+      <main>
         <PageHero
           badge="About"
           title="An enterprise intelligence company."
           description="We help leaders move from debate to outcomes. Real-time visibility across your data, without the manual rework."
         />
 
-        {/* Approved Constancia overview — the lead copy per the brief.
-            Editorial composition, no glass, no card chrome. */}
-        <section className="py-16 sm:py-24 lg:py-28 bg-[#F6F3EE]">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6">
-            <div className="font-mono text-[10px] uppercase tracking-widest text-[#8E4F67] mb-6">
-              Our perspective
-            </div>
-            <p className="text-xl sm:text-2xl font-light leading-relaxed text-[#252826] mb-6">
+        <div className="marketing-stack">
+          {/* Approved Constancia overview — the lead copy per the brief. */}
+          <article className="glass-surface marketing-card">
+            <div className="marketing-card__eyebrow">Our perspective</div>
+            <p className="marketing-card__lede">
               We're an enterprise intelligence company that helps leaders move from debate to outcomes.
             </p>
-            <p className="text-base sm:text-lg text-[#252826]/85 leading-relaxed mb-5">
+            <p className="marketing-card__body">
               Our focus is giving finance and operations teams real-time visibility across their data, without the manual rework in Excel and PowerPoint.
             </p>
-            <p className="text-base sm:text-lg text-[#252826]/85 leading-relaxed mb-5">
+            <p className="marketing-card__body">
               We work with enterprise software and AI partners so you stay in the driver's seat of your company's health.
             </p>
-            <p className="text-base sm:text-lg text-[#252826]/85 leading-relaxed">
+            <p className="marketing-card__body">
               You're the expert on your business. Technology should work that way too.
             </p>
-          </div>
-        </section>
+          </article>
 
-        {/* Founders block. Placeholder portraits (initials-on-tint)
-            until the real images come in. */}
-        <section className="py-16 sm:py-24 bg-[#0a0d14] text-[#F6F3EE]">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6">
-            <div className="font-mono text-[10px] uppercase tracking-widest text-[#7FB8A3] mb-6 text-center">
-              The founders
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-light leading-tight text-center mb-14 max-w-2xl mx-auto">
+          {/* Founders block. */}
+          <article className="glass-surface marketing-card marketing-card--wide">
+            <div className="marketing-card__eyebrow">The founders</div>
+            <h2 className="marketing-card__heading">
               The senior people you'd actually want in the room.
             </h2>
-
-            <div className="grid sm:grid-cols-2 gap-10 lg:gap-16">
+            <div className="marketing-founders">
               {FOUNDERS.map((f) => (
-                <article key={f.name} className="flex flex-col items-center text-center sm:text-left sm:items-start">
+                <article key={f.name} className="marketing-founder">
                   <div
-                    className="w-32 h-32 rounded-full flex items-center justify-center text-3xl font-light mb-6"
-                    style={{ background: f.accent, color: "#F6F3EE" }}
+                    className="marketing-founder__avatar"
+                    style={{ background: f.accent }}
                     aria-hidden="true"
                   >
                     {f.avatarInitials}
                   </div>
-                  <h3 className="text-xl font-medium mb-1">{f.name}</h3>
-                  <div className="text-sm font-mono uppercase tracking-widest text-[#F6F3EE]/55 mb-4">
-                    {f.role}
-                  </div>
-                  <p className="text-[15px] leading-relaxed text-[#F6F3EE]/80">{f.bio}</p>
+                  <h3 className="marketing-founder__name">{f.name}</h3>
+                  <div className="marketing-founder__role">{f.role}</div>
+                  <p className="marketing-founder__bio">{f.bio}</p>
                 </article>
               ))}
             </div>
-          </div>
-        </section>
+          </article>
 
-        {/* Closing photo: Bradley + Alex with Georgie and Sammy.
-            Placeholder until the photo is supplied. */}
-        <section className="py-16 sm:py-24 bg-[#F6F3EE]">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6">
-            <div className="font-mono text-[10px] uppercase tracking-widest text-[#8E4F67] mb-6 text-center">
-              Off-duty
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-light text-center text-[#252826] mb-10 max-w-xl mx-auto">
+          {/* Off-duty photo placeholder. */}
+          <article className="glass-surface marketing-card marketing-card--wide">
+            <div className="marketing-card__eyebrow">Off-duty</div>
+            <h2 className="marketing-card__heading">
               Bradley, Alex, and the team mascots Georgie and Sammy.
             </h2>
             <div
-              className="aspect-[16/9] w-full rounded-2xl bg-[#252826] text-[#F6F3EE]/40 flex items-center justify-center text-sm"
+              className="marketing-photo"
               role="img"
               aria-label="Placeholder: founders Bradley and Alex with Labrador Retrievers Georgie and Sammy"
             >
-              <div className="text-center">
-                <div className="font-mono text-[10px] uppercase tracking-widest mb-2">Image placeholder</div>
+              <div className="marketing-photo__caption">
+                <div className="marketing-photo__caption-eye">Image placeholder</div>
                 <div>Founders with Georgie and Sammy</div>
               </div>
             </div>
-          </div>
-        </section>
+          </article>
 
-        {/* Closing CTA. */}
-        <section className="py-12 sm:py-20 lg:py-28 lg:pb-36 bg-[#F6F3EE]">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6">
-            <div className="grid lg:grid-cols-[1fr_auto] gap-10 items-end border-t border-[#252826]/15 pt-12">
-              <div>
-                <div className="font-mono text-[10px] uppercase tracking-widest text-[#8E4F67] mb-4">
-                  No pitch. No deck.
-                </div>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-light leading-tight text-[#252826] max-w-2xl">
-                  When you're ready,<br />
-                  start the <em className="text-[#8E4F67] not-italic font-normal">conversation.</em>
-                </h2>
-              </div>
-              {flags.contact && (
-                <Link
-                  href="/contact"
-                  className="group inline-flex items-baseline gap-3 text-[#252826] hover:text-[#8E4F67] transition-colors"
-                  data-testid="button-about-cta"
-                >
-                  <span className="text-xl sm:text-2xl font-light underline decoration-[#8E4F67]/40 decoration-1 underline-offset-8 group-hover:decoration-[#8E4F67] group-hover:decoration-2">
-                    Talk to a partner
-                  </span>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              )}
-            </div>
-          </div>
-        </section>
+          {/* Closing CTA — last tablet. */}
+          {flags.contact && (
+            <article className="glass-surface marketing-card">
+              <div className="marketing-card__eyebrow">No pitch. No deck.</div>
+              <h2 className="marketing-card__heading">
+                When you're ready,{" "}
+                <em className="marketing-card__heading-accent">start the conversation.</em>
+              </h2>
+              <Link
+                href="/contact"
+                className="marketing-card__cta"
+                data-testid="button-about-cta"
+              >
+                <span>Talk to a partner</span>
+                <ArrowRight className="marketing-card__cta-icon" />
+              </Link>
+            </article>
+          )}
+        </div>
       </main>
 
       <Footer />
