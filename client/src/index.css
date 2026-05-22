@@ -1434,17 +1434,19 @@ div[class*="hs-chat"] {
   position: relative;
   display: inline-block;
   font-family: 'DM Sans', system-ui, sans-serif;
+  /* Calibrated to the brand PNG: light weight (300), wide tracking
+     to match the airy spacing, near-black ink with slight warmth. */
   font-size: clamp(64px, 11vmin, 124px);
-  font-weight: 500;
-  letter-spacing: -0.045em;
-  color: #12161D;
+  font-weight: 300;
+  letter-spacing: -0.012em;
+  color: #2A2A2C;
   line-height: 1;
   /* preserve-3d on the wordmark + perspective on the parent makes
      the rotateX/Y on each letter render as real 3D depth, not a
      squashed 2D rotation. */
   perspective: 1200px;
   perspective-origin: 50% 50%;
-  filter: drop-shadow(0 10px 36px rgba(18, 22, 29, 0.14));
+  filter: drop-shadow(0 8px 28px rgba(18, 22, 29, 0.10));
 }
 .wordmark-built__row {
   display: inline-flex;
@@ -1506,38 +1508,44 @@ div[class*="hs-chat"] {
     left     700ms cubic-bezier(0.2, 0.8, 0.2, 1) 600ms,
     opacity  900ms ease-out;
 }
+/* Sphere sizing + colour calibrated to the brand PNG: both discs are
+   LARGE (slightly taller than the wordmark) and translucent so the
+   letters and period show through them; rose sits upper-right, mint
+   sits lower-right and overlaps the rose. */
 .wordmark-built__sphere--rose {
-  width: clamp(140px, 18vmin, 260px);
-  height: clamp(140px, 18vmin, 260px);
+  /* Final size: ~1.2em (taller than the cap height) so the disc
+     intersects the right half of the wordmark like in the PNG. */
+  width: 1.2em;
+  height: 1.2em;
   top: 50%; left: 50%;
-  margin-top: calc(-1 * clamp(70px, 9vmin, 130px));
-  margin-left: calc(-1 * clamp(70px, 9vmin, 130px));
+  margin-top: -0.6em;
+  margin-left: -0.6em;
   background:
-    radial-gradient(circle at 32% 30%, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0) 38%),
-    radial-gradient(circle at 70% 72%, rgba(199, 122, 147, 0.92) 0%, rgba(142, 79, 103, 0.55) 60%, rgba(142, 79, 103, 0.12) 100%);
+    radial-gradient(circle at 38% 32%, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0) 38%),
+    radial-gradient(circle at 60% 60%, rgba(199, 122, 147, 0.78) 0%, rgba(199, 122, 147, 0.62) 70%, rgba(199, 122, 147, 0.40) 100%);
   box-shadow:
-    inset 0 8px 26px rgba(255, 255, 255, 0.55),
-    inset 0 -10px 30px rgba(142, 79, 103, 0.38),
-    0 30px 70px -12px rgba(199, 122, 147, 0.55);
-  transform: translate(60vw, -60vh) scale(1);
+    inset 0 6px 22px rgba(255, 255, 255, 0.38),
+    inset 0 -8px 24px rgba(142, 79, 103, 0.22);
+  transform: translate(60vw, -60vh) scale(1.2);
 }
 .wordmark-built__sphere--mint {
-  width: clamp(120px, 15vmin, 220px);
-  height: clamp(120px, 15vmin, 220px);
+  /* Slightly bigger than rose (in the PNG the mint disc extends
+     past the rose at the bottom-right). */
+  width: 1.35em;
+  height: 1.35em;
   top: 50%; left: 50%;
-  margin-top: calc(-1 * clamp(60px, 7.5vmin, 110px));
-  margin-left: calc(-1 * clamp(60px, 7.5vmin, 110px));
+  margin-top: -0.675em;
+  margin-left: -0.675em;
   background:
-    radial-gradient(circle at 35% 28%, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0) 40%),
-    radial-gradient(circle at 65% 72%, rgba(127, 184, 163, 0.92) 0%, rgba(94, 141, 122, 0.55) 60%, rgba(94, 141, 122, 0.12) 100%);
+    radial-gradient(circle at 38% 32%, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0) 40%),
+    radial-gradient(circle at 60% 60%, rgba(127, 184, 163, 0.78) 0%, rgba(127, 184, 163, 0.62) 70%, rgba(127, 184, 163, 0.40) 100%);
   box-shadow:
-    inset 0 8px 26px rgba(255, 255, 255, 0.60),
-    inset 0 -10px 30px rgba(94, 141, 122, 0.38),
-    0 30px 70px -12px rgba(127, 184, 163, 0.55);
-  transform: translate(-60vw, 60vh) scale(1);
+    inset 0 6px 22px rgba(255, 255, 255, 0.42),
+    inset 0 -8px 24px rgba(94, 141, 122, 0.22);
+  transform: translate(-60vw, 60vh) scale(1.2);
 }
 
-/* Phase: balls — spheres swoop in from corners, still oversized. */
+/* Phase: balls — spheres swoop in from off-screen corners. */
 .wordmark-built--balls .wordmark-built__sphere--rose {
   transform: translate(14vw, -14vh) scale(1);
   opacity: 1;
@@ -1547,29 +1555,24 @@ div[class*="hs-chat"] {
   opacity: 1;
 }
 
-/* Phase: settle + settled — spheres shrink and dock at the brand
-   dot positions: rose above the dotless "ı", mint at baseline after
-   the "a". Positions are in em units relative to the wordmark font
-   size so they scale with viewport. */
+/* Phase: settle + settled — spheres dock at the brand-disc positions
+   matching the PNG: rose upper-right of the wordmark, mint lower-
+   right of the wordmark, mint overlapping rose at the centre. The
+   "ı" stem and the period sit visible through the translucent discs.
+   Positions in em so they scale with the font size. */
 .wordmark-built--settle .wordmark-built__sphere--rose,
 .wordmark-built--settled .wordmark-built__sphere--rose {
-  width: 0.36em;
-  height: 0.36em;
-  margin-top: -0.18em;
-  margin-left: -0.18em;
-  top: 0.28em;
-  left: 4.18em;
+  top: -0.20em;     /* upper-right, extends above the cap */
+  left: 3.65em;     /* over the "ncı" cluster */
+  margin-top: 0; margin-left: 0;
   transform: translate(0, 0) scale(1);
   opacity: 1;
 }
 .wordmark-built--settle .wordmark-built__sphere--mint,
 .wordmark-built--settled .wordmark-built__sphere--mint {
-  width: 0.30em;
-  height: 0.30em;
-  margin-top: -0.15em;
-  margin-left: -0.15em;
-  top: 1.06em;
-  left: 5.15em;
+  top: 0.20em;      /* lower-right, extends below baseline */
+  left: 4.25em;     /* over the "ıa." cluster, overlapping the rose */
+  margin-top: 0; margin-left: 0;
   transform: translate(0, 0) scale(1);
   opacity: 1;
 }
@@ -1582,14 +1585,12 @@ div[class*="hs-chat"] {
     transform: translate(0, 0) scale(1);
   }
   .wordmark-built__sphere--rose {
-    width: 0.36em; height: 0.36em;
-    margin-top: -0.18em; margin-left: -0.18em;
-    top: 0.28em; left: 4.18em;
+    top: -0.20em; left: 3.65em;
+    margin-top: 0; margin-left: 0;
   }
   .wordmark-built__sphere--mint {
-    width: 0.30em; height: 0.30em;
-    margin-top: -0.15em; margin-left: -0.15em;
-    top: 1.06em; left: 5.15em;
+    top: 0.20em; left: 4.25em;
+    margin-top: 0; margin-left: 0;
   }
 }
 .landing-hero__mission {
