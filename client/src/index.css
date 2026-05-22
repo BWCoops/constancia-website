@@ -1154,22 +1154,30 @@ div[class*="hs-chat"] {
   line-height: 1.45;
 }
 
-/* Expandable parent row (e.g. "Tools") — same grid as a link, with
-   a chevron in the right column that flips when open. */
+/* Expandable parent row (e.g. "Tools") — matches the anchor row
+   pixel-for-pixel so Tools aligns with Solutions / About / Home
+   above and below it. The chevron sits in the right margin via
+   absolute positioning rather than a grid cell so it doesn't change
+   the label column geometry. */
 .library-nav-drawer__parent {
+  position: relative;
   width: 100%;
   display: grid;
-  grid-template-columns: 36px 1fr auto;
+  grid-template-columns: 36px 1fr;
   grid-template-rows: auto auto;
   column-gap: 16px;
   row-gap: 4px;
-  padding: 18px 4px;
+  padding: 18px 32px 18px 4px;  /* right padding leaves room for chevron */
+  margin: 0;
   background: transparent;
   border: none;
+  border-radius: 0;
   text-align: left;
   cursor: pointer;
   color: #252826;
   font: inherit;
+  appearance: none;
+  -webkit-appearance: none;
   transition: background 220ms ease-out, padding 220ms ease-out;
 }
 .library-nav-drawer__parent:hover,
@@ -1178,35 +1186,53 @@ div[class*="hs-chat"] {
   padding-left: 8px;
   outline: none;
 }
-.library-nav-drawer__parent .library-nav-drawer__num,
-.library-nav-drawer__parent .library-nav-drawer__chevron {
-  grid-row: 1 / 3;
-  align-self: center;
-}
 .library-nav-drawer__chevron {
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
   color: rgba(37, 40, 38, 0.45);
   transition: transform 220ms ease-out, color 220ms ease-out;
+  pointer-events: none;
 }
 .library-nav-drawer__parent.is-open .library-nav-drawer__chevron {
-  transform: rotate(180deg);
+  transform: translateY(-50%) rotate(180deg);
   color: #8E4F67;
 }
 
-/* Sublist — collapsed by default; animates open via max-height + opacity. */
+/* Sublist — clearly indented to the right of the top-level grid so
+   the hierarchy reads at a glance. Left padding 56px (well past the
+   top-level num column) + a faint vertical guide on the inside edge. */
 .library-nav-drawer__sub {
   list-style: none;
   margin: 0;
-  padding: 0 0 0 36px;
+  padding: 0 0 0 56px;
   display: flex;
   flex-direction: column;
   max-height: 0;
   opacity: 0;
   overflow: hidden;
+  position: relative;
   transition: max-height 320ms ease-out, opacity 220ms ease-out;
 }
 .library-nav-drawer__sub.is-open {
   max-height: 800px;
   opacity: 1;
+}
+/* Vertical guide line down the left of the sublist — anchors the
+   children visually to the Tools parent above. */
+.library-nav-drawer__sub::before {
+  content: '';
+  position: absolute;
+  left: 22px;
+  top: 4px;
+  bottom: 4px;
+  width: 1px;
+  background: linear-gradient(to bottom,
+    rgba(142, 79, 103, 0.25) 0%,
+    rgba(142, 79, 103, 0.10) 50%,
+    rgba(142, 79, 103, 0.0) 100%);
+  pointer-events: none;
 }
 .library-nav-drawer__sub li {
   border-top: 1px dashed rgba(37, 40, 38, 0.10);
@@ -1215,11 +1241,11 @@ div[class*="hs-chat"] {
 .library-nav-drawer__sub li:last-child { border-bottom: none; }
 .library-nav-drawer__sub a {
   display: grid;
-  grid-template-columns: 42px 1fr;
+  grid-template-columns: 32px 1fr;
   grid-template-rows: auto auto;
   column-gap: 14px;
   row-gap: 3px;
-  padding: 14px 4px;
+  padding: 12px 4px;
   color: #252826;
   text-decoration: none;
   transition: background 220ms ease-out, padding 220ms ease-out;
@@ -1230,8 +1256,9 @@ div[class*="hs-chat"] {
   padding-left: 8px;
   outline: none;
 }
-.library-nav-drawer__sub .library-nav-drawer__label { font-size: 18px; }
+.library-nav-drawer__sub .library-nav-drawer__label { font-size: 17px; font-weight: 400; }
 .library-nav-drawer__sub .library-nav-drawer__num { font-size: 10px; color: #5E8D7A; }
+.library-nav-drawer__sub .library-nav-drawer__desc { font-size: 12.5px; }
 
 @media (prefers-reduced-motion: reduce) {
   .library-nav-drawer,
@@ -1834,8 +1861,16 @@ div[class*="hs-chat"] {
   background: var(--brand-bg-primary);
   color: var(--brand-text-primary);
   font-family: var(--brand-font-sans);
+  /* Flex column so the stage takes its natural height (the scroll
+     length we set on it) and the Footer always sits cleanly at the
+     bottom of the page, never overlapping the sticky inner. */
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
+  position: relative;
 }
+.marketing-page > main { flex: 1 0 auto; }
+.marketing-page > footer { flex-shrink: 0; position: relative; z-index: 1; }
 .page-hero {
   position: relative;
   isolation: isolate;
