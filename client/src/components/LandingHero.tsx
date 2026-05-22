@@ -25,7 +25,6 @@ import { useEffect, useState } from "react";
 import { MeshBackground } from "./MeshBackground";
 import { HeroFabricCanvas } from "./HeroFabricCanvas";
 import { WordmarkIntro } from "./WordmarkIntro";
-import { LiquidGlassCard } from "@/components/ui/LiquidGlassCard";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 export function LandingHero() {
@@ -73,12 +72,10 @@ export function LandingHero() {
           <WordmarkIntro className="landing-hero__wordmark" />
 
           <div className="landing-hero__mission">
-            <LiquidGlassCard variant="hero" cornerRadius={28}>
-              <div className="landing-hero__mission-inner">
-                <div className="landing-hero__mission-eyebrow">On a mission to deliver</div>
-                <div className="landing-hero__mission-lede">Real-time enterprise intelligence.</div>
-              </div>
-            </LiquidGlassCard>
+            <div className="landing-hero__mission-inner">
+              <div className="landing-hero__mission-eyebrow">On a mission to deliver</div>
+              <div className="landing-hero__mission-lede">Real-time enterprise intelligence.</div>
+            </div>
           </div>
         </div>
       </div>
