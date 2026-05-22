@@ -34,15 +34,15 @@
   --brand-text-muted:       rgba(18,22,29,0.42);
   --brand-text-tertiary:    rgba(18,22,29,0.30);
 
-  /* Brand accents */
-  --brand-graphite:         #12161D;
-  --brand-slate:            #1E2630;
-  --brand-cream:            #F6F3EE;
-  --brand-stone:            #D8D0C6;
-  --brand-rose:             #C77A93;
-  --brand-berry:            #8E4F67;
-  --brand-mint:             #7FB8A3;
-  --brand-deep-mint:        #5E8D7A;
+  /* Brand accents — aligned with the official Constancia palette. */
+  --brand-graphite:         #1A1B1A;  /* deeper variant of secondary dark */
+  --brand-slate:            #252826;  /* official Secondary dark — soft graphite charcoal */
+  --brand-cream:            #F6F3EE;  /* official Main light */
+  --brand-stone:            #D8D0C6;  /* official Support neutral light */
+  --brand-rose:             #C77A93;  /* official Muted rose */
+  --brand-berry:            #8E4F67;  /* official Deep berry */
+  --brand-mint:             #7FB8A3;  /* official Mineral green */
+  --brand-deep-mint:        #5E8D7A;  /* official Deep mint */
 
   /* Translucent overlays */
   --brand-rose-soft:        rgba(199,122,147,0.55);
@@ -1371,10 +1371,7 @@ div[class*="hs-chat"] {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  opacity: 0;
-  /* JS sets opacity per scroll tick; this transition smooths any
-     resize jump and the initial paint. */
-  transition: opacity 200ms linear;
+  opacity: 1;
 }
 .landing-hero__fabric {
   position: absolute;

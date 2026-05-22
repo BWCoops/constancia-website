@@ -62,6 +62,7 @@ const FRAG = `
   uniform float uTime; uniform vec3 uMint; uniform vec3 uDeepMint;
   uniform vec3 uRose; uniform vec3 uBerry;
   uniform vec3 uSlate; uniform vec3 uGraphite;
+  uniform vec3 uStone;
   uniform vec3 uLightDir;  uniform vec3 uLightDir2;
   uniform vec3 uLightTint2;
   uniform vec3 uCamPos; uniform float uOpacity;
@@ -106,16 +107,20 @@ const FRAG = `
     float spec2 = pow(clamp(dot(N, H2), 0.0, 1.0), 56.0);
     col += uLightTint2 * spec2 * 0.42;
     // Low-frequency sheen — wet-glass catching light across the
-    // whole plane, not just the highlight point.
+    // whole plane. Tinted with Stone (support neutral) so the broad
+    // glaze reads as cool glass, not warm pearl. This is the main
+    // glass-morphic body lift.
     float sheen = pow(clamp(dot(N, H), 0.0, 1.0), 12.0);
-    col += vec3(1.0, 0.94, 0.97) * sheen * 0.10;
+    col += uStone * sheen * 0.16;
 
-    // Iridescent rim with a view-angle hue shift — rose at glancing
-    // angles, mint near head-on. Reads as chromatic refraction on
-    // the curved fabric edge.
+    // Iridescent rim with a view-angle hue shift — Stone neutral
+    // through to Mineral green to Muted rose across the rim. The
+    // Stone in the middle softens the chromatic transition and adds
+    // that frosted-glass edge quality.
     float rim = pow(1.0 - clamp(dot(N, V), 0.0, 1.0), 2.4);
-    vec3 rimHue = mix(uMint * 1.05, uRose * 1.10, smoothstep(0.0, 1.0, rim));
-    col = mix(col, rimHue, rim * 0.34);
+    vec3 rimHue = mix(uMint * 1.05, uStone, smoothstep(0.0, 0.5, rim));
+    rimHue = mix(rimHue, uRose * 1.08, smoothstep(0.5, 1.0, rim));
+    col = mix(col, rimHue, rim * 0.36);
     float edgeX = smoothstep(0.0, 0.26, vUv.x) * smoothstep(1.0, 0.74, vUv.x);
     float edgeY = smoothstep(0.0, 0.22, vUv.y) * smoothstep(1.0, 0.82, vUv.y);
     float edge = edgeX * edgeY;
@@ -172,20 +177,23 @@ export function HeroFabricCanvas({ className }: HeroFabricCanvasProps) {
     camera.lookAt(0, 0, 0);
 
     const COL = {
-      MINT:     new THREE.Color("#7FB8A3"),
-      DEEPMINT: new THREE.Color("#5E8D7A"),
-      ROSE:     new THREE.Color("#C77A93"),
-      BERRY:    new THREE.Color("#8E4F67"),
-      SLATE:    new THREE.Color("#1E2630"),
-      GRAPHITE: new THREE.Color("#12161D"),
+      // Official Constancia palette — see brand brief.
+      MINT:     new THREE.Color("#7FB8A3"),  // Mineral green
+      DEEPMINT: new THREE.Color("#5E8D7A"),  // Deep mint
+      ROSE:     new THREE.Color("#C77A93"),  // Muted rose
+      BERRY:    new THREE.Color("#8E4F67"),  // Deep berry
+      SLATE:    new THREE.Color("#252826"),  // Secondary dark (soft graphite charcoal)
+      GRAPHITE: new THREE.Color("#1A1B1A"),  // Deeper variant of secondary dark
+      STONE:    new THREE.Color("#D8D0C6"),  // Support neutral light (folded into shimmer)
     };
     const LIGHT_DIR  = new THREE.Vector3(0.6, 0.85, 0.7).normalize();
     // Secondary light — comes from the opposite-lower angle so the
-    // two highlights cross each other, with a warm rose/peach tint
-    // that picks up brand colour as it travels. Shader animates the
-    // direction over uTime, this is just the rest position.
+    // two highlights cross. Tint is the Support neutral (#D8D0C6)
+    // not a peach pearl — gives the fabric a stone-cool glass-
+    // morphic shimmer instead of a warm sunset feel. Shader animates
+    // the direction over uTime, this is just the rest position.
     const LIGHT_DIR_2  = new THREE.Vector3(-0.7, 0.45, 0.55).normalize();
-    const LIGHT_TINT_2 = new THREE.Color("#FFCEB6"); // warm peach/rose pearl
+    const LIGHT_TINT_2 = COL.STONE.clone();
 
     interface FabricOpts {
       size: number; segs: number; amp: number; phase: number;
@@ -206,6 +214,7 @@ export function HeroFabricCanvas({ className }: HeroFabricCanvasProps) {
           uBerry:    { value: COL.BERRY },
           uSlate:    { value: COL.SLATE },
           uGraphite: { value: COL.GRAPHITE },
+          uStone:    { value: COL.STONE },
           uLightDir:   { value: LIGHT_DIR },
           uLightDir2:  { value: LIGHT_DIR_2 },
           uLightTint2: { value: LIGHT_TINT_2 },

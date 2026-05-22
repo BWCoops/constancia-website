@@ -99,14 +99,6 @@ export function LandingHero() {
       const total = Math.max(1, rect.height - window.innerHeight);
       const p = clamp(-rect.top / total, 0, 1);
 
-      // Fabric ramps in between scroll 0.08 and 0.20. The wordmark-
-      // alone moment (0–0.10) stays largely fabric-free; by the time
-      // the mission card panel is active the fabric is fully present.
-      if (fabricRef.current) {
-        const fabricOpacity = clamp((p - 0.08) / 0.12, 0, 1);
-        fabricRef.current.style.opacity = String(fabricOpacity);
-      }
-
       PANELS.forEach((range, i) => {
         const panel = panelRefs.current[i];
         if (!panel) return;
