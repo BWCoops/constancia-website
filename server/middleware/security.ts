@@ -24,8 +24,8 @@ const LEAD_LOCKOUT_DURATION_MS = 30 * 60 * 1000; // 30 minutes
 const TEST_BYPASS_ACCOUNTS = process.env.NODE_ENV === "production" 
   ? new Set<string>() 
   : new Set([
-    "test@constancia.com",
-    "demo@constancia.com"
+    "test@constancia.io",
+    "demo@constancia.io"
   ]);
 
 export function getClientIp(req: Request): string {

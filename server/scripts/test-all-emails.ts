@@ -7,9 +7,9 @@
  * without touching live user inboxes.
  */
 
-const TEST_RECIPIENT = "bradley.cooper@1qg.com";
+const TEST_RECIPIENT = "info@constancia.io";
 const TEST_NAME      = "Bradley";
-const SENDER         = "info@constancia.com";
+const SENDER         = "info@constancia.io";
 
 import { sendEmailViaGraph } from "../services/ms-graph-email";
 import {
@@ -50,7 +50,7 @@ function tplConfigTest(): string {
       <div style="padding:24px;background:#f9f9f9">
         <p style="color:#22c55e;font-weight:bold;font-size:16px">Email service is working correctly!</p>
         <p>This test was sent at <strong>${new Date().toLocaleString("en-GB", { dateStyle: "full", timeStyle: "long" })}</strong></p>
-        <p><strong>Transport:</strong> Gmail SMTP (info@constancia.com)</p>
+        <p><strong>Transport:</strong> Gmail SMTP (info@constancia.io)</p>
         <p><strong>Recipient:</strong> ${TEST_RECIPIENT}</p>
       </div>
       <div style="text-align:center;padding:16px;font-size:12px;color:#888">Automated test from Constancia Admin Centre.</div>

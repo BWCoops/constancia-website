@@ -38,7 +38,7 @@ import {
 import type { FcQuestion, FcResponse, FcAssessment } from '../../../shared/finance-compass-schema';
 
 // Test constants
-const TEST_EMAIL = 'bradley.cooper@1qg.com';
+const TEST_EMAIL = 'info@constancia.io';
 const DEV_OTP_CODE = '000000';
 const BASE_URL = 'http://localhost:5000/api/finance-compass/public';
 

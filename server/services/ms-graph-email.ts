@@ -6,7 +6,7 @@ import { createChildLogger } from "../lib/logger";
 
 const log = createChildLogger("email-service");
 
-export const SENDER_EMAIL = "info@constancia.com";
+export const SENDER_EMAIL = "info@constancia.io";
 
 // --- Gmail (primary) ---
 const GMAIL_USER = process.env.GMAIL_USER || SENDER_EMAIL;

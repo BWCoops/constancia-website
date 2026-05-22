@@ -3933,7 +3933,7 @@ export default function FinanceCompassResults() {
               <CardContent>
                 <div className="grid md:grid-cols-2 gap-4">
                   <a 
-                    href="mailto:info@constancia.com?subject=FinanceCompass%20Assessment%20Follow-up"
+                    href="mailto:info@constancia.io?subject=FinanceCompass%20Assessment%20Follow-up"
                     className="flex items-center gap-4 p-4 rounded-lg border hover-elevate transition-all"
                     data-testid="link-email-contact"
                   >
@@ -3942,7 +3942,7 @@ export default function FinanceCompassResults() {
                     </div>
                     <div>
                       <div className="font-medium">Email Us</div>
-                      <div className="text-sm text-muted-foreground">info@constancia.com</div>
+                      <div className="text-sm text-muted-foreground">info@constancia.io</div>
                     </div>
                   </a>
                   <Link href="/contact">

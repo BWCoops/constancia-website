@@ -2263,7 +2263,7 @@ function generateWordPressHTML(): string {
     },
     "contactPoint": {
       "@type": "ContactPoint",
-      "email": "info@constancia.com",
+      "email": "info@constancia.io",
       "contactType": "customer service",
       "availableLanguage": "English"
     },
@@ -2432,7 +2432,7 @@ function generateWordPressHTML(): string {
             <h3>Contact Information</h3>
             <div class="contact-item">
               <span>Email:</span>
-              <a href="mailto:info@constancia.com">info@constancia.com</a>
+              <a href="mailto:info@constancia.io">info@constancia.io</a>
             </div>
             <div class="contact-item">
               <span>Address:</span>

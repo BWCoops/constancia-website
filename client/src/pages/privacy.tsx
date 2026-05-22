@@ -69,11 +69,11 @@ export default function PrivacyPolicyPage() {
                 <p className="text-muted-foreground">
                   If you have any concerns or would like further information about our use of data or this policy in general, you can contact us at{" "}
                   <a 
-                    href="mailto:info@constancia.com" 
+                    href="mailto:info@constancia.io" 
                     className="text-brand-teal hover:underline"
                     data-testid="link-contact-email"
                   >
-                    info@constancia.com
+                    info@constancia.io
                   </a>.
                 </p>
               </section>

@@ -104,7 +104,7 @@ const ONEQG_TEST_DATA = {
   contact: {
     firstName: "Bradley",
     lastName: "Cooper",
-    email: "bradley.cooper@1qg.com",
+    email: "info@constancia.io",
     roleTitle: "Managing Director",
     businessPhone: "+44 20 7946 0958",
     priorities: ["ai_automation", "planning_forecasting", "reporting_viz"],

@@ -22,7 +22,7 @@ export const EMAIL_BRAND = {
 export const EMAIL_CONTACT = {
   legalName: 'Constancia Holdings Limited',
   companyNumber: '17227112',
-  email: 'info@constancia.com',
+  email: 'info@constancia.io',
   website: 'constancia.com',
   websiteUrl: 'https://constancia.com',
   address: 'Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ',

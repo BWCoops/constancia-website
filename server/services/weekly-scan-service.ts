@@ -12,8 +12,8 @@ const log = createChildLogger("weekly-scan");
 const MS_GRAPH_CLIENT_ID = process.env.MS_GRAPH_CLIENT_ID;
 const MS_GRAPH_CLIENT_SECRET = process.env.MS_GRAPH_CLIENT_SECRET;
 const MS_GRAPH_TENANT_ID = process.env.MS_GRAPH_TENANT_ID;
-const SENDER_EMAIL = "info@constancia.com";
-const ADMIN_EMAILS = ["grant.vanwyk@1qg.com", "bradley.cooper@1qg.com"];
+const SENDER_EMAIL = "info@constancia.io";
+const ADMIN_EMAILS = ["grant.vanwyk@1qg.com", "info@constancia.io"];
 
 interface ScanSummary {
   totalBlogs: number;

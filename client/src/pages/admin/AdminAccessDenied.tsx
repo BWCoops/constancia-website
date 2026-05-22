@@ -85,7 +85,7 @@ export default function AdminAccessDenied() {
             <Button
               variant="ghost"
               className="w-full gap-2 text-muted-foreground"
-              onClick={() => window.location.href = "mailto:info@constancia.com"}
+              onClick={() => window.location.href = "mailto:info@constancia.io"}
               data-testid="button-contact"
             >
               <Mail className="h-4 w-4" />

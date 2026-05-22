@@ -173,7 +173,7 @@ export default function CareersPage() {
         toast({ title: "Unable to submit", description: result.error || "Please check your details and try again.", variant: "destructive" });
       }
     } catch (error: any) {
-      let errorMessage = "Please try again later or email careers@constancia.com directly.";
+      let errorMessage = "Please try again later or email info@constancia.io directly.";
       if (error?.message) {
         try {
           const jsonPart = error.message.replace(/^\d+:\s*/, "");

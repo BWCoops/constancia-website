@@ -61,7 +61,7 @@ const STRICT_VALIDATION_RULES = {
   noScoresOver100: true,
 };
 
-const ADMIN_EMAIL_RECIPIENTS = ['admin@constancia.com', 'support@constancia.com'];
+const ADMIN_EMAIL_RECIPIENTS = ['admin@constancia.io', 'support@constancia.io'];
 
 // ============================================
 // VALIDATION RESULT TYPES

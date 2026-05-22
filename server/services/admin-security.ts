@@ -434,7 +434,7 @@ export async function requestEmergencyAccess(
   const admins = await db
     .select({ email: adminUsers.email, displayName: adminUsers.displayName })
     .from(adminUsers)
-    .where(and(eq(adminUsers.isActive, true), ne(adminUsers.email, "info@constancia.com")));
+    .where(and(eq(adminUsers.isActive, true), ne(adminUsers.email, "info@constancia.io")));
 
   const htmlContent = `
     <!DOCTYPE html>
@@ -536,14 +536,14 @@ export async function sendLoginNotification(
     return;
   }
 
-  // Fetch all admin emails except info@constancia.com
+  // Fetch all admin emails except info@constancia.io
   const admins = await db
     .select({ email: adminUsers.email, displayName: adminUsers.displayName })
     .from(adminUsers)
     .where(
       and(
         eq(adminUsers.isActive, true),
-        ne(adminUsers.email, "info@constancia.com")
+        ne(adminUsers.email, "info@constancia.io")
       )
     );
 
@@ -590,7 +590,7 @@ export async function sendLoginNotification(
     </html>
   `;
 
-  // Send to all active admins (except info@constancia.com)
+  // Send to all active admins (except info@constancia.io)
   for (const admin of admins) {
     if (!admin.email) continue;
     try {

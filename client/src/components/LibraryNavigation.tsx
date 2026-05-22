@@ -19,6 +19,7 @@ import { useLocation } from "wouter";
 import { useFeatureFlags } from "@/lib/feature-flags";
 import { Menu, X, ChevronDown } from "lucide-react";
 import type { FeatureFlags } from "@shared/feature-flags";
+import constanciaLogoDark from "@assets/constancia-logo-dark.png";
 
 interface LibraryItem {
   href?: string;
@@ -40,9 +41,9 @@ const LIBRARY: LibraryItem[] = [
     description: "Comparison engines, Finance Compass, vendor profiles.",
     featureKey: "comparisonTools",
     children: [
-      { href: "/tools/epm-comparison", num: "04.1", label: "Comparison Tool",  description: "Independent platform benchmarks across EPM and AI vendors.", featureKey: "comparisonTools" },
-      { href: "/finance-compass",      num: "04.2", label: "Finance Compass",  description: "Diagnostic for finance maturity and EPM readiness.",         featureKey: "financeCompass" },
-      { href: "/vendors",              num: "04.3", label: "Vendor Directory", description: "Curated reference of the platforms we evaluate.",            featureKey: "comparisonTools" },
+      { href: "/tools/epm-comparison", num: "01", label: "Comparison Tool",  description: "Independent platform benchmarks across EPM and AI vendors.", featureKey: "comparisonTools" },
+      { href: "/finance-compass",      num: "02", label: "Finance Compass",  description: "Diagnostic for finance maturity and EPM readiness.",         featureKey: "financeCompass" },
+      { href: "/vendors",              num: "03", label: "Vendor Directory", description: "Curated reference of the platforms we evaluate.",            featureKey: "comparisonTools" },
     ],
   },
   { href: "/blog",      num: "05", label: "Day to Day AI", description: "Practical notes on running AI inside finance.",                featureKey: "blog" },
@@ -144,7 +145,10 @@ export function LibraryNavigation({ variant = "light" }: LibraryNavigationProps)
         aria-label="Site navigation"
       >
         <div className="library-nav-drawer__header">
-          <span className="library-nav-drawer__eyebrow">Constancia · Library</span>
+          <div className="library-nav-drawer__brand">
+            <img src={constanciaLogoDark} alt="Constancia" className="library-nav-drawer__logo" />
+            <span className="library-nav-drawer__eyebrow">Library</span>
+          </div>
           <button
             type="button"
             className="library-nav-drawer__close"

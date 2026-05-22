@@ -301,7 +301,7 @@ export function generateComparisonHTML(data: ComparisonExportData): string {
         padding-top: 8pt;
       }
       @bottom-center {
-        content: "info@constancia.com | constancia.com";
+        content: "info@constancia.io | constancia.com";
         font-family: 'Inter', Arial, sans-serif;
         font-size: 8pt;
         color: ${BRAND.teal};
@@ -1055,7 +1055,7 @@ export function generateComparisonHTML(data: ComparisonExportData): string {
     
     <div class="cover-footer">
       <div class="tagline">Finance Transformed. Designed for Change. <span class="highlight">Driven by Technology.</span></div>
-      <div class="cover-contact">info@constancia.com | constancia.com | London, United Kingdom</div>
+      <div class="cover-contact">info@constancia.io | constancia.com | London, United Kingdom</div>
     </div>
   </div>
   
@@ -1323,7 +1323,7 @@ export function generateComparisonHTML(data: ComparisonExportData): string {
     
     <div class="disclaimer">
       <div class="disclaimer-title">Disclaimer</div>
-      <p>This document has been prepared using publicly available information and is intended for general informational purposes only. It does not constitute professional advice or a formal recommendation. Scores, fit recommendations, and vendor comparisons are based on Constancia consultant experience and publicly available information including analyst reports and vendor materials. Always validate through vendor demonstrations, proof-of-concept evaluations, and reference checks specific to your requirements before making selection decisions. To discuss how Constancia can support your specific requirements, contact info@constancia.com or visit constancia.com.</p>
+      <p>This document has been prepared using publicly available information and is intended for general informational purposes only. It does not constitute professional advice or a formal recommendation. Scores, fit recommendations, and vendor comparisons are based on Constancia consultant experience and publicly available information including analyst reports and vendor materials. Always validate through vendor demonstrations, proof-of-concept evaluations, and reference checks specific to your requirements before making selection decisions. To discuss how Constancia can support your specific requirements, contact info@constancia.io or visit constancia.com.</p>
     </div>
   </div>
 </body>

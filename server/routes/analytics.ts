@@ -26,7 +26,7 @@ import { isAuthenticated } from "../clerkAuth";
 const router = Router();
 
 const HUBSPOT_PORTAL_ID = process.env.HUBSPOT_PORTAL_ID || "";
-const LEAD_NOTIFICATION_EMAIL = process.env.LEAD_NOTIFICATION_EMAIL || "info@constancia.com";
+const LEAD_NOTIFICATION_EMAIL = process.env.LEAD_NOTIFICATION_EMAIL || "info@constancia.io";
 
 const EXCLUDED_ANALYTICS_IPS = [
   "2a06:5906:1423:7000:8de0:ce1:adef:4e1",
@@ -1199,7 +1199,7 @@ function buildWidgetResultsEmailHtml(data: z.infer<typeof widgetEmailResultsSche
                       Finance Transformation & EPM Specialists
                     </p>
                     <p style="margin: 0 0 16px 0; font-size: 13px; color: #6b7280;">
-                      <a href="mailto:info@constancia.com" style="color: #8E4F67; text-decoration: none;">info@constancia.com</a>
+                      <a href="mailto:info@constancia.io" style="color: #8E4F67; text-decoration: none;">info@constancia.io</a>
                       &nbsp;|&nbsp;
                       <a href="https://constancia.com" style="color: #8E4F67; text-decoration: none;">www.constancia.com</a>
                     </p>

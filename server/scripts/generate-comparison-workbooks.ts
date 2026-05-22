@@ -380,7 +380,7 @@ async function generateWorkbook(
     `https://constancia.com/${type}-comparison`,
     '',
     'Contact Constancia for independent advisory:',
-    'info@constancia.com | https://constancia.com',
+    'info@constancia.io | https://constancia.com',
   ];
   
   instructions.forEach(line => {

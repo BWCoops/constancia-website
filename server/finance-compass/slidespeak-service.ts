@@ -213,7 +213,7 @@ SLIDE 6 - RECOMMENDED NEXT STEPS:
 SLIDE 7 - CONTACT INFORMATION:
 - Primary Contact: ${contactName}
 - Email: ${contact.email}
-- Constancia Enquiries: info@constancia.com
+- Constancia Enquiries: info@constancia.io
 - Next meeting suggestion
 
 ## DESIGN REQUIREMENTS
@@ -496,7 +496,7 @@ SLIDE 21 - NEXT STEPS & CONTACT:
 - Steering committee kickoff recommendation
 - Governance structure proposal
 - Contact Information: ${contactName}, ${contact.email}
-- Constancia Support: info@constancia.com
+- Constancia Support: info@constancia.io
 
 ## DESIGN REQUIREMENTS
 - Professional, executive-ready styling
@@ -705,7 +705,7 @@ function buildSlideBySlidePresentation(data: AssessmentReportData): SlideDefinit
     title: "Next Steps & Contact",
     layout: "ITEMS",
     item_amount: 4,
-    content: `Schedule steering committee kickoff meeting. Review and prioritise recommendations. Develop detailed implementation plan. Contact: ${contactName} (${contact.email}). Constancia Support: info@constancia.com`
+    content: `Schedule steering committee kickoff meeting. Review and prioritise recommendations. Develop detailed implementation plan. Contact: ${contactName} (${contact.email}). Constancia Support: info@constancia.io`
   });
 
   return slides;

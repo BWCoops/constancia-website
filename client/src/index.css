@@ -1044,9 +1044,13 @@ div[class*="hs-chat"] {
 .library-nav-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(10, 13, 20, 0.55);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  /* Much more opaque than before — the menu surface itself should
+     dominate; the page behind only hints through. Reduces blur to
+     2px so the cream surface comes through cleanly without softening
+     it into the background. */
+  background: rgba(20, 22, 22, 0.78);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   z-index: 60;
   opacity: 0;
   pointer-events: none;
@@ -1078,11 +1082,24 @@ div[class*="hs-chat"] {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 32px;
+  gap: 16px;
+}
+.library-nav-drawer__brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+.library-nav-drawer__logo {
+  height: 28px;
+  width: auto;
+  display: block;
+  flex-shrink: 0;
 }
 .library-nav-drawer__eyebrow {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 11px;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: #8E4F67;
 }
@@ -1200,65 +1217,80 @@ div[class*="hs-chat"] {
   color: #8E4F67;
 }
 
-/* Sublist — clearly indented to the right of the top-level grid so
-   the hierarchy reads at a glance. Left padding 56px (well past the
-   top-level num column) + a faint vertical guide on the inside edge. */
+/* Sublist — clearly indented to the right and visually distinct
+   from top-level (smaller label, mineral-green numbers, a chevron
+   prefix that signals "you're descending a level"). */
 .library-nav-drawer__sub {
   list-style: none;
   margin: 0;
-  padding: 0 0 0 56px;
+  padding: 4px 0 8px 80px;
   display: flex;
   flex-direction: column;
   max-height: 0;
   opacity: 0;
   overflow: hidden;
   position: relative;
-  transition: max-height 320ms ease-out, opacity 220ms ease-out;
+  transition: max-height 320ms ease-out, opacity 220ms ease-out, padding 320ms ease-out;
 }
 .library-nav-drawer__sub.is-open {
   max-height: 800px;
   opacity: 1;
 }
-/* Vertical guide line down the left of the sublist — anchors the
-   children visually to the Tools parent above. */
-.library-nav-drawer__sub::before {
-  content: '';
-  position: absolute;
-  left: 22px;
-  top: 4px;
-  bottom: 4px;
-  width: 1px;
-  background: linear-gradient(to bottom,
-    rgba(142, 79, 103, 0.25) 0%,
-    rgba(142, 79, 103, 0.10) 50%,
-    rgba(142, 79, 103, 0.0) 100%);
-  pointer-events: none;
-}
 .library-nav-drawer__sub li {
-  border-top: 1px dashed rgba(37, 40, 38, 0.10);
+  border-top: none;
 }
-.library-nav-drawer__sub li:first-child { border-top: none; }
-.library-nav-drawer__sub li:last-child { border-bottom: none; }
+.library-nav-drawer__sub li + li {
+  margin-top: 2px;
+}
 .library-nav-drawer__sub a {
   display: grid;
-  grid-template-columns: 32px 1fr;
+  grid-template-columns: 14px 28px 1fr;
   grid-template-rows: auto auto;
-  column-gap: 14px;
+  column-gap: 12px;
   row-gap: 3px;
-  padding: 12px 4px;
+  padding: 12px 6px;
   color: #252826;
   text-decoration: none;
+  border-radius: 8px;
   transition: background 220ms ease-out, padding 220ms ease-out;
+  position: relative;
 }
 .library-nav-drawer__sub a:hover,
 .library-nav-drawer__sub a:focus-visible {
-  background: rgba(127, 184, 163, 0.07);
-  padding-left: 8px;
+  background: rgba(127, 184, 163, 0.08);
+  padding-left: 10px;
   outline: none;
 }
-.library-nav-drawer__sub .library-nav-drawer__label { font-size: 17px; font-weight: 400; }
-.library-nav-drawer__sub .library-nav-drawer__num { font-size: 10px; color: #5E8D7A; }
-.library-nav-drawer__sub .library-nav-drawer__desc { font-size: 12.5px; }
+/* "↳" indent glyph — small chevron-style prefix that signals these
+   rows are children of the row above. Pure CSS, no extra DOM. */
+.library-nav-drawer__sub a::before {
+  content: '↳';
+  grid-column: 1;
+  grid-row: 1 / 3;
+  align-self: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 14px;
+  color: rgba(94, 141, 122, 0.55);
+  line-height: 1;
+}
+.library-nav-drawer__sub .library-nav-drawer__num {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  font-size: 11px;
+  color: var(--brand-deep-mint);
+  align-self: center;
+}
+.library-nav-drawer__sub .library-nav-drawer__label {
+  grid-column: 3;
+  grid-row: 1;
+  font-size: 17px;
+  font-weight: 400;
+}
+.library-nav-drawer__sub .library-nav-drawer__desc {
+  grid-column: 3;
+  grid-row: 2;
+  font-size: 12.5px;
+}
 
 @media (prefers-reduced-motion: reduce) {
   .library-nav-drawer,
@@ -2165,16 +2197,26 @@ div[class*="hs-chat"] {
   color: var(--brand-text-secondary);
 }
 
-/* Photo placeholder block inside a tablet. */
+/* Photo placeholder block inside a tablet. Soft brand-tinted gradient
+   on cream so it blends with the glass surface instead of looking
+   like a dark slab punched through the tablet. */
 .marketing-photo {
   aspect-ratio: 16 / 9;
   width: 100%;
+  max-width: 100%;
   border-radius: 18px;
-  background: linear-gradient(135deg, rgba(37, 40, 38, 0.85) 0%, rgba(37, 40, 38, 0.95) 100%);
+  overflow: hidden;
+  background:
+    radial-gradient(120% 80% at 30% 20%, rgba(199, 122, 147, 0.18) 0%, rgba(199, 122, 147, 0) 60%),
+    radial-gradient(120% 100% at 80% 90%, rgba(127, 184, 163, 0.18) 0%, rgba(127, 184, 163, 0) 60%),
+    linear-gradient(135deg, rgba(216, 208, 198, 0.45) 0%, rgba(246, 243, 238, 0.6) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(246, 243, 238, 0.5);
+  color: rgba(37, 40, 38, 0.5);
+  margin-top: 8px;
 }
 .marketing-photo__caption { text-align: center; }
 .marketing-photo__caption-eye {

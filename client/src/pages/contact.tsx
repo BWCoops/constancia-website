@@ -20,8 +20,8 @@ const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "info@constancia.com",
-    href: "mailto:info@constancia.com",
+    value: "info@constancia.io",
+    href: "mailto:info@constancia.io",
   },
   {
     icon: MapPin,

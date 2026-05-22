@@ -205,7 +205,7 @@ export function sanitiseApiResponse(response: string): string {
     (match) => {
       // Don't redact common example emails or Constancia contact
       if (match.toLowerCase().includes('example') || 
-          match.toLowerCase() === 'info@constancia.com') {
+          match.toLowerCase() === 'info@constancia.io') {
         return match;
       }
       return '[EMAIL_REDACTED]';

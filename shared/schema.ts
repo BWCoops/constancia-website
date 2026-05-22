@@ -1241,7 +1241,7 @@ export type Citation = z.infer<typeof citationSchema>;
 // For Replit Auth, any logged in Replit user can access admin (for development)
 export const ADMIN_WHITELIST_EMAILS = [
   "grant.vanwyk@1qg.com",
-  "bradley.cooper@1qg.com",
+  "info@constancia.io",
 ];
 
 // ============================================

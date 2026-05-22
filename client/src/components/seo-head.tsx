@@ -37,7 +37,7 @@ const organizationSchema = {
   },
   "contactPoint": {
     "@type": "ContactPoint",
-    "email": "info@constancia.com",
+    "email": "info@constancia.io",
     "contactType": "customer service",
     "availableLanguage": "English"
   },

@@ -334,7 +334,7 @@ export async function getResourceHistory(
 export function createSystemActor(): AuditActor {
   return {
     id: "system",
-    email: "system@constancia.com",
+    email: "system@constancia.io",
     name: "System Process",
     role: "system",
   };

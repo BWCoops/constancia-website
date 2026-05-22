@@ -870,7 +870,7 @@ publicRouter.post("/verify-otp", checkBetaAccessByContactIdMiddleware, async (re
             : "None specified";
             
           await sendEmailViaGraph({
-            to: "info@constancia.com",
+            to: "info@constancia.io",
             subject: `New FinanceCompass Lead: ${contact.firstName} ${contact.lastName} from ${companyName}`,
             htmlContent: `
               <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
@@ -2533,7 +2533,7 @@ async function runAnalysisAsync(
               
               <p style="color: #888; font-size: 12px; text-align: center;">
                 Need help interpreting your results? Our expert consultants are here to help.<br>
-                <a href="mailto:info@constancia.com" style="color: #8E4F67;">Contact us</a> to schedule a consultation.<br><br>
+                <a href="mailto:info@constancia.io" style="color: #8E4F67;">Contact us</a> to schedule a consultation.<br><br>
                 &copy; Constancia Ltd. All rights reserved.
               </p>
             </div>

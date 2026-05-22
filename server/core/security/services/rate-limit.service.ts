@@ -206,7 +206,7 @@ export function createRateLimitService(
 ): RateLimitService {
   const bypassAccounts = isProduction 
     ? [] 
-    : ['test@constancia.com', 'demo@constancia.com'];
+    : ['test@constancia.io', 'demo@constancia.io'];
   
   return new RateLimitService(repository, bypassAccounts);
 }
