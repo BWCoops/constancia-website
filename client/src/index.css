@@ -2322,19 +2322,22 @@ div[class*="hs-chat"] {
   color: var(--brand-text-secondary);
 }
 
-/* Photo placeholder block inside a tablet. Constrained so it always
-   fits inside the parent tablet AND inside the 100vh sticky inner
-   of the ScrollyStage — width derives from the height cap via
-   aspect-ratio so the box never overflows on short viewports. */
+/* Photo placeholder block inside a tablet. Width is hard-capped so
+   the height (driven by aspect-ratio) is always bounded — was using
+   max-height before, but browsers violate aspect-ratio when only
+   max-height clamps, leaving the photo overflowing the tablet. The
+   3-way min() cap derives the largest acceptable width from:
+     - the visual ceiling we want (560px on any viewport)
+     - 32vh expressed as a width through the 16:9 ratio (32vh * 16/9)
+     - the parent's content width (100%)
+   So on any viewport, the photo fits inside the tablet AND the
+   100vh sticky inner of the ScrollyStage. */
 .marketing-photo {
+  display: block;
+  width: 100%;
+  max-width: min(560px, calc(32vh * 16 / 9));
   aspect-ratio: 16 / 9;
-  /* Height cap drives the width via aspect-ratio. Cap is the
-     smaller of 320px or 32vh so even on a 600px tall viewport the
-     photo doesn't crowd the heading + eyebrow + tablet padding. */
-  max-height: min(320px, 32vh);
-  max-width: 100%;
-  width: auto;
-  margin: 8px auto 0;
+  margin: 16px auto 0;
   border-radius: 18px;
   overflow: hidden;
   background:
