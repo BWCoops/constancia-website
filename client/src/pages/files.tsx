@@ -117,7 +117,7 @@ export default function FilesPage() {
   };
 
   return (
-    <div className="min-h-screen page-dark">
+    <div className="marketing-page">
       <SEOHead
         title="Toolkit — Constancia Guides, Frameworks & Downloads"
         description="Gated guides, frameworks, and templates from Constancia. Connected finance intelligence, EPM, AI for finance, and operating-model resources for finance and operations leaders."

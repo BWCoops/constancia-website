@@ -49,7 +49,7 @@ export default function BlogPage() {
   };
 
   return (
-    <div className="min-h-screen page-dark">
+    <div className="marketing-page">
       <SEOHead
         title="Constancia Insights Hub - Finance Transformation & EPM Insights"
         description="Expert insights on finance transformation, EPM platform selection, ERP optimisation, and AI for finance from Constancia's independent advisory team."

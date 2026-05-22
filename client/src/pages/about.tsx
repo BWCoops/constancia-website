@@ -44,7 +44,7 @@ export default function AboutPage() {
   const { flags } = useFeatureFlags();
 
   return (
-    <div className="min-h-screen page-dark">
+    <div className="marketing-page">
       <SEOHead
         title="About Constancia — Enterprise Intelligence Company"
         description="Constancia is an enterprise intelligence company that helps leaders move from debate to outcomes. Real-time visibility across organisational data, delivered by senior practitioners. Official Abacum and OneStream partner."

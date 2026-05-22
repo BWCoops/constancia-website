@@ -35,14 +35,16 @@ interface LibraryItem {
 }
 
 const LIBRARY: LibraryItem[] = [
-  { href: "/",         num: "00", label: "Home",          description: "Connected enterprise intelligence.", featureKey: null },
-  { href: "/about",    num: "01", label: "About",         description: "An enterprise intelligence company.", featureKey: "about" },
-  { href: "/services", num: "02", label: "Services",      description: "Abacum. OneStream. AI development partner.", featureKey: "services" },
-  { href: "/solutions", num: "03", label: "Solutions",     description: "Productised intelligence for finance and operations.", featureKey: "solutions" },
-  { href: "/tools/epm-comparison", num: "04", label: "Tools", description: "Comparison engines, FinanceCompass, vendor directory.", featureKey: "comparisonTools" },
-  { href: "/blog",     num: "05", label: "Day to Day AI", description: "Practical notes on running AI inside finance.", featureKey: "blog" },
-  { href: "/files",    num: "06", label: "Toolkit",       description: "Frameworks and templates from real programmes.", featureKey: "resources" },
-  { href: "/contact",  num: "07", label: "Contact",       description: "Tell us about your data challenge.", featureKey: "contact" },
+  { href: "/",                       num: "00", label: "Home",             description: "Connected enterprise intelligence.",                          featureKey: null },
+  { href: "/about",                  num: "01", label: "About",            description: "An enterprise intelligence company.",                          featureKey: "about" },
+  { href: "/services",               num: "02", label: "Services",         description: "Abacum. OneStream. AI development partner.",                  featureKey: "services" },
+  { href: "/solutions",              num: "03", label: "Solutions",        description: "Productised intelligence for finance and operations.",         featureKey: "solutions" },
+  { href: "/tools/epm-comparison",   num: "04", label: "Comparison Tool",  description: "Independent platform benchmarks across EPM and AI vendors.",   featureKey: "comparisonTools" },
+  { href: "/finance-compass",        num: "05", label: "Finance Compass",  description: "Diagnostic for finance maturity and EPM readiness.",           featureKey: "financeCompass" },
+  { href: "/vendors",                num: "06", label: "Vendor Directory", description: "Curated reference of the platforms we evaluate.",              featureKey: "comparisonTools" },
+  { href: "/blog",                   num: "07", label: "Day to Day AI",    description: "Practical notes on running AI inside finance.",                featureKey: "blog" },
+  { href: "/files",                  num: "08", label: "Toolkit",          description: "Frameworks and templates from real programmes.",               featureKey: "resources" },
+  { href: "/contact",                num: "09", label: "Contact",          description: "Tell us about your data challenge.",                           featureKey: "contact" },
 ];
 
 interface LibraryNavigationProps {

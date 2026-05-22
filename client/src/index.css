@@ -1739,6 +1739,94 @@ div[class*="hs-chat"] {
   width: min(80vw, clamp(280px, 36vmin, 480px));
 }
 
+/* ── 14b. Shared marketing-page shell + PageHero ──────────────────────
+   Every public sub-page (About / Services / Solutions / Day-to-Day
+   AI / Toolkit / Contact) sits on the same cream canvas with a
+   glass-surface hero card matching the landing's visual language. */
+.marketing-page {
+  background: var(--brand-bg-primary);
+  color: var(--brand-text-primary);
+  font-family: var(--brand-font-sans);
+  min-height: 100vh;
+}
+.page-hero {
+  position: relative;
+  isolation: isolate;
+  padding: clamp(120px, 18vh, 200px) 24px clamp(80px, 12vh, 120px);
+  overflow: hidden;
+}
+.page-hero__mesh { position: absolute; inset: 0; z-index: 0; opacity: 0.85; }
+.page-hero__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 880px;
+  margin: 0 auto;
+}
+.page-hero__card {
+  padding: clamp(36px, 5vw, 64px) clamp(28px, 4vw, 56px);
+  text-align: center;
+  border-radius: 32px;
+}
+@media (max-width: 540px) {
+  .page-hero__card { padding: 32px 22px; border-radius: 24px; }
+}
+.page-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(246, 243, 238, 0.45);
+  border: 1px solid rgba(199, 122, 147, 0.22);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--brand-berry);
+  margin-bottom: 28px;
+}
+.page-hero__badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--brand-mint);
+  box-shadow: 0 0 8px rgba(127, 184, 163, 0.6);
+}
+.page-hero__title {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: clamp(34px, 5.6vw, 64px);
+  font-weight: 300;
+  line-height: 1.06;
+  letter-spacing: -0.022em;
+  color: var(--brand-text-primary);
+  margin-bottom: 18px;
+}
+.page-hero__title-accent {
+  color: var(--brand-berry);
+  font-style: normal;
+  font-weight: 400;
+}
+.page-hero__subtitle {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: clamp(16px, 1.8vw, 20px);
+  font-weight: 400;
+  color: var(--brand-deep-mint);
+  margin-bottom: 14px;
+}
+.page-hero__description {
+  font-size: clamp(15px, 1.6vw, 18px);
+  line-height: 1.65;
+  color: var(--brand-text-secondary);
+  max-width: 56ch;
+  margin: 0 auto;
+}
+.page-hero__actions {
+  margin-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
 /* ── 15. Connected Enterprise Business Transformation band ─────────────
    Replaces the "Connected Finance Intelligence · 2026" treatment. A
    clean text band on cream, subtle dividers above + below. No Liquid

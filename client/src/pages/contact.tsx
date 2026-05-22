@@ -157,7 +157,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen page-dark">
+    <div className="marketing-page">
       <SEOHead
         title="Contact Us | Constancia — Get In Touch"
         description="Connect every finance system you own. Talk to Constancia about platform selection, integration, transformation planning, and senior-level guidance for finance teams. Official Abacum and OneStream partner."

@@ -157,7 +157,7 @@ export default function SolutionsPage() {
   };
   
   return (
-    <div className="min-h-screen page-dark">
+    <div className="marketing-page">
       <SEOHead
         title="Solutions & Tools | Constancia - Enterprise Performance Management"
         description="Structured analysis tools, expert advisory, and proven methodologies for your EPM journey. Interactive comparison and maturity assessment for finance leaders."

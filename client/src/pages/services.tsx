@@ -122,7 +122,7 @@ export default function ServicesPage() {
   const { flags } = useFeatureFlags();
 
   return (
-    <div className="min-h-screen page-dark">
+    <div className="marketing-page">
       <SEOHead
         title="Services — Abacum, OneStream, AI Development Partner | Constancia"
         description="Constancia is an enterprise intelligence company. Official Abacum partner for mid-market FP&A, OneStream partner for enterprise EPM, and an AI development partner for custom build."
