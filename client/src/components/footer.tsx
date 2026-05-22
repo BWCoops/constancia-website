@@ -149,7 +149,7 @@ export function Footer() {
 
         <div className="pt-8 border-t border-[#FEFFF3]/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-[#FEFFF3]/60">
-            © {new Date().getFullYear()} Constancia Holdings Limited. All rights reserved. Company number 17227112.
+            © {new Date().getFullYear()} Constancia Holdings Limited. All rights reserved.
           </p>
           <div className="flex flex-wrap items-center gap-3 sm:gap-4 md:gap-6 text-sm text-[#FEFFF3]/60">
             {socialLinks.map((social) => (
