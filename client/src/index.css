@@ -1609,22 +1609,20 @@ div[class*="hs-chat"] {
   opacity: 1;
   transform: translateY(0);
 }
-.landing-hero__mission-inner {
-  /* Premium glass card surround. Layered radial highlight + diagonal
-     wash + chromatic border + ambient + close shadow + backdrop blur.
-     Sits in front of the fabric shader so the cream-on-rose tints
-     refract through, reading as Apple-style liquid glass even when
-     the WebGL displacement is subtle. */
+/* — Shared frosted-glass primitive used by the hero mission card and
+     the services partner-logo chips. Replaces the vendored
+     liquid-glass-react library: CSS-only frosting works in every
+     browser, plus a Chromium-only feDisplacementMap enhancement via
+     @supports for users whose engine supports backdrop-filter: url().
+     Safari/Firefox fall through to the plain blur silently. — */
+.glass-surface {
   position: relative;
-  padding: 38px 52px;
-  text-align: center;
-  min-width: clamp(320px, 60vmin, 600px);
-  border-radius: 28px;
   background:
     radial-gradient(120% 80% at 20% 0%, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0) 60%),
     radial-gradient(140% 100% at 100% 100%, rgba(199, 122, 147, 0.14) 0%, rgba(127, 184, 163, 0.08) 50%, rgba(255, 255, 255, 0) 80%),
     linear-gradient(135deg, rgba(255, 255, 255, 0.48) 0%, rgba(246, 243, 238, 0.18) 100%);
   border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 24px;
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.90) inset,
     0 -1px 0 rgba(199, 122, 147, 0.22) inset,
@@ -1634,9 +1632,18 @@ div[class*="hs-chat"] {
   backdrop-filter: blur(24px) saturate(170%);
   -webkit-backdrop-filter: blur(24px) saturate(170%);
 }
-/* Chromatic shimmer running along the top edge — gives the card a
-   subtle iridescent rim that animates with very slow drift. */
-.landing-hero__mission-inner::before {
+/* Chromium-only displacement enhancement — Safari/Firefox don't
+   implement url() backdrop-filter and silently keep the plain blur
+   above. */
+@supports (backdrop-filter: url(#glass)) {
+  .glass-surface {
+    backdrop-filter: url(#glass) blur(18px) saturate(170%);
+    -webkit-backdrop-filter: url(#glass) blur(18px) saturate(170%);
+  }
+}
+/* Chromatic shimmer rim — rose → mint across the border. Same trick
+   we had on the mission card, now shared by every glass surface. */
+.glass-surface::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -1653,6 +1660,15 @@ div[class*="hs-chat"] {
           mask-composite: exclude;
   pointer-events: none;
   opacity: 0.7;
+}
+
+/* Hero mission card — just layout + typography on top of the shared
+   .glass-surface primitive. */
+.landing-hero__mission-inner {
+  padding: 38px 52px;
+  text-align: center;
+  min-width: clamp(320px, 60vmin, 600px);
+  border-radius: 28px;
 }
 @media (max-width: 540px) {
   .landing-hero__mission-inner { padding: 28px 30px; min-width: unset; border-radius: 22px; }
@@ -1947,6 +1963,9 @@ div[class*="hs-chat"] {
   color: #12161D;
   font-size: 17px;
   letter-spacing: 0.02em;
+  /* Chip-sized override of the .glass-surface base radius (24px is
+     too round for a small inline badge). */
+  border-radius: 14px;
 }
 .partner-section--dark .partner-section__partner-card {
   color: #F6F3EE;

@@ -4,7 +4,7 @@ import { useFeatureFlags } from "@/lib/feature-flags";
 import { Footer } from "@/components/footer";
 import { SEOHead } from "@/components/seo-head";
 import { PageHero } from "@/components/page-hero";
-import { LiquidGlassCard } from "@/components/ui/LiquidGlassCard";
+import { GlassSurface } from "@/components/ui/GlassSurface";
 import { ConnectivityShowcase } from "@/components/ConnectivityShowcase";
 
 /**
@@ -15,8 +15,8 @@ import { ConnectivityShowcase } from "@/components/ConnectivityShowcase";
  * connectivity showcase that used to live on the home hero now
  * anchors the AI Development Partner section.
  *
- * LiquidGlassCard usage on this page is restricted to partner-logo
- * chips at variant="subtle" per the brief. Body copy sits outside
+ * Glass-morphism on this page is restricted to the partner-logo
+ * chips (one shared GlassSurface primitive). Body copy sits outside
  * cards.
  */
 
@@ -96,11 +96,9 @@ function PartnerBlock({ section, dark = false }: { section: PartnerSection; dark
               {section.heading}
             </h2>
             <p className="partner-section__sub">{section.sub}</p>
-            <div style={{ display: "inline-block" }}>
-              <LiquidGlassCard variant="subtle" cornerRadius={14}>
-                <div className="partner-section__partner-card">{section.partner}</div>
-              </LiquidGlassCard>
-            </div>
+            <GlassSurface className="partner-section__partner-card">
+              {section.partner}
+            </GlassSurface>
           </div>
 
           <div>

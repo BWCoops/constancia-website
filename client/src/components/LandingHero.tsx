@@ -72,7 +72,7 @@ export function LandingHero() {
           <WordmarkIntro className="landing-hero__wordmark" />
 
           <div className="landing-hero__mission">
-            <div className="landing-hero__mission-inner">
+            <div className="glass-surface landing-hero__mission-inner">
               <div className="landing-hero__mission-eyebrow">On a mission to deliver</div>
               <div className="landing-hero__mission-lede">Real-time enterprise intelligence.</div>
             </div>

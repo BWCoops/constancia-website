@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { LazyMotionProvider } from "@/components/lazy-motion-provider";
 import { CookieConsentBanner } from "@/components/cookie-consent";
 import { LibraryNavigation } from "@/components/LibraryNavigation";
+import { GlassFilterDef } from "@/components/ui/GlassSurface";
 import { VisitorProvider } from "@/contexts/VisitorContext";
 import { initializeImagePreconnects, preloadCriticalImages, preloadPriorityRoutes, preloadHeavyRoutes } from "@/lib/preload";
 import { initAdClickTracker } from "@/lib/ad-click-tracker";
@@ -435,6 +436,7 @@ function App() {
             <VisitorProvider>
               <TooltipProvider>
                 <Toaster />
+                <GlassFilterDef />
                 <GlobalNav />
                 <Router />
                 <CookieConsentBanner />
