@@ -1,21 +1,24 @@
 /**
  * LandingHero — full scrollytelling stage.
  *
- * Outer section is ~580vh tall; the inner is sticky 100vh and holds
- * the fabric shader + the mesh + a stack of glass tablets. As the
- * user scrolls, a single rAF-throttled scroll listener drives each
- * tablet's opacity + transform: tablets pop in from below, hold
- * during their active range, then pop out upward — like cards
- * sliding past the fabric.
+ * First impression is the wordmark alone on a calm cream surface
+ * (mesh ambient stays subtle, fabric is hidden). As the user starts
+ * to scroll, the fabric shader fades in underneath and the rest of
+ * the page reveals as a sequence of glass tablets popping in / out
+ * over the fabric — ending with the wordmark returning for the
+ * contact CTA.
  *
  * Panels in scroll order (active range out of 1.0):
- *   1. 0.00 – 0.15  Hero          — wordmark + mission card
- *   2. 0.22 – 0.39  Who we are
- *   3. 0.44 – 0.61  Connected     — Abacum + OneStream partners
- *   4. 0.66 – 0.83  Services      — four practices
- *   5. 0.88 – 1.00  Contact       — wordmark returns + CTA
+ *   1. 0.00 – 0.10  Wordmark alone (calm intro)
+ *   2. 0.16 – 0.30  Mission card  — "On a mission to deliver..."
+ *   3. 0.36 – 0.50  Who we are
+ *   4. 0.56 – 0.70  Connected     — Abacum + OneStream partners
+ *   5. 0.74 – 0.86  Services      — four practices
+ *   6. 0.90 – 1.00  Contact       — wordmark returns + CTA
  *
- * Below this stage the page resumes with the Footer.
+ * Fabric shader opacity is tied to scroll progress (0 → 1 between
+ * scroll 0.08 and 0.20) so the calm opening reads as truly calm,
+ * then the world comes alive as you scroll.
  */
 
 import { useEffect, useRef, useState } from "react";
@@ -30,20 +33,17 @@ interface PanelRange {
   end: number;
 }
 
-// Active ranges per panel. Tuned so each gets ~17% of the scroll
-// (the hero takes a bit less so the first impression isn't a
-// lingering load state). Small gaps between panels give the eye
-// time to register the swap.
 const PANELS: PanelRange[] = [
-  { start: 0.00, end: 0.15 },
-  { start: 0.22, end: 0.39 },
-  { start: 0.44, end: 0.61 },
-  { start: 0.66, end: 0.83 },
-  { start: 0.88, end: 1.00 },
+  { start: 0.00, end: 0.10 }, // wordmark alone
+  { start: 0.16, end: 0.30 }, // mission card
+  { start: 0.36, end: 0.50 }, // who we are
+  { start: 0.56, end: 0.70 }, // connected
+  { start: 0.74, end: 0.86 }, // services
+  { start: 0.90, end: 1.00 }, // contact (wordmark returns)
 ];
 
-const ENTER_FADE = 0.06; // scroll-fraction over which a panel fades in
-const EXIT_FADE  = 0.06; // and fades out
+const ENTER_FADE = 0.05;
+const EXIT_FADE  = 0.05;
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 
@@ -60,16 +60,15 @@ export function LandingHero() {
   const [fabricMounted, setFabricMounted] = useState(false);
 
   const stageRef = useRef<HTMLElement | null>(null);
+  const fabricRef = useRef<HTMLDivElement | null>(null);
   const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  // Stage the loaded class so the first wordmark's intro plays.
   useEffect(() => {
     if (prefersReducedMotion) return;
     const id = window.setTimeout(() => setLoaded(true), 30);
     return () => window.clearTimeout(id);
   }, [prefersReducedMotion]);
 
-  // Defer the WebGL fabric to idle so first paint stays cheap.
   useEffect(() => {
     const idle = window.requestIdleCallback
       ?? ((cb: () => void) => window.setTimeout(cb, 180));
@@ -79,10 +78,7 @@ export function LandingHero() {
     return () => cancelIdle(id as unknown as number);
   }, []);
 
-  // Scroll-driven panel transitions. Reads progress 0..1 across the
-  // outer stage's scrollable range, then maps each panel range to
-  // its opacity + translateY + scale. Updates DOM directly to avoid
-  // React renders on every scroll tick.
+  // Scroll-driven panels + fabric reveal.
   useEffect(() => {
     if (prefersReducedMotion) {
       panelRefs.current.forEach((el, i) => {
@@ -90,6 +86,7 @@ export function LandingHero() {
         el.style.opacity = i === 0 ? "1" : "0.92";
         el.style.transform = "translateY(0) scale(1)";
       });
+      if (fabricRef.current) fabricRef.current.style.opacity = "1";
       return;
     }
 
@@ -101,6 +98,14 @@ export function LandingHero() {
       const rect = stage.getBoundingClientRect();
       const total = Math.max(1, rect.height - window.innerHeight);
       const p = clamp(-rect.top / total, 0, 1);
+
+      // Fabric ramps in between scroll 0.08 and 0.20. The wordmark-
+      // alone moment (0–0.10) stays largely fabric-free; by the time
+      // the mission card panel is active the fabric is fully present.
+      if (fabricRef.current) {
+        const fabricOpacity = clamp((p - 0.08) / 0.12, 0, 1);
+        fabricRef.current.style.opacity = String(fabricOpacity);
+      }
 
       PANELS.forEach((range, i) => {
         const panel = panelRefs.current[i];
@@ -151,7 +156,7 @@ export function LandingHero() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
-  }, [prefersReducedMotion]);
+  }, [prefersReducedMotion, fabricMounted]);
 
   return (
     <section
@@ -161,11 +166,19 @@ export function LandingHero() {
     >
       <div className="landing-hero__inner">
         <MeshBackground className="landing-hero__mesh" />
-        {fabricMounted && <HeroFabricCanvas className="landing-hero__fabric" />}
+        {fabricMounted && (
+          <div ref={fabricRef} className="landing-hero__fabric-wrap">
+            <HeroFabricCanvas className="landing-hero__fabric" />
+          </div>
+        )}
 
-        {/* Panel 1 — Hero */}
-        <div ref={(el) => { panelRefs.current[0] = el; }} className="scrolly-panel">
+        {/* Panel 1 — Wordmark alone (calm cream opening) */}
+        <div ref={(el) => { panelRefs.current[0] = el; }} className="scrolly-panel scrolly-panel--solo">
           <WordmarkIntro className="landing-hero__wordmark" />
+        </div>
+
+        {/* Panel 2 — Mission card */}
+        <div ref={(el) => { panelRefs.current[1] = el; }} className="scrolly-panel">
           <div className="landing-hero__mission">
             <div className="glass-surface landing-hero__mission-inner">
               <div className="landing-hero__mission-eyebrow">On a mission to deliver</div>
@@ -174,8 +187,8 @@ export function LandingHero() {
           </div>
         </div>
 
-        {/* Panel 2 — Who we are */}
-        <div ref={(el) => { panelRefs.current[1] = el; }} className="scrolly-panel">
+        {/* Panel 3 — Who we are */}
+        <div ref={(el) => { panelRefs.current[2] = el; }} className="scrolly-panel">
           <div className="glass-surface scrolly-tablet">
             <div className="scrolly-tablet__eyebrow">Who we are</div>
             <h2 className="scrolly-tablet__heading">An enterprise intelligence company.</h2>
@@ -190,8 +203,8 @@ export function LandingHero() {
           </div>
         </div>
 
-        {/* Panel 3 — Connected enterprise */}
-        <div ref={(el) => { panelRefs.current[2] = el; }} className="scrolly-panel">
+        {/* Panel 4 — Connected enterprise */}
+        <div ref={(el) => { panelRefs.current[3] = el; }} className="scrolly-panel">
           <div className="glass-surface scrolly-tablet">
             <div className="scrolly-tablet__eyebrow">Connected Enterprise Business Transformation</div>
             <h2 className="scrolly-tablet__heading">
@@ -205,8 +218,8 @@ export function LandingHero() {
           </div>
         </div>
 
-        {/* Panel 4 — Services */}
-        <div ref={(el) => { panelRefs.current[3] = el; }} className="scrolly-panel">
+        {/* Panel 5 — Services */}
+        <div ref={(el) => { panelRefs.current[4] = el; }} className="scrolly-panel">
           <div className="glass-surface scrolly-tablet scrolly-tablet--wide">
             <div className="scrolly-tablet__eyebrow">What we do</div>
             <h2 className="scrolly-tablet__heading">Four practices, one outcome.</h2>
@@ -222,8 +235,8 @@ export function LandingHero() {
           </div>
         </div>
 
-        {/* Panel 5 — Contact (wordmark returns) */}
-        <div ref={(el) => { panelRefs.current[4] = el; }} className="scrolly-panel">
+        {/* Panel 6 — Contact (wordmark returns) */}
+        <div ref={(el) => { panelRefs.current[5] = el; }} className="scrolly-panel">
           <WordmarkIntro className="landing-hero__wordmark landing-hero__wordmark--contact" />
           <div className="landing-hero__mission">
             <div className="glass-surface landing-hero__mission-inner">

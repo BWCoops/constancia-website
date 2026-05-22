@@ -1366,17 +1366,23 @@ div[class*="hs-chat"] {
 @media (max-width: 540px) {
   .landing-hero__inner::before { height: 56px; }
 }
+.landing-hero__fabric-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  /* JS sets opacity per scroll tick; this transition smooths any
+     resize jump and the initial paint. */
+  transition: opacity 200ms linear;
+}
 .landing-hero__fabric {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
   pointer-events: none;
-  opacity: 0;
-  transition: opacity 800ms ease-out 200ms;
 }
-.landing-hero.is-loaded .landing-hero__fabric { opacity: 1; }
 .landing-hero__inner {
   position: sticky;
   top: 0;
@@ -1427,6 +1433,9 @@ div[class*="hs-chat"] {
   will-change: opacity, transform;
 }
 .scrolly-panel > * { pointer-events: auto; }
+/* Solo panel — just the wordmark, no mission card. Centre alignment
+   keeps the brand mark dead in the middle on the calm cream opening. */
+.scrolly-panel--solo { padding-top: clamp(40px, 8vh, 100px); padding-bottom: clamp(40px, 8vh, 100px); }
 
 /* Wordmark — small wrapper that lets the IMG inside drive its own
    intro animation. */
