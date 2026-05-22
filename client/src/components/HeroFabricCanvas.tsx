@@ -77,10 +77,19 @@ const FRAG = `
     vec3 deepShade = mix(uSlate, uGraphite, ele);
     hueShade = mix(deepShade, hueShade, 0.55);
     vec3 col = mix(hueShade, hueLit, lit);
-    float spec = pow(clamp(dot(N, H), 0.0, 1.0), 64.0);
-    col += vec3(1.0, 0.97, 0.94) * spec * 0.22;
-    float rim = pow(1.0 - clamp(dot(N, V), 0.0, 1.0), 2.8);
-    col = mix(col, mix(uMint, uRose, ele) * 1.08, rim * 0.22);
+    // Sharper specular for a glassier surface highlight.
+    float spec = pow(clamp(dot(N, H), 0.0, 1.0), 96.0);
+    col += vec3(1.0, 0.97, 0.94) * spec * 0.38;
+    // Secondary low-frequency sheen — like wet glass catching light
+    // across the whole plane, not just the highlight point.
+    float sheen = pow(clamp(dot(N, H), 0.0, 1.0), 12.0);
+    col += vec3(1.0, 0.94, 0.97) * sheen * 0.10;
+    // Iridescent rim with a view-angle hue shift — rose at glancing
+    // angles, mint near head-on. Reads as chromatic refraction on
+    // the curved fabric edge.
+    float rim = pow(1.0 - clamp(dot(N, V), 0.0, 1.0), 2.4);
+    vec3 rimHue = mix(uMint * 1.05, uRose * 1.10, smoothstep(0.0, 1.0, rim));
+    col = mix(col, rimHue, rim * 0.34);
     float edgeX = smoothstep(0.0, 0.26, vUv.x) * smoothstep(1.0, 0.74, vUv.x);
     float edgeY = smoothstep(0.0, 0.22, vUv.y) * smoothstep(1.0, 0.82, vUv.y);
     float edge = edgeX * edgeY;
@@ -186,15 +195,16 @@ export function HeroFabricCanvas({ className }: HeroFabricCanvasProps) {
     const segScale = isMobile ? 0.55 : 1;
     const seg = (n: number) => Math.max(48, Math.floor(n * segScale));
 
-    // Five stacked fabric layers. Opacity values ~50% of the legacy
-    // hero so the effect is markedly softer behind the new mission
-    // card + diagram + waves.
+    // Five stacked fabric layers. Amplitudes + opacities bumped so
+    // the waves pop a touch more under the glass mission card — the
+    // displacement scale on the card needs varied colour underneath
+    // to read as Apple-style liquid glass.
     const LAYERS = [
-      makeFabric({ size: 10.0, segs: seg(200), amp: 0.85, phase: 2.4, posY: -0.20, posZ:  0.4,   rotX: -Math.PI * 0.50, rotZ: -0.04, baseOpacity: 0.15 }),
-      makeFabric({ size: 11.0, segs: seg(180), amp: 0.95, phase: 0.0, posY: -0.30, posZ: -2.5,   rotX: -Math.PI * 0.46, rotZ:  0.08, baseOpacity: 0.21 }),
-      makeFabric({ size: 12.0, segs: seg(160), amp: 1.00, phase: 1.1, posY: -0.45, posZ: -5.5,   rotX: -Math.PI * 0.52, rotZ: -0.06, baseOpacity: 0.26 }),
-      makeFabric({ size: 13.0, segs: seg(140), amp: 1.05, phase: 3.0, posY: -0.55, posZ: -8.5,   rotX: -Math.PI * 0.44, rotZ:  0.05, baseOpacity: 0.30 }),
-      makeFabric({ size: 14.0, segs: seg(120), amp: 1.10, phase: 4.2, posY: -0.65, posZ: -11.5,  rotX: -Math.PI * 0.50, rotZ: -0.03, baseOpacity: 0.31 }),
+      makeFabric({ size: 10.0, segs: seg(200), amp: 1.05, phase: 2.4, posY: -0.20, posZ:  0.4,   rotX: -Math.PI * 0.50, rotZ: -0.04, baseOpacity: 0.22 }),
+      makeFabric({ size: 11.0, segs: seg(180), amp: 1.20, phase: 0.0, posY: -0.30, posZ: -2.5,   rotX: -Math.PI * 0.46, rotZ:  0.08, baseOpacity: 0.30 }),
+      makeFabric({ size: 12.0, segs: seg(160), amp: 1.30, phase: 1.1, posY: -0.45, posZ: -5.5,   rotX: -Math.PI * 0.52, rotZ: -0.06, baseOpacity: 0.36 }),
+      makeFabric({ size: 13.0, segs: seg(140), amp: 1.35, phase: 3.0, posY: -0.55, posZ: -8.5,   rotX: -Math.PI * 0.44, rotZ:  0.05, baseOpacity: 0.40 }),
+      makeFabric({ size: 14.0, segs: seg(120), amp: 1.40, phase: 4.2, posY: -0.65, posZ: -11.5,  rotX: -Math.PI * 0.50, rotZ: -0.03, baseOpacity: 0.42 }),
     ];
 
     function resizeWithDpr() {

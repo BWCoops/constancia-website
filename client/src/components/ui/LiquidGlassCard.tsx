@@ -22,9 +22,13 @@ interface LiquidGlassCardProps {
 }
 
 const variants = {
-  hero:    { displacementScale: 80, blurAmount: 0.12, saturation: 140, aberrationIntensity: 2.5, elasticity: 0.40 },
-  default: { displacementScale: 60, blurAmount: 0.08, saturation: 130, aberrationIntensity: 2.0, elasticity: 0.30 },
-  subtle:  { displacementScale: 40, blurAmount: 0.05, saturation: 120, aberrationIntensity: 1.0, elasticity: 0.20 },
+  // Hero card refracts the fabric shader behind it — bumped
+  // displacement/saturation/aberration for a stronger Apple-style
+  // liquid feel (the chromatic edges + caustic ripple are what sell
+  // the effect).
+  hero:    { displacementScale: 110, blurAmount: 0.16, saturation: 160, aberrationIntensity: 3.4, elasticity: 0.45 },
+  default: { displacementScale: 60,  blurAmount: 0.08, saturation: 130, aberrationIntensity: 2.0, elasticity: 0.30 },
+  subtle:  { displacementScale: 40,  blurAmount: 0.05, saturation: 120, aberrationIntensity: 1.0, elasticity: 0.20 },
 } as const;
 
 export function LiquidGlassCard({

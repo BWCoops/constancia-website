@@ -76,7 +76,7 @@ export function LandingHero() {
             <LiquidGlassCard variant="hero" cornerRadius={28}>
               <div className="landing-hero__mission-inner">
                 <div className="landing-hero__mission-eyebrow">On a mission to deliver</div>
-                <div className="landing-hero__mission-lede">real-time enterprise intelligence.</div>
+                <div className="landing-hero__mission-lede">Real-time enterprise intelligence.</div>
               </div>
             </LiquidGlassCard>
           </div>
