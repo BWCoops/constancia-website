@@ -101,17 +101,39 @@ const FRAG = `
 
     // Primary specular — sharp warm-white pinpoint.
     float spec = pow(clamp(dot(N, H), 0.0, 1.0), 96.0);
-    col += vec3(1.0, 0.97, 0.94) * spec * 0.38;
-    // Secondary specular — softer, rose-tinted, animated. This is
+    col += vec3(1.0, 0.97, 0.94) * spec * 0.40;
+    // Secondary specular — softer, stone-tinted, animated. This is
     // the shimmer that travels across the fabric.
-    float spec2 = pow(clamp(dot(N, H2), 0.0, 1.0), 56.0);
-    col += uLightTint2 * spec2 * 0.42;
+    float spec2 = pow(clamp(dot(N, H2), 0.0, 1.0), 52.0);
+    col += uLightTint2 * spec2 * 0.55;
     // Low-frequency sheen — wet-glass catching light across the
     // whole plane. Tinted with Stone (support neutral) so the broad
     // glaze reads as cool glass, not warm pearl. This is the main
     // glass-morphic body lift.
     float sheen = pow(clamp(dot(N, H), 0.0, 1.0), 12.0);
-    col += uStone * sheen * 0.16;
+    col += uStone * sheen * 0.22;
+
+    // Anisotropic highlight — stretches the spec along an approximate
+    // tangent direction so the gleam reads as silk / polished glass
+    // (a long streak), not a point light. Built from the surface
+    // slope so it follows the wave flow.
+    vec3 T = normalize(vec3(1.0, 0.0, -vEle * 0.6));
+    float TdH = dot(T, H2);
+    float aniso = sqrt(max(0.0, 1.0 - TdH * TdH));
+    float anisoSpec = pow(aniso, 26.0);
+    col += uStone * anisoSpec * 0.20;
+
+    // Travelling caustic band — a diagonal bright ripple sweeps
+    // slowly across the surface, like sunlight refracting through
+    // rippled glass. Direction is fixed; phase animates with uTime.
+    float causticPos = vUv.x * 1.8 + vUv.y * 1.0 - uTime * 0.16;
+    float caustic = pow(0.5 + 0.5 * sin(causticPos * 5.5), 8.0);
+    col += uStone * caustic * 0.14;
+    // Second caustic at a different angle and speed for cross-hatch
+    // glassy interference.
+    float causticPos2 = vUv.x * 1.2 - vUv.y * 1.6 + uTime * 0.10;
+    float caustic2 = pow(0.5 + 0.5 * sin(causticPos2 * 4.5), 9.0);
+    col += vec3(1.0, 0.98, 0.96) * caustic2 * 0.10;
 
     // Iridescent rim with a view-angle hue shift — Stone neutral
     // through to Mineral green to Muted rose across the rim. The
@@ -120,7 +142,12 @@ const FRAG = `
     float rim = pow(1.0 - clamp(dot(N, V), 0.0, 1.0), 2.4);
     vec3 rimHue = mix(uMint * 1.05, uStone, smoothstep(0.0, 0.5, rim));
     rimHue = mix(rimHue, uRose * 1.08, smoothstep(0.5, 1.0, rim));
-    col = mix(col, rimHue, rim * 0.36);
+    col = mix(col, rimHue, rim * 0.38);
+
+    // Breathing — overall surface luminance pulses subtly so the
+    // fabric feels alive even when held still. 7s cycle, ±3% range.
+    float breath = 0.5 + 0.5 * sin(uTime * 0.42);
+    col *= 0.97 + 0.06 * breath;
     float edgeX = smoothstep(0.0, 0.26, vUv.x) * smoothstep(1.0, 0.74, vUv.x);
     float edgeY = smoothstep(0.0, 0.22, vUv.y) * smoothstep(1.0, 0.82, vUv.y);
     float edge = edgeX * edgeY;

@@ -1483,6 +1483,7 @@ div[class*="hs-chat"] {
      Safari/Firefox fall through to the plain blur silently. — */
 .glass-surface {
   position: relative;
+  overflow: hidden; /* keeps the travelling shimmer sweep clipped to the radius */
   background:
     radial-gradient(120% 80% at 20% 0%, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0) 60%),
     radial-gradient(140% 100% at 100% 100%, rgba(199, 122, 147, 0.14) 0%, rgba(127, 184, 163, 0.08) 50%, rgba(255, 255, 255, 0) 80%),
@@ -1498,6 +1499,10 @@ div[class*="hs-chat"] {
   backdrop-filter: blur(24px) saturate(170%);
   -webkit-backdrop-filter: blur(24px) saturate(170%);
 }
+/* Content sits above the travelling shimmer sweep so the bright bar
+   passes BEHIND the text. Without this, mix-blend-mode: screen would
+   momentarily brighten the text when the sweep crosses it. */
+.glass-surface > * { position: relative; z-index: 2; }
 /* Chromium-only displacement enhancement — Safari/Firefox don't
    implement url() backdrop-filter and silently keep the plain blur
    above. */
@@ -1507,25 +1512,67 @@ div[class*="hs-chat"] {
     -webkit-backdrop-filter: url(#glass) blur(18px) saturate(170%);
   }
 }
-/* Chromatic shimmer rim — rose → mint across the border. Same trick
-   we had on the mission card, now shared by every glass surface. */
+/* Chromatic shimmer rim — rose → stone → mint, slowly rotating
+   around the border so the edge feels alive. The hue rotation is
+   driven by a 14s animation; the mask-composite trick keeps the
+   gradient as a 1px ring rather than filling the whole surface. */
 .glass-surface::before {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(115deg,
-    rgba(199, 122, 147, 0.45) 0%,
-    rgba(255, 255, 255, 0.0) 40%,
-    rgba(127, 184, 163, 0.45) 90%);
+  background: conic-gradient(from var(--glass-angle, 115deg),
+    rgba(199, 122, 147, 0.55) 0deg,
+    rgba(216, 208, 198, 0.45) 90deg,
+    rgba(127, 184, 163, 0.55) 180deg,
+    rgba(216, 208, 198, 0.45) 270deg,
+    rgba(199, 122, 147, 0.55) 360deg);
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
           mask-composite: exclude;
   pointer-events: none;
-  opacity: 0.7;
+  opacity: 0.75;
+  animation: glass-rim-rotate 14s linear infinite;
+}
+@property --glass-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+@keyframes glass-rim-rotate {
+  to { --glass-angle: 360deg; }
+}
+/* Travelling shimmer sweep — a soft, slightly chromatic light bar
+   that drifts diagonally across the surface every ~9s. Lives on the
+   ::after pseudo so it doesn't interfere with the ::before rim. */
+.glass-surface::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(115deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.18) 47%,
+    rgba(216, 208, 198, 0.28) 50%,
+    rgba(255, 255, 255, 0.18) 53%,
+    transparent 65%);
+  background-size: 240% 100%;
+  background-position: 100% 50%;
+  pointer-events: none;
+  opacity: 0.85;
+  mix-blend-mode: screen;
+  animation: glass-shimmer-sweep 9s ease-in-out infinite;
+}
+@keyframes glass-shimmer-sweep {
+  0%, 100% { background-position: 130% 50%; }
+  50%      { background-position: -30% 50%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .glass-surface::before,
+  .glass-surface::after { animation: none; }
 }
 
 /* Hero mission card — just layout + typography on top of the shared
