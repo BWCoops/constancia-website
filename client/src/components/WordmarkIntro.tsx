@@ -1,11 +1,10 @@
 /**
  * WordmarkIntro — landing-hero wordmark.
  *
- * Renders the brand PNG with a soft opacity + scale fade-in. The
- * spheres / constructed-text experiments are gone for now — we
- * need brand consistency first; we can add a deconstruction-on-
- * scroll effect (or a constructed intro) on top of this baseline
- * later.
+ * Renders the brand PNG with a dramatic small-to-large fade-in
+ * (scale 0.35 → 1.04 → 1, with a tiny overshoot bounce) so the
+ * logo draws the eye on first paint. Reused on the contact panel
+ * at the bottom of the scrolly stage where the logo reappears.
  *
  * Honours prefers-reduced-motion — wordmark shows immediately.
  */
@@ -33,7 +32,6 @@ export function WordmarkIntro({ className }: WordmarkIntroProps) {
       <img
         src={constanciaLogoDark}
         alt="Constancia"
-        id="hero-heading"
         decoding="async"
         fetchPriority="high"
       />

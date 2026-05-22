@@ -1339,10 +1339,17 @@ div[class*="hs-chat"] {
 .landing-hero {
   position: relative;
   width: 100%;
-  height: 320vh;
   background: #F6F3EE;
   color: #12161D;
   isolation: isolate;
+}
+/* Scrolly stage is much taller than a normal hero because every
+   below-fold section is now a scroll-driven panel inside it. ~580vh
+   = ~480vh of usable scroll past the first viewport, divided across
+   5 panels with small fade gaps between. */
+.landing-hero--scrolly { height: 580vh; }
+@media (max-width: 768px) {
+  .landing-hero--scrolly { height: 520vh; }
 }
 /* Soft cream fade across the very top so the menu pill always sits
    on a calm cream tone, not a dark fabric band peeking through. Short
@@ -1396,38 +1403,42 @@ div[class*="hs-chat"] {
 }
 .landing-hero.is-loaded .landing-hero__diagram { opacity: 1; }
 
-/* Main content stack — wordmark + mission card. Sits above the
-   mesh + diagram. The wordmark scales into place from a small
-   point on load — the brand mark IS the intro animation, no
-   abstract dots. */
-.landing-hero__content {
+/* — Scrolly panels: each panel is absolutely positioned inside the
+     sticky inner. JS scroll listener drives opacity + transform per
+     panel; CSS just lays them out centred and gives them a starting
+     transition. All five panels share the same centring rules. — */
+.scrolly-panel {
   position: absolute;
   inset: 0;
   z-index: 5;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Justify start + a measured top padding sits the wordmark a touch
-     higher than dead-centre. Bottom padding rebalances so the mission
-     card lands centred below it, not crammed against the fabric. */
-  justify-content: flex-start;
-  padding: clamp(80px, 14vh, 160px) 24px clamp(80px, 14vh, 160px);
+  justify-content: center;
+  padding: clamp(80px, 12vh, 140px) 24px clamp(80px, 12vh, 140px);
   gap: clamp(28px, 4vh, 48px);
   pointer-events: none;
+  /* JS sets opacity + transform inline; the transition smooths any
+     resize/reflow but the per-tick updates skip the transition by
+     happening every frame. */
+  opacity: 0;
+  transform: translate3d(0, 80px, 0) scale(0.92);
+  transition: opacity 200ms linear, transform 200ms linear;
+  will-change: opacity, transform;
 }
-.landing-hero__content > * { pointer-events: auto; }
+.scrolly-panel > * { pointer-events: auto; }
+
+/* Wordmark — small wrapper that lets the IMG inside drive its own
+   intro animation. */
 .landing-hero__wordmark {
-  /* Wrapper sizes itself to the IMG inside via inline-block so the
-     wordmark stays at its original clamp(260, 32vmin, 460) and the
-     two intro spheres orbit around that natural footprint. */
   position: relative;
   display: inline-block;
 }
 
-/* — Wordmark: brand PNG with a soft opacity + scale fade-in. The
-     constructed-text + flying-sphere experiments are gone; brand
-     consistency wins for now. Deconstruct-on-scroll can layer on top
-     of this baseline later. — */
+/* — Wordmark intro: dramatic small-to-large reveal (0.35 → 1.04 →
+     1, with a tiny overshoot bounce) so the logo draws the eye on
+     first paint. Slower than a normal fade — 1.4s total — because
+     the user explicitly wanted "from quite small and quite big". — */
 .wordmark-img {
   position: relative;
   display: inline-block;
@@ -1438,10 +1449,10 @@ div[class*="hs-chat"] {
   width: clamp(260px, 32vmin, 460px);
   height: auto;
   opacity: 0;
-  transform: scale(0.92);
+  transform: scale(0.35);
   transition:
-    opacity 800ms ease-out,
-    transform 1000ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    opacity 1100ms ease-out,
+    transform 1400ms cubic-bezier(0.18, 0.92, 0.26, 1.20);
 }
 .wordmark-img.is-loaded img {
   opacity: 1;
@@ -1451,21 +1462,9 @@ div[class*="hs-chat"] {
   .wordmark-img img { opacity: 1; transform: none; transition: none; }
 }
 .landing-hero__mission {
-  /* Mission card uses pure CSS frosted glass (see .landing-hero__
-     mission-inner) — the LiquidGlassCard wrapper was dropped because
-     its position:relative/left:50% self-centring was fighting our
-     flex layout and dragging the card off-axis. CSS-only is simpler
-     and reads cleanly on cream + fabric. */
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 600ms ease-out 600ms, transform 600ms ease-out 600ms;
-}
-.landing-hero.is-loaded .landing-hero__mission {
-  opacity: 1;
-  transform: translateY(0);
 }
 /* — Shared frosted-glass primitive used by the hero mission card and
      the services partner-logo chips. Replaces the vendored
@@ -1567,6 +1566,121 @@ div[class*="hs-chat"] {
   .landing-hero__diagram,
   .landing-hero__wordmark,
   .landing-hero__mission { animation: none; transition: none; opacity: 1; transform: none; }
+  .scrolly-panel { opacity: 1 !important; transform: none !important; transition: none; }
+}
+
+/* — Scrolly tablets: the Who-we-are / Partners / Services / Contact
+     content lives in glass tablets that scroll-pop through the
+     stage. All sit on top of .glass-surface so they share the
+     hero mission card's visual language. — */
+.scrolly-tablet {
+  padding: 38px 52px;
+  text-align: center;
+  max-width: min(720px, 92vw);
+  border-radius: 28px;
+}
+.scrolly-tablet--wide { max-width: min(960px, 94vw); padding: 38px 56px; }
+@media (max-width: 540px) {
+  .scrolly-tablet { padding: 28px 28px; border-radius: 22px; }
+  .scrolly-tablet--wide { padding: 28px 28px; }
+}
+.scrolly-tablet__eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #8E4F67;
+  margin-bottom: 14px;
+}
+.scrolly-tablet__heading {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: clamp(24px, 3.6vw, 40px);
+  font-weight: 300;
+  line-height: 1.16;
+  letter-spacing: -0.018em;
+  color: #12161D;
+  margin-bottom: 16px;
+}
+.scrolly-tablet__heading-accent {
+  color: #8E4F67;
+  font-style: normal;
+  font-weight: 400;
+}
+.scrolly-tablet__sub {
+  font-size: clamp(14px, 1.4vw, 16px);
+  color: rgba(30, 38, 48, 0.7);
+  margin-bottom: 12px;
+  letter-spacing: 0.01em;
+}
+.scrolly-tablet__body {
+  font-size: clamp(15px, 1.5vw, 17px);
+  line-height: 1.65;
+  color: rgba(30, 38, 48, 0.85);
+  margin-bottom: 20px;
+  max-width: 56ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+.scrolly-tablet__link {
+  display: inline-block;
+  margin-top: 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: #8E4F67;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(142, 79, 103, 0.4);
+  padding-bottom: 2px;
+  transition: color 200ms, border-color 200ms;
+}
+.scrolly-tablet__link:hover,
+.scrolly-tablet__link:focus-visible {
+  color: #5E3A4D;
+  border-color: rgba(94, 58, 77, 0.7);
+  outline: none;
+}
+
+/* Services 2×2 grid inside the wide tablet. */
+.scrolly-services {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(24px, 3vw, 36px);
+  text-align: left;
+  margin-top: 24px;
+}
+@media (max-width: 640px) {
+  .scrolly-services { grid-template-columns: 1fr; gap: 20px; }
+}
+.scrolly-services__item {
+  padding-top: 18px;
+  border-top: 1px solid rgba(30, 38, 48, 0.14);
+}
+.scrolly-services__eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(30, 38, 48, 0.55);
+  margin-bottom: 8px;
+}
+.scrolly-services__title {
+  font-size: clamp(16px, 1.6vw, 20px);
+  font-weight: 500;
+  line-height: 1.2;
+  color: #12161D;
+  margin-bottom: 6px;
+}
+.scrolly-services__body {
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(30, 38, 48, 0.75);
+}
+
+/* When the wordmark returns in the contact panel, it sits a touch
+   smaller than the opening hero (so it reads as a sign-off, not a
+   second arrival). */
+.landing-hero__wordmark--contact .wordmark-img img {
+  width: clamp(220px, 26vmin, 380px);
 }
 
 /* ── 15. Connected Enterprise Business Transformation band ─────────────

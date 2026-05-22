@@ -1,23 +1,21 @@
 import { useEffect } from "react";
-import { Link } from "wouter";
 import { LandingHero } from "@/components/LandingHero";
-import { ConnectedBand } from "@/components/ConnectedBand";
-import { ServicesQuadrant } from "@/components/ServicesQuadrant";
 import { Footer } from "@/components/footer";
 import { CookiePreferencesIcon } from "@/components/cookie-consent";
 import { SEOHead } from "@/components/seo-head";
 import { trackPageView, setupScrollTracking, setupDwellTimeTracking } from "@/lib/funnel-analytics";
 
 /**
- * Constancia landing page — May 2026 Liquid Glass refresh.
+ * Constancia landing page.
  *
- * Sections in scroll order (match the chapter-nav anchors in
- * LandingHero):
- *   1. Hero          — wordmark + mission statement + chapter nav
- *   2. Who we are    — short editorial intro to Constancia
- *   3. Partners      — Connected Enterprise Business Transformation band
- *   4. Services      — four-quadrant LiquidGlassCard grid
- *   5. Contact       — short stub linking to /contact
+ * The whole page is now one scrollytelling stage (<LandingHero>):
+ * the fabric shader stays animated underneath while a sequence of
+ * glass tablets pops in / holds / pops out as the user scrolls,
+ * ending with the wordmark reappearing for the contact CTA. The
+ * old "Who we are / Partners / Services / Contact" sections are
+ * gone — their content now lives inside the LandingHero panels.
+ *
+ * Footer remains below the stage.
  */
 
 export default function Home() {
@@ -58,51 +56,6 @@ export default function Home() {
 
       <main id="main-content">
         <LandingHero />
-
-        {/* Who we are — short editorial intro on cream. */}
-        <section id="who-we-are" className="landing-who" aria-labelledby="landing-who-heading">
-          <div className="landing-who__inner">
-            <div className="landing-who__eyebrow">Who we are</div>
-            <h2 id="landing-who-heading" className="landing-who__heading">
-              An enterprise intelligence company.
-            </h2>
-            <p className="landing-who__body">
-              Constancia combines AI, advisory and development to deliver real-time insight from
-              organisational data. We help finance and operations leaders move from debate to
-              outcomes, without the manual rework in Excel and PowerPoint.
-            </p>
-            <Link
-              href="/about"
-              className="landing-who__link"
-              data-testid="landing-who-link"
-            >
-              About Constancia →
-            </Link>
-          </div>
-        </section>
-
-        <ConnectedBand />
-        <ServicesQuadrant />
-
-        {/* Contact stub — full form lives at /contact. */}
-        <section id="contact" className="landing-contact" aria-labelledby="landing-contact-heading">
-          <div className="landing-contact__inner">
-            <div className="landing-contact__eyebrow">Contact</div>
-            <h2 id="landing-contact-heading" className="landing-contact__heading">
-              Tell us about your data challenge.
-            </h2>
-            <p className="landing-contact__body">
-              We'll come back within one working day. No pitch, no deck.
-            </p>
-            <Link
-              href="/contact"
-              className="landing-contact__link"
-              data-testid="landing-contact-link"
-            >
-              Start the conversation →
-            </Link>
-          </div>
-        </section>
       </main>
 
       <Footer />
