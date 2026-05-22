@@ -19,7 +19,6 @@ import { useLocation } from "wouter";
 import { useFeatureFlags } from "@/lib/feature-flags";
 import { Menu, X, ChevronDown } from "lucide-react";
 import type { FeatureFlags } from "@shared/feature-flags";
-import constanciaLogoDark from "@assets/constancia-logo-dark.png";
 import { HeroFabricCanvas } from "./HeroFabricCanvas";
 
 interface LibraryItem {
@@ -139,21 +138,13 @@ export function LibraryNavigation({ variant = "light" }: LibraryNavigationProps)
       >
         {/* Fabric shader inside the backdrop — mounted only when the
             menu is open so we don't pay the GPU cost the rest of the
-            time. Sits at the back; the stamp + dim layer compose on
-            top. Works on every page (functional pages don't have the
-            page-level fabric, but this gives the menu its own). */}
+            time. The fabric's own caustic + shimmer + breathing
+            animations are the visual on the LEFT side; no separate
+            stamp on top (the page's wordmark shows through
+            naturally where it already sits). */}
         {open && (
           <HeroFabricCanvas className="library-nav-backdrop__fabric" />
         )}
-        {/* Wordmark stamp on the LEFT, above the fabric. */}
-        <div className="library-nav-stamp" aria-hidden="true">
-          <img
-            src={constanciaLogoDark}
-            alt=""
-            className="library-nav-stamp__logo"
-          />
-          <span className="library-nav-stamp__shimmer" aria-hidden="true" />
-        </div>
       </div>
       <aside
         ref={drawerRef}
