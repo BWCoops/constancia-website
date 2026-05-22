@@ -20,6 +20,7 @@ import { useFeatureFlags } from "@/lib/feature-flags";
 import { Menu, X, ChevronDown } from "lucide-react";
 import type { FeatureFlags } from "@shared/feature-flags";
 import constanciaLogoDark from "@assets/constancia-logo-dark.png";
+import { HeroFabricCanvas } from "./HeroFabricCanvas";
 
 interface LibraryItem {
   href?: string;
@@ -136,10 +137,15 @@ export function LibraryNavigation({ variant = "light" }: LibraryNavigationProps)
         onClick={() => setOpen(false)}
         aria-hidden="true"
       >
-        {/* Wordmark floats over the backdrop on the LEFT side, with
-            shimmer — so the brand sits proudly on the page while the
-            drawer slides in from the right. Click here closes the
-            drawer too (inherits the backdrop click handler). */}
+        {/* Fabric shader inside the backdrop — mounted only when the
+            menu is open so we don't pay the GPU cost the rest of the
+            time. Sits at the back; the stamp + dim layer compose on
+            top. Works on every page (functional pages don't have the
+            page-level fabric, but this gives the menu its own). */}
+        {open && (
+          <HeroFabricCanvas className="library-nav-backdrop__fabric" />
+        )}
+        {/* Wordmark stamp on the LEFT, above the fabric. */}
         <div className="library-nav-stamp" aria-hidden="true">
           <img
             src={constanciaLogoDark}
