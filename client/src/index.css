@@ -1455,7 +1455,10 @@ div[class*="hs-chat"] {
 }
 .wordmark-img img {
   display: block;
-  width: clamp(260px, 32vmin, 460px);
+  /* Doubled from clamp(260, 32vmin, 460). 92vw safety cap keeps the
+     mark from overflowing on narrow phones. Aspect ratio preserved
+     via height: auto. */
+  width: min(92vw, clamp(420px, 56vmin, 820px));
   height: auto;
   opacity: 0;
   transform: scale(0.35);
@@ -1687,9 +1690,9 @@ div[class*="hs-chat"] {
 
 /* When the wordmark returns in the contact panel, it sits a touch
    smaller than the opening hero (so it reads as a sign-off, not a
-   second arrival). */
+   second arrival). Scaled to roughly half the opening size. */
 .landing-hero__wordmark--contact .wordmark-img img {
-  width: clamp(220px, 26vmin, 380px);
+  width: min(80vw, clamp(280px, 36vmin, 480px));
 }
 
 /* ── 15. Connected Enterprise Business Transformation band ─────────────

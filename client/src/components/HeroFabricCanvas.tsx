@@ -62,28 +62,54 @@ const FRAG = `
   uniform float uTime; uniform vec3 uMint; uniform vec3 uDeepMint;
   uniform vec3 uRose; uniform vec3 uBerry;
   uniform vec3 uSlate; uniform vec3 uGraphite;
-  uniform vec3 uLightDir; uniform vec3 uCamPos; uniform float uOpacity;
+  uniform vec3 uLightDir;  uniform vec3 uLightDir2;
+  uniform vec3 uLightTint2;
+  uniform vec3 uCamPos; uniform float uOpacity;
   varying vec2 vUv; varying float vEle; varying vec3 vNormal; varying vec3 vWorldPos;
   void main() {
     vec3 N = normalize(vNormal);
-    vec3 L = normalize(uLightDir);
     vec3 V = normalize(uCamPos - vWorldPos);
-    vec3 H = normalize(L + V);
+
+    // Primary key light — warm white from upper-right.
+    vec3 L  = normalize(uLightDir);
+    vec3 H  = normalize(L + V);
     float ndl = dot(N, L);
     float lit = clamp(ndl * 0.5 + 0.6, 0.0, 1.0);
+
+    // Secondary light — animated direction, rose/peach tint. Gives
+    // the fabric a roaming secondary highlight (the "shimmer") that
+    // drifts across the surface independently of the key light.
+    vec3 L2anim = normalize(uLightDir2 + vec3(
+      sin(uTime * 0.18) * 0.35,
+      cos(uTime * 0.13) * 0.15,
+      sin(uTime * 0.11) * 0.30
+    ));
+    vec3 H2 = normalize(L2anim + V);
+    float ndl2 = clamp(dot(N, L2anim), 0.0, 1.0);
+    float lit2 = ndl2 * 0.35;
+
     float ele = smoothstep(-0.45, 0.55, vEle);
     vec3 hueLit   = mix(uMint, uRose, ele);
     vec3 hueShade = mix(uDeepMint, uBerry, ele);
     vec3 deepShade = mix(uSlate, uGraphite, ele);
     hueShade = mix(deepShade, hueShade, 0.55);
     vec3 col = mix(hueShade, hueLit, lit);
-    // Sharper specular for a glassier surface highlight.
+    // Secondary fill — adds rose-tinted brightness to the lit side,
+    // softens the dark side. Reads as bounce light / ambient warmth.
+    col += uLightTint2 * lit2 * 0.18;
+
+    // Primary specular — sharp warm-white pinpoint.
     float spec = pow(clamp(dot(N, H), 0.0, 1.0), 96.0);
     col += vec3(1.0, 0.97, 0.94) * spec * 0.38;
-    // Secondary low-frequency sheen — like wet glass catching light
-    // across the whole plane, not just the highlight point.
+    // Secondary specular — softer, rose-tinted, animated. This is
+    // the shimmer that travels across the fabric.
+    float spec2 = pow(clamp(dot(N, H2), 0.0, 1.0), 56.0);
+    col += uLightTint2 * spec2 * 0.42;
+    // Low-frequency sheen — wet-glass catching light across the
+    // whole plane, not just the highlight point.
     float sheen = pow(clamp(dot(N, H), 0.0, 1.0), 12.0);
     col += vec3(1.0, 0.94, 0.97) * sheen * 0.10;
+
     // Iridescent rim with a view-angle hue shift — rose at glancing
     // angles, mint near head-on. Reads as chromatic refraction on
     // the curved fabric edge.
@@ -153,7 +179,13 @@ export function HeroFabricCanvas({ className }: HeroFabricCanvasProps) {
       SLATE:    new THREE.Color("#1E2630"),
       GRAPHITE: new THREE.Color("#12161D"),
     };
-    const LIGHT_DIR = new THREE.Vector3(0.6, 0.85, 0.7).normalize();
+    const LIGHT_DIR  = new THREE.Vector3(0.6, 0.85, 0.7).normalize();
+    // Secondary light — comes from the opposite-lower angle so the
+    // two highlights cross each other, with a warm rose/peach tint
+    // that picks up brand colour as it travels. Shader animates the
+    // direction over uTime, this is just the rest position.
+    const LIGHT_DIR_2  = new THREE.Vector3(-0.7, 0.45, 0.55).normalize();
+    const LIGHT_TINT_2 = new THREE.Color("#FFCEB6"); // warm peach/rose pearl
 
     interface FabricOpts {
       size: number; segs: number; amp: number; phase: number;
@@ -174,8 +206,10 @@ export function HeroFabricCanvas({ className }: HeroFabricCanvasProps) {
           uBerry:    { value: COL.BERRY },
           uSlate:    { value: COL.SLATE },
           uGraphite: { value: COL.GRAPHITE },
-          uLightDir: { value: LIGHT_DIR },
-          uCamPos:   { value: camera.position },
+          uLightDir:   { value: LIGHT_DIR },
+          uLightDir2:  { value: LIGHT_DIR_2 },
+          uLightTint2: { value: LIGHT_TINT_2 },
+          uCamPos:     { value: camera.position },
         },
         transparent: true, depthWrite: false, side: THREE.DoubleSide,
       });
