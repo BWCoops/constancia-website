@@ -1421,116 +1421,153 @@ div[class*="hs-chat"] {
   display: inline-block;
 }
 
-/* — Wordmark intro animation (two glass-morph spheres fly in,
-     wordmark scales up through them, spheres dissolve). The spheres
-     are positioned absolutely inside .wordmark-intro and animate
-     between named phases set by the React component. — */
-.wordmark-intro {
+/* — Wordmark intro: the wordmark is RENDERED as HTML text (no PNG).
+     Each letter is an individually animated span that staggers in,
+     and two glass-morph spheres fly in from off-screen to become
+     the rose dot above the "ı" (dotless i) and the mint period
+     after "a". The spheres literally construct the brand mark. — */
+.wordmark-built {
   position: relative;
   display: inline-block;
-  filter: drop-shadow(0 6px 32px rgba(18, 22, 29, 0.14));
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: clamp(64px, 11vmin, 124px);
+  font-weight: 300;
+  letter-spacing: -0.045em;
+  color: #12161D;
+  line-height: 1;
+  filter: drop-shadow(0 10px 36px rgba(18, 22, 29, 0.14));
+  /* Extra top/right padding so the rose sphere has room to land
+     above the "ı" and the mint period has room past the "a". */
+  padding: 0.4em 0.9em 0 0;
 }
-.wordmark-intro__wordmark {
-  display: block;
-  width: clamp(260px, 32vmin, 460px);
-  height: auto;
-  position: relative;
-  z-index: 2;
+.wordmark-built__row {
+  display: inline-flex;
+  align-items: baseline;
+  white-space: nowrap;
+}
+.wordmark-built__letter {
+  display: inline-block;
   opacity: 0;
-  transform: scale(0.92);
-  /* Horizontal clip-path so the wordmark is constructed from the
-     centre outwards — reads as the logo being drawn in, not just
-     opacity-fading. Letter shapes appear from the middle, sweeping
-     left and right until the full wordmark is exposed. */
-  clip-path: inset(0 50% 0 50%);
+  transform: translateY(0.55em) scale(0.55);
+  transform-origin: 50% 78%;
+  /* Staggered reveal: each letter starts at (index × 90ms + 200ms).
+     Letters 0..9 land between 200ms and 1100ms. */
   transition:
-    opacity 800ms ease-out,
-    transform 1100ms cubic-bezier(0.2, 0.8, 0.2, 1),
-    clip-path 1100ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    opacity 700ms cubic-bezier(0.2, 0.8, 0.2, 1) calc(var(--i) * 90ms + 200ms),
+    transform 800ms cubic-bezier(0.18, 0.9, 0.22, 1.10) calc(var(--i) * 90ms + 200ms);
+  filter: drop-shadow(0 4px 10px rgba(18, 22, 29, 0.08));
 }
-.wordmark-intro__sphere {
-  position: absolute;
-  top: 50%; left: 50%;
-  width: clamp(160px, 22vmin, 280px);
-  height: clamp(160px, 22vmin, 280px);
-  margin: calc(-1 * clamp(80px, 11vmin, 140px)) 0 0 calc(-1 * clamp(80px, 11vmin, 140px));
-  border-radius: 50%;
-  z-index: 1;
-  opacity: 0;
-  pointer-events: none;
-  transition:
-    transform 1400ms cubic-bezier(0.22, 0.9, 0.18, 1.05),
-    opacity 900ms ease-out,
-    filter 600ms ease-out;
-  backdrop-filter: blur(28px) saturate(160%);
-  -webkit-backdrop-filter: blur(28px) saturate(160%);
-  mix-blend-mode: normal;
-}
-.wordmark-intro__sphere--rose {
-  background:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 35%),
-    radial-gradient(circle at 70% 70%, rgba(199, 122, 147, 0.85) 0%, rgba(142, 79, 103, 0.55) 60%, rgba(142, 79, 103, 0.10) 100%);
-  box-shadow:
-    inset 0 6px 22px rgba(255, 255, 255, 0.50),
-    inset 0 -8px 28px rgba(142, 79, 103, 0.35),
-    0 24px 60px -12px rgba(199, 122, 147, 0.45);
-}
-.wordmark-intro__sphere--mint {
-  background:
-    radial-gradient(circle at 35% 28%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 38%),
-    radial-gradient(circle at 65% 72%, rgba(127, 184, 163, 0.85) 0%, rgba(94, 141, 122, 0.55) 60%, rgba(94, 141, 122, 0.10) 100%);
-  box-shadow:
-    inset 0 6px 22px rgba(255, 255, 255, 0.55),
-    inset 0 -8px 28px rgba(94, 141, 122, 0.35),
-    0 24px 60px -12px rgba(127, 184, 163, 0.45);
-}
-
-/* Phase: init — both spheres parked off-screen, wordmark hidden. */
-.wordmark-intro--init .wordmark-intro__sphere--rose { transform: translate(70vw, -55vh) scale(1.15); opacity: 0; }
-.wordmark-intro--init .wordmark-intro__sphere--mint { transform: translate(-70vw, 55vh) scale(1.15); opacity: 0; }
-
-/* Phase: appear — wordmark fades + scales in on its own, spheres
-   stay parked off-screen (still in init position). The logo lands
-   first, then the circles come for it. */
-.wordmark-intro--appear .wordmark-intro__sphere--rose { transform: translate(70vw, -55vh) scale(1.15); opacity: 0; }
-.wordmark-intro--appear .wordmark-intro__sphere--mint { transform: translate(-70vw, 55vh) scale(1.15); opacity: 0; }
-.wordmark-intro--appear .wordmark-intro__wordmark,
-.wordmark-intro--fly .wordmark-intro__wordmark,
-.wordmark-intro--settle .wordmark-intro__wordmark,
-.wordmark-intro--dissolve .wordmark-intro__wordmark {
+.wordmark-built--letters .wordmark-built__letter,
+.wordmark-built--balls .wordmark-built__letter,
+.wordmark-built--settle .wordmark-built__letter,
+.wordmark-built--settled .wordmark-built__letter {
   opacity: 1;
-  transform: scale(1);
-  clip-path: inset(0 0% 0 0%);
+  transform: translateY(0) scale(1);
 }
 
-/* Phase: fly — spheres rush in from opposite corners, still oversized. */
-.wordmark-intro--fly .wordmark-intro__sphere--rose { transform: translate(18vw, -14vh) scale(1.05); opacity: 1; }
-.wordmark-intro--fly .wordmark-intro__sphere--mint { transform: translate(-18vw, 14vh) scale(1.05); opacity: 1; }
-
-/* Phase: settle — spheres converge onto the logo's brand circles
-   (rose dot on the "i", mint dot near the period). Offsets tuned to
-   the logo PNG; sphere scale is smaller so they sit roughly on top
-   of the existing dots rather than smothering the text. */
-.wordmark-intro--settle .wordmark-intro__sphere--rose {
-  transform: translate(28%, -8%) scale(0.18);
-  opacity: 0.92;
-}
-.wordmark-intro--settle .wordmark-intro__sphere--mint {
-  transform: translate(36%, 12%) scale(0.16);
-  opacity: 0.92;
-}
-
-/* Phase: dissolve — spheres fade into the wordmark's baked circles
-   and the logo stands alone. */
-.wordmark-intro--dissolve .wordmark-intro__sphere {
+/* Spheres — positioned absolutely within .wordmark-built and animate
+   from off-screen corners into the i-tittle and period positions. */
+.wordmark-built__sphere {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
   opacity: 0;
-  transform: translate(0, 0) scale(0.15);
-  filter: blur(8px);
+  z-index: 3;
+  backdrop-filter: blur(22px) saturate(170%);
+  -webkit-backdrop-filter: blur(22px) saturate(170%);
+  transition:
+    transform 1500ms cubic-bezier(0.22, 0.9, 0.18, 1.05),
+    width    700ms cubic-bezier(0.2, 0.8, 0.2, 1) 600ms,
+    height   700ms cubic-bezier(0.2, 0.8, 0.2, 1) 600ms,
+    top      700ms cubic-bezier(0.2, 0.8, 0.2, 1) 600ms,
+    left     700ms cubic-bezier(0.2, 0.8, 0.2, 1) 600ms,
+    opacity  900ms ease-out;
+}
+.wordmark-built__sphere--rose {
+  width: clamp(140px, 18vmin, 260px);
+  height: clamp(140px, 18vmin, 260px);
+  top: 50%; left: 50%;
+  margin-top: calc(-1 * clamp(70px, 9vmin, 130px));
+  margin-left: calc(-1 * clamp(70px, 9vmin, 130px));
+  background:
+    radial-gradient(circle at 32% 30%, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0) 38%),
+    radial-gradient(circle at 70% 72%, rgba(199, 122, 147, 0.92) 0%, rgba(142, 79, 103, 0.55) 60%, rgba(142, 79, 103, 0.12) 100%);
+  box-shadow:
+    inset 0 8px 26px rgba(255, 255, 255, 0.55),
+    inset 0 -10px 30px rgba(142, 79, 103, 0.38),
+    0 30px 70px -12px rgba(199, 122, 147, 0.55);
+  transform: translate(60vw, -60vh) scale(1);
+}
+.wordmark-built__sphere--mint {
+  width: clamp(120px, 15vmin, 220px);
+  height: clamp(120px, 15vmin, 220px);
+  top: 50%; left: 50%;
+  margin-top: calc(-1 * clamp(60px, 7.5vmin, 110px));
+  margin-left: calc(-1 * clamp(60px, 7.5vmin, 110px));
+  background:
+    radial-gradient(circle at 35% 28%, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0) 40%),
+    radial-gradient(circle at 65% 72%, rgba(127, 184, 163, 0.92) 0%, rgba(94, 141, 122, 0.55) 60%, rgba(94, 141, 122, 0.12) 100%);
+  box-shadow:
+    inset 0 8px 26px rgba(255, 255, 255, 0.60),
+    inset 0 -10px 30px rgba(94, 141, 122, 0.38),
+    0 30px 70px -12px rgba(127, 184, 163, 0.55);
+  transform: translate(-60vw, 60vh) scale(1);
+}
+
+/* Phase: balls — spheres swoop in from corners, still oversized. */
+.wordmark-built--balls .wordmark-built__sphere--rose {
+  transform: translate(14vw, -14vh) scale(1);
+  opacity: 1;
+}
+.wordmark-built--balls .wordmark-built__sphere--mint {
+  transform: translate(-14vw, 14vh) scale(1);
+  opacity: 1;
+}
+
+/* Phase: settle + settled — spheres shrink and dock at the brand
+   dot positions: rose above the dotless "ı", mint at baseline after
+   the "a". Positions are in em units relative to the wordmark font
+   size so they scale with viewport. */
+.wordmark-built--settle .wordmark-built__sphere--rose,
+.wordmark-built--settled .wordmark-built__sphere--rose {
+  width: 0.36em;
+  height: 0.36em;
+  margin-top: -0.18em;
+  margin-left: -0.18em;
+  top: 0.30em;        /* above the cap height */
+  left: 4.20em;       /* over the "ı" */
+  transform: translate(0, 0) scale(1);
+  opacity: 1;
+}
+.wordmark-built--settle .wordmark-built__sphere--mint,
+.wordmark-built--settled .wordmark-built__sphere--mint {
+  width: 0.30em;
+  height: 0.30em;
+  margin-top: -0.15em;
+  margin-left: -0.15em;
+  top: 1.10em;        /* baseline level */
+  left: 5.20em;       /* just past the trailing "a" */
+  transform: translate(0, 0) scale(1);
+  opacity: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .wordmark-intro__wordmark { opacity: 1; transform: none; transition: none; }
-  .wordmark-intro__sphere { opacity: 0; transition: none; }
+  .wordmark-built__letter { opacity: 1; transform: none; transition: none; }
+  .wordmark-built__sphere {
+    transition: none;
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  .wordmark-built__sphere--rose {
+    width: 0.36em; height: 0.36em;
+    margin-top: -0.18em; margin-left: -0.18em;
+    top: 0.30em; left: 4.20em;
+  }
+  .wordmark-built__sphere--mint {
+    width: 0.30em; height: 0.30em;
+    margin-top: -0.15em; margin-left: -0.15em;
+    top: 1.10em; left: 5.20em;
+  }
 }
 .landing-hero__mission {
   max-width: 640px;
@@ -1554,42 +1591,82 @@ div[class*="hs-chat"] {
    needs the same centring so the inner shader sits dead centre. */
 .landing-hero__mission > div { display: inline-flex; }
 .landing-hero__mission-inner {
-  /* CSS glass surround acts as a fallback / reinforcement to the
-     LiquidGlass library — frosted bg + inner highlight + chromatic
-     border so the card always reads as glass even on slow GPUs where
-     the displacement shader can't keep up. The library still does
-     the refraction on top of this; the two stack cleanly. */
-  padding: 32px 44px;
+  /* Premium glass card surround. Layered radial highlight + diagonal
+     wash + chromatic border + ambient + close shadow + backdrop blur.
+     Sits in front of the fabric shader so the cream-on-rose tints
+     refract through, reading as Apple-style liquid glass even when
+     the WebGL displacement is subtle. */
+  position: relative;
+  padding: 38px 52px;
   text-align: center;
-  min-width: clamp(300px, 56vmin, 560px);
+  min-width: clamp(320px, 60vmin, 600px);
+  border-radius: 28px;
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.55) 0%, rgba(246, 243, 238, 0.18) 60%, rgba(199, 122, 147, 0.10) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  border-radius: 24px;
+    radial-gradient(120% 80% at 20% 0%, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0) 60%),
+    radial-gradient(140% 100% at 100% 100%, rgba(199, 122, 147, 0.14) 0%, rgba(127, 184, 163, 0.08) 50%, rgba(255, 255, 255, 0) 80%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.48) 0%, rgba(246, 243, 238, 0.18) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.8) inset,
-    0 -1px 0 rgba(199, 122, 147, 0.18) inset,
-    0 20px 60px -16px rgba(18, 22, 29, 0.22),
-    0 4px 14px -8px rgba(18, 22, 29, 0.12);
-  backdrop-filter: blur(18px) saturate(150%);
-  -webkit-backdrop-filter: blur(18px) saturate(150%);
+    0 1px 0 rgba(255, 255, 255, 0.90) inset,
+    0 -1px 0 rgba(199, 122, 147, 0.22) inset,
+    0 1px 1px rgba(255, 255, 255, 0.50) inset,
+    0 30px 80px -18px rgba(18, 22, 29, 0.28),
+    0 6px 22px -10px rgba(18, 22, 29, 0.16);
+  backdrop-filter: blur(24px) saturate(170%);
+  -webkit-backdrop-filter: blur(24px) saturate(170%);
+}
+/* Chromatic shimmer running along the top edge — gives the card a
+   subtle iridescent rim that animates with very slow drift. */
+.landing-hero__mission-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(115deg,
+    rgba(199, 122, 147, 0.45) 0%,
+    rgba(255, 255, 255, 0.0) 40%,
+    rgba(127, 184, 163, 0.45) 90%);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.7;
 }
 @media (max-width: 540px) {
-  .landing-hero__mission-inner { padding: 24px 26px; min-width: unset; border-radius: 20px; }
+  .landing-hero__mission-inner { padding: 28px 30px; min-width: unset; border-radius: 22px; }
 }
 .landing-hero__mission-eyebrow {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 11px;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: #8E4F67;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
+  /* Tiny ornament rule on either side of the eyebrow — gives the
+     editorial / premium feel. */
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.landing-hero__mission-eyebrow::before,
+.landing-hero__mission-eyebrow::after {
+  content: '';
+  width: 22px;
+  height: 1px;
+  background: linear-gradient(to right, rgba(142, 79, 103, 0) 0%, rgba(142, 79, 103, 0.55) 100%);
+}
+.landing-hero__mission-eyebrow::after {
+  background: linear-gradient(to right, rgba(142, 79, 103, 0.55) 0%, rgba(142, 79, 103, 0) 100%);
 }
 .landing-hero__mission-lede {
-  font-size: clamp(22px, 3.2vw, 32px);
-  font-weight: 400;
-  line-height: 1.22;
-  letter-spacing: -0.01em;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: clamp(24px, 3.4vw, 36px);
+  font-weight: 300;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
   color: #12161D;
 }
 @media (prefers-reduced-motion: reduce) {
