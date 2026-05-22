@@ -1424,174 +1424,31 @@ div[class*="hs-chat"] {
   display: inline-block;
 }
 
-/* — Wordmark intro: the wordmark is RENDERED as HTML text (no PNG).
-     Each letter is an individually animated span that flies in from
-     a scattered off-screen position with 3D rotation, and two glass-
-     morph spheres fly in from off-screen to become the rose dot
-     above the "ı" (dotless i) and the mint period after "a". The
-     spheres literally construct the brand mark. — */
-.wordmark-built {
+/* — Wordmark: brand PNG with a soft opacity + scale fade-in. The
+     constructed-text + flying-sphere experiments are gone; brand
+     consistency wins for now. Deconstruct-on-scroll can layer on top
+     of this baseline later. — */
+.wordmark-img {
   position: relative;
   display: inline-block;
-  font-family: 'DM Sans', system-ui, sans-serif;
-  /* Calibrated to the brand PNG: light weight (300), wide tracking
-     to match the airy spacing, near-black ink with slight warmth. */
-  font-size: clamp(64px, 11vmin, 124px);
-  font-weight: 300;
-  letter-spacing: -0.012em;
-  color: #2A2A2C;
-  line-height: 1;
-  /* preserve-3d on the wordmark + perspective on the parent makes
-     the rotateX/Y on each letter render as real 3D depth, not a
-     squashed 2D rotation. */
-  perspective: 1200px;
-  perspective-origin: 50% 50%;
   filter: drop-shadow(0 8px 28px rgba(18, 22, 29, 0.10));
 }
-.wordmark-built__row {
-  display: inline-flex;
-  align-items: baseline;
-  white-space: nowrap;
-  transform-style: preserve-3d;
-}
-.wordmark-built__letter {
-  display: inline-block;
+.wordmark-img img {
+  display: block;
+  width: clamp(260px, 32vmin, 460px);
+  height: auto;
   opacity: 0;
-  /* Construction: each letter starts at a scattered off-screen
-     position with depth (translate3d Z), pitched and rolled in 3D,
-     and shrunken. The fly-in transition is a long spring that lands
-     each letter into place with a tiny overshoot. Lower-indexed
-     letters come from the left, higher from the right; depth (z)
-     pulls them toward the camera as they assemble. */
-  transform:
-    translate3d(calc((var(--i) - 4.5) * 18vw), calc(-22vh + var(--i) * 4.4vh), -400px)
-    rotateX(55deg)
-    rotateY(calc((var(--i) - 4.5) * 8deg))
-    rotateZ(calc((var(--i) - 4.5) * 4deg))
-    scale(0.25);
-  transform-origin: 50% 60% -20px;
-  transform-style: preserve-3d;
+  transform: scale(0.92);
   transition:
-    opacity 700ms ease-out calc(var(--i) * 75ms + 250ms),
-    transform 1400ms cubic-bezier(0.16, 0.84, 0.22, 1.12) calc(var(--i) * 75ms + 250ms);
-  /* Subtle glass / inked feel — soft drop and a tiny inset highlight
-     via text-shadow stack. Makes the letters look slightly raised
-     off the cream. */
-  text-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.55),
-    0 3px 12px rgba(18, 22, 29, 0.12);
-  will-change: transform, opacity;
+    opacity 800ms ease-out,
+    transform 1000ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.wordmark-built--letters .wordmark-built__letter,
-.wordmark-built--balls .wordmark-built__letter,
-.wordmark-built--settle .wordmark-built__letter,
-.wordmark-built--settled .wordmark-built__letter {
+.wordmark-img.is-loaded img {
   opacity: 1;
-  transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+  transform: scale(1);
 }
-
-/* Spheres — positioned absolutely within .wordmark-built and animate
-   from off-screen corners into the i-tittle and period positions. */
-.wordmark-built__sphere {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  opacity: 0;
-  z-index: 3;
-  backdrop-filter: blur(22px) saturate(170%);
-  -webkit-backdrop-filter: blur(22px) saturate(170%);
-  transition:
-    transform 1500ms cubic-bezier(0.22, 0.9, 0.18, 1.05),
-    width    700ms cubic-bezier(0.2, 0.8, 0.2, 1) 600ms,
-    height   700ms cubic-bezier(0.2, 0.8, 0.2, 1) 600ms,
-    top      700ms cubic-bezier(0.2, 0.8, 0.2, 1) 600ms,
-    left     700ms cubic-bezier(0.2, 0.8, 0.2, 1) 600ms,
-    opacity  900ms ease-out;
-}
-/* Sphere sizing + colour calibrated to the brand PNG: both discs are
-   LARGE (slightly taller than the wordmark) and translucent so the
-   letters and period show through them; rose sits upper-right, mint
-   sits lower-right and overlaps the rose. */
-.wordmark-built__sphere--rose {
-  /* Final size: ~1.2em (taller than the cap height) so the disc
-     intersects the right half of the wordmark like in the PNG. */
-  width: 1.2em;
-  height: 1.2em;
-  top: 50%; left: 50%;
-  margin-top: -0.6em;
-  margin-left: -0.6em;
-  background:
-    radial-gradient(circle at 38% 32%, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0) 38%),
-    radial-gradient(circle at 60% 60%, rgba(199, 122, 147, 0.78) 0%, rgba(199, 122, 147, 0.62) 70%, rgba(199, 122, 147, 0.40) 100%);
-  box-shadow:
-    inset 0 6px 22px rgba(255, 255, 255, 0.38),
-    inset 0 -8px 24px rgba(142, 79, 103, 0.22);
-  transform: translate(60vw, -60vh) scale(1.2);
-}
-.wordmark-built__sphere--mint {
-  /* Slightly bigger than rose (in the PNG the mint disc extends
-     past the rose at the bottom-right). */
-  width: 1.35em;
-  height: 1.35em;
-  top: 50%; left: 50%;
-  margin-top: -0.675em;
-  margin-left: -0.675em;
-  background:
-    radial-gradient(circle at 38% 32%, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0) 40%),
-    radial-gradient(circle at 60% 60%, rgba(127, 184, 163, 0.78) 0%, rgba(127, 184, 163, 0.62) 70%, rgba(127, 184, 163, 0.40) 100%);
-  box-shadow:
-    inset 0 6px 22px rgba(255, 255, 255, 0.42),
-    inset 0 -8px 24px rgba(94, 141, 122, 0.22);
-  transform: translate(-60vw, 60vh) scale(1.2);
-}
-
-/* Phase: balls — spheres swoop in from off-screen corners. */
-.wordmark-built--balls .wordmark-built__sphere--rose {
-  transform: translate(14vw, -14vh) scale(1);
-  opacity: 1;
-}
-.wordmark-built--balls .wordmark-built__sphere--mint {
-  transform: translate(-14vw, 14vh) scale(1);
-  opacity: 1;
-}
-
-/* Phase: settle + settled — spheres dock at the brand-disc positions
-   matching the PNG: rose upper-right of the wordmark, mint lower-
-   right of the wordmark, mint overlapping rose at the centre. The
-   "ı" stem and the period sit visible through the translucent discs.
-   Positions in em so they scale with the font size. */
-.wordmark-built--settle .wordmark-built__sphere--rose,
-.wordmark-built--settled .wordmark-built__sphere--rose {
-  top: -0.20em;     /* upper-right, extends above the cap */
-  left: 3.65em;     /* over the "ncı" cluster */
-  margin-top: 0; margin-left: 0;
-  transform: translate(0, 0) scale(1);
-  opacity: 1;
-}
-.wordmark-built--settle .wordmark-built__sphere--mint,
-.wordmark-built--settled .wordmark-built__sphere--mint {
-  top: 0.20em;      /* lower-right, extends below baseline */
-  left: 4.25em;     /* over the "ıa." cluster, overlapping the rose */
-  margin-top: 0; margin-left: 0;
-  transform: translate(0, 0) scale(1);
-  opacity: 1;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .wordmark-built__letter { opacity: 1; transform: none; transition: none; }
-  .wordmark-built__sphere {
-    transition: none;
-    opacity: 1;
-    transform: translate(0, 0) scale(1);
-  }
-  .wordmark-built__sphere--rose {
-    top: -0.20em; left: 3.65em;
-    margin-top: 0; margin-left: 0;
-  }
-  .wordmark-built__sphere--mint {
-    top: 0.20em; left: 4.25em;
-    margin-top: 0; margin-left: 0;
-  }
+  .wordmark-img img { opacity: 1; transform: none; transition: none; }
 }
 .landing-hero__mission {
   /* Mission card uses pure CSS frosted glass (see .landing-hero__
