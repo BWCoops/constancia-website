@@ -29,8 +29,10 @@ interface MarketingScrollyPageProps {
   children: ReactNode;
   /** aria-label on the stage section. */
   label?: string;
-  /** Override stage total height (vh). Default sizes to panel count. */
+  /** Override stage total height (vh) on desktop. */
   heightVh?: number;
+  /** Override stage total height (vh) on narrow viewports. */
+  heightVhMobile?: number;
   /** Override per-panel ranges. Falls back to even distribution. */
   ranges?: PanelRange[];
 }
@@ -40,13 +42,19 @@ export function MarketingScrollyPage({
   children,
   label,
   heightVh,
+  heightVhMobile,
   ranges,
 }: MarketingScrollyPageProps) {
   return (
     <div className="marketing-page">
       <SEOHead {...seo} />
       <main>
-        <ScrollyStage label={label} heightVh={heightVh} ranges={ranges}>
+        <ScrollyStage
+          label={label}
+          heightVh={heightVh}
+          heightVhMobile={heightVhMobile}
+          ranges={ranges}
+        >
           {children}
         </ScrollyStage>
       </main>
