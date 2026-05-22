@@ -3,12 +3,16 @@ import { ArrowRight } from "lucide-react";
 import { useFeatureFlags } from "@/lib/feature-flags";
 import { Footer } from "@/components/footer";
 import { SEOHead } from "@/components/seo-head";
-import { PageHero } from "@/components/page-hero";
+import { ScrollyStage } from "@/components/ScrollyStage";
+import { WordmarkIntro } from "@/components/WordmarkIntro";
 
 /**
- * About — single cream canvas with glass-morphic tablets. No dark
- * banded sub-sections; every block flows through one continuous
- * surface to match the landing's visual language.
+ * About — uses the shared ScrollyStage so the page reads with the
+ * same fabric backdrop, shimmer, and glass tablets as the landing.
+ * Every direct child of <ScrollyStage> is one scroll panel.
+ *
+ * Wordmark is the compact variant — about 60 % of the landing size
+ * so the brand mark introduces the page without dominating it.
  */
 
 interface Founder {
@@ -55,34 +59,41 @@ export default function AboutPage() {
       />
 
       <main>
-        <PageHero
-          badge="About"
-          title="An enterprise intelligence company."
-          description="We help leaders move from debate to outcomes. Real-time visibility across your data, without the manual rework."
-        />
+        <ScrollyStage heightVh={520} heightVhMobile={500} label="About Constancia">
+          {/* Panel 1 — Wordmark + page intro tablet (compact) */}
+          <div className="scrolly-panel--stacked">
+            <WordmarkIntro className="landing-hero__wordmark landing-hero__wordmark--compact" />
+            <div className="glass-surface scrolly-tablet">
+              <div className="scrolly-tablet__eyebrow">About</div>
+              <h1 className="scrolly-tablet__heading">An enterprise intelligence company.</h1>
+              <p className="scrolly-tablet__body">
+                We help leaders move from debate to outcomes. Real-time visibility across your data,
+                without the manual rework.
+              </p>
+            </div>
+          </div>
 
-        <div className="marketing-stack">
-          {/* Approved Constancia overview — the lead copy per the brief. */}
-          <article className="glass-surface marketing-card">
-            <div className="marketing-card__eyebrow">Our perspective</div>
-            <p className="marketing-card__lede">
-              We're an enterprise intelligence company that helps leaders move from debate to outcomes.
+          {/* Panel 2 — Lead perspective */}
+          <div className="glass-surface scrolly-tablet">
+            <div className="scrolly-tablet__eyebrow">Our perspective</div>
+            <h2 className="scrolly-tablet__heading">
+              From debate{" "}
+              <em className="scrolly-tablet__heading-accent">to outcomes</em>.
+            </h2>
+            <p className="scrolly-tablet__body">
+              Our focus is giving finance and operations teams real-time visibility across their
+              data, without the manual rework in Excel and PowerPoint. We work with enterprise
+              software and AI partners so you stay in the driver's seat of your company's health.
             </p>
-            <p className="marketing-card__body">
-              Our focus is giving finance and operations teams real-time visibility across their data, without the manual rework in Excel and PowerPoint.
-            </p>
-            <p className="marketing-card__body">
-              We work with enterprise software and AI partners so you stay in the driver's seat of your company's health.
-            </p>
-            <p className="marketing-card__body">
+            <p className="scrolly-tablet__sub" style={{ marginTop: 12 }}>
               You're the expert on your business. Technology should work that way too.
             </p>
-          </article>
+          </div>
 
-          {/* Founders block. */}
-          <article className="glass-surface marketing-card marketing-card--wide">
-            <div className="marketing-card__eyebrow">The founders</div>
-            <h2 className="marketing-card__heading">
+          {/* Panel 3 — Founders */}
+          <div className="glass-surface scrolly-tablet scrolly-tablet--wide">
+            <div className="scrolly-tablet__eyebrow">The founders</div>
+            <h2 className="scrolly-tablet__heading">
               The senior people you'd actually want in the room.
             </h2>
             <div className="marketing-founders">
@@ -101,12 +112,12 @@ export default function AboutPage() {
                 </article>
               ))}
             </div>
-          </article>
+          </div>
 
-          {/* Off-duty photo placeholder. */}
-          <article className="glass-surface marketing-card marketing-card--wide">
-            <div className="marketing-card__eyebrow">Off-duty</div>
-            <h2 className="marketing-card__heading">
+          {/* Panel 4 — Off-duty photo placeholder */}
+          <div className="glass-surface scrolly-tablet scrolly-tablet--wide">
+            <div className="scrolly-tablet__eyebrow">Off-duty</div>
+            <h2 className="scrolly-tablet__heading">
               Bradley, Alex, and the team mascots Georgie and Sammy.
             </h2>
             <div
@@ -119,27 +130,27 @@ export default function AboutPage() {
                 <div>Founders with Georgie and Sammy</div>
               </div>
             </div>
-          </article>
+          </div>
 
-          {/* Closing CTA — last tablet. */}
+          {/* Panel 5 — Closing CTA */}
           {flags.contact && (
-            <article className="glass-surface marketing-card">
-              <div className="marketing-card__eyebrow">No pitch. No deck.</div>
-              <h2 className="marketing-card__heading">
+            <div className="glass-surface scrolly-tablet">
+              <div className="scrolly-tablet__eyebrow">No pitch. No deck.</div>
+              <h2 className="scrolly-tablet__heading">
                 When you're ready,{" "}
-                <em className="marketing-card__heading-accent">start the conversation.</em>
+                <em className="scrolly-tablet__heading-accent">start the conversation.</em>
               </h2>
               <Link
                 href="/contact"
-                className="marketing-card__cta"
+                className="scrolly-tablet__link scrolly-tablet__link--strong"
                 data-testid="button-about-cta"
               >
-                <span>Talk to a partner</span>
-                <ArrowRight className="marketing-card__cta-icon" />
+                Talk to a partner{" "}
+                <ArrowRight style={{ width: 16, height: 16, display: "inline-block", verticalAlign: "middle" }} />
               </Link>
-            </article>
+            </div>
           )}
-        </div>
+        </ScrollyStage>
       </main>
 
       <Footer />
