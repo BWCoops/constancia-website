@@ -203,7 +203,7 @@ function calculateRiskIndicators(dimensionScores: Record<string, number> | null,
 }
 
 function VendorCard({ vendor, rank }: { vendor: VendorAffinityScore; rank: number }) {
-  const rankColors = ["from-[#12161D] to-[#8E4F67]", "from-[#8E4F67] to-[#7FB8A3]", "from-[#5E8D7A] to-[#8E4F67]"];
+  const rankColors = ["from-[#252826] to-[#8E4F67]", "from-[#8E4F67] to-[#7FB8A3]", "from-[#5E8D7A] to-[#8E4F67]"];
   const rankLabels = ["Top Pick", "Strong Match", "Good Fit"];
   
   return (
@@ -491,7 +491,7 @@ export default function FinanceCompassInteractiveDashboard() {
             <Button 
               variant="ghost" 
               size="sm" 
-              className="text-brand-teal hover:text-[#12161D] -ml-2"
+              className="text-brand-teal hover:text-[#252826] -ml-2"
               data-testid="button-back-main-dashboard"
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
@@ -500,7 +500,7 @@ export default function FinanceCompassInteractiveDashboard() {
           </Link>
         </div>
         
-        <section className="bg-gradient-to-r from-[#12161D] via-[#5E8D7A] to-[#8E4F67] py-10">
+        <section className="bg-gradient-to-r from-[#252826] via-[#5E8D7A] to-[#8E4F67] py-10">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -533,7 +533,7 @@ export default function FinanceCompassInteractiveDashboard() {
                   Download PDF
                 </Button>
                 <Link href={`/finance-compass/roi/${assessmentId}`}>
-                  <Button className="bg-[#7FB8A3] text-[#12161D] hover:bg-[#7FB8A3]/90" data-testid="button-go-roi-wizard">
+                  <Button className="bg-[#7FB8A3] text-[#252826] hover:bg-[#7FB8A3]/90" data-testid="button-go-roi-wizard">
                     <Calculator className="h-4 w-4 mr-2" />
                     Full ROI Wizard
                   </Button>
@@ -564,7 +564,7 @@ export default function FinanceCompassInteractiveDashboard() {
                   label="Payback"
                   value={formatPayback(roiMetrics.paybackMonths)}
                   icon={Clock}
-                  colorClass="bg-gradient-to-br from-[#7FB8A3]/10 to-[#7FB8A3]/10 dark:from-[#1E2630]/20 dark:to-[#1E2630]/20 border-[#7FB8A3] dark:border-[#12161D] text-[#8E4F67] dark:text-[#7FB8A3]"
+                  colorClass="bg-gradient-to-br from-[#7FB8A3]/10 to-[#7FB8A3]/10 dark:from-[#252826]/20 dark:to-[#252826]/20 border-[#7FB8A3] dark:border-[#252826] text-[#8E4F67] dark:text-[#7FB8A3]"
                   testId="metric-payback"
                   tooltipKey="payback"
                 />
@@ -588,7 +588,7 @@ export default function FinanceCompassInteractiveDashboard() {
                   label="BCR"
                   value={`${roiMetrics.benefitCostRatio.toFixed(2)}x`}
                   icon={Scale}
-                  colorClass="bg-gradient-to-br from-[#7FB8A3]/10 to-[#7FB8A3]/10 dark:from-[#1E2630]/20 dark:to-[#1E2630]/20 border-[#7FB8A3] dark:border-[#12161D] text-[#8E4F67] dark:text-[#7FB8A3]"
+                  colorClass="bg-gradient-to-br from-[#7FB8A3]/10 to-[#7FB8A3]/10 dark:from-[#252826]/20 dark:to-[#252826]/20 border-[#7FB8A3] dark:border-[#252826] text-[#8E4F67] dark:text-[#7FB8A3]"
                   testId="metric-bcr"
                   tooltipKey="bcr"
                 />
@@ -596,11 +596,11 @@ export default function FinanceCompassInteractiveDashboard() {
             ) : (
               <Card className="mb-8 p-6 border-dashed border-2 border-[#8E4F67]/30 bg-[#8E4F67]/5" data-testid="card-roi-locked">
                 <div className="flex flex-col md:flex-row items-center gap-4">
-                  <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#12161D]/20 to-[#8E4F67]/20 flex items-center justify-center flex-shrink-0" aria-hidden="true">
+                  <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#252826]/20 to-[#8E4F67]/20 flex items-center justify-center flex-shrink-0" aria-hidden="true">
                     <Calculator className="h-6 w-6 text-brand-teal/60" />
                   </div>
                   <div className="flex-1 text-center md:text-left">
-                    <h4 className="font-semibold text-[#12161D] dark:text-white">Complete the Full Assessment to Unlock ROI & Business Case</h4>
+                    <h4 className="font-semibold text-[#252826] dark:text-white">Complete the Full Assessment to Unlock ROI & Business Case</h4>
                     <p className="text-sm text-muted-foreground">
                       ROI metrics, NPV, Payback, TCO, and BCR analysis are available after completing the Full Assessment. Complete your Full Assessment to access detailed financial projections.
                     </p>
@@ -933,7 +933,7 @@ export default function FinanceCompassInteractiveDashboard() {
                         </div>
                       </div>
                       
-                      <div className="p-4 rounded-lg bg-gradient-to-br from-[#7FB8A3]/10 to-[#7FB8A3]/10 dark:from-[#1E2630]/20 dark:to-[#1E2630]/20 border border-[#7FB8A3] dark:border-[#12161D]">
+                      <div className="p-4 rounded-lg bg-gradient-to-br from-[#7FB8A3]/10 to-[#7FB8A3]/10 dark:from-[#252826]/20 dark:to-[#252826]/20 border border-[#7FB8A3] dark:border-[#252826]">
                         <div className="flex items-center gap-2 text-[#8E4F67] dark:text-[#7FB8A3] text-sm mb-1">
                           <DollarSign className="h-4 w-4" />
                           <span>Implementation Cost</span>

@@ -539,7 +539,7 @@ export function DownloadGateModal({
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[480px] max-h-[85vh] overflow-hidden flex flex-col">
         <DialogHeader className="flex-shrink-0">
-          <DialogTitle className="text-xl font-semibold text-[#12161D]">
+          <DialogTitle className="text-xl font-semibold text-[#252826]">
             {step === "checking" && "Checking Access..."}
             {step === "session" && "Welcome Back"}
             {step === "form" && "Access Your Resource"}
@@ -559,14 +559,14 @@ export function DownloadGateModal({
 
         <div className="flex-1 overflow-y-auto overscroll-contain min-h-0 pr-1" style={{ WebkitOverflowScrolling: 'touch' }}>
           {resource && (
-            <div className="bg-gradient-to-r from-[#12161D]/5 to-[#8E4F67]/5 p-4 rounded-lg mb-4">
-              <p className="text-sm font-medium text-[#12161D]">{resource.title}</p>
+            <div className="bg-gradient-to-r from-[#252826]/5 to-[#8E4F67]/5 p-4 rounded-lg mb-4">
+              <p className="text-sm font-medium text-[#252826]">{resource.title}</p>
               <p className="text-xs text-muted-foreground mt-1">{resource.category} - {resource.fileSize}</p>
             </div>
           )}
           {!resource && customExportTitle && (
-            <div className="bg-gradient-to-r from-[#12161D]/5 to-[#8E4F67]/5 p-4 rounded-lg mb-4">
-              <p className="text-sm font-medium text-[#12161D]">{customExportTitle}</p>
+            <div className="bg-gradient-to-r from-[#252826]/5 to-[#8E4F67]/5 p-4 rounded-lg mb-4">
+              <p className="text-sm font-medium text-[#252826]">{customExportTitle}</p>
               {customExportDescription && (
                 <p className="text-xs text-muted-foreground mt-1">{customExportDescription}</p>
               )}
@@ -612,7 +612,7 @@ export function DownloadGateModal({
 
               <Button
                 onClick={handleSessionDownload}
-                className="w-full bg-[#12161D] hover:bg-[#12161D]/90"
+                className="w-full bg-[#252826] hover:bg-[#252826]/90"
                 data-testid="button-session-download"
               >
                 <Download className="mr-2 h-4 w-4" />
@@ -772,7 +772,7 @@ export function DownloadGateModal({
                     control={leadForm.control}
                     name="subscribeNewsletter"
                     render={({ field }) => (
-                      <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-gradient-to-r from-[#12161D]/5 to-[#8E4F67]/5">
+                      <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-gradient-to-r from-[#252826]/5 to-[#8E4F67]/5">
                         <FormControl>
                           <Checkbox
                             checked={field.value}
@@ -809,7 +809,7 @@ export function DownloadGateModal({
 
                   <Button 
                     type="submit" 
-                    className="w-full bg-gradient-to-r from-[#12161D] to-[#8E4F67] hover:from-[#12161D]/90 hover:to-[#8E4F67]/90"
+                    className="w-full bg-gradient-to-r from-[#252826] to-[#8E4F67] hover:from-[#252826]/90 hover:to-[#8E4F67]/90"
                     disabled={submitLeadMutation.isPending || (turnstileConfig?.enabled ? !captchaToken : false)}
                     data-testid="button-submit-lead"
                   >
@@ -839,7 +839,7 @@ export function DownloadGateModal({
               transition={{ duration: 0.2 }}
             >
               <div className="flex justify-center mb-6">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#12161D] to-[#8E4F67] flex items-center justify-center">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#252826] to-[#8E4F67] flex items-center justify-center">
                   <Mail className="h-8 w-8 text-white" />
                 </div>
               </div>
@@ -876,7 +876,7 @@ export function DownloadGateModal({
 
                   <Button 
                     type="submit" 
-                    className="w-full bg-gradient-to-r from-[#12161D] to-[#8E4F67] hover:from-[#12161D]/90 hover:to-[#8E4F67]/90"
+                    className="w-full bg-gradient-to-r from-[#252826] to-[#8E4F67] hover:from-[#252826]/90 hover:to-[#8E4F67]/90"
                     disabled={verifyOtpMutation.isPending || otpForm.watch("otp").length !== 6}
                     data-testid="button-verify-otp"
                   >
@@ -933,10 +933,10 @@ export function DownloadGateModal({
               exit={{ opacity: 0 }}
               className="text-center py-8"
             >
-              <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-r from-[#12161D] to-[#8E4F67] flex items-center justify-center">
+              <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-r from-[#252826] to-[#8E4F67] flex items-center justify-center">
                 <Loader2 className="h-10 w-10 animate-spin text-[#7FB8A3]" />
               </div>
-              <h3 className="text-lg font-semibold text-[#12161D] mb-2">Preparing Your Document</h3>
+              <h3 className="text-lg font-semibold text-[#252826] mb-2">Preparing Your Document</h3>
               <p className="text-sm text-muted-foreground mb-4">
                 Please wait while we prepare your document. This might take a moment.
               </p>
@@ -951,10 +951,10 @@ export function DownloadGateModal({
               transition={{ duration: 0.3 }}
               className="text-center py-6"
             >
-              <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-r from-[#12161D] to-[#8E4F67] flex items-center justify-center">
+              <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-r from-[#252826] to-[#8E4F67] flex items-center justify-center">
                 <CheckCircle className="h-10 w-10 text-[#7FB8A3]" />
               </div>
-              <h3 className="text-lg font-semibold text-[#12161D] mb-2">Download Started!</h3>
+              <h3 className="text-lg font-semibold text-[#252826] mb-2">Download Started!</h3>
               <p className="text-sm text-muted-foreground">
                 Your resource is downloading. Thank you for your interest in Constancia.
               </p>

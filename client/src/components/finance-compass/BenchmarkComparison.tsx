@@ -140,11 +140,11 @@ function ComparisonBarRow({ data, index }: { data: MultiLayerComparisonData; ind
           <span className="text-xs text-muted-foreground w-24">World-Class</span>
           <div className="flex-1 bg-muted rounded-full h-2.5 overflow-hidden">
             <div 
-              className="h-full bg-[#12161D] rounded-full transition-all duration-500"
+              className="h-full bg-[#252826] rounded-full transition-all duration-500"
               style={{ width: `${worldClassProgress}%` }}
             />
           </div>
-          <span className="text-xs font-medium w-10 text-right text-[#12161D]">{data.worldClass.toFixed(1)}</span>
+          <span className="text-xs font-medium w-10 text-right text-[#252826]">{data.worldClass.toFixed(1)}</span>
         </div>
       </div>
     </motion.div>
@@ -239,7 +239,7 @@ export function BenchmarkComparison({
                               </div>
                               <div className="flex justify-between gap-4">
                                 <span className="flex items-center gap-1.5">
-                                  <div className="w-2 h-2 rounded-full bg-[#12161D]" />
+                                  <div className="w-2 h-2 rounded-full bg-[#252826]" />
                                   World-Class:
                                 </span>
                                 <span className="font-medium">{data.worldClass.toFixed(2)}</span>
@@ -272,7 +272,7 @@ export function BenchmarkComparison({
                   />
                   <Bar dataKey="yourScore" fill="#8E4F67" radius={[0, 4, 4, 0]} name="yourScore" />
                   <Bar dataKey="industryAverage" fill="#9CA3AF" radius={[0, 4, 4, 0]} name="industryAverage" />
-                  <Bar dataKey="worldClass" fill="#12161D" radius={[0, 4, 4, 0]} name="worldClass" />
+                  <Bar dataKey="worldClass" fill="#252826" radius={[0, 4, 4, 0]} name="worldClass" />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -324,7 +324,7 @@ export function BenchmarkComparison({
                 <span className="text-muted-foreground">Industry Avg</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <div className="w-2.5 h-2.5 rounded-full bg-[#12161D]" />
+                <div className="w-2.5 h-2.5 rounded-full bg-[#252826]" />
                 <span className="text-muted-foreground">World-Class</span>
               </div>
             </div>

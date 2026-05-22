@@ -18,8 +18,8 @@
 
 export const COLOR = {
   // Primary brand — Constancia
-  graphite:        '#12161D',
-  slate:           '#1E2630',
+  graphite:        '#252826',
+  slate:           '#252826',
   cream:           '#F6F3EE',
   stone:           '#D8D0C6',
   rose:            '#C77A93',
@@ -30,20 +30,20 @@ export const COLOR = {
   // Surface helpers (composed against cream)
   bgPrimary:        '#F6F3EE',
   bgSecondary:      '#EFEAE0',
-  bgSurface:        'rgba(18,22,29,0.025)',
+  bgSurface:        'rgba(37,40,38,0.025)',
   bgSurfaceHover:   'rgba(199,122,147,0.06)',
 
   // Borders
-  border:           'rgba(18,22,29,0.08)',
+  border:           'rgba(37,40,38,0.08)',
   borderHover:      'rgba(142,79,103,0.30)',
-  borderMuted:      'rgba(18,22,29,0.05)',
-  borderStrong:     'rgba(18,22,29,0.16)',
+  borderMuted:      'rgba(37,40,38,0.05)',
+  borderStrong:     'rgba(37,40,38,0.16)',
 
   // Text
-  textPrimary:      '#12161D',
-  textSecondary:    'rgba(18,22,29,0.66)',
-  textMuted:        'rgba(18,22,29,0.42)',
-  textTertiary:     'rgba(18,22,29,0.30)',
+  textPrimary:      '#252826',
+  textSecondary:    'rgba(37,40,38,0.66)',
+  textMuted:        'rgba(37,40,38,0.42)',
+  textTertiary:     'rgba(37,40,38,0.30)',
 
   // Translucent rose / mint for circles and overlays
   roseSoft:         'rgba(199,122,147,0.55)',
@@ -56,9 +56,9 @@ export const COLOR = {
   // still resolve. Map onto the closest Constancia equivalent.
   teal:             '#5E8D7A',
   cyan:             '#7FB8A3',
-  navy:             '#12161D',
+  navy:             '#252826',
 
-  gradientBannerFrom:   '#1E2630',
+  gradientBannerFrom:   '#252826',
   gradientBannerMid:    '#5E8D7A',
   gradientBannerTo:     '#7FB8A3',
   gradientHeroFrom:     '#F6F3EE',
@@ -95,7 +95,7 @@ export const RADIUS = {
 // ─── Shadows ─────────────────────────────────────────────────────────────────
 
 export const SHADOW = {
-  card:    '0 1px 0 rgba(18,22,29,0.04), 0 8px 24px -12px rgba(18,22,29,0.06)',
+  card:    '0 1px 0 rgba(37,40,38,0.04), 0 8px 24px -12px rgba(37,40,38,0.06)',
   glow:    '0 0 24px rgba(199,122,147,0.10)',
 } as const;
 

@@ -73,16 +73,16 @@ export default function AboutPage() {
             <div className="font-mono text-[10px] uppercase tracking-widest text-[#8E4F67] mb-6">
               Our perspective
             </div>
-            <p className="text-xl sm:text-2xl font-light leading-relaxed text-[#12161D] mb-6">
+            <p className="text-xl sm:text-2xl font-light leading-relaxed text-[#252826] mb-6">
               We're an enterprise intelligence company that helps leaders move from debate to outcomes.
             </p>
-            <p className="text-base sm:text-lg text-[#1E2630]/85 leading-relaxed mb-5">
+            <p className="text-base sm:text-lg text-[#252826]/85 leading-relaxed mb-5">
               Our focus is giving finance and operations teams real-time visibility across their data, without the manual rework in Excel and PowerPoint.
             </p>
-            <p className="text-base sm:text-lg text-[#1E2630]/85 leading-relaxed mb-5">
+            <p className="text-base sm:text-lg text-[#252826]/85 leading-relaxed mb-5">
               We work with enterprise software and AI partners so you stay in the driver's seat of your company's health.
             </p>
-            <p className="text-base sm:text-lg text-[#1E2630]/85 leading-relaxed">
+            <p className="text-base sm:text-lg text-[#252826]/85 leading-relaxed">
               You're the expert on your business. Technology should work that way too.
             </p>
           </div>
@@ -127,11 +127,11 @@ export default function AboutPage() {
             <div className="font-mono text-[10px] uppercase tracking-widest text-[#8E4F67] mb-6 text-center">
               Off-duty
             </div>
-            <h2 className="text-2xl sm:text-3xl font-light text-center text-[#12161D] mb-10 max-w-xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl font-light text-center text-[#252826] mb-10 max-w-xl mx-auto">
               Bradley, Alex, and the team mascots Georgie and Sammy.
             </h2>
             <div
-              className="aspect-[16/9] w-full rounded-2xl bg-[#1E2630] text-[#F6F3EE]/40 flex items-center justify-center text-sm"
+              className="aspect-[16/9] w-full rounded-2xl bg-[#252826] text-[#F6F3EE]/40 flex items-center justify-center text-sm"
               role="img"
               aria-label="Placeholder: founders Bradley and Alex with Labrador Retrievers Georgie and Sammy"
             >
@@ -146,12 +146,12 @@ export default function AboutPage() {
         {/* Closing CTA. */}
         <section className="py-12 sm:py-20 lg:py-28 lg:pb-36 bg-[#F6F3EE]">
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
-            <div className="grid lg:grid-cols-[1fr_auto] gap-10 items-end border-t border-[#1E2630]/15 pt-12">
+            <div className="grid lg:grid-cols-[1fr_auto] gap-10 items-end border-t border-[#252826]/15 pt-12">
               <div>
                 <div className="font-mono text-[10px] uppercase tracking-widest text-[#8E4F67] mb-4">
                   No pitch. No deck.
                 </div>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-light leading-tight text-[#12161D] max-w-2xl">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-light leading-tight text-[#252826] max-w-2xl">
                   When you're ready,<br />
                   start the <em className="text-[#8E4F67] not-italic font-normal">conversation.</em>
                 </h2>
@@ -159,7 +159,7 @@ export default function AboutPage() {
               {flags.contact && (
                 <Link
                   href="/contact"
-                  className="group inline-flex items-baseline gap-3 text-[#12161D] hover:text-[#8E4F67] transition-colors"
+                  className="group inline-flex items-baseline gap-3 text-[#252826] hover:text-[#8E4F67] transition-colors"
                   data-testid="button-about-cta"
                 >
                   <span className="text-xl sm:text-2xl font-light underline decoration-[#8E4F67]/40 decoration-1 underline-offset-8 group-hover:decoration-[#8E4F67] group-hover:decoration-2">

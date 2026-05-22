@@ -95,7 +95,7 @@ type QuestionFormValues = z.infer<typeof questionFormSchema>;
 function getTierBadgeClass(tier: string) {
   switch (tier) {
     case "quick_assessment":
-      return "bg-[#7FB8A3]/10 text-[#8E4F67] dark:bg-[#1E2630]/30 dark:text-[#7FB8A3]";
+      return "bg-[#7FB8A3]/10 text-[#8E4F67] dark:bg-[#252826]/30 dark:text-[#7FB8A3]";
     case "pre_assessment":
       return "bg-teal-100 text-teal-700 dark:bg-teal-900/30 dark:text-teal-400";
     case "full":

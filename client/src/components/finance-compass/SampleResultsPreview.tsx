@@ -118,7 +118,7 @@ export function SampleResultsPreview({ onStartAssessment, className }: SampleRes
 
         <Button
           onClick={onStartAssessment}
-          className="w-full mt-4 bg-white text-[#12161D] hover:bg-white/90"
+          className="w-full mt-4 bg-white text-[#252826] hover:bg-white/90"
           data-testid="button-get-your-results"
         >
           Get Your Results

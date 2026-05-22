@@ -431,7 +431,7 @@ export const HeroConnectionDiagram = forwardRef<HeroDiagramHandle, HeroConnectio
                     width={chipSize}
                     height={chipSize}
                     rx={12}
-                    fill="rgba(18,22,29,0.16)"
+                    fill="rgba(37,40,38,0.16)"
                   />
                   {/* Chip plate */}
                   <rect
@@ -454,7 +454,7 @@ export const HeroConnectionDiagram = forwardRef<HeroDiagramHandle, HeroConnectio
                     textAnchor="middle"
                     fontSize="14"
                     fontFamily="var(--brand-font-sans, system-ui)"
-                    fill="#1E2630"
+                    fill="#252826"
                     opacity={0.85}
                   >
                     {vendor.label}
@@ -488,7 +488,7 @@ export const HeroConnectionDiagram = forwardRef<HeroDiagramHandle, HeroConnectio
                 fontWeight={i === 2 ? 500 : 300}
                 letterSpacing="0.02em"
                 fontFamily="var(--brand-font-sans, system-ui)"
-                fill={i === 2 ? "#8E4F67" : "#12161D"}
+                fill={i === 2 ? "#8E4F67" : "#252826"}
                 style={{ opacity: 0, willChange: "opacity, transform" }}
               >
                 {word}
@@ -515,7 +515,7 @@ export const HeroConnectionDiagram = forwardRef<HeroDiagramHandle, HeroConnectio
                 fontWeight={300}
                 letterSpacing="-0.02em"
                 fontFamily="var(--brand-font-sans, system-ui)"
-                fill="#12161D"
+                fill="#252826"
               >
                 1
               </text>
@@ -526,7 +526,7 @@ export const HeroConnectionDiagram = forwardRef<HeroDiagramHandle, HeroConnectio
                 fontSize="12"
                 letterSpacing="0.20em"
                 fontFamily="var(--brand-font-sans, system-ui)"
-                fill="#1E2630"
+                fill="#252826"
                 opacity={0.65}
               >
                 SYSTEMS · ONE TRUTH

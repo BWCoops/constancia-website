@@ -46,8 +46,8 @@ const SEVERITY_CONFIG: Record<InsightSeverity, {
     label: "Working well",
   },
   [INSIGHT_SEVERITY.INFO]: {
-    borderClass: "border-l-4 border-l-[#1E2630]/40",
-    badgeClass: "bg-[#1E2630]/60 text-white",
+    borderClass: "border-l-4 border-l-[#252826]/40",
+    badgeClass: "bg-[#252826]/60 text-white",
     icon: Info,
     label: "Info",
   },
@@ -73,7 +73,7 @@ function InsightCard({ insight, onAcknowledge, onDismiss }: InsightCardProps) {
               <Badge className={config.badgeClass} variant="default">
                 {config.label}
               </Badge>
-              <h3 className="text-base font-medium text-[#12161D] mt-1.5">{insight.headline}</h3>
+              <h3 className="text-base font-medium text-[#252826] mt-1.5">{insight.headline}</h3>
             </div>
           </div>
           <div className="flex gap-1 flex-shrink-0">
@@ -100,21 +100,21 @@ function InsightCard({ insight, onAcknowledge, onDismiss }: InsightCardProps) {
           </div>
         </div>
 
-        <p className="text-sm text-[#1E2630] leading-relaxed">{insight.detail}</p>
+        <p className="text-sm text-[#252826] leading-relaxed">{insight.detail}</p>
 
         <div className="bg-[#F6F3EE] rounded p-3 text-sm">
-          <div className="font-medium text-[#12161D] mb-1">Recommended action</div>
-          <div className="text-[#1E2630] leading-relaxed">{insight.recommendedAction}</div>
+          <div className="font-medium text-[#252826] mb-1">Recommended action</div>
+          <div className="text-[#252826] leading-relaxed">{insight.recommendedAction}</div>
         </div>
 
         {Object.keys(insight.metrics).length > 0 && (
           <details className="text-xs">
-            <summary className="cursor-pointer text-[#1E2630]/70 hover:text-[#12161D]">Underlying metrics</summary>
+            <summary className="cursor-pointer text-[#252826]/70 hover:text-[#252826]">Underlying metrics</summary>
             <dl className="mt-2 grid grid-cols-2 gap-x-4 gap-y-1">
               {Object.entries(insight.metrics).map(([k, v]) => (
                 <div key={k} className="contents">
-                  <dt className="text-[#1E2630]/60 truncate">{k}</dt>
-                  <dd className="text-[#12161D] font-mono">{String(v)}</dd>
+                  <dt className="text-[#252826]/60 truncate">{k}</dt>
+                  <dd className="text-[#252826] font-mono">{String(v)}</dd>
                 </div>
               ))}
             </dl>
@@ -184,7 +184,7 @@ export function InsightsPanel({ filterByHref, limit = 6 }: InsightsPanelProps) {
       <CardHeader className="flex flex-row items-center justify-between space-y-0">
         <div>
           <CardTitle className="text-lg">What needs your attention</CardTitle>
-          <p className="text-xs text-[#1E2630]/60 mt-0.5">
+          <p className="text-xs text-[#252826]/60 mt-0.5">
             Ranked by severity. Refreshed nightly at 02:30 UTC and on demand.
           </p>
         </div>
@@ -200,9 +200,9 @@ export function InsightsPanel({ filterByHref, limit = 6 }: InsightsPanelProps) {
         </Button>
       </CardHeader>
       <CardContent className="space-y-3">
-        {isLoading && <p className="text-sm text-[#1E2630]/60">Loading insights…</p>}
+        {isLoading && <p className="text-sm text-[#252826]/60">Loading insights…</p>}
         {!isLoading && visible.length === 0 && (
-          <p className="text-sm text-[#1E2630]/60">
+          <p className="text-sm text-[#252826]/60">
             No active insights. Either everything's healthy or we're still gathering enough
             data to generate signals. Insights refresh nightly.
           </p>
@@ -216,7 +216,7 @@ export function InsightsPanel({ filterByHref, limit = 6 }: InsightsPanelProps) {
           />
         ))}
         {overflow > 0 && (
-          <p className="text-xs text-[#1E2630]/60 text-center pt-1">
+          <p className="text-xs text-[#252826]/60 text-center pt-1">
             +{overflow} more insight{overflow === 1 ? "" : "s"} below the fold (refresh page to load more).
           </p>
         )}

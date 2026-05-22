@@ -101,7 +101,7 @@ const DIMENSION_CONFIG: Record<string, { name: string; shortName: string; icon: 
     name: "Organisation Sizing",
     shortName: "Sizing",
     icon: "Building2",
-    color: "#12161D",
+    color: "#252826",
   },
   financial_planning_analysis: {
     name: "Financial Planning & Analysis",
@@ -119,7 +119,7 @@ const DIMENSION_CONFIG: Record<string, { name: string; shortName: string; icon: 
     name: "Consolidation & Close",
     shortName: "Close",
     icon: "RefreshCw",
-    color: "#12161D",
+    color: "#252826",
   },
   financial_controls_compliance: {
     name: "Controls & Compliance",
@@ -661,7 +661,7 @@ export default function FinanceCompassAssess() {
               </CardDescription>
               <div className="space-y-2 sm:space-y-3">
                 <Link href="/finance-compass">
-                  <Button className="w-full min-h-[48px] h-12 sm:h-auto text-base sm:text-sm bg-gradient-to-r from-[#12161D] to-[#8E4F67]" data-testid="button-start-session">
+                  <Button className="w-full min-h-[48px] h-12 sm:h-auto text-base sm:text-sm bg-gradient-to-r from-[#252826] to-[#8E4F67]" data-testid="button-start-session">
                     Start New Session
                   </Button>
                 </Link>
@@ -699,7 +699,7 @@ export default function FinanceCompassAssess() {
               </CardDescription>
               <div className="space-y-2 sm:space-y-3">
                 <Link href="/finance-compass">
-                  <Button className="w-full min-h-[48px] h-12 sm:h-auto text-base sm:text-sm bg-gradient-to-r from-[#12161D] to-[#8E4F67]" data-testid="button-new-assessment">
+                  <Button className="w-full min-h-[48px] h-12 sm:h-auto text-base sm:text-sm bg-gradient-to-r from-[#252826] to-[#8E4F67]" data-testid="button-new-assessment">
                     Start New Assessment
                   </Button>
                 </Link>
@@ -999,7 +999,7 @@ export default function FinanceCompassAssess() {
                 <Button
                   onClick={handleNext}
                   disabled={!canProceed || isLoadingQuestion || adaptiveResponseMutation.isPending}
-                  className="flex-[2] sm:flex-none min-h-[48px] sm:min-h-[44px] h-12 sm:h-auto gap-2 text-base sm:text-sm bg-gradient-to-r from-[#12161D] to-[#8E4F67] hover:from-[#8E4F67] hover:to-[#7FB8A3]"
+                  className="flex-[2] sm:flex-none min-h-[48px] sm:min-h-[44px] h-12 sm:h-auto gap-2 text-base sm:text-sm bg-gradient-to-r from-[#252826] to-[#8E4F67] hover:from-[#8E4F67] hover:to-[#7FB8A3]"
                   data-testid="button-next"
                 >
                   {isLoadingQuestion || adaptiveResponseMutation.isPending ? (

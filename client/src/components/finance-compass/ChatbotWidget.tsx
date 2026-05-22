@@ -156,7 +156,7 @@ function renderMarkdown(text: string): JSX.Element[] {
           <ol key={`list-${listKey}`} className="space-y-2 my-3">
             {currentList.items.map((item, i) => (
               <li key={i} className="flex items-start gap-3 text-sm">
-                <span className="h-5 w-5 rounded-full bg-gradient-to-br from-[#12161D] to-[#8E4F67] text-white text-xs flex items-center justify-center flex-shrink-0 font-medium">
+                <span className="h-5 w-5 rounded-full bg-gradient-to-br from-[#252826] to-[#8E4F67] text-white text-xs flex items-center justify-center flex-shrink-0 font-medium">
                   {i + 1}
                 </span>
                 <span className="leading-relaxed pt-0.5">{parseInlineFormatting(item, `oli-${listKey}-${i}`)}</span>
@@ -181,7 +181,7 @@ function renderMarkdown(text: string): JSX.Element[] {
             </div>
             <table className="w-full text-[10px] sm:text-xs min-w-[400px] sm:min-w-[500px]">
               <thead>
-                <tr className="bg-gradient-to-r from-[#12161D] to-[#8E4F67]">
+                <tr className="bg-gradient-to-r from-[#252826] to-[#8E4F67]">
                   {tableData.headers.map((header, i) => (
                     <th key={i} className={cn(
                       "px-1.5 sm:px-3 py-1.5 sm:py-2.5 text-left font-semibold text-white whitespace-nowrap",
@@ -275,7 +275,7 @@ function renderMarkdown(text: string): JSX.Element[] {
       flushList();
       elements.push(
         <h3 key={`h2-${lineIdx}`} className="flex items-center gap-2 font-bold text-base mt-4 mb-2 text-foreground">
-          <span className="h-1.5 w-5 bg-gradient-to-r from-[#12161D] to-[#8E4F67] rounded-full" />
+          <span className="h-1.5 w-5 bg-gradient-to-r from-[#252826] to-[#8E4F67] rounded-full" />
           {parseInlineFormatting(trimmedLine.slice(3), `h2-${lineIdx}`)}
         </h3>
       );
@@ -1190,7 +1190,7 @@ What would you like to know?`,
             
             {/* Notification content */}
             <div className="flex items-start gap-3">
-              <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#12161D] to-[#8E4F67] flex items-center justify-center flex-shrink-0">
+              <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center flex-shrink-0">
                 <Sparkles className="h-5 w-5 text-[#7FB8A3]" />
               </div>
               <div className="flex-1 min-w-0">
@@ -1202,7 +1202,7 @@ What would you like to know?`,
                 </p>
                 <Button
                   onClick={() => setIsOpen(true)}
-                  className="bg-gradient-to-r from-[#12161D] to-[#8E4F67] hover:from-[#8E4F67] hover:to-[#7FB8A3] text-white min-h-[44px] sm:min-h-0 w-full sm:w-auto"
+                  className="bg-gradient-to-r from-[#252826] to-[#8E4F67] hover:from-[#8E4F67] hover:to-[#7FB8A3] text-white min-h-[44px] sm:min-h-0 w-full sm:w-auto"
                   data-testid="button-popup-chat"
                 >
                   <MessageSquare className="h-4 w-4 mr-2" />
@@ -1227,7 +1227,7 @@ What would you like to know?`,
           onClick={() => setIsOpen(true)}
           className={cn(
             "h-14 w-14 rounded-full shadow-lg p-0",
-            "bg-gradient-to-br from-[#12161D] to-[#8E4F67] hover:from-[#8E4F67] hover:to-[#7FB8A3]",
+            "bg-gradient-to-br from-[#252826] to-[#8E4F67] hover:from-[#8E4F67] hover:to-[#7FB8A3]",
             "transition-all duration-300 hover:shadow-xl hover:scale-105"
           )}
           data-testid="button-open-chatbot"
@@ -1281,7 +1281,7 @@ What would you like to know?`,
           )}
         >
           {/* Header - Touch-friendly with safe area */}
-          <div className="flex items-center justify-between p-3 sm:p-4 bg-gradient-to-r from-[#12161D] to-[#8E4F67] pt-[max(0.75rem,env(safe-area-inset-top))]">
+          <div className="flex items-center justify-between p-3 sm:p-4 bg-gradient-to-r from-[#252826] to-[#8E4F67] pt-[max(0.75rem,env(safe-area-inset-top))]">
             <div className="flex items-center gap-2 sm:gap-3">
               <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
                 <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-[#7FB8A3]" />
@@ -1714,10 +1714,10 @@ What would you like to know?`,
 
             {/* Processing Indicator - Shows completed steps building up like Replit */}
             {(processingStage || completedSteps.length > 0) && isLoading && (
-              <div className="mt-3 sm:mt-4 p-3 sm:p-4 bg-gradient-to-br from-[#12161D]/5 to-[#8E4F67]/10 rounded-xl border border-[#8E4F67]/20">
+              <div className="mt-3 sm:mt-4 p-3 sm:p-4 bg-gradient-to-br from-[#252826]/5 to-[#8E4F67]/10 rounded-xl border border-[#8E4F67]/20">
                 {/* Header */}
                 <div className="flex items-center gap-2 mb-2 sm:mb-3 pb-2 border-b border-[#8E4F67]/20">
-                  <div className="h-6 w-6 rounded-full bg-gradient-to-br from-[#12161D] to-[#8E4F67] flex items-center justify-center flex-shrink-0">
+                  <div className="h-6 w-6 rounded-full bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center flex-shrink-0">
                     <Sparkles className="h-3 w-3 text-[#7FB8A3]" />
                   </div>
                   <div className="flex-1 min-w-0">
@@ -1832,7 +1832,7 @@ What would you like to know?`,
               <Button
                 onClick={sendMessage}
                 disabled={!inputValue.trim() || isLoading || !sessionId}
-                className="h-12 w-12 sm:h-11 sm:w-11 rounded-xl bg-gradient-to-br from-[#12161D] to-[#8E4F67] hover:from-[#8E4F67] hover:to-[#7FB8A3] flex-shrink-0 active:scale-95 transition-transform"
+                className="h-12 w-12 sm:h-11 sm:w-11 rounded-xl bg-gradient-to-br from-[#252826] to-[#8E4F67] hover:from-[#8E4F67] hover:to-[#7FB8A3] flex-shrink-0 active:scale-95 transition-transform"
                 size="icon"
                 data-testid="button-send-message"
               >

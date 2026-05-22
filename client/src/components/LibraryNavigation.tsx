@@ -95,7 +95,7 @@ export function LibraryNavigation({ variant = "light" }: LibraryNavigationProps)
   };
 
   const items = LIBRARY.filter(i => i.featureKey === null || flags[i.featureKey]);
-  const triggerColor = variant === "dark" ? "#F6F3EE" : "#12161D";
+  const triggerColor = variant === "dark" ? "#F6F3EE" : "#252826";
 
   return (
     <>

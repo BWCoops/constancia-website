@@ -280,7 +280,7 @@ export default function SolutionsPage() {
                     <Card className="h-full hover-elevate cursor-pointer group relative overflow-visible border-0 shadow-md hover:shadow-xl transition-shadow">
                       {tool.highlight && (
                         <div className="absolute -top-3 left-4 z-10">
-                          <Badge className="bg-[#7FB8A3] text-[#12161D] font-semibold text-xs px-3 py-1 shadow-sm">
+                          <Badge className="bg-[#7FB8A3] text-[#252826] font-semibold text-xs px-3 py-1 shadow-sm">
                             {tool.highlight}
                           </Badge>
                         </div>
@@ -356,7 +356,7 @@ export default function SolutionsPage() {
                     <Link href="/finance-compass">
                       <Button
                         size="lg"
-                        className="bg-[#7FB8A3] text-[#12161D] hover:bg-[#7FB8A3]/90 font-semibold"
+                        className="bg-[#7FB8A3] text-[#252826] hover:bg-[#7FB8A3]/90 font-semibold"
                         data-testid="button-maturity-assessment-cta"
                       >
                         Begin Assessment

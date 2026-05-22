@@ -103,7 +103,7 @@ function getStatusBadgeClass(status: string) {
     case "not_started":
       return "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300";
     case "in_progress":
-      return "bg-[#7FB8A3]/10 text-[#8E4F67] dark:bg-[#1E2630]/30 dark:text-[#7FB8A3]";
+      return "bg-[#7FB8A3]/10 text-[#8E4F67] dark:bg-[#252826]/30 dark:text-[#7FB8A3]";
     case "initial_complete":
     case "followups_pending":
       return "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400";

@@ -157,7 +157,7 @@ function ChatbotWidgetPopup({ assessmentId }: { assessmentId?: string }) {
   return (
     <div className="flex flex-col h-[calc(100vh-32px)] bg-background border-2 border-[#8E4F67]/20 rounded-2xl shadow-2xl overflow-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between p-4 bg-gradient-to-r from-[#12161D] to-[#8E4F67]">
+      <div className="flex items-center justify-between p-4 bg-gradient-to-r from-[#252826] to-[#8E4F67]">
         <div className="flex items-center gap-3">
           <div className="h-10 w-10 rounded-full bg-white/10 flex items-center justify-center">
             <span className="text-brand-cyan text-lg">✨</span>
@@ -234,7 +234,7 @@ function ChatbotWidgetPopup({ assessmentId }: { assessmentId?: string }) {
           <button
             onClick={sendMessage}
             disabled={!inputValue.trim() || isLoading || !sessionId}
-            className="h-10 w-10 rounded-xl bg-gradient-to-br from-[#12161D] to-[#8E4F67] text-white flex items-center justify-center disabled:opacity-50"
+            className="h-10 w-10 rounded-xl bg-gradient-to-br from-[#252826] to-[#8E4F67] text-white flex items-center justify-center disabled:opacity-50"
           >
             {isLoading ? "..." : "→"}
           </button>

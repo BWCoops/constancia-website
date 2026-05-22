@@ -49,7 +49,7 @@ const iconMap: Record<string, typeof TrendingUp> = {
 const colorMap: Record<string, string> = {
   "#8E4F67": "text-[#0A6688] bg-[#8E4F67]/10",
   "#7FB8A3": "text-[#7FB8A3] bg-[#7FB8A3]/10",
-  "#12161D": "text-[#12161D] bg-[#12161D]/10",
+  "#252826": "text-[#252826] bg-[#252826]/10",
   "#6366F1": "text-indigo-500 bg-indigo-500/10",
   "#10B981": "text-emerald-500 bg-emerald-500/10",
   "#F59E0B": "text-amber-500 bg-amber-500/10",

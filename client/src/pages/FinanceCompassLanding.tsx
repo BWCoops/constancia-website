@@ -215,7 +215,7 @@ function ProgressionStepper({ currentStep }: { currentStep: 1 | 2 | 3 }) {
                   isComplete 
                     ? "bg-green-500/20 text-green-400" 
                     : isActive 
-                      ? "bg-[#7FB8A3] text-[#12161D]" 
+                      ? "bg-[#7FB8A3] text-[#252826]" 
                       : "bg-white/10 text-white/40"
                 }`}>
                   {isComplete ? (
@@ -578,11 +578,11 @@ export default function FinanceCompassLanding() {
                 </Badge>
               </div>
             </div>
-            <CardTitle className="text-xl text-[#12161D]">
+            <CardTitle className="text-xl text-[#252826]">
               Welcome back, {sessionInfo?.firstName || formData.firstName}!
             </CardTitle>
             <CardDescription className="text-sm">
-              Your email <span className="font-medium text-[#12161D]">{sessionInfo?.email || formData.email}</span> is verified.
+              Your email <span className="font-medium text-[#252826]">{sessionInfo?.email || formData.email}</span> is verified.
             </CardDescription>
           </CardHeader>
           <CardContent className="pt-2">
@@ -612,7 +612,7 @@ export default function FinanceCompassLanding() {
                 Verification Required
               </Badge>
             </div>
-            <CardTitle className="text-xl text-[#12161D]">Check Your Email</CardTitle>
+            <CardTitle className="text-xl text-[#252826]">Check Your Email</CardTitle>
             <CardDescription>
               We've sent a 6-digit verification code to <span className="font-medium">{formData.email}</span>
             </CardDescription>
@@ -691,7 +691,7 @@ export default function FinanceCompassLanding() {
               Step 2 of 3
             </Badge>
           </div>
-          <CardTitle className="text-xl text-[#12161D]">Continue to Full Assessment</CardTitle>
+          <CardTitle className="text-xl text-[#252826]">Continue to Full Assessment</CardTitle>
           <CardDescription>
             Register to run the full 74-question assessment. Get the deeper scoring, the AI analysis, and a roadmap that's actually about your stack.
           </CardDescription>
@@ -987,7 +987,7 @@ export default function FinanceCompassLanding() {
 
       <main className="pt-16 sm:pt-20">
         {/* Hero Section */}
-        <section className="relative min-h-[500px] sm:min-h-[600px] flex items-center overflow-hidden bg-gradient-to-br from-[#12161D] via-[#5E8D7A] to-[#8E4F67]">
+        <section className="relative min-h-[500px] sm:min-h-[600px] flex items-center overflow-hidden bg-gradient-to-br from-[#252826] via-[#5E8D7A] to-[#8E4F67]">
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-20 left-10 w-48 sm:w-72 h-48 sm:h-72 bg-[#7FB8A3] rounded-full blur-3xl" />
             <div className="absolute bottom-20 right-10 w-64 sm:w-96 h-64 sm:h-96 bg-[#8E4F67] rounded-full blur-3xl" />
@@ -1121,7 +1121,7 @@ export default function FinanceCompassLanding() {
                 <Rocket className="h-3 w-3 mr-1" />
                 The AI Imperative
               </Badge>
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#12161D] dark:text-white mb-2 sm:mb-3 px-2">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#252826] dark:text-white mb-2 sm:mb-3 px-2">
                 Finance is Transforming. Are You Ready?
               </h2>
               <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto px-2">
@@ -1138,7 +1138,7 @@ export default function FinanceCompassLanding() {
                   description: "Finance functions expected to deploy AI capabilities",
                   source: "Gartner",
                   icon: Cpu,
-                  color: "from-[#8E4F67] to-[#12161D]"
+                  color: "from-[#8E4F67] to-[#252826]"
                 },
                 {
                   stat: "47%",
@@ -1162,7 +1162,7 @@ export default function FinanceCompassLanding() {
                   description: "Autonomous agents transforming finance operations",
                   source: "2025 Trend",
                   icon: Bot,
-                  color: "from-purple-500 to-[#12161D]"
+                  color: "from-purple-500 to-[#252826]"
                 }
               ].map((item, index) => (
                 <motion.div
@@ -1177,7 +1177,7 @@ export default function FinanceCompassLanding() {
                       <div className={`h-8 w-8 sm:h-10 sm:w-10 rounded-lg bg-gradient-to-br ${item.color} flex items-center justify-center mb-2 sm:mb-3`}>
                         <item.icon className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                       </div>
-                      <div className="text-xl sm:text-2xl font-bold text-[#12161D] dark:text-white mb-1">
+                      <div className="text-xl sm:text-2xl font-bold text-[#252826] dark:text-white mb-1">
                         {item.stat}
                       </div>
                       <div className="text-xs sm:text-sm font-medium text-brand-teal mb-1 sm:mb-2">
@@ -1198,7 +1198,7 @@ export default function FinanceCompassLanding() {
         </section>
 
         {/* See What You'll Get Section - Sample Results Preview */}
-        <section id="registration-form" className="py-10 sm:py-16 bg-gradient-to-br from-[#12161D] via-[#5E8D7A] to-[#8E4F67] relative overflow-hidden">
+        <section id="registration-form" className="py-10 sm:py-16 bg-gradient-to-br from-[#252826] via-[#5E8D7A] to-[#8E4F67] relative overflow-hidden">
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-10 right-10 sm:right-20 w-48 sm:w-64 h-48 sm:h-64 bg-[#7FB8A3] rounded-full blur-3xl" />
             <div className="absolute bottom-10 left-10 sm:left-20 w-56 sm:w-80 h-56 sm:h-80 bg-[#8E4F67] rounded-full blur-3xl" />
@@ -1274,15 +1274,15 @@ export default function FinanceCompassLanding() {
               <div className="font-mono text-[10px] uppercase tracking-widest text-[#8E4F67] mb-4">
                 Start the assessment
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-light leading-tight text-[#12161D] dark:text-white mb-3">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-light leading-tight text-[#252826] dark:text-white mb-3">
                 The diagnostic a consulting firm would charge you<br className="hidden sm:inline" /> <em className="not-italic font-normal text-[#8E4F67]">five figures</em> to run.
               </h2>
-              <p className="text-base sm:text-lg text-[#1E2630]/75 dark:text-white/70 max-w-2xl mx-auto mb-4">
+              <p className="text-base sm:text-lg text-[#252826]/75 dark:text-white/70 max-w-2xl mx-auto mb-4">
                 74 questions across 7 dimensions. AI-validated against 200+ EPM benchmarks. Done in 12 minutes. Yours, calibrated to your stack and your industry.
               </p>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7FB8A3]/10 border border-[#7FB8A3]/30">
                 <Zap className="h-4 w-4 text-brand-teal" />
-                <span className="text-sm font-medium text-[#12161D] dark:text-white">Enterprise-grade analysis | Months of work in 20 minutes</span>
+                <span className="text-sm font-medium text-[#252826] dark:text-white">Enterprise-grade analysis | Months of work in 20 minutes</span>
               </div>
             </motion.div>
             
@@ -1299,25 +1299,25 @@ export default function FinanceCompassLanding() {
                   <Clock className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <p className="font-semibold text-[#12161D] dark:text-white text-sm">10-15 min</p>
+                  <p className="font-semibold text-[#252826] dark:text-white text-sm">10-15 min</p>
                   <p className="text-xs text-muted-foreground">Quick assessment</p>
                 </div>
               </div>
               <div className="flex items-center gap-3 p-3 sm:p-4 rounded-xl bg-white dark:bg-card border border-border/50 shadow-sm">
-                <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-[#8E4F67] to-[#12161D] flex items-center justify-center flex-shrink-0">
+                <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-[#8E4F67] to-[#252826] flex items-center justify-center flex-shrink-0">
                   <Target className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <p className="font-semibold text-[#12161D] dark:text-white text-sm">7 Dimensions</p>
+                  <p className="font-semibold text-[#252826] dark:text-white text-sm">7 Dimensions</p>
                   <p className="text-xs text-muted-foreground">Full diagnostic</p>
                 </div>
               </div>
               <div className="flex items-center gap-3 p-3 sm:p-4 rounded-xl bg-white dark:bg-card border border-border/50 shadow-sm">
-                <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-[#12161D] to-[#8E4F67] flex items-center justify-center flex-shrink-0">
+                <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center flex-shrink-0">
                   <Sparkles className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <p className="font-semibold text-[#12161D] dark:text-white text-sm">AI-Powered</p>
+                  <p className="font-semibold text-[#252826] dark:text-white text-sm">AI-Powered</p>
                   <p className="text-xs text-muted-foreground">Smart insights</p>
                 </div>
               </div>
@@ -1326,7 +1326,7 @@ export default function FinanceCompassLanding() {
                   <Shield className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <p className="font-semibold text-[#12161D] dark:text-white text-sm">Secure</p>
+                  <p className="font-semibold text-[#252826] dark:text-white text-sm">Secure</p>
                   <p className="text-xs text-muted-foreground">GDPR compliant</p>
                 </div>
               </div>
@@ -1359,7 +1359,7 @@ export default function FinanceCompassLanding() {
               <div className="font-mono text-[10px] uppercase tracking-widest text-[#8E4F67] text-center mb-5">
                 What you walk out with
               </div>
-              <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-3 text-sm text-[#1E2630] dark:text-white/85">
+              <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-3 text-sm text-[#252826] dark:text-white/85">
                 {[
                   "Readiness score",
                   "Dimension breakdown",
@@ -1373,7 +1373,7 @@ export default function FinanceCompassLanding() {
                     </span>
                     <span className="font-medium">{item}</span>
                     {idx < arr.length - 1 && (
-                      <span aria-hidden="true" className="text-[#1E2630]/25">·</span>
+                      <span aria-hidden="true" className="text-[#252826]/25">·</span>
                     )}
                   </span>
                 ))}
@@ -1384,7 +1384,7 @@ export default function FinanceCompassLanding() {
 
         {/* Your Assessment Journey Section */}
         <section className="py-12 sm:py-20 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#12161D]/5 via-transparent to-[#8E4F67]/5" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#252826]/5 via-transparent to-[#8E4F67]/5" />
           <div className="absolute top-20 left-1/4 w-48 sm:w-64 h-48 sm:h-64 bg-[#7FB8A3]/10 rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-20 right-1/4 w-56 sm:w-80 h-56 sm:h-80 bg-[#8E4F67]/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
           
@@ -1396,7 +1396,7 @@ export default function FinanceCompassLanding() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#12161D] dark:text-white mb-2 sm:mb-3">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#252826] dark:text-white mb-2 sm:mb-3">
                 How It Works
               </h2>
               <p className="text-base sm:text-xl text-brand-teal font-medium mb-3 sm:mb-4">
@@ -1412,7 +1412,7 @@ export default function FinanceCompassLanding() {
             {/* Journey Flow Visual */}
             <div className="relative mb-10 sm:mb-16">
               {/* Connection Line */}
-              <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-green-500/30 via-[#8E4F67]/30 to-[#12161D]/30 -translate-y-1/2" />
+              <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-green-500/30 via-[#8E4F67]/30 to-[#252826]/30 -translate-y-1/2" />
               
               <div className="flex flex-col lg:grid lg:grid-cols-3 gap-3 sm:gap-4">
                 {/* Step 1: Verify */}
@@ -1436,7 +1436,7 @@ export default function FinanceCompassLanding() {
                           Step 1
                         </Badge>
                       </div>
-                      <CardTitle className="text-lg text-[#12161D] dark:text-white">
+                      <CardTitle className="text-lg text-[#252826] dark:text-white">
                         Quick Verification
                       </CardTitle>
                       <CardDescription className="text-sm">
@@ -1479,7 +1479,7 @@ export default function FinanceCompassLanding() {
                     <CardHeader className="pb-3">
                       <div className="flex items-center justify-between gap-2 mb-3">
                         <motion.div 
-                          className="h-12 w-12 rounded-full bg-gradient-to-br from-[#8E4F67] to-[#12161D] flex items-center justify-center shadow-lg"
+                          className="h-12 w-12 rounded-full bg-gradient-to-br from-[#8E4F67] to-[#252826] flex items-center justify-center shadow-lg"
                           whileHover={{ scale: 1.05 }}
                         >
                           <PreAssessmentIcon className="h-6 w-6 text-white" />
@@ -1493,7 +1493,7 @@ export default function FinanceCompassLanding() {
                           </Badge>
                         </div>
                       </div>
-                      <CardTitle className="text-lg text-[#12161D] dark:text-white">
+                      <CardTitle className="text-lg text-[#252826] dark:text-white">
                         Pre-Assessment
                       </CardTitle>
                       <CardDescription className="text-sm">
@@ -1535,8 +1535,8 @@ export default function FinanceCompassLanding() {
                   {/* Arrow for mobile */}
                   <div className="lg:hidden flex justify-center py-2">
                     <div className="flex flex-col items-center gap-1">
-                      <div className="w-0.5 h-3 bg-gradient-to-b from-[#8E4F67]/50 to-[#12161D]/50" />
-                      <ArrowRight className="h-4 w-4 text-[#12161D] rotate-90" />
+                      <div className="w-0.5 h-3 bg-gradient-to-b from-[#8E4F67]/50 to-[#252826]/50" />
+                      <ArrowRight className="h-4 w-4 text-[#252826] rotate-90" />
                     </div>
                   </div>
                 </motion.div>
@@ -1549,17 +1549,17 @@ export default function FinanceCompassLanding() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.45 }}
                 >
-                  <Card className="lg:h-full border-[#12161D]/30 bg-gradient-to-b from-[#12161D]/5 to-transparent">
+                  <Card className="lg:h-full border-[#252826]/30 bg-gradient-to-b from-[#252826]/5 to-transparent">
                     <CardHeader className="pb-3">
                       <div className="flex items-center justify-between gap-2 mb-3">
                         <motion.div 
-                          className="h-12 w-12 rounded-full bg-gradient-to-br from-[#12161D] to-[#8E4F67] flex items-center justify-center shadow-lg"
+                          className="h-12 w-12 rounded-full bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center shadow-lg"
                           whileHover={{ scale: 1.05 }}
                         >
                           <FullAssessmentIcon className="h-6 w-6 text-white" />
                         </motion.div>
                         <div className="flex flex-col items-end gap-1">
-                          <Badge className="bg-brand-navy/10 text-[#12161D] border-[#12161D]/20 dark:text-white dark:border-white/20">
+                          <Badge className="bg-brand-navy/10 text-[#252826] border-[#252826]/20 dark:text-white dark:border-white/20">
                             Step 3
                           </Badge>
                           <Badge variant="outline" className="text-xs">
@@ -1567,7 +1567,7 @@ export default function FinanceCompassLanding() {
                           </Badge>
                         </div>
                       </div>
-                      <CardTitle className="text-lg text-[#12161D] dark:text-white">
+                      <CardTitle className="text-lg text-[#252826] dark:text-white">
                         Full Assessment
                       </CardTitle>
                       <CardDescription className="text-sm">
@@ -1575,25 +1575,25 @@ export default function FinanceCompassLanding() {
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="pt-0 space-y-2">
-                      <div className="flex items-center gap-2 text-xs text-[#12161D] dark:text-white/70">
+                      <div className="flex items-center gap-2 text-xs text-[#252826] dark:text-white/70">
                         <FileText className="h-3.5 w-3.5 flex-shrink-0" />
                         <span>Executive-ready PDF report</span>
                       </div>
-                      <div className="flex items-center gap-2 text-xs text-[#12161D] dark:text-white/70">
+                      <div className="flex items-center gap-2 text-xs text-[#252826] dark:text-white/70">
                         <Award className="h-3.5 w-3.5 flex-shrink-0" />
                         <span>Consultant follow-up session</span>
                       </div>
-                      <div className="flex items-center gap-2 text-xs text-[#12161D] dark:text-white/70">
+                      <div className="flex items-center gap-2 text-xs text-[#252826] dark:text-white/70">
                         <Users className="h-3.5 w-3.5 flex-shrink-0" />
                         <span>Personalised transformation roadmap</span>
                       </div>
-                      <div className="flex items-center gap-2 text-xs text-[#12161D] dark:text-white/70">
+                      <div className="flex items-center gap-2 text-xs text-[#252826] dark:text-white/70">
                         <Building2 className="h-3.5 w-3.5 flex-shrink-0" />
                         <span>Industry benchmarking insights</span>
                       </div>
                       <div className="h-1.5 bg-muted rounded-full overflow-hidden mt-3">
                         <motion.div 
-                          className="h-full bg-gradient-to-r from-[#12161D] to-[#8E4F67] rounded-full"
+                          className="h-full bg-gradient-to-r from-[#252826] to-[#8E4F67] rounded-full"
                           initial={{ width: 0 }}
                           whileInView={{ width: "100%" }}
                           viewport={{ once: true }}
@@ -1602,7 +1602,7 @@ export default function FinanceCompassLanding() {
                       </div>
                       <div className="flex justify-between text-xs text-muted-foreground">
                         <span>Insight depth</span>
-                        <span className="font-medium text-[#12161D] dark:text-white">100%</span>
+                        <span className="font-medium text-[#252826] dark:text-white">100%</span>
                       </div>
                     </CardContent>
                   </Card>
@@ -1618,7 +1618,7 @@ export default function FinanceCompassLanding() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-[#12161D]/5 via-[#8E4F67]/10 to-[#7FB8A3]/5 rounded-2xl" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#252826]/5 via-[#8E4F67]/10 to-[#7FB8A3]/5 rounded-2xl" />
               <Card className="relative border-dashed border-[#8E4F67]/30 bg-transparent overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#7FB8A3]/20 to-transparent rounded-full blur-2xl" />
                 <CardHeader className="pb-3 sm:pb-4">
@@ -1632,7 +1632,7 @@ export default function FinanceCompassLanding() {
                         <Rocket className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                       </motion.div>
                       <div>
-                        <CardTitle className="text-base sm:text-lg text-[#12161D] dark:text-white">
+                        <CardTitle className="text-base sm:text-lg text-[#252826] dark:text-white">
                           Beyond the Assessment
                         </CardTitle>
                         <CardDescription className="text-xs sm:text-sm">
@@ -1640,7 +1640,7 @@ export default function FinanceCompassLanding() {
                         </CardDescription>
                       </div>
                     </div>
-                    <Badge className="bg-gradient-to-r from-[#8E4F67] to-[#12161D] text-white border-0 self-start sm:self-auto">
+                    <Badge className="bg-gradient-to-r from-[#8E4F67] to-[#252826] text-white border-0 self-start sm:self-auto">
                       Premium Journey
                     </Badge>
                   </div>
@@ -1653,7 +1653,7 @@ export default function FinanceCompassLanding() {
                         <Calendar className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-brand-teal" />
                       </div>
                       <div className="min-w-0">
-                        <h4 className="font-semibold text-[#12161D] dark:text-white text-xs sm:text-sm mb-1">
+                        <h4 className="font-semibold text-[#252826] dark:text-white text-xs sm:text-sm mb-1">
                           4-Workshop Series
                         </h4>
                         <p className="text-[11px] sm:text-xs text-muted-foreground">
@@ -1668,7 +1668,7 @@ export default function FinanceCompassLanding() {
                         <LineChart className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-brand-teal" />
                       </div>
                       <div className="min-w-0">
-                        <h4 className="font-semibold text-[#12161D] dark:text-white text-xs sm:text-sm mb-1">
+                        <h4 className="font-semibold text-[#252826] dark:text-white text-xs sm:text-sm mb-1">
                           AI-Powered Tracking
                         </h4>
                         <p className="text-[11px] sm:text-xs text-muted-foreground">
@@ -1683,7 +1683,7 @@ export default function FinanceCompassLanding() {
                         <FileCheck className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-brand-teal" />
                       </div>
                       <div className="min-w-0">
-                        <h4 className="font-semibold text-[#12161D] dark:text-white text-xs sm:text-sm mb-1">
+                        <h4 className="font-semibold text-[#252826] dark:text-white text-xs sm:text-sm mb-1">
                           Executive Deliverables
                         </h4>
                         <p className="text-[11px] sm:text-xs text-muted-foreground">
@@ -1735,7 +1735,7 @@ export default function FinanceCompassLanding() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-[#12161D] dark:text-white">
+              <h2 className="text-3xl md:text-4xl font-bold text-[#252826] dark:text-white">
                 Why Finance Leaders Choose FinanceCompass
               </h2>
             </motion.div>
@@ -1752,7 +1752,7 @@ export default function FinanceCompassLanding() {
                 <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-[#7FB8A3] to-[#8E4F67] flex items-center justify-center mb-5 shadow-lg">
                   <Sparkles className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold text-[#12161D] dark:text-white mb-3">
+                <h3 className="text-xl font-semibold text-[#252826] dark:text-white mb-3">
                   AI-Powered Insights
                 </h3>
                 <p className="text-muted-foreground">
@@ -1768,10 +1768,10 @@ export default function FinanceCompassLanding() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.15 }}
               >
-                <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-[#8E4F67] to-[#12161D] flex items-center justify-center mb-5 shadow-lg">
+                <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-[#8E4F67] to-[#252826] flex items-center justify-center mb-5 shadow-lg">
                   <Target className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold text-[#12161D] dark:text-white mb-3">
+                <h3 className="text-xl font-semibold text-[#252826] dark:text-white mb-3">
                   Actionable Roadmap
                 </h3>
                 <p className="text-muted-foreground">
@@ -1787,10 +1787,10 @@ export default function FinanceCompassLanding() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
-                <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-[#12161D] to-[#8E4F67] flex items-center justify-center mb-5 shadow-lg">
+                <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center mb-5 shadow-lg">
                   <Users className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold text-[#12161D] dark:text-white mb-3">
+                <h3 className="text-xl font-semibold text-[#252826] dark:text-white mb-3">
                   Expert Guidance
                 </h3>
                 <p className="text-muted-foreground">
@@ -1807,13 +1807,13 @@ export default function FinanceCompassLanding() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <div className="p-6 rounded-xl bg-gradient-to-r from-[#12161D]/5 via-[#8E4F67]/10 to-[#7FB8A3]/5 border border-[#8E4F67]/20">
+              <div className="p-6 rounded-xl bg-gradient-to-r from-[#252826]/5 via-[#8E4F67]/10 to-[#7FB8A3]/5 border border-[#8E4F67]/20">
                 <div className="flex items-center justify-center gap-3 mb-4">
                   <div className="h-12 w-12 rounded-full bg-gradient-to-br from-[#7FB8A3] to-[#8E4F67] flex items-center justify-center shadow-lg">
                     <Bot className="h-6 w-6 text-white" />
                   </div>
                 </div>
-                <h3 className="text-xl font-semibold text-[#12161D] dark:text-white mb-3">
+                <h3 className="text-xl font-semibold text-[#252826] dark:text-white mb-3">
                   Future-Ready Finance
                 </h3>
                 <p className="text-muted-foreground mb-4">

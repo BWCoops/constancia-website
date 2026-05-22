@@ -22,7 +22,7 @@ const colorSchemes = {
   epm: {
     low: '#ef4444',
     mid: '#8E4F67',
-    high: '#12161D',
+    high: '#252826',
     track: 'hsl(var(--muted))',
   },
   ai: {

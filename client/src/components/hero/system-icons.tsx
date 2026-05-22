@@ -160,7 +160,7 @@ export const CATEGORY_ACCENT: Record<SystemIcon["category"], string> = {
   crm:         "#C77A93", // rose
   hris:        "#5E8D7A", // deep mint
   procurement: "#7FB8A3", // mint
-  data:        "#1E2630", // slate
+  data:        "#252826", // slate
   spreadsheet: "#8E4F67", // berry
   bi:          "#7FB8A3", // mint
   comms:       "#C77A93", // rose

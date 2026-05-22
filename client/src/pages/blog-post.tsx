@@ -437,7 +437,7 @@ export default function BlogPostPage() {
             className="prose prose-lg dark:prose-invert max-w-none mb-12 
               prose-headings:text-foreground prose-headings:font-bold
               prose-h1:text-3xl prose-h1:mt-10 prose-h1:mb-6 prose-h1:border-b prose-h1:border-border prose-h1:pb-4
-              prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4 prose-h2:text-[#12161D] dark:prose-h2:text-brand-cyan
+              prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4 prose-h2:text-[#252826] dark:prose-h2:text-brand-cyan
               prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3 prose-h3:text-brand-teal dark:prose-h3:text-brand-cyan/80
               prose-h4:text-lg prose-h4:mt-4 prose-h4:mb-2
               prose-p:text-muted-foreground prose-p:leading-relaxed prose-p:mb-4
@@ -465,7 +465,7 @@ export default function BlogPostPage() {
                   }
                   return (
                     <h2 
-                      className="text-xl sm:text-2xl font-bold mt-12 mb-6 text-[#12161D] dark:text-brand-cyan relative pl-5"
+                      className="text-xl sm:text-2xl font-bold mt-12 mb-6 text-[#252826] dark:text-brand-cyan relative pl-5"
                     >
                       <span className="absolute left-0 top-0 bottom-0 w-1 rounded-full bg-gradient-to-b from-[#7FB8A3] to-[#8E4F67]" />
                       {children}
@@ -595,7 +595,7 @@ export default function BlogPostPage() {
                   const validItems = items.filter(item => item != null);
                   return (
                     <div 
-                      className="my-6 p-4 bg-gradient-to-br from-[#12161D]/5 via-transparent to-[#7FB8A3]/5 dark:from-[#12161D]/15 dark:to-[#7FB8A3]/10 border border-[#7FB8A3]/20 rounded-xl"
+                      className="my-6 p-4 bg-gradient-to-br from-[#252826]/5 via-transparent to-[#7FB8A3]/5 dark:from-[#252826]/15 dark:to-[#7FB8A3]/10 border border-[#7FB8A3]/20 rounded-xl"
                     >
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                         {validItems}
@@ -608,7 +608,7 @@ export default function BlogPostPage() {
                   const validItems = items.filter(item => item != null);
                   return (
                     <div 
-                      className="my-6 p-4 bg-gradient-to-br from-[#12161D]/5 via-transparent to-[#7FB8A3]/5 dark:from-[#12161D]/15 dark:to-[#7FB8A3]/10 border border-[#7FB8A3]/20 rounded-xl"
+                      className="my-6 p-4 bg-gradient-to-br from-[#252826]/5 via-transparent to-[#7FB8A3]/5 dark:from-[#252826]/15 dark:to-[#7FB8A3]/10 border border-[#7FB8A3]/20 rounded-xl"
                     >
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                         {validItems}

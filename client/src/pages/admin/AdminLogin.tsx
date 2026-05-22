@@ -138,22 +138,22 @@ export default function AdminLogin() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-[#F6F3EE] p-6 text-center">
         {!clerkStuck ? (
-          <div className="animate-pulse text-[#1E2630] text-lg">Loading sign-in…</div>
+          <div className="animate-pulse text-[#252826] text-lg">Loading sign-in…</div>
         ) : (
           <div className="max-w-md space-y-4">
-            <h1 className="text-2xl font-light text-[#12161D]">Authentication unavailable</h1>
-            <p className="text-[#1E2630] text-sm leading-relaxed">
+            <h1 className="text-2xl font-light text-[#252826]">Authentication unavailable</h1>
+            <p className="text-[#252826] text-sm leading-relaxed">
               Clerk's runtime hasn't loaded after 6 seconds. The usual causes
               are a blocked Content-Security-Policy origin, a rotated or
               deleted Clerk instance, or a network issue between this browser
               and <code className="text-[#8E4F67]">clerk.accounts.dev</code>.
             </p>
-            <p className="text-[#1E2630] text-xs">
+            <p className="text-[#252826] text-xs">
               Server diagnostics: <a className="underline text-[#8E4F67]" href="/api/health/clerk">/api/health/clerk</a>
             </p>
             <button
               onClick={() => window.location.reload()}
-              className="px-4 py-2 rounded-full bg-[#12161D] text-[#F6F3EE] text-sm"
+              className="px-4 py-2 rounded-full bg-[#252826] text-[#F6F3EE] text-sm"
             >
               Retry
             </button>
@@ -173,26 +173,26 @@ export default function AdminLogin() {
       return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-[#F6F3EE] p-6 text-center">
           <div className="max-w-md space-y-4">
-            <h1 className="text-2xl font-light text-[#12161D]">Authentication check failed</h1>
-            <p className="text-[#1E2630] text-sm leading-relaxed">
+            <h1 className="text-2xl font-light text-[#252826]">Authentication check failed</h1>
+            <p className="text-[#252826] text-sm leading-relaxed">
               The server couldn't confirm your authorisation after several
               attempts. This usually means a transient network issue between
               the server and Clerk's API, or rate-limiting from too many
               recent attempts.
             </p>
-            <p className="text-[#1E2630] text-xs">
+            <p className="text-[#252826] text-xs">
               Diagnostics: <a className="underline text-[#8E4F67]" href="/api/health/clerk">/api/health/clerk</a>
             </p>
             <div className="flex gap-3 justify-center pt-2">
               <button
                 onClick={() => { probedRef.current = false; probeAttemptRef.current = 0; setProbeState("idle"); window.location.reload(); }}
-                className="px-4 py-2 rounded-full bg-[#12161D] text-[#F6F3EE] text-sm"
+                className="px-4 py-2 rounded-full bg-[#252826] text-[#F6F3EE] text-sm"
               >
                 Retry
               </button>
               <button
                 onClick={() => (window.location.href = "/api/logout")}
-                className="px-4 py-2 rounded-full bg-transparent text-[#12161D] text-sm border border-[#12161D]/20"
+                className="px-4 py-2 rounded-full bg-transparent text-[#252826] text-sm border border-[#252826]/20"
               >
                 Sign out
               </button>
@@ -203,27 +203,27 @@ export default function AdminLogin() {
     }
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-[#F6F3EE] p-6 text-center">
-        <div className="animate-pulse text-[#1E2630] text-lg">
+        <div className="animate-pulse text-[#252826] text-lg">
           {probeState === "retrying"
             ? `Checking authorisation… (retry ${probeAttemptRef.current})`
             : "Checking authorisation…"}
         </div>
         {probeStuck && (
           <div className="mt-6 max-w-md space-y-2">
-            <p className="text-[#1E2630] text-sm">
+            <p className="text-[#252826] text-sm">
               This is taking longer than expected. You can retry, sign out, or
               check the server diagnostics.
             </p>
             <div className="flex gap-3 justify-center pt-2">
               <button
                 onClick={() => window.location.reload()}
-                className="px-4 py-2 rounded-full bg-[#12161D] text-[#F6F3EE] text-sm"
+                className="px-4 py-2 rounded-full bg-[#252826] text-[#F6F3EE] text-sm"
               >
                 Retry
               </button>
               <button
                 onClick={() => (window.location.href = "/api/logout")}
-                className="px-4 py-2 rounded-full bg-transparent text-[#12161D] text-sm border border-[#12161D]/20"
+                className="px-4 py-2 rounded-full bg-transparent text-[#252826] text-sm border border-[#252826]/20"
               >
                 Sign out
               </button>
@@ -241,7 +241,7 @@ export default function AdminLogin() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#12161D] p-6 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-[#252826] p-6 relative overflow-hidden">
       {/* Soft brand-circle backdrop */}
       <div className="absolute pointer-events-none" style={{
         top: "20%", right: "10%",
@@ -292,10 +292,10 @@ export default function AdminLogin() {
           appearance={{
             elements: {
               rootBox: "w-full",
-              card: "bg-[#F6F3EE] shadow-xl border border-[#12161D]/10",
-              headerTitle: "text-[#12161D]",
-              headerSubtitle: "text-[#1E2630]",
-              formButtonPrimary: "bg-[#12161D] hover:bg-[#8E4F67] text-[#F6F3EE]",
+              card: "bg-[#F6F3EE] shadow-xl border border-[#252826]/10",
+              headerTitle: "text-[#252826]",
+              headerSubtitle: "text-[#252826]",
+              formButtonPrimary: "bg-[#252826] hover:bg-[#8E4F67] text-[#F6F3EE]",
               footerActionLink: "text-[#8E4F67]",
             },
           }}

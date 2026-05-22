@@ -60,7 +60,7 @@ function GapRow({ result, index }: { result: GapAnalysisResult; index: number })
         <div className="relative">
           <Progress value={progressValue} className="h-3" />
           <div 
-            className="absolute top-0 h-3 w-0.5 bg-[#12161D]"
+            className="absolute top-0 h-3 w-0.5 bg-[#252826]"
             style={{ left: `${benchmarkPosition}%` }}
             title="Industry Benchmark"
           />
@@ -77,7 +77,7 @@ function GapRow({ result, index }: { result: GapAnalysisResult; index: number })
               You: <span className="font-medium text-foreground">{result.scaleScore.toFixed(2)}</span>
             </span>
             <span className="whitespace-nowrap">
-              Bench: <span className="font-medium text-[#12161D]">{result.benchmark.toFixed(2)}</span>
+              Bench: <span className="font-medium text-[#252826]">{result.benchmark.toFixed(2)}</span>
             </span>
           </div>
           <span className="whitespace-nowrap">

@@ -238,8 +238,8 @@ export function HeroSectionStatic() {
       DEEPMINT: new THREE.Color("#5E8D7A"),
       ROSE:     new THREE.Color("#C77A93"),
       BERRY:    new THREE.Color("#8E4F67"),
-      SLATE:    new THREE.Color("#1E2630"),
-      GRAPHITE: new THREE.Color("#12161D"),
+      SLATE:    new THREE.Color("#252826"),
+      GRAPHITE: new THREE.Color("#252826"),
     };
     const LIGHT_DIR = new THREE.Vector3(0.6, 0.85, 0.7).normalize();
 

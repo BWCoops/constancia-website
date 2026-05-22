@@ -76,20 +76,20 @@ export function ScoringTransparency({ industry, dimensionScores }: ScoringTransp
           <table className="w-full text-sm">
             <thead className="bg-[#F6F3EE] text-left">
               <tr>
-                <th className="px-3 py-2 font-medium text-[#1E2630]">Dimension</th>
-                <th className="px-3 py-2 font-medium text-[#1E2630]">Industry weight</th>
-                <th className="px-3 py-2 font-medium text-[#1E2630]">Your score</th>
-                <th className="px-3 py-2 font-medium text-[#1E2630]">Contribution</th>
+                <th className="px-3 py-2 font-medium text-[#252826]">Dimension</th>
+                <th className="px-3 py-2 font-medium text-[#252826]">Industry weight</th>
+                <th className="px-3 py-2 font-medium text-[#252826]">Your score</th>
+                <th className="px-3 py-2 font-medium text-[#252826]">Contribution</th>
               </tr>
             </thead>
             <tbody>
               {orderedDimensions.map(row => (
-                <tr key={row.key} className="border-t border-[#1E2630]/10" data-testid={`transparency-row-${row.key}`}>
-                  <td className="px-3 py-2 text-[#12161D]">{row.label}</td>
-                  <td className="px-3 py-2 text-[#1E2630]">
+                <tr key={row.key} className="border-t border-[#252826]/10" data-testid={`transparency-row-${row.key}`}>
+                  <td className="px-3 py-2 text-[#252826]">{row.label}</td>
+                  <td className="px-3 py-2 text-[#252826]">
                     <div className="flex items-center gap-2">
                       <span className="font-mono">{row.weight.toFixed(1)}%</span>
-                      <div className="h-1.5 flex-1 max-w-[80px] rounded-full bg-[#1E2630]/10 overflow-hidden">
+                      <div className="h-1.5 flex-1 max-w-[80px] rounded-full bg-[#252826]/10 overflow-hidden">
                         <div
                           className="h-full bg-[#8E4F67]"
                           style={{ width: `${Math.min(100, row.weight * 5)}%` }}
@@ -97,10 +97,10 @@ export function ScoringTransparency({ industry, dimensionScores }: ScoringTransp
                       </div>
                     </div>
                   </td>
-                  <td className="px-3 py-2 font-mono text-[#1E2630]">
+                  <td className="px-3 py-2 font-mono text-[#252826]">
                     {row.score !== null ? `${Math.round(row.score)}` : "—"}
                   </td>
-                  <td className="px-3 py-2 font-mono text-[#12161D]">
+                  <td className="px-3 py-2 font-mono text-[#252826]">
                     {row.contribution !== null ? `+${row.contribution.toFixed(1)}` : "—"}
                   </td>
                 </tr>
@@ -108,7 +108,7 @@ export function ScoringTransparency({ industry, dimensionScores }: ScoringTransp
             </tbody>
           </table>
         </div>
-        <p className="mt-3 flex items-start gap-2 text-xs text-[#1E2630]/70">
+        <p className="mt-3 flex items-start gap-2 text-xs text-[#252826]/70">
           <Info className="h-3.5 w-3.5 flex-shrink-0 mt-0.5" />
           <span>
             Contribution = your score × industry weight ÷ 100. Sum of contributions across all

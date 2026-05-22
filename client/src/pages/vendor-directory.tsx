@@ -36,9 +36,9 @@ interface VendorEntry {
 }
 
 const TOOL_TYPE_INITIALS_BG: Record<ToolType, string> = {
-  epm: "bg-gradient-to-br from-[#12161D] to-[#8E4F67]",
+  epm: "bg-gradient-to-br from-[#252826] to-[#8E4F67]",
   erp: "bg-gradient-to-br from-[#8E4F67] to-[#7FB8A3]",
-  ai: "bg-gradient-to-br from-[#5E8D7A] to-[#12161D]",
+  ai: "bg-gradient-to-br from-[#5E8D7A] to-[#252826]",
 };
 
 const SEGMENT_COLORS: Record<string, { bg: string; text: string }> = {
@@ -541,7 +541,7 @@ export default function VendorDirectoryPage() {
         <section className="py-8 sm:py-12 bg-muted/30">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div
-              className="p-5 sm:p-8 lg:p-10 rounded-xl bg-gradient-to-r from-[#12161D] via-[#5E8D7A] to-[#8E4F67] text-center"
+              className="p-5 sm:p-8 lg:p-10 rounded-xl bg-gradient-to-r from-[#252826] via-[#5E8D7A] to-[#8E4F67] text-center"
             >
               <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3">
                 Need help identifying the right platform?
@@ -554,7 +554,7 @@ export default function VendorDirectoryPage() {
                   <Link href="/tools/epm-comparison">
                     <Button
                       size="lg"
-                      className="bg-[#7FB8A3] text-[#12161D] font-semibold"
+                      className="bg-[#7FB8A3] text-[#252826] font-semibold"
                       onClick={() => trackCTAClicked("vendor-directory", "compare-platforms")}
                       data-testid="button-cta-compare"
                     >

@@ -132,8 +132,8 @@ const BENEFIT_CATEGORIES: BenefitCategory[] = [
     name: 'Strategic Value',
     icon: Target,
     description: 'Enhanced strategic decision support',
-    color: '#12161D',
-    bgClass: 'bg-[#12161D]/10',
+    color: '#252826',
+    bgClass: 'bg-[#252826]/10',
     metrics: [
       { name: 'Strategic Work Time', currentState: '<20%', potentialRange: [30, 50], unit: '% of FP&A time', impactLevel: 'high', timeframe: '18-24 months' },
       { name: 'Analytics Models', currentState: 'Basic', potentialRange: [3, 5], unit: 'x increase', impactLevel: 'medium', timeframe: '12-18 months' },
@@ -344,9 +344,9 @@ function PhasedBenefitsTimeline({
                 <div className="flex items-start gap-4">
                   <div className="flex flex-col items-center">
                     <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold text-sm ${
-                      index === 0 ? 'bg-[#12161D]' :
+                      index === 0 ? 'bg-[#252826]' :
                       index === 1 ? 'bg-[#8E4F67]' :
-                      index === 2 ? 'bg-[#7FB8A3] text-[#12161D]' :
+                      index === 2 ? 'bg-[#7FB8A3] text-[#252826]' :
                       'bg-green-500'
                     }`}>
                       {index + 1}
@@ -409,7 +409,7 @@ function BenefitsSummaryCard({
     : maturityInfo.timeline;
   
   return (
-    <Card className="bg-gradient-to-br from-[#12161D] to-[#8E4F67] text-white" data-testid="card-benefits-summary">
+    <Card className="bg-gradient-to-br from-[#252826] to-[#8E4F67] text-white" data-testid="card-benefits-summary">
       <CardContent className="py-6">
         <div className="grid sm:grid-cols-3 gap-6">
           <div className="text-center">

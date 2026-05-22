@@ -76,7 +76,7 @@ export function InteractiveSlider({
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="p-3 rounded-xl bg-gradient-to-br from-[#12161D] to-[#8E4F67] text-white shadow-lg flex-shrink-0"
+            className="p-3 rounded-xl bg-gradient-to-br from-[#252826] to-[#8E4F67] text-white shadow-lg flex-shrink-0"
           >
             <DimensionIcon className="h-6 w-6" />
           </motion.div>
@@ -160,9 +160,9 @@ export function InteractiveSlider({
                     left: `calc(${getPercentage(value)}% - 1.5rem)`,
                   }}
                 >
-                  <div className="bg-[#12161D] text-white px-3 py-1.5 rounded-lg shadow-lg text-sm font-semibold whitespace-nowrap">
+                  <div className="bg-[#252826] text-white px-3 py-1.5 rounded-lg shadow-lg text-sm font-semibold whitespace-nowrap">
                     {value}
-                    <div className="absolute left-1/2 -translate-x-1/2 top-full border-4 border-transparent border-t-[#12161D]" />
+                    <div className="absolute left-1/2 -translate-x-1/2 top-full border-4 border-transparent border-t-[#252826]" />
                   </div>
                 </motion.div>
               )}
@@ -213,7 +213,7 @@ export function InteractiveSlider({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 0.2 }}
-            className="p-4 rounded-xl bg-gradient-to-r from-[#12161D]/5 to-[#8E4F67]/5 border border-[#8E4F67]/20"
+            className="p-4 rounded-xl bg-gradient-to-r from-[#252826]/5 to-[#8E4F67]/5 border border-[#8E4F67]/20"
           >
             <div className="flex items-center gap-3">
               <div className="flex items-center justify-center h-10 w-10 rounded-full bg-gradient-to-br from-[#8E4F67] to-[#7FB8A3] text-white font-bold text-lg">

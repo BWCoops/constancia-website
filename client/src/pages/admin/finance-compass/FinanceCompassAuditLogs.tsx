@@ -73,13 +73,13 @@ function getActionBadgeClass(action: string) {
     return "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400";
   }
   if (action.includes("update") || action.includes("edit") || action.includes("submitted")) {
-    return "bg-[#7FB8A3]/10 text-[#8E4F67] dark:bg-[#1E2630]/30 dark:text-[#7FB8A3]";
+    return "bg-[#7FB8A3]/10 text-[#8E4F67] dark:bg-[#252826]/30 dark:text-[#7FB8A3]";
   }
   if (action.includes("delete") || action.includes("remove")) {
     return "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400";
   }
   if (action.includes("completed") || action.includes("generated") || action.includes("verified")) {
-    return "bg-[#7FB8A3]/10 text-[#8E4F67] dark:bg-[#1E2630]/30 dark:text-[#7FB8A3]";
+    return "bg-[#7FB8A3]/10 text-[#8E4F67] dark:bg-[#252826]/30 dark:text-[#7FB8A3]";
   }
   if (action.includes("sent") || action.includes("export")) {
     return "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400";
@@ -90,7 +90,7 @@ function getActionBadgeClass(action: string) {
 function getEntityTypeBadgeClass(entityType: string) {
   switch (entityType) {
     case "assessment":
-      return "bg-[#7FB8A3]/10 text-[#8E4F67] dark:bg-[#1E2630]/30 dark:text-[#7FB8A3]";
+      return "bg-[#7FB8A3]/10 text-[#8E4F67] dark:bg-[#252826]/30 dark:text-[#7FB8A3]";
     case "question":
     case "question_correlation":
     case "question_correlations":

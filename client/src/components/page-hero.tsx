@@ -27,7 +27,7 @@ const PageHeroComponent = ({
         />
 
         <div 
-          className="absolute inset-0 bg-gradient-to-br from-[#12161D] via-[#1E2630] to-[#1E2630]"
+          className="absolute inset-0 bg-gradient-to-br from-[#252826] via-[#252826] to-[#252826]"
           aria-hidden="true"
         />
 
@@ -103,7 +103,7 @@ const PageHeroComponent = ({
       </section>
       
       <div 
-        className="absolute bottom-0 left-0 right-0 h-32 md:h-40 bg-gradient-to-b from-transparent to-[#1E2630] pointer-events-none"
+        className="absolute bottom-0 left-0 right-0 h-32 md:h-40 bg-gradient-to-b from-transparent to-[#252826] pointer-events-none"
         aria-hidden="true" 
       />
     </div>

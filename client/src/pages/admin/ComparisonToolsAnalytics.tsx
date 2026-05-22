@@ -120,10 +120,10 @@ interface ComparisonStatsResponse {
 const CATEGORY_COLORS: Record<string, string> = {
   EPM: "#7FB8A3",
   ERP: "#8E4F67",
-  AI: "#12161D",
+  AI: "#252826",
 };
 
-const FUNNEL_COLORS = ["#7FB8A3", "#8E4F67", "#066B8A", "#12161D"];
+const FUNNEL_COLORS = ["#7FB8A3", "#8E4F67", "#066B8A", "#252826"];
 
 function formatNumber(num: number): string {
   if (num >= 1000) {
@@ -188,7 +188,7 @@ export default function ComparisonToolsAnalytics() {
             <TabsTrigger 
               value="EPM" 
               data-testid="tab-epm"
-              className="data-[state=active]:text-[#12161D]"
+              className="data-[state=active]:text-[#252826]"
               style={{ "--tw-ring-color": "#7FB8A3" } as React.CSSProperties}
             >
               <span className="flex items-center gap-1.5">
@@ -199,7 +199,7 @@ export default function ComparisonToolsAnalytics() {
             <TabsTrigger 
               value="ERP" 
               data-testid="tab-erp"
-              className="data-[state=active]:text-[#12161D]"
+              className="data-[state=active]:text-[#252826]"
               style={{ "--tw-ring-color": "#8E4F67" } as React.CSSProperties}
             >
               <span className="flex items-center gap-1.5">
@@ -211,10 +211,10 @@ export default function ComparisonToolsAnalytics() {
               value="AI" 
               data-testid="tab-ai"
               className="data-[state=active]:text-white data-[state=active]:bg-brand-navy"
-              style={{ "--tw-ring-color": "#12161D" } as React.CSSProperties}
+              style={{ "--tw-ring-color": "#252826" } as React.CSSProperties}
             >
               <span className="flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: "#12161D" }} />
+                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: "#252826" }} />
                 AI
               </span>
             </TabsTrigger>

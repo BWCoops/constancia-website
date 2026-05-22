@@ -115,7 +115,7 @@ const VendorLogo = memo(function VendorLogo({
   if (!logoSrc || imgError) {
     return (
       <div
-        className={`${sizeClasses} rounded-lg bg-gradient-to-br from-[#12161D] to-[#8E4F67] flex items-center justify-center flex-shrink-0`}
+        className={`${sizeClasses} rounded-lg bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center flex-shrink-0`}
         data-testid={`logo-vendor-${platform.id}`}
       >
         <span className={`text-white font-bold ${textSize} leading-none`}>
@@ -285,7 +285,7 @@ export default function VendorProfilePage() {
                           </Badge>
                           <Badge
                             variant="outline"
-                            className="bg-brand-navy/10 text-[#12161D] dark:text-brand-cyan border-[#12161D]/20 dark:border-[#7FB8A3]/20"
+                            className="bg-brand-navy/10 text-[#252826] dark:text-brand-cyan border-[#252826]/20 dark:border-[#7FB8A3]/20"
                             data-testid="badge-vendor-type"
                           >
                             {TOOL_TYPE_LABELS[toolType]}
@@ -504,7 +504,7 @@ export default function VendorProfilePage() {
               </div>
 
               <div
-                className="p-5 sm:p-8 rounded-xl bg-gradient-to-r from-[#12161D] via-[#5E8D7A] to-[#8E4F67] text-center"
+                className="p-5 sm:p-8 rounded-xl bg-gradient-to-r from-[#252826] via-[#5E8D7A] to-[#8E4F67] text-center"
               >
                 <h2
                   className="text-xl sm:text-2xl font-bold text-white mb-3"
@@ -520,7 +520,7 @@ export default function VendorProfilePage() {
                     <Link href="/tools/epm-comparison">
                       <Button
                         size="lg"
-                        className="bg-[#7FB8A3] text-[#12161D] font-semibold"
+                        className="bg-[#7FB8A3] text-[#252826] font-semibold"
                         data-testid="button-cta-compare"
                       >
                         Compare Platforms

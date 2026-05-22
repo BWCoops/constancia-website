@@ -32,8 +32,8 @@ export function KeyTakeawayBox({ children }: KeyTakeawayBoxProps) {
       className="my-8 relative overflow-visible"
       data-testid="component-key-takeaway"
     >
-      <div className="absolute -left-3 top-0 bottom-0 w-1 bg-gradient-to-b from-[#7FB8A3] via-[#8E4F67] to-[#12161D] rounded-full" />
-      <div className="p-6 bg-gradient-to-br from-[#12161D]/5 via-[#8E4F67]/8 to-[#7FB8A3]/10 dark:from-[#12161D]/20 dark:via-[#8E4F67]/15 dark:to-[#7FB8A3]/10 border border-[#7FB8A3]/20 rounded-xl ml-2">
+      <div className="absolute -left-3 top-0 bottom-0 w-1 bg-gradient-to-b from-[#7FB8A3] via-[#8E4F67] to-[#252826] rounded-full" />
+      <div className="p-6 bg-gradient-to-br from-[#252826]/5 via-[#8E4F67]/8 to-[#7FB8A3]/10 dark:from-[#252826]/20 dark:via-[#8E4F67]/15 dark:to-[#7FB8A3]/10 border border-[#7FB8A3]/20 rounded-xl ml-2">
         <div className="flex items-start gap-4">
           <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-[#7FB8A3] to-[#8E4F67] flex items-center justify-center shadow-lg shadow-[#7FB8A3]/20">
             <Lightbulb className="w-5 h-5 text-white" />
@@ -79,7 +79,7 @@ export function KeyTakeawayGrid({ takeaways }: KeyTakeawayGridProps) {
             data-testid={`key-takeaway-card-${index}`}
           >
             <div className="absolute inset-0 bg-gradient-to-br from-[#7FB8A3]/20 to-[#8E4F67]/20 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <div className="relative p-5 bg-gradient-to-br from-[#12161D]/5 via-[#8E4F67]/8 to-[#7FB8A3]/10 dark:from-[#12161D]/20 dark:via-[#8E4F67]/15 dark:to-[#7FB8A3]/10 border border-[#7FB8A3]/20 rounded-xl h-full">
+            <div className="relative p-5 bg-gradient-to-br from-[#252826]/5 via-[#8E4F67]/8 to-[#7FB8A3]/10 dark:from-[#252826]/20 dark:via-[#8E4F67]/15 dark:to-[#7FB8A3]/10 border border-[#7FB8A3]/20 rounded-xl h-full">
               <div className="flex items-start gap-3">
                 <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#7FB8A3] to-[#8E4F67] flex items-center justify-center text-white font-bold text-sm shadow-lg">
                   {index + 1}
@@ -121,7 +121,7 @@ export function RadialPillarsChart({ title, pillars }: RadialPillarsChartProps) 
       className="my-12"
       data-testid="component-radial-pillars"
     >
-      <div className="relative bg-gradient-to-br from-[#12161D] via-[#041a4a] to-[#8E4F67] rounded-2xl p-8 overflow-hidden">
+      <div className="relative bg-gradient-to-br from-[#252826] via-[#041a4a] to-[#8E4F67] rounded-2xl p-8 overflow-hidden">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMSIgZmlsbD0icmdiYSgxOCwyMzUsMjUyLDAuMDUpIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-50" />
         
         <div className="relative z-10">
@@ -150,7 +150,7 @@ export function RadialPillarsChart({ title, pillars }: RadialPillarsChartProps) 
                           <IconComponent className="w-6 h-6 text-white" />
                         </div>
                         <div className="text-[#8E4F67] dark:text-[#7FB8A3] text-xs font-bold mb-1">Pillar {index + 1}</div>
-                        <h4 className="text-[#12161D] dark:text-foreground font-semibold text-sm leading-tight">{pillar.title}</h4>
+                        <h4 className="text-[#252826] dark:text-foreground font-semibold text-sm leading-tight">{pillar.title}</h4>
                         {pillar.description && (
                           <p className="text-muted-foreground text-xs mt-2 leading-relaxed">{pillar.description}</p>
                         )}
@@ -194,7 +194,7 @@ export function SuccessFactorsDiagram({ title, factors }: SuccessFactorsDiagramP
       data-testid="component-success-factors"
     >
       <div className="mb-6 flex items-center gap-3">
-        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#12161D] to-[#8E4F67] flex items-center justify-center">
+        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center">
           <CheckCircle2 className="w-5 h-5 text-[#7FB8A3]" />
         </div>
         <h3 className="text-xl font-bold text-foreground">{title}</h3>
@@ -211,7 +211,7 @@ export function SuccessFactorsDiagram({ title, factors }: SuccessFactorsDiagramP
             >
               <div className="bg-card border border-border rounded-xl p-5 h-full hover:border-[#7FB8A3]/30 hover:shadow-lg hover:shadow-[#7FB8A3]/5 transition-all duration-300">
                 <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-[#12161D] to-[#8E4F67] flex items-center justify-center shadow-lg">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center shadow-lg">
                     <IconComponent className="w-6 h-6 text-[#7FB8A3]" />
                   </div>
                   <div className="flex-1">
@@ -266,7 +266,7 @@ export function ImplementationTimeline({ phases }: ImplementationTimelineProps) 
       </div>
 
       <div className="relative">
-        <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#7FB8A3] via-[#8E4F67] to-[#12161D]" />
+        <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#7FB8A3] via-[#8E4F67] to-[#252826]" />
         
         <div className="space-y-6">
           {phases.map((phase, index) => {
@@ -314,7 +314,7 @@ export function FAQAccordion({ items }: FAQAccordionProps) {
       data-testid="component-faq-accordion"
     >
       <div className="mb-6 flex items-center gap-3">
-        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#12161D] to-[#8E4F67] flex items-center justify-center">
+        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center">
           <HelpCircle className="w-5 h-5 text-[#7FB8A3]" />
         </div>
         <h2 className="text-2xl font-bold text-foreground">Frequently Asked Questions</h2>
@@ -363,7 +363,7 @@ export function StatHighlight({ stat, label, source, trend }: StatHighlightProps
       className="my-6"
       data-testid="component-stat-highlight"
     >
-      <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-[#12161D] via-[#5E8D7A] to-[#8E4F67] p-6 text-center shadow-xl">
+      <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-[#252826] via-[#5E8D7A] to-[#8E4F67] p-6 text-center shadow-xl">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDEwIEwgNDAgMTAgTSAxMCAwIEwgMTAgNDAgTSAwIDIwIEwgNDAgMjAgTSAyMCAwIEwgMjAgNDAgTSAwIDMwIEwgNDAgMzAgTSAzMCAwIEwgMzAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-50" />
         
         <div className="relative z-10">
@@ -414,7 +414,7 @@ export function ComparisonTable({ children }: ComparisonTableProps) {
 
 export function ComparisonTableHead({ children }: { children: React.ReactNode }) {
   return (
-    <thead className="bg-gradient-to-r from-[#12161D] to-[#8E4F67] text-white sticky top-0 z-10">
+    <thead className="bg-gradient-to-r from-[#252826] to-[#8E4F67] text-white sticky top-0 z-10">
       {children}
     </thead>
   );
@@ -496,18 +496,18 @@ const phaseColors = {
     ring: 'ring-[#7FB8A3]/30',
   },
   secondary: {
-    bg: 'from-[#8E4F67] to-[#12161D]',
+    bg: 'from-[#8E4F67] to-[#252826]',
     border: 'border-[#8E4F67]',
     text: 'text-[#8E4F67] dark:text-[#7FB8A3]/80',
     light: 'bg-[#8E4F67]/10',
     ring: 'ring-[#8E4F67]/30',
   },
   tertiary: {
-    bg: 'from-[#12161D] to-[#5E8D7A]',
-    border: 'border-[#12161D]',
-    text: 'text-[#12161D] dark:text-[#7FB8A3]/60',
-    light: 'bg-[#12161D]/10',
-    ring: 'ring-[#12161D]/30',
+    bg: 'from-[#252826] to-[#5E8D7A]',
+    border: 'border-[#252826]',
+    text: 'text-[#252826] dark:text-[#7FB8A3]/60',
+    light: 'bg-[#252826]/10',
+    ring: 'ring-[#252826]/30',
   },
 };
 
@@ -534,7 +534,7 @@ export function TransformationTimeline({ title, subtitle, phases }: Transformati
       )}
 
       <div className="relative">
-        <div className="absolute left-6 md:left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#7FB8A3] via-[#8E4F67] to-[#12161D]" />
+        <div className="absolute left-6 md:left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#7FB8A3] via-[#8E4F67] to-[#252826]" />
 
         <div className="space-y-6">
           {phases.map((phase, index) => {
@@ -631,8 +631,8 @@ interface HorizonTimelineProps {
 export function HorizonTimeline({ horizons }: HorizonTimelineProps) {
   const horizonColors = [
     { bg: 'from-[#7FB8A3] to-[#8E4F67]', card: 'from-[#7FB8A3]/5 to-[#8E4F67]/10', border: 'border-[#7FB8A3]/40' },
-    { bg: 'from-[#8E4F67] to-[#12161D]', card: 'from-[#8E4F67]/5 to-[#12161D]/10', border: 'border-[#8E4F67]/40' },
-    { bg: 'from-[#12161D] to-[#5E8D7A]', card: 'from-[#12161D]/5 to-[#5E8D7A]/10', border: 'border-[#12161D]/40' },
+    { bg: 'from-[#8E4F67] to-[#252826]', card: 'from-[#8E4F67]/5 to-[#252826]/10', border: 'border-[#8E4F67]/40' },
+    { bg: 'from-[#252826] to-[#5E8D7A]', card: 'from-[#252826]/5 to-[#5E8D7A]/10', border: 'border-[#252826]/40' },
   ];
 
   return (
@@ -710,7 +710,7 @@ export function SectionHeading({ level, children }: SectionHeadingProps) {
   if (level === 2) {
     return (
       <h2 
-        className={`${baseClasses} text-2xl mt-10 mb-4 text-[#12161D] dark:text-[#7FB8A3]`}
+        className={`${baseClasses} text-2xl mt-10 mb-4 text-[#252826] dark:text-[#7FB8A3]`}
       >
         <span className="w-1 h-8 bg-gradient-to-b from-[#7FB8A3] to-[#8E4F67] rounded-full" />
         {children}
@@ -739,12 +739,12 @@ export function ListItem({ children }: { children: React.ReactNode }) {
 const CHART_COLOURS = [
   '#7FB8A3',
   '#8E4F67',
-  '#12161D',
+  '#252826',
   '#5E8D7A',
   '#08CCF9',
   '#4FFFFF',
-  '#1E2630',
-  '#1E2630',
+  '#252826',
+  '#252826',
 ];
 
 interface BlogChartProps {
@@ -792,7 +792,7 @@ export function BlogChart({ chart }: BlogChartProps) {
     >
       <div className="p-4 sm:p-6 bg-card border border-border rounded-xl shadow-sm">
         <div className="flex items-center gap-3 mb-4 sm:mb-6">
-          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-[#12161D] to-[#8E4F67] flex items-center justify-center flex-shrink-0">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center flex-shrink-0">
             {type === 'pie' ? (
               <PieChart className="w-4 h-4 sm:w-5 sm:h-5 text-[#7FB8A3]" />
             ) : (
@@ -976,8 +976,8 @@ function BlogPieChart({ data, width, height }: { data: Record<string, unknown>[]
 export function ResourceDownload({ slug, label, description }: { slug: string; label: string; description?: string }) {
   return (
     <div className="my-8 relative overflow-visible" data-testid={`resource-download-${slug}`}>
-      <div className="absolute -left-3 top-0 bottom-0 w-1 bg-gradient-to-b from-[#7FB8A3] via-[#8E4F67] to-[#12161D] rounded-full" />
-      <div className="p-6 bg-gradient-to-br from-[#12161D]/8 via-[#8E4F67]/10 to-[#7FB8A3]/12 dark:from-[#12161D]/25 dark:via-[#8E4F67]/20 dark:to-[#7FB8A3]/15 border border-[#7FB8A3]/30 rounded-xl ml-2 shadow-lg shadow-[#7FB8A3]/5">
+      <div className="absolute -left-3 top-0 bottom-0 w-1 bg-gradient-to-b from-[#7FB8A3] via-[#8E4F67] to-[#252826] rounded-full" />
+      <div className="p-6 bg-gradient-to-br from-[#252826]/8 via-[#8E4F67]/10 to-[#7FB8A3]/12 dark:from-[#252826]/25 dark:via-[#8E4F67]/20 dark:to-[#7FB8A3]/15 border border-[#7FB8A3]/30 rounded-xl ml-2 shadow-lg shadow-[#7FB8A3]/5">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
           <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-[#7FB8A3] to-[#8E4F67] flex items-center justify-center shadow-lg shadow-[#7FB8A3]/20">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white" aria-hidden="true">
@@ -991,13 +991,13 @@ export function ResourceDownload({ slug, label, description }: { slug: string; l
             <div className="text-xs font-semibold uppercase tracking-wider text-[#8E4F67] dark:text-[#7FB8A3] mb-1">
               Downloadable Template
             </div>
-            <h4 className="font-bold text-[#12161D] dark:text-white text-lg leading-tight">{label || slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</h4>
+            <h4 className="font-bold text-[#252826] dark:text-white text-lg leading-tight">{label || slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</h4>
             {description && <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{description}</p>}
           </div>
           <div className="flex flex-col sm:flex-row gap-2">
             <a 
               href={`/resources?download=${slug}`}
-              className="group inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#12161D] to-[#8E4F67] hover:from-[#8E4F67] hover:to-[#7FB8A3] font-semibold rounded-lg transition-all duration-300 shadow-lg shadow-[#12161D]/20 hover:shadow-[#7FB8A3]/30 hover:scale-105 whitespace-nowrap"
+              className="group inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#252826] to-[#8E4F67] hover:from-[#8E4F67] hover:to-[#7FB8A3] font-semibold rounded-lg transition-all duration-300 shadow-lg shadow-[#252826]/20 hover:shadow-[#7FB8A3]/30 hover:scale-105 whitespace-nowrap"
               style={{ color: '#FFFFFF' }}
               data-testid={`download-resource-${slug}`}
               aria-label={`Download ${label || slug} template`}
@@ -1011,7 +1011,7 @@ export function ResourceDownload({ slug, label, description }: { slug: string; l
             </a>
             <a 
               href="/resources"
-              className="inline-flex items-center gap-2 px-4 py-3 text-[#8E4F67] dark:text-[#7FB8A3] hover:text-[#12161D] dark:hover:text-white font-medium rounded-lg transition-colors whitespace-nowrap hover:bg-[#7FB8A3]/10"
+              className="inline-flex items-center gap-2 px-4 py-3 text-[#8E4F67] dark:text-[#7FB8A3] hover:text-[#252826] dark:hover:text-white font-medium rounded-lg transition-colors whitespace-nowrap hover:bg-[#7FB8A3]/10"
               data-testid={`explore-resources-${slug}`}
               aria-label="Explore the Resources Library"
             >
@@ -1050,7 +1050,7 @@ export function InlineBlogImage({ src, alt, caption, type = "stock", alignment =
   const typeStyles = {
     stock: "ring-1 ring-gray-200 dark:ring-gray-700",
     generated: "ring-2 ring-[#7FB8A3]/30",
-    brand: "ring-2 ring-gradient-to-r from-[#12161D] to-[#7FB8A3]",
+    brand: "ring-2 ring-gradient-to-r from-[#252826] to-[#7FB8A3]",
   };
 
   if (hasError) {
@@ -1089,11 +1089,11 @@ export function InlineBlogImage({ src, alt, caption, type = "stock", alignment =
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
             <div className="bg-white/90 dark:bg-gray-900/90 rounded-full p-3 shadow-lg transform scale-0 group-hover:scale-100 transition-transform duration-300">
-              <ZoomIn className="w-5 h-5 text-[#12161D] dark:text-[#7FB8A3]" />
+              <ZoomIn className="w-5 h-5 text-[#252826] dark:text-[#7FB8A3]" />
             </div>
           </div>
           {type === "generated" && (
-            <div className="absolute top-3 right-3 bg-gradient-to-r from-[#12161D] to-[#8E4F67] text-white text-xs font-medium px-2 py-1 rounded-full shadow-lg">
+            <div className="absolute top-3 right-3 bg-gradient-to-r from-[#252826] to-[#8E4F67] text-white text-xs font-medium px-2 py-1 rounded-full shadow-lg">
               AI Generated
             </div>
           )}
@@ -1171,7 +1171,7 @@ export function ReferencesSection({ references }: ReferencesSectionProps) {
       className="my-10"
       data-testid="component-references-section"
     >
-      <div className="relative bg-gradient-to-br from-[#12161D] via-[#041a4a] to-[#8E4F67] rounded-2xl p-8 overflow-hidden">
+      <div className="relative bg-gradient-to-br from-[#252826] via-[#041a4a] to-[#8E4F67] rounded-2xl p-8 overflow-hidden">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMSIgZmlsbD0icmdiYSgxOCwyMzUsMjUyLDAuMDUpIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-50" />
         
         <div className="relative z-10">

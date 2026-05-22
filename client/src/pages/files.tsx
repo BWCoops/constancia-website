@@ -39,7 +39,7 @@ const fileTypeIcons: Record<string, typeof FileText> = {
 
 const fileTypeColors: Record<string, string> = {
   pdf: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
-  doc: "bg-[#7FB8A3]/10 text-[#8E4F67] dark:bg-[#1E2630]/30 dark:text-[#7FB8A3]",
+  doc: "bg-[#7FB8A3]/10 text-[#8E4F67] dark:bg-[#252826]/30 dark:text-[#7FB8A3]",
   xls: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
   zip: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400",
   video: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400",
@@ -171,7 +171,7 @@ export default function FilesPage() {
                       <div className="flex gap-2">
                         <Button 
                           size="sm" 
-                          className="flex-1 bg-gradient-to-r from-[#12161D] to-[#8E4F67]"
+                          className="flex-1 bg-gradient-to-r from-[#252826] to-[#8E4F67]"
                           onClick={() => handleDownload(file)}
                           data-testid={`button-download-${file.id}`}
                         >
@@ -329,7 +329,7 @@ export default function FilesPage() {
                           </Button>
                           <Button 
                             size="sm"
-                            className="bg-gradient-to-r from-[#12161D] to-[#8E4F67]"
+                            className="bg-gradient-to-r from-[#252826] to-[#8E4F67]"
                             onClick={() => handleDownload(file)}
                             data-testid={`button-download-${file.id}`}
                           >

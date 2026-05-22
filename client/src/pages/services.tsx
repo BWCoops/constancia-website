@@ -176,7 +176,7 @@ export default function ServicesPage() {
         </section>
 
         {/* Closing band — three ways to start. */}
-        <section className="py-12 sm:py-20 lg:py-28 bg-[#12161D] text-[#F6F3EE]">
+        <section className="py-12 sm:py-20 lg:py-28 bg-[#252826] text-[#F6F3EE]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="grid lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-16 items-start">
               <div>

@@ -20,7 +20,7 @@ import type { TDocumentDefinitions, Content, TableCell, Style, StyleDictionary }
 
 // Brand colors matching Constancia guidelines
 const BRAND_COLORS = {
-  navy: "#12161D",
+  navy: "#252826",
   cyan: "#7FB8A3",
   teal: "#8E4F67",
   cream: "#F6F3EE",

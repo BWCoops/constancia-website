@@ -2,7 +2,7 @@ import { Loader2 } from "lucide-react";
 
 export function FinanceCompassLoading() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#12161D] via-[#034a5a] to-[#12161D]">
+    <div className="min-h-screen bg-gradient-to-br from-[#252826] via-[#034a5a] to-[#252826]">
       <div className="h-16 border-b border-white/10 flex items-center px-6">
         <div className="w-20 h-8 bg-white/10 rounded animate-pulse" />
       </div>

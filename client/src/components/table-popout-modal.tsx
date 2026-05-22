@@ -26,7 +26,7 @@ export function TablePopoutModal({ title, children, tableId }: TablePopoutModalP
       </DialogTrigger>
       <DialogContent className="max-w-[95vw] w-full max-h-[90vh] overflow-auto">
         <DialogHeader>
-          <DialogTitle className="text-lg font-semibold text-[#12161D] dark:text-[#7FB8A3]">
+          <DialogTitle className="text-lg font-semibold text-[#252826] dark:text-[#7FB8A3]">
             {title}
           </DialogTitle>
         </DialogHeader>

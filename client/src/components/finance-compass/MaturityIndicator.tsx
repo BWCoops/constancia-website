@@ -182,9 +182,9 @@ export function MaturityIndicator({
 
           {/* Key Metrics Grid */}
           <div className="grid grid-cols-3 gap-3 mb-4">
-            <div className="p-3 rounded-lg bg-[#12161D]/5 dark:bg-[#12161D]/20 text-center">
+            <div className="p-3 rounded-lg bg-[#252826]/5 dark:bg-[#252826]/20 text-center">
               <div className="text-xs text-muted-foreground mb-1">Gap to Next</div>
-              <div className="text-lg font-bold text-[#12161D] dark:text-white">
+              <div className="text-lg font-bold text-[#252826] dark:text-white">
                 {maturityKey === 'ADVANCED' ? 'N/A' : `${Math.round(100 - progressValue)}%`}
               </div>
             </div>
@@ -252,7 +252,7 @@ export function MaturityIndicator({
               <h4 className="text-sm font-medium mb-3">Dimension Summary</h4>
               <div className="grid grid-cols-4 gap-2">
                 {Object.entries(dimensionScores).slice(0, 8).map(([dim, dimScore]) => {
-                  const dimColor = dimScore >= 70 ? '#8E4F67' : dimScore >= 50 ? '#12161D' : '#f59e0b';
+                  const dimColor = dimScore >= 70 ? '#8E4F67' : dimScore >= 50 ? '#252826' : '#f59e0b';
                   return (
                     <div key={dim} className="text-center">
                       <div 

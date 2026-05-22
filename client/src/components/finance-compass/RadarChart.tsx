@@ -76,8 +76,8 @@ export function FinanceCompassRadarChart({
                 <Radar
                   name="Industry Benchmark"
                   dataKey="benchmark"
-                  stroke="#12161D"
-                  fill="#12161D"
+                  stroke="#252826"
+                  fill="#252826"
                   fillOpacity={0.2}
                   strokeWidth={2}
                   strokeDasharray="5 5"
@@ -104,7 +104,7 @@ export function FinanceCompassRadarChart({
                             </div>
                             <div className="flex justify-between gap-4">
                               <span className="text-muted-foreground">Benchmark:</span>
-                              <span className="font-medium text-[#12161D]">{dataPoint.benchmark.toFixed(2)}</span>
+                              <span className="font-medium text-[#252826]">{dataPoint.benchmark.toFixed(2)}</span>
                             </div>
                             <div className="flex justify-between gap-4">
                               <span className="text-muted-foreground">World Class:</span>
@@ -133,7 +133,7 @@ export function FinanceCompassRadarChart({
                 <span>Your Performance</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-[#12161D]" />
+                <div className="w-3 h-3 rounded-full bg-[#252826]" />
                 <span>Industry Benchmark</span>
               </div>
               <div className="flex items-center gap-2">

@@ -213,7 +213,7 @@ export default function CareersPage() {
             <Button
               asChild
               size="lg"
-              className="bg-[#7FB8A3] text-[#12161D] border-[#7FB8A3] font-semibold"
+              className="bg-[#7FB8A3] text-[#252826] border-[#7FB8A3] font-semibold"
               data-testid="button-join-talent"
             >
               <a href="#apply">
