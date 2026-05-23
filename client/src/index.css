@@ -2339,6 +2339,26 @@ div[class*="hs-chat"] {
 }
 .contact-form__turnstile { margin: 4px 0; }
 .contact-form__submit { width: 100%; margin-top: 6px; }
+
+/* Careers-specific bits layered on top of .contact-form. */
+.careers-form__consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--brand-text-secondary);
+  cursor: pointer;
+}
+.careers-form__success {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 300;
+  line-height: 1.4;
+  color: var(--brand-text-primary);
+  padding: 32px 16px;
+  text-align: center;
+}
 .marketing-photo__caption { text-align: center; }
 .marketing-photo__caption-eye {
   font-family: 'IBM Plex Mono', monospace;

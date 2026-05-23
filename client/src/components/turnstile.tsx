@@ -106,11 +106,6 @@ export function useTurnstileToken(): [string | null, (t: string) => void, () => 
   return [token, setToken, clearToken];
 }
 
-// @deprecated — kept for any remaining call sites; will be removed next cleanup
-export function useRecaptchaExecute(_siteKey: string | null | undefined) {
-  return useCallback(async (_action = "submit"): Promise<string | null> => null, []);
-}
-
 export function useTurnstileReset() {
   return () => {};
 }
