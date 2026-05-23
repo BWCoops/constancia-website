@@ -2,7 +2,19 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Button } from "@/components/ui/button";
 import { Maximize2, Download } from "lucide-react";
 import { useRef, useState, useCallback } from "react";
-import html2canvas from "html2canvas";
+
+/**
+ * html2canvas is ~400KB+ and only needed when the user clicks
+ * "capture / download chart". Dynamic-imported on first use so the
+ * main bundle stays light. Cached across calls.
+ */
+let html2canvasPromise: Promise<typeof import("html2canvas").default> | null = null;
+function loadHtml2Canvas() {
+  if (!html2canvasPromise) {
+    html2canvasPromise = import("html2canvas").then((m) => m.default);
+  }
+  return html2canvasPromise;
+}
 
 interface ChartPopoutModalProps {
   title: string;
@@ -17,8 +29,9 @@ export function ChartPopoutModal({ title, children, chartId, onCapture }: ChartP
 
   const handleCaptureChart = useCallback(async () => {
     if (!chartRef.current) return null;
-    
+
     try {
+      const html2canvas = await loadHtml2Canvas();
       const canvas = await html2canvas(chartRef.current, {
         backgroundColor: '#ffffff',
         scale: 2,
@@ -96,6 +109,7 @@ export async function captureChartToImage(elementId: string): Promise<string | n
   }
 
   try {
+    const html2canvas = await loadHtml2Canvas();
     const canvas = await html2canvas(element, {
       backgroundColor: '#ffffff',
       scale: 2,

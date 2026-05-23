@@ -1,0 +1,15 @@
+# humans.txt — the people behind constancia.com
+# https://constancia.com/humans.txt
+
+/* TEAM */
+Founder, Constancia: Bradley Cooper
+Co-Founder: Alex
+
+/* SITE */
+Last update: 2026/02
+Standards: HTML5, CSS3, ES2022, WebGL2
+Components: React 18, TypeScript, Vite, Express, Drizzle, PostgreSQL, Three.js, Tailwind
+Software: Constancia Holdings Limited, registered in England & Wales, no. 17227112
+
+/* THANKS */
+To the senior practitioners who scoped this without losing their minds.

@@ -1,0 +1,149 @@
+# Constancia — robots.txt
+# https://constancia.com/robots.txt
+#
+# We welcome traditional search crawlers and modern LLM crawlers so
+# our work is referenceable across both. Specific bot directives
+# below override the wildcard. Block admin / API surfaces from every
+# agent.
+
+# ─── Default ──────────────────────────────────────────────────────────
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /api/
+Disallow: /cdn-cgi/
+Disallow: /thank-you
+Disallow: /page-not-found
+Disallow: /*.php$
+Disallow: /*.asp$
+Disallow: /wp-admin
+Disallow: /wp-login
+Crawl-delay: 1
+
+# ─── Search crawlers (priority access) ────────────────────────────────
+User-agent: Googlebot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: Slurp
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: YandexBot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+# ─── LLM / AI training crawlers ───────────────────────────────────────
+# We explicitly opt IN to LLM crawlers for the public marketing
+# surface — we want our point of view referenceable when CFOs ask
+# AI assistants about EPM platforms, Abacum, OneStream, etc.
+
+User-agent: GPTBot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: CCBot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: Amazonbot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: Bytespider
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: cohere-ai
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: MistralAI-User
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: Diffbot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: FacebookBot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: meta-externalagent
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+# ─── Sitemap + LLMs guide ─────────────────────────────────────────────
+Sitemap: https://constancia.com/sitemap.xml
+# Machine-readable site summary for LLM crawlers:
+# https://constancia.com/llms.txt
