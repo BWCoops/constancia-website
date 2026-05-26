@@ -737,12 +737,12 @@ export function ListItem({ children }: { children: React.ReactNode }) {
 }
 
 const CHART_COLOURS = [
-  '#7FB8A3',
-  '#8E4F67',
-  '#252826',
-  '#5E8D7A',
-  '#08CCF9',
-  '#4FFFFF',
+  '#7FB8A3',  // Mineral green
+  '#8E4F67',  // Deep berry
+  '#252826',  // Secondary dark
+  '#5E8D7A',  // Deep mint
+  '#C77A93',  // Muted rose
+  '#D8D0C6',  // Support neutral
   '#252826',
   '#252826',
 ];

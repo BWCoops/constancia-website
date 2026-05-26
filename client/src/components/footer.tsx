@@ -84,7 +84,7 @@ export function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-[#FEFFF3]/70 hover:text-brand-cyan transition-colors text-sm"
+                    className="text-[#F6F3EE]/70 hover:text-brand-cyan transition-colors text-sm"
                     data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
                   >
                     {link.label}
@@ -101,7 +101,7 @@ export function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-[#FEFFF3]/70 hover:text-brand-cyan transition-colors text-sm"
+                    className="text-[#F6F3EE]/70 hover:text-brand-cyan transition-colors text-sm"
                     data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
                   >
                     {link.label}
@@ -118,7 +118,7 @@ export function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-[#FEFFF3]/70 hover:text-brand-cyan transition-colors text-sm flex items-center gap-1"
+                    className="text-[#F6F3EE]/70 hover:text-brand-cyan transition-colors text-sm flex items-center gap-1"
                     data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
                   >
                     {link.label}
@@ -136,7 +136,7 @@ export function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-[#FEFFF3]/70 hover:text-brand-cyan transition-colors text-sm"
+                    className="text-[#F6F3EE]/70 hover:text-brand-cyan transition-colors text-sm"
                     data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
                   >
                     {link.label}
@@ -147,11 +147,11 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="pt-8 border-t border-[#FEFFF3]/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-[#FEFFF3]/60">
+        <div className="pt-8 border-t border-[#F6F3EE]/10 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-[#F6F3EE]/60">
             © {new Date().getFullYear()} Constancia Holdings Limited. All rights reserved.
           </p>
-          <div className="flex flex-wrap items-center gap-3 sm:gap-4 md:gap-6 text-sm text-[#FEFFF3]/60">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4 md:gap-6 text-sm text-[#F6F3EE]/60">
             {socialLinks.map((social) => (
               <a
                 key={social.label}

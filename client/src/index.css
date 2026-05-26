@@ -609,9 +609,6 @@
   }
 }
 
-@media (prefers-reduced-data: reduce) {
-  .hero-skeleton { background: var(--brand-bg-primary) !important; }
-}
 
 @media (prefers-reduced-motion: reduce) {
   .chart-section-lazy, .comparison-section-lazy { content-visibility: visible; }
@@ -623,335 +620,19 @@
   }
 }
 
-/* ── Hero (deconstruct + dive) ───────────────────────────────────────── */
-.hero-fixed-stage {
-  position: sticky; top: 0;
-  width: 100%; height: 100vh;
-  overflow: hidden;
-}
+/* ── Hero fabric canvas ─────────────────────────────────────────────
+   Class is still applied by HeroFabricCanvas.tsx; sizes the WebGL
+   canvas to fill its parent. The previous "deconstruct + dive" hero
+   (HeroConnectionDiagram, hero-brand-circle, hero-logo-real, hero-
+   panel, hero-eyebrow, hero-stats, etc.) has been replaced by
+   ScrollyStage + scrolly tablet primitives — ~330 lines of orphan
+   CSS removed. */
 .hero-fabric-canvas {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  pointer-events: none;
-  /* Heavily dialled back — the Three.js wave was washing out the
-     panel copy. At 0.18 it reads as a faint atmospheric ripple
-     behind the diagram rather than competing with the text. */
-  opacity: 0.18;
-}
-
-/* Deconstructing wordmark is back, coordinated with the connection
-   diagram. Brand circles stay hidden — the diagram is now the
-   coloured-form layer; the wordmark plays the role of "the thing
-   that explodes outward into systems, then reassembles at the
-   contact panel". */
-.hero-brand-circle--rose,
-.hero-brand-circle--mint {
-  display: none !important;
-}
-
-/* Hosts the SVG connection diagram. Sits behind the panel stack
-   (panels are z-index 5) so copy always reads above the chips and
-   beams. The diagram pans wide so the chips on the left can
-   actually leave room for centred panel text in the middle. */
-.hero-connection-layer {
   position: absolute;
   inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* Slightly faded so the diagram reads as atmospheric depth
-     behind the copy, not as a competing foreground element. */
-  opacity: 0.92;
-}
-.hero-connection-layer > div {
   width: 100%;
   height: 100%;
-  /* Subtle floating animation independent of scroll — gives the
-     diagram a sense of life when the user pauses mid-scroll. */
-  animation: hero-diagram-float 16s ease-in-out infinite;
-}
-@keyframes hero-diagram-float {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-6px); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .hero-connection-layer > div { animation: none; }
-}
-
-.hero-grain {
-  position: absolute; inset: 0; pointer-events: none; z-index: 1;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.035 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity: 0.12; mix-blend-mode: multiply;
-}
-.hero-vignette {
-  position: absolute; inset: 0; pointer-events: none; z-index: 2;
-  background: radial-gradient(ellipse 110% 90% at 50% 50%, transparent 55%, rgba(37,40,38,0.06) 100%);
-}
-
-.hero-brand-circle {
-  position: absolute;
-  border-radius: 50%;
-  /* Softer than `multiply` — keeps the brand tint without darkening
-     the cream behind the text. Pair with the lighter JS-driven
-     opacity in CIRCLE_FRAMES for a more atmospheric, less heavy
-     scroll feel. */
-  mix-blend-mode: soft-light;
-  filter: blur(4px);
   pointer-events: none;
-  z-index: 3;
-  transform: translate(-50%, -50%);
-  will-change: top, left, width, height, opacity, transform;
-}
-.hero-brand-circle--rose { background: var(--brand-rose); }
-.hero-brand-circle--mint { background: var(--brand-mint); }
-
-.hero-logo-real {
-  position: absolute;
-  /* Sits in the upper third — high enough that the body panel copy
-     occupies the bottom 45% of the viewport without any vertical
-     overlap. Diagram beams converge on this point. */
-  top: 30%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: clamp(220px, 24vmin, 380px);
-  z-index: 7;
-  pointer-events: none;
-  opacity: 0;
-  will-change: opacity, transform;
-}
-
-.hero-logo-pieces {
-  position: absolute;
-  /* Matches .hero-logo-real so the deconstruct/reassemble
-     animation crossfades cleanly with the diagram's centre point. */
-  top: 30%; left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 6;
-  display: inline-flex; align-items: baseline;
-  font-size: 48px;
-  letter-spacing: -0.022em;
-  font-weight: 300;
-  color: var(--brand-graphite);
-  line-height: 1;
-  pointer-events: none;
-  white-space: nowrap;
-  opacity: 0;
-}
-.hero-letter {
-  display: inline-block;
-  will-change: transform, opacity;
-  transform-origin: 50% 50%;
-}
-.hero-i-stack { position: relative; display: inline-block; }
-.hero-i-stack .hero-letter-i { color: transparent; }
-.hero-rose-bar {
-  position: absolute;
-  left: 50%; bottom: 2px;
-  width: 3px; height: 26px;
-  background: var(--brand-rose);
-  transform: translateX(-50%);
-  transform-origin: center bottom;
-  will-change: transform, opacity;
-}
-.hero-mint-dot {
-  display: inline-block;
-  width: 14px; height: 14px; border-radius: 50%;
-  background: var(--brand-mint);
-  margin-left: 4px;
-  transform: translateY(-2px);
-  will-change: transform, opacity;
-}
-
-.hero-panel-stack {
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  padding: 0 32px;
-  perspective: 1400px;
-  perspective-origin: 50% 50%;
-  transform-style: preserve-3d;
-  z-index: 5;
-}
-.hero-panel {
-  position: absolute; max-width: 780px; text-align: center;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-  pointer-events: none;
-  will-change: transform, opacity;
-  /* Anchored at top:58% so the copy reads in the visual centre of
-     the viewport (50%-66% range) rather than crunched at the bottom.
-     The diagram appears in the upper third (top:30%) only during
-     cycle 1 + cycle 2 windows; those windows have no body panels
-     visible, so no overlap. */
-  top: 58%;
-  transform: translateY(-50%);
-  /* Tightened padding — top padding was the biggest dead-space
-     culprit, dropped from 36px to 18px. Side padding kept generous
-     so the cream radial wash extends past the headline edges. */
-  padding: 18px 48px 24px;
-  background:
-    radial-gradient(ellipse 75% 65% at 50% 50%,
-      rgba(246,243,238,0.94) 0%,
-      rgba(246,243,238,0.82) 35%,
-      rgba(246,243,238,0.40) 70%,
-      rgba(246,243,238,0) 100%);
-  border-radius: 32px;
-}
-@media (max-width: 640px) {
-  .hero-panel { padding: 14px 20px 18px; }
-}
-.hero-panel .stagger { will-change: transform, opacity; }
-
-.hero-eyebrow {
-  display: inline-flex; align-items: center; gap: 14px;
-  font-family: 'IBM Plex Mono', monospace; font-size: 14px;
-  letter-spacing: 0.13em; text-transform: uppercase;
-  color: var(--brand-berry); margin-bottom: 28px;
-  font-weight: 500;
-}
-.hero-eyebrow::before {
-  content: ''; width: 36px; height: 1px; background: var(--brand-rose);
-}
-.hero-eyebrow-mint {
-  width: 7px; height: 7px; border-radius: 50%; background: var(--brand-mint);
-}
-.hero-h1, .hero-h2 {
-  font-weight: 300; letter-spacing: -0.035em; line-height: 1.04;
-  color: var(--brand-graphite);
-  margin: 0;
-}
-.hero-h1 { font-size: clamp(44px, 6vw, 92px); }
-.hero-h2 { font-size: clamp(34px, 4.6vw, 64px); }
-.hero-h1 em, .hero-h2 em {
-  font-style: italic; font-weight: 300; color: var(--brand-berry);
-}
-.hero-rose-mark { position: relative; }
-.hero-rose-mark::after {
-  content: ''; position: absolute; left: 0; right: 0; bottom: 8px;
-  height: 10px; background: var(--brand-rose); opacity: 0.32;
-  z-index: -1; border-radius: 2px;
-}
-.hero-period {
-  display: inline-block; width: 14px; height: 14px; border-radius: 50%;
-  background: var(--brand-mint); margin-left: 4px; transform: translateY(-2px);
-}
-.hero-body {
-  margin-top: 24px; font-size: 19px; line-height: 1.6;
-  color: var(--brand-slate);
-  max-width: 560px; margin-left: auto; margin-right: auto;
-}
-.hero-num {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 15px;
-  letter-spacing: 0.13em; text-transform: uppercase;
-  color: var(--brand-berry); opacity: 0.85;
-  margin-bottom: 36px;
-  display: inline-flex; align-items: center; gap: 14px;
-  font-weight: 500;
-}
-.hero-num::before {
-  content: ''; width: 36px; height: 1px; background: var(--brand-rose);
-}
-.hero-ctas {
-  display: inline-flex; gap: 14px; flex-wrap: wrap; margin-top: 32px;
-  justify-content: center;
-}
-.hero-btn {
-  font-family: 'Noto Sans', sans-serif;
-  font-size: 14px; font-weight: 500;
-  padding: 14px 26px; border-radius: 100px;
-  background: var(--brand-graphite); color: var(--brand-cream);
-  text-decoration: none; border: none;
-  display: inline-flex; align-items: center; gap: 8px;
-  transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
-}
-.hero-btn:hover {
-  background: var(--brand-berry); transform: translateY(-1px);
-  box-shadow: 0 8px 24px -8px rgba(142,79,103,0.4);
-}
-.hero-btn--ghost {
-  background: transparent; color: var(--brand-graphite);
-  border: 1px solid rgba(37,40,38,0.2);
-}
-.hero-btn--ghost:hover {
-  background: rgba(37,40,38,0.04); border-color: var(--brand-graphite);
-  box-shadow: none;
-}
-.hero-arrow { transition: transform 0.25s; }
-.hero-btn:hover .hero-arrow { transform: translateX(3px); }
-
-.hero-scroll-prog {
-  position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: rgba(37,40,38,0.04); z-index: 40;
-}
-.hero-scroll-prog span {
-  display: block; height: 100%; width: 0;
-  background: linear-gradient(90deg, var(--brand-mint), var(--brand-rose));
-}
-
-/* Platforms / Programmes list panels — bigger inter-line breathing */
-.hero-h2--list {
-  line-height: 1.18;
-  letter-spacing: -0.025em;
-}
-
-/* Track-record stats panel */
-.hero-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 48px 56px;
-  margin-top: 12px;
-  max-width: 900px;
-  margin-left: auto; margin-right: auto;
-}
-.hero-stat { text-align: center; }
-.hero-stat-num {
-  font-family: 'Noto Sans', sans-serif;
-  font-weight: 300;
-  font-size: clamp(56px, 8vw, 110px);
-  line-height: 1;
-  letter-spacing: -0.045em;
-  color: var(--brand-graphite);
-  white-space: nowrap;
-}
-.hero-stat-num span {
-  color: var(--brand-berry);
-  font-size: 0.55em;
-  margin-left: 0.04em;
-  vertical-align: 0.1em;
-  font-weight: 400;
-}
-.hero-stat-label {
-  margin-top: 14px;
-  font-family: 'Noto Sans', sans-serif;
-  font-size: 14px;
-  line-height: 1.45;
-  color: var(--brand-slate);
-  opacity: 0.78;
-  max-width: 220px;
-  margin-left: auto; margin-right: auto;
-}
-
-/* Mobile — keep the cinematic, just tune type & layout */
-@media (max-width: 768px) {
-  .hero-eyebrow { font-size: 12px; letter-spacing: 0.14em; gap: 10px; margin-bottom: 22px; }
-  .hero-eyebrow::before { width: 24px; }
-  .hero-num { font-size: 12px; letter-spacing: 0.14em; gap: 10px; margin-bottom: 24px; }
-  .hero-num::before { width: 24px; }
-  .hero-body { font-size: 16px; margin-top: 18px; max-width: 92vw; }
-  .hero-stats { grid-template-columns: 1fr; gap: 28px; }
-  .hero-stat-label { font-size: 13px; max-width: 260px; }
-  .hero-stat-num { font-size: clamp(64px, 22vw, 92px); }
-  .hero-ctas { gap: 10px; flex-direction: column; align-items: stretch; max-width: 320px; margin-left: auto; margin-right: auto; }
-  .hero-ctas .hero-btn { justify-content: center; padding: 14px 22px; }
-  .hero-logo-pieces { font-size: 36px; }
-  .hero-logo-pieces .hero-rose-bar { width: 2px !important; height: 20px !important; }
-  .hero-logo-pieces .hero-mint-dot { width: 11px !important; height: 11px !important; }
-}
-
-@media (max-width: 420px) {
-  .hero-h1 { font-size: clamp(36px, 11vw, 56px); }
-  .hero-h2 { font-size: clamp(28px, 9vw, 44px); }
-  .hero-logo-real { width: clamp(180px, 56vw, 260px); }
 }
 
 /* ── 11. Third-party overrides ───────────────────────────────────────── */
@@ -1433,9 +1114,6 @@ div[class*="hs-chat"] {
   pointer-events: none;
   z-index: 0;
 }
-.mesh-background--dark {
-  background: #0a0d14;
-}
 .mesh-blob {
   position: absolute;
   width: 60vmax;
@@ -1446,7 +1124,6 @@ div[class*="hs-chat"] {
   will-change: transform;
   transform: translateZ(0); /* force GPU layer */
 }
-.mesh-background--dark .mesh-blob { opacity: 0.55; }
 .mesh-blob--a {
   background: radial-gradient(circle, #C77A93 0%, transparent 60%);
   top: -15%;
@@ -1468,9 +1145,6 @@ div[class*="hs-chat"] {
   opacity: 0.22;
   animation: mesh-drift-c 60s ease-in-out infinite;
 }
-.mesh-background--dark .mesh-blob--a { background: radial-gradient(circle, #11203a 0%, transparent 60%); }
-.mesh-background--dark .mesh-blob--b { background: radial-gradient(circle, #0d1320 0%, transparent 60%); }
-.mesh-background--dark .mesh-blob--c { background: radial-gradient(circle, #11203a 0%, transparent 65%); }
 .mesh-grain {
   position: absolute;
   inset: 0;
