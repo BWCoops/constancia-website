@@ -1,211 +1,82 @@
-import { useState, useEffect, useMemo, memo } from "react";
-import {
-  ArrowLeft,
-  ArrowRight,
-  CheckCircle2,
-  AlertCircle,
-  ExternalLink,
-  Clock,
-  TrendingUp,
-  Tag,
-  Building2,
-  Star,
-  BookOpen,
-  Target,
-  Sparkles,
-  BarChart3,
-  ThumbsUp,
-  AlertTriangle,
-} from "lucide-react";
+/**
+ * Vendor Profile — editorial deep-dive on a single platform.
+ *
+ * Brand-styled (cream canvas, glass tablets, brand typography) so it
+ * reads as part of the Constancia site rather than a generic
+ * comparison table. Each section is a glass-surface card; layout
+ * is editorial, not data-dense.
+ */
+
+import { useState, memo } from "react";
+import { ArrowLeft, ArrowRight, ExternalLink, Check, AlertCircle, Star } from "lucide-react";
 import { Link, useParams } from "wouter";
-import { useFeatureFlags } from "@/lib/feature-flags";
 import { Footer } from "@/components/footer";
 import { SEOHead } from "@/components/seo-head";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import {
-  trackPageView,
-  setupScrollTracking,
-  setupDwellTimeTracking,
-} from "@/lib/funnel-analytics";
-
 import { epmPlatforms } from "@/data/comparison-platforms/epm-platforms";
 import { erpPlatforms } from "@/data/comparison-platforms/erp-platforms";
 import { aiPlatforms } from "@/data/comparison-platforms/ai-platforms";
-import {
-  epmCategories,
-  erpCategories,
-  aiCategories,
-} from "@/data/comparison-platforms/platform-config";
 import { vendorMetadata } from "@/data/comparison-platforms/vendor-metadata";
-import type { Platform, Category } from "@/data/comparison-platforms/types";
+import type { Platform } from "@/data/comparison-platforms/types";
 
-type ToolType = "epm" | "erp" | "ai";
+const ALL_PLATFORMS: Array<Platform & { _category: "EPM / CPM" | "ERP" | "AI for Finance" }> = [
+  ...epmPlatforms.map((p) => ({ ...p, _category: "EPM / CPM" as const })),
+  ...erpPlatforms.map((p) => ({ ...p, _category: "ERP" as const })),
+  ...aiPlatforms.map((p) => ({ ...p, _category: "AI for Finance" as const })),
+];
 
-interface VendorLookupResult {
-  platform: Platform;
-  toolType: ToolType;
-  categories: Category[];
-}
-
-function findVendor(id: string): VendorLookupResult | null {
-  const epm = epmPlatforms.find((p) => p.id === id);
-  if (epm) return { platform: epm, toolType: "epm", categories: epmCategories };
-
-  const erp = erpPlatforms.find((p) => p.id === id);
-  if (erp) return { platform: erp, toolType: "erp", categories: erpCategories };
-
-  const ai = aiPlatforms.find((p) => p.id === id);
-  if (ai) return { platform: ai, toolType: "ai", categories: aiCategories };
-
-  return null;
-}
-
-const TOOL_TYPE_LABELS: Record<ToolType, string> = {
-  epm: "EPM/CPM",
-  erp: "ERP",
-  ai: "AI for Finance",
+const SCORE_LABELS: Record<string, string> = {
+  consolidationClose: "Consolidation & close",
+  planningForecasting: "Planning & forecasting",
+  aiAutomation: "AI & automation",
+  modellingExtensibility: "Modelling & extensibility",
+  integrationDataFabric: "Integration & data fabric",
+  reportingVisualization: "Reporting & visualisation",
+  governanceCompliance: "Governance & compliance",
+  regulatoryCompliance: "Regulatory compliance",
+  timeToValue: "Time to value",
+  totalCostOwnership: "Total cost of ownership",
+  supportEcosystem: "Support & ecosystem",
 };
 
-const ROI_COLORS: Record<string, string> = {
-  high: "text-emerald-600 dark:text-emerald-400",
-  medium: "text-amber-600 dark:text-amber-400",
-  low: "text-red-600 dark:text-red-400",
-};
+const getLogoUrl = (domain: string) => `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
 
-const ROI_BG: Record<string, string> = {
-  high: "bg-emerald-500/10",
-  medium: "bg-amber-500/10",
-  low: "bg-red-500/10",
-};
-
-function getScoreColour(score: number): string {
-  if (score >= 8) return "bg-emerald-500";
-  if (score >= 6) return "bg-[#8E4F67]";
-  if (score >= 4) return "bg-amber-500";
-  return "bg-red-500";
-}
-
-function getScoreTextColour(score: number): string {
-  if (score >= 8) return "text-emerald-600 dark:text-emerald-400";
-  if (score >= 6) return "text-brand-teal dark:text-brand-cyan";
-  if (score >= 4) return "text-amber-600 dark:text-amber-400";
-  return "text-red-600 dark:text-red-400";
-}
-
-interface VendorLogoProps {
-  platform: Platform;
-  logoDomain?: string;
-  size?: "sm" | "lg";
-}
-
-const VendorLogo = memo(function VendorLogo({
-  platform,
-  logoDomain,
-  size = "lg",
-}: VendorLogoProps) {
-  const [imgError, setImgError] = useState(false);
-  const sizeClasses = size === "lg" ? "w-16 h-16" : "w-11 h-11";
-  const textSize = size === "lg" ? "text-xl" : "text-sm";
-
-  const meta = vendorMetadata[platform.id];
-  const logoSrc = meta?.logoOverride || (logoDomain ? `https://www.google.com/s2/favicons?domain=${logoDomain}&sz=128` : null);
-
-  if (!logoSrc || imgError) {
-    return (
-      <div
-        className={`${sizeClasses} rounded-lg bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center flex-shrink-0`}
-        data-testid={`logo-vendor-${platform.id}`}
-      >
-        <span className={`text-white font-bold ${textSize} leading-none`}>
-          {platform.logo.slice(0, 3)}
-        </span>
-      </div>
-    );
+const VendorLogo = memo(function VendorLogo({ platformId, logo, large }: { platformId: string; logo: string; large?: boolean }) {
+  const [failed, setFailed] = useState(false);
+  const meta = vendorMetadata[platformId];
+  const klass = `vendor-logo ${large ? "vendor-logo--large" : ""}`;
+  if (!meta || failed) {
+    return <div className={`${klass} vendor-logo--initials`}>{logo.slice(0, 2)}</div>;
   }
-
   return (
-    <div
-      className={`${sizeClasses} rounded-lg bg-white dark:bg-white/95 flex items-center justify-center flex-shrink-0 border border-border/30`}
-      data-testid={`logo-vendor-${platform.id}`}
-    >
+    <div className={klass}>
       <img
-        src={logoSrc}
-        alt={`${platform.name} logo`}
-        className={size === "lg" ? "w-10 h-10 object-contain" : "w-7 h-7 object-contain"}
+        src={meta.logoOverride || getLogoUrl(meta.logoDomain)}
+        alt=""
         loading="lazy"
-        onError={() => setImgError(true)}
+        onError={() => setFailed(true)}
       />
-    </div>
-  );
-});
-
-interface ScoreBarProps {
-  label: string;
-  score: number;
-  categoryId: string;
-}
-
-const ScoreBar = memo(function ScoreBar({ label, score, categoryId }: ScoreBarProps) {
-  return (
-    <div className="space-y-1" data-testid={`score-bar-${categoryId}`}>
-      <div className="flex items-center justify-between gap-2">
-        <span className="text-sm text-muted-foreground truncate">{label}</span>
-        <span
-          className={`text-sm font-semibold tabular-nums ${getScoreTextColour(score)}`}
-          data-testid={`score-value-${categoryId}`}
-        >
-          {score.toFixed(1)}
-        </span>
-      </div>
-      <div className="h-2.5 rounded-full bg-muted overflow-hidden">
-        <div
-          className={`h-full rounded-full ${getScoreColour(score)}`}
-          style={{ width: `${(score / 10) * 100}%` }}
-        />
-      </div>
     </div>
   );
 });
 
 export default function VendorProfilePage() {
   const params = useParams<{ id: string }>();
-  const vendorId = params.id || "";
-  const { flags } = useFeatureFlags();
+  const platform = ALL_PLATFORMS.find((p) => p.id === params.id);
 
-  const result = useMemo(() => findVendor(vendorId), [vendorId]);
-  const meta = vendorMetadata[vendorId];
-
-  useEffect(() => {
-    trackPageView("vendor-profile", { vendorId });
-    const cleanupScroll = setupScrollTracking("vendor-profile");
-    const cleanupDwell = setupDwellTimeTracking("vendor-profile");
-    return () => {
-      cleanupScroll();
-      cleanupDwell();
-    };
-  }, [vendorId]);
-
-  if (!result) {
+  if (!platform) {
     return (
-      <div className="min-h-screen bg-background">
-        <main className="pt-24 sm:pt-28 pb-20">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-            <h1
-              className="text-2xl font-bold text-foreground mb-4"
-              data-testid="text-vendor-not-found"
-            >
-              Platform not found
-            </h1>
-            <p className="text-muted-foreground mb-8">
-              The platform you are looking for does not exist in our directory.
-            </p>
-            <Link href="/vendors">
-              <Button data-testid="link-back-to-directory">
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Back to Vendor Directory
-              </Button>
+      <div className="marketing-page">
+        <SEOHead title="Vendor not found | Constancia" description="" />
+        <main className="vendor-profile vendor-profile--missing">
+          <div className="glass-surface vendor-profile__missing">
+            <div className="page-hero__badge">
+              <span className="page-hero__badge-dot" aria-hidden="true" />
+              <span>Not found</span>
+            </div>
+            <h1>We don't have a take on this one yet.</h1>
+            <p>The vendor you're looking for isn't in our directory — yet.</p>
+            <Link href="/vendors" className="scrolly-tablet__link">
+              Back to the directory →
             </Link>
           </div>
         </main>
@@ -214,444 +85,206 @@ export default function VendorProfilePage() {
     );
   }
 
-  const { platform, toolType, categories } = result;
+  const meta = vendorMetadata[platform.id];
+  const scores = Object.entries(platform.scores).sort((a, b) => b[1] - a[1]);
+  const topScore = scores[0];
+  const avgScore = scores.reduce((s, [, v]) => s + v, 0) / scores.length;
 
-  const scoreEntries = useMemo(() => {
-    return categories
-      .filter((cat) => platform.scores[cat.id] !== undefined)
-      .map((cat) => ({
-        categoryId: cat.id,
-        label: cat.name,
-        score: platform.scores[cat.id],
-      }))
-      .sort((a, b) => b.score - a.score);
-  }, [platform, categories]);
+  const seo = {
+    title: `${platform.name} — Constancia's take | ${platform._category}`,
+    description: `${platform.bestFor}. Independent practitioner view from Constancia: strengths, watch-outs, pricing tier ${platform.priceTier}/5, time to value ${platform.implementationTime}.`,
+    keywords: [
+      platform.name,
+      platform._category,
+      "Constancia vendor review",
+      ...platform.strengths.slice(0, 3).map((s) => s.split(" ").slice(0, 3).join(" ")),
+    ],
+  };
 
   return (
-    <div className="min-h-screen bg-background">
-      <SEOHead
-        title={`${platform.name} Profile | Constancia - Independent ${TOOL_TYPE_LABELS[toolType]} Review`}
-        description={`Independent review of ${platform.name}: ${platform.bestFor}. Objective capability scores, strengths, limitations and pricing analysis.`}
-        keywords={[
-          platform.name,
-          `${platform.name} review`,
-          `${TOOL_TYPE_LABELS[toolType]} comparison`,
-          "independent platform review",
-          "independent analysis",
-        ]}
-        canonicalUrl={`https://constancia.com/vendors/${platform.id}`}
-      />
+    <div className="marketing-page">
+      <SEOHead {...seo} />
 
+      <main className="vendor-profile">
+        {/* Back link */}
+        <nav className="vendor-profile__back">
+          <Link href="/vendors" className="vendor-profile__back-link" data-testid="link-back">
+            <ArrowLeft size={16} /> All vendors
+          </Link>
+        </nav>
 
-      <main className="pt-20 sm:pt-24 pb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="mb-6">
-            <Link href="/vendors">
-              <span
-                className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-                data-testid="link-back-to-directory"
-              >
-                <ArrowLeft className="mr-1.5 h-4 w-4" />
-                Back to Vendor Directory
-              </span>
-            </Link>
+        {/* Hero card */}
+        <section className="vendor-profile__hero">
+          <div className="glass-surface vendor-profile__hero-card">
+            <div className="vendor-profile__hero-head">
+              <VendorLogo platformId={platform.id} logo={platform.logo} large />
+              <div className="vendor-profile__hero-meta">
+                <div className="page-hero__badge">
+                  <span className="page-hero__badge-dot" aria-hidden="true" />
+                  <span>{platform._category}</span>
+                </div>
+                <h1 className="vendor-profile__name">{platform.name}</h1>
+                <p className="vendor-profile__position">{platform.marketPosition}</p>
+              </div>
+            </div>
+
+            <div className="vendor-profile__hero-pov">
+              <div className="vendor-profile__pov-label">Constancia's take</div>
+              <p>{platform.bestFor}</p>
+            </div>
+
+            <div className="vendor-profile__hero-stats">
+              <div className="vendor-stat">
+                <div className="vendor-stat__label">Pricing</div>
+                <div className="vendor-stat__value">{platform.priceRange}</div>
+                <div className="vendor-stat__sub">Tier {platform.priceTier} of 5</div>
+              </div>
+              <div className="vendor-stat">
+                <div className="vendor-stat__label">Time to value</div>
+                <div className="vendor-stat__value">{platform.implementationTime}</div>
+              </div>
+              <div className="vendor-stat">
+                <div className="vendor-stat__label">ROI potential</div>
+                <div className={`vendor-stat__value vendor-stat__value--${platform.roiPotential}`}>
+                  {platform.roiPotential}
+                </div>
+              </div>
+              <div className="vendor-stat">
+                <div className="vendor-stat__label">Top driver</div>
+                <div className="vendor-stat__value">
+                  {SCORE_LABELS[topScore[0]] ?? topScore[0]}
+                </div>
+                <div className="vendor-stat__sub">{topScore[1].toFixed(1)} / 10</div>
+              </div>
+            </div>
           </div>
+        </section>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
-            <div className="lg:col-span-2 space-y-6">
-              <div>
-                <Card>
-                  <CardContent className="p-5 sm:p-6">
-                    <div className="flex flex-col sm:flex-row items-start gap-4 mb-5">
-                      <VendorLogo
-                        platform={platform}
-                        logoDomain={meta?.logoDomain}
-                        size="lg"
-                      />
-                      <div className="flex-1 min-w-0">
-                        <h1
-                          className="text-2xl sm:text-3xl font-bold text-foreground mb-1.5"
-                          data-testid="text-vendor-name"
-                        >
-                          {platform.name}
-                        </h1>
-                        <div className="flex flex-wrap items-center gap-2 mb-3">
-                          <Badge
-                            variant="outline"
-                            data-testid="badge-vendor-position"
-                          >
-                            <Star className="mr-1 h-3 w-3" />
-                            {platform.marketPosition}
-                          </Badge>
-                          <Badge
-                            variant="outline"
-                            className="bg-brand-navy/10 text-[#252826] dark:text-brand-cyan border-[#252826]/20 dark:border-[#7FB8A3]/20"
-                            data-testid="badge-vendor-type"
-                          >
-                            {TOOL_TYPE_LABELS[toolType]}
-                          </Badge>
-                        </div>
-                        <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-                          <span
-                            className="flex items-center gap-1"
-                            data-testid="text-vendor-price"
-                          >
-                            <Tag className="h-3.5 w-3.5" />
-                            {platform.priceRange}
-                          </span>
-                          <span
-                            className="flex items-center gap-1"
-                            data-testid="text-vendor-impl-time"
-                          >
-                            <Clock className="h-3.5 w-3.5" />
-                            {platform.implementationTime}
-                          </span>
-                          <span
-                            className={`flex items-center gap-1 ${ROI_COLORS[platform.roiPotential]}`}
-                            data-testid="text-vendor-roi"
-                          >
-                            <TrendingUp className="h-3.5 w-3.5" />
-                            {platform.roiPotential.charAt(0).toUpperCase() +
-                              platform.roiPotential.slice(1)}{" "}
-                            ROI
-                          </span>
-                        </div>
-                      </div>
-                      {meta?.website && (
-                        <a
-                          href={meta.website}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          data-testid="link-vendor-website"
-                        >
-                          <Button variant="outline" size="sm">
-                            Visit Website
-                            <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
-                          </Button>
-                        </a>
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
+        {/* Overview */}
+        <section className="vendor-profile__section">
+          <div className="glass-surface vendor-profile__card">
+            <div className="scrolly-tablet__eyebrow">Overview</div>
+            <h2 className="vendor-profile__heading">In one paragraph.</h2>
+            <p className="vendor-profile__body">{platform.description}</p>
+          </div>
+        </section>
 
-              {/* Overview + Best For */}
-              <Card>
-                <CardContent className="p-0">
-                  <div className="p-6">
-                    <div className="flex items-center gap-2.5 mb-4">
-                      <div className="flex-shrink-0 p-1.5 rounded-md bg-[#8E4F67]/10 dark:bg-[#7FB8A3]/10">
-                        <BookOpen className="h-4 w-4 text-brand-teal dark:text-brand-cyan" />
-                      </div>
-                      <h2
-                        className="text-base font-semibold text-foreground"
-                        data-testid="heading-description"
-                      >
-                        Overview
-                      </h2>
-                    </div>
-                    <p
-                      className="text-sm text-muted-foreground leading-relaxed"
-                      data-testid="text-vendor-description"
-                    >
-                      {platform.description}
-                    </p>
+        {/* Strengths + Limitations side by side */}
+        <section className="vendor-profile__section vendor-profile__split">
+          <div className="glass-surface vendor-profile__card">
+            <div className="scrolly-tablet__eyebrow">Strengths</div>
+            <h2 className="vendor-profile__heading">What they do well.</h2>
+            <ul className="vendor-list vendor-list--positive">
+              {platform.strengths.map((s, i) => (
+                <li key={i}>
+                  <Check size={16} className="vendor-list__icon" />
+                  <span>{s}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="glass-surface vendor-profile__card">
+            <div className="scrolly-tablet__eyebrow">Watch-outs</div>
+            <h2 className="vendor-profile__heading">Where it's not a fit.</h2>
+            <ul className="vendor-list vendor-list--caution">
+              {platform.limitations.map((s, i) => (
+                <li key={i}>
+                  <AlertCircle size={16} className="vendor-list__icon" />
+                  <span>{s}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        {/* Scores */}
+        <section className="vendor-profile__section">
+          <div className="glass-surface vendor-profile__card">
+            <div className="scrolly-tablet__eyebrow">Driver scores</div>
+            <h2 className="vendor-profile__heading">
+              How we'd rate it{" "}
+              <em className="scrolly-tablet__heading-accent">out of 10</em>.
+            </h2>
+            <p className="vendor-profile__body" style={{ marginBottom: 24 }}>
+              Average score across drivers: <strong>{avgScore.toFixed(1)} / 10</strong>. Scores
+              based on the Constancia evaluation framework — independent, weighted to the
+              drivers that move the needle in real programmes.
+            </p>
+            <div className="vendor-scores">
+              {scores.map(([key, value]) => (
+                <div key={key} className="vendor-score-row">
+                  <div className="vendor-score-row__label">{SCORE_LABELS[key] ?? key}</div>
+                  <div className="vendor-score-row__bar">
+                    <div
+                      className="vendor-score-row__fill"
+                      style={{ width: `${value * 10}%` }}
+                      aria-hidden="true"
+                    />
                   </div>
+                  <div className="vendor-score-row__value">{value.toFixed(1)}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-                  <div className="border-t border-border" />
+        {/* Key features */}
+        {platform.keyFeatures.length > 0 && (
+          <section className="vendor-profile__section">
+            <div className="glass-surface vendor-profile__card">
+              <div className="scrolly-tablet__eyebrow">Capabilities</div>
+              <h2 className="vendor-profile__heading">Capabilities worth flagging.</h2>
+              <ul className="vendor-features">
+                {platform.keyFeatures.map((f, i) => (
+                  <li key={i}>
+                    <Star size={14} className="vendor-features__icon" />
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        )}
 
-                  <div className="p-6">
-                    <div className="flex items-center gap-2.5 mb-3">
-                      <div className="flex-shrink-0 p-1.5 rounded-md bg-[#8E4F67]/10 dark:bg-[#7FB8A3]/10">
-                        <Target className="h-4 w-4 text-brand-teal dark:text-brand-cyan" />
-                      </div>
-                      <h3
-                        className="text-base font-semibold text-foreground"
-                        data-testid="heading-best-for"
-                      >
-                        Best For
-                      </h3>
-                    </div>
-                    <p
-                      className="text-sm text-foreground/80 leading-relaxed"
-                      data-testid="text-vendor-bestfor"
-                    >
-                      {platform.bestFor}
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Key Features */}
-              <Card>
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-2.5 mb-5">
-                    <div className="flex-shrink-0 p-1.5 rounded-md bg-[#8E4F67]/10 dark:bg-[#7FB8A3]/10">
-                      <Sparkles className="h-4 w-4 text-brand-teal dark:text-brand-cyan" />
-                    </div>
-                    <h2
-                      className="text-base font-semibold text-foreground"
-                      data-testid="heading-key-features"
-                    >
-                      Key Features
-                    </h2>
-                  </div>
-                  <div className="grid sm:grid-cols-2 gap-2">
-                    {platform.keyFeatures.map((feature, idx) => (
-                      <div
-                        key={feature}
-                        className="flex items-center gap-2.5 rounded-md bg-muted/50 px-3 py-2.5"
-                        data-testid={`feature-item-${idx}`}
-                      >
-                        <div className="h-1.5 w-1.5 rounded-full bg-[#8E4F67] dark:bg-[#7FB8A3] flex-shrink-0" />
-                        <span className="text-sm font-medium text-foreground">
-                          {feature}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Capability Scores */}
-              <Card>
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-2.5 mb-5">
-                    <div className="flex-shrink-0 p-1.5 rounded-md bg-[#8E4F67]/10 dark:bg-[#7FB8A3]/10">
-                      <BarChart3 className="h-4 w-4 text-brand-teal dark:text-brand-cyan" />
-                    </div>
-                    <h2
-                      className="text-base font-semibold text-foreground"
-                      data-testid="heading-capability-scores"
-                    >
-                      Capability Scores
-                    </h2>
-                  </div>
-                  <div className="space-y-3">
-                    {scoreEntries.map((entry) => (
-                      <ScoreBar
-                        key={entry.categoryId}
-                        label={entry.label}
-                        score={entry.score}
-                        categoryId={entry.categoryId}
-                      />
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Strengths + Limitations */}
-              <div className="grid sm:grid-cols-2 gap-6">
-                <Card className="h-full">
-                  <CardContent className="p-6">
-                    <div className="flex items-center gap-2.5 mb-5">
-                      <div className="flex-shrink-0 p-1.5 rounded-md bg-emerald-500/10">
-                        <ThumbsUp className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
-                      </div>
-                      <h2
-                        className="text-base font-semibold text-foreground"
-                        data-testid="heading-strengths"
-                      >
-                        Strengths
-                      </h2>
-                    </div>
-                    <ul className="space-y-2">
-                      {platform.strengths.map((strength, idx) => (
-                        <li
-                          key={idx}
-                          className="flex items-start gap-2.5 rounded-md bg-emerald-500/5 dark:bg-emerald-400/5 px-3 py-2.5"
-                          data-testid={`strength-item-${idx}`}
-                        >
-                          <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400 mt-0.5 flex-shrink-0" />
-                          <span className="text-sm text-foreground/80">
-                            {strength}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
-
-                <Card className="h-full">
-                  <CardContent className="p-6">
-                    <div className="flex items-center gap-2.5 mb-5">
-                      <div className="flex-shrink-0 p-1.5 rounded-md bg-amber-500/10">
-                        <AlertTriangle className="h-4 w-4 text-amber-600 dark:text-amber-400" />
-                      </div>
-                      <h2
-                        className="text-base font-semibold text-foreground"
-                        data-testid="heading-limitations"
-                      >
-                        Limitations
-                      </h2>
-                    </div>
-                    <ul className="space-y-2">
-                      {platform.limitations.map((limitation, idx) => (
-                        <li
-                          key={idx}
-                          className="flex items-start gap-2.5 rounded-md bg-amber-500/5 dark:bg-amber-400/5 px-3 py-2.5"
-                          data-testid={`limitation-item-${idx}`}
-                        >
-                          <AlertCircle className="h-4 w-4 text-amber-600 dark:text-amber-400 mt-0.5 flex-shrink-0" />
-                          <span className="text-sm text-foreground/80">
-                            {limitation}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
-              </div>
-
-              <div
-                className="p-5 sm:p-8 rounded-xl bg-gradient-to-r from-[#252826] via-[#5E8D7A] to-[#8E4F67] text-center"
-              >
-                <h2
-                  className="text-xl sm:text-2xl font-bold text-white mb-3"
-                  data-testid="heading-cta"
-                >
-                  Want to compare {platform.shortName} against alternatives?
+        {/* CTAs */}
+        <section className="vendor-profile__section vendor-profile__split">
+          {meta && (
+            <a
+              href={meta.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="glass-surface vendor-profile__card vendor-profile__cta-card"
+            >
+              <div className="scrolly-tablet__eyebrow">Visit</div>
+              <div className="vendor-profile__cta-row">
+                <h2 className="vendor-profile__heading">
+                  See {platform.name}'s site <ExternalLink size={18} />
                 </h2>
-                <p className="text-white/80 max-w-2xl mx-auto mb-6">
-                  Use our interactive comparison tool for a side-by-side evaluation, or speak to our independent advisory team for personalised guidance.
-                </p>
-                <div className="flex flex-wrap items-center justify-center gap-3">
-                  {flags.comparisonTools && (
-                    <Link href="/tools/epm-comparison">
-                      <Button
-                        size="lg"
-                        className="bg-[#7FB8A3] text-[#252826] font-semibold"
-                        data-testid="button-cta-compare"
-                      >
-                        Compare Platforms
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
-                    </Link>
-                  )}
-                  {flags.contact && (
-                    <Link href="/contact">
-                      <Button
-                        size="lg"
-                        variant="outline"
-                        className="border-white/30 text-white backdrop-blur-sm bg-white/5"
-                        data-testid="button-cta-contact"
-                      >
-                        Speak to an Adviser
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
-                    </Link>
-                  )}
-                </div>
               </div>
+              <p className="vendor-profile__body">Their marketing line, in their own words.</p>
+            </a>
+          )}
+          <Link
+            href="/contact"
+            className="glass-surface vendor-profile__card vendor-profile__cta-card"
+          >
+            <div className="scrolly-tablet__eyebrow">Talk to us</div>
+            <div className="vendor-profile__cta-row">
+              <h2 className="vendor-profile__heading">
+                Considering {platform.name}? <ArrowRight size={18} />
+              </h2>
             </div>
+            <p className="vendor-profile__body">
+              We'll tell you straight whether it fits — no kickbacks, no pipeline pressure.
+            </p>
+          </Link>
+        </section>
 
-            <div className="lg:col-span-1">
-              <div className="sticky top-24 space-y-6">
-                <div>
-                  <Card>
-                    <CardContent className="p-5 sm:p-6">
-                      <h3
-                        className="text-base font-semibold text-foreground mb-4"
-                        data-testid="heading-quick-facts"
-                      >
-                        Quick Facts
-                      </h3>
-                      <dl className="space-y-4">
-                        <div data-testid="fact-implementation-time">
-                          <dt className="text-xs text-muted-foreground mb-0.5">
-                            Implementation Time
-                          </dt>
-                          <dd className="text-sm font-medium text-foreground flex items-center gap-1.5">
-                            <Clock className="h-4 w-4 text-muted-foreground" />
-                            {platform.implementationTime}
-                          </dd>
-                        </div>
-                        <div data-testid="fact-price-range">
-                          <dt className="text-xs text-muted-foreground mb-0.5">
-                            Price Range
-                          </dt>
-                          <dd className="text-sm font-medium text-foreground flex items-center gap-1.5">
-                            <Tag className="h-4 w-4 text-muted-foreground" />
-                            {platform.priceRange}
-                          </dd>
-                        </div>
-                        <div data-testid="fact-roi-potential">
-                          <dt className="text-xs text-muted-foreground mb-0.5">
-                            ROI Potential
-                          </dt>
-                          <dd className="text-sm font-medium">
-                            <Badge
-                              variant="outline"
-                              className={`${ROI_BG[platform.roiPotential]} ${ROI_COLORS[platform.roiPotential]} border-0`}
-                              data-testid="badge-roi-potential"
-                            >
-                              <TrendingUp className="mr-1 h-3 w-3" />
-                              {platform.roiPotential.charAt(0).toUpperCase() +
-                                platform.roiPotential.slice(1)}
-                            </Badge>
-                          </dd>
-                        </div>
-                        <div data-testid="fact-price-tier">
-                          <dt className="text-xs text-muted-foreground mb-0.5">
-                            Price Tier
-                          </dt>
-                          <dd className="text-sm font-medium text-foreground flex items-center gap-1">
-                            {Array.from({ length: 5 }, (_, i) => (
-                              <span
-                                key={i}
-                                className={`w-2.5 h-2.5 rounded-full ${
-                                  i < platform.priceTier
-                                    ? "bg-[#8E4F67] dark:bg-[#7FB8A3]"
-                                    : "bg-muted"
-                                }`}
-                              />
-                            ))}
-                            <span className="ml-1 text-xs text-muted-foreground">
-                              ({platform.priceTier}/5)
-                            </span>
-                          </dd>
-                        </div>
-                        <div data-testid="fact-market-position">
-                          <dt className="text-xs text-muted-foreground mb-0.5">
-                            Market Position
-                          </dt>
-                          <dd className="text-sm font-medium text-foreground flex items-center gap-1.5">
-                            <Building2 className="h-4 w-4 text-muted-foreground" />
-                            {platform.marketPosition}
-                          </dd>
-                        </div>
-                        <div data-testid="fact-category">
-                          <dt className="text-xs text-muted-foreground mb-0.5">
-                            Category
-                          </dt>
-                          <dd className="text-sm font-medium text-foreground">
-                            {TOOL_TYPE_LABELS[toolType]}
-                          </dd>
-                        </div>
-                      </dl>
-                    </CardContent>
-                  </Card>
-                </div>
-
-                {meta?.website && (
-                  <div>
-                    <a
-                      href={meta.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      data-testid="link-sidebar-website"
-                    >
-                      <Button variant="outline" className="w-full">
-                        Visit {platform.shortName} Website
-                        <ExternalLink className="ml-2 h-4 w-4" />
-                      </Button>
-                    </a>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
+        <nav className="vendor-profile__back vendor-profile__back--bottom">
+          <Link href="/vendors" className="vendor-profile__back-link" data-testid="link-back-bottom">
+            <ArrowLeft size={16} /> Back to all vendors
+          </Link>
+        </nav>
       </main>
 
       <Footer />
