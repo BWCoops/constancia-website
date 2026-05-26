@@ -146,6 +146,22 @@ export function ScrollyStage({
 
         panel.style.opacity = String(opacity);
         panel.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
+        // Visibility-hide off-screen panels so the browser skips
+        // painting them, including their backdrop-filter + animations.
+        // Threshold 0.04 leaves a tiny buffer so a panel just entering
+        // doesn't pop. is-active flag tells CSS to keep its animations
+        // playing; inactive panels pause via animation-play-state.
+        if (opacity < 0.04) {
+          panel.style.visibility = "hidden";
+          panel.classList.remove("scrolly-panel--active");
+        } else {
+          panel.style.visibility = "visible";
+          if (opacity > 0.6) {
+            panel.classList.add("scrolly-panel--active");
+          } else {
+            panel.classList.remove("scrolly-panel--active");
+          }
+        }
       });
     };
 
@@ -162,6 +178,28 @@ export function ScrollyStage({
       window.removeEventListener("resize", onScroll);
     };
   }, [prefersReducedMotion, panelCount, enterFade, exitFade, resolvedRanges]);
+
+  // Pause the WebGL fabric when the stage scrolls completely out of
+  // view (scrolled past the hero on long pages, or before it on slow
+  // navigations). Adds `data-paused` to the wrap, which the fabric
+  // canvas reads to stop its RAF loop.
+  useEffect(() => {
+    if (!fabricMounted) return;
+    const stage = stageRef.current;
+    if (!stage) return;
+    const wrap = stage.querySelector<HTMLDivElement>(".scrolly-stage__fabric-wrap");
+    if (!wrap || !("IntersectionObserver" in window)) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          wrap.dataset.paused = entry.isIntersecting ? "false" : "true";
+        }
+      },
+      { rootMargin: "100px" }
+    );
+    io.observe(stage);
+    return () => io.disconnect();
+  }, [fabricMounted]);
 
   return (
     <section
