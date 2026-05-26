@@ -329,7 +329,7 @@ async function sendWidgetLeadNotification(data: {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; background-color: #f5f5f5;">
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; background-color: #EFEAE0;">
   <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
     <div style="background: linear-gradient(135deg, #12161D 0%, #8E4F67 100%); padding: 24px; border-radius: 12px 12px 0 0; text-align: center;">
       ${getEmailLogoHtml({ variant: 'white' })}
@@ -875,17 +875,17 @@ function getMaturityBadgeColour(level: string): { bg: string; text: string } {
   const colours: Record<string, { bg: string; text: string }> = {
     "Leading": { bg: "#10b981", text: "#ffffff" },
     "Advanced": { bg: "#3b82f6", text: "#ffffff" },
-    "Established": { bg: "#f59e0b", text: "#ffffff" },
-    "Developing": { bg: "#f97316", text: "#ffffff" },
-    "Ad-hoc": { bg: "#ef4444", text: "#ffffff" },
+    "Established": { bg: "#C77A93", text: "#ffffff" },
+    "Developing": { bg: "#C77A93", text: "#ffffff" },
+    "Ad-hoc": { bg: "#8E4F67", text: "#ffffff" },
   };
   return colours[level] || { bg: "#6b7280", text: "#ffffff" };
 }
 
 function getScoreBarColour(score: number): string {
   if (score >= 4) return "#10b981";
-  if (score >= 3) return "#f59e0b";
-  return "#ef4444";
+  if (score >= 3) return "#C77A93";
+  return "#8E4F67";
 }
 
 function formatQualificationLabel(key: string, value: string): string {
@@ -1068,8 +1068,8 @@ function buildWidgetResultsEmailHtml(data: z.infer<typeof widgetEmailResultsSche
   </noscript>
   <![endif]-->
 </head>
-<body style="margin: 0; padding: 0; background-color: #f5f5f5; font-family: Arial, Helvetica, sans-serif; -webkit-font-smoothing: antialiased;">
-  <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #f5f5f5;">
+<body style="margin: 0; padding: 0; background-color: #EFEAE0; font-family: Arial, Helvetica, sans-serif; -webkit-font-smoothing: antialiased;">
+  <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #EFEAE0;">
     <tr>
       <td style="padding: 20px 10px;">
         <table role="presentation" style="max-width: 600px; width: 100%; margin: 0 auto; border-collapse: collapse; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">

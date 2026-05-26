@@ -6,7 +6,7 @@ import { SEOHead } from "@/components/seo-head";
 
 export default function PrivacyPolicyPage() {
   return (
-    <div className="min-h-screen page-dark">
+    <div className="marketing-page">
       <SEOHead
         title="Privacy Policy | Constancia"
         description="How Constancia Holdings Limited collects, uses, and protects your personal data. Our commitment to privacy, UK data protection compliance, and your rights."
@@ -46,7 +46,7 @@ export default function PrivacyPolicyPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="prose prose-lg prose-invert max-w-none"
+              className="prose prose-lg max-w-none"
             >
               <section className="mb-12" data-testid="section-about-policy">
                 <h2 className="text-2xl font-bold text-foreground mb-4">About This Privacy Policy</h2>

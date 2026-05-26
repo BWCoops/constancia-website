@@ -4158,8 +4158,8 @@ publicRouter.post("/assessments/:id/narratives/regenerate", async (req: Request,
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f5f5f5;">
-  <table cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #f5f5f5; padding: 40px 20px;">
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #EFEAE0;">
+  <table cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #EFEAE0; padding: 40px 20px;">
     <tr>
       <td align="center">
         <table cellpadding="0" cellspacing="0" border="0" width="600" style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
@@ -4175,15 +4175,15 @@ publicRouter.post("/assessments/:id/narratives/regenerate", async (req: Request,
             <td style="padding: 40px;">
               <h1 style="color: #12161D; font-size: 24px; margin: 0 0 20px 0;">Your AI Report is Ready</h1>
               
-              <p style="color: #333333; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
+              <p style="color: #252826; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
                 Dear ${contact.firstName || 'Valued Customer'},
               </p>
               
-              <p style="color: #333333; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
+              <p style="color: #252826; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
                 Your FinanceCompass AI narrative report for <strong>${companyName}</strong> has been regenerated and is now ready for review.
               </p>
               
-              <p style="color: #333333; font-size: 16px; line-height: 1.6; margin: 0 0 30px 0;">
+              <p style="color: #252826; font-size: 16px; line-height: 1.6; margin: 0 0 30px 0;">
                 The report includes an updated executive brief, implementation roadmap, and stakeholder-specific narratives tailored to your finance transformation journey.
               </p>
               

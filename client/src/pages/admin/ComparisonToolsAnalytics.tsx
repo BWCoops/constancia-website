@@ -321,7 +321,7 @@ export default function ComparisonToolsAnalytics() {
                     <div className="text-2xl font-bold">{formatNumber(stats.summary.sessionsExported ?? 0)}</div>
                     <div className="text-xs text-muted-foreground">Exported</div>
                   </div>
-                  <div className="text-center p-3 rounded-lg bg-green-500/10" style={{ borderLeft: "3px solid #22c55e" }}>
+                  <div className="text-center p-3 rounded-lg bg-green-500/10" style={{ borderLeft: "3px solid #7FB8A3" }}>
                     <div className="text-2xl font-bold text-green-600">{stats.summary.startedCompletionRate ?? 0}%</div>
                     <div className="text-xs text-muted-foreground">Started → Complete</div>
                   </div>
@@ -795,7 +795,7 @@ export default function ComparisonToolsAnalytics() {
                               {stats.exportTracking.formatBreakdown.map((entry) => (
                                 <Cell 
                                   key={entry.format} 
-                                  fill={entry.format === "PDF" ? "#ef4444" : "#22c55e"} 
+                                  fill={entry.format === "PDF" ? "#8E4F67" : "#7FB8A3"} 
                                 />
                               ))}
                             </Pie>

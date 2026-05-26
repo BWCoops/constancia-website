@@ -100,7 +100,7 @@ export function FinanceCompassRadarChart({
                           <div className="space-y-1 text-xs">
                             <div className="flex justify-between gap-4">
                               <span className="text-muted-foreground">Your Score:</span>
-                              <span className="font-medium text-[#0A6688]">{dataPoint.yourScore.toFixed(2)}</span>
+                              <span className="font-medium text-[#5E8D7A]">{dataPoint.yourScore.toFixed(2)}</span>
                             </div>
                             <div className="flex justify-between gap-4">
                               <span className="text-muted-foreground">Benchmark:</span>

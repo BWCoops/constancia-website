@@ -137,7 +137,7 @@ const DIMENSION_CONFIG: Record<string, { name: string; shortName: string; icon: 
     name: "Organisation & People",
     shortName: "People",
     icon: "Users",
-    color: "#F59E0B",
+    color: "#C77A93",
   },
   data_analytics: {
     name: "Data & Analytics",

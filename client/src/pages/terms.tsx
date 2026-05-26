@@ -6,7 +6,7 @@ import { SEOHead } from "@/components/seo-head";
 
 export default function TermsOfUsePage() {
   return (
-    <div className="min-h-screen page-dark">
+    <div className="marketing-page">
       <SEOHead
         title="Terms of Use | Constancia"
         description="Terms of Use for the Constancia Holdings Limited website. Conditions governing access to our advisory platform, tools, and resources for finance professionals."
@@ -46,7 +46,7 @@ export default function TermsOfUsePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="prose prose-lg prose-invert max-w-none"
+              className="prose prose-lg max-w-none"
             >
               <section className="mb-12" data-testid="section-about-terms">
                 <h2 className="text-2xl font-bold text-foreground mb-4">About these Terms of Use</h2>

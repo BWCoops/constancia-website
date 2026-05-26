@@ -258,15 +258,11 @@
   body { @apply font-sans antialiased bg-background text-foreground; }
 }
 
-/* ── 5. page-dark — kept as a class alias for legacy markup, now applies the
-        Constancia cream-led system rather than the old navy/cyan theme.       */
-.page-dark {
-  background:  var(--brand-bg-primary);
-  color:       var(--brand-text-primary);
-  font-family: var(--brand-font-sans);
-}
-
-.page-dark .prose {
+/* ── 5. Prose overrides — Tailwind Typography aligned to brand ──────
+   Legal pages (terms / privacy / cookies) and any other text-heavy
+   surface use Tailwind Typography's `prose` class. These overrides
+   apply the brand text + accent colours regardless of page wrapper. */
+.prose {
   --tw-prose-body:       var(--brand-text-secondary);
   --tw-prose-headings:   var(--brand-text-primary);
   --tw-prose-links:      var(--brand-berry);

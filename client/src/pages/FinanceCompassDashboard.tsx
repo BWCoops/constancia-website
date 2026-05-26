@@ -137,7 +137,7 @@ const DIMENSION_CONFIG: Record<string, {
     name: "Organisation & People",
     shortName: "People",
     icon: Users,
-    color: "#F59E0B",
+    color: "#C77A93",
     description: "Structure, talent, skills, culture, and business partnering",
     tooltipContent: {
       measures: "Evaluates finance team structure, talent development, skill capabilities, culture of continuous improvement, and business partnering effectiveness.",
@@ -161,7 +161,7 @@ const DIMENSION_CONFIG: Record<string, {
     name: "AI & Machine Learning",
     shortName: "AI/ML",
     icon: Sparkles,
-    color: "#8B5CF6",
+    color: "#5E8D7A",
     description: "AI adoption, ML models, automation, and intelligent insights",
     tooltipContent: {
       measures: "Evaluates AI and machine learning adoption in finance including intelligent automation, predictive models, and AI-driven insights.",
@@ -1288,7 +1288,7 @@ const AssessmentCard = memo(function AssessmentCard({ assessment }: AssessmentCa
           {isAnalysed && aiAnalysis && (aiAnalysis.summary || (aiAnalysis.keyInsights && aiAnalysis.keyInsights.length > 0)) && (
             <div className="pt-3 border-t border-dashed" data-testid={`ai-insights-${assessment.id}`}>
               <div className="flex items-center gap-2 mb-3">
-                <Sparkles className="h-4 w-4 text-[#8B5CF6]" aria-hidden="true" />
+                <Sparkles className="h-4 w-4 text-[#5E8D7A]" aria-hidden="true" />
                 <span className="text-sm font-medium text-[#252826] dark:text-white">AI Insights</span>
               </div>
               {aiAnalysis.summary && (
@@ -1745,7 +1745,7 @@ const AnalyticsDashboard = memo(function AnalyticsDashboard({
           label="AI Enablement"
           value={kpis.aiEnablement}
           icon={Sparkles}
-          color="#8B5CF6"
+          color="#5E8D7A"
           description="AI & data analytics maturity"
           tooltipContent={{
             measures: "Composite score reflecting AI adoption, machine learning capabilities, data analytics maturity, and intelligent automation across finance.",

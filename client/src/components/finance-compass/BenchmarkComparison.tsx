@@ -271,7 +271,7 @@ export function BenchmarkComparison({
                     }}
                   />
                   <Bar dataKey="yourScore" fill="#8E4F67" radius={[0, 4, 4, 0]} name="yourScore" />
-                  <Bar dataKey="industryAverage" fill="#9CA3AF" radius={[0, 4, 4, 0]} name="industryAverage" />
+                  <Bar dataKey="industryAverage" fill="#D8D0C6" radius={[0, 4, 4, 0]} name="industryAverage" />
                   <Bar dataKey="worldClass" fill="#252826" radius={[0, 4, 4, 0]} name="worldClass" />
                 </BarChart>
               </ResponsiveContainer>

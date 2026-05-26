@@ -388,7 +388,7 @@ async function sendContactVerificationEmail(to: string, firstName: string, token
       to,
       `Verify your email - Constancia Contact`,
       `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 0; background-color: #f5f5f5;">
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 0; background-color: #EFEAE0;">
           <!-- Header with Constancia branding -->
           <div style="background-color: #0A2540; padding: 30px 20px; text-align: center;">
             <h1 style="color: #F6F3EE; margin: 0; font-size: 28px; font-weight: bold;">Constancia</h1>
@@ -397,9 +397,9 @@ async function sendContactVerificationEmail(to: string, firstName: string, token
           
           <!-- Main content -->
           <div style="background-color: #ffffff; padding: 40px 30px;">
-            <p style="color: #333333; font-size: 16px; margin: 0 0 20px 0;">Hi ${firstName},</p>
+            <p style="color: #252826; font-size: 16px; margin: 0 0 20px 0;">Hi ${firstName},</p>
             
-            <p style="color: #333333; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
+            <p style="color: #252826; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
               Thank you for contacting Constancia. Please verify your email address to confirm your enquiry.
             </p>
             
@@ -425,7 +425,7 @@ async function sendContactVerificationEmail(to: string, firstName: string, token
               </p>
             </div>
             
-            <p style="color: #333333; font-size: 16px; line-height: 1.6; margin: 25px 0 0 0;">
+            <p style="color: #252826; font-size: 16px; line-height: 1.6; margin: 25px 0 0 0;">
               Once verified, our team will review your enquiry and get back to you shortly.
             </p>
           </div>
@@ -2167,7 +2167,7 @@ export async function registerRoutes(
             cards: [
               { title: "PDF Quality", value: "100%", subtitle: "Pixel-perfect output" },
               { title: "Formats", value: "4+", subtitle: "Content types supported" },
-              { title: "API Status", value: isAdobePDFConfigured() ? "Active" : "Fallback", color: isAdobePDFConfigured() ? "#10B981" : "#F59E0B" },
+              { title: "API Status", value: isAdobePDFConfigured() ? "Active" : "Fallback", color: isAdobePDFConfigured() ? "#10B981" : "#C77A93" },
             ],
           },
         ],
@@ -2527,11 +2527,11 @@ function generateWordPressCSS(): string {
   --primary: #12161D;
   --primary-foreground: #ffffff;
   --accent: #7FB8A3;
-  --background: #f8fafc;
+  --background: #F6F3EE;
   --foreground: #0f172a;
   --muted: #f1f5f9;
   --muted-foreground: #64748b;
-  --border: #e2e8f0;
+  --border: #D8D0C6;
   --card: #ffffff;
   --radius: 0.5rem;
 }
@@ -3705,7 +3705,7 @@ function convertMarkdownToEnrichedHTML(content: string): string {
   html = html.replace(/^## (.+)$/gm, '<h2 style="font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; color: #12161D; border-bottom: 2px solid #7FB8A3; padding-bottom: 0.5rem;">$1</h2>');
   html = html.replace(/^# (.+)$/gm, '<h1 style="font-size: 2rem; margin-top: 2rem; margin-bottom: 1rem; color: #12161D;">$1</h1>');
   
-  html = html.replace(/\*\*Potential Impact\*\*:(.+)$/gm, '<div style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%); border-left: 4px solid #22c55e; padding: 1rem; margin: 1rem 0; border-radius: 0 8px 8px 0;"><strong style="color: #22c55e;">Potential Impact:</strong>$1</div>');
+  html = html.replace(/\*\*Potential Impact\*\*:(.+)$/gm, '<div style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%); border-left: 4px solid #7FB8A3; padding: 1rem; margin: 1rem 0; border-radius: 0 8px 8px 0;"><strong style="color: #7FB8A3;">Potential Impact:</strong>$1</div>');
   html = html.replace(/\*\*Key Takeaway\*\*:(.+)$/gm, '<div style="background: linear-gradient(135deg, rgba(2, 32, 91, 0.05) 0%, rgba(8, 132, 170, 0.1) 100%); border-left: 4px solid #7FB8A3; padding: 1.5rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0;"><strong style="color: #7FB8A3;">Key Takeaway:</strong>$1</div>');
   
   html = html.replace(/\*\*([^*]+)\*\*/g, '<strong style="color: #12161D;">$1</strong>');

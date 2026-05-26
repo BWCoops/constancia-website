@@ -11,13 +11,13 @@ export const BRAND_COLORS = {
   teal: '#0884AA',
   cream: '#FEFFF3',
   white: '#FFFFFF',
-  lightGray: '#F8FAFC',
-  mediumGray: '#E2E8F0',
+  lightGray: '#F6F3EE',
+  mediumGray: '#D8D0C6',
   darkGray: '#334155',
   slateGray: '#64748B',
   success: '#10B981',
-  warning: '#F59E0B',
-  error: '#EF4444',
+  warning: '#C77A93',
+  error: '#8E4F67',
   info: '#3B82F6',
 };
 

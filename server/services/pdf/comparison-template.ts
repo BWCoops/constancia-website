@@ -13,11 +13,11 @@ const BRAND = {
   cream: '#F6F3EE',
   white: '#FFFFFF',
   muted: '#64748b',
-  cardBg: '#f8fafc',
-  cardBorder: '#e2e8f0',
+  cardBg: '#F6F3EE',
+  cardBorder: '#D8D0C6',
   success: '#10b981',
-  warning: '#f59e0b',
-  danger: '#ef4444',
+  warning: '#C77A93',
+  danger: '#8E4F67',
 };
 
 const IMPLEMENTATION_PHASES = [

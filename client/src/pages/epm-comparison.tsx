@@ -1863,8 +1863,8 @@ function getImplementationGanttData(platforms: Platform[]): PlatformGanttData[] 
     design: '#8E4F67',
     build: '#252826',
     testing: '#6366f1',
-    deployment: '#22c55e',
-    training: '#f59e0b'
+    deployment: '#7FB8A3',
+    training: '#C77A93'
   };
   
   return platforms.map(platform => {
@@ -2517,7 +2517,7 @@ const IMPLEMENTATION_PHASES_TEMPLATE: { name: string; startPct: number; endPct: 
   { name: "Data Migration", startPct: 0.33, endPct: 0.67, color: "#8E4F67" },
   { name: "Testing & UAT", startPct: 0.50, endPct: 0.75, color: "#7FB8A3" },
   { name: "Training", startPct: 0.58, endPct: 0.83, color: "#6366f1" },
-  { name: "Go-Live & Hypercare", startPct: 0.75, endPct: 1.0, color: "#8b5cf6" },
+  { name: "Go-Live & Hypercare", startPct: 0.75, endPct: 1.0, color: "#5E8D7A" },
 ];
 
 function parseImplementationTime(timeStr: string): { min: number; max: number } {
@@ -2941,7 +2941,7 @@ function MobilePlatformCarousel({
                           className={`min-h-[44px] min-w-[44px] ${
                             isSelected 
                               ? "bg-[#7FB8A3] text-[#252826] hover:bg-[#7FB8A3]/90" 
-                              : "border-[#0A6688] text-[#0A6688]"
+                              : "border-[#5E8D7A] text-[#5E8D7A]"
                           }`}
                         >
                           {isSelected ? (
@@ -3009,7 +3009,7 @@ function MobilePlatformCarousel({
 
                       <Button
                         variant="outline"
-                        className="w-full min-h-[44px] border-[#0A6688] text-[#0A6688] hover:bg-[#0A6688] hover:text-white"
+                        className="w-full min-h-[44px] border-[#5E8D7A] text-[#5E8D7A] hover:bg-[#5E8D7A] hover:text-white"
                         onClick={(e) => {
                           e.stopPropagation();
                           onViewDetails(platform.id);
@@ -5835,13 +5835,13 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                       <RadarChart data={radarData}>
                         {/* Background gradient rings - render first so they're behind */}
                         <Radar dataKey="bgGreen" fill="#10b981" fillOpacity={0.12} stroke="none" isAnimationActive={false} legendType="none" />
-                        <Radar dataKey="bgAmber" fill="#f59e0b" fillOpacity={0.08} stroke="none" isAnimationActive={false} legendType="none" />
-                        <Radar dataKey="bgRed" fill="#ef4444" fillOpacity={0.08} stroke="none" isAnimationActive={false} legendType="none" />
+                        <Radar dataKey="bgAmber" fill="#C77A93" fillOpacity={0.08} stroke="none" isAnimationActive={false} legendType="none" />
+                        <Radar dataKey="bgRed" fill="#8E4F67" fillOpacity={0.08} stroke="none" isAnimationActive={false} legendType="none" />
                         <PolarGrid stroke="hsl(var(--border))" gridType="circle" />
                         <PolarAngleAxis dataKey="category" tick={{ fill: "hsl(var(--muted-foreground))", fontSize: 14 }} />
                         <PolarRadiusAxis angle={30} domain={[0, 10]} tick={false} axisLine={false} />
                         {sortedScores.map((platform, index) => {
-                          const colours = ["#7FB8A3", "#8E4F67", "#5E8D7A", "#252826", "#6366f1", "#8b5cf6"];
+                          const colours = ["#7FB8A3", "#8E4F67", "#5E8D7A", "#252826", "#6366f1", "#5E8D7A"];
                           return (
                             <Radar
                               key={platform.id}
@@ -5882,13 +5882,13 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                         <RadarChart data={radarData}>
                           {/* Background gradient rings - render first so they're behind */}
                           <Radar dataKey="bgGreen" fill="#10b981" fillOpacity={0.12} stroke="none" isAnimationActive={false} legendType="none" />
-                          <Radar dataKey="bgAmber" fill="#f59e0b" fillOpacity={0.08} stroke="none" isAnimationActive={false} legendType="none" />
-                          <Radar dataKey="bgRed" fill="#ef4444" fillOpacity={0.08} stroke="none" isAnimationActive={false} legendType="none" />
+                          <Radar dataKey="bgAmber" fill="#C77A93" fillOpacity={0.08} stroke="none" isAnimationActive={false} legendType="none" />
+                          <Radar dataKey="bgRed" fill="#8E4F67" fillOpacity={0.08} stroke="none" isAnimationActive={false} legendType="none" />
                         <PolarGrid stroke="hsl(var(--border))" gridType="circle" />
                         <PolarAngleAxis dataKey="category" tick={{ fill: "hsl(var(--muted-foreground))", fontSize: 12 }} />
                         <PolarRadiusAxis angle={30} domain={[0, 10]} tick={false} axisLine={false} />
                         {sortedScores.map((platform, index) => {
-                          const colours = ["#7FB8A3", "#8E4F67", "#5E8D7A", "#252826", "#6366f1", "#8b5cf6"];
+                          const colours = ["#7FB8A3", "#8E4F67", "#5E8D7A", "#252826", "#6366f1", "#5E8D7A"];
                           return (
                             <Radar
                               key={platform.id}
@@ -5920,13 +5920,13 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                 <RadarChart data={radarData}>
                   {/* Background gradient rings for export */}
                   <Radar dataKey="bgGreen" fill="#10b981" fillOpacity={0.12} stroke="none" isAnimationActive={false} legendType="none" />
-                  <Radar dataKey="bgAmber" fill="#f59e0b" fillOpacity={0.08} stroke="none" isAnimationActive={false} legendType="none" />
-                  <Radar dataKey="bgRed" fill="#ef4444" fillOpacity={0.08} stroke="none" isAnimationActive={false} legendType="none" />
+                  <Radar dataKey="bgAmber" fill="#C77A93" fillOpacity={0.08} stroke="none" isAnimationActive={false} legendType="none" />
+                  <Radar dataKey="bgRed" fill="#8E4F67" fillOpacity={0.08} stroke="none" isAnimationActive={false} legendType="none" />
                   <PolarGrid stroke="#e5e7eb" gridType="circle" />
                   <PolarAngleAxis dataKey="category" tick={{ fill: "#374151", fontSize: 12 }} />
                   <PolarRadiusAxis angle={30} domain={[0, 10]} tick={false} axisLine={false} />
                   {sortedScores.map((platform, index) => {
-                    const colours = ["#7FB8A3", "#8E4F67", "#5E8D7A", "#252826", "#6366f1", "#8b5cf6"];
+                    const colours = ["#7FB8A3", "#8E4F67", "#5E8D7A", "#252826", "#6366f1", "#5E8D7A"];
                     return (
                       <Radar
                         key={platform.id}

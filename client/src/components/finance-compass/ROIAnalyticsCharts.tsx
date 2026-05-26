@@ -46,8 +46,8 @@ interface ROIAnalyticsChartsProps {
 
 const BENEFIT_COLORS = {
   fte: "#8E4F67",
-  efficiency: "#22c55e",
-  risk: "#8b5cf6",
+  efficiency: "#7FB8A3",
+  risk: "#5E8D7A",
 };
 
 function formatCurrencyCompact(value: number, currency: string = "£"): string {
@@ -132,25 +132,25 @@ export function ROIAnalyticsCharts({
       { 
         name: "Implementation", 
         value: -totalImplementationCost, 
-        fill: "#ef4444",
+        fill: "#8E4F67",
         isNegative: true,
       },
       { 
         name: "Operating Costs", 
         value: -yearByYearData.reduce((sum, r) => sum + r.costs, 0), 
-        fill: "#f97316",
+        fill: "#C77A93",
         isNegative: true,
       },
       { 
         name: "Benefits", 
         value: totalBenefitsOverHorizon, 
-        fill: "#22c55e",
+        fill: "#7FB8A3",
         isNegative: false,
       },
       { 
         name: "Net Value", 
         value: netValue, 
-        fill: netValue >= 0 ? "#8E4F67" : "#ef4444",
+        fill: netValue >= 0 ? "#8E4F67" : "#8E4F67",
         isNegative: netValue < 0,
       },
     ];

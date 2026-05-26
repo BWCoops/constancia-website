@@ -237,7 +237,7 @@ async function sendScanReportEmail(summary: ScanSummary): Promise<{ success: boo
             </td>
             <td style="padding: 8px; border-bottom: 1px solid #FECACA;">${escapeHtml(issue.details)}</td>
             <td style="padding: 8px; border-bottom: 1px solid #FECACA;">
-              <span style="background: ${issue.severity === 'critical' ? '#DC2626' : '#F59E0B'}; color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+              <span style="background: ${issue.severity === 'critical' ? '#DC2626' : '#C77A93'}; color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
                 ${issue.severity.toUpperCase()}
               </span>
             </td>
@@ -251,7 +251,7 @@ async function sendScanReportEmail(summary: ScanSummary): Promise<{ success: boo
   ` : "";
 
   const seoRecsHtml = summary.seoRecommendations.length > 0 ? `
-    <div style="background: #FEF3C7; border-left: 4px solid #F59E0B; padding: 16px; margin: 16px 0; border-radius: 4px;">
+    <div style="background: #FEF3C7; border-left: 4px solid #C77A93; padding: 16px; margin: 16px 0; border-radius: 4px;">
       <h3 style="color: #92400E; margin: 0 0 12px 0;">SEO Optimization Suggestions</h3>
       ${summary.seoRecommendations.slice(0, 10).map(rec => `
         <div style="margin-bottom: 12px; padding: 8px; background: white; border-radius: 4px;">
@@ -265,7 +265,7 @@ async function sendScanReportEmail(summary: ScanSummary): Promise<{ success: boo
   ` : "";
 
   const aiDetectionHtml = summary.aiDetectionFlags.length > 0 ? `
-    <div style="background: #EDE9FE; border-left: 4px solid #8B5CF6; padding: 16px; margin: 16px 0; border-radius: 4px;">
+    <div style="background: #EDE9FE; border-left: 4px solid #5E8D7A; padding: 16px; margin: 16px 0; border-radius: 4px;">
       <h3 style="color: #6D28D9; margin: 0 0 12px 0;">AI Content Detection (${summary.aiDetectionFlags.length})</h3>
       <table style="width: 100%; border-collapse: collapse;">
         <tr style="background: #F5F3FF;">
@@ -281,7 +281,7 @@ async function sendScanReportEmail(summary: ScanSummary): Promise<{ success: boo
               <br/><span style="color: #666; font-size: 11px;">ID: ${flag.contentId}</span>
             </td>
             <td style="padding: 8px; border-bottom: 1px solid #DDD6FE;">
-              <span style="background: ${flag.aiScore > 60 ? '#DC2626' : '#F59E0B'}; color: white; padding: 2px 8px; border-radius: 4px;">${flag.aiScore}%</span>
+              <span style="background: ${flag.aiScore > 60 ? '#DC2626' : '#C77A93'}; color: white; padding: 2px 8px; border-radius: 4px;">${flag.aiScore}%</span>
             </td>
             <td style="padding: 8px; border-bottom: 1px solid #DDD6FE;">${flag.humanScore}%</td>
             <td style="padding: 8px; border-bottom: 1px solid #DDD6FE;">
@@ -294,7 +294,7 @@ async function sendScanReportEmail(summary: ScanSummary): Promise<{ success: boo
   ` : "";
 
   const plagiarismHtml = summary.plagiarismFlags.length > 0 ? `
-    <div style="background: #FEF2F2; border-left: 4px solid #EF4444; padding: 16px; margin: 16px 0; border-radius: 4px;">
+    <div style="background: #FEF2F2; border-left: 4px solid #8E4F67; padding: 16px; margin: 16px 0; border-radius: 4px;">
       <h3 style="color: #DC2626; margin: 0 0 12px 0;">Plagiarism Detection (${summary.plagiarismFlags.length})</h3>
       <table style="width: 100%; border-collapse: collapse;">
         <tr style="background: #FEE2E2;">
@@ -309,7 +309,7 @@ async function sendScanReportEmail(summary: ScanSummary): Promise<{ success: boo
               <br/><span style="color: #666; font-size: 11px;">ID: ${flag.contentId}</span>
             </td>
             <td style="padding: 8px; border-bottom: 1px solid #FECACA;">
-              <span style="background: ${flag.plagiarismScore > 20 ? '#DC2626' : '#F59E0B'}; color: white; padding: 2px 8px; border-radius: 4px;">${flag.plagiarismScore}%</span>
+              <span style="background: ${flag.plagiarismScore > 20 ? '#DC2626' : '#C77A93'}; color: white; padding: 2px 8px; border-radius: 4px;">${flag.plagiarismScore}%</span>
             </td>
             <td style="padding: 8px; border-bottom: 1px solid #FECACA;">
               <a href="${adminBaseUrl}/admin/${flag.contentType === 'blog' ? 'blog-posts' : 'resources'}" style="color: #8E4F67; text-decoration: none;">View in Admin</a>
@@ -327,24 +327,24 @@ async function sendScanReportEmail(summary: ScanSummary): Promise<{ success: boo
         <p style="color: #7FB8A3; margin: 8px 0 0 0;">Automated scan completed on ${new Date().toLocaleString("en-GB")}</p>
       </div>
       
-      <div style="background: #F8FAFC; padding: 24px; border: 1px solid #E2E8F0; border-top: none;">
+      <div style="background: #F6F3EE; padding: 24px; border: 1px solid #D8D0C6; border-top: none;">
         <h2 style="color: #1E293B; margin: 0 0 16px 0;">Scan Summary</h2>
         
         <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px;">
-          <div style="background: white; padding: 16px; border-radius: 8px; text-align: center; border: 1px solid #E2E8F0;">
+          <div style="background: white; padding: 16px; border-radius: 8px; text-align: center; border: 1px solid #D8D0C6;">
             <div style="font-size: 28px; font-weight: bold; color: #12161D;">${summary.scannedBlogs}</div>
             <div style="color: #64748B; font-size: 14px;">Blogs Scanned</div>
           </div>
-          <div style="background: white; padding: 16px; border-radius: 8px; text-align: center; border: 1px solid #E2E8F0;">
+          <div style="background: white; padding: 16px; border-radius: 8px; text-align: center; border: 1px solid #D8D0C6;">
             <div style="font-size: 28px; font-weight: bold; color: #12161D;">${summary.scannedResources}</div>
             <div style="color: #64748B; font-size: 14px;">Resources Scanned</div>
           </div>
-          <div style="background: white; padding: 16px; border-radius: 8px; text-align: center; border: 1px solid #E2E8F0;">
+          <div style="background: white; padding: 16px; border-radius: 8px; text-align: center; border: 1px solid #D8D0C6;">
             <div style="font-size: 28px; font-weight: bold; color: ${summary.severeIssues.length > 0 ? '#DC2626' : '#10B981'};">${summary.severeIssues.length}</div>
             <div style="color: #64748B; font-size: 14px;">Issues Found</div>
           </div>
-          <div style="background: white; padding: 16px; border-radius: 8px; text-align: center; border: 1px solid #E2E8F0;">
-            <div style="font-size: 28px; font-weight: bold; color: #F59E0B;">${summary.failedBlogs + summary.failedResources}</div>
+          <div style="background: white; padding: 16px; border-radius: 8px; text-align: center; border: 1px solid #D8D0C6;">
+            <div style="font-size: 28px; font-weight: bold; color: #C77A93;">${summary.failedBlogs + summary.failedResources}</div>
             <div style="color: #64748B; font-size: 14px;">Scan Failures</div>
           </div>
         </div>
@@ -366,7 +366,7 @@ async function sendScanReportEmail(summary: ScanSummary): Promise<{ success: boo
       </div>
       
       <div style="background: #12161D; padding: 16px; border-radius: 0 0 8px 8px; text-align: center;">
-        <p style="color: #9CA3AF; margin: 0; font-size: 12px;">
+        <p style="color: #D8D0C6; margin: 0; font-size: 12px;">
           This is an automated report from the Constancia Admin Centre.
           <br />Questions? Contact the development team.
         </p>

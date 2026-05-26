@@ -121,7 +121,7 @@ export function GapAnalysisCard({
           <div className="flex items-start justify-between">
             <div>
               <CardTitle className="flex items-center gap-2">
-                <TrendingUp className="h-5 w-5 text-[#0A6688]" />
+                <TrendingUp className="h-5 w-5 text-[#5E8D7A]" />
                 {title}
               </CardTitle>
               <CardDescription>{description}</CardDescription>

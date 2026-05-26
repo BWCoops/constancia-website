@@ -76,7 +76,7 @@ const BENEFIT_CATEGORIES: BenefitCategory[] = [
     name: 'Cost Savings',
     icon: DollarSign,
     description: 'Direct cost reduction and efficiency gains',
-    color: '#22c55e',
+    color: '#7FB8A3',
     bgClass: 'bg-green-100 dark:bg-green-900/20',
     metrics: [
       { name: 'Software Consolidation', currentState: 'Multiple tools', potentialRange: [15, 30], unit: '%', impactLevel: 'medium', timeframe: '12-18 months' },
@@ -90,7 +90,7 @@ const BENEFIT_CATEGORIES: BenefitCategory[] = [
     name: 'Cycle Time Reduction',
     icon: Clock,
     description: 'Faster close, planning, and reporting cycles',
-    color: '#8b5cf6',
+    color: '#5E8D7A',
     bgClass: 'bg-purple-100 dark:bg-purple-900/20',
     metrics: [
       { name: 'Monthly Close', currentState: '10+ days', potentialRange: [30, 50], unit: '% faster', impactLevel: 'high', timeframe: '6-12 months' },
@@ -104,7 +104,7 @@ const BENEFIT_CATEGORIES: BenefitCategory[] = [
     name: 'Revenue & Margin Impact',
     icon: TrendingUp,
     description: 'Top and bottom line improvements',
-    color: '#f97316',
+    color: '#C77A93',
     bgClass: 'bg-orange-100 dark:bg-orange-900/20',
     metrics: [
       { name: 'Forecast Accuracy', currentState: '±15%', potentialRange: [2, 5], unit: 'pp improvement', impactLevel: 'high', timeframe: '12-18 months' },
@@ -118,7 +118,7 @@ const BENEFIT_CATEGORIES: BenefitCategory[] = [
     name: 'Risk Reduction',
     icon: Shield,
     description: 'Improved controls and compliance',
-    color: '#ef4444',
+    color: '#8E4F67',
     bgClass: 'bg-red-100 dark:bg-red-900/20',
     metrics: [
       { name: 'Data Quality Issues', currentState: 'Frequent', potentialRange: [40, 60], unit: '% reduction', impactLevel: 'high', timeframe: '6-12 months' },

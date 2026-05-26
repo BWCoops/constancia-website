@@ -11,7 +11,7 @@ export const PDF_BRAND_COLORS = {
   teal: { hex: "#0884AA", rgb: { r: 8, g: 132, b: 170 } },
   cream: { hex: "#FEFFF3", rgb: { r: 254, g: 255, b: 243 } },
   white: { hex: "#FFFFFF", rgb: { r: 255, g: 255, b: 255 } },
-  lightGray: { hex: "#F8FAFC", rgb: { r: 248, g: 250, b: 252 } },
+  lightGray: { hex: "#F6F3EE", rgb: { r: 246, g: 243, b: 238 } },
   darkGray: { hex: "#334155", rgb: { r: 51, g: 65, b: 85 } },
   gray: { hex: "#646464", rgb: { r: 100, g: 100, b: 100 } },
 };

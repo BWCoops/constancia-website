@@ -73,7 +73,7 @@ export async function sendTestEmail(toEmail: string): Promise<{ success: boolean
         .header { background: #12161D; color: white; padding: 20px; text-align: center; }
         .content { padding: 20px; background: #f9f9f9; }
         .footer { text-align: center; padding: 20px; font-size: 12px; color: #666; }
-        .success { color: #22c55e; font-weight: bold; }
+        .success { color: #7FB8A3; font-weight: bold; }
       </style>
     </head>
     <body>

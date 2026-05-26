@@ -76,9 +76,9 @@ const BRAND = {
   lightGrey: "#F3F4F6",
   white: "#FFFFFF",
   green: "#10B981",
-  amber: "#F59E0B",
-  orange: "#F97316",
-  red: "#EF4444",
+  amber: "#C77A93",
+  orange: "#C77A93",
+  red: "#8E4F67",
 };
 
 const RGB = {

@@ -15,7 +15,7 @@ export const EMAIL_BRAND = {
   white: '#FFFFFF',
   lightGray: '#f8f9fa',
   mediumGray: '#e5e7eb',
-  darkGray: '#333333',
+  darkGray: '#252826',
   mutedGray: '#666666',
 };
 
@@ -166,7 +166,7 @@ export function generateInfoCard(content: string): string {
 
 export function wrapEmailContent(content: string): string {
   return `
-    <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 0; background-color: #f5f5f5;">
+    <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 0; background-color: #EFEAE0;">
       ${content}
     </div>
   `;

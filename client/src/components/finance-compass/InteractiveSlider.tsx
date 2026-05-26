@@ -250,13 +250,13 @@ export function InteractiveSlider({
             >
               <div className={cn(
                 "text-lg font-bold mb-1 transition-colors",
-                isActive ? "text-[#0A6688]" : "text-foreground"
+                isActive ? "text-[#5E8D7A]" : "text-foreground"
               )}>
                 {labelValue}
               </div>
               <div className={cn(
                 "text-xs leading-tight transition-colors",
-                isActive ? "text-[#0A6688]/80" : "text-muted-foreground"
+                isActive ? "text-[#5E8D7A]/80" : "text-muted-foreground"
               )}>
                 {label}
               </div>

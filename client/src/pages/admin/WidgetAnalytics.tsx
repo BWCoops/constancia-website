@@ -488,8 +488,8 @@ function getRoleLabel(value: string) {
 }
 
 function getScoreColour(score: number): string {
-  if (score < 2.5) return "#ef4444";
-  if (score < 3.5) return "#f59e0b";
+  if (score < 2.5) return "#8E4F67";
+  if (score < 3.5) return "#C77A93";
   return "#10b981";
 }
 
@@ -559,7 +559,7 @@ function FunnelAnalysisTab({ data, isLoading }: { data: DimensionAnalysisData | 
     sessions: q.sessionsAtQuestion,
     dropoff: q.dropoffRate,
     fill: q.dropoffRate > 20 
-      ? (q.dropoffRate > 35 ? "#ef4444" : "#f59e0b") 
+      ? (q.dropoffRate > 35 ? "#8E4F67" : "#C77A93") 
       : `hsl(${180 + idx * 5}, 70%, ${50 - idx * 2}%)`,
   }));
 
@@ -972,8 +972,8 @@ function DimensionPerformanceTab({ data, isLoading }: { data: DimensionAnalysisD
                             <Cell 
                               key={`cell-${index}`} 
                               fill={
-                                index < 2 ? '#ef4444' : 
-                                index === 2 ? '#f59e0b' : 
+                                index < 2 ? '#8E4F67' : 
+                                index === 2 ? '#C77A93' : 
                                 '#10b981'
                               }
                               opacity={0.8}
@@ -2880,10 +2880,10 @@ export default function WidgetAnalytics() {
                               data={widgetQualityStats.data.flagBreakdown.map(f => ({
                                 name: f.flag.replace(/_/g, ' '),
                                 count: f.count,
-                                fill: f.flag === 'bot_suspected' ? '#ef4444' :
-                                      f.flag === 'too_fast' ? '#f59e0b' :
+                                fill: f.flag === 'bot_suspected' ? '#8E4F67' :
+                                      f.flag === 'too_fast' ? '#C77A93' :
                                       f.flag === 'too_slow' ? '#3b82f6' :
-                                      f.flag === 'incomplete' ? '#8b5cf6' :
+                                      f.flag === 'incomplete' ? '#5E8D7A' :
                                       f.flag === 'missing_responses' ? '#ec4899' :
                                       '#6b7280'
                               }))}
@@ -2911,10 +2911,10 @@ export default function WidgetAnalytics() {
                                 {widgetQualityStats.data.flagBreakdown.map((entry, index) => (
                                   <Cell 
                                     key={`cell-${index}`} 
-                                    fill={entry.flag === 'bot_suspected' ? '#ef4444' :
-                                          entry.flag === 'too_fast' ? '#f59e0b' :
+                                    fill={entry.flag === 'bot_suspected' ? '#8E4F67' :
+                                          entry.flag === 'too_fast' ? '#C77A93' :
                                           entry.flag === 'too_slow' ? '#3b82f6' :
-                                          entry.flag === 'incomplete' ? '#8b5cf6' :
+                                          entry.flag === 'incomplete' ? '#5E8D7A' :
                                           entry.flag === 'missing_responses' ? '#ec4899' :
                                           '#6b7280'}
                                   />

@@ -14,25 +14,25 @@ interface GaugeChartProps {
 
 const colorSchemes = {
   default: {
-    low: '#ef4444',
+    low: '#8E4F67',
     mid: '#eab308',
-    high: '#22c55e',
+    high: '#7FB8A3',
     track: 'hsl(var(--muted))',
   },
   epm: {
-    low: '#ef4444',
+    low: '#8E4F67',
     mid: '#8E4F67',
     high: '#252826',
     track: 'hsl(var(--muted))',
   },
   ai: {
-    low: '#f97316',
-    mid: '#8b5cf6',
+    low: '#C77A93',
+    mid: '#5E8D7A',
     high: '#6366f1',
     track: 'hsl(var(--muted))',
   },
   infrastructure: {
-    low: '#ef4444',
+    low: '#8E4F67',
     mid: '#14b8a6',
     high: '#7FB8A3',
     track: 'hsl(var(--muted))',

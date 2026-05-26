@@ -25,8 +25,8 @@ const BRAND_COLORS = {
   teal: "#8E4F67",
   cream: "#F6F3EE",
   white: "#FFFFFF",
-  darkGray: "#333333",
-  lightGray: "#F5F5F5",
+  darkGray: "#252826",
+  lightGray: "#EFEAE0",
 };
 
 // Default styles for Constancia branded documents
@@ -89,7 +89,7 @@ export function createTable(options: {
     widths,
     headerStyle = {},
     cellStyle = {},
-    alternateRowColor = "#F8FAFC",
+    alternateRowColor = "#F6F3EE",
     caption,
   } = options;
 
@@ -118,8 +118,8 @@ export function createTable(options: {
       layout: {
         hLineWidth: () => 0.5,
         vLineWidth: () => 0.5,
-        hLineColor: () => "#E2E8F0",
-        vLineColor: () => "#E2E8F0",
+        hLineColor: () => "#D8D0C6",
+        vLineColor: () => "#D8D0C6",
         paddingLeft: () => 6,
         paddingRight: () => 6,
         paddingTop: () => 4,
@@ -170,7 +170,7 @@ export function createComparisonTable(options: {
         text: row.name,
         style: "tableCell",
         bold: row.highlight,
-        fillColor: row.highlight ? "#E8F4FC" : rowIndex % 2 === 1 ? "#F8FAFC" : undefined,
+        fillColor: row.highlight ? "#EFEAE0" : rowIndex % 2 === 1 ? "#F6F3EE" : undefined,
       },
     ];
 
@@ -184,7 +184,7 @@ export function createComparisonTable(options: {
         style: "tableCell",
         bold: isHighScore,
         color: isHighScore ? BRAND_COLORS.teal : undefined,
-        fillColor: row.highlight ? "#E8F4FC" : rowIndex % 2 === 1 ? "#F8FAFC" : undefined,
+        fillColor: row.highlight ? "#EFEAE0" : rowIndex % 2 === 1 ? "#F6F3EE" : undefined,
       });
     });
 
@@ -200,8 +200,8 @@ export function createComparisonTable(options: {
     layout: {
       hLineWidth: () => 0.5,
       vLineWidth: () => 0.5,
-      hLineColor: () => "#E2E8F0",
-      vLineColor: () => "#E2E8F0",
+      hLineColor: () => "#D8D0C6",
+      vLineColor: () => "#D8D0C6",
       paddingLeft: () => 6,
       paddingRight: () => 6,
       paddingTop: () => 4,
@@ -226,7 +226,7 @@ export function createCard(options: {
   const bgColors = {
     primary: BRAND_COLORS.navy,
     secondary: "#F1F5F9",
-    highlight: "#E8F4FC",
+    highlight: "#EFEAE0",
   };
 
   const textColors = {

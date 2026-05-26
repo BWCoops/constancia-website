@@ -2786,7 +2786,7 @@ export const DIMENSION_CONFIG = {
     name: "Organisation & People",
     shortName: "People",
     icon: "Users",
-    color: "#F59E0B",
+    color: "#C77A93",
     description: "Structure, talent, skills, culture, and business partnering"
   },
   data_analytics: {
@@ -2800,7 +2800,7 @@ export const DIMENSION_CONFIG = {
     name: "AI & Machine Learning",
     shortName: "AI/ML",
     icon: "Sparkles",
-    color: "#8B5CF6",
+    color: "#5E8D7A",
     description: "AI adoption, ML models, automation, and intelligent insights"
   }
 };

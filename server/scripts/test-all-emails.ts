@@ -48,7 +48,7 @@ function tplConfigTest(): string {
         <h2 style="margin:0">Constancia Email Configuration Test</h2>
       </div>
       <div style="padding:24px;background:#f9f9f9">
-        <p style="color:#22c55e;font-weight:bold;font-size:16px">Email service is working correctly!</p>
+        <p style="color:#7FB8A3;font-weight:bold;font-size:16px">Email service is working correctly!</p>
         <p>This test was sent at <strong>${new Date().toLocaleString("en-GB", { dateStyle: "full", timeStyle: "long" })}</strong></p>
         <p><strong>Transport:</strong> Gmail SMTP (info@constancia.io)</p>
         <p><strong>Recipient:</strong> ${TEST_RECIPIENT}</p>

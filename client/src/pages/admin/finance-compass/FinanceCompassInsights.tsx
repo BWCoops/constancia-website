@@ -236,12 +236,12 @@ const DIMENSION_COLORS: Record<string, string> = {
   financial_planning_analysis: "#7FB8A3",
   management_reporting: "#0EA5E9",
   consolidation_close: "#6366F1",
-  transaction_processing: "#8B5CF6",
+  transaction_processing: "#5E8D7A",
   financial_controls_compliance: "#EC4899",
-  technology_systems: "#F59E0B",
+  technology_systems: "#C77A93",
   organisation_people: "#10B981",
   data_analytics: "#14B8A6",
-  ai_machine_learning: "#F97316",
+  ai_machine_learning: "#C77A93",
 };
 
 const DEVICE_ICONS: Record<string, React.ReactNode> = {
@@ -512,7 +512,7 @@ function CompletionTrendsChart({ data }: { data: CompletionTrend[] }) {
             yAxisId="right"
             type="monotone" 
             dataKey="avgScore" 
-            stroke="#F59E0B" 
+            stroke="#C77A93" 
             strokeWidth={2}
             dot={false}
             name="Avg Score"
@@ -535,7 +535,7 @@ function ScoreHistogram({ data }: { data: ScoreDistribution[] }) {
     });
   }, [data]);
   
-  const colors = ['#EF4444', '#F59E0B', '#EAB308', '#22C55E', '#10B981'];
+  const colors = ['#8E4F67', '#C77A93', '#EAB308', '#7FB8A3', '#10B981'];
   
   return (
     <InteractiveChart height={250} dataLength={sortedData.length} enableZoomControls={false}>
