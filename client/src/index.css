@@ -1708,66 +1708,63 @@ div[class*="hs-chat"] {
     -webkit-backdrop-filter: url(#glass) blur(18px) saturate(170%);
   }
 }
-/* Chromatic shimmer rim — rose → stone → mint, slowly rotating
-   around the border so the edge feels alive. The hue rotation is
-   driven by a 14s animation; the mask-composite trick keeps the
-   gradient as a 1px ring rather than filling the whole surface. */
+/* Static chromatic edge rim — rose → stone → mineral green wraps
+   the border. No rotation animation (the previous 14s spin was
+   distracting once every card on the page had it). The mask-
+   composite trick keeps the gradient as a 1 px ring. */
 .glass-surface::before {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: conic-gradient(from var(--glass-angle, 115deg),
-    rgba(199, 122, 147, 0.55) 0deg,
-    rgba(216, 208, 198, 0.45) 90deg,
-    rgba(127, 184, 163, 0.55) 180deg,
-    rgba(216, 208, 198, 0.45) 270deg,
-    rgba(199, 122, 147, 0.55) 360deg);
+  background: conic-gradient(from 115deg,
+    rgba(199, 122, 147, 0.50) 0deg,
+    rgba(216, 208, 198, 0.42) 90deg,
+    rgba(127, 184, 163, 0.50) 180deg,
+    rgba(216, 208, 198, 0.42) 270deg,
+    rgba(199, 122, 147, 0.50) 360deg);
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
           mask-composite: exclude;
   pointer-events: none;
-  opacity: 0.75;
-  animation: glass-rim-rotate 14s linear infinite;
+  opacity: 0.85;
 }
-@property --glass-angle {
-  syntax: '<angle>';
-  inherits: false;
-  initial-value: 0deg;
-}
-@keyframes glass-rim-rotate {
-  to { --glass-angle: 360deg; }
-}
-/* Travelling shimmer sweep — a soft, slightly chromatic light bar
-   that drifts diagonally across the surface every ~9s. Lives on the
-   ::after pseudo so it doesn't interfere with the ::before rim. */
+
+/* Atmospheric depth pass — three soft brand-tinted bloom spots
+   layered over the card body. Replaces the linear shimmer sweep
+   (which read as a wipe line moving across) with depth-forward
+   ambient light. Top-left white highlight + bottom-right rose +
+   lower-left mineral green for tri-tone interior glow. Very slow
+   gentle bloom (16s) — felt, not seen. */
 .glass-surface::after {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: linear-gradient(115deg,
-    transparent 35%,
-    rgba(255, 255, 255, 0.18) 47%,
-    rgba(216, 208, 198, 0.28) 50%,
-    rgba(255, 255, 255, 0.18) 53%,
-    transparent 65%);
-  background-size: 240% 100%;
-  background-position: 100% 50%;
+  background:
+    radial-gradient(ellipse 55% 45% at 22% 26%,
+      rgba(255, 255, 255, 0.32) 0%,
+      rgba(255, 255, 255, 0.10) 35%,
+      rgba(255, 255, 255, 0) 70%),
+    radial-gradient(ellipse 45% 40% at 78% 78%,
+      rgba(199, 122, 147, 0.18) 0%,
+      rgba(199, 122, 147, 0.06) 40%,
+      rgba(199, 122, 147, 0) 70%),
+    radial-gradient(ellipse 40% 35% at 18% 82%,
+      rgba(127, 184, 163, 0.14) 0%,
+      rgba(127, 184, 163, 0) 65%);
   pointer-events: none;
-  opacity: 0.85;
-  mix-blend-mode: screen;
-  animation: glass-shimmer-sweep 9s ease-in-out infinite;
+  opacity: 0.90;
+  animation: glass-breathe 16s ease-in-out infinite;
 }
-@keyframes glass-shimmer-sweep {
-  0%, 100% { background-position: 130% 50%; }
-  50%      { background-position: -30% 50%; }
+@keyframes glass-breathe {
+  0%, 100% { transform: scale(1.00) translate(0%,    0%); opacity: 0.85; }
+  50%      { transform: scale(1.04) translate(1.5%, -1%); opacity: 1.00; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .glass-surface::before,
   .glass-surface::after { animation: none; }
 }
 
@@ -3290,3 +3287,82 @@ div[class*="hs-chat"] {
   margin: 16px 0;
 }
 .vendor-profile__missing p { color: var(--brand-text-secondary); margin-bottom: 24px; }
+
+/* ── Comparison Tool — brand-styled hero + CTA tablets ──────────────
+   The /tools/epm-comparison page wraps a heavy interactive table.
+   These styles brand-align the hero and closing CTA so the page
+   reads as part of the same site. The middle table region keeps
+   its own UI. */
+.comparison-hero { padding: clamp(72px, 10vh, 120px) 24px clamp(40px, 6vh, 64px); }
+.comparison-hero__inner { max-width: 880px; margin: 0 auto; }
+.comparison-hero__card {
+  padding: clamp(36px, 5vw, 56px) clamp(28px, 4vw, 48px);
+  text-align: center;
+  border-radius: 28px;
+}
+.comparison-hero__title {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: clamp(34px, 5.2vw, 60px);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.022em;
+  color: var(--brand-text-primary);
+  margin: 22px 0 18px;
+}
+.comparison-hero__subtitle {
+  font-size: clamp(15px, 1.55vw, 18px);
+  line-height: 1.6;
+  color: var(--brand-text-secondary);
+  max-width: 60ch;
+  margin: 0 auto 24px;
+}
+.comparison-hero__pills {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.comparison-hero__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(199, 122, 147, 0.22);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brand-berry);
+}
+
+.comparison-cta { padding: clamp(40px, 8vh, 96px) 24px clamp(80px, 12vh, 140px); }
+.comparison-cta__inner { max-width: 880px; margin: 0 auto; }
+.comparison-cta__card {
+  padding: clamp(36px, 5vw, 56px) clamp(28px, 4vw, 48px);
+  text-align: center;
+  border-radius: 28px;
+}
+.comparison-cta__title {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: clamp(28px, 3.8vw, 42px);
+  font-weight: 300;
+  line-height: 1.14;
+  letter-spacing: -0.018em;
+  color: var(--brand-text-primary);
+  margin: 18px 0 16px;
+}
+.comparison-cta__body {
+  font-size: clamp(15px, 1.5vw, 17px);
+  line-height: 1.6;
+  color: var(--brand-text-secondary);
+  max-width: 60ch;
+  margin: 0 auto 24px;
+}
+.comparison-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+}

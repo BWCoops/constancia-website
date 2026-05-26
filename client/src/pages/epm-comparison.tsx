@@ -6624,15 +6624,15 @@ const heroTechImages = [
 // Skeleton loading component for initial page load
 function ComparisonPageSkeleton() {
   return (
-    <div className="min-h-screen bg-background">
-      <main className="pt-16 sm:pt-20">
-        {/* Hero skeleton */}
-        <section className="py-10 md:py-16 lg:py-24 bg-gradient-to-b from-[#252826] to-[#8E4F67]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="flex flex-col items-center text-center">
-              <Skeleton className="h-10 w-64 mb-4 bg-white/20" />
-              <Skeleton className="h-6 w-96 mb-2 bg-white/20" />
-              <Skeleton className="h-6 w-80 bg-white/20" />
+    <div className="marketing-page">
+      <main>
+        {/* Hero skeleton — brand canvas, glass tablet shape */}
+        <section className="comparison-hero">
+          <div className="comparison-hero__inner">
+            <div className="glass-surface comparison-hero__card">
+              <Skeleton className="h-6 w-32 mb-4 mx-auto" />
+              <Skeleton className="h-12 w-80 mb-3 mx-auto" />
+              <Skeleton className="h-5 w-96 mx-auto" />
             </div>
           </div>
         </section>
@@ -6697,179 +6697,44 @@ export default function TechComparisonPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="marketing-page">
       <SEOHead
         title="Enterprise Technology Comparison Tool | Constancia - Compare EPM, ERP & AI Solutions"
         description="Compare EPM platforms like OneStream, Anaplan, and Pigment side by side. Filter by requirements, view detailed scoring, and export analysis for your evaluation."
         keywords={["EPM comparison", "ERP comparison", "AI for finance", "OneStream vs Anaplan", "Oracle ERP", "SAP S/4HANA", "Microsoft Copilot", "financial technology"]}
       />
-      
 
-      <main className="pt-16 sm:pt-20">
-        <section className="py-10 md:py-16 lg:py-24 bg-gradient-to-b from-[#252826] to-[#8E4F67] relative overflow-hidden">
-          {/* Background orbs - static on mobile/reduced motion for better performance */}
-          {shouldReduceMotion ? (
-            <>
-              <div
-                className="absolute top-1/4 left-10 w-64 h-64 rounded-full bg-[#7FB8A3]/10 blur-3xl opacity-40"
-                aria-hidden="true"
-              />
-              <div
-                className="absolute bottom-1/4 right-10 w-96 h-96 rounded-full bg-[#8E4F67]/20 blur-3xl opacity-30"
-                aria-hidden="true"
-              />
-            </>
-          ) : (
-            <>
-              <motion.div
-                className="absolute top-1/4 left-10 w-64 h-64 rounded-full bg-[#7FB8A3]/10 blur-3xl will-change-transform"
-                animate={{
-                  scale: [1, 1.2, 1],
-                  opacity: [0.3, 0.5, 0.3],
-                }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                aria-hidden="true"
-              />
-              <motion.div
-                className="absolute bottom-1/4 right-10 w-96 h-96 rounded-full bg-[#8E4F67]/20 blur-3xl will-change-transform"
-                animate={{
-                  scale: [1.2, 1, 1.2],
-                  opacity: [0.4, 0.2, 0.4],
-                }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                aria-hidden="true"
-              />
-            </>
-          )}
-          
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="text-center lg:text-left"
-              >
-                <Badge className="bg-white/10 backdrop-blur-md border-[#7FB8A3]/30 text-white mb-6" data-testid="badge-hero">
-                  Interactive Tool
-                </Badge>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-                  Enterprise Technology<br />
-                  <span className="text-brand-cyan">Comparison Tool</span>
-                </h1>
-                <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto lg:mx-0 mb-8">
-                  Compare leading enterprise platforms across EPM, ERP, and AI solutions. 
-                  Adjust scoring weights to match your priorities and find the best fit for your organisation.
-                </p>
-                <div className="flex flex-wrap justify-center lg:justify-start gap-4">
-                  <Badge className="bg-white/10 text-white/90 border-white/20" data-testid="badge-categories">
-                    <Layers className="w-3 h-3 mr-1" /> Three categories
-                  </Badge>
-                  <Badge className="bg-white/10 text-white/90 border-white/20" data-testid="badge-data">
-                    <BarChart3 className="w-3 h-3 mr-1" /> Data-driven analysis
-                  </Badge>
-                  <Badge className="bg-white/10 text-white/90 border-white/20" data-testid="badge-realtime">
-                    <TrendingUp className="w-3 h-3 mr-1" /> Real-time scoring
-                  </Badge>
-                </div>
-              </motion.div>
-
-              {/* Hero visual - simplified static version on mobile, animated on desktop */}
-              <div className="hidden lg:flex items-center justify-center">
-                <div className="relative w-80 h-80">
-                  {/* Rotating circles - static when reduced motion preferred */}
-                  {shouldReduceMotion ? (
-                    <>
-                      <div className="absolute inset-0 rounded-full border-2 border-[#7FB8A3]/20" />
-                      <div className="absolute inset-4 rounded-full border-2 border-[#7FB8A3]/30" />
-                      <div className="absolute inset-8 rounded-full border-2 border-[#7FB8A3]/40" />
-                    </>
-                  ) : (
-                    <>
-                      <motion.div
-                        className="absolute inset-0 rounded-full border-2 border-[#7FB8A3]/20 will-change-transform"
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                      />
-                      <motion.div
-                        className="absolute inset-4 rounded-full border-2 border-[#7FB8A3]/30 will-change-transform"
-                        animate={{ rotate: -360 }}
-                        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                      />
-                      <motion.div
-                        className="absolute inset-8 rounded-full border-2 border-[#7FB8A3]/40 will-change-transform"
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                      />
-                    </>
-                  )}
-                  
-                  {/* Center icon - simplified transition on reduced motion */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    {shouldReduceMotion ? (
-                      <div className="flex flex-col items-center">
-                        <div 
-                          className="w-24 h-24 rounded-2xl flex items-center justify-center mb-4"
-                          style={{ backgroundColor: `${heroTechImages[currentHeroImage].color}20` }}
-                        >
-                          {(() => {
-                            const IconComponent = heroTechImages[currentHeroImage].icon;
-                            return <IconComponent className="w-12 h-12" style={{ color: heroTechImages[currentHeroImage].color }} />;
-                          })()}
-                        </div>
-                        <span className="text-lg font-semibold text-white">
-                          {heroTechImages[currentHeroImage].label}
-                        </span>
-                      </div>
-                    ) : (
-                      <AnimatePresence mode="wait">
-                        <motion.div
-                          key={currentHeroImage}
-                          initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
-                          animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-                          exit={{ opacity: 0, scale: 0.8, rotateY: 90 }}
-                          transition={{ duration: 0.5 }}
-                          className="flex flex-col items-center"
-                        >
-                          <div 
-                            className="w-24 h-24 rounded-2xl flex items-center justify-center mb-4"
-                            style={{ backgroundColor: `${heroTechImages[currentHeroImage].color}20` }}
-                          >
-                            {(() => {
-                              const IconComponent = heroTechImages[currentHeroImage].icon;
-                              return <IconComponent className="w-12 h-12" style={{ color: heroTechImages[currentHeroImage].color }} />;
-                            })()}
-                          </div>
-                          <span className="text-lg font-semibold text-white">
-                            {heroTechImages[currentHeroImage].label}
-                          </span>
-                        </motion.div>
-                      </AnimatePresence>
-                    )}
-                  </div>
-
-                  {/* Orbiting dots - skip on reduced motion for performance */}
-                  {!shouldReduceMotion && [0, 1, 2].map((idx) => (
-                    <motion.div
-                      key={idx}
-                      className="absolute w-4 h-4 rounded-full bg-[#7FB8A3] will-change-transform"
-                      style={{
-                        top: "50%",
-                        left: "50%",
-                      }}
-                      animate={{
-                        x: [0, Math.cos((idx * 120 + 0) * Math.PI / 180) * 140, Math.cos((idx * 120 + 120) * Math.PI / 180) * 140, Math.cos((idx * 120 + 240) * Math.PI / 180) * 140, 0],
-                        y: [0, Math.sin((idx * 120 + 0) * Math.PI / 180) * 140, Math.sin((idx * 120 + 120) * Math.PI / 180) * 140, Math.sin((idx * 120 + 240) * Math.PI / 180) * 140, 0],
-                      }}
-                      transition={{
-                        duration: 8,
-                        repeat: Infinity,
-                        ease: "linear",
-                        delay: idx * 0.5,
-                      }}
-                    />
-                  ))}
-                </div>
+      <main>
+        {/* Brand-styled hero matching the rest of the site. Same
+            cream canvas + glass tablet primitive used by the marketing
+            pages. The previous dark-gradient hero with orbiting dots
+            broke visual continuity. */}
+        <section className="comparison-hero">
+          <div className="comparison-hero__inner">
+            <div className="glass-surface comparison-hero__card">
+              <div className="page-hero__badge">
+                <span className="page-hero__badge-dot" aria-hidden="true" />
+                <span>Interactive Tool</span>
+              </div>
+              <h1 className="comparison-hero__title">
+                Enterprise Technology{" "}
+                <em className="scrolly-tablet__heading-accent">Comparison.</em>
+              </h1>
+              <p className="comparison-hero__subtitle">
+                Compare leading platforms across EPM, ERP, and AI for Finance.
+                Adjust scoring weights to match your priorities and see which one
+                actually fits — by the drivers that move the needle.
+              </p>
+              <div className="comparison-hero__pills">
+                <span className="comparison-hero__pill">
+                  <Layers className="w-3.5 h-3.5" /> Three categories
+                </span>
+                <span className="comparison-hero__pill">
+                  <BarChart3 className="w-3.5 h-3.5" /> Data-driven scoring
+                </span>
+                <span className="comparison-hero__pill">
+                  <TrendingUp className="w-3.5 h-3.5" /> Real-time weight tuning
+                </span>
               </div>
             </div>
           </div>
@@ -6953,49 +6818,37 @@ export default function TechComparisonPage() {
           </div>
         </section>
 
-        <section className="py-12 md:py-16 lg:py-24 lg:pb-40 bg-gradient-to-r from-[#252826] via-[#5E8D7A] to-[#8E4F67]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Need Expert Guidance?
+        <section className="comparison-cta">
+          <div className="comparison-cta__inner">
+            <div className="glass-surface comparison-cta__card">
+              <div className="page-hero__badge">
+                <span className="page-hero__badge-dot" aria-hidden="true" />
+                <span>Need a second opinion?</span>
+              </div>
+              <h2 className="comparison-cta__title">
+                The data tells you what fits.{" "}
+                <em className="scrolly-tablet__heading-accent">
+                  A senior practitioner tells you whether to pull the trigger.
+                </em>
               </h2>
-              <p className="text-lg text-white/80 max-w-2xl mx-auto mb-8">
-                Our independent consultants can help you evaluate these platforms in the context of 
-                your specific requirements, existing technology stack, and organisational goals.
+              <p className="comparison-cta__body">
+                Constancia advisors will read the comparison against your existing
+                stack, your team's maturity, and the constraints the demo can't
+                show. Independent — no kickbacks, no pipeline pressure.
               </p>
-              <div className="flex flex-wrap justify-center gap-4">
+              <div className="comparison-cta__actions">
                 {flags.contact && (
-                  <Link href="/contact">
-                    <Button
-                      size="lg"
-                      className="bg-[#7FB8A3] text-[#252826] hover:bg-[#08CCF9]"
-                      data-testid="button-contact-cta"
-                    >
-                      Schedule a Consultation
-                      <ArrowRight className="ml-2 h-5 w-5" />
-                    </Button>
+                  <Link href="/contact" className="scrolly-tablet__link scrolly-tablet__link--strong" data-testid="button-contact-cta">
+                    Schedule a conversation →
                   </Link>
                 )}
                 {flags.services && (
-                  <Link href="/services">
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      className="border-white/30 text-white hover:bg-white/10 backdrop-blur-md"
-                      data-testid="button-services-cta"
-                    >
-                      View Our Services
-                    </Button>
+                  <Link href="/services" className="scrolly-tablet__link" data-testid="button-services-cta">
+                    Our services →
                   </Link>
                 )}
               </div>
-            </motion.div>
+            </div>
           </div>
         </section>
       </main>
