@@ -116,7 +116,7 @@ export function CookiePreferencesIcon() {
                   <Label className="font-medium">Essential Cookies</Label>
                   <p className="text-xs text-muted-foreground">Required for core functionality</p>
                 </div>
-                <Switch checked disabled className="switch-brand flex-shrink-0" />
+                <Switch checked disabled className="flex-shrink-0" />
               </div>
 
               <div className="flex items-center justify-between gap-4 p-3 bg-muted/50 rounded-lg">
@@ -127,7 +127,7 @@ export function CookiePreferencesIcon() {
                 <Switch
                   checked={analytics}
                   onCheckedChange={setAnalytics}
-                  className="switch-brand flex-shrink-0"
+                  className="flex-shrink-0"
                   data-testid="switch-modal-analytics"
                 />
               </div>
@@ -140,7 +140,7 @@ export function CookiePreferencesIcon() {
                 <Switch
                   checked={marketing}
                   onCheckedChange={setMarketing}
-                  className="switch-brand flex-shrink-0"
+                  className="flex-shrink-0"
                   data-testid="switch-modal-marketing"
                 />
               </div>
@@ -252,7 +252,7 @@ export function CookieConsentBanner() {
                         <Label className="font-medium">Essential Cookies</Label>
                         <p className="text-xs text-muted-foreground">Required for the website to function properly</p>
                       </div>
-                      <Switch checked disabled className="switch-brand flex-shrink-0" />
+                      <Switch checked disabled className="flex-shrink-0" />
                     </div>
 
                     <div className="flex items-center justify-between gap-4">
@@ -263,7 +263,7 @@ export function CookieConsentBanner() {
                       <Switch
                         checked={analytics}
                         onCheckedChange={setAnalytics}
-                        className="switch-brand flex-shrink-0"
+                        className="flex-shrink-0"
                         data-testid="switch-analytics"
                       />
                     </div>
@@ -276,7 +276,7 @@ export function CookieConsentBanner() {
                       <Switch
                         checked={marketing}
                         onCheckedChange={setMarketing}
-                        className="switch-brand flex-shrink-0"
+                        className="flex-shrink-0"
                         data-testid="switch-marketing"
                       />
                     </div>

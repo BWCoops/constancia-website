@@ -397,8 +397,8 @@
   /* hp-gradient-banner — used by existing hero / banner sections */
   .hp-gradient-banner { background: var(--brand-gradient-banner); }
 
-  /* Switch brand colour — data-attribute selectors need a real class, not arbitrary Tailwind */
-  .switch-brand[data-state="checked"] { background: var(--brand-teal); }
+  /* (switch-brand utility removed — Switch component now applies the
+     brand palette directly; see client/src/components/ui/switch.tsx) */
 
   /* Icon gradient wrappers — Constancia rose-to-mint */
   .icon-gradient {
@@ -1497,11 +1497,35 @@ div[class*="hs-chat"] {
   text-align: center;
   max-width: min(720px, 92vw);
   border-radius: 28px;
+  /* Cap the tablet's height to the visible panel area and let
+     overflowing content scroll inside it. On a phone, a tablet with
+     a grid of 4–6 service items + heading + body can be taller than
+     the 100vh sticky panel; without this it would be visually
+     cut off at the card's bottom edge. */
+  max-height: calc(100svh - 80px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  /* Hide the scrollbar chrome but keep scrolling functional —
+     content overflow is the rare case, the bar shouldn't be the
+     dominant visual. */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(37, 40, 38, 0.18) transparent;
+}
+.scrolly-tablet::-webkit-scrollbar { width: 6px; }
+.scrolly-tablet::-webkit-scrollbar-track { background: transparent; }
+.scrolly-tablet::-webkit-scrollbar-thumb {
+  background: rgba(37, 40, 38, 0.18);
+  border-radius: 999px;
 }
 .scrolly-tablet--wide { max-width: min(960px, 94vw); padding: 38px 56px; }
 @media (max-width: 540px) {
-  .scrolly-tablet { padding: 28px 28px; border-radius: 22px; }
-  .scrolly-tablet--wide { padding: 28px 28px; }
+  .scrolly-tablet {
+    padding: 26px 22px;
+    border-radius: 22px;
+    /* Tighter cap on phones — leaves room for the menu pill at top */
+    max-height: calc(100svh - 100px);
+  }
+  .scrolly-tablet--wide { padding: 26px 22px; }
 }
 .scrolly-tablet__eyebrow {
   font-family: 'IBM Plex Mono', monospace;
