@@ -3299,7 +3299,14 @@ div[class*="hs-chat"] {
   padding: clamp(36px, 5vw, 56px) clamp(28px, 4vw, 48px);
   text-align: center;
   border-radius: 28px;
+  /* Defensive — text-align + the inner element constraints can be
+     overridden by sibling utility classes elsewhere on the page. */
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
+.comparison-hero__card > * { text-align: center; }
 .comparison-hero__title {
   font-family: 'DM Sans', system-ui, sans-serif;
   font-size: clamp(34px, 5.2vw, 60px);
@@ -3308,6 +3315,9 @@ div[class*="hs-chat"] {
   letter-spacing: -0.022em;
   color: var(--brand-text-primary);
   margin: 22px 0 18px;
+  /* Break long words rather than spilling out of the card. */
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 .comparison-hero__subtitle {
   font-size: clamp(15px, 1.55vw, 18px);
@@ -3315,12 +3325,14 @@ div[class*="hs-chat"] {
   color: var(--brand-text-secondary);
   max-width: 60ch;
   margin: 0 auto 24px;
+  overflow-wrap: anywhere;
 }
 .comparison-hero__pills {
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
   gap: 8px;
   justify-content: center;
+  align-items: center;
 }
 .comparison-hero__pill {
   display: inline-flex;
@@ -3335,6 +3347,17 @@ div[class*="hs-chat"] {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--brand-berry);
+  white-space: nowrap;
+}
+/* Force the lucide icon size — Tailwind's w-3.5/h-3.5 utilities can
+   be purged out of the production bundle on this page since the
+   class string is inside a JSX prop. Hard-code so the icons always
+   render at the intended 14px. */
+.comparison-hero__pill > svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  display: inline-block;
 }
 
 .comparison-cta { padding: clamp(40px, 8vh, 96px) 24px clamp(80px, 12vh, 140px); }
@@ -3343,7 +3366,12 @@ div[class*="hs-chat"] {
   padding: clamp(36px, 5vw, 56px) clamp(28px, 4vw, 48px);
   text-align: center;
   border-radius: 28px;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
+.comparison-cta__card > * { text-align: center; }
 .comparison-cta__title {
   font-family: 'DM Sans', system-ui, sans-serif;
   font-size: clamp(28px, 3.8vw, 42px);
@@ -3352,6 +3380,7 @@ div[class*="hs-chat"] {
   letter-spacing: -0.018em;
   color: var(--brand-text-primary);
   margin: 18px 0 16px;
+  overflow-wrap: anywhere;
 }
 .comparison-cta__body {
   font-size: clamp(15px, 1.5vw, 17px);
@@ -3359,6 +3388,7 @@ div[class*="hs-chat"] {
   color: var(--brand-text-secondary);
   max-width: 60ch;
   margin: 0 auto 24px;
+  overflow-wrap: anywhere;
 }
 .comparison-cta__actions {
   display: flex;

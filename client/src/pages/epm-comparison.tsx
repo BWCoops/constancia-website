@@ -6727,13 +6727,13 @@ export default function TechComparisonPage() {
               </p>
               <div className="comparison-hero__pills">
                 <span className="comparison-hero__pill">
-                  <Layers className="w-3.5 h-3.5" /> Three categories
+                  <Layers size={14} aria-hidden="true" /> Three categories
                 </span>
                 <span className="comparison-hero__pill">
-                  <BarChart3 className="w-3.5 h-3.5" /> Data-driven scoring
+                  <BarChart3 size={14} aria-hidden="true" /> Data-driven scoring
                 </span>
                 <span className="comparison-hero__pill">
-                  <TrendingUp className="w-3.5 h-3.5" /> Real-time weight tuning
+                  <TrendingUp size={14} aria-hidden="true" /> Real-time weight tuning
                 </span>
               </div>
             </div>
