@@ -2059,3 +2059,27 @@ export const insertTalentSubmissionSchema = createInsertSchema(talentSubmissions
 });
 export type InsertTalentSubmission = z.infer<typeof insertTalentSubmissionSchema>;
 export type TalentSubmission = typeof talentSubmissions.$inferSelect;
+
+// Launch holding-page email capture. Single email column, no name,
+// no message. Used while the marketing site is hidden behind the
+// launch screen so we can notify subscribers when it goes live.
+export const notificationSignups = pgTable("notification_signups", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  email: text("email").notNull(),
+  emailHash: text("email_hash").notNull().unique(),
+  source: text("source").notNull().default("holding-page"),
+  timezone: text("timezone"),
+  referrer: text("referrer"),
+  ipAddress: text("ip_address"),
+  userAgent: text("user_agent"),
+  hubspotSynced: boolean("hubspot_synced").default(false).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertNotificationSignupSchema = createInsertSchema(notificationSignups).omit({
+  id: true,
+  createdAt: true,
+  hubspotSynced: true,
+});
+export type InsertNotificationSignup = z.infer<typeof insertNotificationSignupSchema>;
+export type NotificationSignup = typeof notificationSignups.$inferSelect;

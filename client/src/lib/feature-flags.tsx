@@ -20,15 +20,21 @@ interface FeatureFlagContextValue {
 // hidden by default so they don't briefly appear in the nav during
 // the cold-start before the API confirms the DB overrides. Admins
 // can flip either on via /admin/feature-flags.
+//
+// Launch holding page configuration: only Tools (Comparison, Finance
+// Compass, Vendor Directory) + Contact stay public. Marketing pages
+// (about / services / solutions / blog / resources) are all flagged
+// off until the full site goes live. Home renders the dark holding
+// screen at /pages/holding.tsx.
 const DEFAULT_FLAGS: FeatureFlags = {
   home: true,
-  about: true,
-  services: true,
-  solutions: false, // hidden at go-live
+  about: false,
+  services: false,
+  solutions: false,
   comparisonTools: true,
   financeCompass: true,
-  blog: true,
-  resources: false, // Toolkit — hidden at go-live
+  blog: false,
+  resources: false,
   contact: true,
   requireBusinessEmail: false,
 };

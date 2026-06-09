@@ -55,19 +55,24 @@ function parseEnvFlag(value: string | undefined, defaultValue: boolean = true): 
   return value.toLowerCase() !== 'false';
 }
 
-// Server-side feature flags from environment only (synchronous baseline)
+// Server-side feature flags from environment only (synchronous baseline).
+// Launch holding-page baseline: marketing pages (about / services /
+// solutions / blog / resources) default OFF so the server matches the
+// holding-page nav. Admins can flip individual flags on through
+// /admin/feature-flags (DB overrides win over env defaults) once the
+// full site is ready to go live.
 export function getEnvFeatureFlags(): FeatureFlags {
   return {
     home: true, // Home is always enabled
-    about: parseEnvFlag(process.env.FEATURE_ABOUT),
-    services: parseEnvFlag(process.env.FEATURE_SERVICES),
-    solutions: parseEnvFlag(process.env.FEATURE_SOLUTIONS),
+    about: parseEnvFlag(process.env.FEATURE_ABOUT, false),
+    services: parseEnvFlag(process.env.FEATURE_SERVICES, false),
+    solutions: parseEnvFlag(process.env.FEATURE_SOLUTIONS, false),
     comparisonTools: parseEnvFlag(process.env.FEATURE_COMPARISON_TOOLS),
     financeCompass: parseEnvFlag(process.env.FEATURE_FINANCE_COMPASS),
-    blog: parseEnvFlag(process.env.FEATURE_BLOG),
-    resources: parseEnvFlag(process.env.FEATURE_RESOURCES),
+    blog: parseEnvFlag(process.env.FEATURE_BLOG, false),
+    resources: parseEnvFlag(process.env.FEATURE_RESOURCES, false),
     contact: parseEnvFlag(process.env.FEATURE_CONTACT),
-    requireBusinessEmail: parseEnvFlag(process.env.FEATURE_REQUIRE_BUSINESS_EMAIL),
+    requireBusinessEmail: parseEnvFlag(process.env.FEATURE_REQUIRE_BUSINESS_EMAIL, false),
   };
 }
 

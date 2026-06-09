@@ -840,6 +840,96 @@ export async function registerRoutes(
     }
   });
 
+  // ============================================
+  // NOTIFY-ME ENDPOINT (launch holding-page email capture)
+  // ============================================
+  // Lightweight signup used while the marketing site is hidden behind
+  // the launch screen. Stores email-only (no name, no message) and
+  // mirrors to HubSpot so we can notify the list when the full site
+  // ships. Email is encrypted at rest; emailHash provides idempotent
+  // lookup so repeat submissions don't create duplicates.
+  app.post("/api/notify-me", async (req: Request, res: Response) => {
+    try {
+      const { notificationSignups } = await import("@shared/schema");
+      const { encryptField, hashForLookup } = await import("./services/encryption");
+      const { db } = await import("./db");
+      const { eq } = await import("drizzle-orm");
+
+      const schema = z.object({
+        email: z.string().email().max(254),
+        source: z.string().max(64).optional(),
+        timezone: z.string().max(64).optional(),
+        referrer: z.string().max(512).optional(),
+      });
+
+      const parse = schema.safeParse(req.body);
+      if (!parse.success) {
+        return res.status(400).json({
+          success: false,
+          error: "Please use a valid email address.",
+        });
+      }
+
+      const email = parse.data.email.trim().toLowerCase();
+
+      if (isDisposableEmail(email)) {
+        return res.status(400).json({
+          success: false,
+          error: "Temporary or disposable email addresses are not accepted.",
+        });
+      }
+
+      const emailHash = hashForLookup(email);
+      const clientIp = getClientIp(req);
+      const userAgent = req.headers["user-agent"]?.toString().slice(0, 512);
+
+      await db
+        .insert(notificationSignups)
+        .values({
+          email: encryptField(email),
+          emailHash,
+          source: parse.data.source || "holding-page",
+          timezone: parse.data.timezone,
+          referrer: parse.data.referrer,
+          ipAddress: clientIp,
+          userAgent,
+        })
+        .onConflictDoNothing({ target: notificationSignups.emailHash });
+
+      // Mirror to HubSpot as a newsletter subscriber. Fire-and-forget;
+      // failures here don't fail the signup since the row is already
+      // persisted locally.
+      if (HUBSPOT_ACCESS_TOKEN) {
+        syncLeadToHubSpot({
+          firstName: "Subscriber",
+          lastName: "Launch List",
+          email,
+          company: "",
+          jobTitle: "",
+        })
+          .then(async (result) => {
+            if (result.success) {
+              await db
+                .update(notificationSignups)
+                .set({ hubspotSynced: true })
+                .where(eq(notificationSignups.emailHash, emailHash));
+            }
+          })
+          .catch((err) => log.error({ err }, "Notify-me HubSpot sync error"));
+      }
+
+      log.info({ source: parse.data.source || "holding-page" }, "Notify-me signup recorded");
+
+      return res.json({ success: true });
+    } catch (error) {
+      log.error({ err: error }, "Notify-me signup error");
+      return res.status(500).json({
+        success: false,
+        error: "Please try again in a moment.",
+      });
+    }
+  });
+
   // Note: Ad-click tracking, blog, and files/resources routes have been moved to:
   // - server/api/routes/analytics.routes.ts (track/* routes)
   // - server/api/routes/blog.routes.ts (blog/* routes)

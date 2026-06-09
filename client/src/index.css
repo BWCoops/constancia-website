@@ -16,23 +16,27 @@
  */
 
 :root {
+  /* Palette FLIPPED to dark per the launch holding spec: ink as the
+     primary surface, cream as the primary ink, rose + mint as the
+     accents. Every brand-token consumer follows. */
+
   /* Backgrounds */
-  --brand-bg-primary:       #F6F3EE;
-  --brand-bg-secondary:     #EFEAE0;
-  --brand-bg-surface:       rgba(37,40,38,0.025);
-  --brand-bg-surface-hover: rgba(199,122,147,0.06);
+  --brand-bg-primary:       #252826;
+  --brand-bg-secondary:     #1A1B1A;
+  --brand-bg-surface:       rgba(246,243,238,0.04);
+  --brand-bg-surface-hover: rgba(199,122,147,0.10);
 
   /* Borders */
-  --brand-border:           rgba(37,40,38,0.08);
-  --brand-border-hover:     rgba(142,79,103,0.30);
-  --brand-border-muted:     rgba(37,40,38,0.05);
-  --brand-border-strong:    rgba(37,40,38,0.16);
+  --brand-border:           rgba(246,243,238,0.10);
+  --brand-border-hover:     rgba(199,122,147,0.40);
+  --brand-border-muted:     rgba(246,243,238,0.05);
+  --brand-border-strong:    rgba(246,243,238,0.20);
 
   /* Text */
-  --brand-text-primary:     #252826;
-  --brand-text-secondary:   rgba(37,40,38,0.66);
-  --brand-text-muted:       rgba(37,40,38,0.42);
-  --brand-text-tertiary:    rgba(37,40,38,0.30);
+  --brand-text-primary:     #F6F3EE;
+  --brand-text-secondary:   rgba(246,243,238,0.72);
+  --brand-text-muted:       rgba(246,243,238,0.48);
+  --brand-text-tertiary:    rgba(246,243,238,0.32);
 
   /* Brand accents — aligned with the official Constancia palette. */
   --brand-graphite:         #1A1B1A;  /* deeper variant of secondary dark */
@@ -117,34 +121,35 @@
   --elevate-1:                       rgba(0,0,0,0.03);
   --elevate-2:                       rgba(0,0,0,0.08);
 
-  --background:         38 33% 95%;       /* cream #F6F3EE */
-  --foreground:         215 23% 9%;       /* graphite #252826 */
-  --border:             215 14% 88%;
-  --card:               38 33% 97%;
-  --card-foreground:    215 23% 9%;
-  --card-border:        215 14% 88%;
-  --popover:            38 33% 97%;
-  --popover-foreground: 215 23% 9%;
-  --popover-border:     215 14% 88%;
-  --primary:            215 23% 9%;       /* graphite as primary action */
+  /* Palette flipped to dark per the launch holding spec. */
+  --background:         145 4% 15%;       /* ink #252826 */
+  --foreground:         38 33% 95%;       /* cream #F6F3EE */
+  --border:             246 5% 25%;
+  --card:               145 4% 18%;
+  --card-foreground:    38 33% 95%;
+  --card-border:        246 5% 28%;
+  --popover:            145 4% 18%;
+  --popover-foreground: 38 33% 95%;
+  --popover-border:     246 5% 28%;
+  --primary:            340 41% 63%;      /* rose as primary action (matches launch button) */
   --primary-foreground: 38 33% 95%;
   --secondary:          156 23% 61%;      /* mint #7FB8A3 */
-  --secondary-foreground: 215 23% 9%;
-  --muted:              33 21% 85%;       /* stone #D8D0C6 */
-  --muted-foreground:   215 14% 38%;
+  --secondary-foreground: 145 4% 15%;
+  --muted:              145 4% 22%;
+  --muted-foreground:   38 20% 75%;
   --accent:             340 41% 63%;      /* rose #C77A93 */
   --accent-foreground:  38 33% 95%;
-  --destructive:        0 64% 50%;
+  --destructive:        340 27% 43%;      /* berry #8E4F67 */
   --destructive-foreground: 38 33% 98%;
-  --input:              215 14% 88%;
+  --input:              145 4% 22%;
   --ring:               340 41% 63%;
-  --sidebar:            38 33% 95%;
-  --sidebar-foreground: 215 23% 9%;
-  --sidebar-border:     215 14% 88%;
+  --sidebar:            145 4% 15%;
+  --sidebar-foreground: 38 33% 95%;
+  --sidebar-border:     246 5% 25%;
   --sidebar-primary:    340 41% 63%;      /* rose */
   --sidebar-primary-foreground: 38 33% 95%;
-  --sidebar-accent:     33 21% 92%;
-  --sidebar-accent-foreground: 215 23% 9%;
+  --sidebar-accent:     145 4% 22%;
+  --sidebar-accent-foreground: 38 33% 95%;
   --sidebar-ring:       340 41% 63%;
   --chart-1: 340 41% 63%;                  /* rose */
   --chart-2: 156 23% 61%;                  /* mint */
@@ -152,7 +157,7 @@
   --chart-4: 156 19% 46%;                  /* deep mint */
   --chart-5: 33 21% 75%;                   /* stone darker */
 
-  --font-sans:   'DM Sans', Inter, system-ui, sans-serif;
+  --font-sans:   'Noto Sans', 'DM Sans', Inter, system-ui, sans-serif;
   --font-serif:  Georgia, serif;
   --font-mono:   'IBM Plex Mono', ui-monospace, monospace;
   --radius:      0.5rem;
@@ -3089,4 +3094,192 @@ div[class*="hs-chat"] {
   flex-wrap: wrap;
   justify-content: center;
   gap: 24px;
+}
+
+/* ── Holding page (launch screen) ────────────────────────────────────
+   Single dark screen, all content within one phone viewport.
+   Centred, stacked: launch film → wordmark → tagline → email form
+   → partners → footer. */
+body.is-holding-page {
+  background: #252826;
+  color: #F6F3EE;
+}
+.holding-page {
+  min-height: 100svh;
+  min-height: 100dvh;
+  background:
+    radial-gradient(ellipse 65% 50% at 50% 38%, rgba(199,122,147,0.10) 0%, rgba(127,184,163,0.06) 40%, rgba(37,40,38,0) 75%),
+    #252826;
+  color: #F6F3EE;
+  font-family: 'Noto Sans', system-ui, -apple-system, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  padding: clamp(16px, 4vw, 32px);
+}
+.holding-page__main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(18px, 3.4vh, 36px);
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  text-align: center;
+  padding: clamp(20px, 4vh, 48px) 0;
+}
+
+.holding-film {
+  width: 100%;
+  max-width: clamp(240px, 64vw, 360px);
+  aspect-ratio: 4 / 5;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #1A1B1A;
+  box-shadow: 0 14px 40px -12px rgba(0,0,0,0.6);
+}
+.holding-film__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.holding-wordmark { display: flex; justify-content: center; }
+.holding-wordmark img {
+  width: clamp(180px, 48vw, 280px);
+  height: auto;
+  display: block;
+  /* Brand PNG is dark-on-cream — invert so it reads as cream-on-ink */
+  filter: invert(0.94) hue-rotate(180deg);
+}
+
+.holding-tagline {
+  font-family: 'Noto Sans', system-ui, sans-serif;
+  font-weight: 300;
+  font-size: clamp(20px, 5.4vw, 28px);
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+  color: #F6F3EE;
+  margin: 0;
+  max-width: 18ch;
+}
+.holding-tagline__intelligent { color: #7FB8A3; font-style: normal; font-weight: 500; }
+.holding-tagline__agentic     { color: #C77A93; font-style: normal; font-weight: 500; }
+
+/* Email form */
+.holding-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 360px;
+  text-align: left;
+}
+.holding-form__label {
+  font-family: 'Noto Sans', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: #F6F3EE;
+}
+.holding-form__input {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(246,243,238,0.18);
+  background: rgba(246,243,238,0.05);
+  color: #F6F3EE;
+  font-family: inherit;
+  font-size: 16px; /* iOS no-zoom threshold */
+  transition: border-color 200ms, background 200ms;
+}
+.holding-form__input::placeholder { color: rgba(246,243,238,0.45); }
+.holding-form__input:focus {
+  outline: none;
+  border-color: #7FB8A3;
+  background: rgba(246,243,238,0.08);
+}
+.holding-form__input.is-invalid { border-color: #C77A93; }
+.holding-form__error {
+  font-size: 12.5px;
+  color: #C77A93;
+  margin-top: -4px;
+}
+.holding-form__button {
+  margin-top: 4px;
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: 12px;
+  border: none;
+  background: #C77A93;
+  color: #F6F3EE;
+  font-family: 'Noto Sans', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 180ms, transform 180ms;
+}
+.holding-form__button:hover:not(:disabled) { background: #8E4F67; }
+.holding-form__button:active:not(:disabled) { transform: translateY(1px); }
+.holding-form__button:disabled { opacity: 0.55; cursor: not-allowed; }
+.holding-form__hint {
+  font-size: 12.5px;
+  color: rgba(216,208,198,0.78);
+  margin-top: 4px;
+  letter-spacing: 0.01em;
+}
+
+.holding-success {
+  font-family: 'Noto Sans', system-ui, sans-serif;
+  font-size: 16px;
+  color: #7FB8A3;
+  padding: 14px 18px;
+  border: 1px solid rgba(127,184,163,0.32);
+  border-radius: 12px;
+  background: rgba(127,184,163,0.08);
+  max-width: 360px;
+  width: 100%;
+}
+.holding-success p { margin: 0; }
+
+/* Partners */
+.holding-partners {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  color: #F6F3EE;
+  font-family: 'Noto Sans', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.holding-partners__sep {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #7FB8A3;
+}
+
+/* Footer */
+.holding-footer {
+  flex-shrink: 0;
+  text-align: center;
+  font-family: 'Noto Sans', system-ui, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: #D8D0C6;
+  padding: 12px 0 8px;
+}
+
+@media (max-width: 380px) {
+  .holding-page__main { gap: 14px; padding: 16px 0; }
+  .holding-film { max-width: 70vw; }
+  .holding-tagline { font-size: 19px; }
 }

@@ -30,13 +30,15 @@ interface LibraryItem {
   children?: LibraryItem[];
 }
 
+// Launch holding page configuration. Marketing pages (About,
+// Services, Solutions, Day to Day AI, Toolkit) are hidden via
+// feature flags during the launch period. When those flip on
+// again, restore the original 00–07 set — full version is on the
+// backup/full-marketing-site branch.
 const LIBRARY: LibraryItem[] = [
-  { href: "/",          num: "00", label: "Home",          description: "Connected enterprise intelligence.",                          featureKey: null },
-  { href: "/about",     num: "01", label: "About",         description: "An enterprise intelligence company.",                          featureKey: "about" },
-  { href: "/services",  num: "02", label: "Services",      description: "Abacum. OneStream. AI development partner.",                  featureKey: "services" },
-  { href: "/solutions", num: "03", label: "Solutions",     description: "Productised intelligence for finance and operations.",         featureKey: "solutions" },
+  { href: "/",          num: "00", label: "Home",          description: "Launch holding page.",                                          featureKey: null },
   {
-    num: "04",
+    num: "01",
     label: "Tools",
     description: "Comparison engines, Finance Compass, vendor profiles.",
     featureKey: "comparisonTools",
@@ -46,9 +48,7 @@ const LIBRARY: LibraryItem[] = [
       { href: "/vendors",              num: "03", label: "Vendor Directory", description: "Curated reference of the platforms we evaluate.",            featureKey: "comparisonTools" },
     ],
   },
-  { href: "/blog",      num: "05", label: "Day to Day AI", description: "Practical notes on running AI inside finance.",                featureKey: "blog" },
-  { href: "/files",     num: "06", label: "Toolkit",       description: "Frameworks and templates from real programmes.",               featureKey: "resources" },
-  { href: "/contact",   num: "07", label: "Contact",       description: "Tell us about your data challenge.",                           featureKey: "contact" },
+  { href: "/contact",   num: "02", label: "Contact",       description: "Tell us about your data challenge.",                            featureKey: "contact" },
 ];
 
 interface LibraryNavigationProps {

@@ -19,7 +19,7 @@ import { AdminLoadingFallback } from "@/components/admin/AdminLoadingFallback";
 import type { FeatureFlags } from "@shared/feature-flags";
 
 import NotFound from "@/pages/not-found";
-import Home from "@/pages/home";
+import Home from "@/pages/holding";
 const AboutPage = lazy(() => import("@/pages/about"));
 const ServicesPage = lazy(() => import("@/pages/services"));
 const SolutionsPage = lazy(() => import("@/pages/solutions"));
@@ -118,6 +118,12 @@ function GlobalNav() {
   const [location] = useLocation();
   const hideOn = ["/admin", "/finance-compass"];
   if (hideOn.some((p) => location === p || location.startsWith(`${p}/`))) {
+    return null;
+  }
+  // Holding page is a single-screen launch surface. No nav drawer
+  // overlays it during launch — Tools and Contact still get the
+  // drawer on their own routes.
+  if (location === "/") {
     return null;
   }
   return <LibraryNavigation />;
