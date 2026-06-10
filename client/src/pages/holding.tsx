@@ -78,7 +78,7 @@ export default function HoldingPage() {
       setStatus("error");
       toast({
         title: "We could not save that",
-        description: "Please try again in a moment, or email info@constancia.io.",
+        description: "Please try again in a moment.",
         variant: "destructive",
       });
     }
@@ -183,7 +183,7 @@ export default function HoldingPage() {
         </div>
       </main>
 
-      <Footer variant="minimal" />
+      <Footer hideContactEmail />
     </div>
   );
 }

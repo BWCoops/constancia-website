@@ -1,10 +1,5 @@
 import { Link } from "wouter";
-import { Linkedin, Mail, MapPin, ArrowUpRight } from "@/lib/icons";
-// `-dark.png` is the cream/light wordmark intended for use on dark
-// surfaces (the suffix names the *intended surface*, not the logo
-// colour itself). The footer sits on graphite, so this is the right
-// asset; using the graphite-on-cream logo here would render invisible.
-import logoWhite from "@assets/constancia-logo-dark.png";
+import { Linkedin, Mail, MapPin } from "@/lib/icons";
 import { useFeatureFlags } from "@/lib/feature-flags";
 import type { FeatureFlags } from "@shared/feature-flags";
 
@@ -12,161 +7,71 @@ type FooterLink = {
   label: string;
   href: string;
   featureKey: keyof FeatureFlags | null;
+  external?: boolean;
 };
 
-const footerLinks: Record<string, FooterLink[]> = {
-  company: [
-    { label: "About Us", href: "/about", featureKey: "about" },
-    { label: "Our Services", href: "/services", featureKey: "services" },
-    { label: "Careers", href: "/careers", featureKey: null },
-    { label: "Insights Hub", href: "/blog", featureKey: "blog" },
-    { label: "Resources", href: "/files", featureKey: "resources" },
-  ],
-  solutions: [
-    { label: "EPM Solutions", href: "/solutions", featureKey: "solutions" },
-    { label: "Performance Frameworks", href: "/solutions", featureKey: "solutions" },
-    { label: "Advisory Services", href: "/services", featureKey: "services" },
-  ],
-  resources: [
-    { label: "Insights Hub", href: "/blog", featureKey: "blog" },
-    { label: "Downloads", href: "/files", featureKey: "resources" },
-    { label: "Case Studies", href: "/blog", featureKey: "blog" },
-    { label: "Contact", href: "/contact", featureKey: "contact" },
-  ],
-  legal: [
-    { label: "Privacy Policy", href: "/privacy", featureKey: null },
-    { label: "Terms of Use", href: "/terms", featureKey: null },
-    { label: "Cookie Policy", href: "/cookies", featureKey: null },
-    { label: "Operations", href: "/admin/login", featureKey: null },
-  ],
-};
+// Top slim row. Site + legal + ops links, all feature-gated so the
+// holding-page state shows only what makes sense (Careers, Privacy,
+// Terms, Cookies, Operations).
+const SLIM_LINKS: FooterLink[] = [
+  { label: "About", href: "/about", featureKey: "about" },
+  { label: "Services", href: "/services", featureKey: "services" },
+  { label: "Insights", href: "/blog", featureKey: "blog" },
+  { label: "Resources", href: "/files", featureKey: "resources" },
+  { label: "Careers", href: "/careers", featureKey: null },
+  { label: "Contact", href: "/contact", featureKey: "contact" },
+  { label: "Privacy", href: "/privacy", featureKey: null },
+  { label: "Terms", href: "/terms", featureKey: null },
+  { label: "Cookies", href: "/cookies", featureKey: null },
+  { label: "Operations", href: "/admin/login", featureKey: null },
+];
 
 interface FooterProps {
   /**
-   * Holding-screen variant. Drops the four-column nav block above the
-   * thin bar — the launch screen is meant to be a single quiet pane,
-   * so only the slim Constancia Holdings line shows. Other pages keep
-   * the full footer.
+   * Hide the info@constancia.io entry from the bottom row. Used on
+   * the launch holding page where the Notify-me form is the primary
+   * email path and a contact email link is redundant.
    */
-  variant?: "default" | "minimal";
+  hideContactEmail?: boolean;
 }
 
-export function Footer({ variant = "default" }: FooterProps) {
+export function Footer({ hideContactEmail = false }: FooterProps) {
   const { flags } = useFeatureFlags();
+  const year = new Date().getFullYear();
 
-  const filterLinks = (links: FooterLink[]) =>
-    links.filter((link) => link.featureKey === null || flags[link.featureKey]);
-
-  const minimal = variant === "minimal";
+  const visibleLinks = SLIM_LINKS.filter(
+    (link) => link.featureKey === null || flags[link.featureKey],
+  );
 
   return (
     <footer
       className="bg-brand-navy text-brand-cream relative overflow-hidden"
-      style={{ fontFamily: "var(--hp-font-sans)", paddingTop: minimal ? 24 : 56, paddingBottom: 20 }}
+      style={{ fontFamily: "var(--hp-font-sans)", paddingTop: 28, paddingBottom: 22 }}
       role="contentinfo"
       aria-label="Site footer"
     >
       <div className="relative z-10 max-w-7xl mx-auto px-6">
-        {!minimal && (
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 lg:gap-12 mb-10">
-            <div className="col-span-2 md:col-span-4 lg:col-span-1">
-              <Link href="/" className="inline-block mb-2 group" data-testid="link-footer-home">
-                <img
-                  src={logoWhite}
-                  alt="Constancia"
-                  className="h-14 w-auto max-w-[180px]"
-                />
+        {/* Top slim row — site + legal + operations links. */}
+        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[12px] uppercase tracking-[0.14em] text-[#F6F3EE]/65 mb-4">
+          {visibleLinks.map((link, idx) => (
+            <span key={link.href} className="inline-flex items-center gap-4">
+              <Link
+                href={link.href}
+                className="hover:text-brand-cyan transition-colors"
+                data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
+              >
+                {link.label}
               </Link>
+              {idx < visibleLinks.length - 1 && (
+                <span className="opacity-25" aria-hidden="true">·</span>
+              )}
+            </span>
+          ))}
+        </div>
 
-              <div className="mb-4 text-sm leading-relaxed">
-                <p className="text-brand-cream">Connected finance intelligence.</p>
-                <p className="text-brand-cream">Make sense of every system.</p>
-                <p style={{ color: "var(--hp-cyan)", fontStyle: "italic" }}>
-                  One source of truth.
-                </p>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-brand-cyan mb-4">Company</h3>
-              <ul className="space-y-3">
-                {filterLinks(footerLinks.company).map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="text-[#F6F3EE]/70 hover:text-brand-cyan transition-colors text-sm"
-                      data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-brand-cyan mb-4">Solutions</h3>
-              <ul className="space-y-3">
-                {filterLinks(footerLinks.solutions).map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="text-[#F6F3EE]/70 hover:text-brand-cyan transition-colors text-sm"
-                      data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-brand-cyan mb-4">Resources</h3>
-              <ul className="space-y-3">
-                {filterLinks(footerLinks.resources).map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="text-[#F6F3EE]/70 hover:text-brand-cyan transition-colors text-sm flex items-center gap-1"
-                      data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
-                    >
-                      {link.label}
-                      <ArrowUpRight className="w-3 h-3" />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-brand-cyan mb-4">Legal</h3>
-              <ul className="space-y-3">
-                {filterLinks(footerLinks.legal).map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="text-[#F6F3EE]/70 hover:text-brand-cyan transition-colors text-sm"
-                      data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        )}
-
-        {/* One thin line. Copyright | LinkedIn | (Contact on non-home
-            only) | Address. Wraps on narrow screens but stays a single
-            horizontal flow on tablet+. */}
-        <div
-          className={`${
-            minimal ? "" : "pt-6 border-t border-[#F6F3EE]/10"
-          } flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[12.5px] text-[#F6F3EE]/70 tracking-wide`}
-        >
-          <span>© {new Date().getFullYear()} Constancia Holdings Limited. All rights reserved.</span>
+        {/* Bottom slim row — copyright + LinkedIn + (info@) + address. */}
+        <div className="pt-4 border-t border-[#F6F3EE]/10 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[12.5px] text-[#F6F3EE]/70 tracking-wide">
+          <span>© {year} Constancia Holdings Limited. All rights reserved.</span>
 
           <span className="opacity-30" aria-hidden="true">·</span>
 
@@ -182,7 +87,7 @@ export function Footer({ variant = "default" }: FooterProps) {
             <span>LinkedIn</span>
           </a>
 
-          {!minimal && (
+          {!hideContactEmail && (
             <>
               <span className="opacity-30" aria-hidden="true">·</span>
               <a

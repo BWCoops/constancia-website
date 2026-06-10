@@ -2029,6 +2029,91 @@ div[class*="hs-chat"] {
   word-break: break-word;
 }
 
+/* ── Simple contact page ────────────────────────────────────────────
+   Single pane, no scrolly stage. Short hero, channels, form,
+   footer. Inherits the dark site palette. */
+.contact-simple {
+  min-height: 100svh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 28%, rgba(199,122,147,0.07) 0%, rgba(127,184,163,0.04) 45%, rgba(37,40,38,0) 80%),
+    var(--brand-bg-primary, #252826);
+  color: var(--brand-text-primary, #F6F3EE);
+  font-family: 'Noto Sans', system-ui, -apple-system, sans-serif;
+}
+.contact-simple__main {
+  flex: 1 1 auto;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: clamp(72px, 12vh, 120px) clamp(20px, 5vw, 36px) clamp(48px, 8vh, 80px);
+}
+.contact-simple__header {
+  text-align: left;
+  margin-bottom: clamp(28px, 5vh, 48px);
+}
+.contact-simple__eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(246,243,238,0.55);
+  margin: 0 0 14px;
+}
+.contact-simple__title {
+  font-family: 'Noto Sans', system-ui, sans-serif;
+  font-weight: 300;
+  font-size: clamp(30px, 5.8vw, 48px);
+  line-height: 1.12;
+  letter-spacing: -0.012em;
+  margin: 0 0 18px;
+  color: #F6F3EE;
+}
+.contact-simple__title-accent {
+  font-weight: 500;
+  color: #7FB8A3;
+}
+.contact-simple__lede {
+  font-size: 16px;
+  line-height: 1.55;
+  color: rgba(246,243,238,0.78);
+  margin: 0;
+  max-width: 60ch;
+}
+.contact-simple__channels {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  font-size: 13.5px;
+  color: rgba(246,243,238,0.72);
+  margin-bottom: clamp(28px, 5vh, 40px);
+  padding-bottom: clamp(20px, 4vh, 32px);
+  border-bottom: 1px solid rgba(246,243,238,0.10);
+}
+.contact-simple__channel {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(246,243,238,0.78);
+  text-decoration: none;
+  transition: color 180ms ease-out;
+}
+.contact-simple__channel:where(a):hover { color: #7FB8A3; }
+.contact-simple__channel-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+.contact-simple__channel-sep {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(246,243,238,0.25);
+}
+
 .contact-form {
   display: flex;
   flex-direction: column;

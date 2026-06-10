@@ -1,13 +1,13 @@
 /**
- * Contact — declares its panels; framework renders the shell.
- * Form state + submit logic stays here (it's interactive);
- * everything else (background, fabric, footer, SEO) comes from
- * <MarketingScrollyPage>.
+ * Contact — simple single-pane form. No scrolly panels, no sticky
+ * stage. Form posts to /api/contact (the same endpoint Marketing
+ * Scrolly used). Best-practice contact pattern: short hero, the
+ * essentials, one form, clear submit state.
  */
 
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Mail, MapPin, Send, Loader2, Globe } from "lucide-react";
+import { Mail, MapPin, Send, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -17,46 +17,15 @@ import { apiRequest } from "@/lib/queryClient";
 import { trackGoogleAdsConversion } from "@/components/google-analytics";
 import { useVisitor } from "@/contexts/VisitorContext";
 import { Turnstile, useTurnstileToken } from "@/components/turnstile";
-import { MarketingScrollyPage } from "@/components/scrolly/MarketingScrollyPage";
-import {
-  ScrollyHero,
-  ScrollyText,
-  ScrollyCustom,
-} from "@/components/scrolly/ScrollyPanels";
+import { SEOHead } from "@/components/seo-head";
+import { Footer } from "@/components/footer";
 
 const SEO = {
-  title: "Contact Us | Constancia — Get In Touch",
+  title: "Contact Us | Constancia",
   description:
-    "No pitch, no obligation. Talk to Constancia about platform selection, integration, transformation planning, and senior-level guidance for finance teams.",
-  keywords: [
-    "contact Constancia",
-    "connected finance intelligence",
-    "finance systems integration",
-    "Enterprise Performance Management",
-    "EPM partner",
-  ],
+    "Talk to Constancia about platform selection, integration, transformation planning, and senior-level guidance for finance teams.",
+  keywords: ["contact Constancia", "finance systems integration", "EPM partner"],
 };
-
-const CONTACT_INFO = [
-  {
-    Icon: Mail,
-    label: "Email",
-    value: "info@constancia.io",
-    href: "mailto:info@constancia.io",
-  },
-  {
-    Icon: MapPin,
-    label: "Office",
-    value: "Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ, UK",
-    href: "https://maps.google.com/?q=Blount+House+Hall+Court+Hall+Park+Way+Telford+TF3+4NQ",
-  },
-  {
-    Icon: Globe,
-    label: "Website",
-    value: "constancia.com",
-    href: "https://constancia.com",
-  },
-];
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -124,7 +93,7 @@ export default function ContactPage() {
       if (result.success) {
         trackGoogleAdsConversion();
         toast({
-          title: "Message sent successfully!",
+          title: "Message sent",
           description: "We will get back to you within 24 hours.",
         });
         setFormData({ firstName: "", lastName: "", phone: "", email: "", message: "" });
@@ -137,7 +106,7 @@ export default function ContactPage() {
         });
       }
     } catch (error: any) {
-      let errorMessage = "Please try again later or email info@constancia.io directly.";
+      let errorMessage = "Please try again in a moment.";
       if (error?.message) {
         try {
           const jsonPart = error.message.replace(/^\d+:\s*/, "");
@@ -154,76 +123,73 @@ export default function ContactPage() {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   return (
-    <MarketingScrollyPage seo={SEO} label="Contact Constancia" heightVh={520} heightVhMobile={520}>
-      <ScrollyHero
-        eyebrow="Get in touch"
-        heading="No pitch."
-        headingAccent="Just a conversation."
-        body="If you've got a programme coming up, a platform decision to make, or you just want a straight answer from someone who's done this before, we're happy to talk."
-      />
+    <div className="contact-simple">
+      <SEOHead {...SEO} />
 
-      <ScrollyCustom eyebrow="How to reach us" heading="A few ways in." wide>
-        <div className="contact-channels">
-          {CONTACT_INFO.map((c, i) => (
-            <a
-              key={c.label}
-              href={c.href}
-              target={c.href.startsWith("http") ? "_blank" : undefined}
-              rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
-              className="contact-channel"
-              data-testid={`link-contact-${i}`}
-            >
-              <c.Icon className="contact-channel__icon" />
-              <div>
-                <div className="contact-channel__label">{c.label}</div>
-                <div className="contact-channel__value">{c.value}</div>
-              </div>
-            </a>
-          ))}
+      <main className="contact-simple__main">
+        <header className="contact-simple__header">
+          <p className="contact-simple__eyebrow">Get in touch</p>
+          <h1 className="contact-simple__title">
+            No pitch. <span className="contact-simple__title-accent">Just a conversation.</span>
+          </h1>
+          <p className="contact-simple__lede">
+            If you have a programme coming up, a platform decision to make, or you just want a
+            straight answer from someone who has done this before, we are happy to talk. We come
+            back within 24 hours.
+          </p>
+        </header>
+
+        <div className="contact-simple__channels" aria-label="How to reach us">
+          <a href="mailto:info@constancia.io" className="contact-simple__channel">
+            <Mail className="contact-simple__channel-icon" aria-hidden="true" />
+            <span>info@constancia.io</span>
+          </a>
+          <span className="contact-simple__channel-sep" aria-hidden="true" />
+          <span className="contact-simple__channel">
+            <MapPin className="contact-simple__channel-icon" aria-hidden="true" />
+            <span>Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ, UK</span>
+          </span>
         </div>
-      </ScrollyCustom>
 
-      <ScrollyCustom
-        eyebrow="Tell us what you're working on"
-        heading="We come back within"
-        headingAccent="24 hours."
-        wide
-      >
         <form onSubmit={handleSubmit} className="contact-form" data-testid="form-contact">
           <div className="contact-form__row">
             <div className="contact-form__field">
               <Label htmlFor="firstName">First name *</Label>
-              <Input id="firstName" name="firstName" placeholder="John" value={formData.firstName}
-                onChange={handleChange} required data-testid="input-first-name" />
+              <Input id="firstName" name="firstName" placeholder="John"
+                value={formData.firstName} onChange={handleChange} required
+                data-testid="input-first-name" />
             </div>
             <div className="contact-form__field">
               <Label htmlFor="lastName">Last name</Label>
-              <Input id="lastName" name="lastName" placeholder="Smith" value={formData.lastName}
-                onChange={handleChange} data-testid="input-last-name" />
+              <Input id="lastName" name="lastName" placeholder="Smith"
+                value={formData.lastName} onChange={handleChange}
+                data-testid="input-last-name" />
             </div>
           </div>
           <div className="contact-form__row">
             <div className="contact-form__field">
-              <Label htmlFor="phone">Phone *</Label>
-              <Input id="phone" name="phone" type="tel" placeholder="+44 1234 567890"
-                value={formData.phone} onChange={handleChange} required data-testid="input-phone" />
-            </div>
-            <div className="contact-form__field">
               <Label htmlFor="email">Email *</Label>
               <Input id="email" name="email" type="email" placeholder="john@company.com"
-                value={formData.email} onChange={handleChange} required data-testid="input-email" />
+                value={formData.email} onChange={handleChange} required
+                data-testid="input-email" />
+            </div>
+            <div className="contact-form__field">
+              <Label htmlFor="phone">Phone</Label>
+              <Input id="phone" name="phone" type="tel" placeholder="+44 1234 567890"
+                value={formData.phone} onChange={handleChange}
+                data-testid="input-phone" />
             </div>
           </div>
           <div className="contact-form__field">
-            <Label htmlFor="message">Message</Label>
-            <Textarea id="message" name="message" rows={5}
-              placeholder="Tell us about your project and how we can help..."
+            <Label htmlFor="message">Message *</Label>
+            <Textarea id="message" name="message" rows={6} required
+              placeholder="Tell us what you are working on and how we can help."
               value={formData.message} onChange={handleChange}
               className="resize-none" data-testid="input-message" />
           </div>
@@ -241,7 +207,7 @@ export default function ContactPage() {
             {isSubmitting ? (
               <>
                 <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                Sending...
+                Sending
               </>
             ) : (
               <>
@@ -251,14 +217,9 @@ export default function ContactPage() {
             )}
           </Button>
         </form>
-      </ScrollyCustom>
+      </main>
 
-      <ScrollyText
-        eyebrow="How we work"
-        heading="Scoped properly,"
-        headingAccent="priced fixed."
-        body="No time-and-materials, no bill shock at month three. A fixed fee, delivered by the senior practitioner who scoped it."
-      />
-    </MarketingScrollyPage>
+      <Footer />
+    </div>
   );
 }
