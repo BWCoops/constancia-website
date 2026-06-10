@@ -159,6 +159,12 @@ Sitemap: https://constancia.com/sitemap.xml
       
       if (['.js', '.css', '.woff', '.woff2', '.ttf', '.otf'].includes(ext)) {
         res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+      } else if (['.mp4', '.webm', '.mov', '.m4v', '.ogg', '.ogv'].includes(ext)) {
+        // Launch-film + any future video. Long-cache the bytes —
+        // we never overwrite a video at the same path; a new asset
+        // would land at a new name. Range requests still served
+        // correctly via express.static.
+        res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
       } else if (['.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg', '.ico'].includes(ext)) {
         res.setHeader('Cache-Control', 'public, max-age=2592000');
       } else if (ext === '.html') {

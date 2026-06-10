@@ -55,14 +55,18 @@ export default function HoldingPage() {
           Enterprise
         </h1>
 
-        {/* Launch film — 4:5 vertical intro. AV1 (WebM) for modern
-            browsers, H.264 (MP4) fallback. Faststart on the MP4 +
-            preload="auto" so the first paint isn't delayed waiting
-            for the container. WebP poster shown while the video
-            buffers; JPEG fallback for old Safari. */}
+        {/* Launch film — 4:5 vertical intro at 1080×1350. Explicit
+            width/height attributes match the source so the browser
+            reserves the slot before any bytes arrive (no CLS). AV1
+            WebM for modern browsers, H.264 MP4 fallback with
+            +faststart for progressive playback. The poster JPEG is
+            preloaded in index.html so it lights up the LCP slot
+            without waiting on metadata. */}
         <div className="holding-film" aria-label="Constancia launch film">
           <video
             className="holding-film__video"
+            width={1080}
+            height={1350}
             autoPlay
             muted
             loop
@@ -70,6 +74,8 @@ export default function HoldingPage() {
             controls
             preload="auto"
             poster="/launch-film-poster.jpg"
+            disablePictureInPicture
+            disableRemotePlayback
           >
             <source src="/launch-film.webm" type="video/webm" />
             <source src="/launch-film.mp4" type="video/mp4" />

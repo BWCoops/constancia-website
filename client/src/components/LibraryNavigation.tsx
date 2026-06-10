@@ -13,12 +13,19 @@
  * under one "Tools" parent so the top level stays readable.
  */
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, lazy, Suspense } from "react";
 import { useLocation } from "wouter";
 import { useFeatureFlags } from "@/lib/feature-flags";
 import { Menu, X, ChevronDown } from "lucide-react";
 import type { FeatureFlags } from "@shared/feature-flags";
-import { HeroFabricCanvas } from "./HeroFabricCanvas";
+
+// HeroFabricCanvas drags in three.js (~733 KB / ~190 KB gzip). It
+// only renders while the drawer is open, so lazy-load it — every
+// page that isn't the drawer (the holding page included) saves the
+// download until the user actually opens the menu.
+const HeroFabricCanvas = lazy(() =>
+  import("./HeroFabricCanvas").then((m) => ({ default: m.HeroFabricCanvas })),
+);
 
 interface LibraryItem {
   href?: string;
@@ -141,7 +148,9 @@ export function LibraryNavigation({ variant = "light" }: LibraryNavigationProps)
             stamp on top (the page's wordmark shows through
             naturally where it already sits). */}
         {open && (
-          <HeroFabricCanvas className="library-nav-backdrop__fabric" />
+          <Suspense fallback={null}>
+            <HeroFabricCanvas className="library-nav-backdrop__fabric" />
+          </Suspense>
         )}
       </div>
       <aside

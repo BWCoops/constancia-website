@@ -197,9 +197,6 @@ export function ExportGateModal({ exportConfig, open, onOpenChange, onExportAppr
   });
 
   const handleExportApproved = () => {
-    // Debug alert - remove after testing
-    alert("Export approved! Calling parent function...");
-    
     if (!exportConfig) {
       toast({
         title: "Export Error",

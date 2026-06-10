@@ -71,19 +71,27 @@
     
     <!-- Hero image preload is handled via HTTP Link header in server/static.ts
          which dynamically resolves the correct build hash at startup. -->
-    
-    
+
+    <!-- LCP candidate on the launch holding page is the video poster.
+         Preload it so it paints alongside the critical CSS rather than
+         after the video metadata round-trip. -->
+    <link rel="preload" as="image" href="/launch-film-poster.jpg" fetchpriority="high">
+
     <!-- Prefetch FinanceCompass session for LinkedIn traffic -->
     <link rel="prefetch" href="/api/finance-compass/public/session" as="fetch" crossorigin="anonymous">
-    
+
     <!-- Font preloading removed: Google Fonts rotates CDN URLs across versions,
          causing stale preload links to 404 in production. The CSS stylesheet
          handles font loading via display=swap which is sufficient. -->
 
-    <!-- Fonts: DM Sans (primary UI), IBM Plex Mono (code/mono), Inter (fallback).
-         Loaded non-blocking via media="print" trick to avoid render-blocking. -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
+    <!-- Fonts: Noto Sans (primary UI per launch brief), DM Sans (legacy
+         marketing headings still in use on sub-pages), IBM Plex Mono
+         (eyebrows). Inter dropped — wasn't being referenced anywhere
+         live. Weight set trimmed to what actually renders so the
+         stylesheet response is materially smaller. Non-blocking via the
+         media="print" / onload swap trick. -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet"></noscript>
     
     <!-- Critical CSS for initial paint - prevents FOUC and improves FCP.
          Includes root variables, navigation, hero, and button styles
