@@ -136,12 +136,12 @@ export default function ContactPage() {
         <header className="contact-simple__header">
           <p className="contact-simple__eyebrow">Get in touch</p>
           <h1 className="contact-simple__title">
-            No pitch. <span className="contact-simple__title-accent">Just a conversation.</span>
+            Talk to us about <span className="contact-simple__title-accent">your finance systems.</span>
           </h1>
           <p className="contact-simple__lede">
-            If you have a programme coming up, a platform decision to make, or you just want a
-            straight answer from someone who has done this before, we are happy to talk. We come
-            back within 24 hours.
+            Whether you are scoping a programme, evaluating platforms, or want a second opinion on
+            something already in motion, we are happy to talk. Drop us a line and we will get back
+            to you within 24 hours.
           </p>
         </header>
 
