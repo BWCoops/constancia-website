@@ -9,9 +9,8 @@
  *
  * Items can have children — rendered as an expandable subsection
  * the user toggles open with chevron + aria-expanded. Used to group
- * the three tool destinations (Comparison Tool, Finance Compass,
- * Vendor Directory) under one "Tools" parent so the top level stays
- * readable.
+ * the two tool destinations (Comparison Tool, Finance Compass)
+ * under one "Tools" parent so the top level stays readable.
  */
 
 import { useEffect, useRef, useState } from "react";
@@ -43,8 +42,8 @@ const LIBRARY: LibraryItem[] = [
     description: "Comparison engine and Finance Compass diagnostic.",
     featureKey: "comparisonTools",
     children: [
-      { href: "/tools/epm-comparison", num: "01", label: "Comparison Tool", description: "Independent platform benchmarks across EPM and AI vendors.", featureKey: "comparisonTools" },
-      { href: "/finance-compass",      num: "02", label: "Finance Compass", description: "Diagnostic for finance maturity and EPM readiness.",         featureKey: "financeCompass" },
+      { href: "/tools/epm-comparison", num: "01", label: "Comparison Tool", description: "Independent benchmarks across EPM and AI platforms.",  featureKey: "comparisonTools" },
+      { href: "/finance-compass",      num: "02", label: "Finance Compass", description: "Diagnostic for finance maturity and EPM readiness.",  featureKey: "financeCompass" },
     ],
   },
   { href: "/contact",   num: "02", label: "Contact",       description: "Tell us about your data challenge.",                            featureKey: "contact" },

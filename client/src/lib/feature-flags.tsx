@@ -21,10 +21,10 @@ interface FeatureFlagContextValue {
 // the cold-start before the API confirms the DB overrides. Admins
 // can flip either on via /admin/feature-flags.
 //
-// Launch holding page configuration: only Tools (Comparison, Finance
-// Compass, Vendor Directory) + Contact stay public. Marketing pages
-// (about / services / solutions / blog / resources) are all flagged
-// off until the full site goes live. Home renders the dark holding
+// Launch holding page configuration: only Tools (Comparison and
+// Finance Compass) + Contact stay public. Marketing pages (about /
+// services / solutions / blog / resources) are all flagged off
+// until the full site goes live. Home renders the dark holding
 // screen at /pages/holding.tsx.
 const DEFAULT_FLAGS: FeatureFlags = {
   home: true,
