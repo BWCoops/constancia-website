@@ -120,13 +120,10 @@ function GlobalNav() {
   if (hideOn.some((p) => location === p || location.startsWith(`${p}/`))) {
     return null;
   }
-  // Holding page is a single-screen launch surface. No nav drawer
-  // overlays it during launch — Tools and Contact still get the
-  // drawer on their own routes.
-  if (location === "/") {
-    return null;
-  }
-  return <LibraryNavigation />;
+  // Entire public site is on the dark palette since the launch holding
+  // page flip, so the trigger pill defaults to the dark variant —
+  // readable cream-on-ink rather than ink-on-cream.
+  return <LibraryNavigation variant="dark" />;
 }
 
 function RoutePreloader() {

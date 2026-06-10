@@ -3150,11 +3150,12 @@ body.is-holding-page {
 
 .holding-wordmark { display: flex; justify-content: center; }
 .holding-wordmark img {
-  width: clamp(180px, 48vw, 280px);
+  width: clamp(200px, 52vw, 320px);
   height: auto;
   display: block;
-  /* Brand PNG is dark-on-cream — invert so it reads as cream-on-ink */
-  filter: invert(0.94) hue-rotate(180deg);
+  /* -dark.png is the cream/light wordmark already coloured for dark
+     surfaces (the suffix names the intended surface, not the ink) —
+     no filter needed. */
 }
 
 .holding-tagline {

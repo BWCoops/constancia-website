@@ -12,6 +12,7 @@ import { useEffect, useRef, useState } from "react";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { SEOHead } from "@/components/seo-head";
+import { Footer } from "@/components/footer";
 import constanciaLogoDarkWebp from "@assets/constancia-logo-dark.webp";
 import constanciaLogoDarkPng from "@assets/constancia-logo-dark.png";
 
@@ -88,6 +89,23 @@ export default function HoldingPage() {
       <SEOHead {...SEO} />
 
       <main className="holding-page__main">
+        {/* Wordmark — the brand PNG. The "mint full stop" requirement
+            from the spec is intrinsic to the wordmark file itself. */}
+        <div className="holding-wordmark">
+          <picture>
+            <source srcSet={constanciaLogoDarkWebp} type="image/webp" />
+            <img src={constanciaLogoDarkPng} alt="Constancia" />
+          </picture>
+        </div>
+
+        {/* Tagline — Intelligent in mint, Agentic in rose. */}
+        <h1 className="holding-tagline">
+          Building{" "}
+          <em className="holding-tagline__intelligent">Intelligent</em>{" "}
+          <em className="holding-tagline__agentic">Agentic</em>{" "}
+          Enterprise
+        </h1>
+
         {/* Launch film — 4:5, autoplay muted looped, controls so user
             can unmute. When the video file is dropped in
             client/public/launch-film.mp4 it renders; until then the
@@ -107,23 +125,6 @@ export default function HoldingPage() {
             <source src="/launch-film.mp4" type="video/mp4" />
           </video>
         </div>
-
-        {/* Wordmark — the brand PNG. The "mint full stop" requirement
-            from the spec is intrinsic to the wordmark file itself. */}
-        <div className="holding-wordmark">
-          <picture>
-            <source srcSet={constanciaLogoDarkWebp} type="image/webp" />
-            <img src={constanciaLogoDarkPng} alt="Constancia" />
-          </picture>
-        </div>
-
-        {/* Tagline — Intelligent in mint, Agentic in rose. */}
-        <h1 className="holding-tagline">
-          Building{" "}
-          <em className="holding-tagline__intelligent">Intelligent</em>{" "}
-          <em className="holding-tagline__agentic">Agentic</em>{" "}
-          Enterprise
-        </h1>
 
         {/* Email capture */}
         {status === "success" ? (
@@ -182,9 +183,7 @@ export default function HoldingPage() {
         </div>
       </main>
 
-      <footer className="holding-footer">
-        Constancia. London. Copyright {new Date().getFullYear()}.
-      </footer>
+      <Footer />
     </div>
   );
 }
