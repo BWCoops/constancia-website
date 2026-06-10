@@ -55,9 +55,11 @@ export default function HoldingPage() {
           Enterprise
         </h1>
 
-        {/* Launch film — 4:5, autoplay muted looped, controls so user
-            can unmute. Poster falls back to the wordmark until a
-            real /launch-film.mp4 lands in client/public. */}
+        {/* Launch film — 4:5 vertical intro. AV1 (WebM) for modern
+            browsers, H.264 (MP4) fallback. Faststart on the MP4 +
+            preload="auto" so the first paint isn't delayed waiting
+            for the container. WebP poster shown while the video
+            buffers; JPEG fallback for old Safari. */}
         <div className="holding-film" aria-label="Constancia launch film">
           <video
             className="holding-film__video"
@@ -66,8 +68,8 @@ export default function HoldingPage() {
             loop
             playsInline
             controls
-            preload="metadata"
-            poster={constanciaLogoDarkPng}
+            preload="auto"
+            poster="/launch-film-poster.jpg"
           >
             <source src="/launch-film.webm" type="video/webm" />
             <source src="/launch-film.mp4" type="video/mp4" />
