@@ -40,12 +40,11 @@ const LIBRARY: LibraryItem[] = [
   {
     num: "01",
     label: "Tools",
-    description: "Comparison engines, Finance Compass, vendor profiles.",
+    description: "Comparison engine and Finance Compass diagnostic.",
     featureKey: "comparisonTools",
     children: [
-      { href: "/tools/epm-comparison", num: "01", label: "Comparison Tool",  description: "Independent platform benchmarks across EPM and AI vendors.", featureKey: "comparisonTools" },
-      { href: "/finance-compass",      num: "02", label: "Finance Compass",  description: "Diagnostic for finance maturity and EPM readiness.",         featureKey: "financeCompass" },
-      { href: "/vendors",              num: "03", label: "Vendor Directory", description: "Curated reference of the platforms we evaluate.",            featureKey: "comparisonTools" },
+      { href: "/tools/epm-comparison", num: "01", label: "Comparison Tool", description: "Independent platform benchmarks across EPM and AI vendors.", featureKey: "comparisonTools" },
+      { href: "/finance-compass",      num: "02", label: "Finance Compass", description: "Diagnostic for finance maturity and EPM readiness.",         featureKey: "financeCompass" },
     ],
   },
   { href: "/contact",   num: "02", label: "Contact",       description: "Tell us about your data challenge.",                            featureKey: "contact" },

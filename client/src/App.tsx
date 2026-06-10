@@ -29,8 +29,6 @@ const BlogPostPage = lazy(() => import("@/pages/blog-post"));
 const FilesPage = lazy(() => import("@/pages/files"));
 const ExportPage = lazy(() => import("@/pages/export"));
 const EPMComparisonPage = lazy(() => import("@/pages/epm-comparison"));
-const VendorDirectoryPage = lazy(() => import("@/pages/vendor-directory"));
-const VendorProfilePage = lazy(() => import("@/pages/vendor-profile"));
 const TermsOfUsePage = lazy(() => import("@/pages/terms"));
 const CareersPage = lazy(() => import("@/pages/careers"));
 const PrivacyPolicyPage = lazy(() => import("@/pages/privacy"));
@@ -258,15 +256,9 @@ function Router() {
             <FeatureGatedRoute feature="resources" component={FilesPage} />
           </Route>
           
-          {/* Comparison tools */}
+          {/* Comparison tool */}
           <Route path="/tools/epm-comparison">
             <FeatureGatedRoute feature="comparisonTools" component={EPMComparisonPage} />
-          </Route>
-          <Route path="/vendors">
-            <FeatureGatedRoute feature="comparisonTools" component={VendorDirectoryPage} />
-          </Route>
-          <Route path="/vendors/:id">
-            {() => <FeatureGatedRoute feature="comparisonTools" component={VendorProfilePage} />}
           </Route>
           
           {/* Export - always enabled */}

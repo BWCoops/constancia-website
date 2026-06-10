@@ -145,9 +145,8 @@ export const FRONTEND_ROUTE_PATTERNS: Record<keyof FeatureFlags, string[]> = {
   comparisonTools: [
     '/tools',
     '/tools/epm-comparison',
-    '/tools/erp-comparison', 
+    '/tools/erp-comparison',
     '/tools/ai-comparison',
-    '/vendors',
   ],
   financeCompass: [
     '/finance-compass',
@@ -282,7 +281,6 @@ export const NAV_LINKS = [
   { href: '/services', label: 'Services', featureKey: 'services' as keyof FeatureFlags },
   { href: '/solutions', label: 'Solutions', featureKey: 'solutions' as keyof FeatureFlags },
   { href: '/tools/epm-comparison', label: 'Enterprise Technology Comparison', featureKey: 'comparisonTools' as keyof FeatureFlags },
-  { href: '/vendors', label: 'Vendors', featureKey: 'comparisonTools' as keyof FeatureFlags },
   { href: '/finance-compass', label: 'FinanceCompass', featureKey: 'financeCompass' as keyof FeatureFlags },
   { href: '/blog', label: 'Day to Day AI', featureKey: 'blog' as keyof FeatureFlags },
   { href: '/files', label: 'Toolkit', featureKey: 'resources' as keyof FeatureFlags },
@@ -300,7 +298,7 @@ export const SITEMAP_PATHS: Record<keyof FeatureFlags, string[]> = {
   about: ['/about'],
   services: ['/services'],
   solutions: ['/solutions'],
-  comparisonTools: ['/tools/epm-comparison', '/tools/erp-comparison', '/tools/ai-comparison', '/vendors'],
+  comparisonTools: ['/tools/epm-comparison', '/tools/erp-comparison', '/tools/ai-comparison'],
   financeCompass: ['/finance-compass'],
   blog: ['/blog'],
   resources: ['/files'],
