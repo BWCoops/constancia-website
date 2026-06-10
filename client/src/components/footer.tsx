@@ -5,7 +5,6 @@ import { Linkedin, Mail, MapPin, ArrowUpRight } from "@/lib/icons";
 // colour itself). The footer sits on graphite, so this is the right
 // asset; using the graphite-on-cream logo here would render invisible.
 import logoWhite from "@assets/constancia-logo-dark.png";
-import { VisitorDataManager } from "@/components/visitor-data-manager";
 import { useFeatureFlags } from "@/lib/feature-flags";
 import type { FeatureFlags } from "@shared/feature-flags";
 
@@ -42,138 +41,167 @@ const footerLinks: Record<string, FooterLink[]> = {
   ],
 };
 
-const socialLinks = [
-  { icon: Linkedin, href: "https://www.linkedin.com/company/constancia-group/", label: "LinkedIn" },
-];
+interface FooterProps {
+  /**
+   * Holding-screen variant. Drops the four-column nav block above the
+   * thin bar — the launch screen is meant to be a single quiet pane,
+   * so only the slim Constancia Holdings line shows. Other pages keep
+   * the full footer.
+   */
+  variant?: "default" | "minimal";
+}
 
-export function Footer() {
+export function Footer({ variant = "default" }: FooterProps) {
   const { flags } = useFeatureFlags();
 
   const filterLinks = (links: FooterLink[]) =>
     links.filter((link) => link.featureKey === null || flags[link.featureKey]);
 
+  const minimal = variant === "minimal";
+
   return (
     <footer
-      className="bg-brand-navy text-brand-cream py-16 lg:py-20 relative overflow-hidden"
-      style={{ fontFamily: 'var(--hp-font-sans)' }}
+      className="bg-brand-navy text-brand-cream relative overflow-hidden"
+      style={{ fontFamily: "var(--hp-font-sans)", paddingTop: minimal ? 24 : 56, paddingBottom: 20 }}
       role="contentinfo"
       aria-label="Site footer"
     >
       <div className="relative z-10 max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 lg:gap-12 mb-12">
-          <div className="col-span-2 md:col-span-4 lg:col-span-1">
-            <Link href="/" className="inline-block mb-2 group" data-testid="link-footer-home">
-              <img
-                src={logoWhite}
-                alt="Constancia"
-                className="h-16 w-auto max-w-[200px]"
-              />
-            </Link>
-            
-            <div className="mb-4 text-sm leading-relaxed">
-              <p className="text-brand-cream">Connected finance intelligence.</p>
-              <p className="text-brand-cream">Make sense of every system.</p>
-              <p style={{ color: 'var(--hp-cyan)', fontStyle: 'italic' }}>One source of truth.</p>
+        {!minimal && (
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 lg:gap-12 mb-10">
+            <div className="col-span-2 md:col-span-4 lg:col-span-1">
+              <Link href="/" className="inline-block mb-2 group" data-testid="link-footer-home">
+                <img
+                  src={logoWhite}
+                  alt="Constancia"
+                  className="h-14 w-auto max-w-[180px]"
+                />
+              </Link>
+
+              <div className="mb-4 text-sm leading-relaxed">
+                <p className="text-brand-cream">Connected finance intelligence.</p>
+                <p className="text-brand-cream">Make sense of every system.</p>
+                <p style={{ color: "var(--hp-cyan)", fontStyle: "italic" }}>
+                  One source of truth.
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="font-semibold text-brand-cyan mb-4">Company</h3>
+              <ul className="space-y-3">
+                {filterLinks(footerLinks.company).map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-[#F6F3EE]/70 hover:text-brand-cyan transition-colors text-sm"
+                      data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="font-semibold text-brand-cyan mb-4">Solutions</h3>
+              <ul className="space-y-3">
+                {filterLinks(footerLinks.solutions).map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-[#F6F3EE]/70 hover:text-brand-cyan transition-colors text-sm"
+                      data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="font-semibold text-brand-cyan mb-4">Resources</h3>
+              <ul className="space-y-3">
+                {filterLinks(footerLinks.resources).map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-[#F6F3EE]/70 hover:text-brand-cyan transition-colors text-sm flex items-center gap-1"
+                      data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
+                    >
+                      {link.label}
+                      <ArrowUpRight className="w-3 h-3" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="font-semibold text-brand-cyan mb-4">Legal</h3>
+              <ul className="space-y-3">
+                {filterLinks(footerLinks.legal).map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-[#F6F3EE]/70 hover:text-brand-cyan transition-colors text-sm"
+                      data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
+        )}
 
-          <div>
-            <h3 className="font-semibold text-brand-cyan mb-4">Company</h3>
-            <ul className="space-y-3">
-              {filterLinks(footerLinks.company).map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-[#F6F3EE]/70 hover:text-brand-cyan transition-colors text-sm"
-                    data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* One thin line. Copyright | LinkedIn | (Contact on non-home
+            only) | Address. Wraps on narrow screens but stays a single
+            horizontal flow on tablet+. */}
+        <div
+          className={`${
+            minimal ? "" : "pt-6 border-t border-[#F6F3EE]/10"
+          } flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[12.5px] text-[#F6F3EE]/70 tracking-wide`}
+        >
+          <span>© {new Date().getFullYear()} Constancia Holdings Limited. All rights reserved.</span>
 
-          <div>
-            <h3 className="font-semibold text-brand-cyan mb-4">Solutions</h3>
-            <ul className="space-y-3">
-              {filterLinks(footerLinks.solutions).map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-[#F6F3EE]/70 hover:text-brand-cyan transition-colors text-sm"
-                    data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <span className="opacity-30" aria-hidden="true">·</span>
 
-          <div>
-            <h3 className="font-semibold text-brand-cyan mb-4">Resources</h3>
-            <ul className="space-y-3">
-              {filterLinks(footerLinks.resources).map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-[#F6F3EE]/70 hover:text-brand-cyan transition-colors text-sm flex items-center gap-1"
-                    data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
-                  >
-                    {link.label}
-                    <ArrowUpRight className="w-3 h-3" />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <a
+            href="https://www.linkedin.com/company/constancia-group/"
+            target="_blank"
+            rel="nofollow noopener noreferrer"
+            className="inline-flex items-center gap-1.5 hover:text-brand-cyan transition-colors"
+            aria-label="LinkedIn"
+            data-testid="link-social-linkedin"
+          >
+            <Linkedin className="w-3.5 h-3.5" />
+            <span>LinkedIn</span>
+          </a>
 
-          <div>
-            <h3 className="font-semibold text-brand-cyan mb-4">Legal</h3>
-            <ul className="space-y-3">
-              {filterLinks(footerLinks.legal).map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-[#F6F3EE]/70 hover:text-brand-cyan transition-colors text-sm"
-                    data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        <div className="pt-8 border-t border-[#F6F3EE]/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-[#F6F3EE]/60">
-            © {new Date().getFullYear()} Constancia Holdings Limited. All rights reserved.
-          </p>
-          <div className="flex flex-wrap items-center gap-3 sm:gap-4 md:gap-6 text-sm text-[#F6F3EE]/60">
-            {socialLinks.map((social) => (
+          {!minimal && (
+            <>
+              <span className="opacity-30" aria-hidden="true">·</span>
               <a
-                key={social.label}
-                href={social.href}
-                target="_blank"
-                rel="nofollow noopener noreferrer"
-                className="flex items-center gap-2 hover:text-brand-cyan transition-colors"
-                aria-label={social.label}
-                data-testid={`link-social-${social.label.toLowerCase()}`}
+                href="mailto:info@constancia.io"
+                className="inline-flex items-center gap-1.5 hover:text-brand-cyan transition-colors"
+                data-testid="link-footer-email"
               >
-                <social.icon className="w-4 h-4" />
+                <Mail className="w-3.5 h-3.5" />
+                <span>info@constancia.io</span>
               </a>
-            ))}
-            <a href="mailto:info@constancia.io" className="flex items-center gap-2 hover:text-brand-cyan transition-colors">
-              <Mail className="w-4 h-4 flex-shrink-0" />
-              <span className="break-all">info@constancia.io</span>
-            </a>
-            <span className="flex items-start gap-2">
-              <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" />
-              <span>Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ, UK</span>
-            </span>
-          </div>
+            </>
+          )}
+
+          <span className="opacity-30" aria-hidden="true">·</span>
+
+          <span className="inline-flex items-center gap-1.5">
+            <MapPin className="w-3.5 h-3.5" />
+            <span>Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ, UK</span>
+          </span>
         </div>
       </div>
     </footer>

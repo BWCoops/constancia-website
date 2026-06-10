@@ -33,7 +33,6 @@ import {
   Sparkles,
   Info
 } from "lucide-react";
-import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { SEOHead } from "@/components/seo-head";
 import { Button } from "@/components/ui/button";
@@ -2102,7 +2101,6 @@ export default function FinanceCompassDashboard() {
   if (sessionLoading) {
     return (
       <div className="min-h-screen bg-background">
-        <Navigation />
         <main className="pt-16 sm:pt-20 pb-16" role="main" aria-label="Loading dashboard">
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex items-center justify-center py-20">
@@ -2117,7 +2115,6 @@ export default function FinanceCompassDashboard() {
   if (sessionError) {
     return (
       <div className="min-h-screen bg-background">
-        <Navigation />
         <main className="pt-16 sm:pt-20 pb-16" role="main" aria-label="Session error">
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex flex-col items-center justify-center py-20 gap-4">
@@ -2148,7 +2145,6 @@ export default function FinanceCompassDashboard() {
   if (!isVerified) {
     return (
       <div className="min-h-screen bg-background">
-        <Navigation />
         <main className="pt-16 sm:pt-20 pb-16" role="main" aria-label="Redirecting">
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex flex-col items-center justify-center py-20 gap-4">
@@ -2168,8 +2164,6 @@ export default function FinanceCompassDashboard() {
         description="View and manage your finance transformation assessments. Track your progress, view results, and download reports."
         keywords={["finance dashboard", "EPM assessment", "finance transformation", "assessment results"]}
       />
-
-      <Navigation />
 
       <main className="pt-16 sm:pt-20 pb-16" role="main" aria-label="FinanceCompass Dashboard">
         <div className="max-w-7xl mx-auto px-6">

@@ -43,7 +43,6 @@ import {
   ExternalLink,
   Layers
 } from "lucide-react";
-import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { SEOHead } from "@/components/seo-head";
 import { Button } from "@/components/ui/button";
@@ -734,7 +733,6 @@ export default function FinanceCompassResults() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-background">
-        <Navigation />
         <main className="pt-16 sm:pt-20 pb-16">
           <div className="max-w-6xl mx-auto px-6">
             <Skeleton className="h-12 w-64 mb-4" />
@@ -759,7 +757,6 @@ export default function FinanceCompassResults() {
   if (error || !data?.success) {
     return (
       <div className="min-h-screen bg-background">
-        <Navigation />
         <main className="pt-16 sm:pt-20 pb-16 flex items-center justify-center">
           <Card className="w-full max-w-md text-center">
             <CardContent className="pt-6">
@@ -795,8 +792,6 @@ export default function FinanceCompassResults() {
         title={`Your Results | ${tierNames[safeAssessment.tier] || "Assessment"} | FinanceCompass`}
         description="View your personalised finance maturity score, transformation roadmap, vendor recommendations, and ROI projections from your FinanceCompass assessment."
       />
-      
-      <Navigation />
 
       <main className="pt-16 sm:pt-20 pb-12 sm:pb-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 mb-3 sm:mb-4">

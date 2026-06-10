@@ -3124,28 +3124,39 @@ body.is-holding-page {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(18px, 3.4vh, 36px);
+  gap: clamp(20px, 3.4vh, 40px);
   width: 100%;
-  max-width: 480px;
+  max-width: 520px;
   margin: 0 auto;
   text-align: center;
-  padding: clamp(20px, 4vh, 48px) 0;
+  padding: clamp(32px, 6vh, 72px) clamp(16px, 4vw, 28px);
 }
 
+/* Launch film — sits between tagline and email form. Slight frame +
+   soft outer glow so it reads as a deliberate inset rather than a
+   pasted-on rectangle. */
 .holding-film {
   width: 100%;
-  max-width: clamp(240px, 64vw, 360px);
+  max-width: clamp(260px, 70vw, 400px);
   aspect-ratio: 4 / 5;
-  border-radius: 14px;
+  border-radius: 18px;
   overflow: hidden;
-  background: #1A1B1A;
-  box-shadow: 0 14px 40px -12px rgba(0,0,0,0.6);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(127,184,163,0.10), rgba(199,122,147,0.06) 55%, rgba(26,27,26,0) 80%),
+    #1A1B1A;
+  padding: 6px;
+  box-shadow:
+    0 1px 0 rgba(246,243,238,0.04) inset,
+    0 22px 60px -22px rgba(0,0,0,0.72),
+    0 0 0 1px rgba(246,243,238,0.06);
+  margin: clamp(6px, 1.4vh, 14px) 0;
 }
 .holding-film__video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  border-radius: 12px;
 }
 
 .holding-wordmark { display: flex; justify-content: center; }

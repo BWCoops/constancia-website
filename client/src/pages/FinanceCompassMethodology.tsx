@@ -19,7 +19,6 @@ import {
   Users,
   Zap
 } from "lucide-react";
-import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { SEOHead } from "@/components/seo-head";
 import { Button } from "@/components/ui/button";
@@ -144,8 +143,7 @@ export default function FinanceCompassMethodology() {
         description="How Constancia builds accurate finance benchmarks using UK government data. Full transparency into our scoring methodology, data sources, and calculations."
         canonicalUrl="/finance-compass/methodology"
       />
-      <Navigation />
-      
+
       <main className="min-h-screen bg-background">
         <section className="relative py-20 lg:py-28 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--fc-navy))] via-[hsl(var(--fc-navy-light))] to-[hsl(var(--fc-teal))]" />

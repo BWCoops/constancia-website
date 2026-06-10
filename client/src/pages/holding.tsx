@@ -183,7 +183,7 @@ export default function HoldingPage() {
         </div>
       </main>
 
-      <Footer />
+      <Footer variant="minimal" />
     </div>
   );
 }

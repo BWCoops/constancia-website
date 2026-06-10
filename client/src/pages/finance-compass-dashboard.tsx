@@ -29,7 +29,6 @@ import {
   HelpCircle,
   ChevronDown
 } from "lucide-react";
-import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { SEOHead } from "@/components/seo-head";
 import { Button } from "@/components/ui/button";
@@ -429,7 +428,6 @@ export default function FinanceCompassInteractiveDashboard() {
   if (resultsLoading) {
     return (
       <div className="min-h-screen bg-background">
-        <Navigation />
         <main className="pt-16 sm:pt-20 pb-16">
           <div className="max-w-7xl mx-auto px-6 space-y-6">
             <Skeleton className="h-12 w-64" />
@@ -450,7 +448,6 @@ export default function FinanceCompassInteractiveDashboard() {
   if (!resultsData?.success || !resultsData?.data) {
     return (
       <div className="min-h-screen bg-background">
-        <Navigation />
         <main className="pt-16 sm:pt-20 pb-16 flex items-center justify-center">
           <Card className="w-full max-w-md text-center">
             <CardContent className="pt-6">
@@ -482,9 +479,7 @@ export default function FinanceCompassInteractiveDashboard() {
         title="Interactive Assessment Dashboard | FinanceCompass"
         description="Explore your FinanceCompass assessment results with interactive ROI scenarios, vendor recommendations, and a personalised transformation roadmap."
       />
-      
-      <Navigation />
-      
+
       <main className="pt-16 sm:pt-20 pb-16">
         <div className="max-w-7xl mx-auto px-6 mb-4">
           <Link href="/finance-compass/dashboard">

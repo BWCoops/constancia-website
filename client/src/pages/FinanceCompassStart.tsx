@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { ArrowRight, Loader2, Clock, CheckCircle2, ArrowLeft, AlertTriangle, RotateCcw, Trash2, Play } from "lucide-react";
 import { trackPageView, trackCTAClicked, getTrackingData } from "@/lib/funnel-analytics";
-import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { SEOHead } from "@/components/seo-head";
 import { Button } from "@/components/ui/button";
@@ -230,8 +229,6 @@ export default function FinanceCompassStart() {
         title={`Start ${info.name} | FinanceCompass | Constancia`}
         description={info.description}
       />
-      
-      <Navigation />
 
       {/* Existing Assessment Dialog */}
       <Dialog open={showExistingDialog} onOpenChange={setShowExistingDialog}>

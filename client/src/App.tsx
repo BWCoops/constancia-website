@@ -116,8 +116,10 @@ function ScrollToTop() {
  */
 function GlobalNav() {
   const [location] = useLocation();
-  const hideOn = ["/admin", "/finance-compass"];
-  if (hideOn.some((p) => location === p || location.startsWith(`${p}/`))) {
+  // Admin centre runs its own AdminSidebar, so the pill would
+  // duplicate nav. Everywhere else (including Finance Compass) gets
+  // the same pill drawer.
+  if (location === "/admin" || location.startsWith("/admin/")) {
     return null;
   }
   // Entire public site is on the dark palette since the launch holding

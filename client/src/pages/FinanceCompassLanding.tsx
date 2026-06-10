@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { trackPageView, setupScrollTracking, setupWidgetVisibilityTracking, trackCTAClicked } from "@/lib/funnel-analytics";
 import { ArrowRight, ArrowLeft, CheckCircle2, Building2, Mail, User, Briefcase, Phone, Loader2, RefreshCw, Shield, AlertCircle, Target, Sparkles, BarChart3, Star, TrendingUp, Users, Award, Bot, LineChart, Rocket, ClipboardCheck, Search, Cpu, FileText, Clock, Calendar, FileCheck, Zap, ChevronRight } from "lucide-react";
 import { Link } from "wouter";
-import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { SEOHead } from "@/components/seo-head";
 import { preloadFinanceCompassComponents } from "@/lib/preload";
@@ -982,8 +981,6 @@ export default function FinanceCompassLanding() {
         "description": "Finance function maturity assessment tool for CFOs and finance leaders. Benchmark across 7 dimensions and receive a personalised transformation roadmap.",
         "url": "https://constancia.com/finance-compass"
       }) }} />
-      
-      <Navigation />
 
       <main className="pt-16 sm:pt-20">
         {/* Hero Section */}
