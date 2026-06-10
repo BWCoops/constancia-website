@@ -1,24 +1,24 @@
-import { Loader2 } from "lucide-react";
+/**
+ * FinanceCompassLoading — branded splash shown while the Finance
+ * Compass route bundle resolves and the start flow loads. Same
+ * dark palette as the rest of the site, with the wordmark + a
+ * concise compass-eyebrow + a slow mint ring spinner. No marketing
+ * copy here — this is meant to be a quick, on-brand transition.
+ */
+import constanciaLogoDarkPng from "@assets/constancia-logo-dark.png";
 
 export function FinanceCompassLoading() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#252826] via-[#034a5a] to-[#252826]">
-      <div className="h-16 border-b border-white/10 flex items-center px-6">
-        <div className="w-20 h-8 bg-white/10 rounded animate-pulse" />
-      </div>
-      <div className="flex items-center justify-center min-h-[calc(100vh-64px)]">
-        <div className="text-center px-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#8E4F67]/30 mb-4">
-            <span className="text-xs text-[#7FB8A3] font-medium">FinanceCompass</span>
-          </div>
-          <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
-            AI-Powered EPM Readiness Assessment
-          </h1>
-          <p className="text-lg text-white/70 mb-8 max-w-2xl mx-auto">
-            Preparing your personalised experience...
-          </p>
-          <Loader2 className="h-8 w-8 animate-spin text-[#7FB8A3] mx-auto" />
-        </div>
+    <div className="fc-loading">
+      <div className="fc-loading__inner">
+        <img
+          className="fc-loading__wordmark"
+          src={constanciaLogoDarkPng}
+          alt="Constancia"
+        />
+        <span className="fc-loading__eyebrow">Finance Compass</span>
+        <span className="fc-loading__spinner" aria-hidden="true" />
+        <span className="sr-only">Loading Finance Compass</span>
       </div>
     </div>
   );

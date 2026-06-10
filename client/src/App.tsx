@@ -71,7 +71,6 @@ const WidgetAnalytics = lazy(() => import("@/pages/admin/WidgetAnalytics"));
 const FunnelAnalytics = lazy(() => import("@/pages/admin/FunnelAnalytics"));
 const ComparisonToolsAnalytics = lazy(() => import("@/pages/admin/ComparisonToolsAnalytics"));
 
-const FinanceCompassLanding = lazy(() => import("@/pages/FinanceCompassLanding"));
 const FinanceCompassUserDashboard = lazy(() => import("@/pages/FinanceCompassDashboard"));
 const FinanceCompassStart = lazy(() => import("@/pages/FinanceCompassStart"));
 const FinanceCompassAssess = lazy(() => import("@/pages/FinanceCompassAssess"));
@@ -114,6 +113,25 @@ function ScrollToTop() {
  * page. Admin routes have their own AdminSidebar; FinanceCompass has
  * its own header. Both are excluded so we don't double-stack nav.
  */
+/**
+ * FinanceCompassEntry — direct hop into the Finance Compass start
+ * flow. The previous marketing landing at /finance-compass was a
+ * stop-gap; visitors now see the branded loader for a beat while
+ * we navigate to the pre-assessment, which is the real product
+ * surface. Keeping it as a tiny gateway component (rather than a
+ * Redirect) means the loader actually paints — important on cold
+ * starts and slow networks where instant navigation would still
+ * blank the screen.
+ */
+function FinanceCompassEntry() {
+  const [, navigate] = useLocation();
+  useEffect(() => {
+    const t = setTimeout(() => navigate("/finance-compass/start/pre_assessment", { replace: true }), 150);
+    return () => clearTimeout(t);
+  }, [navigate]);
+  return <FinanceCompassLoading />;
+}
+
 function GlobalNav() {
   const [location] = useLocation();
   // Admin centre runs its own AdminSidebar, so the pill would
@@ -260,11 +278,13 @@ function Router() {
           <Route path="/cookies" component={CookiePolicyPage} />
           <Route path="/careers" component={CareersPage} />
           
-          {/* FinanceCompass public routes - gated with custom loading */}
+          {/* FinanceCompass public routes - gated with custom loading.
+              The /finance-compass entry skips the old marketing
+              landing and routes the visitor straight into the
+              assessment-start flow. The branded loader shows during
+              the brief transition. */}
           <Route path="/finance-compass">
-            <Suspense fallback={<FinanceCompassLoading />}>
-              <FeatureGatedRoute feature="financeCompass" component={FinanceCompassLanding} />
-            </Suspense>
+            <FeatureGatedRoute feature="financeCompass" component={FinanceCompassEntry} />
           </Route>
           <Route path="/finance-compass/dashboard">
             <Suspense fallback={<FinanceCompassLoading />}>
