@@ -135,7 +135,19 @@ function FinanceCompassEntry() {
   const { data: sessionData, isLoading } = useQuery<{ verified: boolean }>({
     queryKey: ["/api/finance-compass/public/session"],
     staleTime: 30_000,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
   });
+
+  // Warm the marketing-landing chunk in parallel with the session
+  // fetch. Without this prefetch, an unverified visitor sees the
+  // entry loader -> Suspense fallback (a second mount of the same
+  // loader) -> Landing in three discrete paint frames, which reads
+  // as a flicker. Kicking the import here means the chunk arrives
+  // alongside the session response so the Landing mounts in one go.
+  useEffect(() => {
+    void import("@/pages/FinanceCompassLanding");
+  }, []);
 
   useEffect(() => {
     if (!isLoading && sessionData?.verified) {

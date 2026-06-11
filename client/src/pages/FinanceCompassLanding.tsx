@@ -549,7 +549,7 @@ export default function FinanceCompassLanding() {
   const renderFormCard = () => {
     if (step === "checking") {
       return (
-        <Card className="bg-white/95 backdrop-blur-sm border-0 shadow-2xl">
+        <Card className="bg-card/95 backdrop-blur-sm border-0 shadow-2xl">
           <CardContent className="py-16 flex flex-col items-center justify-center">
             <Loader2 className="h-8 w-8 animate-spin text-brand-teal mb-4" />
             <p className="text-muted-foreground">Checking your session...</p>
@@ -560,7 +560,7 @@ export default function FinanceCompassLanding() {
 
     if (step === "verified") {
       return (
-        <Card className="bg-white/95 backdrop-blur-sm border-0 shadow-2xl">
+        <Card className="bg-card/95 backdrop-blur-sm border-0 shadow-2xl">
           <CardHeader className="pb-3">
             <div className="flex items-center gap-2 mb-2">
               <motion.div 
@@ -601,7 +601,7 @@ export default function FinanceCompassLanding() {
 
     if (step === "otp") {
       return (
-        <Card className="bg-white/95 backdrop-blur-sm border-0 shadow-2xl">
+        <Card className="bg-card/95 backdrop-blur-sm border-0 shadow-2xl">
           <CardHeader className="pb-4">
             <div className="flex items-center gap-2 mb-2">
               <div className="h-8 w-8 flex items-center justify-center rounded-lg bg-brand-berry/10">
@@ -680,7 +680,7 @@ export default function FinanceCompassLanding() {
 
     // Form step
     return (
-      <Card className="bg-white/95 backdrop-blur-sm border-0 shadow-2xl">
+      <Card className="bg-card/95 backdrop-blur-sm border-0 shadow-2xl">
         <CardHeader className="pb-4">
           <div className="flex items-center gap-2 mb-2">
             <div className="h-8 w-8 flex items-center justify-center rounded-lg bg-brand-berry/10">
@@ -1105,7 +1105,7 @@ export default function FinanceCompassLanding() {
         </section>
 
         {/* Industry Context Section - The AI Imperative */}
-        <section className="py-10 sm:py-16 bg-gradient-to-b from-white to-slate-50 dark:from-background dark:to-muted/30">
+        <section className="py-10 sm:py-16 bg-gradient-to-b from-background to-muted/30">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <motion.div 
               className="text-center mb-8 sm:mb-12"
@@ -1253,7 +1253,7 @@ export default function FinanceCompassLanding() {
         {/* Registration Form Section */}
         <section id="start-assessment" className="py-12 sm:py-20 relative overflow-hidden">
           {/* Premium gradient background */}
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-muted/20 dark:via-background dark:to-muted/20" />
+          <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background to-muted/20" />
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-mint/5 rounded-full blur-3xl" />
             <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-brand-berry/5 rounded-full blur-3xl" />
@@ -1291,7 +1291,7 @@ export default function FinanceCompassLanding() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <div className="flex items-center gap-3 p-3 sm:p-4 rounded-xl bg-white dark:bg-card border border-border/50 shadow-sm">
+              <div className="flex items-center gap-3 p-3 sm:p-4 rounded-xl bg-card border border-border/50 shadow-sm">
                 <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-brand-mint to-brand-berry flex items-center justify-center flex-shrink-0">
                   <Clock className="h-5 w-5 text-white" />
                 </div>
@@ -1300,7 +1300,7 @@ export default function FinanceCompassLanding() {
                   <p className="text-xs text-muted-foreground">Quick assessment</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 p-3 sm:p-4 rounded-xl bg-white dark:bg-card border border-border/50 shadow-sm">
+              <div className="flex items-center gap-3 p-3 sm:p-4 rounded-xl bg-card border border-border/50 shadow-sm">
                 <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-brand-berry to-brand-ink flex items-center justify-center flex-shrink-0">
                   <Target className="h-5 w-5 text-white" />
                 </div>
@@ -1309,7 +1309,7 @@ export default function FinanceCompassLanding() {
                   <p className="text-xs text-muted-foreground">Full diagnostic</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 p-3 sm:p-4 rounded-xl bg-white dark:bg-card border border-border/50 shadow-sm">
+              <div className="flex items-center gap-3 p-3 sm:p-4 rounded-xl bg-card border border-border/50 shadow-sm">
                 <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-brand-ink to-brand-berry flex items-center justify-center flex-shrink-0">
                   <Sparkles className="h-5 w-5 text-white" />
                 </div>
@@ -1318,7 +1318,7 @@ export default function FinanceCompassLanding() {
                   <p className="text-xs text-muted-foreground">Smart insights</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 p-3 sm:p-4 rounded-xl bg-white dark:bg-card border border-border/50 shadow-sm">
+              <div className="flex items-center gap-3 p-3 sm:p-4 rounded-xl bg-card border border-border/50 shadow-sm">
                 <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center flex-shrink-0">
                   <Shield className="h-5 w-5 text-white" />
                 </div>
