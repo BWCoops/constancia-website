@@ -165,7 +165,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Skeleton } from "@/components/ui/skeleton";
 import {
   Dialog,
   DialogContent,
@@ -6615,86 +6614,15 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
   );
 }
 
-const heroTechImages = [
-  { icon: Target, label: "EPM Solutions", color: "#7FB8A3" },
-  { icon: Database, label: "ERP Systems", color: "#8E4F67" },
-  { icon: Bot, label: "AI Tools", color: "#7FB8A3" },
-];
-
-// Skeleton loading component for initial page load
-function ComparisonPageSkeleton() {
-  return (
-    <div className="marketing-page">
-      <main>
-        {/* Hero skeleton — brand canvas, glass tablet shape */}
-        <section className="comparison-hero">
-          <div className="comparison-hero__inner">
-            <div className="glass-surface comparison-hero__card">
-              <Skeleton className="h-6 w-32 mb-4 mx-auto" />
-              <Skeleton className="h-12 w-80 mb-3 mx-auto" />
-              <Skeleton className="h-5 w-96 mx-auto" />
-            </div>
-          </div>
-        </section>
-        {/* Tab selector skeleton */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
-          <div className="flex justify-center gap-4 mb-8">
-            <Skeleton className="h-12 w-32 rounded-lg" />
-            <Skeleton className="h-12 w-32 rounded-lg" />
-            <Skeleton className="h-12 w-32 rounded-lg" />
-          </div>
-          {/* Platform cards skeleton */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <Skeleton key={i} className="h-48 rounded-lg" />
-            ))}
-          </div>
-        </div>
-      </main>
-    </div>
-  );
-}
-
 export default function TechComparisonPage() {
   const { flags } = useFeatureFlags();
   const [activeCategory, setActiveCategory] = useState<"epm" | "erp" | "ai">("epm");
-  const [currentHeroImage, setCurrentHeroImage] = useState(0);
-  const [isPageReady, setIsPageReady] = useState(false);
-  
-  // Performance hooks - reduce motion for accessibility and mobile performance
-  const prefersReducedMotion = useReducedMotion();
-  const isMobile = useIsMobile();
-  const shouldReduceMotion = prefersReducedMotion || isMobile;
-
-  // Mark page as ready after initial render to show skeleton briefly
-  useEffect(() => {
-    // Use requestAnimationFrame to ensure skeleton shows for at least one frame
-    const raf = requestAnimationFrame(() => {
-      setIsPageReady(true);
-    });
-    return () => cancelAnimationFrame(raf);
-  }, []);
 
   // Track page view and comparison tool opened on mount
   useEffect(() => {
     trackPageView(`${activeCategory}_comparison`);
     trackComparisonToolOpened(activeCategory);
   }, [activeCategory]);
-
-  // Hero image rotation - must be before conditional return
-  // Slow down rotation on mobile for better performance
-  useEffect(() => {
-    if (!isPageReady) return;
-    const interval = setInterval(() => {
-      setCurrentHeroImage((prev) => (prev + 1) % heroTechImages.length);
-    }, shouldReduceMotion ? 5000 : 3000);
-    return () => clearInterval(interval);
-  }, [isPageReady, shouldReduceMotion]);
-
-  // Show skeleton during initial load
-  if (!isPageReady) {
-    return <ComparisonPageSkeleton />;
-  }
 
   return (
     <div className="marketing-page">
@@ -6705,49 +6633,9 @@ export default function TechComparisonPage() {
       />
 
       <main>
-        {/* Brand-styled hero matching the rest of the site. Same
-            cream canvas + glass tablet primitive used by the marketing
-            pages. The previous dark-gradient hero with orbiting dots
-            broke visual continuity. */}
-        <section className="comparison-hero">
-          <div className="comparison-hero__inner">
-            <div className="glass-surface comparison-hero__card">
-              <div className="page-hero__badge">
-                <span className="page-hero__badge-dot" aria-hidden="true" />
-                <span>Interactive Tool</span>
-              </div>
-              <h1 className="comparison-hero__title">
-                Enterprise Technology{" "}
-                <em className="scrolly-tablet__heading-accent">Comparison.</em>
-              </h1>
-              <p className="comparison-hero__subtitle">
-                Compare leading platforms across EPM, ERP, and AI for Finance.
-                Adjust scoring weights to match your priorities and see which one
-                actually fits — by the drivers that move the needle.
-              </p>
-              <div className="comparison-hero__pills">
-                <span className="comparison-hero__pill">
-                  <Layers size={14} aria-hidden="true" /> Three categories
-                </span>
-                <span className="comparison-hero__pill">
-                  <BarChart3 size={14} aria-hidden="true" /> Data-driven scoring
-                </span>
-                <span className="comparison-hero__pill">
-                  <TrendingUp size={14} aria-hidden="true" /> Real-time weight tuning
-                </span>
-              </div>
-            </div>
-          </div>
-        </section>
-
         <section className="py-8 md:py-12 lg:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
+            <div>
               <Tabs value={activeCategory} onValueChange={(v) => setActiveCategory(v as "epm" | "erp" | "ai")} className="space-y-8">
                 <div className="flex flex-col items-center">
                   <TabsList className="h-auto p-1 bg-muted/50 flex-wrap">
@@ -6814,40 +6702,6 @@ export default function TechComparisonPage() {
                   />
                 </TabsContent>
               </Tabs>
-            </motion.div>
-          </div>
-        </section>
-
-        <section className="comparison-cta">
-          <div className="comparison-cta__inner">
-            <div className="glass-surface comparison-cta__card">
-              <div className="page-hero__badge">
-                <span className="page-hero__badge-dot" aria-hidden="true" />
-                <span>Need a second opinion?</span>
-              </div>
-              <h2 className="comparison-cta__title">
-                The data tells you what fits.{" "}
-                <em className="scrolly-tablet__heading-accent">
-                  A senior practitioner tells you whether to pull the trigger.
-                </em>
-              </h2>
-              <p className="comparison-cta__body">
-                Constancia advisors will read the comparison against your existing
-                stack, your team's maturity, and the constraints the demo can't
-                show. Independent — no kickbacks, no pipeline pressure.
-              </p>
-              <div className="comparison-cta__actions">
-                {flags.contact && (
-                  <Link href="/contact" className="scrolly-tablet__link scrolly-tablet__link--strong" data-testid="button-contact-cta">
-                    Schedule a conversation →
-                  </Link>
-                )}
-                {flags.services && (
-                  <Link href="/services" className="scrolly-tablet__link" data-testid="button-services-cta">
-                    Our services →
-                  </Link>
-                )}
-              </div>
             </div>
           </div>
         </section>
