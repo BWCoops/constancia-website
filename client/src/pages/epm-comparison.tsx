@@ -3305,7 +3305,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
         missingFields.push('Company Size');
       }
       if (!companyProfile?.erpLandscape) {
-        missingFields.push('Current ERP');
+        missingFields.push('Your existing ERP / accounting system');
       }
     }
     
@@ -4698,8 +4698,8 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                             )}
                           </AnimatePresence>
                         </div>
-                        <div className="flex flex-wrap items-center gap-1 mt-2">
-                          <Badge className="text-[10px] px-1.5 py-0.5" variant="secondary">
+                        <div className="flex flex-wrap items-center gap-1 mt-2 min-w-0">
+                          <Badge className="text-[10px] px-1.5 py-0.5 max-w-full truncate" variant="secondary">
                             {platform.marketPosition}
                           </Badge>
                           {fitResult && (

@@ -1008,7 +1008,7 @@ export const epmPlatforms: Platform[] = [
       totalCostOwnership: 8.0,
       supportEcosystem: 6.5,
     },
-    marketPosition: "Challenger (Strategic Finance)",
+    marketPosition: "Challenger",
     roiPotential: "high",
     implementationTime: "4-8 weeks",
     priceRange: "£48K-£96K/year",
