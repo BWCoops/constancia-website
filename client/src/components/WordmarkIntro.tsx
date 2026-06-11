@@ -9,7 +9,7 @@
  */
 
 import { useEffect, useState } from "react";
-import constanciaLogoDark from "@assets/constancia-logo-dark.webp";
+import constanciaLogoDark from "@assets/constancia-logo-hero.webp";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 interface WordmarkIntroProps {
