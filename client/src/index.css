@@ -2605,28 +2605,42 @@ body.is-holding-page {
 /* Launch film — sits between tagline and email form. Slight frame +
    soft outer glow so it reads as a deliberate inset rather than a
    pasted-on rectangle. */
+/* Launch film — sit it into the page rather than pasting on top.
+   No padded frame, no hard rim. The video has its own corner
+   radius and gets a wide, diffused halo behind it (rose + mint at
+   low opacity) that bleeds into the page background, so the eye
+   reads the film as part of the canvas. The drop-shadow is large
+   and very soft — enough to lift it without making it feel like a
+   sticker. */
 .holding-film {
+  position: relative;
   width: 100%;
-  max-width: clamp(260px, 70vw, 400px);
+  max-width: clamp(280px, 76vw, 440px);
   aspect-ratio: 4 / 5;
-  border-radius: 18px;
-  overflow: hidden;
+  border-radius: 22px;
+  margin: clamp(8px, 1.6vh, 18px) auto;
+  isolation: isolate;
+}
+.holding-film::before {
+  content: '';
+  position: absolute;
+  inset: -28% -22%;
+  z-index: -1;
   background:
-    radial-gradient(ellipse at 50% 0%, rgba(127,184,163,0.10), rgba(199,122,147,0.06) 55%, rgba(26,27,26,0) 80%),
-    #1A1B1A;
-  padding: 6px;
-  box-shadow:
-    0 1px 0 rgba(246,243,238,0.04) inset,
-    0 22px 60px -22px rgba(0,0,0,0.72),
-    0 0 0 1px rgba(246,243,238,0.06);
-  margin: clamp(6px, 1.4vh, 14px) 0;
+    radial-gradient(ellipse 60% 50% at 50% 38%, rgba(199,122,147,0.14) 0%, rgba(199,122,147,0) 65%),
+    radial-gradient(ellipse 65% 55% at 35% 70%, rgba(127,184,163,0.12) 0%, rgba(127,184,163,0) 65%);
+  filter: blur(34px);
+  pointer-events: none;
 }
 .holding-film__video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  border-radius: 12px;
+  border-radius: 22px;
+  box-shadow:
+    0 30px 80px -28px rgba(0,0,0,0.55),
+    0 12px 30px -18px rgba(0,0,0,0.35);
 }
 
 .holding-wordmark { display: flex; justify-content: center; }

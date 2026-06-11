@@ -65,8 +65,11 @@ const adminPriorityRoutes = [
   '/admin/feature-flags'
 ];
 
-const priorityRoutes = ['/solutions', '/services', '/about', '/contact'];
-const heavyRoutes = ['/tools/epm-comparison'];
+// Launch-state priority list. About / Services / Solutions are
+// flagged off and would warm chunks that are never rendered, so
+// they're out. Contact stays — it's reachable from the pill drawer
+// and a real navigation target.
+const priorityRoutes = ['/contact'];
 
 export function preloadFinanceCompassComponents(): void {
   if (typeof window === 'undefined') return;

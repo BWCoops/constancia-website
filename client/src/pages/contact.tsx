@@ -23,8 +23,13 @@ import { Footer } from "@/components/footer";
 const SEO = {
   title: "Contact Us | Constancia",
   description:
-    "Talk to Constancia about platform selection, integration, transformation planning, and senior-level guidance for finance teams.",
-  keywords: ["contact Constancia", "finance systems integration", "EPM partner"],
+    "Talk to Constancia about enterprise intelligence — platform selection, integration, transformation planning, and senior-level guidance.",
+  keywords: [
+    "contact Constancia",
+    "enterprise intelligence",
+    "intelligent agentic enterprise",
+    "EPM partner",
+  ],
 };
 
 export default function ContactPage() {
@@ -136,7 +141,7 @@ export default function ContactPage() {
         <header className="contact-simple__header">
           <p className="contact-simple__eyebrow">Get in touch</p>
           <h1 className="contact-simple__title">
-            Talk to us about <span className="contact-simple__title-accent">your finance systems.</span>
+            Talk to us about <span className="contact-simple__title-accent">enterprise intelligence.</span>
           </h1>
           <p className="contact-simple__lede">
             Whether you are scoping a programme, evaluating platforms, or want a second opinion on

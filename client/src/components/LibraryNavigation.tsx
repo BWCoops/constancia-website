@@ -16,6 +16,7 @@
 import { useEffect, useRef, useState, lazy, Suspense } from "react";
 import { useLocation } from "wouter";
 import { useFeatureFlags } from "@/lib/feature-flags";
+import { preloadRoute } from "@/lib/preload";
 import { Menu, X, ChevronDown } from "lucide-react";
 import type { FeatureFlags } from "@shared/feature-flags";
 
@@ -212,6 +213,9 @@ export function LibraryNavigation({ variant = "light" }: LibraryNavigationProps)
                               e.preventDefault();
                               if (child.href) handleItemClick(child.href);
                             }}
+                            onMouseEnter={() => child.href && preloadRoute(child.href)}
+                            onFocus={() => child.href && preloadRoute(child.href)}
+                            onTouchStart={() => child.href && preloadRoute(child.href)}
                           >
                             <span className="library-nav-drawer__num">{child.num}</span>
                             <span className="library-nav-drawer__label">{child.label}</span>
@@ -232,6 +236,9 @@ export function LibraryNavigation({ variant = "light" }: LibraryNavigationProps)
                       e.preventDefault();
                       if (item.href) handleItemClick(item.href);
                     }}
+                    onMouseEnter={() => item.href && preloadRoute(item.href)}
+                    onFocus={() => item.href && preloadRoute(item.href)}
+                    onTouchStart={() => item.href && preloadRoute(item.href)}
                   >
                     <span className="library-nav-drawer__num">{item.num}</span>
                     <span className="library-nav-drawer__label">{item.label}</span>

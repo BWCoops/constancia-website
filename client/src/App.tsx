@@ -1,7 +1,7 @@
 import { useEffect, useRef, lazy, Suspense } from "react";
 import { Switch, Route, useLocation, Redirect } from "wouter";
 import { queryClient } from "./lib/queryClient";
-import { QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider, useQuery } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -70,6 +70,7 @@ const FunnelAnalytics = lazy(() => import("@/pages/admin/FunnelAnalytics"));
 const ComparisonToolsAnalytics = lazy(() => import("@/pages/admin/ComparisonToolsAnalytics"));
 
 const FinanceCompassUserDashboard = lazy(() => import("@/pages/FinanceCompassDashboard"));
+const FinanceCompassLanding = lazy(() => import("@/pages/FinanceCompassLanding"));
 const FinanceCompassStart = lazy(() => import("@/pages/FinanceCompassStart"));
 const FinanceCompassAssess = lazy(() => import("@/pages/FinanceCompassAssess"));
 const FinanceCompassResults = lazy(() => import("@/pages/FinanceCompassResults"));
@@ -112,22 +113,44 @@ function ScrollToTop() {
  * its own header. Both are excluded so we don't double-stack nav.
  */
 /**
- * FinanceCompassEntry — direct hop into the Finance Compass start
- * flow. The previous marketing landing at /finance-compass was a
- * stop-gap; visitors now see the branded loader for a beat while
- * we navigate to the pre-assessment, which is the real product
- * surface. Keeping it as a tiny gateway component (rather than a
- * Redirect) means the loader actually paints — important on cold
- * starts and slow networks where instant navigation would still
- * blank the screen.
+ * FinanceCompassEntry — smart gateway for /finance-compass.
+ *
+ * The product gates everything behind an email-verified session
+ * (lead-capture + OTP). Verifying happens on the FinanceCompassLanding
+ * page; once verified, the assessment surface at
+ * /finance-compass/start/:tier becomes reachable.
+ *
+ * Previous build of this gateway hard-routed every visitor to /start,
+ * which trapped unverified users in an infinite loop because /start
+ * immediately bounces them back here with a "Verification Required"
+ * toast. We now check the session first:
+ *  - while loading: branded loader, no flash of marketing content.
+ *  - if verified: hop straight to /start (replace: true so back
+ *    doesn't trap on the loader).
+ *  - otherwise: render the verification landing so the user can
+ *    sign in.
  */
 function FinanceCompassEntry() {
   const [, navigate] = useLocation();
+  const { data: sessionData, isLoading } = useQuery<{ verified: boolean }>({
+    queryKey: ["/api/finance-compass/public/session"],
+    staleTime: 30_000,
+  });
+
   useEffect(() => {
-    const t = setTimeout(() => navigate("/finance-compass/start/pre_assessment", { replace: true }), 150);
-    return () => clearTimeout(t);
-  }, [navigate]);
-  return <FinanceCompassLoading />;
+    if (!isLoading && sessionData?.verified) {
+      navigate("/finance-compass/start/pre_assessment", { replace: true });
+    }
+  }, [isLoading, sessionData, navigate]);
+
+  if (isLoading || sessionData?.verified) {
+    return <FinanceCompassLoading />;
+  }
+  return (
+    <Suspense fallback={<FinanceCompassLoading />}>
+      <FinanceCompassLanding />
+    </Suspense>
+  );
 }
 
 function GlobalNav() {
