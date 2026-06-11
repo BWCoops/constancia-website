@@ -2,6 +2,7 @@ import { Component, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import { ClerkProvider } from "@clerk/clerk-react";
 import App from "./App";
+import { ThemeProvider } from "./components/theme-provider";
 import "./index.css";
 import { initializeWebVitals } from "./lib/web-vitals";
 
@@ -206,15 +207,17 @@ async function bootstrap() {
 
   const root = createRoot(document.getElementById("root")!);
   root.render(
-    key ? (
-      <ClerkBoundary fallback={<App />}>
-        <ClerkProvider publishableKey={key} afterSignOutUrl="/admin/login">
-          <App />
-        </ClerkProvider>
-      </ClerkBoundary>
-    ) : (
-      <App />
-    )
+    <ThemeProvider defaultTheme="light" storageKey="constancia-ui-theme">
+      {key ? (
+        <ClerkBoundary fallback={<App />}>
+          <ClerkProvider publishableKey={key} afterSignOutUrl="/admin/login">
+            <App />
+          </ClerkProvider>
+        </ClerkBoundary>
+      ) : (
+        <App />
+      )}
+    </ThemeProvider>
   );
 }
 

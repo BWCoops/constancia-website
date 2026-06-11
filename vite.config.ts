@@ -48,6 +48,13 @@ export default defineConfig({
       "react-dom",
       "react-dom/client",
       "@clerk/clerk-react",
+      // Pre-bundle Tailwind plugins so Vite discovers them at startup
+      // rather than lazily mid-render. Without this, Vite triggers a
+      // forced full-page reload the moment it first encounters these
+      // packages, which nulls React's dispatcher and crashes ThemeProvider
+      // on every cold start.
+      "tailwindcss-animate",
+      "@tailwindcss/typography",
     ],
   },
   root: path.resolve(import.meta.dirname, "client"),

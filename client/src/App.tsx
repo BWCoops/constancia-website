@@ -4,7 +4,6 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider, useQuery } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { ThemeProvider } from "@/components/theme-provider";
 import { LazyMotionProvider } from "@/components/lazy-motion-provider";
 import { CookieConsentBanner } from "@/components/cookie-consent";
 import { LibraryNavigation } from "@/components/LibraryNavigation";
@@ -478,23 +477,21 @@ function Router() {
 
 function App() {
   return (
-    <ThemeProvider defaultTheme="light" storageKey="constancia-ui-theme">
-      <LazyMotionProvider>
-        <QueryClientProvider client={queryClient}>
-          <FeatureFlagProvider>
-            <VisitorProvider>
-              <TooltipProvider>
-                <Toaster />
-                <GlassFilterDef />
-                <GlobalNav />
-                <Router />
-                <CookieConsentBanner />
-              </TooltipProvider>
-            </VisitorProvider>
-          </FeatureFlagProvider>
-        </QueryClientProvider>
-      </LazyMotionProvider>
-    </ThemeProvider>
+    <LazyMotionProvider>
+      <QueryClientProvider client={queryClient}>
+        <FeatureFlagProvider>
+          <VisitorProvider>
+            <TooltipProvider>
+              <Toaster />
+              <GlassFilterDef />
+              <GlobalNav />
+              <Router />
+              <CookieConsentBanner />
+            </TooltipProvider>
+          </VisitorProvider>
+        </FeatureFlagProvider>
+      </QueryClientProvider>
+    </LazyMotionProvider>
   );
 }
 
