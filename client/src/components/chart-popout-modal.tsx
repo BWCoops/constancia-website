@@ -72,7 +72,7 @@ export function ChartPopoutModal({ title, children, chartId, onCapture }: ChartP
       <DialogContent className="max-w-5xl w-[90vw] max-h-[85vh] overflow-hidden flex flex-col">
         <DialogHeader className="flex-shrink-0">
           <div className="flex items-center justify-between pr-8">
-            <DialogTitle className="text-lg font-semibold text-[#252826] dark:text-[#7FB8A3]">
+            <DialogTitle className="text-lg font-semibold text-[#7FB8A3]">
               {title}
             </DialogTitle>
             <Button

@@ -124,7 +124,7 @@ export function InteractiveSlider({
                   }}
                   transition={{ duration: 0.2 }}
                   className={cn(
-                    "block h-6 w-6 rounded-full border-[3px] border-[#8E4F67] bg-white cursor-grab",
+                    "block h-6 w-6 rounded-full border-[3px] border-[#8E4F67] bg-[#F6F3EE] cursor-grab",
                     "ring-offset-background transition-colors",
                     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7FB8A3] focus-visible:ring-offset-2",
                     "disabled:pointer-events-none disabled:opacity-50",

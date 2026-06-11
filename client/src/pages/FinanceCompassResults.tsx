@@ -799,7 +799,7 @@ export default function FinanceCompassResults() {
             <Button 
               variant="ghost" 
               size="sm" 
-              className="text-brand-teal hover:text-[#252826] -ml-2 text-xs sm:text-sm"
+              className="text-brand-teal hover:text-[#F6F3EE] -ml-2 text-xs sm:text-sm"
               data-testid="button-back-dashboard"
             >
               <ArrowLeft className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5 sm:mr-2" />
@@ -965,7 +965,7 @@ export default function FinanceCompassResults() {
                                   <Calculator className="h-7 w-7 text-white" />
                                 </div>
                                 <div className="flex-1">
-                                  <h4 className="font-bold text-lg text-[#252826] dark:text-[#7FB8A3]">
+                                  <h4 className="font-bold text-lg text-[#7FB8A3]">
                                     Return on Investment Analysis
                                   </h4>
                                   <p className="text-sm text-muted-foreground mt-1">
@@ -976,7 +976,7 @@ export default function FinanceCompassResults() {
                               
                               {/* Key metrics grid */}
                               <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
-                                <div className="bg-white/80 dark:bg-white/5 rounded-xl p-3 sm:p-4 border border-[#8E4F67]/20 hover:border-[#8E4F67]/40 transition-colors">
+                                <div className="bg-white/5 rounded-xl p-3 sm:p-4 border border-[#8E4F67]/20 hover:border-[#8E4F67]/40 transition-colors">
                                   <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
                                     <TrendingUp className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-green-600 dark:text-green-400 flex-shrink-0" />
                                     <span className="text-[10px] sm:text-xs font-medium text-muted-foreground truncate">ROI</span>
@@ -989,7 +989,7 @@ export default function FinanceCompassResults() {
                                   </p>
                                 </div>
                                 
-                                <div className="bg-white/80 dark:bg-white/5 rounded-xl p-3 sm:p-4 border border-[#8E4F67]/20 hover:border-[#8E4F67]/40 transition-colors">
+                                <div className="bg-white/5 rounded-xl p-3 sm:p-4 border border-[#8E4F67]/20 hover:border-[#8E4F67]/40 transition-colors">
                                   <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
                                     <Clock className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-amber-600 dark:text-amber-400 flex-shrink-0" />
                                     <span className="text-[10px] sm:text-xs font-medium text-muted-foreground truncate">Payback</span>
@@ -1004,7 +1004,7 @@ export default function FinanceCompassResults() {
                                   </p>
                                 </div>
                                 
-                                <div className="bg-white/80 dark:bg-white/5 rounded-xl p-3 sm:p-4 border border-[#8E4F67]/20 hover:border-[#8E4F67]/40 transition-colors">
+                                <div className="bg-white/5 rounded-xl p-3 sm:p-4 border border-[#8E4F67]/20 hover:border-[#8E4F67]/40 transition-colors">
                                   <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
                                     <BarChart3 className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-[#8E4F67] dark:text-[#7FB8A3] flex-shrink-0" />
                                     <span className="text-[10px] sm:text-xs font-medium text-muted-foreground truncate">NPV</span>
@@ -1019,7 +1019,7 @@ export default function FinanceCompassResults() {
                                   </p>
                                 </div>
                                 
-                                <div className="bg-white/80 dark:bg-white/5 rounded-xl p-3 sm:p-4 border border-[#8E4F67]/20 hover:border-[#8E4F67]/40 transition-colors">
+                                <div className="bg-white/5 rounded-xl p-3 sm:p-4 border border-[#8E4F67]/20 hover:border-[#8E4F67]/40 transition-colors">
                                   <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
                                     <Scale className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-purple-600 dark:text-purple-400 flex-shrink-0" />
                                     <span className="text-[10px] sm:text-xs font-medium text-muted-foreground truncate">BCR</span>
@@ -1073,7 +1073,7 @@ export default function FinanceCompassResults() {
                                 <Calculator className="h-7 w-7 text-white" />
                               </div>
                               <div className="flex-1">
-                                <h4 className="font-bold text-lg text-[#252826] dark:text-[#7FB8A3]">
+                                <h4 className="font-bold text-lg text-[#7FB8A3]">
                                   Return on Investment Analysis
                                 </h4>
                                 <p className="text-sm text-muted-foreground mt-1">
@@ -1180,7 +1180,7 @@ export default function FinanceCompassResults() {
                           </Card>
                         </div>
 
-                        <Card className="bg-gradient-to-br from-[#7FB8A3]/10 to-[#7FB8A3]/10 dark:from-[#252826]/20 dark:to-[#252826]/20 border-[#7FB8A3] dark:border-[#252826]" data-testid="card-methodology-info">
+                        <Card className="bg-gradient-to-br from-[#7FB8A3]/10 to-[#7FB8A3]/10 dark:from-[#252826]/20 dark:to-[#252826]/20 border-[#252826]" data-testid="card-methodology-info">
                           <CardContent className="py-5">
                             <div className="space-y-4">
                               <div className="flex items-start gap-3">
@@ -1188,7 +1188,7 @@ export default function FinanceCompassResults() {
                                   <Scale className="h-5 w-5 text-white" />
                                 </div>
                                 <div className="flex-1">
-                                  <h4 className="font-semibold text-[#252826] dark:text-[#7FB8A3] mb-1">
+                                  <h4 className="font-semibold text-[#7FB8A3] mb-1">
                                     How are your scores calculated?
                                   </h4>
                                   <p className="text-sm text-[#8E4F67] dark:text-[#7FB8A3]">
@@ -1199,10 +1199,10 @@ export default function FinanceCompassResults() {
                               </div>
                               
                               {scoreBreakdownData?.data?.methodology?.benchmarkDescription && (
-                                <div className="p-3 bg-white/60 dark:bg-white/5 rounded-lg border border-[#7FB8A3] dark:border-[#8E4F67]">
+                                <div className="p-3 bg-white/5 rounded-lg border border-[#8E4F67]">
                                   <div className="flex items-center gap-2 mb-2">
                                     <BarChart3 className="h-4 w-4 text-brand-teal" />
-                                    <span className="text-sm font-medium text-[#252826] dark:text-[#7FB8A3]">
+                                    <span className="text-sm font-medium text-[#7FB8A3]">
                                       {scoreBreakdownData?.data?.methodology?.benchmarkSource || "Constancia Benchmark Database"}
                                     </span>
                                   </div>
@@ -1215,8 +1215,8 @@ export default function FinanceCompassResults() {
                               <Accordion type="multiple" className="w-full space-y-2">
                                 {/* 6-Layer AI Validation Pipeline */}
                                 {scoreBreakdownData?.data?.methodology?.validationPipeline && (
-                                  <AccordionItem value="validation-pipeline" className="border-[#7FB8A3] dark:border-[#8E4F67]">
-                                    <AccordionTrigger className="text-sm font-medium text-[#252826] dark:text-[#7FB8A3] hover:no-underline py-2">
+                                  <AccordionItem value="validation-pipeline" className="border-[#8E4F67]">
+                                    <AccordionTrigger className="text-sm font-medium text-[#7FB8A3] hover:no-underline py-2">
                                       <div className="flex items-center gap-2">
                                         <Layers className="h-4 w-4 text-brand-teal" />
                                         {scoreBreakdownData.data.methodology.validationPipeline.name}
@@ -1239,7 +1239,7 @@ export default function FinanceCompassResults() {
                                           return (
                                             <div 
                                               key={idx}
-                                              className="flex items-start gap-3 p-3 bg-white/60 dark:bg-white/5 rounded-lg border border-[#7FB8A3] dark:border-[#252826]"
+                                              className="flex items-start gap-3 p-3 bg-white/5 rounded-lg border border-[#252826]"
                                               data-testid={`validation-layer-${layer.layer}`}
                                             >
                                               <div className={`w-8 h-8 rounded-full ${layerColors[idx] || "bg-gray-500"} flex items-center justify-center flex-shrink-0`}>
@@ -1260,8 +1260,8 @@ export default function FinanceCompassResults() {
 
                                 {/* Assessment Structure - Pre + Full */}
                                 {scoreBreakdownData?.data?.methodology?.assessmentStructure && (
-                                  <AccordionItem value="assessment-structure" className="border-[#7FB8A3] dark:border-[#8E4F67]">
-                                    <AccordionTrigger className="text-sm font-medium text-[#252826] dark:text-[#7FB8A3] hover:no-underline py-2">
+                                  <AccordionItem value="assessment-structure" className="border-[#8E4F67]">
+                                    <AccordionTrigger className="text-sm font-medium text-[#7FB8A3] hover:no-underline py-2">
                                       <div className="flex items-center gap-2">
                                         <FileText className="h-4 w-4 text-brand-teal" />
                                         Assessment Structure
@@ -1275,7 +1275,7 @@ export default function FinanceCompassResults() {
                                         {scoreBreakdownData.data.methodology.assessmentStructure.tiers.map((tier: { tier: string; questionCount: number; focus: string; description: string }, idx: number) => (
                                           <div 
                                             key={idx}
-                                            className="p-3 bg-white/60 dark:bg-white/5 rounded-lg border border-[#7FB8A3] dark:border-[#252826]"
+                                            className="p-3 bg-white/5 rounded-lg border border-[#252826]"
                                             data-testid={`assessment-tier-${idx}`}
                                           >
                                             <div className="flex items-center justify-between mb-2">
@@ -1292,7 +1292,7 @@ export default function FinanceCompassResults() {
                                         ))}
                                       </div>
                                       <div className="p-3 bg-gradient-to-r from-[#252826]/5 to-[#8E4F67]/5 rounded-lg border border-[#8E4F67]/20">
-                                        <p className="text-xs text-[#252826] dark:text-[#7FB8A3]">
+                                        <p className="text-xs text-[#7FB8A3]">
                                           {scoreBreakdownData.data.methodology.assessmentStructure.combined}
                                         </p>
                                       </div>
@@ -1301,8 +1301,8 @@ export default function FinanceCompassResults() {
                                 )}
 
                                 {scoreBreakdownData?.data?.methodology?.framework && (
-                                  <AccordionItem value="framework" className="border-[#7FB8A3] dark:border-[#8E4F67]">
-                                    <AccordionTrigger className="text-sm font-medium text-[#252826] dark:text-[#7FB8A3] hover:no-underline py-2">
+                                  <AccordionItem value="framework" className="border-[#8E4F67]">
+                                    <AccordionTrigger className="text-sm font-medium text-[#7FB8A3] hover:no-underline py-2">
                                       <div className="flex items-center gap-2">
                                         <Target className="h-4 w-4 text-brand-teal" />
                                         {scoreBreakdownData.data.methodology.framework.name}
@@ -1317,7 +1317,7 @@ export default function FinanceCompassResults() {
                                           {scoreBreakdownData.data.methodology.framework.dimensions.map((dim, idx) => (
                                             <div 
                                               key={idx}
-                                              className="flex items-start gap-3 p-2 bg-white/60 dark:bg-white/5 rounded border border-[#7FB8A3] dark:border-[#252826]"
+                                              className="flex items-start gap-3 p-2 bg-white/5 rounded border border-[#252826]"
                                               data-testid={`framework-dimension-${idx}`}
                                             >
                                               <Badge variant="outline" className="bg-brand-navy text-white border-0 text-xs font-bold shrink-0">
@@ -1367,7 +1367,7 @@ export default function FinanceCompassResults() {
                                           {scoreBreakdownData.data.methodology.framework.benchmarkTiers.map((tier, idx) => (
                                             <div 
                                               key={idx}
-                                              className="flex items-center gap-3 p-2 bg-white/60 dark:bg-white/5 rounded border border-[#7FB8A3] dark:border-[#252826]"
+                                              className="flex items-center gap-3 p-2 bg-white/5 rounded border border-[#252826]"
                                               data-testid={`benchmark-tier-${idx}`}
                                             >
                                               <Badge 
@@ -1389,8 +1389,8 @@ export default function FinanceCompassResults() {
                                   </AccordionItem>
                                 )}
                                 
-                                <AccordionItem value="scoring-methods" className="border-[#7FB8A3] dark:border-[#8E4F67]">
-                                  <AccordionTrigger className="text-sm font-medium text-[#252826] dark:text-[#7FB8A3] hover:no-underline py-2">
+                                <AccordionItem value="scoring-methods" className="border-[#8E4F67]">
+                                  <AccordionTrigger className="text-sm font-medium text-[#7FB8A3] hover:no-underline py-2">
                                     <div className="flex items-center gap-2">
                                       <Calculator className="h-4 w-4 text-brand-teal" />
                                       Scoring Methods Explained
@@ -1401,7 +1401,7 @@ export default function FinanceCompassResults() {
                                       {scoreBreakdownData?.data?.methodology?.scoringTypes?.map((type: { type: string; explanation: string; example?: string; calculation?: string }, idx: number) => (
                                         <div 
                                           key={idx} 
-                                          className="p-3 bg-white/80 dark:bg-white/5 rounded-lg border border-[#7FB8A3] dark:border-[#252826]"
+                                          className="p-3 bg-white/5 rounded-lg border border-[#252826]"
                                           data-testid={`scoring-method-${idx}`}
                                         >
                                           <div className="flex items-center gap-2 mb-1">
@@ -1417,7 +1417,7 @@ export default function FinanceCompassResults() {
                                             <p className="text-xs text-muted-foreground italic mb-1">{type.example}</p>
                                           )}
                                           {type.calculation && (
-                                            <code className="text-xs bg-muted px-2 py-1 rounded text-[#252826] dark:text-[#7FB8A3] font-mono">
+                                            <code className="text-xs bg-muted px-2 py-1 rounded text-[#7FB8A3] font-mono">
                                               {type.calculation}
                                             </code>
                                           )}
@@ -1429,10 +1429,10 @@ export default function FinanceCompassResults() {
                               </Accordion>
 
                               {scoreBreakdownData?.data?.methodology?.trustIndicators && (
-                                <div className="pt-2 border-t border-[#7FB8A3] dark:border-[#8E4F67]">
+                                <div className="pt-2 border-t border-[#8E4F67]">
                                   <div className="flex items-center gap-2 mb-2">
                                     <Shield className="h-4 w-4 text-brand-teal" />
-                                    <span className="text-xs font-medium text-[#252826] dark:text-[#7FB8A3]">
+                                    <span className="text-xs font-medium text-[#7FB8A3]">
                                       Methodology Credentials
                                     </span>
                                   </div>
@@ -1675,7 +1675,7 @@ export default function FinanceCompassResults() {
                                             </h5>
                                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                                               <div className="text-center">
-                                                <div className="text-2xl font-bold text-[#252826] dark:text-[#7FB8A3]">
+                                                <div className="text-2xl font-bold text-[#7FB8A3]">
                                                   {(comparison.yourScore ?? 0).toFixed(0)}
                                                 </div>
                                                 <div className="text-xs text-muted-foreground">Your Score</div>
@@ -1960,7 +1960,7 @@ export default function FinanceCompassResults() {
                               </div>
                               
                               {/* Payback Period */}
-                              <div className="p-3 sm:p-4 rounded-lg bg-gradient-to-br from-[#7FB8A3]/10 to-[#7FB8A3]/10 dark:from-[#252826]/20 dark:to-[#252826]/20 border border-[#7FB8A3] dark:border-[#252826]">
+                              <div className="p-3 sm:p-4 rounded-lg bg-gradient-to-br from-[#7FB8A3]/10 to-[#7FB8A3]/10 dark:from-[#252826]/20 dark:to-[#252826]/20 border border-[#252826]">
                                 <div className="flex items-center gap-1.5 sm:gap-2 text-[#8E4F67] dark:text-[#7FB8A3] text-xs sm:text-sm mb-0.5 sm:mb-1">
                                   <Clock className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" />
                                   <span className="truncate">Payback</span>
@@ -2661,7 +2661,7 @@ export default function FinanceCompassResults() {
                             </div>
 
                             <div className="p-3 sm:p-4 bg-brand-navy/5 dark:bg-brand-navy/20 rounded-lg border border-[#252826]/20">
-                              <h5 className="font-medium text-[#252826] dark:text-brand-cyan mb-1.5 sm:mb-2 text-sm sm:text-base">Call to Action</h5>
+                              <h5 className="font-medium text-brand-cyan mb-1.5 sm:mb-2 text-sm sm:text-base">Call to Action</h5>
                               <p className="text-sm sm:text-base text-foreground" data-testid="text-call-to-action">
                                 {narrativesData.data.executiveBrief.callToAction}
                               </p>
@@ -3116,7 +3116,7 @@ export default function FinanceCompassResults() {
                                 </CardHeader>
                                 <CardContent className="space-y-2 sm:space-y-3 px-3 sm:px-6">
                                   <div className="flex items-center justify-between">
-                                    <span className="text-xl sm:text-2xl font-bold text-[#252826] dark:text-brand-cyan">
+                                    <span className="text-xl sm:text-2xl font-bold text-brand-cyan">
                                       {narrativesData.data.phase14Intelligence.respondentConfidence.overall}%
                                     </span>
                                     <Badge variant="outline" className={`${

@@ -346,7 +346,7 @@ function PhasedBenefitsTimeline({
                     <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold text-sm ${
                       index === 0 ? 'bg-[#252826]' :
                       index === 1 ? 'bg-[#8E4F67]' :
-                      index === 2 ? 'bg-[#7FB8A3] text-[#252826]' :
+                      index === 2 ? 'bg-[#7FB8A3] text-[#F6F3EE]' :
                       'bg-green-500'
                     }`}>
                       {index + 1}

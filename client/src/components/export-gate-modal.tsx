@@ -585,7 +585,7 @@ export function ExportGateModal({ exportConfig, open, onOpenChange, onExportAppr
               <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-r from-[#252826] to-[#8E4F67] flex items-center justify-center">
                 <CheckCircle className="h-10 w-10 text-[#7FB8A3]" />
               </div>
-              <h3 className="text-lg font-semibold text-[#252826] dark:text-[#7FB8A3] mb-2">Export Started!</h3>
+              <h3 className="text-lg font-semibold text-[#7FB8A3] mb-2">Export Started!</h3>
               <p className="text-sm text-muted-foreground">
                 Your {exportConfig?.type.toUpperCase()} report is being generated. Thank you for your interest in Constancia.
               </p>

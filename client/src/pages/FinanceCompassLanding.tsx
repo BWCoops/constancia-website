@@ -214,7 +214,7 @@ function ProgressionStepper({ currentStep }: { currentStep: 1 | 2 | 3 }) {
                   isComplete 
                     ? "bg-green-500/20 text-green-400" 
                     : isActive 
-                      ? "bg-[#7FB8A3] text-[#252826]" 
+                      ? "bg-[#7FB8A3] text-[#F6F3EE]" 
                       : "bg-white/10 text-white/40"
                 }`}>
                   {isComplete ? (
@@ -577,11 +577,11 @@ export default function FinanceCompassLanding() {
                 </Badge>
               </div>
             </div>
-            <CardTitle className="text-xl text-[#252826]">
+            <CardTitle className="text-xl text-[#F6F3EE]">
               Welcome back, {sessionInfo?.firstName || formData.firstName}!
             </CardTitle>
             <CardDescription className="text-sm">
-              Your email <span className="font-medium text-[#252826]">{sessionInfo?.email || formData.email}</span> is verified.
+              Your email <span className="font-medium text-[#F6F3EE]">{sessionInfo?.email || formData.email}</span> is verified.
             </CardDescription>
           </CardHeader>
           <CardContent className="pt-2">
@@ -611,7 +611,7 @@ export default function FinanceCompassLanding() {
                 Verification Required
               </Badge>
             </div>
-            <CardTitle className="text-xl text-[#252826]">Check Your Email</CardTitle>
+            <CardTitle className="text-xl text-[#F6F3EE]">Check Your Email</CardTitle>
             <CardDescription>
               We've sent a 6-digit verification code to <span className="font-medium">{formData.email}</span>
             </CardDescription>
@@ -690,7 +690,7 @@ export default function FinanceCompassLanding() {
               Step 2 of 3
             </Badge>
           </div>
-          <CardTitle className="text-xl text-[#252826]">Continue to Full Assessment</CardTitle>
+          <CardTitle className="text-xl text-[#F6F3EE]">Continue to Full Assessment</CardTitle>
           <CardDescription>
             Register to run the full 74-question assessment. Get the deeper scoring, the AI analysis, and a roadmap that's actually about your stack.
           </CardDescription>
@@ -1118,7 +1118,7 @@ export default function FinanceCompassLanding() {
                 <Rocket className="h-3 w-3 mr-1" />
                 The AI Imperative
               </Badge>
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#252826] dark:text-white mb-2 sm:mb-3 px-2">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#F6F3EE] mb-2 sm:mb-3 px-2">
                 Finance is Transforming. Are You Ready?
               </h2>
               <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto px-2">
@@ -1174,7 +1174,7 @@ export default function FinanceCompassLanding() {
                       <div className={`h-8 w-8 sm:h-10 sm:w-10 rounded-lg bg-gradient-to-br ${item.color} flex items-center justify-center mb-2 sm:mb-3`}>
                         <item.icon className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                       </div>
-                      <div className="text-xl sm:text-2xl font-bold text-[#252826] dark:text-white mb-1">
+                      <div className="text-xl sm:text-2xl font-bold text-[#F6F3EE] mb-1">
                         {item.stat}
                       </div>
                       <div className="text-xs sm:text-sm font-medium text-brand-teal mb-1 sm:mb-2">
@@ -1271,15 +1271,15 @@ export default function FinanceCompassLanding() {
               <div className="font-mono text-[10px] uppercase tracking-widest text-[#8E4F67] mb-4">
                 Start the assessment
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-light leading-tight text-[#252826] dark:text-white mb-3">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-light leading-tight text-[#F6F3EE] mb-3">
                 The diagnostic a consulting firm would charge you<br className="hidden sm:inline" /> <em className="not-italic font-normal text-[#8E4F67]">five figures</em> to run.
               </h2>
-              <p className="text-base sm:text-lg text-[#252826]/75 dark:text-white/70 max-w-2xl mx-auto mb-4">
+              <p className="text-base sm:text-lg text-[#F6F3EE]/70 max-w-2xl mx-auto mb-4">
                 74 questions across 7 dimensions. AI-validated against 200+ EPM benchmarks. Done in 12 minutes. Yours, calibrated to your stack and your industry.
               </p>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7FB8A3]/10 border border-[#7FB8A3]/30">
                 <Zap className="h-4 w-4 text-brand-teal" />
-                <span className="text-sm font-medium text-[#252826] dark:text-white">Enterprise-grade analysis | Months of work in 20 minutes</span>
+                <span className="text-sm font-medium text-[#F6F3EE]">Enterprise-grade analysis | Months of work in 20 minutes</span>
               </div>
             </motion.div>
             
@@ -1296,7 +1296,7 @@ export default function FinanceCompassLanding() {
                   <Clock className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <p className="font-semibold text-[#252826] dark:text-white text-sm">10-15 min</p>
+                  <p className="font-semibold text-[#F6F3EE] text-sm">10-15 min</p>
                   <p className="text-xs text-muted-foreground">Quick assessment</p>
                 </div>
               </div>
@@ -1305,7 +1305,7 @@ export default function FinanceCompassLanding() {
                   <Target className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <p className="font-semibold text-[#252826] dark:text-white text-sm">7 Dimensions</p>
+                  <p className="font-semibold text-[#F6F3EE] text-sm">7 Dimensions</p>
                   <p className="text-xs text-muted-foreground">Full diagnostic</p>
                 </div>
               </div>
@@ -1314,7 +1314,7 @@ export default function FinanceCompassLanding() {
                   <Sparkles className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <p className="font-semibold text-[#252826] dark:text-white text-sm">AI-Powered</p>
+                  <p className="font-semibold text-[#F6F3EE] text-sm">AI-Powered</p>
                   <p className="text-xs text-muted-foreground">Smart insights</p>
                 </div>
               </div>
@@ -1323,7 +1323,7 @@ export default function FinanceCompassLanding() {
                   <Shield className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <p className="font-semibold text-[#252826] dark:text-white text-sm">Secure</p>
+                  <p className="font-semibold text-[#F6F3EE] text-sm">Secure</p>
                   <p className="text-xs text-muted-foreground">GDPR compliant</p>
                 </div>
               </div>
@@ -1356,7 +1356,7 @@ export default function FinanceCompassLanding() {
               <div className="font-mono text-[10px] uppercase tracking-widest text-[#8E4F67] text-center mb-5">
                 What you walk out with
               </div>
-              <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-3 text-sm text-[#252826] dark:text-white/85">
+              <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-3 text-sm text-[#F6F3EE]/85">
                 {[
                   "Readiness score",
                   "Dimension breakdown",
@@ -1370,7 +1370,7 @@ export default function FinanceCompassLanding() {
                     </span>
                     <span className="font-medium">{item}</span>
                     {idx < arr.length - 1 && (
-                      <span aria-hidden="true" className="text-[#252826]/25">·</span>
+                      <span aria-hidden="true" className="text-[#F6F3EE]/25">·</span>
                     )}
                   </span>
                 ))}
@@ -1393,7 +1393,7 @@ export default function FinanceCompassLanding() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#252826] dark:text-white mb-2 sm:mb-3">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#F6F3EE] mb-2 sm:mb-3">
                 How It Works
               </h2>
               <p className="text-base sm:text-xl text-brand-teal font-medium mb-3 sm:mb-4">
@@ -1433,7 +1433,7 @@ export default function FinanceCompassLanding() {
                           Step 1
                         </Badge>
                       </div>
-                      <CardTitle className="text-lg text-[#252826] dark:text-white">
+                      <CardTitle className="text-lg text-[#F6F3EE]">
                         Quick Verification
                       </CardTitle>
                       <CardDescription className="text-sm">
@@ -1490,7 +1490,7 @@ export default function FinanceCompassLanding() {
                           </Badge>
                         </div>
                       </div>
-                      <CardTitle className="text-lg text-[#252826] dark:text-white">
+                      <CardTitle className="text-lg text-[#F6F3EE]">
                         Pre-Assessment
                       </CardTitle>
                       <CardDescription className="text-sm">
@@ -1533,7 +1533,7 @@ export default function FinanceCompassLanding() {
                   <div className="lg:hidden flex justify-center py-2">
                     <div className="flex flex-col items-center gap-1">
                       <div className="w-0.5 h-3 bg-gradient-to-b from-[#8E4F67]/50 to-[#252826]/50" />
-                      <ArrowRight className="h-4 w-4 text-[#252826] rotate-90" />
+                      <ArrowRight className="h-4 w-4 text-[#F6F3EE] rotate-90" />
                     </div>
                   </div>
                 </motion.div>
@@ -1556,7 +1556,7 @@ export default function FinanceCompassLanding() {
                           <FullAssessmentIcon className="h-6 w-6 text-white" />
                         </motion.div>
                         <div className="flex flex-col items-end gap-1">
-                          <Badge className="bg-brand-navy/10 text-[#252826] border-[#252826]/20 dark:text-white dark:border-white/20">
+                          <Badge className="bg-brand-navy/10 text-[#F6F3EE] border-[#252826]/20 dark:text-white dark:border-white/20">
                             Step 3
                           </Badge>
                           <Badge variant="outline" className="text-xs">
@@ -1564,7 +1564,7 @@ export default function FinanceCompassLanding() {
                           </Badge>
                         </div>
                       </div>
-                      <CardTitle className="text-lg text-[#252826] dark:text-white">
+                      <CardTitle className="text-lg text-[#F6F3EE]">
                         Full Assessment
                       </CardTitle>
                       <CardDescription className="text-sm">
@@ -1572,19 +1572,19 @@ export default function FinanceCompassLanding() {
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="pt-0 space-y-2">
-                      <div className="flex items-center gap-2 text-xs text-[#252826] dark:text-white/70">
+                      <div className="flex items-center gap-2 text-xs text-[#F6F3EE]/70">
                         <FileText className="h-3.5 w-3.5 flex-shrink-0" />
                         <span>Executive-ready PDF report</span>
                       </div>
-                      <div className="flex items-center gap-2 text-xs text-[#252826] dark:text-white/70">
+                      <div className="flex items-center gap-2 text-xs text-[#F6F3EE]/70">
                         <Award className="h-3.5 w-3.5 flex-shrink-0" />
                         <span>Consultant follow-up session</span>
                       </div>
-                      <div className="flex items-center gap-2 text-xs text-[#252826] dark:text-white/70">
+                      <div className="flex items-center gap-2 text-xs text-[#F6F3EE]/70">
                         <Users className="h-3.5 w-3.5 flex-shrink-0" />
                         <span>Personalised transformation roadmap</span>
                       </div>
-                      <div className="flex items-center gap-2 text-xs text-[#252826] dark:text-white/70">
+                      <div className="flex items-center gap-2 text-xs text-[#F6F3EE]/70">
                         <Building2 className="h-3.5 w-3.5 flex-shrink-0" />
                         <span>Industry benchmarking insights</span>
                       </div>
@@ -1599,7 +1599,7 @@ export default function FinanceCompassLanding() {
                       </div>
                       <div className="flex justify-between text-xs text-muted-foreground">
                         <span>Insight depth</span>
-                        <span className="font-medium text-[#252826] dark:text-white">100%</span>
+                        <span className="font-medium text-[#F6F3EE]">100%</span>
                       </div>
                     </CardContent>
                   </Card>
@@ -1629,7 +1629,7 @@ export default function FinanceCompassLanding() {
                         <Rocket className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                       </motion.div>
                       <div>
-                        <CardTitle className="text-base sm:text-lg text-[#252826] dark:text-white">
+                        <CardTitle className="text-base sm:text-lg text-[#F6F3EE]">
                           Beyond the Assessment
                         </CardTitle>
                         <CardDescription className="text-xs sm:text-sm">
@@ -1650,7 +1650,7 @@ export default function FinanceCompassLanding() {
                         <Calendar className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-brand-teal" />
                       </div>
                       <div className="min-w-0">
-                        <h4 className="font-semibold text-[#252826] dark:text-white text-xs sm:text-sm mb-1">
+                        <h4 className="font-semibold text-[#F6F3EE] text-xs sm:text-sm mb-1">
                           4-Workshop Series
                         </h4>
                         <p className="text-[11px] sm:text-xs text-muted-foreground">
@@ -1665,7 +1665,7 @@ export default function FinanceCompassLanding() {
                         <LineChart className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-brand-teal" />
                       </div>
                       <div className="min-w-0">
-                        <h4 className="font-semibold text-[#252826] dark:text-white text-xs sm:text-sm mb-1">
+                        <h4 className="font-semibold text-[#F6F3EE] text-xs sm:text-sm mb-1">
                           AI-Powered Tracking
                         </h4>
                         <p className="text-[11px] sm:text-xs text-muted-foreground">
@@ -1680,7 +1680,7 @@ export default function FinanceCompassLanding() {
                         <FileCheck className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-brand-teal" />
                       </div>
                       <div className="min-w-0">
-                        <h4 className="font-semibold text-[#252826] dark:text-white text-xs sm:text-sm mb-1">
+                        <h4 className="font-semibold text-[#F6F3EE] text-xs sm:text-sm mb-1">
                           Executive Deliverables
                         </h4>
                         <p className="text-[11px] sm:text-xs text-muted-foreground">
@@ -1732,7 +1732,7 @@ export default function FinanceCompassLanding() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-[#252826] dark:text-white">
+              <h2 className="text-3xl md:text-4xl font-bold text-[#F6F3EE]">
                 Why Finance Leaders Choose FinanceCompass
               </h2>
             </motion.div>
@@ -1749,7 +1749,7 @@ export default function FinanceCompassLanding() {
                 <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-[#7FB8A3] to-[#8E4F67] flex items-center justify-center mb-5 shadow-lg">
                   <Sparkles className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold text-[#252826] dark:text-white mb-3">
+                <h3 className="text-xl font-semibold text-[#F6F3EE] mb-3">
                   AI-Powered Insights
                 </h3>
                 <p className="text-muted-foreground">
@@ -1768,7 +1768,7 @@ export default function FinanceCompassLanding() {
                 <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-[#8E4F67] to-[#252826] flex items-center justify-center mb-5 shadow-lg">
                   <Target className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold text-[#252826] dark:text-white mb-3">
+                <h3 className="text-xl font-semibold text-[#F6F3EE] mb-3">
                   Actionable Roadmap
                 </h3>
                 <p className="text-muted-foreground">
@@ -1787,7 +1787,7 @@ export default function FinanceCompassLanding() {
                 <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center mb-5 shadow-lg">
                   <Users className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold text-[#252826] dark:text-white mb-3">
+                <h3 className="text-xl font-semibold text-[#F6F3EE] mb-3">
                   Expert Guidance
                 </h3>
                 <p className="text-muted-foreground">
@@ -1810,7 +1810,7 @@ export default function FinanceCompassLanding() {
                     <Bot className="h-6 w-6 text-white" />
                   </div>
                 </div>
-                <h3 className="text-xl font-semibold text-[#252826] dark:text-white mb-3">
+                <h3 className="text-xl font-semibold text-[#F6F3EE] mb-3">
                   Future-Ready Finance
                 </h3>
                 <p className="text-muted-foreground mb-4">

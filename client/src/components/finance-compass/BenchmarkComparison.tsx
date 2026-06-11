@@ -144,7 +144,7 @@ function ComparisonBarRow({ data, index }: { data: MultiLayerComparisonData; ind
               style={{ width: `${worldClassProgress}%` }}
             />
           </div>
-          <span className="text-xs font-medium w-10 text-right text-[#252826]">{data.worldClass.toFixed(1)}</span>
+          <span className="text-xs font-medium w-10 text-right text-[#F6F3EE]">{data.worldClass.toFixed(1)}</span>
         </div>
       </div>
     </motion.div>

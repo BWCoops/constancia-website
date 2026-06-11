@@ -324,7 +324,7 @@ export default function ExportPage() {
 
         <Card className="border-[#7FB8A3]/30 bg-gradient-to-br from-[#252826]/5 to-[#8E4F67]/10">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-[#252826] dark:text-brand-cyan">
+            <CardTitle className="flex items-center gap-2 text-brand-cyan">
               <Settings className="w-5 h-5" />
               Theme Features
             </CardTitle>

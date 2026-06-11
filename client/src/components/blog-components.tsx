@@ -505,7 +505,7 @@ const phaseColors = {
   tertiary: {
     bg: 'from-[#252826] to-[#5E8D7A]',
     border: 'border-[#252826]',
-    text: 'text-[#252826] dark:text-[#7FB8A3]/60',
+    text: 'text-[#7FB8A3]/60',
     light: 'bg-[#252826]/10',
     ring: 'ring-[#252826]/30',
   },
@@ -710,7 +710,7 @@ export function SectionHeading({ level, children }: SectionHeadingProps) {
   if (level === 2) {
     return (
       <h2 
-        className={`${baseClasses} text-2xl mt-10 mb-4 text-[#252826] dark:text-[#7FB8A3]`}
+        className={`${baseClasses} text-2xl mt-10 mb-4 text-[#7FB8A3]`}
       >
         <span className="w-1 h-8 bg-gradient-to-b from-[#7FB8A3] to-[#8E4F67] rounded-full" />
         {children}
@@ -991,7 +991,7 @@ export function ResourceDownload({ slug, label, description }: { slug: string; l
             <div className="text-xs font-semibold uppercase tracking-wider text-[#8E4F67] dark:text-[#7FB8A3] mb-1">
               Downloadable Template
             </div>
-            <h4 className="font-bold text-[#252826] dark:text-white text-lg leading-tight">{label || slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</h4>
+            <h4 className="font-bold text-[#F6F3EE] text-lg leading-tight">{label || slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</h4>
             {description && <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{description}</p>}
           </div>
           <div className="flex flex-col sm:flex-row gap-2">
@@ -1088,8 +1088,8 @@ export function InlineBlogImage({ src, alt, caption, type = "stock", alignment =
             loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-            <div className="bg-white/90 dark:bg-gray-900/90 rounded-full p-3 shadow-lg transform scale-0 group-hover:scale-100 transition-transform duration-300">
-              <ZoomIn className="w-5 h-5 text-[#252826] dark:text-[#7FB8A3]" />
+            <div className="bg-card/90 rounded-full p-3 shadow-lg transform scale-0 group-hover:scale-100 transition-transform duration-300">
+              <ZoomIn className="w-5 h-5 text-[#7FB8A3]" />
             </div>
           </div>
           {type === "generated" && (

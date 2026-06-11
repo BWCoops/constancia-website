@@ -465,7 +465,7 @@ export default function BlogPostPage() {
                   }
                   return (
                     <h2 
-                      className="text-xl sm:text-2xl font-bold mt-12 mb-6 text-[#252826] dark:text-brand-cyan relative pl-5"
+                      className="text-xl sm:text-2xl font-bold mt-12 mb-6 text-brand-cyan relative pl-5"
                     >
                       <span className="absolute left-0 top-0 bottom-0 w-1 rounded-full bg-gradient-to-b from-[#7FB8A3] to-[#8E4F67]" />
                       {children}

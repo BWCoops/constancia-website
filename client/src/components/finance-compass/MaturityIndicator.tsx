@@ -184,7 +184,7 @@ export function MaturityIndicator({
           <div className="grid grid-cols-3 gap-3 mb-4">
             <div className="p-3 rounded-lg bg-[#252826]/5 dark:bg-[#252826]/20 text-center">
               <div className="text-xs text-muted-foreground mb-1">Gap to Next</div>
-              <div className="text-lg font-bold text-[#252826] dark:text-white">
+              <div className="text-lg font-bold text-[#F6F3EE]">
                 {maturityKey === 'ADVANCED' ? 'N/A' : `${Math.round(100 - progressValue)}%`}
               </div>
             </div>

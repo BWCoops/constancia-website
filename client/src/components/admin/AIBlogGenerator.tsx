@@ -1572,7 +1572,7 @@ export function AIBlogGenerator({ isOpen, onClose, onPublishSuccess }: AIBlogGen
                                   status === "in_progress" ? (
                                     retry ? "bg-orange-50 dark:bg-orange-950 border-orange-200 dark:border-orange-800" : 
                                     winston ? "bg-purple-50 dark:bg-purple-950 border-purple-200 dark:border-purple-800" :
-                                    "bg-[#7FB8A3]/10 dark:bg-[#252826] border-[#7FB8A3] dark:border-[#252826]"
+                                    "bg-[#7FB8A3]/10 dark:bg-[#252826] border-[#252826]"
                                   ) :
                                   status === "failed" ? "bg-red-50 dark:bg-red-950 border-red-200 dark:border-red-800" :
                                   "bg-muted/50"
@@ -2751,7 +2751,7 @@ export function AIBlogGenerator({ isOpen, onClose, onPublishSuccess }: AIBlogGen
                                                 }
                                               }}
                                             >
-                                              <h3 className="text-lg font-bold text-[#252826] dark:text-[#7FB8A3] flex-1">
+                                              <h3 className="text-lg font-bold text-[#7FB8A3] flex-1">
                                                 {section.title.replace("## ", "")}
                                               </h3>
                                               {!isEditingThis && (
@@ -3162,7 +3162,7 @@ export function AIBlogGenerator({ isOpen, onClose, onPublishSuccess }: AIBlogGen
                       remarkPlugins={[remarkGfm]}
                       components={{
                         h2: ({children}) => (
-                          <h2 className="text-2xl font-bold mt-12 mb-6 text-[#252826] dark:text-[#7FB8A3] flex items-center gap-3">
+                          <h2 className="text-2xl font-bold mt-12 mb-6 text-[#7FB8A3] flex items-center gap-3">
                             <span className="w-1 h-8 bg-gradient-to-b from-[#7FB8A3] to-[#8E4F67] rounded-full" />
                             {children}
                           </h2>
@@ -3406,7 +3406,7 @@ export function AIBlogGenerator({ isOpen, onClose, onPublishSuccess }: AIBlogGen
                 data-testid="input-fix-description"
               />
             </div>
-            <div className="p-3 bg-[#7FB8A3]/10 dark:bg-[#252826] border border-[#7FB8A3] dark:border-[#252826] rounded-lg">
+            <div className="p-3 bg-[#7FB8A3]/10 dark:bg-[#252826] border border-[#252826] rounded-lg">
               <p className="text-sm text-[#8E4F67] dark:text-[#7FB8A3] flex items-start gap-2">
                 <Lightbulb className="h-4 w-4 mt-0.5 flex-shrink-0" />
                 <span>This will regenerate just this component, not the entire blog. Quick fix!</span>

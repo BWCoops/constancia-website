@@ -1011,7 +1011,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                 >
                   <Sparkles className="h-7 w-7 sm:h-8 sm:w-8 text-white" />
                 </motion.div>
-                <h3 className="text-lg sm:text-xl font-bold text-[#252826] mb-1">Finance Readiness Score</h3>
+                <h3 className="text-lg sm:text-xl font-bold text-[#F6F3EE] mb-1">Finance Readiness Score</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground">Based on 10 key dimensions (1-5 scale)</p>
               </div>
 
@@ -1021,7 +1021,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
-                    className="text-4xl sm:text-5xl font-bold text-[#252826]"
+                    className="text-4xl sm:text-5xl font-bold text-[#F6F3EE]"
                   >
                     {score}
                   </motion.span>
@@ -1053,7 +1053,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                 >
                   <div className="flex items-center gap-2 mb-3">
                     <BarChart3 className="h-4 w-4 text-[#8E4F67]" />
-                    <p className="text-[10px] font-semibold text-[#252826] uppercase tracking-wide">How You Compare</p>
+                    <p className="text-[10px] font-semibold text-[#F6F3EE] uppercase tracking-wide">How You Compare</p>
                   </div>
                   <div className="space-y-2.5">
                     <div className="flex items-center gap-2" data-testid="peer-comparison-your-score">
@@ -1061,7 +1061,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                       <div className="flex-1">
                         <Progress value={score} className="h-2 bg-slate-200" />
                       </div>
-                      <span className="text-xs font-semibold text-[#252826] w-10 text-right">{score}%</span>
+                      <span className="text-xs font-semibold text-[#F6F3EE] w-10 text-right">{score}%</span>
                     </div>
                     <div className="flex items-center gap-2" data-testid="peer-comparison-industry-avg">
                       <span className="text-[10px] text-muted-foreground w-24 sm:w-28 flex-shrink-0">Industry Average</span>
@@ -1122,9 +1122,9 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
               >
                 <div className="flex items-start gap-2 mb-2">
                   <Lightbulb className="h-4 w-4 text-[#8E4F67] mt-0.5 flex-shrink-0" />
-                  <p className="text-[10px] font-semibold text-[#252826] uppercase tracking-wide">What This Means</p>
+                  <p className="text-[10px] font-semibold text-[#F6F3EE] uppercase tracking-wide">What This Means</p>
                 </div>
-                <p className="text-xs text-[#252826] mb-1.5">{interpretation.summary}</p>
+                <p className="text-xs text-[#F6F3EE] mb-1.5">{interpretation.summary}</p>
                 <p className="text-[10px] text-muted-foreground">{interpretation.detail}</p>
               </motion.div>
 
@@ -1141,7 +1141,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                     {qualificationData.industry && (
                       <div>
                         <p className="text-[10px] text-muted-foreground">Industry</p>
-                        <p className="font-medium text-[#252826] truncate">
+                        <p className="font-medium text-[#F6F3EE] truncate">
                           {QUALIFICATION_QUESTIONS.find(q => q.field === "industry")?.options.find(o => o.value === qualificationData.industry)?.label || qualificationData.industry}
                         </p>
                       </div>
@@ -1149,7 +1149,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                     {qualificationData.companySize && (
                       <div>
                         <p className="text-[10px] text-muted-foreground">Size</p>
-                        <p className="font-medium text-[#252826] truncate">
+                        <p className="font-medium text-[#F6F3EE] truncate">
                           {QUALIFICATION_QUESTIONS.find(q => q.field === "companySize")?.options.find(o => o.value === qualificationData.companySize)?.label || qualificationData.companySize}
                         </p>
                       </div>
@@ -1157,7 +1157,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                     {qualificationData.revenue && (
                       <div>
                         <p className="text-[10px] text-muted-foreground">Revenue</p>
-                        <p className="font-medium text-[#252826] truncate">
+                        <p className="font-medium text-[#F6F3EE] truncate">
                           {QUALIFICATION_QUESTIONS.find(q => q.field === "revenue")?.options.find(o => o.value === qualificationData.revenue)?.label || qualificationData.revenue}
                         </p>
                       </div>
@@ -1176,10 +1176,10 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                 >
                   <p className="text-[10px] font-semibold text-[#8E4F67] uppercase tracking-wide mb-2">Industry Context</p>
                   <p className="text-[10px] text-muted-foreground mb-1.5">
-                    <span className="font-medium text-[#252826]">Challenge:</span> {industryInsight.challenge}
+                    <span className="font-medium text-[#F6F3EE]">Challenge:</span> {industryInsight.challenge}
                   </p>
                   <p className="text-[10px] text-muted-foreground">
-                    <span className="font-medium text-[#252826]">Opportunity:</span> {industryInsight.opportunity}
+                    <span className="font-medium text-[#F6F3EE]">Opportunity:</span> {industryInsight.opportunity}
                   </p>
                 </motion.div>
               )}
@@ -1261,15 +1261,15 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                 className="mb-4 p-3 rounded-lg bg-gradient-to-br from-[#252826]/5 to-[#8E4F67]/5 border border-[#252826]/10"
               >
                 <div className="flex items-center gap-2 mb-2">
-                  <TrendingUp className="h-4 w-4 text-[#252826]" />
-                  <p className="text-[10px] font-semibold text-[#252826] uppercase tracking-wide">Recommended Next Steps</p>
+                  <TrendingUp className="h-4 w-4 text-[#F6F3EE]" />
+                  <p className="text-[10px] font-semibold text-[#F6F3EE] uppercase tracking-wide">Recommended Next Steps</p>
                 </div>
                 <div className="space-y-2">
                   {recommendations.map((rec, idx) => (
                     <div key={idx} className="flex items-start gap-2">
                       <span className="flex-shrink-0 w-4 h-4 rounded-full bg-[#8E4F67] text-white text-[10px] flex items-center justify-center font-bold">{idx + 1}</span>
                       <div>
-                        <p className="text-xs font-medium text-[#252826]">{rec.title}</p>
+                        <p className="text-xs font-medium text-[#F6F3EE]">{rec.title}</p>
                         <p className="text-[10px] text-muted-foreground">{rec.description}</p>
                       </div>
                     </div>
@@ -1340,7 +1340,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                 className="mb-4"
                 data-testid="pre-cta-commitment-section"
               >
-                <p className="text-sm font-medium text-[#252826] mb-2">
+                <p className="text-sm font-medium text-[#F6F3EE] mb-2">
                   What would you like to discover? (Select all that apply)
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -1355,7 +1355,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                         onCheckedChange={(checked) => handlePriorityChange(option.id, checked === true)}
                         className="data-[state=checked]:bg-[#252826] data-[state=checked]:border-[#252826]"
                       />
-                      <span className="text-xs sm:text-sm text-[#252826]">{option.label}</span>
+                      <span className="text-xs sm:text-sm text-[#F6F3EE]">{option.label}</span>
                     </label>
                   ))}
                 </div>
@@ -1369,17 +1369,17 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                 className="mb-4 p-3 rounded-lg bg-gradient-to-r from-[#252826]/10 to-[#8E4F67]/10 border border-[#8E4F67]/20"
                 data-testid="section-unlock-value"
               >
-                <p className="text-[10px] font-semibold text-[#252826] uppercase tracking-wide mb-2">Unlock Your Full Potential</p>
+                <p className="text-[10px] font-semibold text-[#F6F3EE] uppercase tracking-wide mb-2">Unlock Your Full Potential</p>
                 <div className="space-y-1.5">
-                  <div className="flex items-center gap-2 text-xs text-[#252826]" data-testid="text-value-74-questions">
+                  <div className="flex items-center gap-2 text-xs text-[#F6F3EE]" data-testid="text-value-74-questions">
                     <CheckCircle className="h-3.5 w-3.5 text-[#8E4F67] flex-shrink-0" />
                     <span>74 questions across 7 comprehensive dimensions</span>
                   </div>
-                  <div className="flex items-center gap-2 text-xs text-[#252826]" data-testid="text-value-ai-recommendations">
+                  <div className="flex items-center gap-2 text-xs text-[#F6F3EE]" data-testid="text-value-ai-recommendations">
                     <CheckCircle className="h-3.5 w-3.5 text-[#8E4F67] flex-shrink-0" />
                     <span>AI-powered personalised recommendations</span>
                   </div>
-                  <div className="flex items-center gap-2 text-xs text-[#252826]" data-testid="text-value-roadmap">
+                  <div className="flex items-center gap-2 text-xs text-[#F6F3EE]" data-testid="text-value-roadmap">
                     <CheckCircle className="h-3.5 w-3.5 text-[#8E4F67] flex-shrink-0" />
                     <span>Detailed transformation roadmap & ROI projections</span>
                   </div>
@@ -1449,7 +1449,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
           <Dialog open={showEmailDialog} onOpenChange={setShowEmailDialog}>
             <DialogContent className="sm:max-w-md">
               <DialogHeader>
-                <DialogTitle className="flex items-center gap-2 text-[#252826]">
+                <DialogTitle className="flex items-center gap-2 text-[#F6F3EE]">
                   <Mail className="h-5 w-5" />
                   Email Your Results
                 </DialogTitle>
@@ -1461,7 +1461,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
               {emailStatus === "success" ? (
                 <div className="py-6 text-center">
                   <CheckCircle className="h-12 w-12 text-emerald-500 mx-auto mb-3" />
-                  <p className="font-medium text-[#252826] mb-1">Results Sent Successfully!</p>
+                  <p className="font-medium text-[#F6F3EE] mb-1">Results Sent Successfully!</p>
                   <p className="text-sm text-muted-foreground">Check your inbox for your Finance Readiness summary.</p>
                   <Button
                     onClick={() => setShowEmailDialog(false)}
@@ -1586,7 +1586,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                   </div>
                   {/* Visible step label on mobile */}
                   <div className="mb-2">
-                    <span className="text-xs text-[#252826] font-medium">Step 1 · About Your Organisation</span>
+                    <span className="text-xs text-[#F6F3EE] font-medium">Step 1 · About Your Organisation</span>
                   </div>
 
               <AnimatePresence mode="wait">
@@ -1598,13 +1598,13 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                   transition={{ duration: 0.3 }}
                 >
                   <div className="flex items-start gap-2 mb-3 sm:mb-4">
-                    <h3 className="text-base sm:text-lg font-semibold text-[#252826] leading-snug flex-1">
+                    <h3 className="text-base sm:text-lg font-semibold text-[#F6F3EE] leading-snug flex-1">
                       {qualQuestion.text}
                     </h3>
                     <Tooltip delayDuration={0}>
                       <TooltipTrigger asChild>
                         <button className="flex-shrink-0 h-5 w-5 rounded-full bg-[#252826]/10 hover:bg-[#252826]/20 flex items-center justify-center transition-colors">
-                          <Info className="h-3 w-3 text-[#252826]" />
+                          <Info className="h-3 w-3 text-[#F6F3EE]" />
                         </button>
                       </TooltipTrigger>
                       <TooltipContent side="left" className="max-w-[250px] text-xs">
@@ -1713,11 +1713,11 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                     {question.dimension}
                   </span>
                 </div>
-                <h3 className="text-base sm:text-lg font-semibold text-[#252826] mb-3 leading-snug">
+                <h3 className="text-base sm:text-lg font-semibold text-[#F6F3EE] mb-3 leading-snug">
                   {question.text}
                 </h3>
                 <div className="bg-gradient-to-r from-[#8E4F67]/10 to-[#7FB8A3]/10 border-l-3 border-[#8E4F67] rounded-r-lg p-3 mb-4">
-                  <p className="text-sm text-[#252826] leading-relaxed">
+                  <p className="text-sm text-[#F6F3EE] leading-relaxed">
                     {question.tooltip}
                   </p>
                   <p className="text-xs text-[#8E4F67] mt-1.5 font-medium">

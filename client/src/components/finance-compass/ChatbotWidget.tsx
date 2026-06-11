@@ -1178,7 +1178,7 @@ What would you like to know?`,
         <div 
           className="fixed bottom-20 sm:bottom-24 z-50 animate-in slide-in-from-right-4 fade-in duration-300 left-4 right-4 sm:left-auto sm:right-6"
         >
-          <div className="bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-[#8E4F67]/20 p-3 sm:p-4 max-w-full sm:max-w-[280px] sm:ml-auto">
+          <div className="bg-card rounded-xl shadow-xl border border-[#8E4F67]/20 p-3 sm:p-4 max-w-full sm:max-w-[280px] sm:ml-auto">
             {/* Close button - touch-friendly */}
             <button
               onClick={dismissPopup}

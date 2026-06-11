@@ -77,7 +77,7 @@ function GapRow({ result, index }: { result: GapAnalysisResult; index: number })
               You: <span className="font-medium text-foreground">{result.scaleScore.toFixed(2)}</span>
             </span>
             <span className="whitespace-nowrap">
-              Bench: <span className="font-medium text-[#252826]">{result.benchmark.toFixed(2)}</span>
+              Bench: <span className="font-medium text-[#F6F3EE]">{result.benchmark.toFixed(2)}</span>
             </span>
           </div>
           <span className="whitespace-nowrap">

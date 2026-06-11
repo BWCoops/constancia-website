@@ -104,7 +104,7 @@ export function FinanceCompassRadarChart({
                             </div>
                             <div className="flex justify-between gap-4">
                               <span className="text-muted-foreground">Benchmark:</span>
-                              <span className="font-medium text-[#252826]">{dataPoint.benchmark.toFixed(2)}</span>
+                              <span className="font-medium text-[#F6F3EE]">{dataPoint.benchmark.toFixed(2)}</span>
                             </div>
                             <div className="flex justify-between gap-4">
                               <span className="text-muted-foreground">World Class:</span>
