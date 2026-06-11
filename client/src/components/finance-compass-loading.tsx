@@ -5,7 +5,7 @@
  * concise compass-eyebrow + a slow mint ring spinner. No marketing
  * copy here — this is meant to be a quick, on-brand transition.
  */
-import constanciaLogoDarkPng from "@assets/constancia-logo-dark.png";
+import constanciaLogoDarkPng from "@assets/constancia-logo-dark.webp";
 
 export function FinanceCompassLoading() {
   return (
