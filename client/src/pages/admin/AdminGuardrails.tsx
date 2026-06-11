@@ -352,7 +352,7 @@ export default function AdminGuardrails() {
       <div className="p-6 space-y-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-foreground" data-testid="text-page-title">Guardrails Management</h1>
+            <h1 className="text-2xl font-semibold text-foreground" data-testid="text-page-title">Guardrails Management</h1>
             <p className="text-muted-foreground">
               Manage the 350+ consulting-grade content quality rules
             </p>
@@ -384,7 +384,7 @@ export default function AdminGuardrails() {
               <CardTitle className="text-sm font-medium text-muted-foreground">Total Rules</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stats?.totalRules || rules?.length || 0}</div>
+              <div className="text-2xl font-semibold">{stats?.totalRules || rules?.length || 0}</div>
             </CardContent>
           </Card>
           <Card data-testid="card-stat-active">
@@ -392,7 +392,7 @@ export default function AdminGuardrails() {
               <CardTitle className="text-sm font-medium text-muted-foreground">Active Rules</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-green-600">
+              <div className="text-2xl font-semibold text-green-600">
                 {stats?.activeRules || rules?.filter(r => r.isActive).length || 0}
               </div>
             </CardContent>
@@ -402,7 +402,7 @@ export default function AdminGuardrails() {
               <CardTitle className="text-sm font-medium text-muted-foreground">Categories</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stats?.categories || categories?.length || 0}</div>
+              <div className="text-2xl font-semibold">{stats?.categories || categories?.length || 0}</div>
             </CardContent>
           </Card>
         </div>

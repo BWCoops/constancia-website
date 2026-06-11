@@ -116,7 +116,7 @@ export function GaugeChart({
           x={centerX}
           y={centerY - config.fontSize / 2}
           textAnchor="middle"
-          className="fill-foreground font-bold"
+          className="fill-foreground font-semibold"
           style={{ fontSize: config.fontSize }}
         >
           {Math.round(value)}

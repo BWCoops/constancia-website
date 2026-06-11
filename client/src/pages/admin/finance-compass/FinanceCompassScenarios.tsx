@@ -256,7 +256,7 @@ function ScenariosContent() {
                       <DollarSign className="h-4 w-4 text-muted-foreground" />
                       <Label className="text-muted-foreground">Base Investment</Label>
                     </div>
-                    <p className="text-2xl font-bold">{formatCurrency(selectedScenario.baseInvestment)}</p>
+                    <p className="text-2xl font-semibold">{formatCurrency(selectedScenario.baseInvestment)}</p>
                   </CardContent>
                 </Card>
                 <Card>
@@ -265,7 +265,7 @@ function ScenariosContent() {
                       <TrendingUp className="h-4 w-4 text-muted-foreground" />
                       <Label className="text-muted-foreground">NPV</Label>
                     </div>
-                    <p className={`text-2xl font-bold ${selectedScenario.npv && selectedScenario.npv >= 0 ? "text-emerald-600" : "text-red-600"}`}>
+                    <p className={`text-2xl font-semibold ${selectedScenario.npv && selectedScenario.npv >= 0 ? "text-emerald-600" : "text-red-600"}`}>
                       {selectedScenario.npv !== null && selectedScenario.npv !== undefined 
                         ? formatCurrency(selectedScenario.npv) 
                         : "-"

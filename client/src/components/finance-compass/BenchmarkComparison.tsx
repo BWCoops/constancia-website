@@ -299,7 +299,7 @@ export function BenchmarkComparison({
               <CardDescription>{description}</CardDescription>
             </div>
             <div className="text-right">
-              <div className={`text-lg font-bold ${avgDifference >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+              <div className={`text-lg font-semibold ${avgDifference >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                 {avgDifference > 0 ? '+' : ''}{avgDifference.toFixed(1)} pts
               </div>
               <div className="text-xs text-muted-foreground">Avg. gap to industry (1-5 scale)</div>

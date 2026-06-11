@@ -590,7 +590,7 @@ function AnalyticsContent() {
           </CardHeader>
           <CardContent>
             <div className="flex items-center justify-between gap-2">
-              <div className="text-2xl font-bold">{overview?.pageViews?.toLocaleString() ?? 0}</div>
+              <div className="text-2xl font-semibold">{overview?.pageViews?.toLocaleString() ?? 0}</div>
               {trends && <TrendIndicator change={trends.pageViews.change} label="vs prev" />}
             </div>
             <p className="text-xs text-muted-foreground">Last {period} days</p>
@@ -604,7 +604,7 @@ function AnalyticsContent() {
           </CardHeader>
           <CardContent>
             <div className="flex items-center justify-between gap-2">
-              <div className="text-2xl font-bold">{overview?.sessions?.toLocaleString() ?? 0}</div>
+              <div className="text-2xl font-semibold">{overview?.sessions?.toLocaleString() ?? 0}</div>
               {trends && <TrendIndicator change={trends.sessions.change} label="vs prev" />}
             </div>
             <p className="text-xs text-muted-foreground">Last {period} days</p>
@@ -618,7 +618,7 @@ function AnalyticsContent() {
           </CardHeader>
           <CardContent>
             <div className="flex items-center justify-between gap-2">
-              <div className="text-2xl font-bold">{overview?.uniqueVisitors?.toLocaleString() ?? 0}</div>
+              <div className="text-2xl font-semibold">{overview?.uniqueVisitors?.toLocaleString() ?? 0}</div>
               {trends && <TrendIndicator change={trends.uniqueVisitors.change} label="vs prev" />}
             </div>
             <p className="text-xs text-muted-foreground">Last {period} days</p>
@@ -632,7 +632,7 @@ function AnalyticsContent() {
           </CardHeader>
           <CardContent>
             <div className="flex items-center justify-between gap-2">
-              <div className="text-2xl font-bold">{formatDuration(overview?.avgSessionDuration ?? 0)}</div>
+              <div className="text-2xl font-semibold">{formatDuration(overview?.avgSessionDuration ?? 0)}</div>
               {trends && <TrendIndicator change={trends.avgDuration.change} label="vs prev" />}
             </div>
             <p className="text-xs text-muted-foreground">Last {period} days</p>
@@ -666,7 +666,7 @@ function AnalyticsContent() {
                   <Skeleton className="h-8 w-20" />
                 ) : (
                   <>
-                    <div className="text-2xl font-bold">{engagement?.bounceRate ?? 0}%</div>
+                    <div className="text-2xl font-semibold">{engagement?.bounceRate ?? 0}%</div>
                     <p className="text-xs text-muted-foreground">
                       {engagement?.bouncedSessions ?? 0} of {engagement?.totalSessions ?? 0} sessions
                     </p>
@@ -685,7 +685,7 @@ function AnalyticsContent() {
                   <Skeleton className="h-8 w-20" />
                 ) : (
                   <>
-                    <div className="text-2xl font-bold">{engagement?.pagesPerSession ?? 0}</div>
+                    <div className="text-2xl font-semibold">{engagement?.pagesPerSession ?? 0}</div>
                     <p className="text-xs text-muted-foreground">
                       {engagement?.totalPageViews ?? 0} pages viewed
                     </p>
@@ -704,7 +704,7 @@ function AnalyticsContent() {
                   <Skeleton className="h-8 w-20" />
                 ) : (
                   <>
-                    <div className="text-2xl font-bold">{overview?.botPageViews?.toLocaleString() ?? 0}</div>
+                    <div className="text-2xl font-semibold">{overview?.botPageViews?.toLocaleString() ?? 0}</div>
                     <p className="text-xs text-muted-foreground">
                       {overview?.botSessions ?? 0} bot sessions (excluded from metrics)
                     </p>
@@ -723,7 +723,7 @@ function AnalyticsContent() {
                   <Skeleton className="h-8 w-20" />
                 ) : (
                   <>
-                    <div className="text-2xl font-bold">{engagement?.returningVisitorsPercent ?? 0}%</div>
+                    <div className="text-2xl font-semibold">{engagement?.returningVisitorsPercent ?? 0}%</div>
                     <p className="text-xs text-muted-foreground">
                       {engagement?.returningVisitors ?? 0} returning visitors
                     </p>
@@ -744,7 +744,7 @@ function AnalyticsContent() {
                   <Skeleton className="h-8 w-20" />
                 ) : (
                   <>
-                    <div className="text-2xl font-bold">{leadsSummary?.totalLeads ?? 0}</div>
+                    <div className="text-2xl font-semibold">{leadsSummary?.totalLeads ?? 0}</div>
                     <p className="text-xs text-muted-foreground">
                       {leadsSummary?.verifiedLeads ?? 0} verified
                     </p>
@@ -763,7 +763,7 @@ function AnalyticsContent() {
                   <Skeleton className="h-8 w-20" />
                 ) : (
                   <>
-                    <div className="text-2xl font-bold">{leadsSummary?.conversionRate ?? 0}%</div>
+                    <div className="text-2xl font-semibold">{leadsSummary?.conversionRate ?? 0}%</div>
                     <p className="text-xs text-muted-foreground">
                       From {leadsSummary?.uniqueVisitors ?? 0} visitors
                     </p>
@@ -782,7 +782,7 @@ function AnalyticsContent() {
                   <Skeleton className="h-8 w-20" />
                 ) : (
                   <>
-                    <div className="text-2xl font-bold">{blogStats?.blogViewsPercent ?? 0}%</div>
+                    <div className="text-2xl font-semibold">{blogStats?.blogViewsPercent ?? 0}%</div>
                     <p className="text-xs text-muted-foreground">
                       {blogStats?.blogViews ?? 0} of {blogStats?.totalViews ?? 0} views
                     </p>
@@ -1160,7 +1160,7 @@ function AnalyticsContent() {
                       <TrendIndicator change={weeklyComparison.changes.pageViews} label="vs last week" />
                     </div>
                     <div className="flex items-end gap-2">
-                      <span className="text-2xl font-bold">{weeklyComparison.thisWeek.pageViews}</span>
+                      <span className="text-2xl font-semibold">{weeklyComparison.thisWeek.pageViews}</span>
                       <span className="text-sm text-muted-foreground mb-1">vs {weeklyComparison.lastWeek.pageViews}</span>
                     </div>
                   </div>
@@ -1170,7 +1170,7 @@ function AnalyticsContent() {
                       <TrendIndicator change={weeklyComparison.changes.sessions} label="vs last week" />
                     </div>
                     <div className="flex items-end gap-2">
-                      <span className="text-2xl font-bold">{weeklyComparison.thisWeek.sessions}</span>
+                      <span className="text-2xl font-semibold">{weeklyComparison.thisWeek.sessions}</span>
                       <span className="text-sm text-muted-foreground mb-1">vs {weeklyComparison.lastWeek.sessions}</span>
                     </div>
                   </div>
@@ -1180,7 +1180,7 @@ function AnalyticsContent() {
                       <TrendIndicator change={weeklyComparison.changes.leads} label="vs last week" />
                     </div>
                     <div className="flex items-end gap-2">
-                      <span className="text-2xl font-bold">{weeklyComparison.thisWeek.leads}</span>
+                      <span className="text-2xl font-semibold">{weeklyComparison.thisWeek.leads}</span>
                       <span className="text-sm text-muted-foreground mb-1">vs {weeklyComparison.lastWeek.leads}</span>
                     </div>
                   </div>
@@ -1345,7 +1345,7 @@ function AnalyticsContent() {
                   <div className="flex items-center gap-4">
                     <div className="p-4 bg-muted/50 rounded-lg">
                       <p className="text-sm text-muted-foreground">Total Downloads</p>
-                      <p className="text-3xl font-bold">{downloadStats.totalDownloads}</p>
+                      <p className="text-3xl font-semibold">{downloadStats.totalDownloads}</p>
                     </div>
                   </div>
 

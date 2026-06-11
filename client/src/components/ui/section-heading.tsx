@@ -56,7 +56,7 @@ function SectionHeading({
       )}
 
       <h2
-        className="text-3xl md:text-4xl font-bold leading-tight tracking-tight mb-4"
+        className="text-3xl md:text-4xl font-semibold leading-tight tracking-tight mb-4"
         style={{ color: "var(--brand-text-primary)" }}
       >
         {title}

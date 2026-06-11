@@ -328,7 +328,7 @@ export default function BlogPostPage() {
     return (
       <div className="min-h-screen bg-background">
         <div className="flex flex-col items-center justify-center min-h-screen">
-          <h1 className="text-2xl font-bold mb-4">Article Not Found</h1>
+          <h1 className="text-2xl font-semibold mb-4">Article Not Found</h1>
           {flags.blog && (
             <Link href="/blog">
               <Button>
@@ -396,7 +396,7 @@ export default function BlogPostPage() {
             </div>
 
             <h1 
-              className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4" 
+              className="text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground mb-4" 
               data-testid="text-post-title"
             >
               {post.title}
@@ -435,7 +435,7 @@ export default function BlogPostPage() {
 
           <div 
             className="prose prose-lg dark:prose-invert max-w-none mb-12 
-              prose-headings:text-foreground prose-headings:font-bold
+              prose-headings:text-foreground prose-headings:font-semibold
               prose-h1:text-3xl prose-h1:mt-10 prose-h1:mb-6 prose-h1:border-b prose-h1:border-border prose-h1:pb-4
               prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4 prose-h2:text-[#252826] dark:prose-h2:text-brand-cyan
               prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3 prose-h3:text-brand-teal dark:prose-h3:text-brand-cyan/80
@@ -454,7 +454,7 @@ export default function BlogPostPage() {
               remarkPlugins={[remarkGfm]}
               components={{
                 h1: ({children}) => (
-                  <h1 className="text-3xl font-bold mt-10 mb-6 border-b border-border pb-4 text-foreground">
+                  <h1 className="text-3xl font-semibold mt-10 mb-6 border-b border-border pb-4 text-foreground">
                     {children}
                   </h1>
                 ),
@@ -465,7 +465,7 @@ export default function BlogPostPage() {
                   }
                   return (
                     <h2 
-                      className="text-xl sm:text-2xl font-bold mt-12 mb-6 text-brand-cyan relative pl-5"
+                      className="text-xl sm:text-2xl font-semibold mt-12 mb-6 text-brand-cyan relative pl-5"
                     >
                       <span className="absolute left-0 top-0 bottom-0 w-1 rounded-full bg-gradient-to-b from-[#7FB8A3] to-[#8E4F67]" />
                       {children}
@@ -724,7 +724,7 @@ export default function BlogPostPage() {
             <section 
               className="pt-8 border-t border-border"
             >
-              <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
+              <h2 className="text-2xl font-semibold mb-6 flex items-center gap-3">
                 <span className="w-1 h-8 bg-gradient-to-b from-[#7FB8A3] to-[#8E4F67] rounded-full" />
                 Related Articles
               </h2>

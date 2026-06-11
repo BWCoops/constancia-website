@@ -127,7 +127,7 @@ export function GapAnalysisCard({
               <CardDescription>{description}</CardDescription>
             </div>
             <div className="text-right">
-              <div className="text-2xl font-bold text-foreground">{averageGap.toFixed(2)}</div>
+              <div className="text-2xl font-semibold text-foreground">{averageGap.toFixed(2)}</div>
               <div className="text-xs text-muted-foreground">Avg. Gap</div>
             </div>
           </div>

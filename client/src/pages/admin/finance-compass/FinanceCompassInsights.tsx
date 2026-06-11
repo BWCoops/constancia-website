@@ -807,7 +807,7 @@ function InsightsContent() {
                   <div className="flex items-center justify-between gap-2">
                     <div>
                       <p className="text-sm text-muted-foreground">Total Responses</p>
-                      <p className="text-2xl font-bold">{analytics.summary.totalResponses.toLocaleString()}</p>
+                      <p className="text-2xl font-semibold">{analytics.summary.totalResponses.toLocaleString()}</p>
                     </div>
                     <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
                       <Activity className="h-5 w-5 text-primary" />
@@ -821,7 +821,7 @@ function InsightsContent() {
                   <div className="flex items-center justify-between gap-2">
                     <div>
                       <p className="text-sm text-muted-foreground">Avg Overall Score</p>
-                      <p className="text-2xl font-bold">{analytics.summary.avgOverallScore.toFixed(1)}</p>
+                      <p className="text-2xl font-semibold">{analytics.summary.avgOverallScore.toFixed(1)}</p>
                     </div>
                     <div className="h-10 w-10 rounded-full bg-[#7FB8A3]/100/10 flex items-center justify-center">
                       <TrendingUp className="h-5 w-5 text-[#7FB8A3]" />
@@ -835,7 +835,7 @@ function InsightsContent() {
                   <div className="flex items-center justify-between gap-2">
                     <div>
                       <p className="text-sm text-muted-foreground">Total Questions</p>
-                      <p className="text-2xl font-bold">{analytics.summary.totalQuestions}</p>
+                      <p className="text-2xl font-semibold">{analytics.summary.totalQuestions}</p>
                     </div>
                     <div className="h-10 w-10 rounded-full bg-indigo-500/10 flex items-center justify-center">
                       <HelpCircle className="h-5 w-5 text-indigo-500" />
@@ -849,7 +849,7 @@ function InsightsContent() {
                   <div className="flex items-center justify-between gap-2">
                     <div>
                       <p className="text-sm text-muted-foreground">Dimensions</p>
-                      <p className="text-2xl font-bold">{analytics.dimensionPerformance.length}</p>
+                      <p className="text-2xl font-semibold">{analytics.dimensionPerformance.length}</p>
                     </div>
                     <div className="h-10 w-10 rounded-full bg-amber-500/10 flex items-center justify-center">
                       <Layers className="h-5 w-5 text-amber-500" />
@@ -1142,7 +1142,7 @@ function InsightsContent() {
                           <div className="flex items-center justify-between">
                             <div>
                               <p className="text-sm text-muted-foreground">Total Events</p>
-                              <p className="text-2xl font-bold">{widgetAnalytics.summary.totalEvents.toLocaleString()}</p>
+                              <p className="text-2xl font-semibold">{widgetAnalytics.summary.totalEvents.toLocaleString()}</p>
                             </div>
                             <Activity className="h-8 w-8 text-[#7FB8A3] opacity-80" />
                           </div>
@@ -1154,7 +1154,7 @@ function InsightsContent() {
                           <div className="flex items-center justify-between">
                             <div>
                               <p className="text-sm text-muted-foreground">Completion Rate</p>
-                              <p className="text-2xl font-bold">{widgetAnalytics.summary.avgCompletionRate}%</p>
+                              <p className="text-2xl font-semibold">{widgetAnalytics.summary.avgCompletionRate}%</p>
                             </div>
                             <CheckCircle2 className="h-8 w-8 text-green-500 opacity-80" />
                           </div>
@@ -1166,7 +1166,7 @@ function InsightsContent() {
                           <div className="flex items-center justify-between">
                             <div>
                               <p className="text-sm text-muted-foreground">Avg Events/Session</p>
-                              <p className="text-2xl font-bold">{widgetAnalytics.summary.avgEventsPerSession}</p>
+                              <p className="text-2xl font-semibold">{widgetAnalytics.summary.avgEventsPerSession}</p>
                             </div>
                             <BarChart3 className="h-8 w-8 text-amber-500 opacity-80" />
                           </div>
@@ -1183,7 +1183,7 @@ function InsightsContent() {
                           <div className="flex items-center justify-between">
                             <div>
                               <p className="text-sm text-muted-foreground">Data Quality</p>
-                              <p className="text-2xl font-bold">{widgetAnalytics.qualityScore.score}/100</p>
+                              <p className="text-2xl font-semibold">{widgetAnalytics.qualityScore.score}/100</p>
                               <Badge variant={
                                 widgetAnalytics.qualityScore.confidence === 'high' ? 'default' :
                                 widgetAnalytics.qualityScore.confidence === 'medium' ? 'secondary' :
@@ -1445,7 +1445,7 @@ function InsightsContent() {
                                       <p className="text-sm">{outlier.insight}</p>
                                     </div>
                                     <div className="text-right shrink-0">
-                                      <div className={`text-sm font-bold ${
+                                      <div className={`text-sm font-semibold ${
                                         outlier.deviation === 'above' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
                                       }`}>
                                         {outlier.value}

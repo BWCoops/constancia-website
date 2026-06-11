@@ -150,7 +150,7 @@ function StatsCard({
         {isLoading ? (
           <Skeleton className="h-8 w-20" />
         ) : (
-          <div className="text-2xl font-bold" data-testid={`text-stat-value-${title.toLowerCase().replace(/\s+/g, "-")}`}>
+          <div className="text-2xl font-semibold" data-testid={`text-stat-value-${title.toLowerCase().replace(/\s+/g, "-")}`}>
             {typeof value === "number" ? value.toLocaleString() : value}
           </div>
         )}
@@ -481,7 +481,7 @@ function DashboardContent() {
               {qualitySummaryLoading ? (
                 <Skeleton className="h-7 w-16" />
               ) : (
-                <p className="text-xl sm:text-2xl font-bold" data-testid="text-valid-assessments">
+                <p className="text-xl sm:text-2xl font-semibold" data-testid="text-valid-assessments">
                   {qualityData?.validRecords ?? 0}
                 </p>
               )}
@@ -494,7 +494,7 @@ function DashboardContent() {
               {qualitySummaryLoading ? (
                 <Skeleton className="h-7 w-16" />
               ) : (
-                <p className="text-xl sm:text-2xl font-bold" data-testid="text-invalid-assessments">
+                <p className="text-xl sm:text-2xl font-semibold" data-testid="text-invalid-assessments">
                   {qualityData?.invalidRecords ?? 0}
                 </p>
               )}
@@ -507,7 +507,7 @@ function DashboardContent() {
               {qualitySummaryLoading ? (
                 <Skeleton className="h-7 w-16" />
               ) : (
-                <p className="text-xl sm:text-2xl font-bold" data-testid="text-valid-percentage">
+                <p className="text-xl sm:text-2xl font-semibold" data-testid="text-valid-percentage">
                   {qualityData?.validPercentage?.toFixed(1) ?? 0}%
                 </p>
               )}
@@ -520,7 +520,7 @@ function DashboardContent() {
               {qualitySummaryLoading ? (
                 <Skeleton className="h-7 w-16" />
               ) : (
-                <p className="text-xl sm:text-2xl font-bold" data-testid="text-avg-quality-score">
+                <p className="text-xl sm:text-2xl font-semibold" data-testid="text-avg-quality-score">
                   {qualityData?.avgQualityScore?.toFixed(1) ?? 0}
                 </p>
               )}
@@ -594,7 +594,7 @@ function DashboardContent() {
               {widgetLoading ? (
                 <Skeleton className="h-7 w-16" />
               ) : (
-                <p className="text-xl sm:text-2xl font-bold" data-testid="text-widget-sessions-24h">
+                <p className="text-xl sm:text-2xl font-semibold" data-testid="text-widget-sessions-24h">
                   {widgetData?.data?.last24h?.uniqueSessions ?? 0}
                 </p>
               )}
@@ -607,7 +607,7 @@ function DashboardContent() {
               {widgetLoading ? (
                 <Skeleton className="h-7 w-16" />
               ) : (
-                <p className="text-xl sm:text-2xl font-bold" data-testid="text-widget-completions-24h">
+                <p className="text-xl sm:text-2xl font-semibold" data-testid="text-widget-completions-24h">
                   {widgetData?.data?.last24h?.completions ?? 0}
                 </p>
               )}
@@ -620,7 +620,7 @@ function DashboardContent() {
               {widgetLoading ? (
                 <Skeleton className="h-7 w-16" />
               ) : (
-                <p className="text-xl sm:text-2xl font-bold" data-testid="text-widget-cta-24h">
+                <p className="text-xl sm:text-2xl font-semibold" data-testid="text-widget-cta-24h">
                   {widgetData?.data?.last24h?.ctaClicks ?? 0}
                 </p>
               )}
@@ -633,7 +633,7 @@ function DashboardContent() {
               {widgetLoading ? (
                 <Skeleton className="h-7 w-16" />
               ) : (
-                <p className="text-xl sm:text-2xl font-bold" data-testid="text-widget-conversion-24h">
+                <p className="text-xl sm:text-2xl font-semibold" data-testid="text-widget-conversion-24h">
                   {widgetData?.data?.last24h?.conversionRate ?? 0}%
                 </p>
               )}

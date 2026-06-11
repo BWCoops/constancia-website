@@ -85,26 +85,27 @@
          causing stale preload links to 404 in production. The CSS stylesheet
          handles font loading via display=swap which is sufficient. -->
 
-    <!-- Fonts: Noto Sans (primary UI per launch brief), DM Sans (legacy
-         marketing headings still in use on sub-pages), IBM Plex Mono
-         (eyebrows). Inter dropped — wasn't being referenced anywhere
-         live. Weight set trimmed to what actually renders so the
-         stylesheet response is materially smaller. Non-blocking via the
-         media="print" / onload swap trick. -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet"></noscript>
+    <!-- Single sans family across the entire site: Noto Sans, weights
+         300 (light body), 400 (regular), 500 (medium for accents and
+         small headings), 600 (semibold for headings). IBM Plex Mono
+         400 is kept for the small uppercase eyebrow labels — that's
+         the only non-Noto family on the site. Inter and DM Sans have
+         been dropped. Non-blocking via the media="print" / onload
+         swap so fonts never block first paint. -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet"></noscript>
     
     <!-- Critical CSS for initial paint - prevents FOUC and improves FCP.
          Includes root variables, navigation, hero, and button styles
          so page can render while the 32KB main stylesheet downloads. -->
     <style>
-      :root{--bg:60 33% 99%;--fg:220 5% 14%;--primary:215 97% 19%;--secondary:197 100% 52%;--radius:.5rem;--font-sans:"DM Sans",Inter,system-ui,-apple-system,sans-serif;--font-mono:"IBM Plex Mono",ui-monospace,monospace}
+      :root{--bg:60 33% 99%;--fg:220 5% 14%;--primary:215 97% 19%;--secondary:197 100% 52%;--radius:.5rem;--font-sans:"Noto Sans",system-ui,-apple-system,sans-serif;--font-mono:"IBM Plex Mono",ui-monospace,monospace}
       .dark{--bg:220 5% 8%;--fg:60 33% 97%}
       *,::before,::after{margin:0;padding:0;box-sizing:border-box}
       html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
       /* Cream background — matches the Constancia brand bg #F6F3EE so
          there's no navy flash before React/Tailwind apply. */
-      body{margin:0;font-family:"Noto Sans","DM Sans",system-ui,-apple-system,sans-serif;background:#252826;color:#F6F3EE;line-height:1.5;overflow-x:hidden}
+      body{margin:0;font-family:"Noto Sans",system-ui,-apple-system,sans-serif;background:#252826;color:#F6F3EE;line-height:1.5;overflow-x:hidden}
       #root{min-height:100vh;min-height:100svh}
       h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.2;margin-bottom:1rem}
       h1{font-size:2rem}h2{font-size:1.5rem}h3{font-size:1.25rem}

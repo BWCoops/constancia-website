@@ -42,7 +42,7 @@ export function HeroResultsVisual({ className }: HeroResultsVisualProps) {
             <h3 className="text-lg font-semibold text-white">Finance Readiness</h3>
           </div>
           <div className="text-right">
-            <p className="text-3xl font-bold text-brand-mint">{overallScore}</p>
+            <p className="text-3xl font-semibold text-brand-mint">{overallScore}</p>
             <p className="text-xs text-white/60">/ 100</p>
           </div>
         </div>

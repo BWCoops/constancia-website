@@ -59,7 +59,7 @@ export function SampleResultsPreview({ onStartAssessment, className }: SampleRes
             <h3 className="text-lg font-semibold text-white">7-Dimension Analysis</h3>
           </div>
           <div className="text-right">
-            <p className="text-3xl font-bold text-brand-mint">{overallScore}</p>
+            <p className="text-3xl font-semibold text-brand-mint">{overallScore}</p>
             <p className="text-xs text-white/60">/ 100</p>
           </div>
         </div>
@@ -81,7 +81,7 @@ export function SampleResultsPreview({ onStartAssessment, className }: SampleRes
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-xs text-white/80 truncate pr-2">{dim.dimension}</span>
-                  <span className={cn("text-xs font-bold tabular-nums", getScoreColor(dim.score))}>
+                  <span className={cn("text-xs font-semibold tabular-nums", getScoreColor(dim.score))}>
                     {dim.score}%
                   </span>
                 </div>

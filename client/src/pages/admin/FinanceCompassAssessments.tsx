@@ -735,13 +735,13 @@ function AssessmentsContent() {
                   {selectedAssessment.epmReadinessScore !== undefined && (
                     <div>
                       <h4 className="text-sm font-medium text-muted-foreground mb-2">Maturity Score</h4>
-                      <p className="text-2xl font-bold">{selectedAssessment.epmReadinessScore}/100</p>
+                      <p className="text-2xl font-semibold">{selectedAssessment.epmReadinessScore}/100</p>
                     </div>
                   )}
                   {selectedAssessment.urgencyScore !== undefined && (
                     <div>
                       <h4 className="text-sm font-medium text-muted-foreground mb-2">Urgency Score</h4>
-                      <p className="text-2xl font-bold">{selectedAssessment.urgencyScore}/5</p>
+                      <p className="text-2xl font-semibold">{selectedAssessment.urgencyScore}/5</p>
                     </div>
                   )}
                 </div>

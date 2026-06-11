@@ -78,7 +78,7 @@ function StatCard({ title, value, icon: Icon, description, variant = "default" }
         <Icon className={`h-4 w-4 ${iconColor}`} />
       </CardHeader>
       <CardContent>
-        <div className="text-2xl font-bold">{value}</div>
+        <div className="text-2xl font-semibold">{value}</div>
         {description && <p className="text-xs text-muted-foreground">{description}</p>}
       </CardContent>
     </Card>
@@ -131,7 +131,7 @@ export default function AdminAdFraud() {
       <div className="p-6 space-y-6">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight" data-testid="page-title">Ad Click Fraud Tracking</h1>
+            <h1 className="text-3xl font-semibold tracking-tight" data-testid="page-title">Ad Click Fraud Tracking</h1>
             <p className="text-muted-foreground">Monitor and identify suspicious ad clicks from Google Ads campaigns</p>
           </div>
         </div>
@@ -336,7 +336,7 @@ export default function AdminAdFraud() {
               <CardContent className="space-y-6">
                 <div className="space-y-4">
                   <div className="flex gap-4">
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground font-bold">1</div>
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground font-semibold">1</div>
                     <div>
                       <h4 className="font-semibold">Copy the suspicious IP list</h4>
                       <p className="text-muted-foreground text-sm">
@@ -346,7 +346,7 @@ export default function AdminAdFraud() {
                   </div>
 
                   <div className="flex gap-4">
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground font-bold">2</div>
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground font-semibold">2</div>
                     <div>
                       <h4 className="font-semibold">Open Google Ads</h4>
                       <p className="text-muted-foreground text-sm">
@@ -359,7 +359,7 @@ export default function AdminAdFraud() {
                   </div>
 
                   <div className="flex gap-4">
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground font-bold">3</div>
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground font-semibold">3</div>
                     <div>
                       <h4 className="font-semibold">Navigate to IP Exclusions</h4>
                       <p className="text-muted-foreground text-sm">
@@ -369,7 +369,7 @@ export default function AdminAdFraud() {
                   </div>
 
                   <div className="flex gap-4">
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground font-bold">4</div>
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground font-semibold">4</div>
                     <div>
                       <h4 className="font-semibold">Add the IP addresses</h4>
                       <p className="text-muted-foreground text-sm">
@@ -379,7 +379,7 @@ export default function AdminAdFraud() {
                   </div>
 
                   <div className="flex gap-4">
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground font-bold">5</div>
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground font-semibold">5</div>
                     <div>
                       <h4 className="font-semibold">Monitor and update regularly</h4>
                       <p className="text-muted-foreground text-sm">

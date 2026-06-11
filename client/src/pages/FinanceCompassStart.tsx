@@ -464,11 +464,11 @@ export default function FinanceCompassStart() {
                   <CardContent className="pt-4 sm:pt-6">
                     <div className="grid grid-cols-2 lg:grid-cols-1 gap-4">
                       <div className="text-center">
-                        <div className="text-2xl sm:text-4xl font-bold text-brand-teal mb-1">{info.questions}</div>
+                        <div className="text-2xl sm:text-4xl font-semibold text-brand-teal mb-1">{info.questions}</div>
                         <div className="text-xs sm:text-sm text-muted-foreground">Questions</div>
                       </div>
                       <div className="lg:border-t lg:pt-4 text-center">
-                        <div className="text-lg sm:text-4xl font-bold text-brand-teal mb-1">{info.duration}</div>
+                        <div className="text-lg sm:text-4xl font-semibold text-brand-teal mb-1">{info.duration}</div>
                         <div className="text-xs sm:text-sm text-muted-foreground">To Complete</div>
                       </div>
                     </div>

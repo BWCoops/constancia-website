@@ -210,7 +210,7 @@ function VendorCard({ vendor, rank }: { vendor: VendorAffinityScore; rank: numbe
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between gap-2">
           <div className="flex items-center gap-3">
-            <div className={`h-10 w-10 rounded-lg flex items-center justify-center bg-gradient-to-br ${rankColors[rank] || rankColors[2]} text-white font-bold shadow-lg`}>
+            <div className={`h-10 w-10 rounded-lg flex items-center justify-center bg-gradient-to-br ${rankColors[rank] || rankColors[2]} text-white font-semibold shadow-lg`}>
               {rank + 1}
             </div>
             <div>
@@ -228,7 +228,7 @@ function VendorCard({ vendor, rank }: { vendor: VendorAffinityScore; rank: numbe
       <CardContent className="space-y-4">
         <div className="flex items-center justify-between">
           <span className="text-sm text-muted-foreground">Affinity Score</span>
-          <span className="text-xl font-bold text-brand-teal" data-testid={`text-vendor-score-${vendor.vendorId}`}>
+          <span className="text-xl font-semibold text-brand-teal" data-testid={`text-vendor-score-${vendor.vendorId}`}>
             {Math.round(vendor.normalizedScore)}%
           </span>
         </div>
@@ -357,7 +357,7 @@ function MetricCard({
           </Tooltip>
         )}
       </div>
-      <div className="text-xl font-bold">{value}</div>
+      <div className="text-xl font-semibold">{value}</div>
     </Card>
   );
 }
@@ -508,7 +508,7 @@ export default function FinanceCompassInteractiveDashboard() {
                     <BarChart3 className="h-6 w-6 text-brand-cyan" />
                   </div>
                   <div>
-                    <h1 className="text-2xl md:text-3xl font-bold" data-testid="text-dashboard-title">
+                    <h1 className="text-2xl md:text-3xl font-semibold" data-testid="text-dashboard-title">
                       Interactive Dashboard
                     </h1>
                     <p className="text-white/70 text-sm">
@@ -664,7 +664,7 @@ export default function FinanceCompassInteractiveDashboard() {
                               </TooltipContent>
                             </Tooltip>
                           </label>
-                          <span className="text-sm font-bold text-brand-teal" data-testid="value-process-efficiency">
+                          <span className="text-sm font-semibold text-brand-teal" data-testid="value-process-efficiency">
                             {roiInputs.processEfficiencyPercent || 0}%
                           </span>
                         </div>
@@ -696,7 +696,7 @@ export default function FinanceCompassInteractiveDashboard() {
                               </TooltipContent>
                             </Tooltip>
                           </label>
-                          <span className="text-sm font-bold text-brand-teal" data-testid="value-headcount">
+                          <span className="text-sm font-semibold text-brand-teal" data-testid="value-headcount">
                             {roiInputs.headcountDelta || 0}
                           </span>
                         </div>
@@ -728,7 +728,7 @@ export default function FinanceCompassInteractiveDashboard() {
                               </TooltipContent>
                             </Tooltip>
                           </label>
-                          <span className="text-sm font-bold text-brand-teal" data-testid="value-implementation">
+                          <span className="text-sm font-semibold text-brand-teal" data-testid="value-implementation">
                             {formatCurrency((roiInputs.softwareLicenses || 0) + (roiInputs.integrationCosts || 0), currency)}
                           </span>
                         </div>
@@ -764,7 +764,7 @@ export default function FinanceCompassInteractiveDashboard() {
                               </TooltipContent>
                             </Tooltip>
                           </label>
-                          <span className="text-sm font-bold text-brand-teal" data-testid="value-close-days">
+                          <span className="text-sm font-semibold text-brand-teal" data-testid="value-close-days">
                             {roiInputs.closeAccelerationDays || 0}
                           </span>
                         </div>
@@ -796,7 +796,7 @@ export default function FinanceCompassInteractiveDashboard() {
                               </TooltipContent>
                             </Tooltip>
                           </label>
-                          <span className="text-sm font-bold text-brand-teal" data-testid="value-compliance">
+                          <span className="text-sm font-semibold text-brand-teal" data-testid="value-compliance">
                             {formatCurrency(roiInputs.complianceRiskAvoidance || 0, currency)}
                           </span>
                         </div>
@@ -923,7 +923,7 @@ export default function FinanceCompassInteractiveDashboard() {
                             </TooltipContent>
                           </Tooltip>
                         </div>
-                        <div className="text-2xl font-bold text-green-700 dark:text-green-300" data-testid="live-net-benefit">
+                        <div className="text-2xl font-semibold text-green-700 dark:text-green-300" data-testid="live-net-benefit">
                           {formatCurrency(roiMetrics.netAnnualBenefit, currency)}
                         </div>
                       </div>
@@ -945,7 +945,7 @@ export default function FinanceCompassInteractiveDashboard() {
                             </TooltipContent>
                           </Tooltip>
                         </div>
-                        <div className="text-2xl font-bold text-brand-berry dark:text-brand-mint" data-testid="live-impl-cost">
+                        <div className="text-2xl font-semibold text-brand-berry dark:text-brand-mint" data-testid="live-impl-cost">
                           {formatCurrency(roiMetrics.totalImplementationCost, currency)}
                         </div>
                       </div>
@@ -1140,7 +1140,7 @@ export default function FinanceCompassInteractiveDashboard() {
                                     {vendorRecommendations.map((vendor, idx) => (
                                       <div key={vendor.vendorId} className="flex items-center justify-between p-2 bg-muted/30 rounded" data-testid={`vendor-score-breakdown-${vendor.vendorId}`}>
                                         <div className="flex items-center gap-2">
-                                          <span className="h-5 w-5 rounded text-xs flex items-center justify-center bg-brand-berry text-white font-bold">
+                                          <span className="h-5 w-5 rounded text-xs flex items-center justify-center bg-brand-berry text-white font-semibold">
                                             {idx + 1}
                                           </span>
                                           <span className="font-medium">{vendor.vendorName}</span>
@@ -1151,7 +1151,7 @@ export default function FinanceCompassInteractiveDashboard() {
                                             <span>Ind: {Math.round(vendor.breakdown.industryScore * 100)}%</span>
                                             <span>Size: {Math.round(vendor.breakdown.sizeScore * 100)}%</span>
                                           </div>
-                                          <span className="font-bold text-brand-teal">{Math.round(vendor.normalizedScore)}%</span>
+                                          <span className="font-semibold text-brand-teal">{Math.round(vendor.normalizedScore)}%</span>
                                         </div>
                                       </div>
                                     ))}
@@ -1231,7 +1231,7 @@ export default function FinanceCompassInteractiveDashboard() {
                         {aiAnalysis.keyInsights.map((insight, idx) => (
                           <li key={idx} className="flex items-start gap-3">
                             <div className="h-6 w-6 rounded-full bg-brand-mint/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                              <span className="text-xs font-bold text-brand-teal">{idx + 1}</span>
+                              <span className="text-xs font-semibold text-brand-teal">{idx + 1}</span>
                             </div>
                             <p className="text-sm text-muted-foreground">{insight}</p>
                           </li>

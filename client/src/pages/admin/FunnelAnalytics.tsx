@@ -331,7 +331,7 @@ function FunnelVisualization({ stages }: { stages: FunnelStage[] }) {
                       minHeight: `${Math.max(60, heightPercent * 0.8)}px`,
                     }}
                   >
-                    <div className={`text-2xl font-bold ${colors.text}`}>
+                    <div className={`text-2xl font-semibold ${colors.text}`}>
                       {stage.count.toLocaleString()}
                     </div>
                     <div className={`text-xs ${colors.text} opacity-90 mt-1`}>
@@ -604,7 +604,7 @@ export default function FunnelAnalytics() {
       <div className="space-y-4 md:space-y-6" data-testid="funnel-analytics-page">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-xl md:text-2xl font-bold">Full-Funnel Analytics</h1>
+            <h1 className="text-xl md:text-2xl font-semibold">Full-Funnel Analytics</h1>
             <p className="text-sm text-muted-foreground">
               Track the complete user journey from landing to conversion
             </p>
@@ -658,7 +658,7 @@ export default function FunnelAnalytics() {
                   <div className="flex items-center justify-between gap-2">
                     <div className="min-w-0">
                       <p className="text-xs md:text-sm text-muted-foreground truncate">Total Sessions</p>
-                      <p className="text-lg md:text-2xl font-bold">{funnelStats.totalSessions.toLocaleString()}</p>
+                      <p className="text-lg md:text-2xl font-semibold">{funnelStats.totalSessions.toLocaleString()}</p>
                     </div>
                     <div className="h-8 w-8 md:h-10 md:w-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                       <Users className="h-4 w-4 md:h-5 md:w-5 text-primary" />
@@ -677,7 +677,7 @@ export default function FunnelAnalytics() {
                   <div className="flex items-center justify-between gap-2">
                     <div className="min-w-0">
                       <p className="text-xs md:text-sm text-muted-foreground truncate">Widget Completions</p>
-                      <p className="text-lg md:text-2xl font-bold">
+                      <p className="text-lg md:text-2xl font-semibold">
                         {funnelStats.funnel.find(f => f.name === "widget_complete")?.count.toLocaleString() || 0}
                       </p>
                     </div>
@@ -698,7 +698,7 @@ export default function FunnelAnalytics() {
                   <div className="flex items-center justify-between gap-2">
                     <div className="min-w-0">
                       <p className="text-xs md:text-sm text-muted-foreground truncate">Assessments Complete</p>
-                      <p className="text-lg md:text-2xl font-bold">
+                      <p className="text-lg md:text-2xl font-semibold">
                         {funnelStats.funnel.find(f => f.name === "assessment_complete")?.count.toLocaleString() || 0}
                       </p>
                     </div>
@@ -719,7 +719,7 @@ export default function FunnelAnalytics() {
                   <div className="flex items-center justify-between gap-2">
                     <div className="min-w-0">
                       <p className="text-xs md:text-sm text-muted-foreground truncate">Leads Captured</p>
-                      <p className="text-lg md:text-2xl font-bold">
+                      <p className="text-lg md:text-2xl font-semibold">
                         {funnelStats.funnel.find(f => f.name === "lead_captured")?.count.toLocaleString() || 0}
                       </p>
                     </div>
@@ -924,7 +924,7 @@ export default function FunnelAnalytics() {
                                   <StatusBadge status={severity} />
                                 </div>
                                 <div className="text-right">
-                                  <span className={`text-xl font-bold ${colors.text}`}>
+                                  <span className={`text-xl font-semibold ${colors.text}`}>
                                     {dropPct}%
                                   </span>
                                   <span className="text-sm text-muted-foreground ml-2">
@@ -968,7 +968,7 @@ export default function FunnelAnalytics() {
                                   {DEVICE_ICONS[device.device] || DEVICE_ICONS.unknown}
                                   <span className="capitalize font-medium">{device.device}</span>
                                 </div>
-                                <span className="font-bold">{device.completionRate}%</span>
+                                <span className="font-semibold">{device.completionRate}%</span>
                               </div>
                               <Progress value={device.completionRate} className="h-2" />
                               <p className="text-xs text-muted-foreground">

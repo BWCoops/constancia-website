@@ -30,7 +30,7 @@ export default function TermsOfUsePage() {
                 <ArrowLeft className="w-4 h-4" />
                 Back to Home
               </Link>
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-4" data-testid="heading-terms-of-use">
+              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4" data-testid="heading-terms-of-use">
                 Terms of Use
               </h1>
               <p className="text-lg text-white/80">
@@ -49,7 +49,7 @@ export default function TermsOfUsePage() {
               className="prose prose-lg max-w-none"
             >
               <section className="mb-12" data-testid="section-about-terms">
-                <h2 className="text-2xl font-bold text-foreground mb-4">About these Terms of Use</h2>
+                <h2 className="text-2xl font-semibold text-foreground mb-4">About these Terms of Use</h2>
                 <p className="text-muted-foreground mb-4">
                   We are Constancia Holdings Limited, incorporated in England and Wales under company registration number 17227112. Our registered office is at Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ, United Kingdom.
                 </p>
@@ -62,7 +62,7 @@ export default function TermsOfUsePage() {
               </section>
 
               <section className="mb-12" data-testid="section-consent">
-                <h2 className="text-2xl font-bold text-foreground mb-4">Consent to Terms of Use</h2>
+                <h2 className="text-2xl font-semibold text-foreground mb-4">Consent to Terms of Use</h2>
                 <p className="text-muted-foreground mb-4">
                   By using this website you agree to these Terms of Use.
                 </p>
@@ -72,7 +72,7 @@ export default function TermsOfUsePage() {
               </section>
 
               <section className="mb-12" data-testid="section-copyright">
-                <h2 className="text-2xl font-bold text-foreground mb-4">Copyright notice</h2>
+                <h2 className="text-2xl font-semibold text-foreground mb-4">Copyright notice</h2>
                 <p className="text-muted-foreground mb-4">
                   Unless we expressly state otherwise, the copyright and any other intellectual property rights, including but not limited to design rights, trade marks and patents appearing anywhere on this website remain our property, whether owned by or licensed to us.
                 </p>
@@ -82,7 +82,7 @@ export default function TermsOfUsePage() {
               </section>
 
               <section className="mb-12" data-testid="section-disclaimer">
-                <h2 className="text-2xl font-bold text-foreground mb-4">Disclaimer</h2>
+                <h2 className="text-2xl font-semibold text-foreground mb-4">Disclaimer</h2>
                 <p className="text-muted-foreground mb-4">
                   Accessing or using this website or its content in any way is done entirely at your own risk. You will be responsible for any loss or damage to any computer, device, software, systems or data resulting directly or indirectly from the use or inability to use this website or its content.
                 </p>
@@ -101,21 +101,21 @@ export default function TermsOfUsePage() {
               </section>
 
               <section className="mb-12" data-testid="section-third-party-links">
-                <h2 className="text-2xl font-bold text-foreground mb-4">Links to third party websites</h2>
+                <h2 className="text-2xl font-semibold text-foreground mb-4">Links to third party websites</h2>
                 <p className="text-muted-foreground">
                   This website may provide links out to websites or other online resources under the control of third parties. Any such links are provided solely for your convenience. We have no control over the contents of these third-party resources. We are not responsible for the contents of any linked websites and do not endorse them in any way.
                 </p>
               </section>
 
               <section className="mb-12" data-testid="section-links-from-third-party">
-                <h2 className="text-2xl font-bold text-foreground mb-4">Links from third party websites</h2>
+                <h2 className="text-2xl font-semibold text-foreground mb-4">Links from third party websites</h2>
                 <p className="text-muted-foreground">
                   You can link to this website, so long as you do so fairly and without suggesting any affiliation, endorsement, approval or association with Constancia Holdings Limited if there is none. We reserve the right to withdraw permission to link to our site at any time.
                 </p>
               </section>
 
               <section className="mb-12" data-testid="section-privacy-policy">
-                <h2 className="text-2xl font-bold text-foreground mb-4">Privacy policy</h2>
+                <h2 className="text-2xl font-semibold text-foreground mb-4">Privacy policy</h2>
                 <p className="text-muted-foreground">
                   We take your privacy and the protection of your data very seriously. We may gather and/or use certain information about you in accordance with our privacy policy. Please see our separate{" "}
                   <Link 
@@ -130,14 +130,14 @@ export default function TermsOfUsePage() {
               </section>
 
               <section className="mb-12" data-testid="section-entire-agreement">
-                <h2 className="text-2xl font-bold text-foreground mb-4">Entire agreement</h2>
+                <h2 className="text-2xl font-semibold text-foreground mb-4">Entire agreement</h2>
                 <p className="text-muted-foreground">
                   These Terms of Use are the entire agreement between us and you, and supersede any and all prior terms, conditions, warranties or representations to the fullest extent permitted by law.
                 </p>
               </section>
 
               <section data-testid="section-applicable-law">
-                <h2 className="text-2xl font-bold text-foreground mb-4">Applicable law</h2>
+                <h2 className="text-2xl font-semibold text-foreground mb-4">Applicable law</h2>
                 <p className="text-muted-foreground">
                   This Agreement shall be governed by the law of England and courts of England and Wales will have exclusive jurisdiction in relation to these Terms of Use.
                 </p>

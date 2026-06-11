@@ -85,7 +85,7 @@ function StatsCard({
         {isLoading ? (
           <Skeleton className="h-8 w-20" />
         ) : (
-          <div className="text-2xl font-bold" data-testid={`text-stat-value-${title.toLowerCase().replace(/\s+/g, "-")}`}>
+          <div className="text-2xl font-semibold" data-testid={`text-stat-value-${title.toLowerCase().replace(/\s+/g, "-")}`}>
             {typeof value === "number" ? value.toLocaleString() : value}
           </div>
         )}

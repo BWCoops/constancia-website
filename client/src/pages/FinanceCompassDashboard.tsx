@@ -365,7 +365,7 @@ const KpiIndicator = memo(function KpiIndicator({
             <Tooltip>
               <TooltipTrigger asChild>
                 <span
-                  className="text-lg font-bold cursor-help"
+                  className="text-lg font-semibold cursor-help"
                   style={{ color: maturity.color }}
                   data-testid={`kpi-value-${label.toLowerCase().replace(/\s+/g, '-')}`}
                   aria-label={`${value} percent`}
@@ -488,7 +488,7 @@ const MaturityScorecard = memo(function MaturityScorecard({
             <Tooltip>
               <TooltipTrigger asChild>
                 <span
-                  className="text-xl font-bold cursor-help"
+                  className="text-xl font-semibold cursor-help"
                   style={{ color: overallMaturity.color }}
                   data-testid="text-overall-score"
                   aria-label={`Overall score: ${Math.round(overallScore!)} percent`}
@@ -689,7 +689,7 @@ const RoiKpiPanel = memo(function RoiKpiPanel({ assessmentId }: RoiKpiPanelProps
             <Percent className="h-3 w-3" aria-hidden="true" />
             <span>ROI</span>
           </div>
-          <div className="text-xl font-bold text-brand-cyan" data-testid="kpi-roi" aria-label={`Return on Investment: ${formatPercent(metrics!.roiPercent)}`}>
+          <div className="text-xl font-semibold text-brand-cyan" data-testid="kpi-roi" aria-label={`Return on Investment: ${formatPercent(metrics!.roiPercent)}`}>
             {formatPercent(metrics!.roiPercent)}
           </div>
         </Card>
@@ -698,7 +698,7 @@ const RoiKpiPanel = memo(function RoiKpiPanel({ assessmentId }: RoiKpiPanelProps
             <Clock className="h-3 w-3" aria-hidden="true" />
             <span>Payback</span>
           </div>
-          <div className="text-xl font-bold text-brand-berry dark:text-brand-mint" data-testid="kpi-payback" aria-label={`Payback period: ${formatPayback(metrics!.paybackMonths)}`}>
+          <div className="text-xl font-semibold text-brand-berry dark:text-brand-mint" data-testid="kpi-payback" aria-label={`Payback period: ${formatPayback(metrics!.paybackMonths)}`}>
             {formatPayback(metrics!.paybackMonths)}
           </div>
         </Card>
@@ -707,7 +707,7 @@ const RoiKpiPanel = memo(function RoiKpiPanel({ assessmentId }: RoiKpiPanelProps
             <TrendingUp className="h-3 w-3" aria-hidden="true" />
             <span>NPV</span>
           </div>
-          <div className="text-xl font-bold text-purple-700 dark:text-purple-300" data-testid="kpi-npv" aria-label={`Net Present Value: ${formatCurrency(metrics!.npvValue, currency)}`}>
+          <div className="text-xl font-semibold text-purple-700 dark:text-purple-300" data-testid="kpi-npv" aria-label={`Net Present Value: ${formatCurrency(metrics!.npvValue, currency)}`}>
             {formatCurrency(metrics!.npvValue, currency)}
           </div>
         </Card>
@@ -716,7 +716,7 @@ const RoiKpiPanel = memo(function RoiKpiPanel({ assessmentId }: RoiKpiPanelProps
             <DollarSign className="h-3 w-3" aria-hidden="true" />
             <span>TCO</span>
           </div>
-          <div className="text-xl font-bold text-amber-700 dark:text-amber-300" data-testid="kpi-tco" aria-label={`Total Cost of Ownership: ${formatCurrency(metrics!.totalCostOfOwnership, currency)}`}>
+          <div className="text-xl font-semibold text-amber-700 dark:text-amber-300" data-testid="kpi-tco" aria-label={`Total Cost of Ownership: ${formatCurrency(metrics!.totalCostOfOwnership, currency)}`}>
             {formatCurrency(metrics!.totalCostOfOwnership, currency)}
           </div>
         </Card>
@@ -725,7 +725,7 @@ const RoiKpiPanel = memo(function RoiKpiPanel({ assessmentId }: RoiKpiPanelProps
             <Scale className="h-3 w-3" aria-hidden="true" />
             <span>BCR</span>
           </div>
-          <div className="text-xl font-bold text-brand-berry dark:text-brand-mint" data-testid="kpi-bcr" aria-label={`Benefit Cost Ratio: ${metrics!.benefitCostRatio.toFixed(2)}x`}>
+          <div className="text-xl font-semibold text-brand-berry dark:text-brand-mint" data-testid="kpi-bcr" aria-label={`Benefit Cost Ratio: ${metrics!.benefitCostRatio.toFixed(2)}x`}>
             {metrics!.benefitCostRatio.toFixed(2)}x
           </div>
         </Card>
@@ -920,7 +920,7 @@ const AssessmentJourneyView = memo(function AssessmentJourneyView({
                       animate={isInProgress ? { scale: [1, 1.1, 1] } : {}}
                       transition={{ duration: 2, repeat: Infinity }}
                       className={`
-                        w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold shadow-lg
+                        w-10 h-10 rounded-xl flex items-center justify-center text-sm font-semibold shadow-lg
                         ${isCompleted ? "bg-gradient-to-br from-brand-berry to-brand-mint text-white" : ""}
                         ${isInProgress ? "bg-gradient-to-br from-brand-ink to-brand-berry text-white" : ""}
                         ${isReady ? "bg-gradient-to-br from-brand-berry to-brand-ink text-white" : ""}
@@ -1078,18 +1078,18 @@ const AssessmentJourneyView = memo(function AssessmentJourneyView({
             {totalQuestionsAnswered > 0 && (
               <div className="flex items-center gap-6">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-brand-teal">{Math.round((totalQuestionsAnswered / 124) * 100)}%</div>
+                  <div className="text-2xl font-semibold text-brand-teal">{Math.round((totalQuestionsAnswered / 124) * 100)}%</div>
                   <div className="text-xs text-muted-foreground">Complete</div>
                 </div>
                 {hasRoiData && (
                   <>
                     <div className="h-8 w-px bg-border" />
                     <div className="text-center">
-                      <div className="text-2xl font-bold text-brand-cyan">{formatPercent(roiMetrics!.roiPercent)}</div>
+                      <div className="text-2xl font-semibold text-brand-cyan">{formatPercent(roiMetrics!.roiPercent)}</div>
                       <div className="text-xs text-muted-foreground">ROI</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-2xl font-bold text-brand-teal">{formatPayback(roiMetrics!.paybackMonths)}</div>
+                      <div className="text-2xl font-semibold text-brand-teal">{formatPayback(roiMetrics!.paybackMonths)}</div>
                       <div className="text-xs text-muted-foreground">Payback</div>
                     </div>
                   </>
@@ -1593,7 +1593,7 @@ const AnalyticsDashboard = memo(function AnalyticsDashboard({
               >
                 <div className="text-center">
                   <span
-                    className="text-3xl font-bold"
+                    className="text-3xl font-semibold"
                     style={{ color: overallMaturity.color }}
                     data-testid="text-overall-maturity-score"
                   >
@@ -1682,7 +1682,7 @@ const AnalyticsDashboard = memo(function AnalyticsDashboard({
                         </div>
                         <div className="flex items-center justify-between">
                           <span
-                            className="text-lg font-bold"
+                            className="text-lg font-semibold"
                             style={{ color: maturity.color }}
                             data-testid={`dimension-score-${key}`}
                           >
@@ -1793,7 +1793,7 @@ const AnalyticsDashboard = memo(function AnalyticsDashboard({
                       <span className="text-sm font-medium text-brand-cream">{config.shortName}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-bold" style={{ color: maturity.color }}>{Math.round(score)}%</span>
+                      <span className="text-sm font-semibold" style={{ color: maturity.color }}>{Math.round(score)}%</span>
                       <Badge
                         className="text-[10px] px-1.5"
                         style={{ backgroundColor: `${maturity.color}20`, color: maturity.color }}
@@ -1834,7 +1834,7 @@ const AnalyticsDashboard = memo(function AnalyticsDashboard({
                       <span className="text-sm font-medium text-brand-cream">{config.shortName}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-bold" style={{ color: maturity.color }}>{Math.round(score)}%</span>
+                      <span className="text-sm font-semibold" style={{ color: maturity.color }}>{Math.round(score)}%</span>
                       <Badge
                         className="text-[10px] px-1.5"
                         style={{ backgroundColor: `${maturity.color}20`, color: maturity.color }}
@@ -2193,7 +2193,7 @@ export default function FinanceCompassDashboard() {
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-3 flex-wrap mb-1">
-                  <h1 className="text-2xl md:text-3xl font-bold text-brand-cream" data-testid="text-welcome-message">
+                  <h1 className="text-2xl md:text-3xl font-semibold text-brand-cream" data-testid="text-welcome-message">
                     Welcome back, {sessionData?.firstName}!
                   </h1>
                   <Badge className="bg-brand-berry/10 text-brand-teal border-brand-berry/30">

@@ -178,7 +178,7 @@ export default function AdminFeatureFlags() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight" data-testid="text-page-title">Feature Flags Manager</h1>
+            <h1 className="text-3xl font-semibold tracking-tight" data-testid="text-page-title">Feature Flags Manager</h1>
             <p className="text-muted-foreground">
               Control which sections of the website are visible to users
             </p>
@@ -201,7 +201,7 @@ export default function AdminFeatureFlags() {
               <CheckCircle2 className="h-4 w-4 text-green-500" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-green-600" data-testid="text-enabled-count">{enabledCount}</div>
+              <div className="text-2xl font-semibold text-green-600" data-testid="text-enabled-count">{enabledCount}</div>
               <p className="text-xs text-muted-foreground">Currently active</p>
             </CardContent>
           </Card>
@@ -212,7 +212,7 @@ export default function AdminFeatureFlags() {
               <XCircle className="h-4 w-4 text-red-500" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-red-600" data-testid="text-disabled-count">{disabledCount}</div>
+              <div className="text-2xl font-semibold text-red-600" data-testid="text-disabled-count">{disabledCount}</div>
               <p className="text-xs text-muted-foreground">Currently hidden</p>
             </CardContent>
           </Card>
@@ -223,7 +223,7 @@ export default function AdminFeatureFlags() {
               <AlertTriangle className="h-4 w-4 text-amber-500" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-amber-600" data-testid="text-override-count">{overrideCount}</div>
+              <div className="text-2xl font-semibold text-amber-600" data-testid="text-override-count">{overrideCount}</div>
               <p className="text-xs text-muted-foreground">Overriding env defaults</p>
             </CardContent>
           </Card>

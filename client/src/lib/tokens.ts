@@ -68,7 +68,7 @@ export const COLOR = {
 // ─── Typography ──────────────────────────────────────────────────────────────
 
 export const FONT = {
-  sans: "'Noto Sans', 'DM Sans', system-ui, sans-serif",
+  sans: "'Noto Sans', system-ui, sans-serif",
   mono: "'IBM Plex Mono', monospace",
 } as const;
 

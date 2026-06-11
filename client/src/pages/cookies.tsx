@@ -30,7 +30,7 @@ export default function CookiePolicyPage() {
                 <ArrowLeft className="w-4 h-4" />
                 Back to Home
               </Link>
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-4" data-testid="heading-cookie-policy">
+              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4" data-testid="heading-cookie-policy">
                 Cookie Policy
               </h1>
               <p className="text-lg text-white/80">
@@ -49,7 +49,7 @@ export default function CookiePolicyPage() {
               className="prose prose-lg max-w-none"
             >
               <section className="mb-12" data-testid="section-about-cookies">
-                <h2 className="text-2xl font-bold text-foreground mb-4">About This Cookie Policy</h2>
+                <h2 className="text-2xl font-semibold text-foreground mb-4">About This Cookie Policy</h2>
                 <p className="text-muted-foreground mb-4">
                   The website https://constancia.com/ (the Site) is operated by Constancia Holdings Limited (we, us, our), a company incorporated in England and Wales under company number 17227112. Our registered office is at Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ, United Kingdom.
                 </p>
@@ -62,7 +62,7 @@ export default function CookiePolicyPage() {
               </section>
 
               <section className="mb-12" data-testid="section-contact">
-                <h2 className="text-2xl font-bold text-foreground mb-4">Contact Information</h2>
+                <h2 className="text-2xl font-semibold text-foreground mb-4">Contact Information</h2>
                 <p className="text-muted-foreground">
                   If you have any concerns or would like further information about this policy in general, you can contact us at{" "}
                   <a 
@@ -76,14 +76,14 @@ export default function CookiePolicyPage() {
               </section>
 
               <section className="mb-12" data-testid="section-what-are-cookies">
-                <h2 className="text-2xl font-bold text-foreground mb-4">What Are Cookies?</h2>
+                <h2 className="text-2xl font-semibold text-foreground mb-4">What Are Cookies?</h2>
                 <p className="text-muted-foreground">
                   Cookies are small text files that are stored on your computer when you visit the Site. It is standard practice to use cookies to make your experience better when using a website. We and our third-party service providers use cookies and similar technologies to collect information about, and relevant to, your usage of the Site.
                 </p>
               </section>
 
               <section className="mb-12" data-testid="section-use-of-cookies">
-                <h2 className="text-2xl font-bold text-foreground mb-4">Use of Cookies and Similar Technologies</h2>
+                <h2 className="text-2xl font-semibold text-foreground mb-4">Use of Cookies and Similar Technologies</h2>
                 <p className="text-muted-foreground mb-6">
                   We use the following categories of cookies and similar technologies on this Site:
                 </p>
@@ -127,14 +127,14 @@ export default function CookiePolicyPage() {
               </section>
 
               <section className="mb-12" data-testid="section-cookie-consent">
-                <h2 className="text-2xl font-bold text-foreground mb-4">Cookie Consent</h2>
+                <h2 className="text-2xl font-semibold text-foreground mb-4">Cookie Consent</h2>
                 <p className="text-muted-foreground">
                   When you visit the Site for the first time (and periodically after that), we will request your consent to the setting of all cookies other than strictly necessary cookies.
                 </p>
               </section>
 
               <section data-testid="section-manage-cookies">
-                <h2 className="text-2xl font-bold text-foreground mb-4">How to Manage Cookies</h2>
+                <h2 className="text-2xl font-semibold text-foreground mb-4">How to Manage Cookies</h2>
                 <p className="text-muted-foreground mb-4">
                   You can delete existing cookies and disable some or all types of cookies in future if you wish. To disable some or all types of cookies, you will have to either change the settings on your browser or use the cookie manager tool on the Site.
                 </p>

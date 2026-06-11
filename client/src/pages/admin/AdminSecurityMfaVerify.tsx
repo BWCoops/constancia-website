@@ -66,7 +66,7 @@ export default function AdminSecurityMfaVerify() {
           <img src={logo} alt="Constancia" className="h-12" />
         </div>
 
-        <h1 className="text-2xl font-bold text-center mb-2 text-[#252826]">Two-Factor Authentication</h1>
+        <h1 className="text-2xl font-semibold text-center mb-2 text-[#252826]">Two-Factor Authentication</h1>
         <p className="text-center text-gray-600 mb-6">Enter your authentication code to continue</p>
 
         {!useBackup ? (

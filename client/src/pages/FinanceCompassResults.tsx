@@ -836,7 +836,7 @@ export default function FinanceCompassResults() {
               <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-brand-mint/20 mb-4 sm:mb-6">
                 <CheckCircle2 className="h-6 w-6 sm:h-8 sm:w-8 text-brand-cyan" />
               </div>
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-4">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-2 sm:mb-4">
                 Thank You{contact ? `, ${contact.firstName}` : ""}!
               </h1>
               <p className="text-base sm:text-lg text-white/80 mb-1 sm:mb-2">
@@ -868,7 +868,7 @@ export default function FinanceCompassResults() {
                     />
                   </div>
                   <div className="flex flex-col items-center justify-center p-3 sm:p-4 bg-muted/30 rounded-lg">
-                    <div className="text-2xl sm:text-3xl font-bold text-foreground mb-1">
+                    <div className="text-2xl sm:text-3xl font-semibold text-foreground mb-1">
                       {summary.answeredQuestions}
                     </div>
                     <div className="text-xs sm:text-sm text-muted-foreground text-center">
@@ -876,7 +876,7 @@ export default function FinanceCompassResults() {
                     </div>
                   </div>
                   <div className="flex flex-col items-center justify-center p-3 sm:p-4 bg-muted/30 rounded-lg">
-                    <div className="text-2xl sm:text-3xl font-bold text-foreground mb-1">
+                    <div className="text-2xl sm:text-3xl font-semibold text-foreground mb-1">
                       {summary.completionPercentage}%
                     </div>
                     <div className="text-xs sm:text-sm text-muted-foreground text-center">
@@ -965,7 +965,7 @@ export default function FinanceCompassResults() {
                                   <Calculator className="h-7 w-7 text-white" />
                                 </div>
                                 <div className="flex-1">
-                                  <h4 className="font-bold text-lg text-brand-mint">
+                                  <h4 className="font-semibold text-lg text-brand-mint">
                                     Return on Investment Analysis
                                   </h4>
                                   <p className="text-sm text-muted-foreground mt-1">
@@ -981,7 +981,7 @@ export default function FinanceCompassResults() {
                                     <TrendingUp className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-green-600 dark:text-green-400 flex-shrink-0" />
                                     <span className="text-[10px] sm:text-xs font-medium text-muted-foreground truncate">ROI</span>
                                   </div>
-                                  <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-brand-ink to-brand-berry bg-clip-text text-transparent">
+                                  <div className="text-xl sm:text-2xl font-semibold bg-gradient-to-r from-brand-ink to-brand-berry bg-clip-text text-transparent">
                                     {roiData.data.metrics.roiPercent.toFixed(0)}%
                                   </div>
                                   <p className="text-[10px] sm:text-xs text-muted-foreground mt-0.5 sm:mt-1 line-clamp-2">
@@ -994,7 +994,7 @@ export default function FinanceCompassResults() {
                                     <Clock className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-amber-600 dark:text-amber-400 flex-shrink-0" />
                                     <span className="text-[10px] sm:text-xs font-medium text-muted-foreground truncate">Payback</span>
                                   </div>
-                                  <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-brand-ink to-brand-berry bg-clip-text text-transparent">
+                                  <div className="text-xl sm:text-2xl font-semibold bg-gradient-to-r from-brand-ink to-brand-berry bg-clip-text text-transparent">
                                     {roiData.data.metrics.paybackMonths < 24 
                                       ? `${roiData.data.metrics.paybackMonths.toFixed(1)} mo`
                                       : `${(roiData.data.metrics.paybackMonths / 12).toFixed(1)} yr`}
@@ -1009,7 +1009,7 @@ export default function FinanceCompassResults() {
                                     <BarChart3 className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-brand-berry dark:text-brand-mint flex-shrink-0" />
                                     <span className="text-[10px] sm:text-xs font-medium text-muted-foreground truncate">NPV</span>
                                   </div>
-                                  <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-brand-ink to-brand-berry bg-clip-text text-transparent">
+                                  <div className="text-xl sm:text-2xl font-semibold bg-gradient-to-r from-brand-ink to-brand-berry bg-clip-text text-transparent">
                                     {roiData.data.metrics.npvValue >= 1000 
                                       ? `£${(roiData.data.metrics.npvValue / 1000).toFixed(1)}M`
                                       : `£${roiData.data.metrics.npvValue.toFixed(0)}k`}
@@ -1024,7 +1024,7 @@ export default function FinanceCompassResults() {
                                     <Scale className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-purple-600 dark:text-purple-400 flex-shrink-0" />
                                     <span className="text-[10px] sm:text-xs font-medium text-muted-foreground truncate">BCR</span>
                                   </div>
-                                  <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-brand-ink to-brand-berry bg-clip-text text-transparent">
+                                  <div className="text-xl sm:text-2xl font-semibold bg-gradient-to-r from-brand-ink to-brand-berry bg-clip-text text-transparent">
                                     {roiData.data.metrics.benefitCostRatio.toFixed(2)}x
                                   </div>
                                   <p className="text-[10px] sm:text-xs text-muted-foreground mt-0.5 sm:mt-1 line-clamp-2">
@@ -1073,7 +1073,7 @@ export default function FinanceCompassResults() {
                                 <Calculator className="h-7 w-7 text-white" />
                               </div>
                               <div className="flex-1">
-                                <h4 className="font-bold text-lg text-brand-mint">
+                                <h4 className="font-semibold text-lg text-brand-mint">
                                   Return on Investment Analysis
                                 </h4>
                                 <p className="text-sm text-muted-foreground mt-1">
@@ -1139,7 +1139,7 @@ export default function FinanceCompassResults() {
                               <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-brand-ink to-brand-berry flex items-center justify-center mb-1.5 sm:mb-2">
                                 <Award className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                               </div>
-                              <div className="text-xl sm:text-2xl font-bold text-foreground">
+                              <div className="text-xl sm:text-2xl font-semibold text-foreground">
                                 {benchmarkData.data.summary.overallPercentileRank}%
                               </div>
                               <div className="text-xs sm:text-sm text-muted-foreground">Overall Percentile</div>
@@ -1150,7 +1150,7 @@ export default function FinanceCompassResults() {
                               <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mb-1.5 sm:mb-2">
                                 <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-green-600 dark:text-green-400" />
                               </div>
-                              <div className="text-xl sm:text-2xl font-bold text-green-600 dark:text-green-400">
+                              <div className="text-xl sm:text-2xl font-semibold text-green-600 dark:text-green-400">
                                 {benchmarkData.data.summary.strengthCount}
                               </div>
                               <div className="text-xs sm:text-sm text-muted-foreground">Strengths</div>
@@ -1161,7 +1161,7 @@ export default function FinanceCompassResults() {
                               <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center mb-1.5 sm:mb-2">
                                 <TrendingDown className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-600 dark:text-yellow-400" />
                               </div>
-                              <div className="text-xl sm:text-2xl font-bold text-yellow-600 dark:text-yellow-400">
+                              <div className="text-xl sm:text-2xl font-semibold text-yellow-600 dark:text-yellow-400">
                                 {benchmarkData.data.summary.improvementCount}
                               </div>
                               <div className="text-xs sm:text-sm text-muted-foreground">Improvements</div>
@@ -1172,7 +1172,7 @@ export default function FinanceCompassResults() {
                               <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center mb-1.5 sm:mb-2">
                                 <AlertTriangle className="h-4 w-4 sm:h-5 sm:w-5 text-red-600 dark:text-red-400" />
                               </div>
-                              <div className="text-xl sm:text-2xl font-bold text-red-600 dark:text-red-400">
+                              <div className="text-xl sm:text-2xl font-semibold text-red-600 dark:text-red-400">
                                 {benchmarkData.data.summary.criticalGapCount}
                               </div>
                               <div className="text-xs sm:text-sm text-muted-foreground">Critical Gaps</div>
@@ -1243,7 +1243,7 @@ export default function FinanceCompassResults() {
                                               data-testid={`validation-layer-${layer.layer}`}
                                             >
                                               <div className={`w-8 h-8 rounded-full ${layerColors[idx] || "bg-gray-500"} flex items-center justify-center flex-shrink-0`}>
-                                                <span className="text-white text-xs font-bold">L{layer.layer}</span>
+                                                <span className="text-white text-xs font-semibold">L{layer.layer}</span>
                                               </div>
                                               <div className="flex-1">
                                                 <div className="text-sm font-medium text-foreground">{layer.name}</div>
@@ -1320,7 +1320,7 @@ export default function FinanceCompassResults() {
                                               className="flex items-start gap-3 p-2 bg-white/5 rounded border border-brand-ink"
                                               data-testid={`framework-dimension-${idx}`}
                                             >
-                                              <Badge variant="outline" className="bg-brand-navy text-white border-0 text-xs font-bold shrink-0">
+                                              <Badge variant="outline" className="bg-brand-navy text-white border-0 text-xs font-semibold shrink-0">
                                                 {dim.code}
                                               </Badge>
                                               <div>
@@ -1350,7 +1350,7 @@ export default function FinanceCompassResults() {
                                                 className={`p-2 rounded border text-center ${levelColors[idx]}`}
                                                 data-testid={`maturity-level-${idx}`}
                                               >
-                                                <div className="text-sm font-bold text-foreground">{level.name}</div>
+                                                <div className="text-sm font-semibold text-foreground">{level.name}</div>
                                                 <div className="text-xs text-muted-foreground">{level.range}</div>
                                                 <div className="text-xs text-muted-foreground mt-1">{level.timeline}</div>
                                               </div>
@@ -1675,19 +1675,19 @@ export default function FinanceCompassResults() {
                                             </h5>
                                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                                               <div className="text-center">
-                                                <div className="text-2xl font-bold text-brand-mint">
+                                                <div className="text-2xl font-semibold text-brand-mint">
                                                   {(comparison.yourScore ?? 0).toFixed(0)}
                                                 </div>
                                                 <div className="text-xs text-muted-foreground">Your Score</div>
                                               </div>
                                               <div className="text-center">
-                                                <div className="text-2xl font-bold text-muted-foreground">
+                                                <div className="text-2xl font-semibold text-muted-foreground">
                                                   {(comparison.p50 ?? 0).toFixed(0)}
                                                 </div>
                                                 <div className="text-xs text-muted-foreground">Industry Median</div>
                                               </div>
                                               <div className="text-center">
-                                                <div className={`text-2xl font-bold ${
+                                                <div className={`text-2xl font-semibold ${
                                                   (comparison.gap ?? 0) > 0 
                                                     ? 'text-red-600 dark:text-red-400' 
                                                     : 'text-green-600 dark:text-green-400'
@@ -1697,7 +1697,7 @@ export default function FinanceCompassResults() {
                                                 <div className="text-xs text-muted-foreground">Gap to Median</div>
                                               </div>
                                               <div className="text-center">
-                                                <div className="text-2xl font-bold text-brand-teal">
+                                                <div className="text-2xl font-semibold text-brand-teal">
                                                   P{comparison.percentileRank}
                                                 </div>
                                                 <div className="text-xs text-muted-foreground">Percentile</div>
@@ -1761,7 +1761,7 @@ export default function FinanceCompassResults() {
                                   >
                                     <AccordionTrigger className="px-4 py-3 hover:bg-muted/50">
                                       <div className="flex items-center gap-3 w-full">
-                                        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-brand-ink to-brand-berry flex items-center justify-center text-white font-bold text-sm">
+                                        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-brand-ink to-brand-berry flex items-center justify-center text-white font-semibold text-sm">
                                           {priority.priority}
                                         </div>
                                         <div className="flex-1 text-left">
@@ -1951,7 +1951,7 @@ export default function FinanceCompassResults() {
                                   <TrendingUp className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" />
                                   <span className="truncate">ROI</span>
                                 </div>
-                                <div className="text-xl sm:text-2xl font-bold text-green-700 dark:text-green-300" data-testid="text-roi-percent">
+                                <div className="text-xl sm:text-2xl font-semibold text-green-700 dark:text-green-300" data-testid="text-roi-percent">
                                   {roiData.data.metrics.roiPercent.toFixed(0)}%
                                 </div>
                                 <div className="text-[10px] sm:text-xs text-green-600/70 dark:text-green-400/70 mt-0.5 sm:mt-1">
@@ -1965,7 +1965,7 @@ export default function FinanceCompassResults() {
                                   <Clock className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" />
                                   <span className="truncate">Payback</span>
                                 </div>
-                                <div className="text-xl sm:text-2xl font-bold text-brand-berry dark:text-brand-mint" data-testid="text-payback">
+                                <div className="text-xl sm:text-2xl font-semibold text-brand-berry dark:text-brand-mint" data-testid="text-payback">
                                   {roiData.data.metrics.paybackMonths.toFixed(1)} mo
                                 </div>
                                 <div className="text-[10px] sm:text-xs text-brand-berry/70 dark:text-brand-mint/70 mt-0.5 sm:mt-1">
@@ -1979,7 +1979,7 @@ export default function FinanceCompassResults() {
                                   <BarChart3 className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" />
                                   <span className="truncate">NPV</span>
                                 </div>
-                                <div className="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300" data-testid="text-npv">
+                                <div className="text-xl sm:text-2xl font-semibold text-purple-700 dark:text-purple-300" data-testid="text-npv">
                                   £{(roiData.data.metrics.npvValue / 1000000).toFixed(2)}M
                                 </div>
                                 <div className="text-[10px] sm:text-xs text-purple-600/70 dark:text-purple-400/70 mt-0.5 sm:mt-1">
@@ -1993,7 +1993,7 @@ export default function FinanceCompassResults() {
                                   <Scale className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" />
                                   <span className="truncate">BCR</span>
                                 </div>
-                                <div className="text-xl sm:text-2xl font-bold text-amber-700 dark:text-amber-300" data-testid="text-bcr">
+                                <div className="text-xl sm:text-2xl font-semibold text-amber-700 dark:text-amber-300" data-testid="text-bcr">
                                   {roiData.data.metrics.benefitCostRatio.toFixed(2)}x
                                 </div>
                                 <div className="text-[10px] sm:text-xs text-amber-600/70 dark:text-amber-400/70 mt-0.5 sm:mt-1">
@@ -2141,7 +2141,7 @@ export default function FinanceCompassResults() {
                               {/* Summary Stats */}
                               <div className="grid grid-cols-3 gap-2 sm:gap-4" data-testid="workshop-summary-stats">
                                 <div className="flex flex-col items-center justify-center p-2 sm:p-4 bg-muted/30 rounded-lg">
-                                  <div className="flex items-center gap-1 sm:gap-2 text-lg sm:text-2xl font-bold text-foreground">
+                                  <div className="flex items-center gap-1 sm:gap-2 text-lg sm:text-2xl font-semibold text-foreground">
                                     <BookOpen className="h-4 w-4 sm:h-5 sm:w-5 text-brand-teal flex-shrink-0" />
                                     {workshopData.data.summary.totalWorkshops}
                                   </div>
@@ -2150,7 +2150,7 @@ export default function FinanceCompassResults() {
                                   </div>
                                 </div>
                                 <div className="flex flex-col items-center justify-center p-2 sm:p-4 bg-muted/30 rounded-lg">
-                                  <div className="flex items-center gap-1 sm:gap-2 text-lg sm:text-2xl font-bold text-foreground">
+                                  <div className="flex items-center gap-1 sm:gap-2 text-lg sm:text-2xl font-semibold text-foreground">
                                     <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-brand-teal flex-shrink-0" />
                                     {workshopData.data.summary.totalHours}h
                                   </div>
@@ -2159,7 +2159,7 @@ export default function FinanceCompassResults() {
                                   </div>
                                 </div>
                                 <div className="flex flex-col items-center justify-center p-2 sm:p-4 bg-muted/30 rounded-lg">
-                                  <div className="flex items-center gap-1 sm:gap-2 text-lg sm:text-2xl font-bold text-foreground">
+                                  <div className="flex items-center gap-1 sm:gap-2 text-lg sm:text-2xl font-semibold text-foreground">
                                     <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-brand-teal flex-shrink-0" />
                                     {workshopData.data.summary.durationWeeks}
                                   </div>
@@ -2191,7 +2191,7 @@ export default function FinanceCompassResults() {
                                     <div className="grid grid-cols-3 gap-2 sm:gap-4">
                                       <div className="p-2 sm:p-4 rounded-lg bg-muted/30 text-center">
                                         <div className="text-[10px] sm:text-xs text-muted-foreground uppercase tracking-wide mb-0.5 sm:mb-1">Your Cost</div>
-                                        <div className="text-lg sm:text-2xl font-bold text-foreground">
+                                        <div className="text-lg sm:text-2xl font-semibold text-foreground">
                                           {workshopData.data.financeCostBenchmark.companyFinanceCostPct !== null 
                                             ? `${workshopData.data.financeCostBenchmark.companyFinanceCostPct.toFixed(1)}%` 
                                             : 'N/A'}
@@ -2200,14 +2200,14 @@ export default function FinanceCompassResults() {
                                       </div>
                                       <div className="p-2 sm:p-4 rounded-lg bg-muted/30 text-center">
                                         <div className="text-[10px] sm:text-xs text-muted-foreground uppercase tracking-wide mb-0.5 sm:mb-1">Median</div>
-                                        <div className="text-lg sm:text-2xl font-bold text-brand-teal">
+                                        <div className="text-lg sm:text-2xl font-semibold text-brand-teal">
                                           {workshopData.data.financeCostBenchmark.industryMedianPct.toFixed(1)}%
                                         </div>
                                         <div className="text-[10px] sm:text-xs text-muted-foreground">of revenue</div>
                                       </div>
                                       <div className="p-2 sm:p-4 rounded-lg bg-muted/30 text-center">
                                         <div className="text-[10px] sm:text-xs text-muted-foreground uppercase tracking-wide mb-0.5 sm:mb-1">Top 25%</div>
-                                        <div className="text-lg sm:text-2xl font-bold text-green-600 dark:text-green-400">
+                                        <div className="text-lg sm:text-2xl font-semibold text-green-600 dark:text-green-400">
                                           {workshopData.data.financeCostBenchmark.topQuartilePct.toFixed(1)}%
                                         </div>
                                         <div className="text-[10px] sm:text-xs text-muted-foreground">of revenue</div>
@@ -2281,7 +2281,7 @@ export default function FinanceCompassResults() {
                                           <TrendingUp className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-green-600 dark:text-green-400 flex-shrink-0" />
                                           <span className="text-xs sm:text-sm font-medium text-green-700 dark:text-green-400">Potential Annual Savings</span>
                                         </div>
-                                        <div className="text-base sm:text-xl font-bold text-green-700 dark:text-green-400">
+                                        <div className="text-base sm:text-xl font-semibold text-green-700 dark:text-green-400">
                                           {workshopData.data.financeCostBenchmark.potentialSavingsRange.currency}
                                           {workshopData.data.financeCostBenchmark.potentialSavingsRange.min.toLocaleString()} - {workshopData.data.financeCostBenchmark.potentialSavingsRange.currency}
                                           {workshopData.data.financeCostBenchmark.potentialSavingsRange.max.toLocaleString()}
@@ -2693,7 +2693,7 @@ export default function FinanceCompassResults() {
                                 <AccordionItem key={phase.phase} value={`phase-${phase.phase}`} data-testid={`accordion-item-phase-${phase.phase}`}>
                                   <AccordionTrigger className="hover:no-underline py-2 sm:py-4">
                                     <div className="flex items-center gap-2 sm:gap-3">
-                                      <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-brand-ink to-brand-berry flex items-center justify-center text-white text-xs sm:text-sm font-bold flex-shrink-0">
+                                      <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-brand-ink to-brand-berry flex items-center justify-center text-white text-xs sm:text-sm font-semibold flex-shrink-0">
                                         {phase.phase}
                                       </div>
                                       <div className="text-left">
@@ -3116,7 +3116,7 @@ export default function FinanceCompassResults() {
                                 </CardHeader>
                                 <CardContent className="space-y-2 sm:space-y-3 px-3 sm:px-6">
                                   <div className="flex items-center justify-between">
-                                    <span className="text-xl sm:text-2xl font-bold text-brand-cyan">
+                                    <span className="text-xl sm:text-2xl font-semibold text-brand-cyan">
                                       {narrativesData.data.phase14Intelligence.respondentConfidence.overall}%
                                     </span>
                                     <Badge variant="outline" className={`${
@@ -3756,7 +3756,7 @@ export default function FinanceCompassResults() {
                                                 </span>
                                               </div>
                                               <div className="flex items-center gap-2">
-                                                <span className={`text-lg font-bold ${
+                                                <span className={`text-lg font-semibold ${
                                                   isModerate ? 'text-amber-600 dark:text-amber-400' : 'text-red-600 dark:text-red-400'
                                                 }`}>
                                                   {score}%
@@ -3826,7 +3826,7 @@ export default function FinanceCompassResults() {
                                               </span>
                                             </div>
                                             <div className="flex items-center gap-2">
-                                              <span className="text-lg font-bold text-green-600 dark:text-green-400">
+                                              <span className="text-lg font-semibold text-green-600 dark:text-green-400">
                                                 {score}%
                                               </span>
                                               <Badge variant="outline" className="border-0 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400">

@@ -68,7 +68,7 @@ export function KeyTakeawayGrid({ takeaways }: KeyTakeawayGridProps) {
         <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#7FB8A3] to-[#8E4F67] flex items-center justify-center shadow-lg">
           <Lightbulb className="w-5 h-5 text-white" />
         </div>
-        <h3 className="text-xl font-bold text-foreground">Key Takeaways</h3>
+        <h3 className="text-xl font-semibold text-foreground">Key Takeaways</h3>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -81,7 +81,7 @@ export function KeyTakeawayGrid({ takeaways }: KeyTakeawayGridProps) {
             <div className="absolute inset-0 bg-gradient-to-br from-[#7FB8A3]/20 to-[#8E4F67]/20 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <div className="relative p-5 bg-gradient-to-br from-[#252826]/5 via-[#8E4F67]/8 to-[#7FB8A3]/10 dark:from-[#252826]/20 dark:via-[#8E4F67]/15 dark:to-[#7FB8A3]/10 border border-[#7FB8A3]/20 rounded-xl h-full">
               <div className="flex items-start gap-3">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#7FB8A3] to-[#8E4F67] flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#7FB8A3] to-[#8E4F67] flex items-center justify-center text-white font-semibold text-sm shadow-lg">
                   {index + 1}
                 </div>
                 <p className="text-foreground text-sm leading-relaxed flex-1">{takeaway}</p>
@@ -126,7 +126,7 @@ export function RadialPillarsChart({ title, pillars }: RadialPillarsChartProps) 
         
         <div className="relative z-10">
           <div className="text-center mb-8">
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">{title}</h3>
+            <h3 className="text-2xl md:text-3xl font-semibold text-white mb-2">{title}</h3>
             <div className="w-20 h-1 bg-gradient-to-r from-[#7FB8A3] to-[#8E4F67] mx-auto rounded-full" />
           </div>
 
@@ -149,7 +149,7 @@ export function RadialPillarsChart({ title, pillars }: RadialPillarsChartProps) 
                         <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#7FB8A3] to-[#8E4F67] flex items-center justify-center mb-3 shadow-md">
                           <IconComponent className="w-6 h-6 text-white" />
                         </div>
-                        <div className="text-[#8E4F67] dark:text-[#7FB8A3] text-xs font-bold mb-1">Pillar {index + 1}</div>
+                        <div className="text-[#8E4F67] dark:text-[#7FB8A3] text-xs font-semibold mb-1">Pillar {index + 1}</div>
                         <h4 className="text-[#252826] dark:text-foreground font-semibold text-sm leading-tight">{pillar.title}</h4>
                         {pillar.description && (
                           <p className="text-muted-foreground text-xs mt-2 leading-relaxed">{pillar.description}</p>
@@ -197,7 +197,7 @@ export function SuccessFactorsDiagram({ title, factors }: SuccessFactorsDiagramP
         <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center">
           <CheckCircle2 className="w-5 h-5 text-[#7FB8A3]" />
         </div>
-        <h3 className="text-xl font-bold text-foreground">{title}</h3>
+        <h3 className="text-xl font-semibold text-foreground">{title}</h3>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -262,7 +262,7 @@ export function ImplementationTimeline({ phases }: ImplementationTimelineProps) 
         <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#7FB8A3] to-[#8E4F67] flex items-center justify-center">
           <Milestone className="w-5 h-5 text-white" />
         </div>
-        <h3 className="text-xl font-bold text-foreground">Implementation Framework</h3>
+        <h3 className="text-xl font-semibold text-foreground">Implementation Framework</h3>
       </div>
 
       <div className="relative">
@@ -317,7 +317,7 @@ export function FAQAccordion({ items }: FAQAccordionProps) {
         <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center">
           <HelpCircle className="w-5 h-5 text-[#7FB8A3]" />
         </div>
-        <h2 className="text-2xl font-bold text-foreground">Frequently Asked Questions</h2>
+        <h2 className="text-2xl font-semibold text-foreground">Frequently Asked Questions</h2>
       </div>
       
       <div className="border border-border rounded-xl overflow-hidden bg-card">
@@ -333,7 +333,7 @@ export function FAQAccordion({ items }: FAQAccordionProps) {
                 data-testid={`faq-trigger-${index}`}
               >
                 <div className="flex items-center gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[#7FB8A3]/10 flex items-center justify-center text-xs font-bold text-[#8E4F67] dark:text-[#7FB8A3]">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[#7FB8A3]/10 flex items-center justify-center text-xs font-semibold text-[#8E4F67] dark:text-[#7FB8A3]">
                     {index + 1}
                   </span>
                   <span>{item.question}</span>
@@ -370,7 +370,7 @@ export function StatHighlight({ stat, label, source, trend }: StatHighlightProps
           <div className="flex items-center justify-center gap-2 mb-2">
             <BarChart3 className="w-5 h-5 text-[#7FB8A3]/70" />
           </div>
-          <div className="text-4xl md:text-5xl font-bold text-[#7FB8A3] mb-2 tracking-tight">
+          <div className="text-4xl md:text-5xl font-semibold text-[#7FB8A3] mb-2 tracking-tight">
             {stat}
           </div>
           <div className="text-sm md:text-base text-white/90 font-medium mb-2">
@@ -524,7 +524,7 @@ export function TransformationTimeline({ title, subtitle, phases }: Transformati
               <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#7FB8A3] to-[#8E4F67] flex items-center justify-center shadow-lg">
                 <Milestone className="w-5 h-5 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-foreground">{title}</h3>
+              <h3 className="text-2xl font-semibold text-foreground">{title}</h3>
             </div>
           )}
           {subtitle && (
@@ -547,12 +547,12 @@ export function TransformationTimeline({ title, subtitle, phases }: Transformati
                 className="relative pl-16 md:pl-20"
               >
                 <div className={`absolute left-3 md:left-5 w-6 h-6 md:w-7 md:h-7 rounded-full bg-gradient-to-br ${colorScheme.bg} flex items-center justify-center shadow-lg ring-4 ${colorScheme.ring} ring-offset-2 ring-offset-background z-10`}>
-                  <span className="text-white text-xs font-bold">{index + 1}</span>
+                  <span className="text-white text-xs font-semibold">{index + 1}</span>
                 </div>
 
                 <div className={`p-5 rounded-xl border ${colorScheme.border}/30 ${colorScheme.light} hover:${colorScheme.light.replace('/10', '/20')} transition-colors`}>
                   <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
-                    <h4 className={`text-lg font-bold ${colorScheme.text}`}>
+                    <h4 className={`text-lg font-semibold ${colorScheme.text}`}>
                       {phase.title}
                     </h4>
                     <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-background/80 border border-border">
@@ -579,7 +579,7 @@ export function TransformationTimeline({ title, subtitle, phases }: Transformati
                           className="flex items-start gap-3 p-3 rounded-lg bg-background/40 border border-border/30 hover:bg-background/60 transition-colors"
                         >
                           <div className="flex-shrink-0 w-8 h-8 rounded-md bg-gradient-to-br from-[#7FB8A3]/20 to-[#8E4F67]/20 flex items-center justify-center border border-[#7FB8A3]/30">
-                            <span className="text-xs font-bold text-[#8E4F67] dark:text-[#7FB8A3]">
+                            <span className="text-xs font-semibold text-[#8E4F67] dark:text-[#7FB8A3]">
                               {String.fromCharCode(65 + subIndex)}
                             </span>
                           </div>
@@ -653,10 +653,10 @@ export function HorizonTimeline({ horizons }: HorizonTimelineProps) {
               
               <div className="flex items-center gap-3 mb-4">
                 <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${colors.bg} flex items-center justify-center shadow-lg`}>
-                  <span className="text-white text-xl font-bold">H{horizon.number}</span>
+                  <span className="text-white text-xl font-semibold">H{horizon.number}</span>
                 </div>
                 <div>
-                  <h4 className="font-bold text-foreground">{horizon.title}</h4>
+                  <h4 className="font-semibold text-foreground">{horizon.title}</h4>
                   <div className="flex items-center gap-1 text-xs text-muted-foreground">
                     <Clock className="w-3 h-3" />
                     <span>{horizon.timeframe}</span>
@@ -679,7 +679,7 @@ export function HorizonTimeline({ horizons }: HorizonTimelineProps) {
                       className="flex items-center gap-2 p-2 rounded-lg bg-background/40 border border-border/30"
                     >
                       <div className="w-6 h-6 rounded-md bg-[#7FB8A3]/10 flex items-center justify-center border border-[#7FB8A3]/20">
-                        <span className="text-xs font-bold text-[#8E4F67] dark:text-[#7FB8A3]">
+                        <span className="text-xs font-semibold text-[#8E4F67] dark:text-[#7FB8A3]">
                           {phaseIndex + 1}{String.fromCharCode(65 + phaseIndex)}
                         </span>
                       </div>
@@ -705,7 +705,7 @@ interface SectionHeadingProps {
 }
 
 export function SectionHeading({ level, children }: SectionHeadingProps) {
-  const baseClasses = "flex items-center gap-3 font-bold";
+  const baseClasses = "flex items-center gap-3 font-semibold";
   
   if (level === 2) {
     return (
@@ -991,7 +991,7 @@ export function ResourceDownload({ slug, label, description }: { slug: string; l
             <div className="text-xs font-semibold uppercase tracking-wider text-[#8E4F67] dark:text-[#7FB8A3] mb-1">
               Downloadable Template
             </div>
-            <h4 className="font-bold text-[#F6F3EE] text-lg leading-tight">{label || slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</h4>
+            <h4 className="font-semibold text-[#F6F3EE] text-lg leading-tight">{label || slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</h4>
             {description && <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{description}</p>}
           </div>
           <div className="flex flex-col sm:flex-row gap-2">
@@ -1181,7 +1181,7 @@ export function ReferencesSection({ references }: ReferencesSectionProps) {
                 <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
               </svg>
             </div>
-            <h3 className="text-xl font-bold text-white">Sources and References</h3>
+            <h3 className="text-xl font-semibold text-white">Sources and References</h3>
           </div>
           
           <ul className="space-y-3">
@@ -1194,7 +1194,7 @@ export function ReferencesSection({ references }: ReferencesSectionProps) {
                   data-testid={`reference-item-${index}`}
                 >
                   <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-br from-[#7FB8A3] to-[#8E4F67] flex items-center justify-center mt-0.5 shadow-md">
-                    <span className="text-xs font-bold text-white">{index + 1}</span>
+                    <span className="text-xs font-semibold text-white">{index + 1}</span>
                   </div>
                   <div className="flex-1">
                     <span className="text-sm text-white/90">{displayText}</span>

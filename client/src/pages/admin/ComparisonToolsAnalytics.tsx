@@ -162,7 +162,7 @@ export default function ComparisonToolsAnalytics() {
       <div className="space-y-6" data-testid="comparison-tools-analytics">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold" data-testid="page-title">
+            <h1 className="text-2xl font-semibold" data-testid="page-title">
               Comparison Tools Analytics
             </h1>
             <p className="text-muted-foreground text-sm">
@@ -249,7 +249,7 @@ export default function ComparisonToolsAnalytics() {
                   <Users className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{formatNumber(stats.summary.totalSessions)}</div>
+                  <div className="text-2xl font-semibold">{formatNumber(stats.summary.totalSessions)}</div>
                 </CardContent>
               </Card>
 
@@ -259,7 +259,7 @@ export default function ComparisonToolsAnalytics() {
                   <Activity className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{formatNumber(stats.summary.totalEvents)}</div>
+                  <div className="text-2xl font-semibold">{formatNumber(stats.summary.totalEvents)}</div>
                 </CardContent>
               </Card>
 
@@ -269,7 +269,7 @@ export default function ComparisonToolsAnalytics() {
                   <Target className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{formatNumber(stats.summary.totalCompletions)}</div>
+                  <div className="text-2xl font-semibold">{formatNumber(stats.summary.totalCompletions)}</div>
                 </CardContent>
               </Card>
 
@@ -279,7 +279,7 @@ export default function ComparisonToolsAnalytics() {
                   <TrendingUp className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{stats.summary.avgCompletionRate}%</div>
+                  <div className="text-2xl font-semibold">{stats.summary.avgCompletionRate}%</div>
                 </CardContent>
               </Card>
 
@@ -289,7 +289,7 @@ export default function ComparisonToolsAnalytics() {
                   <Bot className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent className="space-y-2">
-                  <div className="text-2xl font-bold">{stats.botTraffic.botLikeSessions || stats.botTraffic.uniqueBotSessions}</div>
+                  <div className="text-2xl font-semibold">{stats.botTraffic.botLikeSessions || stats.botTraffic.uniqueBotSessions}</div>
                   <div className="text-xs text-muted-foreground space-y-1">
                     <div>{stats.botTraffic.botSessionPercentage}% of sessions</div>
                     <div>{stats.botTraffic.totalBotEvents} events excluded</div>
@@ -310,23 +310,23 @@ export default function ComparisonToolsAnalytics() {
               <CardContent>
                 <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
                   <div className="text-center p-3 rounded-lg bg-muted/30">
-                    <div className="text-2xl font-bold">{formatNumber(stats.summary.sessionsStarted ?? 0)}</div>
+                    <div className="text-2xl font-semibold">{formatNumber(stats.summary.sessionsStarted ?? 0)}</div>
                     <div className="text-xs text-muted-foreground">Started</div>
                   </div>
                   <div className="text-center p-3 rounded-lg bg-muted/30">
-                    <div className="text-2xl font-bold">{formatNumber(stats.summary.sessionsCompleted ?? 0)}</div>
+                    <div className="text-2xl font-semibold">{formatNumber(stats.summary.sessionsCompleted ?? 0)}</div>
                     <div className="text-xs text-muted-foreground">Completed</div>
                   </div>
                   <div className="text-center p-3 rounded-lg bg-muted/30">
-                    <div className="text-2xl font-bold">{formatNumber(stats.summary.sessionsExported ?? 0)}</div>
+                    <div className="text-2xl font-semibold">{formatNumber(stats.summary.sessionsExported ?? 0)}</div>
                     <div className="text-xs text-muted-foreground">Exported</div>
                   </div>
                   <div className="text-center p-3 rounded-lg bg-green-500/10" style={{ borderLeft: "3px solid #7FB8A3" }}>
-                    <div className="text-2xl font-bold text-green-600">{stats.summary.startedCompletionRate ?? 0}%</div>
+                    <div className="text-2xl font-semibold text-green-600">{stats.summary.startedCompletionRate ?? 0}%</div>
                     <div className="text-xs text-muted-foreground">Started → Complete</div>
                   </div>
                   <div className="text-center p-3 rounded-lg bg-[#7FB8A3]/100/10" style={{ borderLeft: "3px solid #3b82f6" }}>
-                    <div className="text-2xl font-bold text-[#8E4F67]">{stats.summary.exportRate ?? 0}%</div>
+                    <div className="text-2xl font-semibold text-[#8E4F67]">{stats.summary.exportRate ?? 0}%</div>
                     <div className="text-xs text-muted-foreground">Complete → Export</div>
                   </div>
                 </div>
@@ -412,19 +412,19 @@ export default function ComparisonToolsAnalytics() {
                     >
                       <div className="grid grid-cols-3 gap-4">
                         <div>
-                          <div className="text-3xl font-bold" style={{ color: CATEGORY_COLORS[category] }}>
+                          <div className="text-3xl font-semibold" style={{ color: CATEGORY_COLORS[category] }}>
                             {formatNumber(stats.summary.totalSessions)}
                           </div>
                           <div className="text-sm text-muted-foreground">Sessions</div>
                         </div>
                         <div>
-                          <div className="text-3xl font-bold" style={{ color: CATEGORY_COLORS[category] }}>
+                          <div className="text-3xl font-semibold" style={{ color: CATEGORY_COLORS[category] }}>
                             {formatNumber(stats.summary.totalCompletions)}
                           </div>
                           <div className="text-sm text-muted-foreground">Completions</div>
                         </div>
                         <div>
-                          <div className="text-3xl font-bold" style={{ color: CATEGORY_COLORS[category] }}>
+                          <div className="text-3xl font-semibold" style={{ color: CATEGORY_COLORS[category] }}>
                             {stats.summary.avgCompletionRate}%
                           </div>
                           <div className="text-sm text-muted-foreground">Completion Rate</div>
@@ -598,7 +598,7 @@ export default function ComparisonToolsAnalytics() {
                         style={{ backgroundColor: FUNNEL_COLORS[idx] + "20", borderLeft: `4px solid ${FUNNEL_COLORS[idx]}` }}
                       >
                         <div className="text-sm font-medium text-muted-foreground">{step.step}</div>
-                        <div className="text-2xl font-bold mt-1">{step.sessions}</div>
+                        <div className="text-2xl font-semibold mt-1">{step.sessions}</div>
                         <div className="text-xs text-muted-foreground mt-1">
                           {step.conversionRate}% of total
                         </div>

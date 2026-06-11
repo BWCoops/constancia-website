@@ -115,22 +115,22 @@ function ScrollToTop() {
 /**
  * FinanceCompassEntry — smart gateway for /finance-compass.
  *
- * The product gates everything behind an email-verified session
- * (lead-capture + OTP). Verifying happens on the FinanceCompassLanding
- * page; once verified, the assessment surface at
+ * The product gates everything behind an email-verified session.
+ * Verifying happens on the FinanceCompassLanding page; once
+ * verified, the assessment surface at
  * /finance-compass/start/:tier becomes reachable.
  *
- * Previous build of this gateway hard-routed every visitor to /start,
- * which trapped unverified users in an infinite loop because /start
- * immediately bounces them back here with a "Verification Required"
- * toast. We now check the session first:
- *  - while loading: branded loader, no flash of marketing content.
- *  - if verified: hop straight to /start (replace: true so back
- *    doesn't trap on the loader).
- *  - otherwise: render the verification landing so the user can
- *    sign in.
+ * Implementation:
+ * - The Suspense fallback IS the branded loader, so we render
+ *   exactly one loader instance from first paint until the
+ *   Landing chunk arrives. No mount → unmount → re-mount cycle,
+ *   no perceived flicker.
+ * - Session check + redirect-if-verified live inside the inner
+ *   FinanceCompassEntryInner component, which is gated by both
+ *   the chunk being downloaded and the query state. Verified
+ *   users see the loader while navigate() fires.
  */
-function FinanceCompassEntry() {
+function FinanceCompassEntryInner() {
   const [, navigate] = useLocation();
   const { data: sessionData, isLoading } = useQuery<{ verified: boolean }>({
     queryKey: ["/api/finance-compass/public/session"],
@@ -139,28 +139,25 @@ function FinanceCompassEntry() {
     refetchOnMount: false,
   });
 
-  // Warm the marketing-landing chunk in parallel with the session
-  // fetch. Without this prefetch, an unverified visitor sees the
-  // entry loader -> Suspense fallback (a second mount of the same
-  // loader) -> Landing in three discrete paint frames, which reads
-  // as a flicker. Kicking the import here means the chunk arrives
-  // alongside the session response so the Landing mounts in one go.
-  useEffect(() => {
-    void import("@/pages/FinanceCompassLanding");
-  }, []);
-
   useEffect(() => {
     if (!isLoading && sessionData?.verified) {
       navigate("/finance-compass/start/pre_assessment", { replace: true });
     }
   }, [isLoading, sessionData, navigate]);
 
+  // While the session is in flight, or once we know the user is
+  // verified, stay on the same loader the Suspense fallback rendered.
+  // Verified users see it for the single frame the navigation needs.
   if (isLoading || sessionData?.verified) {
     return <FinanceCompassLoading />;
   }
+  return <FinanceCompassLanding />;
+}
+
+function FinanceCompassEntry() {
   return (
     <Suspense fallback={<FinanceCompassLoading />}>
-      <FinanceCompassLanding />
+      <FinanceCompassEntryInner />
     </Suspense>
   );
 }

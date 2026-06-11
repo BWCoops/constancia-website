@@ -274,7 +274,7 @@ function ContentQualityContent() {
                 <Card>
                   <CardContent className="pt-4">
                     <div className="text-xs text-muted-foreground">Overall grade</div>
-                    <div className={`mt-1 inline-flex items-center justify-center h-12 w-12 rounded-lg text-2xl font-bold ${GRADE_COLOR[report.overallGrade]}`}>
+                    <div className={`mt-1 inline-flex items-center justify-center h-12 w-12 rounded-lg text-2xl font-semibold ${GRADE_COLOR[report.overallGrade]}`}>
                       {report.overallGrade}
                     </div>
                   </CardContent>

@@ -414,14 +414,14 @@ function BenefitsSummaryCard({
       <CardContent className="py-6">
         <div className="grid sm:grid-cols-3 gap-6">
           <div className="text-center">
-            <div className="text-3xl font-bold mb-1">
+            <div className="text-3xl font-semibold mb-1">
               {Math.round(multiplier * 100)}%
             </div>
             <div className="text-sm text-white/70">Benefit Potential</div>
             <div className="text-xs text-brand-mint mt-1">{label}</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold mb-1">
+            <div className="text-3xl font-semibold mb-1">
               {displayTimeline}
             </div>
             <div className="text-sm text-white/70">Value Realisation</div>
@@ -430,7 +430,7 @@ function BenefitsSummaryCard({
             </div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold mb-1">6</div>
+            <div className="text-3xl font-semibold mb-1">6</div>
             <div className="text-sm text-white/70">Benefit Categories</div>
             <div className="text-xs text-brand-mint mt-1">Across all dimensions</div>
           </div>

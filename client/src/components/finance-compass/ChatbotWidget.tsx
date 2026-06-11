@@ -274,7 +274,7 @@ function renderMarkdown(text: string): JSX.Element[] {
     if (trimmedLine.startsWith('## ')) {
       flushList();
       elements.push(
-        <h3 key={`h2-${lineIdx}`} className="flex items-center gap-2 font-bold text-base mt-4 mb-2 text-foreground">
+        <h3 key={`h2-${lineIdx}`} className="flex items-center gap-2 font-semibold text-base mt-4 mb-2 text-foreground">
           <span className="h-1.5 w-5 bg-gradient-to-r from-brand-ink to-brand-berry rounded-full" />
           {parseInlineFormatting(trimmedLine.slice(3), `h2-${lineIdx}`)}
         </h3>

@@ -365,7 +365,7 @@ function ResourcesContent() {
             {isLoading ? (
               <Skeleton className="h-8 w-16" />
             ) : (
-              <div className="text-2xl font-bold" data-testid="text-total-resources">
+              <div className="text-2xl font-semibold" data-testid="text-total-resources">
                 {resources?.length ?? 0}
               </div>
             )}
@@ -381,7 +381,7 @@ function ResourcesContent() {
             {isLoading ? (
               <Skeleton className="h-8 w-16" />
             ) : (
-              <div className="text-2xl font-bold" data-testid="text-total-downloads">
+              <div className="text-2xl font-semibold" data-testid="text-total-downloads">
                 {totalDownloads.toLocaleString()}
               </div>
             )}
@@ -397,7 +397,7 @@ function ResourcesContent() {
             {isLoading ? (
               <Skeleton className="h-8 w-16" />
             ) : (
-              <div className="text-2xl font-bold" data-testid="text-featured-count">
+              <div className="text-2xl font-semibold" data-testid="text-featured-count">
                 {resources?.filter(r => r.featured).length ?? 0}
               </div>
             )}
@@ -413,7 +413,7 @@ function ResourcesContent() {
             {isLoading ? (
               <Skeleton className="h-8 w-16" />
             ) : (
-              <div className="text-2xl font-bold" data-testid="text-categories-count">
+              <div className="text-2xl font-semibold" data-testid="text-categories-count">
                 {new Set(resources?.map(r => r.category)).size}
               </div>
             )}

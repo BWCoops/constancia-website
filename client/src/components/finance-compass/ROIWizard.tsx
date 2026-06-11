@@ -629,7 +629,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
               <Calculator className="h-6 w-6 text-white" />
             </div>
           </div>
-          <h2 className="text-2xl font-bold text-brand-cream">ROI Analysis Dashboard</h2>
+          <h2 className="text-2xl font-semibold text-brand-cream">ROI Analysis Dashboard</h2>
           <p className="text-muted-foreground max-w-lg mx-auto">
             Your transformation business case summary with key financial metrics and projections
           </p>
@@ -677,7 +677,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                       <Info className="h-3 w-3 ml-auto opacity-60" />
                     </div>
                     <motion.div 
-                      className="text-2xl font-bold"
+                      className="text-2xl font-semibold"
                       data-testid="text-dashboard-roi"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
@@ -713,7 +713,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                       <Info className="h-3 w-3 ml-auto opacity-40" />
                     </div>
                     <motion.div 
-                      className="text-2xl font-bold text-brand-cream"
+                      className="text-2xl font-semibold text-brand-cream"
                       data-testid="text-dashboard-payback"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
@@ -749,7 +749,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                       <Info className="h-3 w-3 ml-auto opacity-40" />
                     </div>
                     <motion.div 
-                      className="text-2xl font-bold text-brand-cream"
+                      className="text-2xl font-semibold text-brand-cream"
                       data-testid="text-dashboard-npv"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
@@ -782,7 +782,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                       <Info className="h-3 w-3 ml-auto opacity-40" />
                     </div>
                     <motion.div 
-                      className="text-2xl font-bold text-brand-cream"
+                      className="text-2xl font-semibold text-brand-cream"
                       data-testid="text-dashboard-bcr"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
@@ -818,7 +818,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                       <Info className="h-3 w-3 ml-auto opacity-40" />
                     </div>
                     <motion.div 
-                      className="text-2xl font-bold text-brand-cream"
+                      className="text-2xl font-semibold text-brand-cream"
                       data-testid="text-dashboard-tco"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
@@ -860,7 +860,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                     <span className="text-sm font-medium">ROI Performance</span>
                     <roiStatus.icon className={`h-4 w-4 ${roiStatus.color}`} />
                   </div>
-                  <div className={`text-lg font-bold ${roiStatus.color}`}>{roiStatus.label}</div>
+                  <div className={`text-lg font-semibold ${roiStatus.color}`}>{roiStatus.label}</div>
                   <div className="text-xs text-muted-foreground mt-1">
                     Best Practice: 200%+ | Average: 150% | Typical: 50%+
                   </div>
@@ -872,7 +872,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                     <span className="text-sm font-medium">Payback Speed</span>
                     <paybackStatus.icon className={`h-4 w-4 ${paybackStatus.color}`} />
                   </div>
-                  <div className={`text-lg font-bold ${paybackStatus.color}`}>{paybackStatus.label}</div>
+                  <div className={`text-lg font-semibold ${paybackStatus.color}`}>{paybackStatus.label}</div>
                   <div className="text-xs text-muted-foreground mt-1">
                     Best: &lt;12mo | Good: 12-18mo | Typical: 18-24mo
                   </div>
@@ -884,7 +884,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                     <span className="text-sm font-medium">Benefit-Cost Ratio</span>
                     <bcrStatus.icon className={`h-4 w-4 ${bcrStatus.color}`} />
                   </div>
-                  <div className={`text-lg font-bold ${bcrStatus.color}`}>{bcrStatus.label}</div>
+                  <div className={`text-lg font-semibold ${bcrStatus.color}`}>{bcrStatus.label}</div>
                   <div className="text-xs text-muted-foreground mt-1">
                     Best: 2.0x+ | Good: 1.5x+ | Acceptable: 1.0x+
                   </div>
@@ -1016,7 +1016,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                 </div>
                 <div className="flex justify-between pt-2 border-t">
                   <span className="text-muted-foreground">Net Gain</span>
-                  <span className="font-bold text-brand-mint">{formatCurrency(scenarios.delta.netValueDelta, currency)}</span>
+                  <span className="font-semibold text-brand-mint">{formatCurrency(scenarios.delta.netValueDelta, currency)}</span>
                 </div>
               </CardContent>
             </Card>
@@ -1972,7 +1972,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                         <Percent className="h-3 w-3" />
                         ROI
                       </div>
-                      <div className="text-base font-bold text-green-700 dark:text-green-300" data-testid="text-preview-roi">
+                      <div className="text-base font-semibold text-green-700 dark:text-green-300" data-testid="text-preview-roi">
                         {formatPercent(liveMetrics.roiPercent)}
                       </div>
                     </div>
@@ -1981,7 +1981,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                         <Clock className="h-3 w-3" />
                         Payback
                       </div>
-                      <div className="text-base font-bold text-brand-berry dark:text-brand-mint" data-testid="text-preview-payback">
+                      <div className="text-base font-semibold text-brand-berry dark:text-brand-mint" data-testid="text-preview-payback">
                         {formatPayback(liveMetrics.paybackMonths)}
                       </div>
                     </div>
@@ -1990,7 +1990,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                         <TrendingUp className="h-3 w-3" />
                         NPV
                       </div>
-                      <div className="text-base font-bold text-purple-700 dark:text-purple-300" data-testid="text-preview-npv">
+                      <div className="text-base font-semibold text-purple-700 dark:text-purple-300" data-testid="text-preview-npv">
                         {formatCurrency(liveMetrics.npvValue, currency)}
                       </div>
                     </div>
@@ -1999,7 +1999,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                         <Scale className="h-3 w-3" />
                         BCR
                       </div>
-                      <div className="text-base font-bold text-amber-700 dark:text-amber-300" data-testid="text-preview-bcr">
+                      <div className="text-base font-semibold text-amber-700 dark:text-amber-300" data-testid="text-preview-bcr">
                         {safeToFixed(liveMetrics.benefitCostRatio, 2)}x
                       </div>
                     </div>
@@ -2091,13 +2091,13 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                           <div className="grid grid-cols-2 gap-2 text-xs">
                             <div className="flex justify-between">
                               <span className="text-muted-foreground">Net Gain</span>
-                              <span className="font-bold text-brand-mint" data-testid="text-delta-gain">
+                              <span className="font-semibold text-brand-mint" data-testid="text-delta-gain">
                                 {formatCurrency(comparison.delta.netValueDelta, currency)}
                               </span>
                             </div>
                             <div className="flex justify-between">
                               <span className="text-muted-foreground">NPV Uplift</span>
-                              <span className="font-bold text-brand-mint" data-testid="text-delta-npv">
+                              <span className="font-semibold text-brand-mint" data-testid="text-delta-npv">
                                 {formatCurrency(comparison.delta.npvDelta, currency)}
                               </span>
                             </div>
@@ -2207,7 +2207,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                         <div className="grid grid-cols-3 gap-2 pt-2 border-t">
                           <div className="p-2 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-center">
                             <div className="text-xs text-red-600 dark:text-red-400 font-medium mb-1">{sensitivity.worstCase.label}</div>
-                            <div className="text-sm font-bold text-red-700 dark:text-red-300" data-testid="text-worst-roi">
+                            <div className="text-sm font-semibold text-red-700 dark:text-red-300" data-testid="text-worst-roi">
                               {formatPercent(sensitivity.worstCase.roiPercent)}
                             </div>
                             <div className="text-xs text-muted-foreground">
@@ -2216,7 +2216,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                           </div>
                           <div className="p-2 rounded-lg bg-brand-berry/10 border border-brand-berry/30 text-center">
                             <div className="text-xs text-brand-berry font-medium mb-1">{sensitivity.midCase.label}</div>
-                            <div className="text-sm font-bold text-brand-mint" data-testid="text-mid-roi">
+                            <div className="text-sm font-semibold text-brand-mint" data-testid="text-mid-roi">
                               {formatPercent(sensitivity.midCase.roiPercent)}
                             </div>
                             <div className="text-xs text-muted-foreground">
@@ -2225,7 +2225,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                           </div>
                           <div className="p-2 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 text-center">
                             <div className="text-xs text-green-600 dark:text-green-400 font-medium mb-1">{sensitivity.bestCase.label}</div>
-                            <div className="text-sm font-bold text-green-700 dark:text-green-300" data-testid="text-best-roi">
+                            <div className="text-sm font-semibold text-green-700 dark:text-green-300" data-testid="text-best-roi">
                               {formatPercent(sensitivity.bestCase.roiPercent)}
                             </div>
                             <div className="text-xs text-muted-foreground">

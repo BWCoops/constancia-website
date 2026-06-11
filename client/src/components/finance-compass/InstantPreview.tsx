@@ -1011,7 +1011,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                 >
                   <Sparkles className="h-7 w-7 sm:h-8 sm:w-8 text-white" />
                 </motion.div>
-                <h3 className="text-lg sm:text-xl font-bold text-brand-cream mb-1">Finance Readiness Score</h3>
+                <h3 className="text-lg sm:text-xl font-semibold text-brand-cream mb-1">Finance Readiness Score</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground">Based on 10 key dimensions (1-5 scale)</p>
               </div>
 
@@ -1021,7 +1021,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
-                    className="text-4xl sm:text-5xl font-bold text-brand-cream"
+                    className="text-4xl sm:text-5xl font-semibold text-brand-cream"
                   >
                     {score}
                   </motion.span>
@@ -1034,7 +1034,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                   transition={{ delay: 0.5 }}
                   className="text-center mt-2"
                 >
-                  <span className={cn("font-bold text-base sm:text-lg", maturity.color)}>
+                  <span className={cn("font-semibold text-base sm:text-lg", maturity.color)}>
                     {maturity.label}
                   </span>
                   <p className="text-xs text-muted-foreground mt-1">{maturity.description}</p>
@@ -1195,7 +1195,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                 >
                   <div className="flex items-center gap-2 mb-2">
                     <AlertTriangle className="h-4 w-4 text-red-500" />
-                    <span className="font-bold text-sm text-red-700">
+                    <span className="font-semibold text-sm text-red-700">
                       {dimensionScores.filter(d => d.rawScore <= 2).length} Critical Gap{dimensionScores.filter(d => d.rawScore <= 2).length > 1 ? 's' : ''} Identified
                     </span>
                   </div>
@@ -1225,7 +1225,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                   <p className="text-xs text-amber-800">
                     <strong>Estimated Impact:</strong> Finance teams at your maturity level typically spend 
                     15+ additional hours per month on manual processes. Addressing your gaps could 
-                    save <span className="font-bold">{currencySymbol}{getEstimatedSavings(qualificationData.companySize, currency).toLocaleString()}</span> annually.
+                    save <span className="font-semibold">{currencySymbol}{getEstimatedSavings(qualificationData.companySize, currency).toLocaleString()}</span> annually.
                   </p>
                 </motion.div>
               )}
@@ -1267,7 +1267,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                 <div className="space-y-2">
                   {recommendations.map((rec, idx) => (
                     <div key={idx} className="flex items-start gap-2">
-                      <span className="flex-shrink-0 w-4 h-4 rounded-full bg-brand-berry text-white text-[10px] flex items-center justify-center font-bold">{idx + 1}</span>
+                      <span className="flex-shrink-0 w-4 h-4 rounded-full bg-brand-berry text-white text-[10px] flex items-center justify-center font-semibold">{idx + 1}</span>
                       <div>
                         <p className="text-xs font-medium text-brand-cream">{rec.title}</p>
                         <p className="text-[10px] text-muted-foreground">{rec.description}</p>
@@ -1579,7 +1579,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                         />
                       )}
                       {/* Mobile-optimized progress counter */}
-                      <div className="bg-brand-ink text-white px-3 py-1.5 rounded-full text-xs font-bold">
+                      <div className="bg-brand-ink text-white px-3 py-1.5 rounded-full text-xs font-semibold">
                         {currentOverallQuestion + 1} of {totalQuestions}
                       </div>
                     </div>
@@ -1690,7 +1690,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
               </div>
               {/* Mobile-optimized progress counter */}
               <div className="flex items-center gap-2">
-                <div className="bg-brand-ink text-white px-3 py-1.5 rounded-full text-xs font-bold">
+                <div className="bg-brand-ink text-white px-3 py-1.5 rounded-full text-xs font-semibold">
                   {currentOverallQuestion + 1} of {totalQuestions}
                 </div>
               </div>
@@ -1747,7 +1747,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                       <div className="flex items-center justify-between gap-2">
                         <div className="flex items-center gap-2 min-w-0">
                           <span className={cn(
-                            "flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold",
+                            "flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-semibold",
                             option.value >= 4 ? "bg-emerald-100 text-emerald-700" :
                             option.value >= 3 ? "bg-brand-mint/10 text-brand-berry" :
                             option.value >= 2 ? "bg-amber-100 text-amber-700" :

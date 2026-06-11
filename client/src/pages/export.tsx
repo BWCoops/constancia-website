@@ -115,7 +115,7 @@ export default function ExportPage() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 mb-6">
             <Package className="w-8 h-8 text-primary" aria-hidden="true" />
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <h1 className="text-3xl md:text-4xl font-semibold text-foreground mb-4">
             WordPress Export
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">

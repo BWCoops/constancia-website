@@ -447,7 +447,7 @@ export default function FinanceCompassWeightings() {
       </div>
       <div className="flex items-center justify-between gap-4 flex-wrap">
         <div>
-          <h1 className="text-2xl font-bold flex items-center gap-2" data-testid="heading-question-config">
+          <h1 className="text-2xl font-semibold flex items-center gap-2" data-testid="heading-question-config">
             <Settings2 className="h-6 w-6" />
             Question Configuration
           </h1>
@@ -489,25 +489,25 @@ export default function FinanceCompassWeightings() {
       <div className="grid grid-cols-4 gap-4">
         <Card>
           <CardContent className="pt-4">
-            <div className="text-2xl font-bold" data-testid="stat-total-questions">{configData?.data?.totalQuestions || 0}</div>
+            <div className="text-2xl font-semibold" data-testid="stat-total-questions">{configData?.data?.totalQuestions || 0}</div>
             <p className="text-xs text-muted-foreground">Total Questions</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="pt-4">
-            <div className="text-2xl font-bold" data-testid="stat-configured">{configData?.data?.totalWeightings || 0}</div>
+            <div className="text-2xl font-semibold" data-testid="stat-configured">{configData?.data?.totalWeightings || 0}</div>
             <p className="text-xs text-muted-foreground">Configured Weightings</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="pt-4">
-            <div className="text-2xl font-bold" data-testid="stat-correlations">{configData?.data?.totalCorrelations || 0}</div>
+            <div className="text-2xl font-semibold" data-testid="stat-correlations">{configData?.data?.totalCorrelations || 0}</div>
             <p className="text-xs text-muted-foreground">Correlations</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="pt-4">
-            <div className="text-2xl font-bold" data-testid="stat-pending">{pendingChanges.size}</div>
+            <div className="text-2xl font-semibold" data-testid="stat-pending">{pendingChanges.size}</div>
             <p className="text-xs text-muted-foreground">Pending Changes</p>
           </CardContent>
         </Card>

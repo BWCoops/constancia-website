@@ -30,7 +30,7 @@ export default function PrivacyPolicyPage() {
                 <ArrowLeft className="w-4 h-4" />
                 Back to Home
               </Link>
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-4" data-testid="heading-privacy-policy">
+              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4" data-testid="heading-privacy-policy">
                 Privacy Policy
               </h1>
               <p className="text-lg text-white/80">
@@ -49,7 +49,7 @@ export default function PrivacyPolicyPage() {
               className="prose prose-lg max-w-none"
             >
               <section className="mb-12" data-testid="section-about-policy">
-                <h2 className="text-2xl font-bold text-foreground mb-4">About This Privacy Policy</h2>
+                <h2 className="text-2xl font-semibold text-foreground mb-4">About This Privacy Policy</h2>
                 <p className="text-muted-foreground mb-4">
                   The website https://constancia.com/ (the Site) is operated by Constancia Holdings Limited ("we", "us", "our"), a company incorporated in England and Wales under company number 17227112. Our registered office is at Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ, United Kingdom.
                 </p>
@@ -65,7 +65,7 @@ export default function PrivacyPolicyPage() {
               </section>
 
               <section className="mb-12" data-testid="section-contact">
-                <h2 className="text-2xl font-bold text-foreground mb-4">Contact Information</h2>
+                <h2 className="text-2xl font-semibold text-foreground mb-4">Contact Information</h2>
                 <p className="text-muted-foreground">
                   If you have any concerns or would like further information about our use of data or this policy in general, you can contact us at{" "}
                   <a 
@@ -79,21 +79,21 @@ export default function PrivacyPolicyPage() {
               </section>
 
               <section className="mb-12" data-testid="section-what-we-collect">
-                <h2 className="text-2xl font-bold text-foreground mb-4">What Information Do We Collect?</h2>
+                <h2 className="text-2xl font-semibold text-foreground mb-4">What Information Do We Collect?</h2>
                 <p className="text-muted-foreground">
                   We collect, store and use the types of personal data set out in the table at the end of this policy.
                 </p>
               </section>
 
               <section className="mb-12" data-testid="section-how-we-use">
-                <h2 className="text-2xl font-bold text-foreground mb-4">How Will We Use Your Personal Data?</h2>
+                <h2 className="text-2xl font-semibold text-foreground mb-4">How Will We Use Your Personal Data?</h2>
                 <p className="text-muted-foreground">
                   We will use your personal data for the purposes set out in the table at the end of this policy.
                 </p>
               </section>
 
               <section className="mb-12" data-testid="section-data-sharing">
-                <h2 className="text-2xl font-bold text-foreground mb-4">How Do We Share Your Personal Data?</h2>
+                <h2 className="text-2xl font-semibold text-foreground mb-4">How Do We Share Your Personal Data?</h2>
                 <p className="text-muted-foreground mb-4">
                   When we share personal data, we do so in accordance with Data Protection Law. We may share certain personal data, where necessary, with employees, contractors, consultants or advisers, to facilitate sales and for general commercial purposes.
                 </p>
@@ -103,14 +103,14 @@ export default function PrivacyPolicyPage() {
               </section>
 
               <section className="mb-12" data-testid="section-third-party-links">
-                <h2 className="text-2xl font-bold text-foreground mb-4">Third Party Links</h2>
+                <h2 className="text-2xl font-semibold text-foreground mb-4">Third Party Links</h2>
                 <p className="text-muted-foreground">
                   This Site may contain links to other websites over which we have no control. We are not responsible for and do not review or endorse the privacy policies or practices of other websites which you choose to access from this Site. We encourage you to review the privacy policies of those other websites, so you can understand how they collect, use and share your personal information.
                 </p>
               </section>
 
               <section className="mb-12" data-testid="section-your-rights">
-                <h2 className="text-2xl font-bold text-foreground mb-4">Your Rights</h2>
+                <h2 className="text-2xl font-semibold text-foreground mb-4">Your Rights</h2>
                 <p className="text-muted-foreground mb-4">
                   We respect your rights to privacy and will respond to requests for access or control over information about you in accordance with Data Protection Law. We may require you to verify your identity before we take any action.
                 </p>
@@ -154,7 +154,7 @@ export default function PrivacyPolicyPage() {
               </section>
 
               <section className="mb-12" data-testid="section-data-retention">
-                <h2 className="text-2xl font-bold text-foreground mb-4">Data Retention</h2>
+                <h2 className="text-2xl font-semibold text-foreground mb-4">Data Retention</h2>
                 <p className="text-muted-foreground mb-4">
                   Your personal data will only be kept for as long as necessary for our purposes. Specific retention periods are set out in the table at the end of this policy.
                 </p>
@@ -164,7 +164,7 @@ export default function PrivacyPolicyPage() {
               </section>
 
               <section className="mb-12" data-testid="section-data-principles">
-                <h2 className="text-2xl font-bold text-foreground mb-4">Data Protection Principles</h2>
+                <h2 className="text-2xl font-semibold text-foreground mb-4">Data Protection Principles</h2>
                 <p className="text-muted-foreground mb-4">
                   We process your personal data in accordance with the following principles:
                 </p>
@@ -185,7 +185,7 @@ export default function PrivacyPolicyPage() {
               </section>
 
               <section className="mb-12" data-testid="section-lawful-basis">
-                <h2 className="text-2xl font-bold text-foreground mb-4">What Is Our Lawful Basis for Processing?</h2>
+                <h2 className="text-2xl font-semibold text-foreground mb-4">What Is Our Lawful Basis for Processing?</h2>
                 <p className="text-muted-foreground mb-4">
                   We will only process personal data when we have a lawful basis for doing that processing. The table at the end of this policy sets out the lawful basis we rely on for each type of data we process.
                 </p>
@@ -203,7 +203,7 @@ export default function PrivacyPolicyPage() {
               </section>
 
               <section data-testid="section-data-table">
-                <h2 className="text-2xl font-bold text-foreground mb-6">Table of Personal Information We Use</h2>
+                <h2 className="text-2xl font-semibold text-foreground mb-6">Table of Personal Information We Use</h2>
                 <p className="text-muted-foreground mb-6">
                   The table below sets out detailed information about the types of personal information we collect, our purposes for processing, the basis for processing and the retention period for the personal data.
                 </p>

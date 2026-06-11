@@ -161,7 +161,7 @@ export default function FinanceCompassMethodology() {
                 Complete Transparency
               </Badge>
               
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6" data-testid="heading-methodology-title">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6" data-testid="heading-methodology-title">
                 Our Benchmarking{" "}
                 <span className="bg-gradient-to-r from-brand-deep-mint to-teal-400 bg-clip-text text-transparent">
                   Methodology
@@ -197,7 +197,7 @@ export default function FinanceCompassMethodology() {
               className="text-center mb-12"
               {...fadeInUp}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4" data-testid="heading-data-sources">
+              <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-4" data-testid="heading-data-sources">
                 Our Data Sources
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -263,7 +263,7 @@ export default function FinanceCompassMethodology() {
               className="text-center mb-12"
               {...fadeInUp}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4" data-testid="heading-scoring">
+              <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-4" data-testid="heading-scoring">
                 Scoring Methodology
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -356,7 +356,7 @@ export default function FinanceCompassMethodology() {
               className="text-center mb-12"
               {...fadeInUp}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4" data-testid="heading-maturity">
+              <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-4" data-testid="heading-maturity">
                 Maturity Framework
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -376,7 +376,7 @@ export default function FinanceCompassMethodology() {
                   <Card className="h-full text-center">
                     <CardHeader className="pb-2">
                       <div className={`w-12 h-12 rounded-full ${level.color} mx-auto mb-3 flex items-center justify-center`}>
-                        <span className="text-white font-bold text-xl">{level.level}</span>
+                        <span className="text-white font-semibold text-xl">{level.level}</span>
                       </div>
                       <CardTitle data-testid={`heading-level-${level.level}`}>{level.name}</CardTitle>
                       <Badge variant="outline" className="mt-2">{level.range}</Badge>
@@ -419,7 +419,7 @@ export default function FinanceCompassMethodology() {
               className="text-center mb-12"
               {...fadeInUp}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4" data-testid="heading-transparency">
+              <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-4" data-testid="heading-transparency">
                 Metric Transparency
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -542,7 +542,7 @@ export default function FinanceCompassMethodology() {
               className="text-center mb-12"
               {...fadeInUp}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4" data-testid="heading-dimensions">
+              <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-4" data-testid="heading-dimensions">
                 7 Assessment Dimensions
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -571,7 +571,7 @@ export default function FinanceCompassMethodology() {
                     <CardHeader className="pb-2">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-mint to-teal-500 flex items-center justify-center">
-                          <span className="text-white font-bold text-sm">{dimension.code}</span>
+                          <span className="text-white font-semibold text-sm">{dimension.code}</span>
                         </div>
                         <dimension.icon className="w-5 h-5 text-brand-berry" />
                       </div>
@@ -595,7 +595,7 @@ export default function FinanceCompassMethodology() {
               className="text-center mb-12"
               {...fadeInUp}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4" data-testid="heading-faq">
+              <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-4" data-testid="heading-faq">
                 Frequently Asked Questions
               </h2>
             </motion.div>
@@ -671,7 +671,7 @@ export default function FinanceCompassMethodology() {
               className="max-w-3xl mx-auto text-center"
               {...fadeInUp}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6" data-testid="heading-cta">
+              <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6" data-testid="heading-cta">
                 Ready to Benchmark Your Finance Function?
               </h2>
               <p className="text-lg text-slate-300 mb-8">

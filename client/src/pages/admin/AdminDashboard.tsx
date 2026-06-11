@@ -182,7 +182,7 @@ function StatsCard({
           <Skeleton className="h-8 w-20" />
         ) : (
           <div className="flex items-center gap-2">
-            <div className="text-2xl font-bold" data-testid={`text-stat-value-${title.toLowerCase().replace(/\s+/g, "-")}`}>
+            <div className="text-2xl font-semibold" data-testid={`text-stat-value-${title.toLowerCase().replace(/\s+/g, "-")}`}>
               {typeof value === "number" ? value.toLocaleString() : value}
             </div>
             {trend && trendValue && (
@@ -232,7 +232,7 @@ function MetricCard({
         ) : (
           <>
             <div className="flex items-center justify-between mb-2">
-              <span className="text-2xl font-bold">{value.toLocaleString()}</span>
+              <span className="text-2xl font-semibold">{value.toLocaleString()}</span>
               <span className="text-sm text-muted-foreground">of {total.toLocaleString()}</span>
             </div>
             <Progress value={percentage} className="h-2" />

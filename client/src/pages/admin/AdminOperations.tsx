@@ -338,7 +338,7 @@ export default function AdminOperations() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight" data-testid="heading-operations">
+            <h1 className="text-2xl font-semibold tracking-tight" data-testid="heading-operations">
               Operations
             </h1>
             <p className="text-muted-foreground">
@@ -414,7 +414,7 @@ export default function AdminOperations() {
                       <Clock className="h-4 w-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
-                      <div className="text-2xl font-bold" data-testid="text-uptime">
+                      <div className="text-2xl font-semibold" data-testid="text-uptime">
                         {formatUptime(health.uptime)}
                       </div>
                       <p className="text-xs text-muted-foreground">
@@ -429,7 +429,7 @@ export default function AdminOperations() {
                       <HardDrive className="h-4 w-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
-                      <div className="text-2xl font-bold" data-testid="text-memory">
+                      <div className="text-2xl font-semibold" data-testid="text-memory">
                         {health.checks.memory.percentage.toFixed(0)}%
                       </div>
                       <p className="text-xs text-muted-foreground">
@@ -447,7 +447,7 @@ export default function AdminOperations() {
                       <Cpu className="h-4 w-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
-                      <div className="text-2xl font-bold" data-testid="text-cpu">
+                      <div className="text-2xl font-semibold" data-testid="text-cpu">
                         {health.checks.cpu.loadAverage[0]?.toFixed(2) || "N/A"}
                       </div>
                       <p className="text-xs text-muted-foreground">
@@ -498,19 +498,19 @@ export default function AdminOperations() {
                       <div className="grid gap-4 md:grid-cols-3">
                         <div>
                           <p className="text-sm text-muted-foreground">Total Requests</p>
-                          <p className="text-2xl font-bold" data-testid="text-total-requests">
+                          <p className="text-2xl font-semibold" data-testid="text-total-requests">
                             {stats.totalRequests.toLocaleString()}
                           </p>
                         </div>
                         <div>
                           <p className="text-sm text-muted-foreground">Avg Response Time</p>
-                          <p className="text-2xl font-bold" data-testid="text-avg-response">
+                          <p className="text-2xl font-semibold" data-testid="text-avg-response">
                             {stats.avgResponseTime.toFixed(0)}ms
                           </p>
                         </div>
                         <div>
                           <p className="text-sm text-muted-foreground">Success Rate</p>
-                          <p className="text-2xl font-bold" data-testid="text-success-rate">
+                          <p className="text-2xl font-semibold" data-testid="text-success-rate">
                             {stats.successRate.toFixed(1)}%
                           </p>
                         </div>

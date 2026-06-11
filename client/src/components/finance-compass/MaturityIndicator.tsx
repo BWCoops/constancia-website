@@ -131,7 +131,7 @@ export function MaturityIndicator({
             </div>
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-1">
-                <h3 className="text-2xl font-bold">{maturity.label}</h3>
+                <h3 className="text-2xl font-semibold">{maturity.label}</h3>
                 <Badge 
                   variant="outline" 
                   className={`${maturity.bgColor} ${maturity.textColor} border-0`}
@@ -184,19 +184,19 @@ export function MaturityIndicator({
           <div className="grid grid-cols-3 gap-3 mb-4">
             <div className="p-3 rounded-lg bg-brand-ink/5 dark:bg-brand-ink/20 text-center">
               <div className="text-xs text-muted-foreground mb-1">Gap to Next</div>
-              <div className="text-lg font-bold text-brand-cream">
+              <div className="text-lg font-semibold text-brand-cream">
                 {maturityKey === 'ADVANCED' ? 'N/A' : `${Math.round(100 - progressValue)}%`}
               </div>
             </div>
             <div className="p-3 rounded-lg bg-brand-berry/5 dark:bg-brand-berry/20 text-center">
               <div className="text-xs text-muted-foreground mb-1">Percentile</div>
-              <div className="text-lg font-bold text-brand-berry">
+              <div className="text-lg font-semibold text-brand-berry">
                 {score >= 70 ? 'Top 15%' : score >= 50 ? 'Top 40%' : score >= 35 ? 'Top 60%' : 'Top 80%'}
               </div>
             </div>
             <div className="p-3 rounded-lg bg-brand-mint/10 dark:bg-brand-mint/20 text-center">
               <div className="text-xs text-muted-foreground mb-1">Dimensions</div>
-              <div className="text-lg font-bold text-brand-berry">
+              <div className="text-lg font-semibold text-brand-berry">
                 {hasDimensionData ? Object.keys(dimensionScores).length : 8}
               </div>
             </div>
@@ -256,7 +256,7 @@ export function MaturityIndicator({
                   return (
                     <div key={dim} className="text-center">
                       <div 
-                        className="text-sm font-bold"
+                        className="text-sm font-semibold"
                         style={{ color: dimColor }}
                       >
                         {Math.round(dimScore)}%

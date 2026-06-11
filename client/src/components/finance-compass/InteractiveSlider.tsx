@@ -216,7 +216,7 @@ export function InteractiveSlider({
             className="p-4 rounded-xl bg-gradient-to-r from-brand-ink/5 to-brand-berry/5 border border-brand-berry/20"
           >
             <div className="flex items-center gap-3">
-              <div className="flex items-center justify-center h-10 w-10 rounded-full bg-gradient-to-br from-brand-berry to-brand-mint text-white font-bold text-lg">
+              <div className="flex items-center justify-center h-10 w-10 rounded-full bg-gradient-to-br from-brand-berry to-brand-mint text-white font-semibold text-lg">
                 {value}
               </div>
               <div className="flex-1">
@@ -249,7 +249,7 @@ export function InteractiveSlider({
               data-testid={`slider-label-${labelValue}`}
             >
               <div className={cn(
-                "text-lg font-bold mb-1 transition-colors",
+                "text-lg font-semibold mb-1 transition-colors",
                 isActive ? "text-brand-deep-mint" : "text-foreground"
               )}>
                 {labelValue}

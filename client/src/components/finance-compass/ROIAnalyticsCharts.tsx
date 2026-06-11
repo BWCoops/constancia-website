@@ -211,7 +211,7 @@ export function ROIAnalyticsCharts({
                   ))}
                   <div className="pt-2 mt-2 border-t flex justify-between items-center">
                     <span className="text-sm font-medium">Total Annual Benefits</span>
-                    <span className="font-bold text-green-600">
+                    <span className="font-semibold text-green-600">
                       {formatCurrencyCompact(totalAnnualBenefits, currency)}
                     </span>
                   </div>

@@ -198,7 +198,7 @@ function BenchmarksContent() {
             <BarChart3 className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold" data-testid="count-assessment">{counts.assessment}</div>
+            <div className="text-2xl font-semibold" data-testid="count-assessment">{counts.assessment}</div>
             <p className="text-xs text-muted-foreground mt-1">Dimension scores</p>
           </CardContent>
         </Card>
@@ -208,7 +208,7 @@ function BenchmarksContent() {
             <TrendingUp className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold" data-testid="count-industry">{counts.industry}</div>
+            <div className="text-2xl font-semibold" data-testid="count-industry">{counts.industry}</div>
             <p className="text-xs text-muted-foreground mt-1">Finance KPIs</p>
           </CardContent>
         </Card>
@@ -218,7 +218,7 @@ function BenchmarksContent() {
             <Globe2 className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold" data-testid="count-macro">{counts.macro}</div>
+            <div className="text-2xl font-semibold" data-testid="count-macro">{counts.macro}</div>
             <p className="text-xs text-muted-foreground mt-1">Economic data</p>
           </CardContent>
         </Card>
@@ -228,7 +228,7 @@ function BenchmarksContent() {
             <Layers className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold" data-testid="count-sectors">{sectors.length}</div>
+            <div className="text-2xl font-semibold" data-testid="count-sectors">{sectors.length}</div>
             <p className="text-xs text-muted-foreground mt-1">Industries covered</p>
           </CardContent>
         </Card>

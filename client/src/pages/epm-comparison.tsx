@@ -2920,7 +2920,7 @@ function MobilePlatformCarousel({
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex items-center gap-2">
                           <Badge 
-                            className={`${getRankBadgeColor(rank)} text-xs font-bold px-2 py-0.5`}
+                            className={`${getRankBadgeColor(rank)} text-xs font-semibold px-2 py-0.5`}
                           >
                             #{rank}
                           </Badge>
@@ -2955,7 +2955,7 @@ function MobilePlatformCarousel({
                       <div className="mb-4">
                         <div className="flex items-center justify-between mb-1">
                           <span className="text-xs text-muted-foreground">Overall Score</span>
-                          <span className={`text-lg font-bold ${getScoreColor(displayScore)}`}>
+                          <span className={`text-lg font-semibold ${getScoreColor(displayScore)}`}>
                             {displayScore.toFixed(1)}
                           </span>
                         </div>
@@ -4294,7 +4294,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                               {category.icon && <category.icon className="w-4 h-4 text-brand-teal" />}
                               <span className="truncate">{category.name}</span>
                             </label>
-                            <span className="text-sm font-bold text-brand-cyan">{categoryWeights[category.id] || category.weight}%</span>
+                            <span className="text-sm font-semibold text-brand-cyan">{categoryWeights[category.id] || category.weight}%</span>
                           </div>
                           <Slider
                             value={[categoryWeights[category.id] || category.weight]}
@@ -4426,15 +4426,15 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
               {/* Summary Stats */}
               <div className="grid grid-cols-3 gap-2 sm:gap-4 p-3 sm:p-4 bg-muted/30 rounded-lg">
                 <div className="text-center">
-                  <div className="text-lg sm:text-2xl font-bold text-brand-cyan">{platforms.length}</div>
+                  <div className="text-lg sm:text-2xl font-semibold text-brand-cyan">{platforms.length}</div>
                   <div className="text-[10px] sm:text-xs text-muted-foreground">Platforms Analysed</div>
                 </div>
                 <div className="text-center border-x border-border">
-                  <div className="text-lg sm:text-2xl font-bold text-brand-teal">{categories.length}</div>
+                  <div className="text-lg sm:text-2xl font-semibold text-brand-teal">{categories.length}</div>
                   <div className="text-[10px] sm:text-xs text-muted-foreground">Capability Areas</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-lg sm:text-2xl font-bold text-green-600">{Math.round((sortedByFit[0]?.fitAdjustedScore || sortedByFit[0]?.calculatedScore || 0) * 10)}</div>
+                  <div className="text-lg sm:text-2xl font-semibold text-green-600">{Math.round((sortedByFit[0]?.fitAdjustedScore || sortedByFit[0]?.calculatedScore || 0) * 10)}</div>
                   <div className="text-[10px] sm:text-xs text-muted-foreground">Top Score</div>
                 </div>
               </div>
@@ -4459,7 +4459,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                         <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
                           index === 0 ? 'bg-[#7FB8A3] text-[#252826]' : index === 1 ? 'bg-[#8E4F67]/20 text-brand-teal' : 'bg-muted text-muted-foreground'
                         }`}>
-                          <span className="text-sm sm:text-base font-bold">{index + 1}</span>
+                          <span className="text-sm sm:text-base font-semibold">{index + 1}</span>
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center justify-between gap-2 mb-1">
@@ -4475,7 +4475,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                               </Badge>
                             </div>
                             <div className="text-right flex-shrink-0">
-                              <span className="text-base sm:text-lg font-bold text-brand-cyan">{score}</span>
+                              <span className="text-base sm:text-lg font-semibold text-brand-cyan">{score}</span>
                               <span className="text-[10px] sm:text-xs text-muted-foreground ml-1">/ 100</span>
                             </div>
                           </div>
@@ -4649,7 +4649,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
       <section className="py-6 sm:py-8 bg-muted/30 rounded-xl">
         <div className="px-3 sm:px-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
-            <h2 className="text-xl sm:text-2xl font-bold text-foreground">Select Platforms to Compare</h2>
+            <h2 className="text-xl sm:text-2xl font-semibold text-foreground">Select Platforms to Compare</h2>
           </div>
           
           <MobilePlatformCarousel
@@ -4736,7 +4736,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
             <Scale className="w-5 h-5 sm:w-6 sm:h-6 text-brand-cream" />
           </div>
           <div>
-            <h2 className="text-xl sm:text-2xl font-bold text-foreground">Priority Scoring</h2>
+            <h2 className="text-xl sm:text-2xl font-semibold text-foreground">Priority Scoring</h2>
             <p className="text-sm sm:text-base text-muted-foreground">Adjust importance weights for each category</p>
           </div>
         </div>
@@ -5155,7 +5155,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                 <CardContent className="space-y-3 sm:space-y-4">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4">
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-bold text-foreground">{recommendedPlatform.name}</h3>
+                      <h3 className="text-xl sm:text-2xl font-semibold text-foreground">{recommendedPlatform.name}</h3>
                       <p className="text-muted-foreground text-xs sm:text-sm">{recommendedPlatform.bestFor}</p>
                       {usesFitScoring && recommendedPlatform.fitLevel && (
                         <div className="flex items-center gap-2 mt-2">
@@ -5171,7 +5171,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                       )}
                     </div>
                     <div className="text-left sm:text-right">
-                      <div className="text-2xl sm:text-3xl font-bold text-brand-cyan">
+                      <div className="text-2xl sm:text-3xl font-semibold text-brand-cyan">
                         {Math.round((usesFitScoring ? recommendedPlatform.fitAdjustedScore : recommendedPlatform.calculatedScore) * 10)}
                       </div>
                       <div className="text-[10px] sm:text-xs text-muted-foreground">
@@ -5206,7 +5206,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                             <span>{mod.value > 0 ? '+' : ''}{mod.value}</span>
                           </div>
                         ))}
-                        <div className="border-t border-border pt-2 mt-2 flex justify-between font-bold">
+                        <div className="border-t border-border pt-2 mt-2 flex justify-between font-semibold">
                           <span>Contextual Score:</span>
                           <span className="text-brand-cyan">{(recommendedPlatform.fitAdjustedScore * 10).toFixed(0)}</span>
                         </div>
@@ -5299,7 +5299,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                                 <span>Fit Modifier:</span>
                                 <span>{topFit.modifier >= 0 ? '+' : ''}{topFit.modifier.toFixed(1)}</span>
                               </div>
-                              <div className="border-t border-border pt-2 mt-2 flex justify-between font-bold">
+                              <div className="border-t border-border pt-2 mt-2 flex justify-between font-semibold">
                                 <span>Adjusted Score:</span>
                                 <span className="text-brand-cyan">{topFit.score.toFixed(1)}</span>
                               </div>
@@ -5540,7 +5540,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
               <BarChart3 className="w-5 h-5 sm:w-6 sm:h-6 text-brand-cream" />
             </div>
             <div>
-              <h2 className="text-xl sm:text-2xl font-bold text-foreground">Detailed Comparison</h2>
+              <h2 className="text-xl sm:text-2xl font-semibold text-foreground">Detailed Comparison</h2>
               <p className="text-sm sm:text-base text-muted-foreground">Side-by-side platform analysis</p>
             </div>
           </div>
@@ -5565,7 +5565,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                           <TableHead className="min-w-[150px]">Metric</TableHead>
                           {selectedPlatformsData.map((platform) => (
                             <TableHead key={platform.id} className="text-center min-w-[140px]">
-                              <div className="font-bold">{platform.shortName}</div>
+                              <div className="font-semibold">{platform.shortName}</div>
                               <Badge className="mt-1 text-[10px] px-1.5" variant="outline">{platform.marketPosition}</Badge>
                             </TableHead>
                           ))}
@@ -5582,7 +5582,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                             const displayScore = Math.round(((usesFitScoring ? calcScore?.fitAdjustedScore : calcScore?.calculatedScore) ?? 0) * 10);
                             return (
                               <TableCell key={platform.id} className="text-center">
-                                <span className={`text-xl font-bold ${isTop ? "text-brand-cyan" : "text-foreground"}`}>
+                                <span className={`text-xl font-semibold ${isTop ? "text-brand-cyan" : "text-foreground"}`}>
                                   {displayScore}
                                 </span>
                                 {isTop && <Trophy className="w-4 h-4 text-brand-cyan inline ml-1" />}
@@ -5630,7 +5630,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                       <TableHead className="min-w-[150px]">Metric</TableHead>
                       {selectedPlatformsData.map((platform) => (
                         <TableHead key={platform.id} className="text-center min-w-[140px]">
-                          <div className="font-bold">{platform.shortName}</div>
+                          <div className="font-semibold">{platform.shortName}</div>
                           <Badge className="mt-1 text-[10px] px-1.5" variant="outline">{platform.marketPosition}</Badge>
                         </TableHead>
                       ))}
@@ -5647,7 +5647,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                         const displayScore = Math.round(((usesFitScoring ? calcScore?.fitAdjustedScore : calcScore?.calculatedScore) ?? 0) * 10);
                         return (
                           <TableCell key={platform.id} className="text-center">
-                            <span className={`text-xl font-bold ${isTop ? "text-brand-cyan" : "text-foreground"}`}>
+                            <span className={`text-xl font-semibold ${isTop ? "text-brand-cyan" : "text-foreground"}`}>
                               {displayScore}
                             </span>
                             {isTop && <Trophy className="w-4 h-4 text-brand-cyan inline ml-1" />}
@@ -5763,7 +5763,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                         {featureComparison.map((category) => (
                           <Fragment key={category.category}>
                             <TableRow className="bg-muted/50">
-                              <TableCell colSpan={selectedPlatformsData.length + 1} className="font-bold">
+                              <TableCell colSpan={selectedPlatformsData.length + 1} className="font-semibold">
                                 {category.category}
                               </TableCell>
                             </TableRow>
@@ -5802,7 +5802,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                     {featureComparison.map((category) => (
                       <Fragment key={category.category}>
                         <TableRow className="bg-muted/50">
-                          <TableCell colSpan={selectedPlatformsData.length + 1} className="font-bold">
+                          <TableCell colSpan={selectedPlatformsData.length + 1} className="font-semibold">
                             {category.category}
                           </TableCell>
                         </TableRow>
@@ -5954,7 +5954,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                 <Clock className="w-5 h-5 text-brand-cream" />
               </div>
               <div>
-                <h2 className="text-xl font-bold text-foreground">Implementation Timeline</h2>
+                <h2 className="text-xl font-semibold text-foreground">Implementation Timeline</h2>
                 <p className="text-sm text-muted-foreground">Compare typical implementation phases</p>
               </div>
             </div>
@@ -5986,7 +5986,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
               <Layers className="w-6 h-6 text-brand-cream" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-foreground">Platform Deep Dives</h2>
+              <h2 className="text-2xl font-semibold text-foreground">Platform Deep Dives</h2>
               <p className="text-muted-foreground">Detailed analysis of selected platforms</p>
             </div>
           </div>
@@ -6070,7 +6070,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                         />
                       </div>
                     )}
-                    <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center text-white font-bold text-lg">
+                    <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center text-white font-semibold text-lg">
                       {platform.logo}
                     </div>
                     <div>
@@ -6112,7 +6112,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                               weights={categoryWeights}
                             >
                               <div className="cursor-help">
-                                <div className="text-2xl font-bold text-brand-cyan">
+                                <div className="text-2xl font-semibold text-brand-cyan">
                                   {displayScore}
                                 </div>
                                 <div className="text-xs text-muted-foreground">
@@ -6132,7 +6132,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                           <UITooltip>
                             <TooltipTrigger asChild>
                               <div className="cursor-help">
-                                <div className="text-2xl font-bold text-brand-cyan">
+                                <div className="text-2xl font-semibold text-brand-cyan">
                                   {displayScore}
                                 </div>
                                 <div className="text-xs text-muted-foreground">
@@ -6158,7 +6158,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                                   </div>
                                 ))}
                                 {usesFitScoring && (
-                                  <div className="flex justify-between gap-4 pt-1 border-t border-border font-bold">
+                                  <div className="flex justify-between gap-4 pt-1 border-t border-border font-semibold">
                                     <span>Fit-Adjusted:</span>
                                     <span className="text-brand-cyan">{Math.round((calcScore?.fitAdjustedScore ?? 0) * 10)}</span>
                                   </div>
@@ -6265,7 +6265,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                               <span>{mod.value > 0 ? '+' : ''}{mod.value}</span>
                             </div>
                           ))}
-                          <div className="border-t border-border pt-2 mt-2 flex justify-between font-bold">
+                          <div className="border-t border-border pt-2 mt-2 flex justify-between font-semibold">
                             <span>Contextual Score:</span>
                             <span className="text-brand-cyan">{(calcScore.fitAdjustedScore * 10).toFixed(0)}</span>
                           </div>
@@ -6377,7 +6377,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                   <Card key={platform.id} className="border-[#7FB8A3]/30">
                     <CardContent className="p-4">
                       <div className="flex items-center gap-3 mb-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center text-white font-bold text-sm">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center text-white font-semibold text-sm">
                           {platform.logo}
                         </div>
                         <div>
@@ -6388,7 +6388,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                       <div className="grid grid-cols-2 gap-2 text-xs">
                         <div>
                           <span className="text-muted-foreground">Score:</span>
-                          <span className="font-bold text-brand-cyan ml-1">{Math.round(((usesFitScoring ? calcScore?.fitAdjustedScore : calcScore?.calculatedScore) ?? 0) * 10)}</span>
+                          <span className="font-semibold text-brand-cyan ml-1">{Math.round(((usesFitScoring ? calcScore?.fitAdjustedScore : calcScore?.calculatedScore) ?? 0) * 10)}</span>
                         </div>
                         <div>
                           <span className="text-muted-foreground">Time:</span>
@@ -6410,9 +6410,9 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
               <Table data-testid="table-feature-matrix" className="text-sm">
                 <TableHeader>
                   <TableRow className="bg-muted/50">
-                    <TableHead className="min-w-[200px] font-bold">Feature</TableHead>
+                    <TableHead className="min-w-[200px] font-semibold">Feature</TableHead>
                     {deepDiveSelectedPlatformsData.map((platform) => (
-                      <TableHead key={platform.id} className="text-center min-w-[120px] font-bold">
+                      <TableHead key={platform.id} className="text-center min-w-[120px] font-semibold">
                         {platform.shortName}
                       </TableHead>
                     ))}
@@ -6430,7 +6430,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                           className="bg-gradient-to-r from-[#252826]/10 to-[#8E4F67]/10 cursor-pointer hover:from-[#252826]/15 hover:to-[#8E4F67]/15"
                           onClick={() => handleCategoryToggle(category.category)}
                         >
-                          <TableCell className="font-bold">
+                          <TableCell className="font-semibold">
                             <div className="flex items-center gap-2">
                               {isExpanded ? (
                                 <ChevronUp className="w-4 h-4 text-muted-foreground" />
@@ -6778,7 +6778,7 @@ export default function TechComparisonPage() {
                   </TabsList>
 
                   <div className="mt-6 text-center max-w-2xl">
-                    <h2 className="text-2xl font-bold text-foreground mb-2">
+                    <h2 className="text-2xl font-semibold text-foreground mb-2">
                       {categoryDescriptions[activeCategory].title}
                     </h2>
                     <p className="text-muted-foreground">

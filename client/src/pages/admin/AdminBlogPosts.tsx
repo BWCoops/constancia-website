@@ -684,7 +684,7 @@ function SEOAnalysisSection({ title, excerpt, content, onCopySuggestions }: {
         <div className="space-y-3">
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium">Overall SEO Score</span>
-            <span className={`text-2xl font-bold ${getMetricColor(metrics.overallScore)}`}>
+            <span className={`text-2xl font-semibold ${getMetricColor(metrics.overallScore)}`}>
               {metrics.overallScore}%
             </span>
           </div>

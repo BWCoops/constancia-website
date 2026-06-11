@@ -2083,7 +2083,7 @@ export function AIBlogGenerator({ isOpen, onClose, onPublishSuccess }: AIBlogGen
                                       <div className="p-3 rounded-lg bg-background border">
                                         <p className="text-xs text-muted-foreground mb-1">AI Detection Score</p>
                                         <div className="flex items-center gap-2">
-                                          <span className={`text-2xl font-bold ${
+                                          <span className={`text-2xl font-semibold ${
                                             result.aiScore < 30 ? "text-green-600" :
                                             result.aiScore < 50 ? "text-yellow-600" :
                                             "text-red-600"
@@ -2107,7 +2107,7 @@ export function AIBlogGenerator({ isOpen, onClose, onPublishSuccess }: AIBlogGen
                                       <div className="p-3 rounded-lg bg-background border">
                                         <p className="text-xs text-muted-foreground mb-1">Human Score</p>
                                         <div className="flex items-center gap-2">
-                                          <span className={`text-2xl font-bold ${
+                                          <span className={`text-2xl font-semibold ${
                                             result.humanScore > 70 ? "text-green-600" :
                                             result.humanScore > 50 ? "text-yellow-600" :
                                             "text-red-600"
@@ -2457,7 +2457,7 @@ export function AIBlogGenerator({ isOpen, onClose, onPublishSuccess }: AIBlogGen
                               data-testid="input-edit-title"
                             />
                           ) : (
-                            <h2 className="text-xl font-bold mt-1">{editableContent.title || parseFinalContent()?.title}</h2>
+                            <h2 className="text-xl font-semibold mt-1">{editableContent.title || parseFinalContent()?.title}</h2>
                           )}
                         </div>
                         
@@ -2751,7 +2751,7 @@ export function AIBlogGenerator({ isOpen, onClose, onPublishSuccess }: AIBlogGen
                                                 }
                                               }}
                                             >
-                                              <h3 className="text-lg font-bold text-[#7FB8A3] flex-1">
+                                              <h3 className="text-lg font-semibold text-[#7FB8A3] flex-1">
                                                 {section.title.replace("## ", "")}
                                               </h3>
                                               {!isEditingThis && (
@@ -3117,7 +3117,7 @@ export function AIBlogGenerator({ isOpen, onClose, onPublishSuccess }: AIBlogGen
                     Blog Post
                   </Badge>
                 </div>
-                <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                <h1 className="text-3xl md:text-4xl font-semibold text-foreground mb-4">
                   {editableContent.title || parseFinalContent()?.title || "Untitled"}
                 </h1>
                 <p className="text-lg text-muted-foreground mb-6">
@@ -3144,7 +3144,7 @@ export function AIBlogGenerator({ isOpen, onClose, onPublishSuccess }: AIBlogGen
 
               {/* Blog Content with Visual Components */}
               <div className="prose prose-lg dark:prose-invert max-w-none
-                prose-headings:text-foreground prose-headings:font-bold
+                prose-headings:text-foreground prose-headings:font-semibold
                 prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4 prose-h2:text-[#252826] dark:prose-h2:text-[#7FB8A3]
                 prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3 prose-h3:text-[#8E4F67] dark:prose-h3:text-[#7FB8A3]/80
                 prose-p:text-muted-foreground prose-p:leading-relaxed prose-p:mb-4
@@ -3162,7 +3162,7 @@ export function AIBlogGenerator({ isOpen, onClose, onPublishSuccess }: AIBlogGen
                       remarkPlugins={[remarkGfm]}
                       components={{
                         h2: ({children}) => (
-                          <h2 className="text-2xl font-bold mt-12 mb-6 text-[#7FB8A3] flex items-center gap-3">
+                          <h2 className="text-2xl font-semibold mt-12 mb-6 text-[#7FB8A3] flex items-center gap-3">
                             <span className="w-1 h-8 bg-gradient-to-b from-[#7FB8A3] to-[#8E4F67] rounded-full" />
                             {children}
                           </h2>
@@ -3314,7 +3314,7 @@ export function AIBlogGenerator({ isOpen, onClose, onPublishSuccess }: AIBlogGen
                           </ul>
                         ),
                         ol: ({children}) => (
-                          <ol className="my-4 ml-6 list-decimal space-y-2 marker:text-[#7FB8A3] marker:font-bold">
+                          <ol className="my-4 ml-6 list-decimal space-y-2 marker:text-[#7FB8A3] marker:font-semibold">
                             {children}
                           </ol>
                         ),

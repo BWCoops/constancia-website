@@ -1003,7 +1003,7 @@ export default function FinanceCompassLanding() {
                 </div>
               </div>
               
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 leading-tight max-w-4xl mx-auto">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-4 sm:mb-6 leading-tight max-w-4xl mx-auto">
                 See where your finance systems are{" "}
                 <span className="text-brand-cyan">disconnected</span>
               </h1>
@@ -1061,7 +1061,7 @@ export default function FinanceCompassLanding() {
                   { value: "60sec", label: "Quick Preview" },
                 ].map((stat) => (
                   <div key={stat.label} className="bg-white/10 backdrop-blur-sm rounded-lg p-2 sm:p-3 text-center">
-                    <div className="text-lg sm:text-xl font-bold text-brand-cyan">{stat.value}</div>
+                    <div className="text-lg sm:text-xl font-semibold text-brand-cyan">{stat.value}</div>
                     <div className="text-[10px] sm:text-xs text-white/70 leading-tight">{stat.label}</div>
                   </div>
                 ))}
@@ -1118,7 +1118,7 @@ export default function FinanceCompassLanding() {
                 <Rocket className="h-3 w-3 mr-1" />
                 The AI Imperative
               </Badge>
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-brand-cream mb-2 sm:mb-3 px-2">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-brand-cream mb-2 sm:mb-3 px-2">
                 Finance is Transforming. Are You Ready?
               </h2>
               <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto px-2">
@@ -1174,7 +1174,7 @@ export default function FinanceCompassLanding() {
                       <div className={`h-8 w-8 sm:h-10 sm:w-10 rounded-lg bg-gradient-to-br ${item.color} flex items-center justify-center mb-2 sm:mb-3`}>
                         <item.icon className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                       </div>
-                      <div className="text-xl sm:text-2xl font-bold text-brand-cream mb-1">
+                      <div className="text-xl sm:text-2xl font-semibold text-brand-cream mb-1">
                         {item.stat}
                       </div>
                       <div className="text-xs sm:text-sm font-medium text-brand-teal mb-1 sm:mb-2">
@@ -1393,7 +1393,7 @@ export default function FinanceCompassLanding() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-cream mb-2 sm:mb-3">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-brand-cream mb-2 sm:mb-3">
                 How It Works
               </h2>
               <p className="text-base sm:text-xl text-brand-teal font-medium mb-3 sm:mb-4">
@@ -1732,7 +1732,7 @@ export default function FinanceCompassLanding() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-cream">
+              <h2 className="text-3xl md:text-4xl font-semibold text-brand-cream">
                 Why Finance Leaders Choose FinanceCompass
               </h2>
             </motion.div>

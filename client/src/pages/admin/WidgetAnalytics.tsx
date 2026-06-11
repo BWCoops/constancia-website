@@ -573,7 +573,7 @@ function FunnelAnalysisTab({ data, isLoading }: { data: DimensionAnalysisData | 
                 <Target className="h-5 w-5 text-brand-teal" />
               </div>
               <div className="min-w-0">
-                <p className="text-2xl sm:text-3xl font-bold text-[#F6F3EE]" data-testid="stat-completion-rate">
+                <p className="text-2xl sm:text-3xl font-semibold text-[#F6F3EE]" data-testid="stat-completion-rate">
                   {overallCompletionRate}%
                 </p>
                 <p className="text-sm text-muted-foreground truncate">Overall Completion Rate</p>
@@ -590,7 +590,7 @@ function FunnelAnalysisTab({ data, isLoading }: { data: DimensionAnalysisData | 
                 <Users className="h-5 w-5 text-[#7FB8A3]" />
               </div>
               <div className="min-w-0">
-                <p className="text-2xl sm:text-3xl font-bold text-[#F6F3EE]" data-testid="stat-total-sessions">
+                <p className="text-2xl sm:text-3xl font-semibold text-[#F6F3EE]" data-testid="stat-total-sessions">
                   {firstQuestionSessions}
                 </p>
                 <p className="text-sm text-muted-foreground truncate">Started Assessment</p>
@@ -611,7 +611,7 @@ function FunnelAnalysisTab({ data, isLoading }: { data: DimensionAnalysisData | 
                 )}
               </div>
               <div className="min-w-0">
-                <p className={`text-2xl sm:text-3xl font-bold ${hotspots.length > 0 ? 'text-amber-700 dark:text-amber-400' : 'text-green-700 dark:text-green-400'}`} data-testid="stat-hotspots">
+                <p className={`text-2xl sm:text-3xl font-semibold ${hotspots.length > 0 ? 'text-amber-700 dark:text-amber-400' : 'text-green-700 dark:text-green-400'}`} data-testid="stat-hotspots">
                   {hotspots.length}
                 </p>
                 <p className="text-sm text-muted-foreground truncate">Dropoff Hotspots</p>
@@ -951,15 +951,15 @@ function DimensionPerformanceTab({ data, isLoading }: { data: DimensionAnalysisD
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-3 gap-2 text-center">
                     <div className="p-2 rounded-lg bg-red-50 dark:bg-red-900/20">
-                      <p className="text-lg font-bold text-red-600 dark:text-red-400">{dim.pctStruggling}%</p>
+                      <p className="text-lg font-semibold text-red-600 dark:text-red-400">{dim.pctStruggling}%</p>
                       <p className="text-xs text-muted-foreground">Struggling</p>
                     </div>
                     <div className="p-2 rounded-lg bg-muted/50">
-                      <p className="text-lg font-bold text-foreground">{dim.responseCount}</p>
+                      <p className="text-lg font-semibold text-foreground">{dim.responseCount}</p>
                       <p className="text-xs text-muted-foreground">Responses</p>
                     </div>
                     <div className="p-2 rounded-lg bg-green-50 dark:bg-green-900/20">
-                      <p className="text-lg font-bold text-green-600 dark:text-green-400">{dim.pctMature}%</p>
+                      <p className="text-lg font-semibold text-green-600 dark:text-green-400">{dim.pctMature}%</p>
                       <p className="text-xs text-muted-foreground">Mature</p>
                     </div>
                   </div>
@@ -1456,7 +1456,7 @@ export default function WidgetAnalytics() {
     <AdminLayout>
       <div className="space-y-4 md:space-y-6">
         <div className="mb-4 md:mb-6">
-          <h1 className="text-xl md:text-2xl font-bold text-foreground">{pageTitle}</h1>
+          <h1 className="text-xl md:text-2xl font-semibold text-foreground">{pageTitle}</h1>
           <p className="text-sm text-muted-foreground">{pageDescription}</p>
         </div>
 
@@ -1569,7 +1569,7 @@ export default function WidgetAnalytics() {
                       <Eye className="h-4 w-4 sm:h-5 sm:w-5 text-slate-600 dark:text-slate-400" />
                     </div>
                     <div className="min-w-0">
-                      <p className="text-lg sm:text-2xl font-bold truncate" data-testid="stat-impressions">{filteredStats.impressions}</p>
+                      <p className="text-lg sm:text-2xl font-semibold truncate" data-testid="stat-impressions">{filteredStats.impressions}</p>
                       <p className="text-xs text-muted-foreground truncate">Impressions</p>
                     </div>
                   </div>
@@ -1582,7 +1582,7 @@ export default function WidgetAnalytics() {
                       <Users className="h-4 w-4 sm:h-5 sm:w-5 text-[#8E4F67] dark:text-[#7FB8A3]" />
                     </div>
                     <div className="min-w-0">
-                      <p className="text-lg sm:text-2xl font-bold truncate" data-testid="stat-sessions">{filteredStats.sessions}</p>
+                      <p className="text-lg sm:text-2xl font-semibold truncate" data-testid="stat-sessions">{filteredStats.sessions}</p>
                       <p className="text-xs text-muted-foreground truncate">Sessions</p>
                     </div>
                   </div>
@@ -1595,7 +1595,7 @@ export default function WidgetAnalytics() {
                       <Target className="h-4 w-4 sm:h-5 sm:w-5 text-emerald-600 dark:text-emerald-400" />
                     </div>
                     <div className="min-w-0">
-                      <p className="text-lg sm:text-2xl font-bold truncate" data-testid="stat-completions">{filteredStats.completions}</p>
+                      <p className="text-lg sm:text-2xl font-semibold truncate" data-testid="stat-completions">{filteredStats.completions}</p>
                       <p className="text-xs text-muted-foreground truncate">Completions</p>
                     </div>
                   </div>
@@ -1608,7 +1608,7 @@ export default function WidgetAnalytics() {
                       <MousePointerClick className="h-4 w-4 sm:h-5 sm:w-5 text-amber-600 dark:text-amber-400" />
                     </div>
                     <div className="min-w-0">
-                      <p className="text-lg sm:text-2xl font-bold truncate" data-testid="stat-cta-clicks">{filteredStats.ctaClicks}</p>
+                      <p className="text-lg sm:text-2xl font-semibold truncate" data-testid="stat-cta-clicks">{filteredStats.ctaClicks}</p>
                       <p className="text-xs text-muted-foreground truncate">CTA Clicks</p>
                     </div>
                   </div>
@@ -1621,7 +1621,7 @@ export default function WidgetAnalytics() {
                       <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-purple-600 dark:text-purple-400" />
                     </div>
                     <div className="min-w-0">
-                      <p className="text-lg sm:text-2xl font-bold truncate" data-testid="stat-conversion">{filteredStats.conversionRate}%</p>
+                      <p className="text-lg sm:text-2xl font-semibold truncate" data-testid="stat-conversion">{filteredStats.conversionRate}%</p>
                       <p className="text-xs text-muted-foreground truncate">Conversion Rate</p>
                     </div>
                   </div>
@@ -1644,7 +1644,7 @@ export default function WidgetAnalytics() {
                       <Activity className="h-5 w-5 text-[#8E4F67] dark:text-[#7FB8A3]" />
                     </div>
                     <div>
-                      <p className="text-2xl font-bold text-[#8E4F67] dark:text-[#7FB8A3]" data-testid="stat-active-sessions">{sessionStats.active}</p>
+                      <p className="text-2xl font-semibold text-[#8E4F67] dark:text-[#7FB8A3]" data-testid="stat-active-sessions">{sessionStats.active}</p>
                       <p className="text-xs text-muted-foreground">Active Sessions</p>
                     </div>
                   </div>
@@ -1653,7 +1653,7 @@ export default function WidgetAnalytics() {
                       <CheckCircle2 className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
                     </div>
                     <div>
-                      <p className="text-2xl font-bold text-emerald-700 dark:text-emerald-400" data-testid="stat-completed-sessions">{sessionStats.completed}</p>
+                      <p className="text-2xl font-semibold text-emerald-700 dark:text-emerald-400" data-testid="stat-completed-sessions">{sessionStats.completed}</p>
                       <p className="text-xs text-muted-foreground">Completed</p>
                     </div>
                   </div>
@@ -1662,7 +1662,7 @@ export default function WidgetAnalytics() {
                       <PlayCircle className="h-5 w-5 text-amber-600 dark:text-amber-400" />
                     </div>
                     <div>
-                      <p className="text-2xl font-bold text-amber-700 dark:text-amber-400" data-testid="stat-in-progress-sessions">{sessionStats.inProgress}</p>
+                      <p className="text-2xl font-semibold text-amber-700 dark:text-amber-400" data-testid="stat-in-progress-sessions">{sessionStats.inProgress}</p>
                       <p className="text-xs text-muted-foreground">In Progress</p>
                     </div>
                   </div>
@@ -1671,7 +1671,7 @@ export default function WidgetAnalytics() {
                       <XCircle className="h-5 w-5 text-rose-600 dark:text-rose-400" />
                     </div>
                     <div>
-                      <p className="text-2xl font-bold text-rose-700 dark:text-rose-400" data-testid="stat-abandoned-sessions">{sessionStats.abandoned}</p>
+                      <p className="text-2xl font-semibold text-rose-700 dark:text-rose-400" data-testid="stat-abandoned-sessions">{sessionStats.abandoned}</p>
                       <p className="text-xs text-muted-foreground">Abandoned</p>
                     </div>
                   </div>
@@ -1680,7 +1680,7 @@ export default function WidgetAnalytics() {
                       <Bot className="h-5 w-5 text-slate-600 dark:text-slate-400" />
                     </div>
                     <div>
-                      <p className="text-2xl font-bold text-slate-700 dark:text-slate-400" data-testid="stat-bot-sessions">{sessionStats.botLike}</p>
+                      <p className="text-2xl font-semibold text-slate-700 dark:text-slate-400" data-testid="stat-bot-sessions">{sessionStats.botLike}</p>
                       <p className="text-xs text-muted-foreground">Bot-like</p>
                     </div>
                   </div>
@@ -2200,7 +2200,7 @@ export default function WidgetAnalytics() {
                       <div className="flex items-center justify-between gap-2">
                         <div className="min-w-0">
                           <p className="text-xs sm:text-sm text-muted-foreground truncate">Total Events</p>
-                          <p className="text-lg sm:text-2xl font-bold truncate">{widgetTrends.summary.totalEvents.toLocaleString()}</p>
+                          <p className="text-lg sm:text-2xl font-semibold truncate">{widgetTrends.summary.totalEvents.toLocaleString()}</p>
                         </div>
                         <Activity className="h-6 w-6 sm:h-8 sm:w-8 text-[#7FB8A3] opacity-80 shrink-0" />
                       </div>
@@ -2212,7 +2212,7 @@ export default function WidgetAnalytics() {
                       <div className="flex items-center justify-between gap-2">
                         <div className="min-w-0">
                           <p className="text-xs sm:text-sm text-muted-foreground truncate">Completion Rate</p>
-                          <p className="text-lg sm:text-2xl font-bold">{widgetTrends.summary.avgCompletionRate}%</p>
+                          <p className="text-lg sm:text-2xl font-semibold">{widgetTrends.summary.avgCompletionRate}%</p>
                         </div>
                         <CheckCircle2 className="h-6 w-6 sm:h-8 sm:w-8 text-green-500 opacity-80 shrink-0" />
                       </div>
@@ -2224,7 +2224,7 @@ export default function WidgetAnalytics() {
                       <div className="flex items-center justify-between gap-2">
                         <div className="min-w-0">
                           <p className="text-xs sm:text-sm text-muted-foreground truncate">Avg Events/Session</p>
-                          <p className="text-lg sm:text-2xl font-bold">{widgetTrends.summary.avgEventsPerSession}</p>
+                          <p className="text-lg sm:text-2xl font-semibold">{widgetTrends.summary.avgEventsPerSession}</p>
                         </div>
                         <BarChart3 className="h-6 w-6 sm:h-8 sm:w-8 text-amber-500 opacity-80 shrink-0" />
                       </div>
@@ -2241,7 +2241,7 @@ export default function WidgetAnalytics() {
                       <div className="flex items-center justify-between">
                         <div>
                           <p className="text-sm text-muted-foreground">Data Quality</p>
-                          <p className="text-2xl font-bold">{widgetTrends.qualityScore.score}/100</p>
+                          <p className="text-2xl font-semibold">{widgetTrends.qualityScore.score}/100</p>
                           <Badge variant={
                             widgetTrends.qualityScore.confidence === 'high' ? 'default' :
                             widgetTrends.qualityScore.confidence === 'medium' ? 'secondary' :
@@ -2503,7 +2503,7 @@ export default function WidgetAnalytics() {
                                   <p className="text-sm">{outlier.insight}</p>
                                 </div>
                                 <div className="text-right shrink-0">
-                                  <div className={`text-sm font-bold ${
+                                  <div className={`text-sm font-semibold ${
                                     outlier.deviation === 'above' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
                                   }`}>
                                     {outlier.value}
@@ -2786,7 +2786,7 @@ export default function WidgetAnalytics() {
                           <CheckCircle2 className="h-4 w-4 sm:h-5 sm:w-5 text-emerald-600 dark:text-emerald-400" />
                         </div>
                         <div className="min-w-0">
-                          <p className="text-lg sm:text-2xl font-bold text-emerald-700 dark:text-emerald-400 truncate" data-testid="stat-valid-records">
+                          <p className="text-lg sm:text-2xl font-semibold text-emerald-700 dark:text-emerald-400 truncate" data-testid="stat-valid-records">
                             {widgetQualityStats.data.validSessions.toLocaleString()}
                           </p>
                           <p className="text-xs text-muted-foreground truncate">Valid Sessions</p>
@@ -2802,7 +2802,7 @@ export default function WidgetAnalytics() {
                           <XCircle className="h-4 w-4 sm:h-5 sm:w-5 text-rose-600 dark:text-rose-400" />
                         </div>
                         <div className="min-w-0">
-                          <p className="text-lg sm:text-2xl font-bold text-rose-700 dark:text-rose-400 truncate" data-testid="stat-invalid-records">
+                          <p className="text-lg sm:text-2xl font-semibold text-rose-700 dark:text-rose-400 truncate" data-testid="stat-invalid-records">
                             {widgetQualityStats.data.invalidSessions.toLocaleString()}
                           </p>
                           <p className="text-xs text-muted-foreground truncate">Invalid Sessions</p>
@@ -2818,7 +2818,7 @@ export default function WidgetAnalytics() {
                           <Target className="h-4 w-4 sm:h-5 sm:w-5 text-[#8E4F67] dark:text-[#7FB8A3]" />
                         </div>
                         <div className="min-w-0">
-                          <p className="text-lg sm:text-2xl font-bold text-[#8E4F67] dark:text-[#7FB8A3]" data-testid="stat-valid-percentage">
+                          <p className="text-lg sm:text-2xl font-semibold text-[#8E4F67] dark:text-[#7FB8A3]" data-testid="stat-valid-percentage">
                             {widgetQualityStats.data.validPercentage}%
                           </p>
                           <p className="text-xs text-muted-foreground truncate">Valid Percentage</p>
@@ -2834,7 +2834,7 @@ export default function WidgetAnalytics() {
                           <BarChart3 className="h-4 w-4 sm:h-5 sm:w-5 text-amber-600 dark:text-amber-400" />
                         </div>
                         <div className="min-w-0">
-                          <p className="text-lg sm:text-2xl font-bold text-amber-700 dark:text-amber-400" data-testid="stat-avg-quality-score">
+                          <p className="text-lg sm:text-2xl font-semibold text-amber-700 dark:text-amber-400" data-testid="stat-avg-quality-score">
                             {widgetQualityStats?.data?.avgQualityScore ?? '-'}
                           </p>
                           <p className="text-xs text-muted-foreground truncate">Avg Quality</p>
@@ -2850,7 +2850,7 @@ export default function WidgetAnalytics() {
                           <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-purple-600 dark:text-purple-400" />
                         </div>
                         <div className="min-w-0">
-                          <p className="text-lg sm:text-2xl font-bold text-purple-700 dark:text-purple-400" data-testid="stat-avg-completion-time">
+                          <p className="text-lg sm:text-2xl font-semibold text-purple-700 dark:text-purple-400" data-testid="stat-avg-completion-time">
                             {widgetQualityStats?.data?.avgCompletionTime 
                               ? `${Math.round(widgetQualityStats.data.avgCompletionTime / 60)}m`
                               : '-'
@@ -3174,7 +3174,7 @@ export default function WidgetAnalytics() {
                 {selectedEvent.finalScore !== null && (
                   <div>
                     <h4 className="text-sm font-medium mb-2">Score</h4>
-                    <p className="text-2xl font-bold text-[#252826]">{selectedEvent.finalScore}%</p>
+                    <p className="text-2xl font-semibold text-[#252826]">{selectedEvent.finalScore}%</p>
                   </div>
                 )}
 
