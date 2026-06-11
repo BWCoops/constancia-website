@@ -173,30 +173,12 @@ Sitemap: https://constancia.com/sitemap.xml
     }
   }));
 
-  // Discover the hashed hero image filename once at startup so the Link
-  // preload header always points to the actual built asset.
-  let heroPreloadHeader = "";
-  try {
-    const assetsDir = path.resolve(distPath, "assets");
-    const heroFile = fs.readdirSync(assetsDir).find(f => f.startsWith("dark_navy_cyan_abstract_hero") && f.endsWith(".webp"));
-    if (heroFile) {
-      heroPreloadHeader = `</assets/${heroFile}>; rel=preload; as=image; type="image/webp"; fetchpriority=high`;
-      log.info({ heroFile }, "Hero image preload header configured");
-    }
-  } catch {
-    log.warn("Could not discover hero image for Link preload header");
-  }
-
   // SPA fallback with proper HTTP status codes
   // Returns 404 for unknown routes (fixes soft 404 issue for Google Search Console)
   // Returns 200 for known routes
   app.get("/*", (req, res) => {
     res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-    
-    if (heroPreloadHeader) {
-      res.setHeader('Link', heroPreloadHeader);
-    }
-    
+
     const indexPath = path.resolve(distPath, "index.html");
     
     // Check if this is a known valid route

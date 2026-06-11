@@ -53,18 +53,18 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
     <link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png" />
     
-    <!-- Preconnect to critical resources (high priority - fonts and images) -->
+    <!-- Preconnect to the only critical third-party origins:
+         Google Fonts CSS + the fonts CDN. Unsplash dropped: the
+         holding page doesn't use unsplash assets. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
-    
-    <!-- DNS Prefetch for analytics (loaded after interaction) -->
+
+    <!-- DNS-prefetch only for the analytics origin that loads on
+         every page (GA). LinkedIn / Apollo / Google reCAPTCHA load
+         conditionally after interaction or with a 5-6s delay — the
+         resolver hop is cheaper than the wasted prefetch on cold
+         start where they often never fire at all. -->
     <link rel="dns-prefetch" href="//www.googletagmanager.com">
-    <link rel="dns-prefetch" href="//www.google.com">
-    <link rel="dns-prefetch" href="//www.gstatic.com">
-    <link rel="dns-prefetch" href="//snap.licdn.com">
-    <link rel="dns-prefetch" href="//px.ads.linkedin.com">
-    <link rel="dns-prefetch" href="//assets.apollo.io">
     
     <!-- reCAPTCHA v2 checkbox widget is loaded dynamically by the app.
          Dev keys are used in NODE_ENV=development; production keys on constancia.io. -->
@@ -77,8 +77,9 @@
          after the video metadata round-trip. -->
     <link rel="preload" as="image" href="/launch-film-poster.jpg" fetchpriority="high">
 
-    <!-- Prefetch FinanceCompass session for LinkedIn traffic -->
-    <link rel="prefetch" href="/api/finance-compass/public/session" as="fetch" crossorigin="anonymous">
+    <!-- Holding page doesn't need FC session — prefetch is now
+         issued from FinanceCompassEntry on actual navigation. -->
+
 
     <!-- Font preloading removed: Google Fonts rotates CDN URLs across versions,
          causing stale preload links to 404 in production. The CSS stylesheet
@@ -113,17 +114,12 @@
          library-nav-bar and rendering as a band across the top. */
     </style>
     
-    <!-- Google Analytics - Required in head for Search Console verification.
-         fetchpriority="low" prevents GA from competing with LCP hero image and fonts. -->
-    <script async fetchpriority="low" src="https://www.googletagmanager.com/gtag/js?id=G-4YK3EC0B5Q"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-4YK3EC0B5Q');
-      gtag('config', 'AW-17757915012');
-    </script>
-    
+    <!-- GA / Search Console verification moved to the end of <body>
+         so it doesn't compete with critical CSS, fonts, and the
+         video poster for head parser time. dataLayer is still
+         seeded inline so any pre-React click handler can push. -->
+    <script>window.dataLayer = window.dataLayer || [];</script>
+
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
@@ -171,11 +167,22 @@
   </head>
   <body>
     <div id="root"></div>
-    
+
     <script type="module" src="/src/main.tsx"></script>
-    
+
+    <!-- Google Analytics — loaded after main.tsx kicks off so it
+         doesn't compete on the critical path. Still picks up
+         Search Console verification because the gtag() config
+         calls run on script load. -->
+    <script async fetchpriority="low" src="https://www.googletagmanager.com/gtag/js?id=G-4YK3EC0B5Q"></script>
+    <script>
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4YK3EC0B5Q');
+      gtag('config', 'AW-17757915012');
+    </script>
+
     <!-- Deferred third-party scripts - load after page is fully interactive -->
-    <!-- Note: Google Analytics now loads in <head> for Search Console verification -->
     <script>
       var scheduleLoad = window.requestIdleCallback || function(cb) { setTimeout(cb, 1); };
 

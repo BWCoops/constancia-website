@@ -54,7 +54,13 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
-    cssCodeSplit: false,
+    // Per-chunk CSS so the holding page only pays for the rules its
+    // route actually uses. The previous global stylesheet shipped
+    // every Tailwind utility + every page's CSS together (~32 KB
+    // gzip), blocking paint until the whole thing arrived. With
+    // splitting on, the home route gets the holding-page slice and
+    // each route lazy-loads its own.
+    cssCodeSplit: true,
     cssMinify: true,
     rollupOptions: {
       output: {
@@ -66,6 +72,13 @@ export default defineConfig({
             if (id.includes("@tanstack")) return "query";
             if (id.includes("recharts") || id.includes("d3-")) return "charts";
             if (id.includes("@anthropic-ai") || id.includes("openai")) return "ai-sdk";
+            // Heavy export-only deps. exceljs alone is ~940 KB and is
+            // only touched on /admin/resources / comparison-export
+            // flow — keep it in its own chunk so it stays out of the
+            // initial graph everywhere else.
+            if (id.includes("exceljs")) return "export-exceljs";
+            if (id.includes("html2canvas")) return "export-html2canvas";
+            if (id.includes("jspdf")) return "export-jspdf";
           }
         },
       },
