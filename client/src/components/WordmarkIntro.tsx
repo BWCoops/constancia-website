@@ -1,9 +1,7 @@
 /**
  * WordmarkIntro — landing-hero wordmark.
  *
- * Renders the brand mark via <picture> so WebP-capable browsers get
- * a ~58 % smaller asset, others fall back to the PNG. Dramatic
- * small-to-large fade-in (scale 0.35 → 1 with a tiny overshoot)
+ * Dramatic small-to-large fade-in (scale 0.35 → 1 with a tiny overshoot)
  * so the logo draws the eye on first paint. Reused on the contact
  * panel at the bottom of the scrolly stage where the logo reappears.
  *
@@ -11,8 +9,7 @@
  */
 
 import { useEffect, useState } from "react";
-import constanciaLogoDarkWebp from "@assets/constancia-logo-dark.webp";
-import constanciaLogoDarkPng from "@assets/constancia-logo-dark.png";
+import constanciaLogoDark from "@assets/constancia-logo-dark.png";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 interface WordmarkIntroProps {
@@ -31,15 +28,12 @@ export function WordmarkIntro({ className }: WordmarkIntroProps) {
 
   return (
     <div className={`wordmark-img ${loaded ? "is-loaded" : ""} ${className ?? ""}`}>
-      <picture>
-        <source srcSet={constanciaLogoDarkWebp} type="image/webp" />
-        <img
-          src={constanciaLogoDarkPng}
-          alt="Constancia"
-          decoding="async"
-          fetchPriority="high"
-        />
-      </picture>
+      <img
+        src={constanciaLogoDark}
+        alt="Constancia"
+        decoding="async"
+        fetchPriority="high"
+      />
     </div>
   );
 }
