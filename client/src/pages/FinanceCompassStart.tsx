@@ -275,7 +275,7 @@ export default function FinanceCompassStart() {
             {existingAssessment && ["completed", "analysed", "report_generated"].includes(existingAssessment.status) ? (
               <>
                 <Button
-                  className="w-full bg-gradient-to-r from-[#252826] to-[#8E4F67]"
+                  className="w-full bg-gradient-to-r from-brand-ink to-brand-berry"
                   onClick={() => navigate(`/finance-compass/results/${existingAssessment.id}`)}
                   data-testid="button-view-results"
                 >
@@ -302,7 +302,7 @@ export default function FinanceCompassStart() {
               /* For in-progress assessments - show Continue option */
               <>
                 <Button
-                  className="w-full bg-gradient-to-r from-[#252826] to-[#8E4F67]"
+                  className="w-full bg-gradient-to-r from-brand-ink to-brand-berry"
                   onClick={handleResume}
                   disabled={startMutation.isPending}
                   data-testid="button-resume-assessment"
@@ -405,7 +405,7 @@ export default function FinanceCompassStart() {
 
                     <Button 
                       size="lg" 
-                      className="w-full bg-gradient-to-r from-[#252826] to-[#8E4F67] hover:from-[#8E4F67] hover:to-[#7FB8A3]"
+                      className="w-full bg-gradient-to-r from-brand-ink to-brand-berry hover:from-brand-berry hover:to-brand-mint"
                       disabled={startMutation.isPending}
                       onClick={handleStartAssessment}
                       data-testid="button-start-assessment"
@@ -439,7 +439,7 @@ export default function FinanceCompassStart() {
               </div>
 
               <div className="lg:col-span-2">
-                <Card className="bg-gradient-to-br from-[#252826] to-[#8E4F67] text-white border-0">
+                <Card className="bg-gradient-to-br from-brand-ink to-brand-berry text-white border-0">
                   <CardHeader>
                     <CardTitle className="text-lg">What You Will Get</CardTitle>
                   </CardHeader>

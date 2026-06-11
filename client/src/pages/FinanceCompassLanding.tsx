@@ -68,7 +68,7 @@ function FloatingCTAButton({ onClick, visible }: { onClick: () => void; visible:
         onClick={onClick}
         size="lg"
         variant="default"
-        className="bg-[#8E4F67] border-[#8E4F67] text-white shadow-lg sm:shadow-2xl shadow-[#8E4F67]/40 rounded-full text-sm sm:text-base"
+        className="bg-brand-berry border-brand-berry text-white shadow-lg sm:shadow-2xl shadow-brand-berry/40 rounded-full text-sm sm:text-base"
         data-testid="button-floating-cta"
       >
         <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
@@ -214,7 +214,7 @@ function ProgressionStepper({ currentStep }: { currentStep: 1 | 2 | 3 }) {
                   isComplete 
                     ? "bg-green-500/20 text-green-400" 
                     : isActive 
-                      ? "bg-[#7FB8A3] text-[#F6F3EE]" 
+                      ? "bg-brand-mint text-brand-cream" 
                       : "bg-white/10 text-white/40"
                 }`}>
                   {isComplete ? (
@@ -577,16 +577,16 @@ export default function FinanceCompassLanding() {
                 </Badge>
               </div>
             </div>
-            <CardTitle className="text-xl text-[#F6F3EE]">
+            <CardTitle className="text-xl text-brand-cream">
               Welcome back, {sessionInfo?.firstName || formData.firstName}!
             </CardTitle>
             <CardDescription className="text-sm">
-              Your email <span className="font-medium text-[#F6F3EE]">{sessionInfo?.email || formData.email}</span> is verified.
+              Your email <span className="font-medium text-brand-cream">{sessionInfo?.email || formData.email}</span> is verified.
             </CardDescription>
           </CardHeader>
           <CardContent className="pt-2">
             <Button 
-              className="w-full bg-brand-navy hover:bg-[#8E4F67]"
+              className="w-full bg-brand-navy hover:bg-brand-berry"
               onClick={() => navigate("/finance-compass/dashboard")}
               data-testid="button-go-to-dashboard"
             >
@@ -604,14 +604,14 @@ export default function FinanceCompassLanding() {
         <Card className="bg-white/95 backdrop-blur-sm border-0 shadow-2xl">
           <CardHeader className="pb-4">
             <div className="flex items-center gap-2 mb-2">
-              <div className="h-8 w-8 flex items-center justify-center rounded-lg bg-[#8E4F67]/10">
+              <div className="h-8 w-8 flex items-center justify-center rounded-lg bg-brand-berry/10">
                 <Mail className="h-5 w-5 text-brand-teal" />
               </div>
-              <Badge className="bg-[#7FB8A3]/20 text-brand-teal border-[#7FB8A3]/30">
+              <Badge className="bg-brand-mint/20 text-brand-teal border-brand-mint/30">
                 Verification Required
               </Badge>
             </div>
-            <CardTitle className="text-xl text-[#F6F3EE]">Check Your Email</CardTitle>
+            <CardTitle className="text-xl text-brand-cream">Check Your Email</CardTitle>
             <CardDescription>
               We've sent a 6-digit verification code to <span className="font-medium">{formData.email}</span>
             </CardDescription>
@@ -630,7 +630,7 @@ export default function FinanceCompassLanding() {
             </div>
 
             <Button
-              className="w-full bg-[#8E4F67] hover:bg-brand-navy"
+              className="w-full bg-brand-berry hover:bg-brand-navy"
               onClick={handleVerifyOtp}
               disabled={otpValue.length !== 6 || isSubmitting}
               data-testid="button-verify-otp"
@@ -683,14 +683,14 @@ export default function FinanceCompassLanding() {
       <Card className="bg-white/95 backdrop-blur-sm border-0 shadow-2xl">
         <CardHeader className="pb-4">
           <div className="flex items-center gap-2 mb-2">
-            <div className="h-8 w-8 flex items-center justify-center rounded-lg bg-[#8E4F67]/10">
+            <div className="h-8 w-8 flex items-center justify-center rounded-lg bg-brand-berry/10">
               <QualificationIcon className="h-5 w-5 text-brand-teal" />
             </div>
-            <Badge className="bg-[#7FB8A3]/20 text-brand-teal border-[#7FB8A3]/30">
+            <Badge className="bg-brand-mint/20 text-brand-teal border-brand-mint/30">
               Step 2 of 3
             </Badge>
           </div>
-          <CardTitle className="text-xl text-[#F6F3EE]">Continue to Full Assessment</CardTitle>
+          <CardTitle className="text-xl text-brand-cream">Continue to Full Assessment</CardTitle>
           <CardDescription>
             Register to run the full 74-question assessment. Get the deeper scoring, the AI analysis, and a roadmap that's actually about your stack.
           </CardDescription>
@@ -892,13 +892,13 @@ export default function FinanceCompassLanding() {
                       onClick={() => togglePriority(priority.id)}
                       className={`w-full flex items-center gap-3 p-2.5 rounded-md border transition-all text-left ${
                         isSelected 
-                          ? "border-[#8E4F67] bg-[#8E4F67]/10 dark:bg-[#8E4F67]/20" 
+                          ? "border-brand-berry bg-brand-berry/10 dark:bg-brand-berry/20" 
                           : "border-border hover:border-muted-foreground/50 hover:bg-muted/30"
                       }`}
                       data-testid={`priority-${priority.id}`}
                     >
                       {isSelected ? (
-                        <div className="w-6 h-6 rounded-full bg-[#8E4F67] text-white flex items-center justify-center text-xs font-semibold flex-shrink-0">
+                        <div className="w-6 h-6 rounded-full bg-brand-berry text-white flex items-center justify-center text-xs font-semibold flex-shrink-0">
                           {rank}
                         </div>
                       ) : (
@@ -940,7 +940,7 @@ export default function FinanceCompassLanding() {
 
             <Button
               type="submit"
-              className="w-full bg-[#8E4F67] hover:bg-brand-navy"
+              className="w-full bg-brand-berry hover:bg-brand-navy"
               disabled={isSubmitting || (turnstileConfig?.enabled ? !captchaToken : false)}
               data-testid="button-submit-qualification"
             >
@@ -984,10 +984,10 @@ export default function FinanceCompassLanding() {
 
       <main className="pt-16 sm:pt-20">
         {/* Hero Section */}
-        <section className="relative min-h-[500px] sm:min-h-[600px] flex items-center overflow-hidden bg-gradient-to-br from-[#252826] via-[#5E8D7A] to-[#8E4F67]">
+        <section className="relative min-h-[500px] sm:min-h-[600px] flex items-center overflow-hidden bg-gradient-to-br from-brand-ink via-brand-deep-mint to-brand-berry">
           <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-20 left-10 w-48 sm:w-72 h-48 sm:h-72 bg-[#7FB8A3] rounded-full blur-3xl" />
-            <div className="absolute bottom-20 right-10 w-64 sm:w-96 h-64 sm:h-96 bg-[#8E4F67] rounded-full blur-3xl" />
+            <div className="absolute top-20 left-10 w-48 sm:w-72 h-48 sm:h-72 bg-brand-mint rounded-full blur-3xl" />
+            <div className="absolute bottom-20 right-10 w-64 sm:w-96 h-64 sm:h-96 bg-brand-berry rounded-full blur-3xl" />
           </div>
           
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-16 w-full">
@@ -1042,7 +1042,7 @@ export default function FinanceCompassLanding() {
                   { icon: Users, title: "Expert Guidance", desc: "Consultant support to execute your transformation" },
                 ].map((benefit) => (
                   <div key={benefit.title} className="flex items-center gap-3 bg-white/5 backdrop-blur-sm rounded-lg p-2.5 sm:p-3 text-left">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#7FB8A3] to-[#8E4F67] flex items-center justify-center flex-shrink-0">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-brand-mint to-brand-berry flex items-center justify-center flex-shrink-0">
                       <benefit.icon className="h-4 w-4 text-white" />
                     </div>
                     <div className="min-w-0 flex-1">
@@ -1114,11 +1114,11 @@ export default function FinanceCompassLanding() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <Badge className="mb-3 sm:mb-4 bg-[#7FB8A3]/20 text-brand-teal border-[#7FB8A3]/30">
+              <Badge className="mb-3 sm:mb-4 bg-brand-mint/20 text-brand-teal border-brand-mint/30">
                 <Rocket className="h-3 w-3 mr-1" />
                 The AI Imperative
               </Badge>
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#F6F3EE] mb-2 sm:mb-3 px-2">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-brand-cream mb-2 sm:mb-3 px-2">
                 Finance is Transforming. Are You Ready?
               </h2>
               <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto px-2">
@@ -1135,7 +1135,7 @@ export default function FinanceCompassLanding() {
                   description: "Finance functions expected to deploy AI capabilities",
                   source: "Gartner",
                   icon: Cpu,
-                  color: "from-[#8E4F67] to-[#252826]"
+                  color: "from-brand-berry to-brand-ink"
                 },
                 {
                   stat: "47%",
@@ -1143,7 +1143,7 @@ export default function FinanceCompassLanding() {
                   description: "Organisations using GenAI in 2025, up from 6% in 2024",
                   source: "Gartner Survey",
                   icon: TrendingUp,
-                  color: "from-[#7FB8A3] to-[#8E4F67]"
+                  color: "from-brand-mint to-brand-berry"
                 },
                 {
                   stat: "40-60%",
@@ -1159,7 +1159,7 @@ export default function FinanceCompassLanding() {
                   description: "Autonomous agents transforming finance operations",
                   source: "2025 Trend",
                   icon: Bot,
-                  color: "from-purple-500 to-[#252826]"
+                  color: "from-purple-500 to-brand-ink"
                 }
               ].map((item, index) => (
                 <motion.div
@@ -1174,7 +1174,7 @@ export default function FinanceCompassLanding() {
                       <div className={`h-8 w-8 sm:h-10 sm:w-10 rounded-lg bg-gradient-to-br ${item.color} flex items-center justify-center mb-2 sm:mb-3`}>
                         <item.icon className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                       </div>
-                      <div className="text-xl sm:text-2xl font-bold text-[#F6F3EE] mb-1">
+                      <div className="text-xl sm:text-2xl font-bold text-brand-cream mb-1">
                         {item.stat}
                       </div>
                       <div className="text-xs sm:text-sm font-medium text-brand-teal mb-1 sm:mb-2">
@@ -1195,10 +1195,10 @@ export default function FinanceCompassLanding() {
         </section>
 
         {/* See What You'll Get Section - Sample Results Preview */}
-        <section id="registration-form" className="py-10 sm:py-16 bg-gradient-to-br from-[#252826] via-[#5E8D7A] to-[#8E4F67] relative overflow-hidden">
+        <section id="registration-form" className="py-10 sm:py-16 bg-gradient-to-br from-brand-ink via-brand-deep-mint to-brand-berry relative overflow-hidden">
           <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-10 right-10 sm:right-20 w-48 sm:w-64 h-48 sm:h-64 bg-[#7FB8A3] rounded-full blur-3xl" />
-            <div className="absolute bottom-10 left-10 sm:left-20 w-56 sm:w-80 h-56 sm:h-80 bg-[#8E4F67] rounded-full blur-3xl" />
+            <div className="absolute top-10 right-10 sm:right-20 w-48 sm:w-64 h-48 sm:h-64 bg-brand-mint rounded-full blur-3xl" />
+            <div className="absolute bottom-10 left-10 sm:left-20 w-56 sm:w-80 h-56 sm:h-80 bg-brand-berry rounded-full blur-3xl" />
           </div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
@@ -1209,7 +1209,7 @@ export default function FinanceCompassLanding() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <div className="font-mono text-[10px] uppercase tracking-widest text-[#7FB8A3] mb-4">
+              <div className="font-mono text-[10px] uppercase tracking-widest text-brand-mint mb-4">
                 Your report
               </div>
               <h2 className="text-xl sm:text-2xl md:text-3xl font-light text-white mb-2 sm:mb-3 px-2">
@@ -1255,8 +1255,8 @@ export default function FinanceCompassLanding() {
           {/* Premium gradient background */}
           <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-muted/20 dark:via-background dark:to-muted/20" />
           <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#7FB8A3]/5 rounded-full blur-3xl" />
-            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#8E4F67]/5 rounded-full blur-3xl" />
+            <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-mint/5 rounded-full blur-3xl" />
+            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-brand-berry/5 rounded-full blur-3xl" />
           </div>
           
           <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
@@ -1268,18 +1268,18 @@ export default function FinanceCompassLanding() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <div className="font-mono text-[10px] uppercase tracking-widest text-[#8E4F67] mb-4">
+              <div className="font-mono text-[10px] uppercase tracking-widest text-brand-berry mb-4">
                 Start the assessment
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-light leading-tight text-[#F6F3EE] mb-3">
-                The diagnostic a consulting firm would charge you<br className="hidden sm:inline" /> <em className="not-italic font-normal text-[#8E4F67]">five figures</em> to run.
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-light leading-tight text-brand-cream mb-3">
+                The diagnostic a consulting firm would charge you<br className="hidden sm:inline" /> <em className="not-italic font-normal text-brand-berry">five figures</em> to run.
               </h2>
-              <p className="text-base sm:text-lg text-[#F6F3EE]/70 max-w-2xl mx-auto mb-4">
+              <p className="text-base sm:text-lg text-brand-cream/70 max-w-2xl mx-auto mb-4">
                 74 questions across 7 dimensions. AI-validated against 200+ EPM benchmarks. Done in 12 minutes. Yours, calibrated to your stack and your industry.
               </p>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7FB8A3]/10 border border-[#7FB8A3]/30">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-mint/10 border border-brand-mint/30">
                 <Zap className="h-4 w-4 text-brand-teal" />
-                <span className="text-sm font-medium text-[#F6F3EE]">Enterprise-grade analysis | Months of work in 20 minutes</span>
+                <span className="text-sm font-medium text-brand-cream">Enterprise-grade analysis | Months of work in 20 minutes</span>
               </div>
             </motion.div>
             
@@ -1292,29 +1292,29 @@ export default function FinanceCompassLanding() {
               transition={{ duration: 0.5, delay: 0.1 }}
             >
               <div className="flex items-center gap-3 p-3 sm:p-4 rounded-xl bg-white dark:bg-card border border-border/50 shadow-sm">
-                <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-[#7FB8A3] to-[#8E4F67] flex items-center justify-center flex-shrink-0">
+                <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-brand-mint to-brand-berry flex items-center justify-center flex-shrink-0">
                   <Clock className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <p className="font-semibold text-[#F6F3EE] text-sm">10-15 min</p>
+                  <p className="font-semibold text-brand-cream text-sm">10-15 min</p>
                   <p className="text-xs text-muted-foreground">Quick assessment</p>
                 </div>
               </div>
               <div className="flex items-center gap-3 p-3 sm:p-4 rounded-xl bg-white dark:bg-card border border-border/50 shadow-sm">
-                <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-[#8E4F67] to-[#252826] flex items-center justify-center flex-shrink-0">
+                <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-brand-berry to-brand-ink flex items-center justify-center flex-shrink-0">
                   <Target className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <p className="font-semibold text-[#F6F3EE] text-sm">7 Dimensions</p>
+                  <p className="font-semibold text-brand-cream text-sm">7 Dimensions</p>
                   <p className="text-xs text-muted-foreground">Full diagnostic</p>
                 </div>
               </div>
               <div className="flex items-center gap-3 p-3 sm:p-4 rounded-xl bg-white dark:bg-card border border-border/50 shadow-sm">
-                <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center flex-shrink-0">
+                <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-brand-ink to-brand-berry flex items-center justify-center flex-shrink-0">
                   <Sparkles className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <p className="font-semibold text-[#F6F3EE] text-sm">AI-Powered</p>
+                  <p className="font-semibold text-brand-cream text-sm">AI-Powered</p>
                   <p className="text-xs text-muted-foreground">Smart insights</p>
                 </div>
               </div>
@@ -1323,7 +1323,7 @@ export default function FinanceCompassLanding() {
                   <Shield className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <p className="font-semibold text-[#F6F3EE] text-sm">Secure</p>
+                  <p className="font-semibold text-brand-cream text-sm">Secure</p>
                   <p className="text-xs text-muted-foreground">GDPR compliant</p>
                 </div>
               </div>
@@ -1353,10 +1353,10 @@ export default function FinanceCompassLanding() {
                   inline-text strip with mono numbering, each item
                   separated by a thin divider. Reads as "here are
                   the five deliverables" without the chip chrome. */}
-              <div className="font-mono text-[10px] uppercase tracking-widest text-[#8E4F67] text-center mb-5">
+              <div className="font-mono text-[10px] uppercase tracking-widest text-brand-berry text-center mb-5">
                 What you walk out with
               </div>
-              <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-3 text-sm text-[#F6F3EE]/85">
+              <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-3 text-sm text-brand-cream/85">
                 {[
                   "Readiness score",
                   "Dimension breakdown",
@@ -1365,12 +1365,12 @@ export default function FinanceCompassLanding() {
                   "Sequenced roadmap",
                 ].map((item, idx, arr) => (
                   <span key={item} className="flex items-center gap-3">
-                    <span className="font-mono text-[10px] text-[#8E4F67]/60 tabular-nums">
+                    <span className="font-mono text-[10px] text-brand-berry/60 tabular-nums">
                       {String(idx + 1).padStart(2, "0")}
                     </span>
                     <span className="font-medium">{item}</span>
                     {idx < arr.length - 1 && (
-                      <span aria-hidden="true" className="text-[#F6F3EE]/25">·</span>
+                      <span aria-hidden="true" className="text-brand-cream/25">·</span>
                     )}
                   </span>
                 ))}
@@ -1381,9 +1381,9 @@ export default function FinanceCompassLanding() {
 
         {/* Your Assessment Journey Section */}
         <section className="py-12 sm:py-20 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#252826]/5 via-transparent to-[#8E4F67]/5" />
-          <div className="absolute top-20 left-1/4 w-48 sm:w-64 h-48 sm:h-64 bg-[#7FB8A3]/10 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-20 right-1/4 w-56 sm:w-80 h-56 sm:h-80 bg-[#8E4F67]/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-ink/5 via-transparent to-brand-berry/5" />
+          <div className="absolute top-20 left-1/4 w-48 sm:w-64 h-48 sm:h-64 bg-brand-mint/10 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-20 right-1/4 w-56 sm:w-80 h-56 sm:h-80 bg-brand-berry/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
             <motion.div 
@@ -1393,7 +1393,7 @@ export default function FinanceCompassLanding() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#F6F3EE] mb-2 sm:mb-3">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-cream mb-2 sm:mb-3">
                 How It Works
               </h2>
               <p className="text-base sm:text-xl text-brand-teal font-medium mb-3 sm:mb-4">
@@ -1409,7 +1409,7 @@ export default function FinanceCompassLanding() {
             {/* Journey Flow Visual */}
             <div className="relative mb-10 sm:mb-16">
               {/* Connection Line */}
-              <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-green-500/30 via-[#8E4F67]/30 to-[#252826]/30 -translate-y-1/2" />
+              <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-green-500/30 via-brand-berry/30 to-brand-ink/30 -translate-y-1/2" />
               
               <div className="flex flex-col lg:grid lg:grid-cols-3 gap-3 sm:gap-4">
                 {/* Step 1: Verify */}
@@ -1433,7 +1433,7 @@ export default function FinanceCompassLanding() {
                           Step 1
                         </Badge>
                       </div>
-                      <CardTitle className="text-lg text-[#F6F3EE]">
+                      <CardTitle className="text-lg text-brand-cream">
                         Quick Verification
                       </CardTitle>
                       <CardDescription className="text-sm">
@@ -1458,7 +1458,7 @@ export default function FinanceCompassLanding() {
                   {/* Arrow for mobile */}
                   <div className="lg:hidden flex justify-center py-2">
                     <div className="flex flex-col items-center gap-1">
-                      <div className="w-0.5 h-3 bg-gradient-to-b from-green-500/50 to-[#7FB8A3]/50" />
+                      <div className="w-0.5 h-3 bg-gradient-to-b from-green-500/50 to-brand-mint/50" />
                       <ArrowRight className="h-4 w-4 text-brand-cyan rotate-90" />
                     </div>
                   </div>
@@ -1472,17 +1472,17 @@ export default function FinanceCompassLanding() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.3 }}
                 >
-                  <Card className="lg:h-full border-[#8E4F67]/30 bg-gradient-to-b from-[#8E4F67]/10 to-transparent">
+                  <Card className="lg:h-full border-brand-berry/30 bg-gradient-to-b from-brand-berry/10 to-transparent">
                     <CardHeader className="pb-3">
                       <div className="flex items-center justify-between gap-2 mb-3">
                         <motion.div 
-                          className="h-12 w-12 rounded-full bg-gradient-to-br from-[#8E4F67] to-[#252826] flex items-center justify-center shadow-lg"
+                          className="h-12 w-12 rounded-full bg-gradient-to-br from-brand-berry to-brand-ink flex items-center justify-center shadow-lg"
                           whileHover={{ scale: 1.05 }}
                         >
                           <PreAssessmentIcon className="h-6 w-6 text-white" />
                         </motion.div>
                         <div className="flex flex-col items-end gap-1">
-                          <Badge className="bg-[#8E4F67]/10 text-brand-teal border-[#8E4F67]/20">
+                          <Badge className="bg-brand-berry/10 text-brand-teal border-brand-berry/20">
                             Step 2
                           </Badge>
                           <Badge variant="default" className="text-xs">
@@ -1490,7 +1490,7 @@ export default function FinanceCompassLanding() {
                           </Badge>
                         </div>
                       </div>
-                      <CardTitle className="text-lg text-[#F6F3EE]">
+                      <CardTitle className="text-lg text-brand-cream">
                         Pre-Assessment
                       </CardTitle>
                       <CardDescription className="text-sm">
@@ -1516,7 +1516,7 @@ export default function FinanceCompassLanding() {
                       </div>
                       <div className="h-1.5 bg-muted rounded-full overflow-hidden mt-3">
                         <motion.div 
-                          className="h-full bg-gradient-to-r from-[#8E4F67] to-[#7FB8A3] rounded-full"
+                          className="h-full bg-gradient-to-r from-brand-berry to-brand-mint rounded-full"
                           initial={{ width: 0 }}
                           whileInView={{ width: "60%" }}
                           viewport={{ once: true }}
@@ -1532,8 +1532,8 @@ export default function FinanceCompassLanding() {
                   {/* Arrow for mobile */}
                   <div className="lg:hidden flex justify-center py-2">
                     <div className="flex flex-col items-center gap-1">
-                      <div className="w-0.5 h-3 bg-gradient-to-b from-[#8E4F67]/50 to-[#252826]/50" />
-                      <ArrowRight className="h-4 w-4 text-[#F6F3EE] rotate-90" />
+                      <div className="w-0.5 h-3 bg-gradient-to-b from-brand-berry/50 to-brand-ink/50" />
+                      <ArrowRight className="h-4 w-4 text-brand-cream rotate-90" />
                     </div>
                   </div>
                 </motion.div>
@@ -1546,17 +1546,17 @@ export default function FinanceCompassLanding() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.45 }}
                 >
-                  <Card className="lg:h-full border-[#252826]/30 bg-gradient-to-b from-[#252826]/5 to-transparent">
+                  <Card className="lg:h-full border-brand-ink/30 bg-gradient-to-b from-brand-ink/5 to-transparent">
                     <CardHeader className="pb-3">
                       <div className="flex items-center justify-between gap-2 mb-3">
                         <motion.div 
-                          className="h-12 w-12 rounded-full bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center shadow-lg"
+                          className="h-12 w-12 rounded-full bg-gradient-to-br from-brand-ink to-brand-berry flex items-center justify-center shadow-lg"
                           whileHover={{ scale: 1.05 }}
                         >
                           <FullAssessmentIcon className="h-6 w-6 text-white" />
                         </motion.div>
                         <div className="flex flex-col items-end gap-1">
-                          <Badge className="bg-brand-navy/10 text-[#F6F3EE] border-[#252826]/20 dark:text-white dark:border-white/20">
+                          <Badge className="bg-brand-navy/10 text-brand-cream border-brand-ink/20 dark:text-white dark:border-white/20">
                             Step 3
                           </Badge>
                           <Badge variant="outline" className="text-xs">
@@ -1564,7 +1564,7 @@ export default function FinanceCompassLanding() {
                           </Badge>
                         </div>
                       </div>
-                      <CardTitle className="text-lg text-[#F6F3EE]">
+                      <CardTitle className="text-lg text-brand-cream">
                         Full Assessment
                       </CardTitle>
                       <CardDescription className="text-sm">
@@ -1572,25 +1572,25 @@ export default function FinanceCompassLanding() {
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="pt-0 space-y-2">
-                      <div className="flex items-center gap-2 text-xs text-[#F6F3EE]/70">
+                      <div className="flex items-center gap-2 text-xs text-brand-cream/70">
                         <FileText className="h-3.5 w-3.5 flex-shrink-0" />
                         <span>Executive-ready PDF report</span>
                       </div>
-                      <div className="flex items-center gap-2 text-xs text-[#F6F3EE]/70">
+                      <div className="flex items-center gap-2 text-xs text-brand-cream/70">
                         <Award className="h-3.5 w-3.5 flex-shrink-0" />
                         <span>Consultant follow-up session</span>
                       </div>
-                      <div className="flex items-center gap-2 text-xs text-[#F6F3EE]/70">
+                      <div className="flex items-center gap-2 text-xs text-brand-cream/70">
                         <Users className="h-3.5 w-3.5 flex-shrink-0" />
                         <span>Personalised transformation roadmap</span>
                       </div>
-                      <div className="flex items-center gap-2 text-xs text-[#F6F3EE]/70">
+                      <div className="flex items-center gap-2 text-xs text-brand-cream/70">
                         <Building2 className="h-3.5 w-3.5 flex-shrink-0" />
                         <span>Industry benchmarking insights</span>
                       </div>
                       <div className="h-1.5 bg-muted rounded-full overflow-hidden mt-3">
                         <motion.div 
-                          className="h-full bg-gradient-to-r from-[#252826] to-[#8E4F67] rounded-full"
+                          className="h-full bg-gradient-to-r from-brand-ink to-brand-berry rounded-full"
                           initial={{ width: 0 }}
                           whileInView={{ width: "100%" }}
                           viewport={{ once: true }}
@@ -1599,7 +1599,7 @@ export default function FinanceCompassLanding() {
                       </div>
                       <div className="flex justify-between text-xs text-muted-foreground">
                         <span>Insight depth</span>
-                        <span className="font-medium text-[#F6F3EE]">100%</span>
+                        <span className="font-medium text-brand-cream">100%</span>
                       </div>
                     </CardContent>
                   </Card>
@@ -1615,21 +1615,21 @@ export default function FinanceCompassLanding() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-[#252826]/5 via-[#8E4F67]/10 to-[#7FB8A3]/5 rounded-2xl" />
-              <Card className="relative border-dashed border-[#8E4F67]/30 bg-transparent overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#7FB8A3]/20 to-transparent rounded-full blur-2xl" />
+              <div className="absolute inset-0 bg-gradient-to-r from-brand-ink/5 via-brand-berry/10 to-brand-mint/5 rounded-2xl" />
+              <Card className="relative border-dashed border-brand-berry/30 bg-transparent overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-brand-mint/20 to-transparent rounded-full blur-2xl" />
                 <CardHeader className="pb-3 sm:pb-4">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                     <div className="flex items-center gap-3">
                       <motion.div 
-                        className="h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-gradient-to-br from-[#7FB8A3] to-[#8E4F67] flex items-center justify-center shadow-lg flex-shrink-0"
+                        className="h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-gradient-to-br from-brand-mint to-brand-berry flex items-center justify-center shadow-lg flex-shrink-0"
                         animate={{ scale: [1, 1.05, 1] }}
                         transition={{ duration: 2, repeat: Infinity }}
                       >
                         <Rocket className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                       </motion.div>
                       <div>
-                        <CardTitle className="text-base sm:text-lg text-[#F6F3EE]">
+                        <CardTitle className="text-base sm:text-lg text-brand-cream">
                           Beyond the Assessment
                         </CardTitle>
                         <CardDescription className="text-xs sm:text-sm">
@@ -1637,7 +1637,7 @@ export default function FinanceCompassLanding() {
                         </CardDescription>
                       </div>
                     </div>
-                    <Badge className="bg-gradient-to-r from-[#8E4F67] to-[#252826] text-white border-0 self-start sm:self-auto">
+                    <Badge className="bg-gradient-to-r from-brand-berry to-brand-ink text-white border-0 self-start sm:self-auto">
                       Premium Journey
                     </Badge>
                   </div>
@@ -1645,12 +1645,12 @@ export default function FinanceCompassLanding() {
                 <CardContent className="pt-0">
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
                     {/* Workshop Series */}
-                    <div className="flex items-start gap-3 p-3 sm:p-4 rounded-lg bg-background/50 border border-[#8E4F67]/20">
-                      <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-lg bg-[#8E4F67]/10 flex items-center justify-center flex-shrink-0">
+                    <div className="flex items-start gap-3 p-3 sm:p-4 rounded-lg bg-background/50 border border-brand-berry/20">
+                      <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-lg bg-brand-berry/10 flex items-center justify-center flex-shrink-0">
                         <Calendar className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-brand-teal" />
                       </div>
                       <div className="min-w-0">
-                        <h4 className="font-semibold text-[#F6F3EE] text-xs sm:text-sm mb-1">
+                        <h4 className="font-semibold text-brand-cream text-xs sm:text-sm mb-1">
                           4-Workshop Series
                         </h4>
                         <p className="text-[11px] sm:text-xs text-muted-foreground">
@@ -1660,12 +1660,12 @@ export default function FinanceCompassLanding() {
                     </div>
 
                     {/* Execution Tracking */}
-                    <div className="flex items-start gap-3 p-3 sm:p-4 rounded-lg bg-background/50 border border-[#8E4F67]/20">
-                      <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-lg bg-[#8E4F67]/10 flex items-center justify-center flex-shrink-0">
+                    <div className="flex items-start gap-3 p-3 sm:p-4 rounded-lg bg-background/50 border border-brand-berry/20">
+                      <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-lg bg-brand-berry/10 flex items-center justify-center flex-shrink-0">
                         <LineChart className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-brand-teal" />
                       </div>
                       <div className="min-w-0">
-                        <h4 className="font-semibold text-[#F6F3EE] text-xs sm:text-sm mb-1">
+                        <h4 className="font-semibold text-brand-cream text-xs sm:text-sm mb-1">
                           AI-Powered Tracking
                         </h4>
                         <p className="text-[11px] sm:text-xs text-muted-foreground">
@@ -1675,12 +1675,12 @@ export default function FinanceCompassLanding() {
                     </div>
 
                     {/* Final Deliverables */}
-                    <div className="flex items-start gap-3 p-3 sm:p-4 rounded-lg bg-background/50 border border-[#8E4F67]/20">
-                      <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-lg bg-[#8E4F67]/10 flex items-center justify-center flex-shrink-0">
+                    <div className="flex items-start gap-3 p-3 sm:p-4 rounded-lg bg-background/50 border border-brand-berry/20">
+                      <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-lg bg-brand-berry/10 flex items-center justify-center flex-shrink-0">
                         <FileCheck className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-brand-teal" />
                       </div>
                       <div className="min-w-0">
-                        <h4 className="font-semibold text-[#F6F3EE] text-xs sm:text-sm mb-1">
+                        <h4 className="font-semibold text-brand-cream text-xs sm:text-sm mb-1">
                           Executive Deliverables
                         </h4>
                         <p className="text-[11px] sm:text-xs text-muted-foreground">
@@ -1693,7 +1693,7 @@ export default function FinanceCompassLanding() {
                   <div className="mt-6 flex items-center justify-center">
                     <Button
                       variant="outline"
-                      className="border-[#8E4F67] text-brand-teal hover:bg-[#8E4F67]/10"
+                      className="border-brand-berry text-brand-teal hover:bg-brand-berry/10"
                       onClick={() => navigate("/contact")}
                       data-testid="button-learn-more-workshops"
                     >
@@ -1732,7 +1732,7 @@ export default function FinanceCompassLanding() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-[#F6F3EE]">
+              <h2 className="text-3xl md:text-4xl font-bold text-brand-cream">
                 Why Finance Leaders Choose FinanceCompass
               </h2>
             </motion.div>
@@ -1746,10 +1746,10 @@ export default function FinanceCompassLanding() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0 }}
               >
-                <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-[#7FB8A3] to-[#8E4F67] flex items-center justify-center mb-5 shadow-lg">
+                <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-brand-mint to-brand-berry flex items-center justify-center mb-5 shadow-lg">
                   <Sparkles className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold text-[#F6F3EE] mb-3">
+                <h3 className="text-xl font-semibold text-brand-cream mb-3">
                   AI-Powered Insights
                 </h3>
                 <p className="text-muted-foreground">
@@ -1765,10 +1765,10 @@ export default function FinanceCompassLanding() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.15 }}
               >
-                <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-[#8E4F67] to-[#252826] flex items-center justify-center mb-5 shadow-lg">
+                <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-brand-berry to-brand-ink flex items-center justify-center mb-5 shadow-lg">
                   <Target className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold text-[#F6F3EE] mb-3">
+                <h3 className="text-xl font-semibold text-brand-cream mb-3">
                   Actionable Roadmap
                 </h3>
                 <p className="text-muted-foreground">
@@ -1784,10 +1784,10 @@ export default function FinanceCompassLanding() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
-                <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center mb-5 shadow-lg">
+                <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-brand-ink to-brand-berry flex items-center justify-center mb-5 shadow-lg">
                   <Users className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold text-[#F6F3EE] mb-3">
+                <h3 className="text-xl font-semibold text-brand-cream mb-3">
                   Expert Guidance
                 </h3>
                 <p className="text-muted-foreground">
@@ -1804,13 +1804,13 @@ export default function FinanceCompassLanding() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <div className="p-6 rounded-xl bg-gradient-to-r from-[#252826]/5 via-[#8E4F67]/10 to-[#7FB8A3]/5 border border-[#8E4F67]/20">
+              <div className="p-6 rounded-xl bg-gradient-to-r from-brand-ink/5 via-brand-berry/10 to-brand-mint/5 border border-brand-berry/20">
                 <div className="flex items-center justify-center gap-3 mb-4">
-                  <div className="h-12 w-12 rounded-full bg-gradient-to-br from-[#7FB8A3] to-[#8E4F67] flex items-center justify-center shadow-lg">
+                  <div className="h-12 w-12 rounded-full bg-gradient-to-br from-brand-mint to-brand-berry flex items-center justify-center shadow-lg">
                     <Bot className="h-6 w-6 text-white" />
                   </div>
                 </div>
-                <h3 className="text-xl font-semibold text-[#F6F3EE] mb-3">
+                <h3 className="text-xl font-semibold text-brand-cream mb-3">
                   Future-Ready Finance
                 </h3>
                 <p className="text-muted-foreground mb-4">
@@ -1818,15 +1818,15 @@ export default function FinanceCompassLanding() {
                   continuous close processes, and self-service analytics - positioning your team to lead rather than follow the AI revolution in finance.
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-3 text-sm">
-                  <Badge variant="outline" className="border-[#8E4F67]/30 text-brand-teal">
+                  <Badge variant="outline" className="border-brand-berry/30 text-brand-teal">
                     <Cpu className="h-3 w-3 mr-1" />
                     Agentic AI Readiness
                   </Badge>
-                  <Badge variant="outline" className="border-[#8E4F67]/30 text-brand-teal">
+                  <Badge variant="outline" className="border-brand-berry/30 text-brand-teal">
                     <LineChart className="h-3 w-3 mr-1" />
                     Continuous Close
                   </Badge>
-                  <Badge variant="outline" className="border-[#8E4F67]/30 text-brand-teal">
+                  <Badge variant="outline" className="border-brand-berry/30 text-brand-teal">
                     <Sparkles className="h-3 w-3 mr-1" />
                     Self-Service Analytics
                   </Badge>

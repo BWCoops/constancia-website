@@ -120,7 +120,7 @@ function ComparisonBarRow({ data, index }: { data: MultiLayerComparisonData; ind
           <span className="text-xs text-muted-foreground w-24">Your Score</span>
           <div className="flex-1 bg-muted rounded-full h-2.5 overflow-hidden">
             <div 
-              className="h-full bg-[#8E4F67] rounded-full transition-all duration-500"
+              className="h-full bg-brand-berry rounded-full transition-all duration-500"
               style={{ width: `${yourProgress}%` }}
             />
           </div>
@@ -140,11 +140,11 @@ function ComparisonBarRow({ data, index }: { data: MultiLayerComparisonData; ind
           <span className="text-xs text-muted-foreground w-24">World-Class</span>
           <div className="flex-1 bg-muted rounded-full h-2.5 overflow-hidden">
             <div 
-              className="h-full bg-[#252826] rounded-full transition-all duration-500"
+              className="h-full bg-brand-ink rounded-full transition-all duration-500"
               style={{ width: `${worldClassProgress}%` }}
             />
           </div>
-          <span className="text-xs font-medium w-10 text-right text-[#F6F3EE]">{data.worldClass.toFixed(1)}</span>
+          <span className="text-xs font-medium w-10 text-right text-brand-cream">{data.worldClass.toFixed(1)}</span>
         </div>
       </div>
     </motion.div>
@@ -179,7 +179,7 @@ export function BenchmarkComparison({
             <div className="flex flex-wrap items-start justify-between gap-2">
               <div>
                 <CardTitle className="flex items-center gap-2">
-                  <BarChart3 className="h-5 w-5 text-[#8E4F67]" />
+                  <BarChart3 className="h-5 w-5 text-brand-berry" />
                   {title}
                 </CardTitle>
                 <CardDescription>{description}</CardDescription>
@@ -225,7 +225,7 @@ export function BenchmarkComparison({
                             <div className="space-y-1 text-xs">
                               <div className="flex justify-between gap-4">
                                 <span className="flex items-center gap-1.5">
-                                  <div className="w-2 h-2 rounded-full bg-[#8E4F67]" />
+                                  <div className="w-2 h-2 rounded-full bg-brand-berry" />
                                   Your Score:
                                 </span>
                                 <span className="font-medium">{data.yourScore.toFixed(2)}</span>
@@ -239,7 +239,7 @@ export function BenchmarkComparison({
                               </div>
                               <div className="flex justify-between gap-4">
                                 <span className="flex items-center gap-1.5">
-                                  <div className="w-2 h-2 rounded-full bg-[#252826]" />
+                                  <div className="w-2 h-2 rounded-full bg-brand-ink" />
                                   World-Class:
                                 </span>
                                 <span className="font-medium">{data.worldClass.toFixed(2)}</span>
@@ -293,7 +293,7 @@ export function BenchmarkComparison({
           <div className="flex flex-wrap items-start justify-between gap-2">
             <div>
               <CardTitle className="flex items-center gap-2">
-                <BarChart3 className="h-5 w-5 text-[#8E4F67]" />
+                <BarChart3 className="h-5 w-5 text-brand-berry" />
                 {title}
               </CardTitle>
               <CardDescription>{description}</CardDescription>
@@ -316,7 +316,7 @@ export function BenchmarkComparison({
           <div className="mt-6 pt-4 border-t flex flex-wrap items-center justify-between gap-2 text-xs">
             <div className="flex flex-wrap items-center gap-3">
               <div className="flex items-center gap-1.5">
-                <div className="w-2.5 h-2.5 rounded-full bg-[#8E4F67]" />
+                <div className="w-2.5 h-2.5 rounded-full bg-brand-berry" />
                 <span className="text-muted-foreground">Your Score</span>
               </div>
               <div className="flex items-center gap-1.5">
@@ -324,7 +324,7 @@ export function BenchmarkComparison({
                 <span className="text-muted-foreground">Industry Avg</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <div className="w-2.5 h-2.5 rounded-full bg-[#252826]" />
+                <div className="w-2.5 h-2.5 rounded-full bg-brand-ink" />
                 <span className="text-muted-foreground">World-Class</span>
               </div>
             </div>

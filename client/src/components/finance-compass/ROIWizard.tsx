@@ -206,7 +206,7 @@ function DimensionContributionCard({
                   </p>
                 </div>
                 <div className="text-right ml-2">
-                  <p className="text-sm font-semibold text-[#8E4F67]">
+                  <p className="text-sm font-semibold text-brand-berry">
                     £{contrib.totalContribution}k
                   </p>
                 </div>
@@ -567,7 +567,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
   if (loadingExisting || (loadingAssessment && setupMode === "pending")) {
     return (
       <div className="flex items-center justify-center py-12">
-        <Loader2 className="h-8 w-8 animate-spin text-[#8E4F67]" />
+        <Loader2 className="h-8 w-8 animate-spin text-brand-berry" />
       </div>
     );
   }
@@ -625,11 +625,11 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
           className="text-center space-y-2"
         >
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center shadow-lg">
+            <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-brand-ink to-brand-berry flex items-center justify-center shadow-lg">
               <Calculator className="h-6 w-6 text-white" />
             </div>
           </div>
-          <h2 className="text-2xl font-bold text-[#F6F3EE]">ROI Analysis Dashboard</h2>
+          <h2 className="text-2xl font-bold text-brand-cream">ROI Analysis Dashboard</h2>
           <p className="text-muted-foreground max-w-lg mx-auto">
             Your transformation business case summary with key financial metrics and projections
           </p>
@@ -669,7 +669,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.1 }}
               >
-                <Card className="border-0 bg-gradient-to-br from-[#252826] to-[#8E4F67] text-white overflow-visible">
+                <Card className="border-0 bg-gradient-to-br from-brand-ink to-brand-berry text-white overflow-visible">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-2 text-white/80 text-xs mb-1">
                       <Percent className="h-3.5 w-3.5" />
@@ -705,15 +705,15 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.15 }}
               >
-                <Card className="border-[#8E4F67]/20 overflow-visible">
+                <Card className="border-brand-berry/20 overflow-visible">
                   <CardContent className="p-4">
-                    <div className="flex items-center gap-2 text-[#8E4F67] text-xs mb-1">
+                    <div className="flex items-center gap-2 text-brand-berry text-xs mb-1">
                       <Clock className="h-3.5 w-3.5" />
                       Payback
                       <Info className="h-3 w-3 ml-auto opacity-40" />
                     </div>
                     <motion.div 
-                      className="text-2xl font-bold text-[#F6F3EE]"
+                      className="text-2xl font-bold text-brand-cream"
                       data-testid="text-dashboard-payback"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
@@ -741,15 +741,15 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2 }}
               >
-                <Card className="border-[#8E4F67]/20 overflow-visible">
+                <Card className="border-brand-berry/20 overflow-visible">
                   <CardContent className="p-4">
-                    <div className="flex items-center gap-2 text-[#8E4F67] text-xs mb-1">
+                    <div className="flex items-center gap-2 text-brand-berry text-xs mb-1">
                       <TrendingUp className="h-3.5 w-3.5" />
                       NPV
                       <Info className="h-3 w-3 ml-auto opacity-40" />
                     </div>
                     <motion.div 
-                      className="text-2xl font-bold text-[#F6F3EE]"
+                      className="text-2xl font-bold text-brand-cream"
                       data-testid="text-dashboard-npv"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
@@ -774,15 +774,15 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.25 }}
               >
-                <Card className="border-[#8E4F67]/20 overflow-visible">
+                <Card className="border-brand-berry/20 overflow-visible">
                   <CardContent className="p-4">
-                    <div className="flex items-center gap-2 text-[#8E4F67] text-xs mb-1">
+                    <div className="flex items-center gap-2 text-brand-berry text-xs mb-1">
                       <Scale className="h-3.5 w-3.5" />
                       BCR
                       <Info className="h-3 w-3 ml-auto opacity-40" />
                     </div>
                     <motion.div 
-                      className="text-2xl font-bold text-[#F6F3EE]"
+                      className="text-2xl font-bold text-brand-cream"
                       data-testid="text-dashboard-bcr"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
@@ -810,15 +810,15 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.3 }}
               >
-                <Card className="border-[#8E4F67]/20 overflow-visible">
+                <Card className="border-brand-berry/20 overflow-visible">
                   <CardContent className="p-4">
-                    <div className="flex items-center gap-2 text-[#8E4F67] text-xs mb-1">
+                    <div className="flex items-center gap-2 text-brand-berry text-xs mb-1">
                       <DollarSign className="h-3.5 w-3.5" />
                       TCO
                       <Info className="h-3 w-3 ml-auto opacity-40" />
                     </div>
                     <motion.div 
-                      className="text-2xl font-bold text-[#F6F3EE]"
+                      className="text-2xl font-bold text-brand-cream"
                       data-testid="text-dashboard-tco"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
@@ -843,10 +843,10 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.35 }}
         >
-          <Card className="border-[#8E4F67]/20">
+          <Card className="border-brand-berry/20">
             <CardHeader className="pb-3">
               <CardTitle className="text-sm flex items-center gap-2">
-                <Target className="h-4 w-4 text-[#8E4F67]" />
+                <Target className="h-4 w-4 text-brand-berry" />
                 Industry Benchmark Comparison
               </CardTitle>
               <CardDescription className="text-xs">
@@ -901,14 +901,14 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
         >
-          <Card className="border-[#7FB8A3]/30 bg-gradient-to-r from-[#252826]/5 to-[#8E4F67]/5 dark:from-[#252826]/20 dark:to-[#8E4F67]/20">
+          <Card className="border-brand-mint/30 bg-gradient-to-r from-brand-ink/5 to-brand-berry/5 dark:from-brand-ink/20 dark:to-brand-berry/20">
             <CardContent className="p-4">
               <div className="flex items-start gap-3">
-                <div className="h-8 w-8 rounded-full bg-[#8E4F67]/10 flex items-center justify-center flex-shrink-0">
-                  <Info className="h-4 w-4 text-[#8E4F67]" />
+                <div className="h-8 w-8 rounded-full bg-brand-berry/10 flex items-center justify-center flex-shrink-0">
+                  <Info className="h-4 w-4 text-brand-berry" />
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-medium text-[#F6F3EE] text-sm">Understanding Your Metrics</h4>
+                  <h4 className="font-medium text-brand-cream text-sm">Understanding Your Metrics</h4>
                   <ul className="text-xs text-muted-foreground space-y-1.5">
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-3 w-3 text-green-600 mt-0.5 flex-shrink-0" />
@@ -955,10 +955,10 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5 }}
           >
-            <Card className="border-[#8E4F67]/20 h-full">
+            <Card className="border-brand-berry/20 h-full">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm flex items-center gap-2">
-                  <BarChart3 className="h-4 w-4 text-[#8E4F67]" />
+                  <BarChart3 className="h-4 w-4 text-brand-berry" />
                   Investment Summary
                 </CardTitle>
               </CardHeader>
@@ -969,7 +969,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Annual Benefits</span>
-                  <span className="font-medium text-[#8E4F67]">{formatCurrency(liveMetrics.totalAnnualBenefits, currency)}</span>
+                  <span className="font-medium text-brand-berry">{formatCurrency(liveMetrics.totalAnnualBenefits, currency)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Annual Costs</span>
@@ -998,10 +998,10 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.55 }}
           >
-            <Card className="border-[#8E4F67]/20 h-full">
+            <Card className="border-brand-berry/20 h-full">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm flex items-center gap-2">
-                  <TrendingUp className="h-4 w-4 text-[#8E4F67]" />
+                  <TrendingUp className="h-4 w-4 text-brand-berry" />
                   Transformation Value
                 </CardTitle>
               </CardHeader>
@@ -1012,11 +1012,11 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">With EPM Net Value</span>
-                  <span className="font-medium text-[#8E4F67]">{formatCurrency(scenarios.withTransformation.netValue, currency)}</span>
+                  <span className="font-medium text-brand-berry">{formatCurrency(scenarios.withTransformation.netValue, currency)}</span>
                 </div>
                 <div className="flex justify-between pt-2 border-t">
                   <span className="text-muted-foreground">Net Gain</span>
-                  <span className="font-bold text-[#7FB8A3]">{formatCurrency(scenarios.delta.netValueDelta, currency)}</span>
+                  <span className="font-bold text-brand-mint">{formatCurrency(scenarios.delta.netValueDelta, currency)}</span>
                 </div>
               </CardContent>
             </Card>
@@ -1029,10 +1029,10 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
         >
-          <Card className="border-[#8E4F67]/20">
+          <Card className="border-brand-berry/20">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm flex items-center gap-2">
-                <BarChart3 className="h-4 w-4 text-[#8E4F67]" />
+                <BarChart3 className="h-4 w-4 text-brand-berry" />
                 Year-by-Year Analysis
               </CardTitle>
             </CardHeader>
@@ -1052,11 +1052,11 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                     <TableRow key={row.year}>
                       <TableCell className="py-2 font-medium">Year {row.year}</TableCell>
                       <TableCell className="py-2 text-right text-red-600">{formatCurrency(row.costs, currency)}</TableCell>
-                      <TableCell className="py-2 text-right text-[#8E4F67]">{formatCurrency(row.benefits, currency)}</TableCell>
-                      <TableCell className={`py-2 text-right font-medium ${row.netCashFlow >= 0 ? 'text-[#8E4F67]' : 'text-red-600'}`}>
+                      <TableCell className="py-2 text-right text-brand-berry">{formatCurrency(row.benefits, currency)}</TableCell>
+                      <TableCell className={`py-2 text-right font-medium ${row.netCashFlow >= 0 ? 'text-brand-berry' : 'text-red-600'}`}>
                         {formatCurrency(row.netCashFlow, currency)}
                       </TableCell>
-                      <TableCell className={`py-2 text-right font-medium ${row.cumulativeNpv >= 0 ? 'text-[#8E4F67]' : 'text-red-600'}`}>
+                      <TableCell className={`py-2 text-right font-medium ${row.cumulativeNpv >= 0 ? 'text-brand-berry' : 'text-red-600'}`}>
                         {formatCurrency(row.cumulativeNpv, currency)}
                       </TableCell>
                     </TableRow>
@@ -1064,11 +1064,11 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                   <TableRow className="border-t-2 font-semibold bg-muted/30">
                     <TableCell className="py-2">Total</TableCell>
                     <TableCell className="py-2 text-right text-red-600">{formatCurrency(yearlyAnalysis.totals.totalCosts, currency)}</TableCell>
-                    <TableCell className="py-2 text-right text-[#8E4F67]">{formatCurrency(yearlyAnalysis.totals.totalBenefits, currency)}</TableCell>
-                    <TableCell className={`py-2 text-right ${yearlyAnalysis.totals.totalNet >= 0 ? 'text-[#8E4F67]' : 'text-red-600'}`}>
+                    <TableCell className="py-2 text-right text-brand-berry">{formatCurrency(yearlyAnalysis.totals.totalBenefits, currency)}</TableCell>
+                    <TableCell className={`py-2 text-right ${yearlyAnalysis.totals.totalNet >= 0 ? 'text-brand-berry' : 'text-red-600'}`}>
                       {formatCurrency(yearlyAnalysis.totals.totalNet, currency)}
                     </TableCell>
-                    <TableCell className={`py-2 text-right ${yearlyAnalysis.totals.finalNpv >= 0 ? 'text-[#8E4F67]' : 'text-red-600'}`}>
+                    <TableCell className={`py-2 text-right ${yearlyAnalysis.totals.finalNpv >= 0 ? 'text-brand-berry' : 'text-red-600'}`}>
                       {formatCurrency(yearlyAnalysis.totals.finalNpv, currency)}
                     </TableCell>
                   </TableRow>
@@ -1085,17 +1085,17 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
     return (
       <div className="space-y-6">
         <div className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center">
+          <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-brand-ink to-brand-berry flex items-center justify-center">
             <Calculator className="h-5 w-5 text-white" />
           </div>
           <div>
-            <h2 className="text-xl font-semibold text-[#F6F3EE]">ROI Calculator</h2>
+            <h2 className="text-xl font-semibold text-brand-cream">ROI Calculator</h2>
             <p className="text-sm text-muted-foreground">Build your transformation business case</p>
           </div>
         </div>
 
         <div className="text-center py-4">
-          <h3 className="text-lg font-medium text-[#F6F3EE] mb-2">How would you like to get started?</h3>
+          <h3 className="text-lg font-medium text-brand-cream mb-2">How would you like to get started?</h3>
           <p className="text-sm text-muted-foreground">Choose how to initialize your ROI baseline values</p>
         </div>
 
@@ -1118,7 +1118,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                   <Calculator className="h-6 w-6 text-green-600" />
                 </div>
                 <div className="flex-1">
-                  <h4 className="font-semibold text-[#F6F3EE] mb-1">
+                  <h4 className="font-semibold text-brand-cream mb-1">
                     Continue with Existing
                   </h4>
                   <p className="text-sm text-muted-foreground">
@@ -1135,14 +1135,14 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
             disabled={!hasCompletedAssessment}
             className={`relative p-6 rounded-xl border-2 text-left transition-all ${
               hasCompletedAssessment
-                ? "border-[#8E4F67]/30 hover:border-[#8E4F67] hover:bg-[#8E4F67]/5 cursor-pointer"
+                ? "border-brand-berry/30 hover:border-brand-berry hover:bg-brand-berry/5 cursor-pointer"
                 : "border-gray-200 dark:border-gray-700 opacity-60 cursor-not-allowed"
             }`}
             data-testid="button-import-assessment"
           >
             {hasCompletedAssessment && !hasExistingProfile && (
               <div className="absolute -top-2 -right-2">
-                <Badge className="bg-gradient-to-r from-[#252826] to-[#8E4F67] text-white">
+                <Badge className="bg-gradient-to-r from-brand-ink to-brand-berry text-white">
                   <Sparkles className="h-3 w-3 mr-1" />
                   Recommended
                 </Badge>
@@ -1151,19 +1151,19 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
             <div className="flex items-start gap-4">
               <div className={`h-12 w-12 rounded-lg flex items-center justify-center flex-shrink-0 ${
                 hasCompletedAssessment 
-                  ? "bg-[#8E4F67]/10" 
+                  ? "bg-brand-berry/10" 
                   : "bg-gray-100 dark:bg-gray-800"
               }`}>
                 <FileInput className={`h-6 w-6 ${
                   hasCompletedAssessment 
-                    ? "text-[#8E4F67]" 
+                    ? "text-brand-berry" 
                     : "text-gray-400"
                 }`} />
               </div>
               <div className="flex-1">
                 <h4 className={`font-semibold mb-1 ${
                   hasCompletedAssessment 
-                    ? "text-[#F6F3EE]" 
+                    ? "text-brand-cream" 
                     : "text-gray-500 dark:text-gray-400"
                 }`}>
                   Import from Assessment
@@ -1202,7 +1202,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
               form.reset();
               setSetupMode("fresh");
             }}
-            className="p-6 rounded-xl border-2 border-gray-200 dark:border-gray-700 hover:border-[#8E4F67]/50 hover:bg-[#8E4F67]/5 text-left transition-all cursor-pointer"
+            className="p-6 rounded-xl border-2 border-gray-200 dark:border-gray-700 hover:border-brand-berry/50 hover:bg-brand-berry/5 text-left transition-all cursor-pointer"
             data-testid="button-start-fresh"
           >
             <div className="flex items-start gap-4">
@@ -1210,7 +1210,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                 <PenLine className="h-6 w-6 text-gray-600 dark:text-gray-400" />
               </div>
               <div className="flex-1">
-                <h4 className="font-semibold text-[#F6F3EE] mb-1">
+                <h4 className="font-semibold text-brand-cream mb-1">
                   Start Fresh
                 </h4>
                 <p className="text-sm text-muted-foreground">
@@ -1239,11 +1239,11 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
     <div className="space-y-6">
       <div className="flex items-center justify-between gap-4 flex-wrap">
         <div className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center">
+          <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-brand-ink to-brand-berry flex items-center justify-center">
             <Calculator className="h-5 w-5 text-white" />
           </div>
           <div>
-            <h2 className="text-xl font-semibold text-[#F6F3EE]">ROI Calculator</h2>
+            <h2 className="text-xl font-semibold text-brand-cream">ROI Calculator</h2>
             <p className="text-sm text-muted-foreground">Build your transformation business case</p>
           </div>
         </div>
@@ -1265,7 +1265,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                 onClick={() => setCurrentStep(index)}
                 className={`flex items-center gap-2 p-2 rounded-lg transition-colors w-full ${
                   isActive
-                    ? "bg-[#8E4F67]/10 border border-[#8E4F67]/30"
+                    ? "bg-brand-berry/10 border border-brand-berry/30"
                     : isCompleted
                     ? "bg-green-50 dark:bg-green-900/20"
                     : "bg-gray-50 dark:bg-gray-800/50"
@@ -1275,7 +1275,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                 <div
                   className={`h-6 w-6 rounded-full flex items-center justify-center flex-shrink-0 ${
                     isActive
-                      ? "bg-[#8E4F67] text-white"
+                      ? "bg-brand-berry text-white"
                       : isCompleted
                       ? "bg-green-500 text-white"
                       : "bg-gray-200 dark:bg-gray-700 text-gray-500"
@@ -1283,7 +1283,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                 >
                   {isCompleted ? <Check className="h-3 w-3" /> : <StepIcon className="h-3 w-3" />}
                 </div>
-                <span className={`text-xs font-medium hidden md:block ${isActive ? "text-[#8E4F67]" : "text-muted-foreground"}`}>
+                <span className={`text-xs font-medium hidden md:block ${isActive ? "text-brand-berry" : "text-muted-foreground"}`}>
                   {step.title}
                 </span>
               </button>
@@ -1311,8 +1311,8 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
               <Card>
                 <CardHeader>
                   <div className="flex items-center gap-3">
-                    <div className="h-8 w-8 rounded-lg bg-[#8E4F67]/10 flex items-center justify-center">
-                      <CurrentStepIcon className="h-4 w-4 text-[#8E4F67]" />
+                    <div className="h-8 w-8 rounded-lg bg-brand-berry/10 flex items-center justify-center">
+                      <CurrentStepIcon className="h-4 w-4 text-brand-berry" />
                     </div>
                     <div>
                       <CardTitle className="text-lg">{STEPS[currentStep].title}</CardTitle>
@@ -1589,8 +1589,8 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                           </div>
                           
                           {setupMode === "import" && assessmentData?.data && (
-                            <div className="rounded-lg bg-[#8E4F67]/5 border border-[#8E4F67]/20 p-3 mb-4">
-                              <div className="flex items-center gap-2 text-sm text-[#8E4F67] font-medium mb-1">
+                            <div className="rounded-lg bg-brand-berry/5 border border-brand-berry/20 p-3 mb-4">
+                              <div className="flex items-center gap-2 text-sm text-brand-berry font-medium mb-1">
                                 <Sparkles className="h-4 w-4" />
                                 <span>Values seeded from your assessment</span>
                               </div>
@@ -1698,12 +1698,12 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                               </div>
                             </div>
 
-                            <div className="rounded-lg border bg-[#7FB8A3]/10/50 dark:bg-[#252826]/10 p-4">
+                            <div className="rounded-lg border bg-brand-mint/10/50 dark:bg-brand-ink/10 p-4">
                               <div className="flex items-center gap-2 mb-3">
-                                <div className="h-6 w-6 rounded bg-[#8E4F67] flex items-center justify-center">
+                                <div className="h-6 w-6 rounded bg-brand-berry flex items-center justify-center">
                                   <TrendingUp className="h-3 w-3 text-white" />
                                 </div>
-                                <h4 className="font-medium text-[#7FB8A3]">Revenue & Strategic Impact</h4>
+                                <h4 className="font-medium text-brand-mint">Revenue & Strategic Impact</h4>
                               </div>
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <FormField
@@ -1918,7 +1918,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                         <Button
                           type="button"
                           onClick={handleNext}
-                          className="bg-[#8E4F67] hover:bg-[#252826]"
+                          className="bg-brand-berry hover:bg-brand-ink"
                           data-testid="button-next"
                         >
                           Next
@@ -1927,7 +1927,7 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                       ) : (
                         <Button
                           type="submit"
-                          className="bg-[#252826] hover:bg-[#8E4F67]"
+                          className="bg-brand-ink hover:bg-brand-berry"
                           disabled={saveMutation.isPending}
                           data-testid="button-save-roi"
                         >
@@ -1948,10 +1948,10 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
         </div>
 
         <div className="lg:col-span-1">
-          <Card className="sticky top-24 border-[#8E4F67]/20">
+          <Card className="sticky top-24 border-brand-berry/20">
             <CardHeader className="pb-2">
               <CardTitle className="text-base flex items-center gap-2">
-                <BarChart3 className="h-4 w-4 text-[#8E4F67]" />
+                <BarChart3 className="h-4 w-4 text-brand-berry" />
                 Live ROI Analysis
               </CardTitle>
             </CardHeader>
@@ -1976,12 +1976,12 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                         {formatPercent(liveMetrics.roiPercent)}
                       </div>
                     </div>
-                    <div className="p-2 rounded-lg bg-gradient-to-br from-[#7FB8A3]/10 to-[#7FB8A3]/10 dark:from-[#252826]/20 dark:to-[#252826]/20 border border-[#252826]">
-                      <div className="flex items-center gap-1 text-[#8E4F67] dark:text-[#7FB8A3] text-xs mb-0.5">
+                    <div className="p-2 rounded-lg bg-gradient-to-br from-brand-mint/10 to-brand-mint/10 dark:from-brand-ink/20 dark:to-brand-ink/20 border border-brand-ink">
+                      <div className="flex items-center gap-1 text-brand-berry dark:text-brand-mint text-xs mb-0.5">
                         <Clock className="h-3 w-3" />
                         Payback
                       </div>
-                      <div className="text-base font-bold text-[#8E4F67] dark:text-[#7FB8A3]" data-testid="text-preview-payback">
+                      <div className="text-base font-bold text-brand-berry dark:text-brand-mint" data-testid="text-preview-payback">
                         {formatPayback(liveMetrics.paybackMonths)}
                       </div>
                     </div>
@@ -2086,18 +2086,18 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                             </div>
                           </div>
                         </div>
-                        <div className="p-2 rounded-lg border border-[#8E4F67]/30 bg-[#8E4F67]/5">
-                          <div className="text-xs font-medium text-[#8E4F67] mb-1">Transformation Value</div>
+                        <div className="p-2 rounded-lg border border-brand-berry/30 bg-brand-berry/5">
+                          <div className="text-xs font-medium text-brand-berry mb-1">Transformation Value</div>
                           <div className="grid grid-cols-2 gap-2 text-xs">
                             <div className="flex justify-between">
                               <span className="text-muted-foreground">Net Gain</span>
-                              <span className="font-bold text-[#7FB8A3]" data-testid="text-delta-gain">
+                              <span className="font-bold text-brand-mint" data-testid="text-delta-gain">
                                 {formatCurrency(comparison.delta.netValueDelta, currency)}
                               </span>
                             </div>
                             <div className="flex justify-between">
                               <span className="text-muted-foreground">NPV Uplift</span>
-                              <span className="font-bold text-[#7FB8A3]" data-testid="text-delta-npv">
+                              <span className="font-bold text-brand-mint" data-testid="text-delta-npv">
                                 {formatCurrency(comparison.delta.npvDelta, currency)}
                               </span>
                             </div>
@@ -2214,9 +2214,9 @@ export function ROIWizard({ assessmentId, onComplete, onCancel }: ROIWizardProps
                               NPV: {formatCurrency(sensitivity.worstCase.npv, currency)}
                             </div>
                           </div>
-                          <div className="p-2 rounded-lg bg-[#8E4F67]/10 border border-[#8E4F67]/30 text-center">
-                            <div className="text-xs text-[#8E4F67] font-medium mb-1">{sensitivity.midCase.label}</div>
-                            <div className="text-sm font-bold text-[#7FB8A3]" data-testid="text-mid-roi">
+                          <div className="p-2 rounded-lg bg-brand-berry/10 border border-brand-berry/30 text-center">
+                            <div className="text-xs text-brand-berry font-medium mb-1">{sensitivity.midCase.label}</div>
+                            <div className="text-sm font-bold text-brand-mint" data-testid="text-mid-roi">
                               {formatPercent(sensitivity.midCase.roiPercent)}
                             </div>
                             <div className="text-xs text-muted-foreground">

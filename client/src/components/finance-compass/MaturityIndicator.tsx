@@ -119,7 +119,7 @@ export function MaturityIndicator({
         />
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Clock className="h-5 w-5 text-[#8E4F67]" />
+            <Clock className="h-5 w-5 text-brand-berry" />
             {title}
           </CardTitle>
           <CardDescription>{description}</CardDescription>
@@ -182,21 +182,21 @@ export function MaturityIndicator({
 
           {/* Key Metrics Grid */}
           <div className="grid grid-cols-3 gap-3 mb-4">
-            <div className="p-3 rounded-lg bg-[#252826]/5 dark:bg-[#252826]/20 text-center">
+            <div className="p-3 rounded-lg bg-brand-ink/5 dark:bg-brand-ink/20 text-center">
               <div className="text-xs text-muted-foreground mb-1">Gap to Next</div>
-              <div className="text-lg font-bold text-[#F6F3EE]">
+              <div className="text-lg font-bold text-brand-cream">
                 {maturityKey === 'ADVANCED' ? 'N/A' : `${Math.round(100 - progressValue)}%`}
               </div>
             </div>
-            <div className="p-3 rounded-lg bg-[#8E4F67]/5 dark:bg-[#8E4F67]/20 text-center">
+            <div className="p-3 rounded-lg bg-brand-berry/5 dark:bg-brand-berry/20 text-center">
               <div className="text-xs text-muted-foreground mb-1">Percentile</div>
-              <div className="text-lg font-bold text-[#8E4F67]">
+              <div className="text-lg font-bold text-brand-berry">
                 {score >= 70 ? 'Top 15%' : score >= 50 ? 'Top 40%' : score >= 35 ? 'Top 60%' : 'Top 80%'}
               </div>
             </div>
-            <div className="p-3 rounded-lg bg-[#7FB8A3]/10 dark:bg-[#7FB8A3]/20 text-center">
+            <div className="p-3 rounded-lg bg-brand-mint/10 dark:bg-brand-mint/20 text-center">
               <div className="text-xs text-muted-foreground mb-1">Dimensions</div>
-              <div className="text-lg font-bold text-[#8E4F67]">
+              <div className="text-lg font-bold text-brand-berry">
                 {hasDimensionData ? Object.keys(dimensionScores).length : 8}
               </div>
             </div>
@@ -206,7 +206,7 @@ export function MaturityIndicator({
             <div className="p-3 rounded-lg bg-muted/50 mb-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <Calendar className="h-5 w-5 text-[#8E4F67]" />
+                  <Calendar className="h-5 w-5 text-brand-berry" />
                   <div>
                     <div className="font-medium text-sm">Recommended Timeline</div>
                     <div className="text-xs text-muted-foreground">
@@ -238,7 +238,7 @@ export function MaturityIndicator({
                     transition={{ delay: 0.3 + index * 0.1 }}
                     className="flex items-start gap-2 text-sm text-muted-foreground"
                   >
-                    <CheckCircle className="h-4 w-4 text-[#8E4F67] mt-0.5 flex-shrink-0" />
+                    <CheckCircle className="h-4 w-4 text-brand-berry mt-0.5 flex-shrink-0" />
                     <span>{rec}</span>
                   </motion.li>
                 ))}

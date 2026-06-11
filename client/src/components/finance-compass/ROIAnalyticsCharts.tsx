@@ -233,7 +233,7 @@ export function ROIAnalyticsCharts({
           <Card className="h-full" data-testid="card-investment-returns">
             <CardHeader className="pb-2">
               <CardTitle className="text-base flex items-center gap-2">
-                <TrendingUp className="h-4 w-4 text-[#8E4F67]" />
+                <TrendingUp className="h-4 w-4 text-brand-berry" />
                 Investment vs Returns ({horizonYears}yr)
               </CardTitle>
               <CardDescription className="text-xs">
@@ -289,7 +289,7 @@ export function ROIAnalyticsCharts({
             <div className="flex items-center justify-between gap-4 flex-wrap">
               <div>
                 <CardTitle className="text-base flex items-center gap-2">
-                  <ArrowRight className="h-4 w-4 text-[#8E4F67]" />
+                  <ArrowRight className="h-4 w-4 text-brand-berry" />
                   Cumulative Cash Flow Projection
                 </CardTitle>
                 <CardDescription className="text-xs">
@@ -351,7 +351,7 @@ export function ROIAnalyticsCharts({
             </ResponsiveContainer>
             <div className="flex items-center justify-center gap-6 mt-2 text-xs text-muted-foreground">
               <div className="flex items-center gap-1.5">
-                <div className="w-3 h-0.5 bg-[#8E4F67] rounded" />
+                <div className="w-3 h-0.5 bg-brand-berry rounded" />
                 <span>Cumulative Value</span>
               </div>
               <div className="flex items-center gap-1.5">

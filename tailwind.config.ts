@@ -26,15 +26,28 @@ export default {
 
       colors: {
         brand: {
+          // Surfaces
           "bg-primary":    "var(--brand-bg-primary)",
           "bg-secondary":  "var(--brand-bg-secondary)",
           surface:         "var(--brand-bg-surface)",
           "surface-hover": "var(--brand-bg-surface-hover)",
+          // Core palette (full set — every hex used in the FC tree
+          // now has a named token so components stop hard-coding
+          // values inline).
+          ink:             "var(--brand-bg-primary)",   // #252826
+          graphite:        "var(--brand-graphite)",     // #1A1B1A
+          cream:           "var(--brand-cream)",        // #F6F3EE
+          stone:           "var(--brand-stone)",        // #D8D0C6
+          rose:            "var(--brand-rose)",         // #C77A93
+          berry:           "var(--brand-berry)",        // #8E4F67
+          mint:            "var(--brand-mint)",         // #7FB8A3
+          "deep-mint":     "var(--brand-deep-mint)",    // #5E8D7A
+          // Legacy aliases — kept so existing code that still uses
+          // these classnames keeps resolving.
           teal:            "var(--brand-teal)",
           cyan:            "var(--brand-cyan)",
           navy:            "var(--brand-navy)",
           navyDark:        "var(--brand-bg-primary)",
-          cream:           "var(--brand-cream)",
           border:          "var(--brand-border)",
           "border-hover":  "var(--brand-border-hover)",
           "border-muted":  "var(--brand-border-muted)",

@@ -14,6 +14,7 @@ import {
   CheckCircle2,
   Zap,
 } from "lucide-react";
+import { BRAND_BERRY, BRAND_MINT, BRAND_DEEP_MINT, BRAND_ROSE, BRAND_INK, BRAND_CREAM, BRAND_STONE } from "@/lib/brand-colors";
 import {
   getMaturityLevel,
   MATURITY_LEVELS,
@@ -62,8 +63,8 @@ const BENEFIT_CATEGORIES: BenefitCategory[] = [
     name: 'FTE Savings',
     icon: Users,
     description: 'Reduction in manual effort through automation',
-    color: '#8E4F67',
-    bgClass: 'bg-[#8E4F67]/10',
+    color: BRAND_BERRY,
+    bgClass: 'bg-brand-berry/10',
     metrics: [
       { name: 'Data Collection', currentState: 'Manual', potentialRange: [30, 50], unit: '%', impactLevel: 'high', timeframe: '6-12 months' },
       { name: 'Report Generation', currentState: 'Semi-automated', potentialRange: [20, 40], unit: '%', impactLevel: 'high', timeframe: '3-6 months' },
@@ -76,7 +77,7 @@ const BENEFIT_CATEGORIES: BenefitCategory[] = [
     name: 'Cost Savings',
     icon: DollarSign,
     description: 'Direct cost reduction and efficiency gains',
-    color: '#7FB8A3',
+    color: BRAND_MINT,
     bgClass: 'bg-green-100 dark:bg-green-900/20',
     metrics: [
       { name: 'Software Consolidation', currentState: 'Multiple tools', potentialRange: [15, 30], unit: '%', impactLevel: 'medium', timeframe: '12-18 months' },
@@ -90,7 +91,7 @@ const BENEFIT_CATEGORIES: BenefitCategory[] = [
     name: 'Cycle Time Reduction',
     icon: Clock,
     description: 'Faster close, planning, and reporting cycles',
-    color: '#5E8D7A',
+    color: BRAND_DEEP_MINT,
     bgClass: 'bg-purple-100 dark:bg-purple-900/20',
     metrics: [
       { name: 'Monthly Close', currentState: '10+ days', potentialRange: [30, 50], unit: '% faster', impactLevel: 'high', timeframe: '6-12 months' },
@@ -104,7 +105,7 @@ const BENEFIT_CATEGORIES: BenefitCategory[] = [
     name: 'Revenue & Margin Impact',
     icon: TrendingUp,
     description: 'Top and bottom line improvements',
-    color: '#C77A93',
+    color: BRAND_ROSE,
     bgClass: 'bg-orange-100 dark:bg-orange-900/20',
     metrics: [
       { name: 'Forecast Accuracy', currentState: '±15%', potentialRange: [2, 5], unit: 'pp improvement', impactLevel: 'high', timeframe: '12-18 months' },
@@ -118,7 +119,7 @@ const BENEFIT_CATEGORIES: BenefitCategory[] = [
     name: 'Risk Reduction',
     icon: Shield,
     description: 'Improved controls and compliance',
-    color: '#8E4F67',
+    color: BRAND_BERRY,
     bgClass: 'bg-red-100 dark:bg-red-900/20',
     metrics: [
       { name: 'Data Quality Issues', currentState: 'Frequent', potentialRange: [40, 60], unit: '% reduction', impactLevel: 'high', timeframe: '6-12 months' },
@@ -132,8 +133,8 @@ const BENEFIT_CATEGORIES: BenefitCategory[] = [
     name: 'Strategic Value',
     icon: Target,
     description: 'Enhanced strategic decision support',
-    color: '#252826',
-    bgClass: 'bg-[#252826]/10',
+    color: BRAND_INK,
+    bgClass: 'bg-brand-ink/10',
     metrics: [
       { name: 'Strategic Work Time', currentState: '<20%', potentialRange: [30, 50], unit: '% of FP&A time', impactLevel: 'high', timeframe: '18-24 months' },
       { name: 'Analytics Models', currentState: 'Basic', potentialRange: [3, 5], unit: 'x increase', impactLevel: 'medium', timeframe: '12-18 months' },
@@ -310,7 +311,7 @@ function PhasedBenefitsTimeline({
     <Card data-testid="card-phased-benefits">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Zap className="h-5 w-5 text-[#8E4F67]" />
+          <Zap className="h-5 w-5 text-brand-berry" />
           Phased Benefits Realisation
         </CardTitle>
         <CardDescription className="flex flex-wrap items-center gap-2">
@@ -344,9 +345,9 @@ function PhasedBenefitsTimeline({
                 <div className="flex items-start gap-4">
                   <div className="flex flex-col items-center">
                     <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold text-sm ${
-                      index === 0 ? 'bg-[#252826]' :
-                      index === 1 ? 'bg-[#8E4F67]' :
-                      index === 2 ? 'bg-[#7FB8A3] text-[#F6F3EE]' :
+                      index === 0 ? 'bg-brand-ink' :
+                      index === 1 ? 'bg-brand-berry' :
+                      index === 2 ? 'bg-brand-mint text-brand-cream' :
                       'bg-green-500'
                     }`}>
                       {index + 1}
@@ -366,7 +367,7 @@ function PhasedBenefitsTimeline({
                         <Badge variant="outline" className="text-xs">
                           +{adjustedPercentage}% value
                         </Badge>
-                        <Badge className="bg-[#8E4F67] text-xs">
+                        <Badge className="bg-brand-berry text-xs">
                           {cumulativePercentage}% cumulative
                         </Badge>
                       </div>
@@ -409,7 +410,7 @@ function BenefitsSummaryCard({
     : maturityInfo.timeline;
   
   return (
-    <Card className="bg-gradient-to-br from-[#252826] to-[#8E4F67] text-white" data-testid="card-benefits-summary">
+    <Card className="bg-gradient-to-br from-brand-ink to-brand-berry text-white" data-testid="card-benefits-summary">
       <CardContent className="py-6">
         <div className="grid sm:grid-cols-3 gap-6">
           <div className="text-center">
@@ -417,21 +418,21 @@ function BenefitsSummaryCard({
               {Math.round(multiplier * 100)}%
             </div>
             <div className="text-sm text-white/70">Benefit Potential</div>
-            <div className="text-xs text-[#7FB8A3] mt-1">{label}</div>
+            <div className="text-xs text-brand-mint mt-1">{label}</div>
           </div>
           <div className="text-center">
             <div className="text-3xl font-bold mb-1">
               {displayTimeline}
             </div>
             <div className="text-sm text-white/70">Value Realisation</div>
-            <div className="text-xs text-[#7FB8A3] mt-1">
+            <div className="text-xs text-brand-mint mt-1">
               {implementationTimeline?.totalMonths ? 'Based on your profile' : 'Estimated timeline'}
             </div>
           </div>
           <div className="text-center">
             <div className="text-3xl font-bold mb-1">6</div>
             <div className="text-sm text-white/70">Benefit Categories</div>
-            <div className="text-xs text-[#7FB8A3] mt-1">Across all dimensions</div>
+            <div className="text-xs text-brand-mint mt-1">Across all dimensions</div>
           </div>
         </div>
       </CardContent>

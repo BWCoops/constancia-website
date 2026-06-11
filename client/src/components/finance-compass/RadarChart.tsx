@@ -38,7 +38,7 @@ export function FinanceCompassRadarChart({
       <Card className="shadow-lg" data-testid="card-radar-chart">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-[#8E4F67]" />
+            <div className="w-2 h-2 rounded-full bg-brand-berry" />
             {title}
           </CardTitle>
           <CardDescription>{description}</CardDescription>
@@ -100,15 +100,15 @@ export function FinanceCompassRadarChart({
                           <div className="space-y-1 text-xs">
                             <div className="flex justify-between gap-4">
                               <span className="text-muted-foreground">Your Score:</span>
-                              <span className="font-medium text-[#5E8D7A]">{dataPoint.yourScore.toFixed(2)}</span>
+                              <span className="font-medium text-brand-deep-mint">{dataPoint.yourScore.toFixed(2)}</span>
                             </div>
                             <div className="flex justify-between gap-4">
                               <span className="text-muted-foreground">Benchmark:</span>
-                              <span className="font-medium text-[#F6F3EE]">{dataPoint.benchmark.toFixed(2)}</span>
+                              <span className="font-medium text-brand-cream">{dataPoint.benchmark.toFixed(2)}</span>
                             </div>
                             <div className="flex justify-between gap-4">
                               <span className="text-muted-foreground">World Class:</span>
-                              <span className="font-medium text-[#7FB8A3]">4.00</span>
+                              <span className="font-medium text-brand-mint">4.00</span>
                             </div>
                           </div>
                         </div>
@@ -129,15 +129,15 @@ export function FinanceCompassRadarChart({
           <div className="mt-4 pt-4 border-t">
             <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-muted-foreground">
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-[#8E4F67]" />
+                <div className="w-3 h-3 rounded-full bg-brand-berry" />
                 <span>Your Performance</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-[#252826]" />
+                <div className="w-3 h-3 rounded-full bg-brand-ink" />
                 <span>Industry Benchmark</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full border-2 border-[#7FB8A3]" />
+                <div className="w-3 h-3 rounded-full border-2 border-brand-mint" />
                 <span>World Class Target</span>
               </div>
             </div>

@@ -64,7 +64,7 @@ const calculationExamples = [
       calculation: "(7 / 10) × 15 = 10.5 points",
       maxPossible: "15 points",
     },
-    color: "bg-[#7FB8A3]/100/10 border-[#7FB8A3]/30",
+    color: "bg-brand-mint/10 border-brand-mint/30",
   },
   {
     id: "weighted",
@@ -114,7 +114,7 @@ const calculationExamples = [
       calculation: "(3 / 5) × 15 = 9 points",
       maxPossible: "15 points",
     },
-    color: "bg-[#7FB8A3]/100/10 border-[#7FB8A3]/30",
+    color: "bg-brand-mint/10 border-brand-mint/30",
   },
 ];
 
@@ -127,7 +127,7 @@ const maturityLevels = [
 
 const benchmarkTiers = [
   { tier: "typical", label: "Typical", description: "Median performance (P50) - where most organisations operate", color: "text-slate-600 dark:text-slate-400" },
-  { tier: "constancia_good", label: "Above Average", description: "Top quartile (P75) - what good looks like in modern finance", color: "text-[#8E4F67] dark:text-[#7FB8A3]" },
+  { tier: "constancia_good", label: "Above Average", description: "Top quartile (P75) - what good looks like in modern finance", color: "text-brand-berry dark:text-brand-mint" },
   { tier: "constancia_best", label: "Best in Class", description: "Digital world class (P90+) - aspirational excellence", color: "text-teal-600 dark:text-teal-400" },
 ];
 
@@ -147,7 +147,7 @@ export default function FinanceCompassMethodology() {
       <main className="min-h-screen bg-background">
         <section className="relative py-20 lg:py-28 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--fc-navy))] via-[hsl(var(--fc-navy-light))] to-[hsl(var(--fc-teal))]" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#7FB8A3]/100/20 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-mint/20 via-transparent to-transparent" />
           
           <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
@@ -156,14 +156,14 @@ export default function FinanceCompassMethodology() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <Badge className="mb-6 bg-[#7FB8A3]/100/20 text-[#7FB8A3] border-[#7FB8A3]/30" data-testid="badge-methodology">
+              <Badge className="mb-6 bg-brand-mint/20 text-brand-mint border-brand-mint/30" data-testid="badge-methodology">
                 <Shield className="w-3 h-3 mr-1" />
                 Complete Transparency
               </Badge>
               
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6" data-testid="heading-methodology-title">
                 Our Benchmarking{" "}
-                <span className="bg-gradient-to-r from-[#5E8D7A] to-teal-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-brand-deep-mint to-teal-400 bg-clip-text text-transparent">
                   Methodology
                 </span>
               </h1>
@@ -175,7 +175,7 @@ export default function FinanceCompassMethodology() {
 
               <div className="flex flex-wrap justify-center gap-4 mb-8">
                 <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
-                  <Database className="w-4 h-4 text-[#7FB8A3]" />
+                  <Database className="w-4 h-4 text-brand-mint" />
                   <span className="text-white text-sm font-medium" data-testid="stat-sources">{totalSources} Data Sources</span>
                 </div>
                 <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
@@ -217,8 +217,8 @@ export default function FinanceCompassMethodology() {
                   <Card className="border-border/50">
                     <CardHeader>
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#7FB8A3]/100/20 to-teal-500/20 flex items-center justify-center">
-                          <category.icon className="w-5 h-5 text-[#8E4F67] dark:text-[#7FB8A3]" />
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-mint/20 to-teal-500/20 flex items-center justify-center">
+                          <category.icon className="w-5 h-5 text-brand-berry dark:text-brand-mint" />
                         </div>
                         <div>
                           <CardTitle className="text-xl" data-testid={`heading-category-${category.id}`}>{category.name}</CardTitle>
@@ -234,14 +234,14 @@ export default function FinanceCompassMethodology() {
                             href={source.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group p-4 rounded-lg border border-border/50 hover:border-[#7FB8A3]/50 hover:bg-[#7FB8A3]/100/5 transition-all duration-200"
+                            className="group p-4 rounded-lg border border-border/50 hover:border-brand-mint/50 hover:bg-brand-mint/5 transition-all duration-200"
                             data-testid={`link-source-${source.id}`}
                           >
                             <div className="flex items-start justify-between mb-2">
-                              <h4 className="font-semibold text-foreground group-hover:text-[#8E4F67] dark:group-hover:text-[#7FB8A3] transition-colors">
+                              <h4 className="font-semibold text-foreground group-hover:text-brand-berry dark:group-hover:text-brand-mint transition-colors">
                                 {source.name}
                               </h4>
-                              <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-[#7FB8A3] transition-colors flex-shrink-0" />
+                              <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-brand-mint transition-colors flex-shrink-0" />
                             </div>
                             <p className="text-sm text-muted-foreground">
                               {source.description}
@@ -284,7 +284,7 @@ export default function FinanceCompassMethodology() {
                     <CardHeader>
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-full bg-background flex items-center justify-center">
-                          <Calculator className="w-4 h-4 text-[#8E4F67]" />
+                          <Calculator className="w-4 h-4 text-brand-berry" />
                         </div>
                         <div>
                           <CardTitle className="text-lg" data-testid={`heading-calc-${calc.id}`}>{calc.title}</CardTitle>
@@ -313,7 +313,7 @@ export default function FinanceCompassMethodology() {
                                 {Array.isArray(calc.example.options) && calc.example.options.map((opt: any, i: number) => (
                                   <div key={i} className="flex justify-between text-xs">
                                     <span>{typeof opt === 'string' ? opt : opt.label}</span>
-                                    {typeof opt !== 'string' && <span className="text-[#8E4F67]">({opt.value})</span>}
+                                    {typeof opt !== 'string' && <span className="text-brand-berry">({opt.value})</span>}
                                   </div>
                                 ))}
                               </div>
@@ -322,7 +322,7 @@ export default function FinanceCompassMethodology() {
 
                           <div className="flex justify-between">
                             <span className="text-muted-foreground">User Input:</span>
-                            <span className="text-[#8E4F67] font-medium">
+                            <span className="text-brand-berry font-medium">
                               {calc.example.userInput || calc.example.userSelection || calc.example.userSelections?.join(", ")}
                             </span>
                           </div>
@@ -389,10 +389,10 @@ export default function FinanceCompassMethodology() {
               ))}
             </div>
 
-            <Card className="border-[#7FB8A3]/30 bg-gradient-to-r from-[#7FB8A3]/100/5 to-teal-500/5">
+            <Card className="border-brand-mint/30 bg-gradient-to-r from-brand-mint/5 to-teal-500/5">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2" data-testid="heading-benchmark-tiers">
-                  <Target className="w-5 h-5 text-[#8E4F67]" />
+                  <Target className="w-5 h-5 text-brand-berry" />
                   Benchmark Tiers
                 </CardTitle>
                 <CardDescription>
@@ -459,10 +459,10 @@ export default function FinanceCompassMethodology() {
                 </CardContent>
               </Card>
 
-              <Card className="border-[#7FB8A3]/30 bg-[#7FB8A3]/100/5">
+              <Card className="border-brand-mint/30 bg-brand-mint/5">
                 <CardHeader className="pb-2">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-[#7FB8A3]/100 flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-full bg-brand-mint flex items-center justify-center">
                       <Calculator className="w-4 h-4 text-white" />
                     </div>
                     <CardTitle className="text-lg">Constancia Insights + APQC</CardTitle>
@@ -474,19 +474,19 @@ export default function FinanceCompassMethodology() {
                   </p>
                   <ul className="text-sm space-y-1">
                     <li className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#7FB8A3]/100" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-brand-mint" />
                       Budget cycle duration (APQC: top ~25 days, median ~32 days)
                     </li>
                     <li className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#7FB8A3]/100" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-brand-mint" />
                       Days to close monthly books
                     </li>
                     <li className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#7FB8A3]/100" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-brand-mint" />
                       Forecast accuracy and cycle duration
                     </li>
                     <li className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#7FB8A3]/100" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-brand-mint" />
                       Industry-specific adjustments (47 industries)
                     </li>
                   </ul>
@@ -496,10 +496,10 @@ export default function FinanceCompassMethodology() {
                 </CardContent>
               </Card>
 
-              <Card className="border-[#7FB8A3]/30 bg-[#7FB8A3]/100/5">
+              <Card className="border-brand-mint/30 bg-brand-mint/5">
                 <CardHeader className="pb-2">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-[#7FB8A3]/100 flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-full bg-brand-mint flex items-center justify-center">
                       <Award className="w-4 h-4 text-white" />
                     </div>
                     <CardTitle className="text-lg">Continuous Improvement</CardTitle>
@@ -511,11 +511,11 @@ export default function FinanceCompassMethodology() {
                   </p>
                   <ul className="text-sm space-y-1">
                     <li className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#7FB8A3]/100" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-brand-mint" />
                       Statistically validated over time
                     </li>
                     <li className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#7FB8A3]/100" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-brand-mint" />
                       Industry-specific refinements
                     </li>
                   </ul>
@@ -567,13 +567,13 @@ export default function FinanceCompassMethodology() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: idx * 0.05 }}
                 >
-                  <Card className="h-full hover:border-[#7FB8A3]/50 transition-colors">
+                  <Card className="h-full hover:border-brand-mint/50 transition-colors">
                     <CardHeader className="pb-2">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#7FB8A3]/100 to-teal-500 flex items-center justify-center">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-mint to-teal-500 flex items-center justify-center">
                           <span className="text-white font-bold text-sm">{dimension.code}</span>
                         </div>
-                        <dimension.icon className="w-5 h-5 text-[#8E4F67]" />
+                        <dimension.icon className="w-5 h-5 text-brand-berry" />
                       </div>
                       <CardTitle className="text-lg mt-3" data-testid={`heading-dimension-${dimension.code}`}>
                         {dimension.name}

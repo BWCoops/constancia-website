@@ -199,7 +199,7 @@ const tierConfig: Record<string, {
     name: "Pre-Assessment",
     tagline: "Strategic Analysis",
     icon: PreAssessmentIcon,
-    gradient: "from-[#8E4F67] to-[#252826]",
+    gradient: "from-brand-berry to-brand-ink",
     questions: 50,
     duration: "20-25 minutes",
   },
@@ -207,7 +207,7 @@ const tierConfig: Record<string, {
     name: "Full Assessment",
     tagline: "Complete Transformation",
     icon: FullAssessmentIcon,
-    gradient: "from-[#252826] to-[#8E4F67]",
+    gradient: "from-brand-ink to-brand-berry",
     questions: 74,
     duration: "35-45 minutes",
   },
@@ -222,8 +222,8 @@ const statusConfig: Record<string, {
   in_progress: {
     label: "In Progress",
     color: "text-brand-teal",
-    bgColor: "bg-[#8E4F67]/10",
-    borderColor: "border-[#8E4F67]/30",
+    bgColor: "bg-brand-berry/10",
+    borderColor: "border-brand-berry/30",
   },
   initial_complete: {
     label: "Initial Complete",
@@ -234,8 +234,8 @@ const statusConfig: Record<string, {
   completed: {
     label: "Completed",
     color: "text-brand-teal",
-    bgColor: "bg-[#8E4F67]/10",
-    borderColor: "border-[#8E4F67]/30",
+    bgColor: "bg-brand-berry/10",
+    borderColor: "border-brand-berry/30",
   },
   analysed: {
     label: "Analysed",
@@ -245,9 +245,9 @@ const statusConfig: Record<string, {
   },
   report_generated: {
     label: "Report Ready",
-    color: "text-[#F6F3EE]",
+    color: "text-brand-cream",
     bgColor: "bg-brand-navy/10",
-    borderColor: "border-[#252826]/30",
+    borderColor: "border-brand-ink/30",
   },
   not_started: {
     label: "Not Started",
@@ -345,7 +345,7 @@ const KpiIndicator = memo(function KpiIndicator({
             <Tooltip>
               <TooltipTrigger asChild>
                 <span 
-                  className="text-sm font-medium text-[#F6F3EE] truncate cursor-help flex items-center gap-1"
+                  className="text-sm font-medium text-brand-cream truncate cursor-help flex items-center gap-1"
                   data-testid={`tooltip-trigger-dimension-${testId}`}
                 >
                   {label}
@@ -459,12 +459,12 @@ const MaturityScorecard = memo(function MaturityScorecard({
   return (
     <div className="space-y-4" role="region" aria-label="Maturity Scorecard">
       {overallMaturity && (
-        <div className="flex items-center justify-between p-3 rounded-lg bg-gradient-to-r from-[#252826]/5 to-[#8E4F67]/5 border border-[#8E4F67]/20">
+        <div className="flex items-center justify-between p-3 rounded-lg bg-gradient-to-r from-brand-ink/5 to-brand-berry/5 border border-brand-berry/20">
           <div className="flex items-center gap-2">
             <Gauge className="h-5 w-5 text-brand-teal" aria-hidden="true" />
             <Tooltip>
               <TooltipTrigger asChild>
-                <span className="font-medium text-[#F6F3EE] cursor-help flex items-center gap-1">
+                <span className="font-medium text-brand-cream cursor-help flex items-center gap-1">
                   Overall Maturity
                   <Info className="h-3 w-3 opacity-40" />
                 </span>
@@ -554,7 +554,7 @@ const MaturityScorecard = memo(function MaturityScorecard({
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <span 
-                        className="text-sm font-medium text-[#F6F3EE] truncate cursor-help flex items-center gap-1"
+                        className="text-sm font-medium text-brand-cream truncate cursor-help flex items-center gap-1"
                         data-testid={`tooltip-trigger-dimension-${key}`}
                       >
                         {config.shortName}
@@ -658,17 +658,17 @@ const RoiKpiPanel = memo(function RoiKpiPanel({ assessmentId }: RoiKpiPanelProps
 
   if (!hasMetrics) {
     return (
-      <Card className="p-6 border-dashed border-2 border-[#8E4F67]/30 bg-[#8E4F67]/5" data-testid="card-roi-empty-state">
+      <Card className="p-6 border-dashed border-2 border-brand-berry/30 bg-brand-berry/5" data-testid="card-roi-empty-state">
         <div className="flex items-center gap-4">
-          <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center" aria-hidden="true">
+          <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-brand-ink to-brand-berry flex items-center justify-center" aria-hidden="true">
             <Calculator className="h-6 w-6 text-white" />
           </div>
           <div className="flex-1">
-            <h4 className="font-semibold text-[#F6F3EE]">Build Your Business Case</h4>
+            <h4 className="font-semibold text-brand-cream">Build Your Business Case</h4>
             <p className="text-sm text-muted-foreground">Use our ROI Calculator to quantify your finance transformation benefits</p>
           </div>
           <Button
-            className="bg-[#8E4F67] hover:bg-brand-navy"
+            className="bg-brand-berry hover:bg-brand-navy"
             onClick={handleNavigateToRoi}
             data-testid="button-start-roi-wizard"
             aria-label="Calculate ROI for your transformation"
@@ -684,7 +684,7 @@ const RoiKpiPanel = memo(function RoiKpiPanel({ assessmentId }: RoiKpiPanelProps
   return (
     <div className="space-y-3" role="region" aria-label="ROI metrics dashboard">
       <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-        <Card className="p-4 bg-gradient-to-br from-[#7FB8A3]/10 to-[#8E4F67]/20 dark:from-[#7FB8A3]/10 dark:to-[#8E4F67]/20 border-[#8E4F67]/30 dark:border-[#8E4F67]/40">
+        <Card className="p-4 bg-gradient-to-br from-brand-mint/10 to-brand-berry/20 dark:from-brand-mint/10 dark:to-brand-berry/20 border-brand-berry/30 dark:border-brand-berry/40">
           <div className="flex items-center gap-2 text-brand-teal dark:text-brand-cyan text-xs mb-1">
             <Percent className="h-3 w-3" aria-hidden="true" />
             <span>ROI</span>
@@ -693,12 +693,12 @@ const RoiKpiPanel = memo(function RoiKpiPanel({ assessmentId }: RoiKpiPanelProps
             {formatPercent(metrics!.roiPercent)}
           </div>
         </Card>
-        <Card className="p-4 bg-gradient-to-br from-[#7FB8A3]/10 to-[#7FB8A3]/10 dark:from-[#252826]/20 dark:to-[#252826]/20 border-[#252826]">
-          <div className="flex items-center gap-2 text-[#8E4F67] dark:text-[#7FB8A3] text-xs mb-1">
+        <Card className="p-4 bg-gradient-to-br from-brand-mint/10 to-brand-mint/10 dark:from-brand-ink/20 dark:to-brand-ink/20 border-brand-ink">
+          <div className="flex items-center gap-2 text-brand-berry dark:text-brand-mint text-xs mb-1">
             <Clock className="h-3 w-3" aria-hidden="true" />
             <span>Payback</span>
           </div>
-          <div className="text-xl font-bold text-[#8E4F67] dark:text-[#7FB8A3]" data-testid="kpi-payback" aria-label={`Payback period: ${formatPayback(metrics!.paybackMonths)}`}>
+          <div className="text-xl font-bold text-brand-berry dark:text-brand-mint" data-testid="kpi-payback" aria-label={`Payback period: ${formatPayback(metrics!.paybackMonths)}`}>
             {formatPayback(metrics!.paybackMonths)}
           </div>
         </Card>
@@ -720,12 +720,12 @@ const RoiKpiPanel = memo(function RoiKpiPanel({ assessmentId }: RoiKpiPanelProps
             {formatCurrency(metrics!.totalCostOfOwnership, currency)}
           </div>
         </Card>
-        <Card className="p-4 bg-gradient-to-br from-[#7FB8A3]/10 to-[#7FB8A3]/10 dark:from-[#252826]/20 dark:to-[#252826]/20 border-[#252826]">
-          <div className="flex items-center gap-2 text-[#8E4F67] dark:text-[#7FB8A3] text-xs mb-1">
+        <Card className="p-4 bg-gradient-to-br from-brand-mint/10 to-brand-mint/10 dark:from-brand-ink/20 dark:to-brand-ink/20 border-brand-ink">
+          <div className="flex items-center gap-2 text-brand-berry dark:text-brand-mint text-xs mb-1">
             <Scale className="h-3 w-3" aria-hidden="true" />
             <span>BCR</span>
           </div>
-          <div className="text-xl font-bold text-[#8E4F67] dark:text-[#7FB8A3]" data-testid="kpi-bcr" aria-label={`Benefit Cost Ratio: ${metrics!.benefitCostRatio.toFixed(2)}x`}>
+          <div className="text-xl font-bold text-brand-berry dark:text-brand-mint" data-testid="kpi-bcr" aria-label={`Benefit Cost Ratio: ${metrics!.benefitCostRatio.toFixed(2)}x`}>
             {metrics!.benefitCostRatio.toFixed(2)}x
           </div>
         </Card>
@@ -755,10 +755,10 @@ interface AssessmentJourneyViewProps {
 
 const VALIDATION_PIPELINE_LAYERS = [
   { layer: 1, name: "Base Scoring", icon: Calculator, description: "Context-aware scoring engine", color: "bg-brand-navy" },
-  { layer: 2, name: "Fragmentation Check", icon: Layers, description: "Multi-vendor fragmentation detection", color: "bg-[#8E4F67]" },
+  { layer: 2, name: "Fragmentation Check", icon: Layers, description: "Multi-vendor fragmentation detection", color: "bg-brand-berry" },
   { layer: 2.5, name: "Correlation Matrix", icon: Target, description: "8x8 dimension correlations", color: "bg-purple-500" },
-  { layer: 3, name: "Business Rules", icon: Shield, description: "Vendor benchmarks validation", color: "bg-[#7FB8A3]" },
-  { layer: 4, name: "AI Advisory", icon: Sparkles, description: "GPT validation layer", color: "bg-[#7FB8A3]/100" },
+  { layer: 3, name: "Business Rules", icon: Shield, description: "Vendor benchmarks validation", color: "bg-brand-mint" },
+  { layer: 4, name: "AI Advisory", icon: Sparkles, description: "GPT validation layer", color: "bg-brand-mint" },
   { layer: 5, name: "Intelligence Engine", icon: TrendingUp, description: "Root cause & stakeholder insights", color: "bg-indigo-500" },
 ];
 
@@ -902,16 +902,16 @@ const AssessmentJourneyView = memo(function AssessmentJourneyView({
                   transition={{ type: "spring", stiffness: 300 }}
                   className={`
                     relative p-5 rounded-2xl border transition-all h-full min-h-[320px] flex flex-col overflow-hidden
-                    ${isCompleted ? "bg-gradient-to-br from-[#8E4F67]/10 to-[#7FB8A3]/10 border-[#8E4F67] shadow-lg shadow-[#8E4F67]/20" : ""}
-                    ${isInProgress ? "bg-gradient-to-br from-[#252826]/10 to-[#8E4F67]/10 border-[#8E4F67]/60 shadow-md" : ""}
-                    ${isReady ? "bg-gradient-to-br from-white to-[#8E4F67]/5 dark:from-gray-900 dark:to-[#8E4F67]/10 border-[#8E4F67]/40 hover:border-[#8E4F67] hover:shadow-lg" : ""}
+                    ${isCompleted ? "bg-gradient-to-br from-brand-berry/10 to-brand-mint/10 border-brand-berry shadow-lg shadow-brand-berry/20" : ""}
+                    ${isInProgress ? "bg-gradient-to-br from-brand-ink/10 to-brand-berry/10 border-brand-berry/60 shadow-md" : ""}
+                    ${isReady ? "bg-gradient-to-br from-white to-brand-berry/5 dark:from-gray-900 dark:to-brand-berry/10 border-brand-berry/40 hover:border-brand-berry hover:shadow-lg" : ""}
                     ${isLocked ? "bg-gray-50 dark:bg-gray-900/50 border-gray-200 dark:border-gray-700" : ""}
                     ${!isCompleted && !isInProgress && !isReady && !isLocked ? "bg-background border-border" : ""}
                   `}
                 >
                   {/* Decorative gradient orb for completed/active states */}
                   {(isCompleted || isInProgress) && (
-                    <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-[#8E4F67]/20 to-[#7FB8A3]/20 rounded-full blur-2xl" />
+                    <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-brand-berry/20 to-brand-mint/20 rounded-full blur-2xl" />
                   )}
                   
                   {/* Step indicator with pulsing animation for active */}
@@ -921,9 +921,9 @@ const AssessmentJourneyView = memo(function AssessmentJourneyView({
                       transition={{ duration: 2, repeat: Infinity }}
                       className={`
                         w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold shadow-lg
-                        ${isCompleted ? "bg-gradient-to-br from-[#8E4F67] to-[#7FB8A3] text-white" : ""}
-                        ${isInProgress ? "bg-gradient-to-br from-[#252826] to-[#8E4F67] text-white" : ""}
-                        ${isReady ? "bg-gradient-to-br from-[#8E4F67] to-[#252826] text-white" : ""}
+                        ${isCompleted ? "bg-gradient-to-br from-brand-berry to-brand-mint text-white" : ""}
+                        ${isInProgress ? "bg-gradient-to-br from-brand-ink to-brand-berry text-white" : ""}
+                        ${isReady ? "bg-gradient-to-br from-brand-berry to-brand-ink text-white" : ""}
                         ${isLocked ? "bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400" : ""}
                         ${!isCompleted && !isInProgress && !isReady && !isLocked ? "bg-brand-navy text-white" : ""}
                       `}
@@ -931,15 +931,15 @@ const AssessmentJourneyView = memo(function AssessmentJourneyView({
                       {isCompleted ? <CheckCircle2 className="h-5 w-5" /> : idx + 1}
                     </motion.div>
                     <div className="flex-1">
-                      <h4 className={`font-semibold text-base ${isLocked ? "text-muted-foreground" : "text-[#F6F3EE]"}`}>
+                      <h4 className={`font-semibold text-base ${isLocked ? "text-muted-foreground" : "text-brand-cream"}`}>
                         {stage.name}
                       </h4>
                       <Badge 
                         variant="outline" 
                         className={`text-[10px] mt-1 ${
-                          isCompleted ? "border-[#8E4F67] text-brand-teal" : 
-                          isInProgress ? "border-[#252826] text-[#F6F3EE] dark:border-[#8E4F67] dark:text-brand-teal" : 
-                          isReady ? "border-[#8E4F67]/50 text-brand-teal" :
+                          isCompleted ? "border-brand-berry text-brand-teal" : 
+                          isInProgress ? "border-brand-ink text-brand-cream dark:border-brand-berry dark:text-brand-teal" : 
+                          isReady ? "border-brand-berry/50 text-brand-teal" :
                           "border-gray-300 text-gray-500"
                         }`}
                       >
@@ -955,11 +955,11 @@ const AssessmentJourneyView = memo(function AssessmentJourneyView({
                       transition={{ duration: 4, repeat: Infinity }}
                       className={`
                         w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg
-                        ${isCompleted ? "bg-gradient-to-br from-[#8E4F67] to-[#7FB8A3]" : ""}
-                        ${isInProgress ? "bg-gradient-to-br from-[#252826] to-[#8E4F67]" : ""}
-                        ${isReady ? "bg-gradient-to-br from-[#8E4F67] to-[#252826]" : ""}
+                        ${isCompleted ? "bg-gradient-to-br from-brand-berry to-brand-mint" : ""}
+                        ${isInProgress ? "bg-gradient-to-br from-brand-ink to-brand-berry" : ""}
+                        ${isReady ? "bg-gradient-to-br from-brand-berry to-brand-ink" : ""}
                         ${isLocked ? "bg-gray-300 dark:bg-gray-600" : ""}
-                        ${!isCompleted && !isInProgress && !isReady && !isLocked ? "bg-gradient-to-br from-[#252826] to-[#8E4F67]" : ""}
+                        ${!isCompleted && !isInProgress && !isReady && !isLocked ? "bg-gradient-to-br from-brand-ink to-brand-berry" : ""}
                       `}
                     >
                       <IconComponent className="h-8 w-8 text-white" />
@@ -982,9 +982,9 @@ const AssessmentJourneyView = memo(function AssessmentJourneyView({
                               className={`flex items-center gap-2 ${isLocked ? "text-muted-foreground/60" : "text-muted-foreground"}`}
                             >
                               <div className={`w-1.5 h-1.5 rounded-full ${
-                                isCompleted ? "bg-[#8E4F67]" : 
-                                isInProgress ? "bg-brand-navy dark:bg-[#8E4F67]" : 
-                                isReady ? "bg-[#8E4F67]/60" : 
+                                isCompleted ? "bg-brand-berry" : 
+                                isInProgress ? "bg-brand-navy dark:bg-brand-berry" : 
+                                isReady ? "bg-brand-berry/60" : 
                                 "bg-gray-300"
                               }`} />
                               {highlight}
@@ -993,7 +993,7 @@ const AssessmentJourneyView = memo(function AssessmentJourneyView({
                         </ul>
                         {details.metrics && (
                           <div className={`text-[11px] font-medium pt-2 border-t border-dashed ${
-                            isLocked ? "text-muted-foreground/50 border-gray-200" : "text-brand-teal border-[#8E4F67]/20"
+                            isLocked ? "text-muted-foreground/50 border-gray-200" : "text-brand-teal border-brand-berry/20"
                           }`}>
                             {details.metrics}
                           </div>
@@ -1009,8 +1009,8 @@ const AssessmentJourneyView = memo(function AssessmentJourneyView({
                         <Button 
                           className={`w-full ${
                             isCompleted 
-                              ? "bg-gradient-to-r from-[#8E4F67] to-[#7FB8A3] hover:from-[#8E4F67]/90 hover:to-[#7FB8A3]/90 text-white shadow-md" 
-                              : "bg-gradient-to-r from-[#252826] to-[#8E4F67] hover:from-[#252826]/90 hover:to-[#8E4F67]/90 text-white shadow-md"
+                              ? "bg-gradient-to-r from-brand-berry to-brand-mint hover:from-brand-berry/90 hover:to-brand-mint/90 text-white shadow-md" 
+                              : "bg-gradient-to-r from-brand-ink to-brand-berry hover:from-brand-ink/90 hover:to-brand-berry/90 text-white shadow-md"
                           }`}
                           data-testid={`button-journey-${stage.id}`}
                         >
@@ -1019,7 +1019,7 @@ const AssessmentJourneyView = memo(function AssessmentJourneyView({
                       </Link>
                     ) : stage.onAction && !isLocked ? (
                       <Button 
-                        className="w-full bg-gradient-to-r from-[#252826] to-[#8E4F67] hover:from-[#252826]/90 hover:to-[#8E4F67]/90 text-white shadow-md"
+                        className="w-full bg-gradient-to-r from-brand-ink to-brand-berry hover:from-brand-ink/90 hover:to-brand-berry/90 text-white shadow-md"
                         onClick={stage.onAction}
                         data-testid={`button-journey-${stage.id}`}
                       >
@@ -1046,7 +1046,7 @@ const AssessmentJourneyView = memo(function AssessmentJourneyView({
                       animate={{ height: 40 }}
                       transition={{ duration: 0.5, delay: idx * 0.2 }}
                       className={`w-0.5 ${
-                        isCompleted ? "bg-gradient-to-b from-[#8E4F67] to-[#7FB8A3]" : "bg-gradient-to-b from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600"
+                        isCompleted ? "bg-gradient-to-b from-brand-berry to-brand-mint" : "bg-gradient-to-b from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600"
                       }`}
                     />
                   </div>
@@ -1058,15 +1058,15 @@ const AssessmentJourneyView = memo(function AssessmentJourneyView({
       </div>
       
       {/* Combined Assessment Summary */}
-      <Card className="bg-gradient-to-br from-[#252826]/5 to-[#8E4F67]/5 border-[#8E4F67]/20">
+      <Card className="bg-gradient-to-br from-brand-ink/5 to-brand-berry/5 border-brand-berry/20">
         <CardContent className="py-4">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div className="flex items-center gap-4">
-              <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center">
+              <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-brand-ink to-brand-berry flex items-center justify-center">
                 <Gauge className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h4 className="font-semibold text-[#F6F3EE]">Assessment Progress</h4>
+                <h4 className="font-semibold text-brand-cream">Assessment Progress</h4>
                 <p className="text-sm text-muted-foreground">
                   {totalQuestionsAnswered > 0 
                     ? `${totalQuestionsAnswered} of 124 questions completed (Pre + Full combined)`
@@ -1107,26 +1107,26 @@ const AssessmentJourneyView = memo(function AssessmentJourneyView({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <Card className="border-[#252826]/20 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-[#252826]/5 via-transparent to-[#8E4F67]/5 pointer-events-none" />
+          <Card className="border-brand-ink/20 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-brand-ink/5 via-transparent to-brand-berry/5 pointer-events-none" />
             <CardHeader className="pb-3 relative">
               <div className="flex items-center gap-3">
                 <motion.div 
                   animate={{ rotate: [0, 360] }}
                   transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  className="h-10 w-10 rounded-xl bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center shadow-lg"
+                  className="h-10 w-10 rounded-xl bg-gradient-to-br from-brand-ink to-brand-berry flex items-center justify-center shadow-lg"
                 >
                   <Layers className="h-5 w-5 text-white" />
                 </motion.div>
                 <div>
-                  <CardTitle className="text-lg text-[#F6F3EE]">6-Layer AI Validation Pipeline</CardTitle>
+                  <CardTitle className="text-lg text-brand-cream">6-Layer AI Validation Pipeline</CardTitle>
                   <CardDescription className="text-sm">Your scores pass through our rigorous validation system</CardDescription>
                 </div>
               </div>
             </CardHeader>
             <CardContent className="relative">
               {/* Flowing connection line for desktop */}
-              <div className="absolute top-[40px] left-[8%] right-[8%] h-1 bg-gradient-to-r from-[#252826]/20 via-[#8E4F67]/40 to-[#7FB8A3]/20 rounded-full hidden lg:block" />
+              <div className="absolute top-[40px] left-[8%] right-[8%] h-1 bg-gradient-to-r from-brand-ink/20 via-brand-berry/40 to-brand-mint/20 rounded-full hidden lg:block" />
               
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                 {VALIDATION_PIPELINE_LAYERS.map((layer, idx) => {
@@ -1138,7 +1138,7 @@ const AssessmentJourneyView = memo(function AssessmentJourneyView({
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.4, delay: idx * 0.1 }}
                       whileHover={{ scale: 1.05, y: -2 }}
-                      className="relative p-4 rounded-xl border bg-gradient-to-br from-white to-[#8E4F67]/5 dark:from-gray-900 dark:to-[#8E4F67]/10 border-[#8E4F67]/20 hover:border-[#8E4F67]/50 transition-all shadow-sm hover:shadow-md"
+                      className="relative p-4 rounded-xl border bg-gradient-to-br from-white to-brand-berry/5 dark:from-gray-900 dark:to-brand-berry/10 border-brand-berry/20 hover:border-brand-berry/50 transition-all shadow-sm hover:shadow-md"
                       data-testid={`validation-layer-${layer.layer}`}
                     >
                       <div className="flex flex-col items-center text-center gap-3">
@@ -1150,16 +1150,16 @@ const AssessmentJourneyView = memo(function AssessmentJourneyView({
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
                             transition={{ delay: 0.5 + idx * 0.1 }}
-                            className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-[#7FB8A3] flex items-center justify-center shadow-md"
+                            className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-brand-mint flex items-center justify-center shadow-md"
                           >
-                            <CheckCircle2 className="h-3 w-3 text-[#F6F3EE]" />
+                            <CheckCircle2 className="h-3 w-3 text-brand-cream" />
                           </motion.div>
                         </div>
                         <div>
-                          <Badge variant="outline" className="text-[10px] border-[#8E4F67]/30 text-brand-teal mb-1">
+                          <Badge variant="outline" className="text-[10px] border-brand-berry/30 text-brand-teal mb-1">
                             Layer {layer.layer}
                           </Badge>
-                          <div className="text-xs font-semibold text-[#F6F3EE]">{layer.name}</div>
+                          <div className="text-xs font-semibold text-brand-cream">{layer.name}</div>
                           <div className="text-[10px] text-muted-foreground mt-1 leading-tight">{layer.description}</div>
                         </div>
                       </div>
@@ -1219,7 +1219,7 @@ const AssessmentCard = memo(function AssessmentCard({ assessment }: AssessmentCa
                 <IconComponent className="h-6 w-6 text-white" />
               </div>
               <div>
-                <CardTitle className="text-lg text-[#F6F3EE]" data-testid={`text-tier-name-${assessment.id}`}>
+                <CardTitle className="text-lg text-brand-cream" data-testid={`text-tier-name-${assessment.id}`}>
                   {tier.name}
                 </CardTitle>
                 <CardDescription className="text-sm">{tier.tagline}</CardDescription>
@@ -1251,7 +1251,7 @@ const AssessmentCard = memo(function AssessmentCard({ assessment }: AssessmentCa
               <Calendar className="h-4 w-4" aria-hidden="true" />
               <span>Started</span>
             </dt>
-            <dd className="font-medium text-[#F6F3EE]" data-testid={`text-started-${assessment.id}`}>
+            <dd className="font-medium text-brand-cream" data-testid={`text-started-${assessment.id}`}>
               {formatDate(assessment.startedAt)}
             </dd>
 
@@ -1259,7 +1259,7 @@ const AssessmentCard = memo(function AssessmentCard({ assessment }: AssessmentCa
               <RefreshCw className="h-4 w-4" aria-hidden="true" />
               <span>Updated</span>
             </dt>
-            <dd className="font-medium text-[#F6F3EE]" data-testid={`text-updated-${assessment.id}`}>
+            <dd className="font-medium text-brand-cream" data-testid={`text-updated-${assessment.id}`}>
               {formatDateTime(assessment.updatedAt)}
             </dd>
           </dl>
@@ -1268,7 +1268,7 @@ const AssessmentCard = memo(function AssessmentCard({ assessment }: AssessmentCa
             <div className="pt-3 border-t border-dashed">
               <div className="flex items-center gap-2 mb-3">
                 <Layers className="h-4 w-4 text-brand-teal" aria-hidden="true" />
-                <span className="text-sm font-medium text-[#F6F3EE]">Finance Maturity Scorecard</span>
+                <span className="text-sm font-medium text-brand-cream">Finance Maturity Scorecard</span>
               </div>
               {resultsLoading ? (
                 <div className="flex items-center justify-center py-4" role="status" aria-label="Loading scorecard">
@@ -1287,8 +1287,8 @@ const AssessmentCard = memo(function AssessmentCard({ assessment }: AssessmentCa
           {isAnalysed && aiAnalysis && (aiAnalysis.summary || (aiAnalysis.keyInsights && aiAnalysis.keyInsights.length > 0)) && (
             <div className="pt-3 border-t border-dashed" data-testid={`ai-insights-${assessment.id}`}>
               <div className="flex items-center gap-2 mb-3">
-                <Sparkles className="h-4 w-4 text-[#5E8D7A]" aria-hidden="true" />
-                <span className="text-sm font-medium text-[#F6F3EE]">AI Insights</span>
+                <Sparkles className="h-4 w-4 text-brand-deep-mint" aria-hidden="true" />
+                <span className="text-sm font-medium text-brand-cream">AI Insights</span>
               </div>
               {aiAnalysis.summary && (
                 <p className="text-xs text-muted-foreground mb-3" data-testid={`ai-summary-${assessment.id}`}>
@@ -1312,7 +1312,7 @@ const AssessmentCard = memo(function AssessmentCard({ assessment }: AssessmentCa
         <CardFooter className="flex flex-wrap gap-2 pt-3 border-t">
           {isInProgress && (
             <Button
-              className="flex-1 bg-[#8E4F67] hover:bg-brand-navy"
+              className="flex-1 bg-brand-berry hover:bg-brand-navy"
               onClick={handleResume}
               data-testid={`button-resume-${assessment.id}`}
               aria-label={`Resume ${tier.name}`}
@@ -1325,7 +1325,7 @@ const AssessmentCard = memo(function AssessmentCard({ assessment }: AssessmentCa
           {isCompleted && (
             <Button
               variant="outline"
-              className="flex-1 border-[#8E4F67] text-brand-teal hover:bg-[#8E4F67]/10"
+              className="flex-1 border-brand-berry text-brand-teal hover:bg-brand-berry/10"
               onClick={handleViewResults}
               data-testid={`button-view-results-${assessment.id}`}
               aria-label={`View results for ${tier.name}`}
@@ -1342,7 +1342,7 @@ const AssessmentCard = memo(function AssessmentCard({ assessment }: AssessmentCa
             >
               <Button
                 variant="outline"
-                className="w-full border-[#8E4F67] text-brand-teal hover:bg-[#8E4F67]/10"
+                className="w-full border-brand-berry text-brand-teal hover:bg-brand-berry/10"
                 data-testid={`button-download-pdf-${assessment.id}`}
                 aria-label={`Download PDF report for ${tier.name}`}
               >
@@ -1422,14 +1422,14 @@ const StartNewAssessmentCard = memo(function StartNewAssessmentCard({
       transition={{ duration: 0.4 }}
       aria-label={`Start new ${config.name}`}
     >
-      <Card className={`hover-elevate h-full ${showContactUs ? "border-dashed border-2 border-[#252826]/30" : ""}`}>
+      <Card className={`hover-elevate h-full ${showContactUs ? "border-dashed border-2 border-brand-ink/30" : ""}`}>
         <CardHeader className="pb-3">
           <div className="flex items-center gap-3">
             <div className={`h-10 w-10 rounded-lg flex items-center justify-center bg-gradient-to-br ${config.gradient}`} aria-hidden="true">
               <IconComponent className="h-5 w-5 text-white" />
             </div>
             <div>
-              <CardTitle className="text-base text-[#F6F3EE]">{config.name}</CardTitle>
+              <CardTitle className="text-base text-brand-cream">{config.name}</CardTitle>
               <CardDescription className="text-xs">{config.tagline}</CardDescription>
             </div>
           </div>
@@ -1446,7 +1446,7 @@ const StartNewAssessmentCard = memo(function StartNewAssessmentCard({
         </CardContent>
         <CardFooter className="pt-3">
           <Button
-            className={showContactUs ? "w-full" : "w-full bg-[#8E4F67] hover:bg-brand-navy"}
+            className={showContactUs ? "w-full" : "w-full bg-brand-berry hover:bg-brand-navy"}
             variant={showContactUs ? "outline" : "default"}
             onClick={handleClick}
             data-testid={`button-start-${tier}`}
@@ -1538,7 +1538,7 @@ const AnalyticsDashboard = memo(function AnalyticsDashboard({
     return (
       <section className="mb-10" data-testid="section-analytics-dashboard" aria-labelledby="analytics-dashboard-heading">
         <div className="mb-6">
-          <h2 id="analytics-dashboard-heading" className="text-xl font-semibold text-[#F6F3EE] flex items-center gap-2">
+          <h2 id="analytics-dashboard-heading" className="text-xl font-semibold text-brand-cream flex items-center gap-2">
             <Gauge className="h-5 w-5 text-brand-teal" aria-hidden="true" />
             Maturity Summary
           </h2>
@@ -1546,13 +1546,13 @@ const AnalyticsDashboard = memo(function AnalyticsDashboard({
             Complete an assessment to see your finance transformation maturity scores
           </p>
         </div>
-        <Card className="border-[#8E4F67]/20 bg-[#8E4F67]/5" data-testid="card-empty-maturity-state">
+        <Card className="border-brand-berry/20 bg-brand-berry/5" data-testid="card-empty-maturity-state">
           <CardContent className="py-12">
             <div className="flex flex-col items-center text-center">
-              <div className="h-16 w-16 rounded-full bg-[#8E4F67]/20 flex items-center justify-center mb-4" aria-hidden="true">
+              <div className="h-16 w-16 rounded-full bg-brand-berry/20 flex items-center justify-center mb-4" aria-hidden="true">
                 <Gauge className="h-8 w-8 text-brand-teal" />
               </div>
-              <h3 className="font-semibold text-lg text-[#F6F3EE] mb-2">No Maturity Data Yet</h3>
+              <h3 className="font-semibold text-lg text-brand-cream mb-2">No Maturity Data Yet</h3>
               <p className="text-muted-foreground text-sm mb-4 max-w-md">
                 Complete your first assessment to unlock your personalised finance transformation maturity scorecard and dimension analysis.
               </p>
@@ -1571,7 +1571,7 @@ const AnalyticsDashboard = memo(function AnalyticsDashboard({
     <section className="mb-10" data-testid="section-analytics-dashboard" aria-labelledby="analytics-dashboard-heading">
       <div className="flex items-center justify-between gap-4 flex-wrap mb-6">
         <div>
-          <h2 id="analytics-dashboard-heading" className="text-xl font-semibold text-[#F6F3EE] flex items-center gap-2">
+          <h2 id="analytics-dashboard-heading" className="text-xl font-semibold text-brand-cream flex items-center gap-2">
             <Gauge className="h-5 w-5 text-brand-teal" aria-hidden="true" />
             Maturity Summary
           </h2>
@@ -1583,7 +1583,7 @@ const AnalyticsDashboard = memo(function AnalyticsDashboard({
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
         <Card className="relative overflow-hidden" data-testid="card-overall-score">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#252826]/5 to-[#8E4F67]/10" aria-hidden="true" />
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-ink/5 to-brand-berry/10" aria-hidden="true" />
           <CardContent className="relative pt-6">
             <div className="flex flex-col items-center text-center">
               <div
@@ -1608,19 +1608,19 @@ const AnalyticsDashboard = memo(function AnalyticsDashboard({
               >
                 {overallMaturity.label}
               </Badge>
-              <span className="text-xs font-medium text-[#F6F3EE] mb-4">Overall Maturity Score</span>
+              <span className="text-xs font-medium text-brand-cream mb-4">Overall Maturity Score</span>
               
               {/* Benchmark & Insight Section */}
-              <div className="w-full pt-3 border-t border-[#8E4F67]/20 space-y-2">
+              <div className="w-full pt-3 border-t border-brand-berry/20 space-y-2">
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-muted-foreground">Industry Average</span>
-                  <span className="font-medium text-[#F6F3EE]">48%</span>
+                  <span className="font-medium text-brand-cream">48%</span>
                 </div>
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-muted-foreground">Your Position</span>
                   <Badge 
                     variant="outline" 
-                    className={`text-xs ${displayOverallScore >= 48 ? 'text-brand-teal border-[#8E4F67]/40' : 'text-amber-600 border-amber-400/40'}`}
+                    className={`text-xs ${displayOverallScore >= 48 ? 'text-brand-teal border-brand-berry/40' : 'text-amber-600 border-amber-400/40'}`}
                     data-testid="badge-benchmark-position"
                   >
                     {displayOverallScore >= 48 
@@ -1644,7 +1644,7 @@ const AnalyticsDashboard = memo(function AnalyticsDashboard({
 
         <Card className="lg:col-span-2" data-testid="card-dimension-summary">
           <CardHeader className="pb-3">
-            <CardTitle className="text-base text-[#F6F3EE] flex items-center gap-2">
+            <CardTitle className="text-base text-brand-cream flex items-center gap-2">
               <Layers className="h-4 w-4 text-brand-teal" aria-hidden="true" />
               Dimension Overview
             </CardTitle>
@@ -1675,7 +1675,7 @@ const AnalyticsDashboard = memo(function AnalyticsDashboard({
                           >
                             <DimensionIcon className="h-3.5 w-3.5" style={{ color: config.color }} />
                           </div>
-                          <span className="text-xs font-medium text-[#F6F3EE] truncate flex items-center gap-1">
+                          <span className="text-xs font-medium text-brand-cream truncate flex items-center gap-1">
                             {config.shortName}
                             <Info className="h-2.5 w-2.5 opacity-40" />
                           </span>
@@ -1769,7 +1769,7 @@ const AnalyticsDashboard = memo(function AnalyticsDashboard({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card data-testid="card-top-strengths">
           <CardHeader className="pb-3">
-            <CardTitle className="text-base text-[#F6F3EE] flex items-center gap-2">
+            <CardTitle className="text-base text-brand-cream flex items-center gap-2">
               <TrendingUp className="h-4 w-4 text-brand-teal" aria-hidden="true" />
               Top Strengths
             </CardTitle>
@@ -1790,7 +1790,7 @@ const AnalyticsDashboard = memo(function AnalyticsDashboard({
                       >
                         <DimensionIcon className="h-4 w-4" style={{ color: config.color }} />
                       </div>
-                      <span className="text-sm font-medium text-[#F6F3EE]">{config.shortName}</span>
+                      <span className="text-sm font-medium text-brand-cream">{config.shortName}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-bold" style={{ color: maturity.color }}>{Math.round(score)}%</span>
@@ -1810,7 +1810,7 @@ const AnalyticsDashboard = memo(function AnalyticsDashboard({
 
         <Card data-testid="card-top-opportunities">
           <CardHeader className="pb-3">
-            <CardTitle className="text-base text-[#F6F3EE] flex items-center gap-2">
+            <CardTitle className="text-base text-brand-cream flex items-center gap-2">
               <Target className="h-4 w-4 text-amber-500" aria-hidden="true" />
               Improvement Opportunities
             </CardTitle>
@@ -1831,7 +1831,7 @@ const AnalyticsDashboard = memo(function AnalyticsDashboard({
                       >
                         <DimensionIcon className="h-4 w-4" style={{ color: config.color }} />
                       </div>
-                      <span className="text-sm font-medium text-[#F6F3EE]">{config.shortName}</span>
+                      <span className="text-sm font-medium text-brand-cream">{config.shortName}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-bold" style={{ color: maturity.color }}>{Math.round(score)}%</span>
@@ -1868,7 +1868,7 @@ const JOURNEY_STAGE_CONFIG = {
     description: "Establish your baseline maturity across 8 dimensions and identify priority focus areas",
     duration: "20-25 minutes",
     questions: "50 questions",
-    gradient: "from-[#8E4F67] to-[#7FB8A3]",
+    gradient: "from-brand-berry to-brand-mint",
     icon: PreAssessmentIcon,
     features: [
       "Finance Maturity Scorecard",
@@ -1884,7 +1884,7 @@ const JOURNEY_STAGE_CONFIG = {
     description: "Build on your discovery with detailed capability mapping and transformation roadmap",
     duration: "35-45 minutes",
     questions: "74 questions",
-    gradient: "from-[#252826] to-[#8E4F67]",
+    gradient: "from-brand-ink to-brand-berry",
     icon: FullAssessmentIcon,
     features: [
       "Complete KPI Registry",
@@ -1900,7 +1900,7 @@ const JOURNEY_STAGE_CONFIG = {
     description: "Quantify your business case and track transformation benefits over time",
     duration: "Real-time",
     questions: "Ongoing",
-    gradient: "from-[#7FB8A3] to-[#8E4F67]",
+    gradient: "from-brand-mint to-brand-berry",
     icon: BarChart3,
     features: [
       "ROI Calculator",
@@ -1951,7 +1951,7 @@ const JourneyStageCard = memo(function JourneyStageCard({
       <Card className={`h-full flex flex-col hover-elevate ${showContactUs ? "border-dashed border-2" : ""}`} data-testid={`card-path-${path}`}>
         <CardHeader className="pb-3">
           <div className="flex items-center justify-between gap-2 mb-3">
-            <Badge className="text-xs font-semibold bg-gradient-to-r from-[#252826] to-[#8E4F67] text-white border-0">
+            <Badge className="text-xs font-semibold bg-gradient-to-r from-brand-ink to-brand-berry text-white border-0">
               Stage {config.stage}
             </Badge>
             {isPremium && (
@@ -1963,7 +1963,7 @@ const JourneyStageCard = memo(function JourneyStageCard({
               <IconComponent className="h-6 w-6 text-white" />
             </div>
             <div>
-              <CardTitle className="text-lg text-[#F6F3EE]">{config.name}</CardTitle>
+              <CardTitle className="text-lg text-brand-cream">{config.name}</CardTitle>
               <CardDescription className="text-xs">{config.subtitle}</CardDescription>
             </div>
           </div>
@@ -1987,7 +1987,7 @@ const JourneyStageCard = memo(function JourneyStageCard({
             {config.features.map((feature, index) => (
               <li key={index} className="flex items-center gap-2 text-sm">
                 <CheckCircle2 className="h-4 w-4 text-brand-teal flex-shrink-0" aria-hidden="true" />
-                <span className="text-[#F6F3EE]">{feature}</span>
+                <span className="text-brand-cream">{feature}</span>
               </li>
             ))}
           </ul>
@@ -1995,7 +1995,7 @@ const JourneyStageCard = memo(function JourneyStageCard({
 
         <CardFooter className="pt-4 border-t">
           <Button
-            className={`w-full ${isDisabled ? "" : showContactUs ? "" : "bg-[#8E4F67] hover:bg-brand-navy"}`}
+            className={`w-full ${isDisabled ? "" : showContactUs ? "" : "bg-brand-berry hover:bg-brand-navy"}`}
             variant={isDisabled ? "secondary" : showContactUs ? "outline" : "default"}
             onClick={handleClick}
             disabled={isDisabled}
@@ -2035,7 +2035,7 @@ const JourneyToValueSection = memo(function JourneyToValueSection({
   return (
     <section className="mb-12" aria-labelledby="journey-heading" data-testid="section-journey-to-value">
       <div className="mb-6">
-        <h2 id="journey-heading" className="text-xl font-semibold text-[#F6F3EE] flex items-center gap-2">
+        <h2 id="journey-heading" className="text-xl font-semibold text-brand-cream flex items-center gap-2">
           <CompassIcon className="h-5 w-5 text-brand-teal" aria-hidden="true" />
           Your Journey to Value
         </h2>
@@ -2047,7 +2047,7 @@ const JourneyToValueSection = memo(function JourneyToValueSection({
       {/* Journey flow indicator */}
       <div className="relative">
         {/* Connecting flow line - desktop only */}
-        <div className="absolute top-1/2 left-[15%] right-[15%] h-1 bg-gradient-to-r from-[#8E4F67]/20 via-[#252826]/30 to-[#7FB8A3]/20 rounded-full hidden md:block -translate-y-1/2 z-0" />
+        <div className="absolute top-1/2 left-[15%] right-[15%] h-1 bg-gradient-to-r from-brand-berry/20 via-brand-ink/30 to-brand-mint/20 rounded-full hidden md:block -translate-y-1/2 z-0" />
         
         <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6">
           <JourneyStageCard
@@ -2172,7 +2172,7 @@ export default function FinanceCompassDashboard() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-brand-teal hover:text-[#F6F3EE] -ml-2"
+                className="text-brand-teal hover:text-brand-cream -ml-2"
                 data-testid="button-back-to-landing"
               >
                 <ArrowLeft className="h-4 w-4 mr-2" aria-hidden="true" />
@@ -2188,15 +2188,15 @@ export default function FinanceCompassDashboard() {
             className="mb-8"
           >
             <div className="flex items-start gap-4 flex-wrap">
-              <div className="h-14 w-14 flex items-center justify-center rounded-xl bg-gradient-to-br from-[#252826] to-[#8E4F67] shadow-lg" aria-hidden="true">
+              <div className="h-14 w-14 flex items-center justify-center rounded-xl bg-gradient-to-br from-brand-ink to-brand-berry shadow-lg" aria-hidden="true">
                 <CompassIcon className="h-7 w-7 text-white" />
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-3 flex-wrap mb-1">
-                  <h1 className="text-2xl md:text-3xl font-bold text-[#F6F3EE]" data-testid="text-welcome-message">
+                  <h1 className="text-2xl md:text-3xl font-bold text-brand-cream" data-testid="text-welcome-message">
                     Welcome back, {sessionData?.firstName}!
                   </h1>
-                  <Badge className="bg-[#8E4F67]/10 text-brand-teal border-[#8E4F67]/30">
+                  <Badge className="bg-brand-berry/10 text-brand-teal border-brand-berry/30">
                     <CheckCircle2 className="h-3 w-3 mr-1" aria-hidden="true" />
                     Verified
                   </Badge>
@@ -2231,7 +2231,7 @@ export default function FinanceCompassDashboard() {
               return (
                 <section className="mb-12" aria-labelledby="roi-heading">
                   <div className="mb-6">
-                    <h2 id="roi-heading" className="text-xl font-semibold text-[#F6F3EE] flex items-center gap-2">
+                    <h2 id="roi-heading" className="text-xl font-semibold text-brand-cream flex items-center gap-2">
                       <Calculator className="h-5 w-5 text-brand-teal" aria-hidden="true" />
                       ROI & Business Case
                     </h2>
@@ -2246,7 +2246,7 @@ export default function FinanceCompassDashboard() {
               return (
                 <section className="mb-12" aria-labelledby="roi-heading">
                   <div className="mb-6">
-                    <h2 id="roi-heading" className="text-xl font-semibold text-[#F6F3EE] flex items-center gap-2">
+                    <h2 id="roi-heading" className="text-xl font-semibold text-brand-cream flex items-center gap-2">
                       <Calculator className="h-5 w-5 text-brand-teal" aria-hidden="true" />
                       ROI & Business Case
                     </h2>
@@ -2254,19 +2254,19 @@ export default function FinanceCompassDashboard() {
                       Financial metrics from your transformation business case
                     </p>
                   </div>
-                  <Card className="p-6 border-dashed border-2 border-[#8E4F67]/30 bg-[#8E4F67]/5" data-testid="card-roi-locked">
+                  <Card className="p-6 border-dashed border-2 border-brand-berry/30 bg-brand-berry/5" data-testid="card-roi-locked">
                     <div className="flex items-center gap-4">
-                      <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#252826]/20 to-[#8E4F67]/20 flex items-center justify-center" aria-hidden="true">
+                      <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-brand-ink/20 to-brand-berry/20 flex items-center justify-center" aria-hidden="true">
                         <Calculator className="h-6 w-6 text-brand-teal/60" />
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-semibold text-[#F6F3EE]">Complete the Full Assessment to Unlock</h4>
+                        <h4 className="font-semibold text-brand-cream">Complete the Full Assessment to Unlock</h4>
                         <p className="text-sm text-muted-foreground">
                           ROI & Business Case analysis is available after completing the Full Assessment. Start your Full Assessment to access detailed financial projections and transformation business case.
                         </p>
                       </div>
                       <Button
-                        className="bg-[#8E4F67] hover:bg-brand-navy"
+                        className="bg-brand-berry hover:bg-brand-navy"
                         onClick={() => handleStartAssessment("full")}
                         data-testid="button-start-full-for-roi"
                         aria-label="Start Full Assessment to unlock ROI analysis"
@@ -2285,7 +2285,7 @@ export default function FinanceCompassDashboard() {
           <section className="mb-12" aria-labelledby="assessments-heading">
             <div className="flex items-center justify-between gap-4 flex-wrap mb-6">
               <div>
-                <h2 id="assessments-heading" className="text-xl font-semibold text-[#F6F3EE] flex items-center gap-2">
+                <h2 id="assessments-heading" className="text-xl font-semibold text-brand-cream flex items-center gap-2">
                   <BarChart3 className="h-5 w-5 text-brand-teal" aria-hidden="true" />
                   Your Assessment Journey
                 </h2>
