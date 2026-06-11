@@ -50,6 +50,7 @@ import { isBusinessEmail } from "@shared/schema";
 import { getServerFeatureFlags } from "@shared/feature-flags";
 import { generateOtp, hashOtp } from "../storage";
 import { verifyTurnstileToken, getTurnstileSiteKey, isTurnstileConfigured } from "../services/turnstile";
+import { getAuth, clerkClient } from "@clerk/express";
 import { sendEmailViaGraph } from "../services/ms-graph-email";
 import { syncLeadToHubSpot, sendLeadVerificationNotification } from "../api/routes/shared/email-helpers";
 import {
@@ -700,6 +701,99 @@ publicRouter.post("/qualify", otpRequestLimiter, checkBetaAccessMiddleware, asyn
       return res.status(400).json({ success: false, error: error.errors[0]?.message || "Validation error" });
     }
     res.status(500).json({ success: false, error: "Failed to qualify lead" });
+  }
+});
+
+// Clerk OAuth qualification — creates/retrieves FC contact from a verified Clerk Google account
+// and sets an FC session, bypassing the email OTP flow.
+publicRouter.post("/qualify-clerk", standardApiLimiter, async (req: Request, res: Response) => {
+  try {
+    const auth = getAuth(req);
+    if (!auth?.userId) {
+      return res.status(401).json({
+        success: false,
+        error: "Not signed in. Please sign in with Google to continue.",
+      });
+    }
+
+    const clerkUser = await clerkClient.users.getUser(auth.userId);
+    const primaryEmailObj = clerkUser.emailAddresses.find(
+      (e) => e.id === clerkUser.primaryEmailAddressId
+    ) ?? clerkUser.emailAddresses[0];
+    const email = primaryEmailObj?.emailAddress;
+
+    if (!email) {
+      return res.status(400).json({
+        success: false,
+        error: "No email address found on your Google account.",
+      });
+    }
+
+    const firstName = clerkUser.firstName || "";
+    const lastName = clerkUser.lastName || "";
+    const emailHash = crypto.createHash("sha256").update(email.toLowerCase()).digest("hex");
+
+    let contact = await fcStorage.getContactByEmail(email.toLowerCase());
+    if (!contact) {
+      const company = await fcStorage.createCompany({
+        name: email.split("@")[0],
+        sector: "Other",
+        sizeBand: "Not specified",
+      });
+      contact = await fcStorage.createContact({
+        companyId: company.id,
+        firstName,
+        lastName,
+        email: email.toLowerCase(),
+        emailHash,
+        ipAddress: req.ip || req.headers["x-forwarded-for"]?.toString(),
+        userAgent: req.headers["user-agent"],
+      });
+    }
+
+    const expiresAt = new Date(Date.now() + FC_SESSION_EXPIRY_DAYS * 24 * 60 * 60 * 1000);
+    (req.session as any).fcVerified = {
+      contactId: contact.id,
+      email: contact.email,
+      firstName: contact.firstName,
+      lastName: contact.lastName,
+      expiresAt: expiresAt.toISOString(),
+    };
+
+    await new Promise<void>((resolve, reject) => {
+      req.session.save((err) => {
+        if (err) {
+          log.error({ err }, "Session save error in qualify-clerk");
+          reject(err);
+        } else {
+          resolve();
+        }
+      });
+    });
+
+    await fcStorage.createAuditLog({
+      contactId: contact.id,
+      action: "clerk:google_verified",
+      entityType: "contact",
+      entityId: contact.id,
+      details: { provider: "google", clerkUserId: auth.userId },
+      ipAddress: req.ip || req.headers["x-forwarded-for"]?.toString(),
+      userAgent: req.headers["user-agent"],
+    });
+
+    return res.json({
+      success: true,
+      data: {
+        contactId: contact.id,
+        email: contact.email,
+        firstName: contact.firstName,
+        lastName: contact.lastName,
+        expiresAt: expiresAt.toISOString(),
+      },
+    });
+  } catch (error: any) {
+    log.error({ err: error }, "Qualify-clerk error");
+    return res.status(500).json({ success: false, error: "Failed to set up your account. Please try again." });
   }
 });
 

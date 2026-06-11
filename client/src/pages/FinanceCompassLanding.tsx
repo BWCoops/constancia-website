@@ -18,8 +18,18 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { Skeleton } from "@/components/ui/skeleton";
 import { apiRequest } from "@/lib/queryClient";
-import { LazyInputOTP } from "@/components/finance-compass/LazyFormComponents";
-import { Turnstile, useTurnstileToken } from "@/components/turnstile";
+import { useUser, useClerk } from "@clerk/clerk-react";
+
+function GoogleIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+    </svg>
+  );
+}
 import { InstantPreview } from "@/components/finance-compass/InstantPreview";
 import { SampleResultsPreview } from "@/components/finance-compass/SampleResultsPreview";
 import { HeroResultsVisual } from "@/components/finance-compass/HeroResultsVisual";
@@ -30,7 +40,6 @@ import {
   FullAssessmentIcon,
   QualificationIcon,
 } from "@/components/finance-compass-icons";
-import { INDUSTRY_SECTORS, getSimplifiedIndustryList } from "@shared/finance-compass-industries";
 import { useFeatureFlags } from "@/lib/feature-flags";
 
 // Floating CTA Button Component - Mobile First Design
@@ -104,27 +113,6 @@ interface MyAssessmentsResponse {
   error?: string;
 }
 
-// Expanded industry list from APQC benchmarks - 47 industries across 16 sectors
-const expandedIndustries = getSimplifiedIndustryList();
-
-const companySizes = [
-  "1-50 employees",
-  "51-200 employees",
-  "201-500 employees",
-  "501-1000 employees",
-  "1001-5000 employees",
-  "5000+ employees",
-];
-
-// Transformation priority options for the registration form
-// Users rank these 1-5 to indicate their strategic focus areas
-const TRANSFORMATION_PRIORITIES = [
-  { id: "epm", label: "Planning & Forecasting (EPM)", icon: Target, description: "Budgeting, forecasting, financial planning" },
-  { id: "erp", label: "Core Finance Systems (ERP)", icon: Building2, description: "GL, AP, AR, core transactional systems" },
-  { id: "ai", label: "AI & Automation", icon: Bot, description: "Machine learning, process automation, intelligent insights" },
-  { id: "analytics", label: "Data & Analytics", icon: LineChart, description: "Reporting, dashboards, data integration" },
-  { id: "consolidation", label: "Consolidation & Close", icon: ClipboardCheck, description: "Month-end close, consolidation, intercompany" },
-];
 
 const tiers = [
   {
@@ -186,7 +174,7 @@ function isBusinessEmail(email: string): boolean {
   return domain ? !personalDomains.includes(domain) : false;
 }
 
-type Step = "checking" | "form" | "otp" | "verified";
+type Step = "checking" | "sign-in" | "qualifying" | "verified";
 
 // Progression Step Indicator Component
 function ProgressionStepper({ currentStep }: { currentStep: 1 | 2 | 3 }) {
@@ -256,55 +244,14 @@ export default function FinanceCompassLanding() {
   const instantPreviewRef = useRef<HTMLDivElement>(null);
   // Removed isPageReady state - skeleton loader caused white flash on mobile
   
+  const { isSignedIn, isLoaded: isClerkLoaded, user } = useUser();
+  const clerk = useClerk();
+
   const [step, setStep] = useState<Step>("checking");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [contactId, setContactId] = useState<string | null>(null);
   const [sessionInfo, setSessionInfo] = useState<SessionStatus | null>(null);
-  const [otpValue, setOtpValue] = useState("");
-  const [isResending, setIsResending] = useState(false);
-  
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    companyName: "",
-    companyDescription: "", // What the company does - for AI context
-    jobTitle: "",
-    industry: "",
-    companySize: "",
-    transformationPriorities: [] as string[], // Ordered list of priority IDs
-  });
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  
-  // Handle priority ranking - users click to add/remove from their ranked list
-  const togglePriority = (priorityId: string) => {
-    setFormData(prev => {
-      const currentPriorities = [...prev.transformationPriorities];
-      const index = currentPriorities.indexOf(priorityId);
-      
-      if (index >= 0) {
-        // Remove from list
-        currentPriorities.splice(index, 1);
-      } else {
-        // Add to end of list
-        currentPriorities.push(priorityId);
-      }
-      
-      return { ...prev, transformationPriorities: currentPriorities };
-    });
-  };
-  
-  const getPriorityRank = (priorityId: string): number | null => {
-    const index = formData.transformationPriorities.indexOf(priorityId);
-    return index >= 0 ? index + 1 : null;
-  };
-
-  const { data: turnstileConfig } = useQuery<{ enabled: boolean; siteKey: string | null }>({
-    queryKey: ["/api/config/turnstile"],
-  });
-
-  const [captchaToken, setCaptchaToken, clearCaptcha] = useTurnstileToken();
+  const [fcChecked, setFcChecked] = useState(false);
 
   // Fetch user's existing assessments when verified
   const { data: myAssessmentsData, isLoading: assessmentsLoading, error: assessmentsError } = useQuery<MyAssessmentsResponse>({
@@ -324,225 +271,84 @@ export default function FinanceCompassLanding() {
     return userAssessments.some(a => a.tier === tierId && (a.status === "completed" || a.status === "initial_complete"));
   };
 
-  // Check for existing session on mount
+  // Step 1: Check existing FC session on mount
   useEffect(() => {
-    checkSession();
+    (async () => {
+      try {
+        const response = await fetch("/api/finance-compass/public/session", { credentials: "include" });
+        const data: SessionStatus = await response.json();
+        if (data.verified && data.contactId) {
+          setContactId(data.contactId);
+          setSessionInfo(data);
+          setStep("verified");
+        }
+      } catch {
+        // handled by Clerk effect below
+      } finally {
+        setFcChecked(true);
+      }
+    })();
   }, []);
-  
-  // Removed skeleton loader effect - caused white flash on mobile
-  
-  // Track page view and scroll on mount
+
+  // Track page view on mount
   useEffect(() => {
     trackPageView("fc_landing");
     const cleanupScroll = setupScrollTracking("fc_landing");
-    
-    return () => {
-      cleanupScroll();
-    };
+    return () => { cleanupScroll(); };
   }, []);
-  
+
   // Setup widget visibility tracking for InstantPreview
   useEffect(() => {
-    if (step === "form" && instantPreviewRef.current) {
-      const cleanup = setupWidgetVisibilityTracking(
-        instantPreviewRef.current,
-        "fc_landing"
-      );
+    if (step === "sign-in" && instantPreviewRef.current) {
+      const cleanup = setupWidgetVisibilityTracking(instantPreviewRef.current, "fc_landing");
       return cleanup;
     }
   }, [step]);
-  
-  useEffect(() => {
-    if (step === "otp") {
-      const otpCard = document.querySelector('[data-testid="input-otp"]');
-      if (otpCard) {
-        otpCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    }
-  }, [step]);
 
-  // Only preload heavy components after user is verified
+  // Preload heavy components after user is verified
   useEffect(() => {
     if (step === "verified") {
       preloadFinanceCompassComponents();
     }
   }, [step]);
 
-  const checkSession = async () => {
-    try {
-      const response = await fetch("/api/finance-compass/public/session", {
-        credentials: "include",
-      });
-      const data: SessionStatus = await response.json();
-      
-      if (data.verified && data.contactId) {
-        setSessionInfo(data);
-        setContactId(data.contactId);
-        setFormData(prev => ({
-          ...prev,
-          firstName: data.firstName || "",
-          lastName: data.lastName || "",
-          email: data.email || "",
-        }));
-        setStep("verified");
-      } else {
-        setStep("form");
-      }
-    } catch (error) {
-      console.error("Session check error:", error);
-      setStep("form");
+  // Step 2: When both FC check and Clerk load resolve, decide next step
+  useEffect(() => {
+    if (!fcChecked || !isClerkLoaded) return;
+    if (step === "verified" || step === "qualifying") return;
+    if (isSignedIn) {
+      handleClerkQualify();
+    } else {
+      setStep("sign-in");
     }
-  };
+  }, [fcChecked, isClerkLoaded, isSignedIn]);
 
-  const validateForm = (): boolean => {
-    const newErrors: Record<string, string> = {};
-    
-    if (!formData.firstName.trim()) newErrors.firstName = "First name is required";
-    if (!formData.lastName.trim()) newErrors.lastName = "Last name is required";
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (featureFlags.requireBusinessEmail && !isBusinessEmail(formData.email)) {
-      newErrors.email = "Please use your business email address";
-    }
-    if (!formData.companyName.trim()) newErrors.companyName = "Company name is required";
-    if (!formData.jobTitle.trim()) newErrors.jobTitle = "Job title is required";
-    if (!formData.industry) newErrors.industry = "Please select your industry";
-    if (!formData.companySize) newErrors.companySize = "Please select company size";
-    
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmitForm = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validateForm()) return;
-
+  const handleClerkQualify = async () => {
+    setStep("qualifying");
     setIsSubmitting(true);
     try {
-      if (turnstileConfig?.enabled && !captchaToken) {
-        toast({ title: "Verification required", description: "Please complete the \"I'm not a robot\" check before submitting.", variant: "destructive" });
-        setIsSubmitting(false);
-        return;
-      }
-      const response = await apiRequest("POST", "/api/finance-compass/public/qualify", {
-        ...formData,
-        turnstileToken: turnstileConfig?.enabled ? captchaToken : null,
-      });
+      const response = await apiRequest("POST", "/api/finance-compass/public/qualify-clerk", {});
       const result = await response.json();
-      
       if (result.success) {
         setContactId(result.data.contactId);
-        clearCaptcha();
-        setStep("otp");
-        setTimeout(() => {
-          const otpCard = document.querySelector('[data-testid="input-otp"]');
-          if (otpCard) {
-            otpCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
-        }, 100);
-        toast({
-          title: "Verification code sent",
-          description: `We've sent a 6-digit code to ${formData.email}`,
-        });
+        setSessionInfo({ verified: true, ...result.data });
+        navigate("/finance-compass/start/pre_assessment", { replace: true });
       } else {
-        toast({
-          title: "Something went wrong",
-          description: result.error || "Please try again.",
-          variant: "destructive",
-        });
+        toast({ title: "Sign-in failed", description: result.error || "Please try again.", variant: "destructive" });
+        setStep("sign-in");
       }
     } catch (error: any) {
-      toast({
-        title: "Something went wrong",
-        description: error.message || "Please try again or contact us for assistance.",
-        variant: "destructive",
-      });
+      toast({ title: "Something went wrong", description: error.message || "Please try again.", variant: "destructive" });
+      setStep("sign-in");
     } finally {
       setIsSubmitting(false);
-    }
-  };
-
-  const handleVerifyOtp = async () => {
-    if (otpValue.length !== 6 || !contactId) return;
-    
-    setIsSubmitting(true);
-    try {
-      const response = await apiRequest("POST", "/api/finance-compass/public/verify-otp", {
-        contactId,
-        otp: otpValue,
-      });
-      const result = await response.json();
-      
-      if (result.success) {
-        setSessionInfo({
-          verified: true,
-          contactId: result.data.contactId,
-          firstName: result.data.firstName,
-          lastName: result.data.lastName,
-          email: result.data.email,
-        });
-        setStep("verified");
-        toast({
-          title: "Email verified",
-          description: "You now have access to all assessment tools.",
-        });
-      } else {
-        toast({
-          title: "Verification failed",
-          description: result.error || "Please check the code and try again.",
-          variant: "destructive",
-        });
-        setOtpValue("");
-      }
-    } catch (error: any) {
-      toast({
-        title: "Verification failed",
-        description: error.message || "Please try again.",
-        variant: "destructive",
-      });
-      setOtpValue("");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleResendOtp = async () => {
-    if (!contactId) return;
-    
-    setIsResending(true);
-    try {
-      const response = await apiRequest("POST", "/api/finance-compass/public/resend-otp", {
-        contactId,
-      });
-      const result = await response.json();
-      
-      if (result.success) {
-        toast({
-          title: "New code sent",
-          description: "Please check your email for the new verification code.",
-        });
-        setOtpValue("");
-      } else {
-        toast({
-          title: "Failed to resend",
-          description: result.error || "Please try again.",
-          variant: "destructive",
-        });
-      }
-    } catch (error) {
-      toast({
-        title: "Failed to resend",
-        description: "Please try again in a moment.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsResending(false);
     }
   };
 
   const handleStartAssessment = (tierId: string) => {
     trackCTAClicked("fc_landing", "start_assessment");
-    navigate(`/finance-compass/start/${tierId}?qualified=true&email=${encodeURIComponent(formData.email || sessionInfo?.email || "")}&company=${encodeURIComponent(formData.companyName)}`);
+    const email = user?.primaryEmailAddress?.emailAddress || sessionInfo?.email || "";
+    navigate(`/finance-compass/start/${tierId}?qualified=true&email=${encodeURIComponent(email)}&company=`);
   };
 
   // Render different card content based on step
@@ -578,10 +384,10 @@ export default function FinanceCompassLanding() {
               </div>
             </div>
             <CardTitle className="text-xl text-brand-cream">
-              Welcome back, {sessionInfo?.firstName || formData.firstName}!
+              Welcome back, {sessionInfo?.firstName || user?.firstName}!
             </CardTitle>
             <CardDescription className="text-sm">
-              Your email <span className="font-medium text-brand-cream">{sessionInfo?.email || formData.email}</span> is verified.
+              Signed in as <span className="font-medium text-brand-cream">{sessionInfo?.email || user?.primaryEmailAddress?.emailAddress}</span>
             </CardDescription>
           </CardHeader>
           <CardContent className="pt-2">
@@ -599,86 +405,7 @@ export default function FinanceCompassLanding() {
       );
     }
 
-    if (step === "otp") {
-      return (
-        <Card className="bg-card/95 backdrop-blur-sm border-0 shadow-2xl">
-          <CardHeader className="pb-4">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="h-8 w-8 flex items-center justify-center rounded-lg bg-brand-berry/10">
-                <Mail className="h-5 w-5 text-brand-teal" />
-              </div>
-              <Badge className="bg-brand-mint/20 text-brand-teal border-brand-mint/30">
-                Verification Required
-              </Badge>
-            </div>
-            <CardTitle className="text-xl text-brand-cream">Check Your Email</CardTitle>
-            <CardDescription>
-              We've sent a 6-digit verification code to <span className="font-medium">{formData.email}</span>
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="flex flex-col items-center space-y-4" data-testid="input-otp">
-              <LazyInputOTP
-                maxLength={6}
-                value={otpValue}
-                onChange={setOtpValue}
-              />
-              
-              <p className="text-sm text-muted-foreground text-center">
-                Enter the code from your email
-              </p>
-            </div>
-
-            <Button
-              className="w-full bg-brand-berry hover:bg-brand-navy"
-              onClick={handleVerifyOtp}
-              disabled={otpValue.length !== 6 || isSubmitting}
-              data-testid="button-verify-otp"
-            >
-              {isSubmitting ? (
-                <Loader2 className="h-4 w-4 animate-spin mr-2" />
-              ) : (
-                <CheckCircle2 className="h-4 w-4 mr-2" />
-              )}
-              Verify Email
-            </Button>
-
-            <div className="flex items-center justify-center gap-2">
-              <span className="text-sm text-muted-foreground">Didn't receive it?</span>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={handleResendOtp}
-                disabled={isResending}
-                className="text-brand-teal px-2 h-auto"
-                data-testid="button-resend-otp"
-              >
-                {isResending ? (
-                  <RefreshCw className="h-3 w-3 animate-spin mr-1" />
-                ) : null}
-                Resend code
-              </Button>
-            </div>
-
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => {
-                setStep("form");
-                setOtpValue("");
-                setContactId(null);
-              }}
-              className="w-full text-muted-foreground"
-              data-testid="button-back-to-form"
-            >
-              Use a different email
-            </Button>
-          </CardContent>
-        </Card>
-      );
-    }
-
-    // Form step
+    // sign-in step
     return (
       <Card className="bg-card/95 backdrop-blur-sm border-0 shadow-2xl">
         <CardHeader className="pb-4">
@@ -687,14 +414,13 @@ export default function FinanceCompassLanding() {
               <QualificationIcon className="h-5 w-5 text-brand-teal" />
             </div>
             <Badge className="bg-brand-mint/20 text-brand-teal border-brand-mint/30">
-              Step 2 of 3
+              Free Access
             </Badge>
           </div>
-          <CardTitle className="text-xl text-brand-cream">Continue to Full Assessment</CardTitle>
+          <CardTitle className="text-xl text-brand-cream">Get Your Finance Score</CardTitle>
           <CardDescription>
-            Register to run the full 74-question assessment. Get the deeper scoring, the AI analysis, and a roadmap that's actually about your stack.
+            Sign in with Google to run the full 74-question assessment and get your personalised roadmap — no call required.
           </CardDescription>
-          {/* Progression indicator */}
           <div className="flex items-center gap-2 mt-3 text-xs">
             <span className="flex items-center gap-1 text-green-600">
               <CheckCircle2 className="h-3.5 w-3.5" />
@@ -712,250 +438,19 @@ export default function FinanceCompassLanding() {
             </span>
           </div>
         </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmitForm} className="space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <Label htmlFor="firstName" className="text-xs">First Name *</Label>
-                <div className="relative">
-                  <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="firstName"
-                    placeholder="John"
-                    value={formData.firstName}
-                    onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                    className={`pl-9 ${errors.firstName ? "border-destructive" : ""}`}
-                    data-testid="input-firstName"
-                  />
-                </div>
-                {errors.firstName && <p className="text-xs text-destructive mt-1">{errors.firstName}</p>}
-              </div>
-              <div>
-                <Label htmlFor="lastName" className="text-xs">Last Name *</Label>
-                <Input
-                  id="lastName"
-                  placeholder="Smith"
-                  value={formData.lastName}
-                  onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                  className={errors.lastName ? "border-destructive" : ""}
-                  data-testid="input-lastName"
-                />
-                {errors.lastName && <p className="text-xs text-destructive mt-1">{errors.lastName}</p>}
-              </div>
-            </div>
-            
-            <div>
-              <Label htmlFor="email" className="text-xs">{featureFlags.requireBusinessEmail ? "Business Email" : "Email"} *</Label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder={featureFlags.requireBusinessEmail ? "john.smith@company.com" : "you@example.com"}
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className={`pl-9 ${errors.email ? "border-destructive" : ""}`}
-                  data-testid="input-email"
-                />
-              </div>
-              {errors.email && <p className="text-xs text-destructive mt-1">{errors.email}</p>}
-            </div>
-            
-            <div>
-              <Label htmlFor="phone" className="text-xs">Phone (Optional)</Label>
-              <div className="relative">
-                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input
-                  id="phone"
-                  type="tel"
-                  placeholder="+44 20 1234 5678"
-                  value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="pl-9"
-                  data-testid="input-phone"
-                />
-              </div>
-            </div>
-            
-            <div>
-              <Label htmlFor="companyName" className="text-xs">Company Name *</Label>
-              <div className="relative">
-                <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input
-                  id="companyName"
-                  placeholder="Company Ltd"
-                  value={formData.companyName}
-                  onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
-                  className={`pl-9 ${errors.companyName ? "border-destructive" : ""}`}
-                  data-testid="input-companyName"
-                />
-              </div>
-              {errors.companyName && <p className="text-xs text-destructive mt-1">{errors.companyName}</p>}
-            </div>
-            
-            <div>
-              <Label htmlFor="companyDescription" className="text-xs">What does your company do? (Optional)</Label>
-              <Textarea
-                id="companyDescription"
-                placeholder="Brief description of your business, products or services..."
-                value={formData.companyDescription}
-                onChange={(e) => setFormData({ ...formData, companyDescription: e.target.value })}
-                className="min-h-[60px] resize-none text-sm"
-                data-testid="input-companyDescription"
-              />
-              <p className="text-xs text-muted-foreground mt-1">Helps us provide more relevant insights</p>
-            </div>
-            
-            <div>
-              <Label htmlFor="jobTitle" className="text-xs">Job Title *</Label>
-              <div className="relative">
-                <Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input
-                  id="jobTitle"
-                  placeholder="CFO, Finance Director..."
-                  value={formData.jobTitle}
-                  onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
-                  className={`pl-9 ${errors.jobTitle ? "border-destructive" : ""}`}
-                  data-testid="input-jobTitle"
-                />
-              </div>
-              {errors.jobTitle && <p className="text-xs text-destructive mt-1">{errors.jobTitle}</p>}
-            </div>
-            
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <Label className="text-xs">Industry *</Label>
-                <Select
-                  value={formData.industry}
-                  onValueChange={(value) => setFormData({ ...formData, industry: value })}
-                >
-                  <SelectTrigger className={errors.industry ? "border-destructive" : ""} data-testid="select-industry">
-                    <SelectValue placeholder="Select industry..." />
-                  </SelectTrigger>
-                  <SelectContent className="max-h-[300px]">
-                    {INDUSTRY_SECTORS.map((sector) => (
-                      <div key={sector.code}>
-                        <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground bg-muted/50">
-                          {sector.name}
-                        </div>
-                        {sector.industries.map((industry) => (
-                          <SelectItem key={industry.code} value={industry.name}>
-                            {industry.name}
-                          </SelectItem>
-                        ))}
-                      </div>
-                    ))}
-                  </SelectContent>
-                </Select>
-                {errors.industry && <p className="text-xs text-destructive mt-1">{errors.industry}</p>}
-              </div>
-              <div>
-                <Label className="text-xs">Company Size *</Label>
-                <Select
-                  value={formData.companySize}
-                  onValueChange={(value) => setFormData({ ...formData, companySize: value })}
-                >
-                  <SelectTrigger className={errors.companySize ? "border-destructive" : ""} data-testid="select-companySize">
-                    <SelectValue placeholder="Select..." />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {companySizes.map((size) => (
-                      <SelectItem key={size} value={size}>
-                        {size}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                {errors.companySize && <p className="text-xs text-destructive mt-1">{errors.companySize}</p>}
-              </div>
-            </div>
-
-            {/* Transformation Priorities - Click to rank */}
-            <div className="pt-2">
-              <Label className="text-xs flex items-center gap-2">
-                <Target className="h-3.5 w-3.5 text-brand-teal" />
-                Transformation Priorities (click to rank)
-              </Label>
-              <p className="text-xs text-muted-foreground mb-2">
-                Select your top priorities in order of importance. This helps us tailor your assessment.
-              </p>
-              <div className="space-y-1.5">
-                {TRANSFORMATION_PRIORITIES.map((priority) => {
-                  const rank = getPriorityRank(priority.id);
-                  const isSelected = rank !== null;
-                  const PriorityIcon = priority.icon;
-                  
-                  return (
-                    <button
-                      key={priority.id}
-                      type="button"
-                      onClick={() => togglePriority(priority.id)}
-                      className={`w-full flex items-center gap-3 p-2.5 rounded-md border transition-all text-left ${
-                        isSelected 
-                          ? "border-brand-berry bg-brand-berry/10 dark:bg-brand-berry/20" 
-                          : "border-border hover:border-muted-foreground/50 hover:bg-muted/30"
-                      }`}
-                      data-testid={`priority-${priority.id}`}
-                    >
-                      {isSelected ? (
-                        <div className="w-6 h-6 rounded-full bg-brand-berry text-white flex items-center justify-center text-xs font-semibold flex-shrink-0">
-                          {rank}
-                        </div>
-                      ) : (
-                        <div className="w-6 h-6 rounded-full border-2 border-dashed border-muted-foreground/30 flex items-center justify-center flex-shrink-0">
-                          <PriorityIcon className="h-3 w-3 text-muted-foreground/50" />
-                        </div>
-                      )}
-                      <div className="flex-1 min-w-0">
-                        <span className={`text-sm font-medium block ${isSelected ? "text-foreground" : "text-muted-foreground"}`}>
-                          {priority.label}
-                        </span>
-                        <span className="text-xs text-muted-foreground truncate block">
-                          {priority.description}
-                        </span>
-                      </div>
-                      {isSelected && (
-                        <CheckCircle2 className="h-4 w-4 text-brand-teal flex-shrink-0" />
-                      )}
-                    </button>
-                  );
-                })}
-              </div>
-              {formData.transformationPriorities.length > 0 && (
-                <p className="text-xs text-brand-teal mt-2 flex items-center gap-1">
-                  <Sparkles className="h-3 w-3" />
-                  {formData.transformationPriorities.length} priorit{formData.transformationPriorities.length === 1 ? "y" : "ies"} selected
-                </p>
-              )}
-            </div>
-
-            {turnstileConfig?.enabled && turnstileConfig.siteKey && (
-              <Turnstile
-                siteKey={turnstileConfig.siteKey}
-                onVerify={setCaptchaToken}
-                onExpire={clearCaptcha}
-                className="my-2"
-              />
-            )}
-
-            <Button
-              type="submit"
-              className="w-full bg-brand-berry hover:bg-brand-navy"
-              disabled={isSubmitting || (turnstileConfig?.enabled ? !captchaToken : false)}
-              data-testid="button-submit-qualification"
-            >
-              {isSubmitting ? (
-                <Loader2 className="h-4 w-4 animate-spin mr-2" />
-              ) : (
-                <Shield className="h-4 w-4 mr-2" />
-              )}
-              Verify & Unlock Access
-            </Button>
-            
-            <p className="text-xs text-center text-muted-foreground">
-              We'll send a verification code to your email. Your data is protected under GDPR.
-            </p>
-          </form>
+        <CardContent className="space-y-4">
+          <Button
+            className="w-full bg-brand-berry hover:bg-brand-navy"
+            onClick={() => clerk.openSignIn()}
+            data-testid="button-sign-in-google"
+            disabled={isSubmitting}
+          >
+            <GoogleIcon className="h-4 w-4 mr-2" />
+            Continue with Google
+          </Button>
+          <p className="text-xs text-center text-muted-foreground">
+            Your data is protected under GDPR. No card required.
+          </p>
         </CardContent>
       </Card>
     );
@@ -1070,7 +565,7 @@ export default function FinanceCompassLanding() {
 
             <div className="max-w-2xl mx-auto">
               <div className="flex flex-col">
-                {step === "form" && (
+                {step === "sign-in" && (
                   <div className="mb-4 text-center">
                     <div className="mb-4">
                       <ProgressionStepper currentStep={1} />
@@ -1085,7 +580,7 @@ export default function FinanceCompassLanding() {
                     </p>
                   </div>
                 )}
-                {step === "form" ? (
+                {step === "sign-in" ? (
                   <div ref={instantPreviewRef}>
                     <InstantPreview 
                       onStartFullAssessment={() => {
@@ -1847,7 +1342,7 @@ export default function FinanceCompassLanding() {
             trackCTAClicked("finance_compass_landing", "floating_cta");
           }
         }}
-        visible={step === "form"}
+        visible={step === "sign-in"}
       />
     </div>
   );
