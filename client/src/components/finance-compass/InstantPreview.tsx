@@ -999,7 +999,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
           animate={{ opacity: 1, scale: 1 }}
           className={cn("w-full", className)}
         >
-          <Card className="border-2 border-[#7FB8A3]/30 bg-white/95 backdrop-blur-sm shadow-xl overflow-hidden">
+          <Card className="border-2 border-[#7FB8A3]/30 bg-[#252826]/95 backdrop-blur-sm shadow-xl overflow-hidden">
             <div className="h-1.5 bg-gradient-to-r from-[#252826] via-[#8E4F67] to-[#7FB8A3]" />
             <CardContent className="p-4 sm:p-6">
               <div className="text-center mb-4 sm:mb-6">
@@ -1027,7 +1027,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                   </motion.span>
                   <span className="text-xl sm:text-2xl text-muted-foreground">/100</span>
                 </div>
-                <Progress value={score} className="h-2.5 sm:h-3 bg-slate-100" />
+                <Progress value={score} className="h-2.5 sm:h-3 bg-[#F6F3EE]/10" />
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -1059,14 +1059,14 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                     <div className="flex items-center gap-2" data-testid="peer-comparison-your-score">
                       <span className="text-[10px] text-muted-foreground w-24 sm:w-28 flex-shrink-0">Your Score</span>
                       <div className="flex-1">
-                        <Progress value={score} className="h-2 bg-slate-200" />
+                        <Progress value={score} className="h-2 bg-[#F6F3EE]/10" />
                       </div>
                       <span className="text-xs font-semibold text-[#F6F3EE] w-10 text-right">{score}%</span>
                     </div>
                     <div className="flex items-center gap-2" data-testid="peer-comparison-industry-avg">
                       <span className="text-[10px] text-muted-foreground w-24 sm:w-28 flex-shrink-0">Industry Average</span>
                       <div className="flex-1">
-                        <div className="relative h-2 bg-slate-200 rounded-full overflow-hidden">
+                        <div className="relative h-2 bg-[#F6F3EE]/10 rounded-full overflow-hidden">
                           <div 
                             className="absolute inset-y-0 left-0 bg-[#8E4F67]/60 rounded-full"
                             style={{ width: `${INDUSTRY_BENCHMARKS[qualificationData.industry]?.avg || 50}%` }}
@@ -1080,7 +1080,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                     <div className="flex items-center gap-2" data-testid="peer-comparison-top-performers">
                       <span className="text-[10px] text-muted-foreground w-24 sm:w-28 flex-shrink-0">Top Performers</span>
                       <div className="flex-1">
-                        <div className="relative h-2 bg-slate-200 rounded-full overflow-hidden">
+                        <div className="relative h-2 bg-[#F6F3EE]/10 rounded-full overflow-hidden">
                           <div 
                             className="absolute inset-y-0 left-0 bg-emerald-500/60 rounded-full"
                             style={{ width: `${INDUSTRY_BENCHMARKS[qualificationData.industry]?.topPerformer || 68}%` }}
@@ -1541,9 +1541,9 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
           animate={{ opacity: 1, y: 0 }}
           className={cn("w-full", className)}
         >
-          <Card className="border-2 border-[#7FB8A3]/30 bg-white/95 backdrop-blur-sm shadow-xl overflow-hidden">
+          <Card className="border-2 border-[#7FB8A3]/30 bg-[#252826]/95 backdrop-blur-sm shadow-xl overflow-hidden">
             {/* Enhanced Progress Bar for Mobile */}
-            <div className="h-2 bg-slate-200">
+            <div className="h-2 bg-[#F6F3EE]/10">
               <motion.div
                 className="h-full bg-gradient-to-r from-[#252826] via-[#8E4F67] to-[#7FB8A3]"
                 initial={{ width: 0 }}
@@ -1559,7 +1559,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                         <button
                           onClick={handleGoBack}
                           disabled={isAnimating}
-                          className="h-9 w-9 sm:h-8 sm:w-8 rounded-full bg-slate-100 hover:bg-slate-200 active:bg-slate-300 flex items-center justify-center transition-colors disabled:opacity-50 touch-manipulation"
+                          className="h-9 w-9 sm:h-8 sm:w-8 rounded-full bg-[#F6F3EE]/10 hover:bg-[#F6F3EE]/10 active:bg-slate-300 flex items-center justify-center transition-colors disabled:opacity-50 touch-manipulation"
                           data-testid="button-go-back"
                         >
                           <ArrowLeft className="h-4 w-4 text-slate-600" />
@@ -1629,8 +1629,8 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                           disabled={isAnimating}
                           className={cn(
                             "w-full text-left p-3 sm:p-3.5 rounded-xl border-2 transition-all touch-manipulation min-h-[48px]",
-                            "hover:border-[#252826] hover:bg-[#252826]/5",
-                            "active:scale-[0.98] active:border-[#252826] active:bg-[#252826]/10",
+                            "hover:border-[#7FB8A3] hover:bg-[#7FB8A3]/10",
+                            "active:scale-[0.98] active:border-[#7FB8A3] active:bg-[#7FB8A3]/15",
                             "focus:outline-none focus:ring-2 focus:ring-[#7FB8A3]/50",
                             isAnimating && "opacity-50 pointer-events-none"
                           )}
@@ -1662,9 +1662,9 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
         animate={{ opacity: 1, y: 0 }}
         className={cn("w-full", className)}
       >
-        <Card className="border-2 border-[#7FB8A3]/30 bg-white/95 backdrop-blur-sm shadow-xl overflow-hidden">
+        <Card className="border-2 border-[#7FB8A3]/30 bg-[#252826]/95 backdrop-blur-sm shadow-xl overflow-hidden">
           {/* Enhanced Progress Bar for Mobile */}
-          <div className="h-2 bg-slate-200">
+          <div className="h-2 bg-[#F6F3EE]/10">
             <motion.div
               className="h-full bg-gradient-to-r from-[#252826] via-[#8E4F67] to-[#7FB8A3]"
               initial={{ width: 0 }}
@@ -1679,7 +1679,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
                 <button
                   onClick={handleGoBack}
                   disabled={isAnimating}
-                  className="h-9 w-9 sm:h-8 sm:w-8 rounded-full bg-slate-100 hover:bg-slate-200 active:bg-slate-300 flex items-center justify-center transition-colors disabled:opacity-50 touch-manipulation"
+                  className="h-9 w-9 sm:h-8 sm:w-8 rounded-full bg-[#F6F3EE]/10 hover:bg-[#F6F3EE]/10 active:bg-slate-300 flex items-center justify-center transition-colors disabled:opacity-50 touch-manipulation"
                   data-testid="button-go-back-maturity"
                 >
                   <ArrowLeft className="h-4 w-4 sm:h-4 sm:w-4 text-slate-600" />
