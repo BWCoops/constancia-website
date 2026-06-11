@@ -666,10 +666,14 @@ publicRouter.post("/qualify", otpRequestLimiter, checkBetaAccessMiddleware, asyn
     // Send OTP email
     const emailSent = await sendFcOtpEmail(data.email, data.firstName, otp);
     if (!emailSent) {
-      return res.status(500).json({
-        success: false,
-        error: "Failed to send verification email. Please try again.",
-      });
+      if (process.env.NODE_ENV === "production") {
+        return res.status(500).json({
+          success: false,
+          error: "Failed to send verification email. Please try again.",
+        });
+      }
+      // Dev: email delivery not configured — OTP was printed to server logs
+      log.warn({ contactId: contact.id }, "DEV: email send failed — OTP visible in server logs");
     }
     
     await fcStorage.createAuditLog({
@@ -1004,10 +1008,13 @@ publicRouter.post("/resend-otp", otpRequestLimiter, checkBetaAccessByContactIdMi
     
     const emailSent = await sendFcOtpEmail(contact.email, contact.firstName, otp);
     if (!emailSent) {
-      return res.status(500).json({
-        success: false,
-        error: "Failed to send verification email. Please try again.",
-      });
+      if (process.env.NODE_ENV === "production") {
+        return res.status(500).json({
+          success: false,
+          error: "Failed to send verification email. Please try again.",
+        });
+      }
+      log.warn({ contactId }, "DEV: resend email failed — OTP visible in server logs");
     }
     
     res.json({
