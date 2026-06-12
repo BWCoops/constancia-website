@@ -342,6 +342,26 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   
   // Permitted cross-domain policies
   res.setHeader("X-Permitted-Cross-Domain-Policies", "none");
+
+  // Permissions-Policy — disable all features the site does not use
+  res.setHeader(
+    "Permissions-Policy",
+    [
+      "camera=()",
+      "microphone=()",
+      "geolocation=()",
+      "payment=()",
+      "usb=()",
+      "magnetometer=()",
+      "accelerometer=()",
+      "gyroscope=()",
+      "fullscreen=(self)",
+      "picture-in-picture=()",
+      "display-capture=()",
+      "clipboard-read=()",
+      "clipboard-write=(self)",
+    ].join(", "),
+  );
   
   // Cache control for security
   if (req.path.startsWith("/api")) {

@@ -12,10 +12,10 @@
   },
   "dependencies": {
     "@adobe/pdfservices-node-sdk": "^4.1.0",
-    "@anthropic-ai/sdk": "^0.78.0",
+    "@anthropic-ai/sdk": "0.78.0",
     "@azure/msal-node": "^3.8.3",
     "@clerk/clerk-react": "^5.61.6",
-    "@clerk/express": "^2.1.19",
+    "@clerk/express": "2.1.19",
     "@hookform/resolvers": "^3.10.0",
     "@hubspot/api-client": "^12.0.1",
     "@jridgewell/trace-mapping": "^0.3.25",
@@ -68,16 +68,16 @@
     "connect-pg-simple": "^10.0.0",
     "cookie-parser": "^1.4.7",
     "date-fns": "^3.6.0",
-    "drizzle-orm": "^0.45.2",
+    "drizzle-orm": "0.45.2",
     "drizzle-zod": "^0.7.0",
     "embla-carousel-react": "^8.6.0",
     "exceljs": "^4.4.0",
-    "express": "^4.21.2",
+    "express": "4.22.2",
     "express-fileupload": "^1.5.2",
-    "express-rate-limit": "^8.3.0",
+    "express-rate-limit": "8.5.2",
     "express-session": "^1.19.0",
     "framer-motion": "^11.13.1",
-    "helmet": "^8.1.0",
+    "helmet": "8.1.0",
     "html2canvas": "^1.4.1",
     "input-otp": "^1.4.2",
     "isomorphic-dompurify": "^2.30.0",
@@ -145,7 +145,7 @@
     "tailwindcss": "^3.4.17",
     "tsx": "^4.20.5",
     "typescript": "5.6.3",
-    "vite": "^6.4.2"
+    "vite": "6.4.2"
   },
   "optionalDependencies": {
     "bufferutil": "^4.0.8"

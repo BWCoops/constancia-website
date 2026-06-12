@@ -555,7 +555,13 @@ export async function registerRoutes(
   // FEATURE FLAGS API ENDPOINTS
   // ============================================
   const { isAuthenticated } = await import("./clerkAuth");
-  
+
+  // Blanket auth guard — every /api/admin/* route requires a valid Clerk session.
+  // Individual routes that already pass isAuthenticated explicitly remain unaffected
+  // (Express runs middleware in order; a second call to isAuthenticated is a no-op
+  // when the session is already verified).
+  app.use("/api/admin", isAuthenticated);
+
   app.get("/api/feature-flags", async (_req: Request, res: Response) => {
     try {
       const flags = await getServerFeatureFlags();
@@ -2078,7 +2084,7 @@ export async function registerRoutes(
   });
 
   // Export to WordPress format
-  app.post("/api/export/wordpress", async (_req: Request, res: Response) => {
+  app.post("/api/export/wordpress", isAuthenticated, async (_req: Request, res: Response) => {
     try {
       // Placeholder for WordPress export
       res.json({ 
