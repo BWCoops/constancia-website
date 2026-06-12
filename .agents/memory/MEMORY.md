@@ -1,5 +1,5 @@
 - [Canonical domain](canonical-domain.md) — constancia.IO is the real owned site; constancia.com is a parked domain the company does NOT own. Never flip .io back to .com.
-- [Hiding a page](hiding-a-page.md) — fully hiding a route needs nav + footer + App routes + preload + server KNOWN_ROUTES + sitemap; static.ts now 404-gates disabled feature routes in PROD (Vite serves 200 in dev — can't test there); flag precedence DB>env>default; edit env via setEnvVars not .replit.
+- [Hiding a page](hiding-a-page.md) — hiding a route spans nav/footer/App routes/preload/KNOWN_ROUTES/sitemap; static.ts 404-gates disabled routes in PROD only (dev=Vite=200); flags DB>env>default.
 - [Clerk Express middleware scope](clerk-express-scope.md) — clerkMiddleware must be scoped to /api/admin + /api/auth only; global mount causes host_invalid redirects for every page in @clerk/express v2.x
 - [Admin id resolution](admin-id-resolution.md) — admin_users rows are provisioned lazily by getAdminIdFromDb (not at login); use it (not getAdminId) for any audit/admin-FK id.
 - [Production build pipeline](build-pipeline.md) — build is custom `tsx script/build.ts` (vite+esbuild→dist/index.cjs); if publish fails with ERR_MODULE_NOT_FOUND restore that file from git.
