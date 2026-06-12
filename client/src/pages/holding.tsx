@@ -40,21 +40,25 @@ export default function HoldingPage() {
     const video = videoRef.current;
     if (!video) return;
 
+    // React's `muted` JSX prop doesn't reliably set the DOM attribute that
+    // mobile browsers check for autoplay policy — set it directly on the node.
+    video.muted = true;
+    video.play().catch(() => {
+      // Autoplay blocked even with muted — do nothing, poster will show.
+    });
+
     const unmute = () => {
       video.muted = false;
-      document.removeEventListener("click", unmute);
-      document.removeEventListener("touchstart", unmute);
-      document.removeEventListener("keydown", unmute);
+      // Re-trigger play in case it stalled waiting for interaction.
+      video.play().catch(() => {});
     };
 
     document.addEventListener("click", unmute, { once: true });
     document.addEventListener("touchstart", unmute, { once: true });
-    document.addEventListener("keydown", unmute, { once: true });
 
     return () => {
       document.removeEventListener("click", unmute);
       document.removeEventListener("touchstart", unmute);
-      document.removeEventListener("keydown", unmute);
     };
   }, []);
 

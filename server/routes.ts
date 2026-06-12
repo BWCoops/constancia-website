@@ -53,6 +53,20 @@ import {
 import { reloadFeatureFlags } from "./middleware/feature-flags";
 
 import { sendEmailViaGraph, SENDER_EMAIL, isEmailConfigured } from "./services/ms-graph-email";
+import {
+  EMAIL_BRAND,
+  EMAIL_CONTACT,
+  generateEmailHeader,
+  generateEmailFooter,
+  generateEmailWrapper,
+  generateNotificationHeader,
+  generateOtpBox,
+  generateCtaButton,
+  generateWarningBox,
+  generateSuccessBox,
+  generateInfoCard,
+  wrapEmailContent,
+} from "./core/email/components";
 const HUBSPOT_ACCESS_TOKEN = process.env.HUBSPOT_ACCESS_TOKEN;
 
 // OTP configuration
@@ -155,94 +169,44 @@ async function sendLeadVerificationNotification(lead: {
   pageUrl?: string;
 }): Promise<boolean> {
   try {
-    const fingerprintSection = (lead.screenResolution || lead.timezone || lead.language || lead.referrer || lead.pageUrl) ? `
-          <div style="background: #edf5f1; padding: 15px; border-radius: 4px; margin-bottom: 20px; border: 1px solid #7FB8A3;">
-            <h3 style="color: #5E8D7A; margin: 0 0 10px 0; font-size: 14px; letter-spacing: 0.04em;">Browser Fingerprint Data</h3>
-            <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
-              ${lead.screenResolution ? `
-              <tr>
-                <td style="padding: 4px 0; color: #5E8D7A; width: 120px;"><strong>Screen:</strong></td>
-                <td style="padding: 4px 0; color: #252826;">${lead.screenResolution}</td>
-              </tr>` : ''}
-              ${lead.timezone ? `
-              <tr>
-                <td style="padding: 4px 0; color: #5E8D7A;"><strong>Timezone:</strong></td>
-                <td style="padding: 4px 0; color: #252826;">${lead.timezone}</td>
-              </tr>` : ''}
-              ${lead.language ? `
-              <tr>
-                <td style="padding: 4px 0; color: #5E8D7A;"><strong>Language:</strong></td>
-                <td style="padding: 4px 0; color: #252826;">${lead.language}</td>
-              </tr>` : ''}
-              ${lead.referrer ? `
-              <tr>
-                <td style="padding: 4px 0; color: #5E8D7A;"><strong>Referrer:</strong></td>
-                <td style="padding: 4px 0; color: #252826;">${lead.referrer}</td>
-              </tr>` : ''}
-              ${lead.pageUrl ? `
-              <tr>
-                <td style="padding: 4px 0; color: #5E8D7A;"><strong>Page URL:</strong></td>
-                <td style="padding: 4px 0; color: #252826;">${lead.pageUrl}</td>
-              </tr>` : ''}
-            </table>
-          </div>
-    ` : '';
+    const fingerprintSection = (lead.screenResolution || lead.timezone || lead.language || lead.referrer || lead.pageUrl)
+      ? generateInfoCard(`
+          <h3 style="color: ${EMAIL_BRAND.deepMint}; margin: 0 0 10px 0; font-size: 14px; letter-spacing: 0.04em;">Browser Fingerprint Data</h3>
+          <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
+            ${lead.screenResolution ? `<tr><td style="padding: 4px 0; color: ${EMAIL_BRAND.deepMint}; width: 120px;"><strong>Screen:</strong></td><td style="padding: 4px 0; color: ${EMAIL_BRAND.darkGray};">${lead.screenResolution}</td></tr>` : ''}
+            ${lead.timezone ? `<tr><td style="padding: 4px 0; color: ${EMAIL_BRAND.deepMint};"><strong>Timezone:</strong></td><td style="padding: 4px 0; color: ${EMAIL_BRAND.darkGray};">${lead.timezone}</td></tr>` : ''}
+            ${lead.language ? `<tr><td style="padding: 4px 0; color: ${EMAIL_BRAND.deepMint};"><strong>Language:</strong></td><td style="padding: 4px 0; color: ${EMAIL_BRAND.darkGray};">${lead.language}</td></tr>` : ''}
+            ${lead.referrer ? `<tr><td style="padding: 4px 0; color: ${EMAIL_BRAND.deepMint};"><strong>Referrer:</strong></td><td style="padding: 4px 0; color: ${EMAIL_BRAND.darkGray};">${lead.referrer}</td></tr>` : ''}
+            ${lead.pageUrl ? `<tr><td style="padding: 4px 0; color: ${EMAIL_BRAND.deepMint};"><strong>Page URL:</strong></td><td style="padding: 4px 0; color: ${EMAIL_BRAND.darkGray};">${lead.pageUrl}</td></tr>` : ''}
+          </table>`)
+      : '';
+
+    const leadTable = `
+      <h2 style="color: ${EMAIL_BRAND.charcoal}; margin-top: 0;">Lead Details</h2>
+      <table style="width: 100%; border-collapse: collapse;">
+        <tr><td style="padding: 8px 0; color: ${EMAIL_BRAND.mutedGray}; width: 120px;"><strong>Name:</strong></td><td style="padding: 8px 0; color: ${EMAIL_BRAND.darkGray};">${lead.firstName} ${lead.lastName}</td></tr>
+        <tr><td style="padding: 8px 0; color: ${EMAIL_BRAND.mutedGray};"><strong>Email:</strong></td><td style="padding: 8px 0;"><a href="mailto:${lead.email}" style="color: ${EMAIL_BRAND.deepMint};">${lead.email}</a></td></tr>
+        <tr><td style="padding: 8px 0; color: ${EMAIL_BRAND.mutedGray};"><strong>Company:</strong></td><td style="padding: 8px 0; color: ${EMAIL_BRAND.darkGray};">${lead.company}</td></tr>
+        <tr><td style="padding: 8px 0; color: ${EMAIL_BRAND.mutedGray};"><strong>Job Title:</strong></td><td style="padding: 8px 0; color: ${EMAIL_BRAND.darkGray};">${lead.jobTitle}</td></tr>
+        ${lead.resourceTitle ? `<tr><td style="padding: 8px 0; color: ${EMAIL_BRAND.mutedGray};"><strong>Resource:</strong></td><td style="padding: 8px 0; color: ${EMAIL_BRAND.darkGray};">${lead.resourceTitle}</td></tr>` : ''}
+      </table>`;
+
+    const html = wrapEmailContent(`
+      ${generateNotificationHeader({ title: 'New Verified Lead', subtitle: 'Resource Download' })}
+      <div style="background-color: ${EMAIL_BRAND.white}; padding: 32px;">
+        ${generateInfoCard(leadTable)}
+        ${fingerprintSection}
+        ${generateSuccessBox('This lead has verified their email address via OTP and downloaded a resource.')}
+        <p style="color: ${EMAIL_BRAND.mutedGray}; font-size: 12px; text-align: center; margin: 24px 0 0 0;">
+          Verified: ${new Date().toLocaleString('en-GB', { dateStyle: 'full', timeStyle: 'short' })}
+        </p>
+      </div>
+    `);
 
     await sendEmailViaGraph(
       SENDER_EMAIL,
       `New Verified Lead: ${lead.firstName} ${lead.lastName} from ${lead.company}`,
-      `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, #12161D 0%, #8E4F67 100%); border-radius: 8px;">
-            <h1 style="color: #7FB8A3; margin: 0;">New Verified Lead</h1>
-            <p style="color: #fff; margin: 5px 0;">Resource Download</p>
-          </div>
-          
-          <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-            <h2 style="color: #12161D; margin-top: 0;">Lead Details</h2>
-            <table style="width: 100%; border-collapse: collapse;">
-              <tr>
-                <td style="padding: 8px 0; color: #666; width: 120px;"><strong>Name:</strong></td>
-                <td style="padding: 8px 0; color: #333;">${lead.firstName} ${lead.lastName}</td>
-              </tr>
-              <tr>
-                <td style="padding: 8px 0; color: #666;"><strong>Email:</strong></td>
-                <td style="padding: 8px 0;"><a href="mailto:${lead.email}" style="color: #8E4F67;">${lead.email}</a></td>
-              </tr>
-              <tr>
-                <td style="padding: 8px 0; color: #666;"><strong>Company:</strong></td>
-                <td style="padding: 8px 0; color: #333;">${lead.company}</td>
-              </tr>
-              <tr>
-                <td style="padding: 8px 0; color: #666;"><strong>Job Title:</strong></td>
-                <td style="padding: 8px 0; color: #333;">${lead.jobTitle}</td>
-              </tr>
-              ${lead.resourceTitle ? `
-              <tr>
-                <td style="padding: 8px 0; color: #666;"><strong>Resource:</strong></td>
-                <td style="padding: 8px 0; color: #333;">${lead.resourceTitle}</td>
-              </tr>
-              ` : ''}
-            </table>
-          </div>
-          
-          ${fingerprintSection}
-          
-          <div style="background: #edf5f1; border: 1px solid #7FB8A3; border-radius: 4px; padding: 14px 18px; margin: 24px 0;">
-            <p style="color: #5E8D7A; margin: 0; font-weight: 500; font-size: 14px; line-height: 1.6;">
-              This lead has verified their email address via OTP and downloaded a resource.
-            </p>
-          </div>
-          
-          <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
-          
-          <p style="color: #666; font-size: 12px; text-align: center;">
-            This notification was sent automatically from the Constancia website.
-            <br>
-            Verified: ${new Date().toLocaleString('en-GB', { dateStyle: 'full', timeStyle: 'short' })}
-          </p>
-        </div>
-      `
+      html
     );
 
     log.info("lead notification email sent successfully via Graph API");
@@ -264,58 +228,37 @@ async function sendContactFormNotification(submission: {
   phone?: string;
 }): Promise<boolean> {
   try {
+    const contactTable = `
+      <h2 style="color: ${EMAIL_BRAND.charcoal}; margin-top: 0;">Contact Details</h2>
+      <table style="width: 100%; border-collapse: collapse;">
+        <tr><td style="padding: 8px 0; color: ${EMAIL_BRAND.mutedGray}; width: 120px;"><strong>Name:</strong></td><td style="padding: 8px 0; color: ${EMAIL_BRAND.darkGray};">${submission.firstName} ${submission.lastName}</td></tr>
+        <tr><td style="padding: 8px 0; color: ${EMAIL_BRAND.mutedGray};"><strong>Email:</strong></td><td style="padding: 8px 0;"><a href="mailto:${submission.email}" style="color: ${EMAIL_BRAND.deepMint};">${submission.email}</a></td></tr>
+        <tr><td style="padding: 8px 0; color: ${EMAIL_BRAND.mutedGray};"><strong>Company:</strong></td><td style="padding: 8px 0; color: ${EMAIL_BRAND.darkGray};">${submission.company}</td></tr>
+        <tr><td style="padding: 8px 0; color: ${EMAIL_BRAND.mutedGray};"><strong>Job Title:</strong></td><td style="padding: 8px 0; color: ${EMAIL_BRAND.darkGray};">${submission.jobTitle}</td></tr>
+        ${submission.phone ? `<tr><td style="padding: 8px 0; color: ${EMAIL_BRAND.mutedGray};"><strong>Phone:</strong></td><td style="padding: 8px 0; color: ${EMAIL_BRAND.darkGray};">${submission.phone}</td></tr>` : ''}
+      </table>`;
+
+    const messageSection = `
+      <div style="background: ${EMAIL_BRAND.white}; padding: 20px; border: 1px solid ${EMAIL_BRAND.mediumGray}; border-radius: 4px; margin-top: 20px;">
+        <h2 style="color: ${EMAIL_BRAND.charcoal}; margin-top: 0;">Message</h2>
+        <p style="color: ${EMAIL_BRAND.darkGray}; line-height: 1.6; white-space: pre-wrap;">${submission.message}</p>
+      </div>`;
+
+    const html = wrapEmailContent(`
+      ${generateNotificationHeader({ title: 'New Contact Form Submission', subtitle: 'Constancia Website' })}
+      <div style="background-color: ${EMAIL_BRAND.white}; padding: 32px;">
+        ${generateInfoCard(contactTable)}
+        ${messageSection}
+        <p style="color: ${EMAIL_BRAND.mutedGray}; font-size: 12px; text-align: center; margin: 24px 0 0 0;">
+          Submitted: ${new Date().toLocaleString('en-GB', { dateStyle: 'full', timeStyle: 'short' })}
+        </p>
+      </div>
+    `);
+
     await sendEmailViaGraph(
       SENDER_EMAIL,
       `New Contact Form Submission from ${submission.firstName} ${submission.lastName}`,
-      `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, #12161D 0%, #8E4F67 100%); border-radius: 8px;">
-            <h1 style="color: #7FB8A3; margin: 0;">New Contact Form Submission</h1>
-            <p style="color: #fff; margin: 5px 0;">Constancia Website</p>
-          </div>
-          
-          <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-            <h2 style="color: #12161D; margin-top: 0;">Contact Details</h2>
-            <table style="width: 100%; border-collapse: collapse;">
-              <tr>
-                <td style="padding: 8px 0; color: #666; width: 120px;"><strong>Name:</strong></td>
-                <td style="padding: 8px 0; color: #333;">${submission.firstName} ${submission.lastName}</td>
-              </tr>
-              <tr>
-                <td style="padding: 8px 0; color: #666;"><strong>Email:</strong></td>
-                <td style="padding: 8px 0;"><a href="mailto:${submission.email}" style="color: #8E4F67;">${submission.email}</a></td>
-              </tr>
-              <tr>
-                <td style="padding: 8px 0; color: #666;"><strong>Company:</strong></td>
-                <td style="padding: 8px 0; color: #333;">${submission.company}</td>
-              </tr>
-              <tr>
-                <td style="padding: 8px 0; color: #666;"><strong>Job Title:</strong></td>
-                <td style="padding: 8px 0; color: #333;">${submission.jobTitle}</td>
-              </tr>
-              ${submission.phone ? `
-              <tr>
-                <td style="padding: 8px 0; color: #666;"><strong>Phone:</strong></td>
-                <td style="padding: 8px 0; color: #333;">${submission.phone}</td>
-              </tr>
-              ` : ''}
-            </table>
-          </div>
-          
-          <div style="background: #fff; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px;">
-            <h2 style="color: #12161D; margin-top: 0;">Message</h2>
-            <p style="color: #333; line-height: 1.6; white-space: pre-wrap;">${submission.message}</p>
-          </div>
-          
-          <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
-          
-          <p style="color: #666; font-size: 12px; text-align: center;">
-            This notification was sent from the Constancia website contact form.
-            <br>
-            Submitted: ${new Date().toLocaleString('en-GB', { dateStyle: 'full', timeStyle: 'short' })}
-          </p>
-        </div>
-      `
+      html
     );
 
     return true;
@@ -332,37 +275,21 @@ async function sendContactFormNotification(submission: {
  */
 async function sendOtpEmail(email: string, firstName: string, otp: string): Promise<boolean> {
   try {
+    const html = generateEmailWrapper(
+      generateEmailHeader(),
+      `<p style="color: ${EMAIL_BRAND.charcoal}; font-size: 16px; margin: 0 0 16px 0;">Hi ${firstName},</p>
+        <p style="color: ${EMAIL_BRAND.charcoal}; font-size: 16px; line-height: 1.6; margin: 0 0 24px 0;">
+          Thank you for your interest in Constancia resources. Please use the following code to access your download:
+        </p>
+        ${generateOtpBox(otp)}
+        <p style="color: ${EMAIL_BRAND.mutedGray}; font-size: 14px; margin: 16px 0 0 0;">This code expires in ${OTP_EXPIRY_MINUTES} minutes.</p>`,
+      generateEmailFooter()
+    );
+
     await sendEmailViaGraph(
       email,
       "Your Constancia Resource Access Code",
-      `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <div style="text-align: center; margin-bottom: 30px;">
-            <h1 style="color: #12161D; margin: 0;">Constancia</h1>
-            <p style="color: #8E4F67; margin: 5px 0;">Enterprise Performance Management Advisory</p>
-          </div>
-          
-          <p style="color: #333;">Hi ${firstName},</p>
-          
-          <p style="color: #333;">Thank you for your interest in Constancia resources. Please use the following code to access your download:</p>
-          
-          <div style="background: linear-gradient(135deg, #12161D 0%, #8E4F67 100%); padding: 20px; border-radius: 8px; text-align: center; margin: 30px 0;">
-            <span style="font-size: 32px; font-weight: bold; letter-spacing: 8px; color: #7FB8A3;">${otp}</span>
-          </div>
-          
-          <p style="color: #666; font-size: 14px;">This code expires in ${OTP_EXPIRY_MINUTES} minutes.</p>
-          
-          <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
-          
-          <p style="color: #666; font-size: 12px;">
-            Constancia delivers connected finance intelligence. We bring disparate finance systems together — ERP, EPM, HRIS, CRM, data warehouse — so finance leaders get one source of truth. Official Abacum partner for mid-market FP&amp;A. OneStream partner for enterprise EPM.
-            <br><br>
-            Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ
-            <br>
-            <a href="https://constancia.com" style="color: #8E4F67;">constancia.com</a>
-          </p>
-        </div>
-      `
+      html
     );
 
     return true;
@@ -384,64 +311,30 @@ async function sendContactVerificationEmail(to: string, firstName: string, token
     const baseUrl = process.env.BASE_URL || 'https://constancia.com';
     const verificationLink = `${baseUrl}/api/contact/verify?token=${token}`;
     
+    const html = generateEmailWrapper(
+      generateEmailHeader(),
+      `<p style="color: ${EMAIL_BRAND.charcoal}; font-size: 16px; margin: 0 0 20px 0;">Hi ${firstName},</p>
+        <p style="color: ${EMAIL_BRAND.charcoal}; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
+          Thank you for contacting Constancia. Please verify your email address to confirm your enquiry.
+        </p>
+        ${generateCtaButton('Verify Email Address', verificationLink)}
+        <p style="color: ${EMAIL_BRAND.mutedGray}; font-size: 14px; margin: 25px 0 8px 0;">
+          If the button above doesn't work, copy and paste this link into your browser:
+        </p>
+        <p style="color: ${EMAIL_BRAND.deepMint}; font-size: 13px; word-break: break-all; background-color: ${EMAIL_BRAND.warmCream}; padding: 12px; border-radius: 4px; margin: 0 0 25px 0;">
+          ${verificationLink}
+        </p>
+        ${generateWarningBox('<strong>Note:</strong> This link expires in 24 hours. After expiration, you\'ll need to submit a new contact request.')}
+        <p style="color: ${EMAIL_BRAND.charcoal}; font-size: 16px; line-height: 1.6; margin: 25px 0 0 0;">
+          Once verified, our team will review your enquiry and get back to you shortly.
+        </p>`,
+      generateEmailFooter()
+    );
+
     await sendEmailViaGraph(
       to,
       `Verify your email - Constancia Contact`,
-      `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 0; background-color: #EFEAE0;">
-          <!-- Header with Constancia branding -->
-          <div style="background-color: #0A2540; padding: 30px 20px; text-align: center;">
-            <h1 style="color: #F6F3EE; margin: 0; font-size: 28px; font-weight: bold;">Constancia</h1>
-            <p style="color: #ffffff; margin: 8px 0 0 0; font-size: 14px;">Enterprise Performance Management Advisory</p>
-          </div>
-          
-          <!-- Main content -->
-          <div style="background-color: #ffffff; padding: 40px 30px;">
-            <p style="color: #252826; font-size: 16px; margin: 0 0 20px 0;">Hi ${firstName},</p>
-            
-            <p style="color: #252826; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
-              Thank you for contacting Constancia. Please verify your email address to confirm your enquiry.
-            </p>
-            
-            <!-- CTA Button -->
-            <div style="text-align: center; margin: 35px 0;">
-              <a href="${verificationLink}" style="display: inline-block; background-color: #7FB8A3; color: #0A2540; padding: 16px 40px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 16px;">
-                Verify Email Address
-              </a>
-            </div>
-            
-            <!-- Alternative link text -->
-            <p style="color: #666666; font-size: 14px; margin: 25px 0 10px 0;">
-              If the button above doesn't work, copy and paste this link into your browser:
-            </p>
-            <p style="color: #7FB8A3; font-size: 13px; word-break: break-all; background-color: #f8f9fa; padding: 12px; border-radius: 4px; margin: 0 0 25px 0;">
-              ${verificationLink}
-            </p>
-            
-            <!-- Expiry notice -->
-            <div style="background-color: #f9f3e8; border: 1px solid #dedad2; border-radius: 4px; padding: 14px 18px; margin: 25px 0;">
-              <p style="color: #7a6a50; font-size: 14px; margin: 0; line-height: 1.6;">
-                <strong>Note:</strong> This link expires in 24 hours. After expiration, you'll need to submit a new contact request.
-              </p>
-            </div>
-            
-            <p style="color: #252826; font-size: 16px; line-height: 1.6; margin: 25px 0 0 0;">
-              Once verified, our team will review your enquiry and get back to you shortly.
-            </p>
-          </div>
-          
-          <!-- Footer -->
-          <div style="background-color: #0A2540; padding: 25px 20px; text-align: center;">
-            <p style="color: #ffffff; font-size: 12px; margin: 0 0 10px 0;">
-              Constancia delivers connected finance intelligence. We bring disparate finance systems together — ERP, EPM, HRIS, CRM, data warehouse — so finance leaders get one source of truth. Official Abacum partner for mid-market FP&amp;A. OneStream partner for enterprise EPM.
-            </p>
-            <p style="color: #aaaaaa; font-size: 12px; margin: 0 0 10px 0;">
-              Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ
-            </p>
-            <a href="https://constancia.com" style="color: #7FB8A3; font-size: 12px; text-decoration: none;">constancia.com</a>
-          </div>
-        </div>
-      `
+      html
     );
 
     return true;
@@ -981,49 +874,36 @@ export async function registerRoutes(
       const [submission] = await db.insert(talentSubmissions).values(parsed).returning();
 
       try {
+        const candidateTable = `
+          <h2 style="color: ${EMAIL_BRAND.charcoal}; margin-top: 0;">Candidate Details</h2>
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr><td style="padding: 8px 0; color: ${EMAIL_BRAND.mutedGray}; width: 140px;"><strong>Name:</strong></td><td style="padding: 8px 0; color: ${EMAIL_BRAND.darkGray};">${parsed.firstName} ${parsed.lastName}</td></tr>
+            <tr><td style="padding: 8px 0; color: ${EMAIL_BRAND.mutedGray};"><strong>Email:</strong></td><td style="padding: 8px 0;"><a href="mailto:${parsed.email}" style="color: ${EMAIL_BRAND.deepMint};">${parsed.email}</a></td></tr>
+            ${parsed.linkedIn ? `<tr><td style="padding: 8px 0; color: ${EMAIL_BRAND.mutedGray};"><strong>LinkedIn:</strong></td><td style="padding: 8px 0;"><a href="${parsed.linkedIn}" style="color: ${EMAIL_BRAND.deepMint};">${parsed.linkedIn}</a></td></tr>` : ''}
+            <tr><td style="padding: 8px 0; color: ${EMAIL_BRAND.mutedGray};"><strong>Area of Interest:</strong></td><td style="padding: 8px 0; color: ${EMAIL_BRAND.darkGray};">${parsed.areaOfInterest}</td></tr>
+          </table>`;
+
+        const talentMessageSection = `
+          <div style="background: ${EMAIL_BRAND.white}; padding: 20px; border: 1px solid ${EMAIL_BRAND.mediumGray}; border-radius: 4px; margin-top: 20px;">
+            <h2 style="color: ${EMAIL_BRAND.charcoal}; margin-top: 0;">Message</h2>
+            <p style="color: ${EMAIL_BRAND.darkGray}; line-height: 1.6; white-space: pre-wrap;">${parsed.message}</p>
+          </div>`;
+
+        const talentHtml = wrapEmailContent(`
+          ${generateNotificationHeader({ title: 'Talent Community Submission', subtitle: 'Constancia Careers' })}
+          <div style="background-color: ${EMAIL_BRAND.white}; padding: 32px;">
+            ${generateInfoCard(candidateTable)}
+            ${talentMessageSection}
+            <p style="color: ${EMAIL_BRAND.mutedGray}; font-size: 12px; text-align: center; margin: 24px 0 0 0;">
+              Submitted: ${new Date().toLocaleString('en-GB', { dateStyle: 'full', timeStyle: 'short' })}
+            </p>
+          </div>
+        `);
+
         await sendEmailViaGraph(
           SENDER_EMAIL,
           `New Talent Community Submission: ${parsed.firstName} ${parsed.lastName}`,
-          `
-            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-              <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, #12161D 0%, #8E4F67 100%); border-radius: 8px;">
-                <h1 style="color: #7FB8A3; margin: 0;">Talent Community Submission</h1>
-                <p style="color: #fff; margin: 5px 0;">Constancia Careers</p>
-              </div>
-              <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                <h2 style="color: #12161D; margin-top: 0;">Candidate Details</h2>
-                <table style="width: 100%; border-collapse: collapse;">
-                  <tr>
-                    <td style="padding: 8px 0; color: #666; width: 140px;"><strong>Name:</strong></td>
-                    <td style="padding: 8px 0; color: #333;">${parsed.firstName} ${parsed.lastName}</td>
-                  </tr>
-                  <tr>
-                    <td style="padding: 8px 0; color: #666;"><strong>Email:</strong></td>
-                    <td style="padding: 8px 0;"><a href="mailto:${parsed.email}" style="color: #8E4F67;">${parsed.email}</a></td>
-                  </tr>
-                  ${parsed.linkedIn ? `
-                  <tr>
-                    <td style="padding: 8px 0; color: #666;"><strong>LinkedIn:</strong></td>
-                    <td style="padding: 8px 0;"><a href="${parsed.linkedIn}" style="color: #8E4F67;">${parsed.linkedIn}</a></td>
-                  </tr>` : ""}
-                  <tr>
-                    <td style="padding: 8px 0; color: #666;"><strong>Area of Interest:</strong></td>
-                    <td style="padding: 8px 0; color: #333;">${parsed.areaOfInterest}</td>
-                  </tr>
-                </table>
-              </div>
-              <div style="background: #fff; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px;">
-                <h2 style="color: #12161D; margin-top: 0;">Message</h2>
-                <p style="color: #333; line-height: 1.6; white-space: pre-wrap;">${parsed.message}</p>
-              </div>
-              <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
-              <p style="color: #666; font-size: 12px; text-align: center;">
-                This notification was sent from the Constancia website careers form.
-                <br>
-                Submitted: ${new Date().toLocaleString("en-GB", { dateStyle: "full", timeStyle: "short" })}
-              </p>
-            </div>
-          `
+          talentHtml
         );
       } catch (emailError) {
         log.error({ err: emailError }, "talent submission email notification error");
