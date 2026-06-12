@@ -17,6 +17,11 @@ import { createChildLogger } from "../../lib/logger";
 import { getOpenAIConfig } from "../../config";
 import { sendEmailViaGraph, SENDER_EMAIL } from "../../services/ms-graph-email";
 import { escapeHtml } from "../../utils/html-escape";
+import {
+  EMAIL_BRAND,
+  generateNotificationHeader,
+  wrapEmailContent,
+} from "../../core/email/components";
 
 const log = createChildLogger("journey-validation");
 import { calculateQuestionScore, type ScoreResult } from "./scoring-engine";
@@ -574,112 +579,99 @@ async function sendAdminErrorReport(
     return false;
   }
   
-  const htmlContent = `
-<!DOCTYPE html>
-<html>
-<head>
-  <style>
-    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-    .header { background: linear-gradient(135deg, #12161D, #8E4F67); color: white; padding: 20px; border-radius: 8px 8px 0 0; }
-    .content { padding: 20px; background: #f9f9f9; }
-    .issue { margin: 10px 0; padding: 12px; border-radius: 6px; }
-    .critical { background: #fee2e2; border-left: 4px solid #dc2626; }
-    .error { background: #fef3c7; border-left: 4px solid #d97706; }
-    .warning { background: #e0f2fe; border-left: 4px solid #0284c7; }
-    .code-suggestion { background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 6px; font-family: monospace; font-size: 12px; overflow-x: auto; margin: 15px 0; }
-    .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0; }
-    .metric { background: white; padding: 15px; border-radius: 8px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-    .metric-value { font-size: 24px; font-weight: bold; color: #12161D; }
-    .metric-label { font-size: 12px; color: #666; }
-    .footer { padding: 15px; text-align: center; font-size: 12px; color: #666; }
-  </style>
-</head>
-<body>
-  <div class="header">
-    <h1>FinanceCompass Validation Alert</h1>
-    <p>Assessment ID: ${escapeHtml(validationResult.assessmentId)}</p>
-    <p>Stage: ${escapeHtml(validationResult.stage)} | Generated: ${new Date().toISOString()}</p>
-  </div>
-  
-  <div class="content">
-    <div class="metrics">
-      <div class="metric">
-        <div class="metric-value">${validationResult.totalIssues}</div>
-        <div class="metric-label">Total Issues</div>
-      </div>
-      <div class="metric">
-        <div class="metric-value" style="color: #dc2626;">${validationResult.criticalIssues}</div>
-        <div class="metric-label">Critical Issues</div>
-      </div>
-      <div class="metric">
-        <div class="metric-value" style="color: #059669;">${validationResult.autoFixedCount}</div>
-        <div class="metric-label">Auto-Fixed</div>
-      </div>
+  const issueSeverityColor = (severity: string) => {
+    if (severity === 'critical') return '#fee2e2';
+    if (severity === 'error') return '#fef3c7';
+    return '#e0f2fe';
+  };
+  const issueBorderColor = (severity: string) => {
+    if (severity === 'critical') return '#dc2626';
+    if (severity === 'error') return '#d97706';
+    return '#0284c7';
+  };
+
+  const validationBody = `
+    <div style="background-color: ${EMAIL_BRAND.lightGray}; border: 1px solid ${EMAIL_BRAND.mediumGray}; border-radius: 4px; padding: 16px; margin-bottom: 20px;">
+      <p style="margin: 0 0 6px 0; color: ${EMAIL_BRAND.mutedGray}; font-size: 13px;">Assessment ID: <strong style="color: ${EMAIL_BRAND.charcoal};">${escapeHtml(validationResult.assessmentId)}</strong></p>
+      <p style="margin: 0; color: ${EMAIL_BRAND.mutedGray}; font-size: 13px;">Stage: <strong style="color: ${EMAIL_BRAND.charcoal};">${escapeHtml(validationResult.stage)}</strong> &mdash; Generated: ${new Date().toISOString()}</p>
     </div>
-    
-    <h2>Issues Requiring Attention</h2>
+
+    <table style="width: 100%; border-collapse: separate; border-spacing: 8px; margin-bottom: 24px;">
+      <tr>
+        <td style="background: ${EMAIL_BRAND.white}; padding: 16px; border-radius: 4px; text-align: center; border: 1px solid ${EMAIL_BRAND.mediumGray};">
+          <div style="font-size: 26px; font-weight: 700; color: ${EMAIL_BRAND.charcoal};">${validationResult.totalIssues}</div>
+          <div style="color: ${EMAIL_BRAND.mutedGray}; font-size: 13px;">Total Issues</div>
+        </td>
+        <td style="background: ${EMAIL_BRAND.white}; padding: 16px; border-radius: 4px; text-align: center; border: 1px solid ${EMAIL_BRAND.mediumGray};">
+          <div style="font-size: 26px; font-weight: 700; color: #dc2626;">${validationResult.criticalIssues}</div>
+          <div style="color: ${EMAIL_BRAND.mutedGray}; font-size: 13px;">Critical Issues</div>
+        </td>
+        <td style="background: ${EMAIL_BRAND.white}; padding: 16px; border-radius: 4px; text-align: center; border: 1px solid ${EMAIL_BRAND.mediumGray};">
+          <div style="font-size: 26px; font-weight: 700; color: ${EMAIL_BRAND.mint};">${validationResult.autoFixedCount}</div>
+          <div style="color: ${EMAIL_BRAND.mutedGray}; font-size: 13px;">Auto-Fixed</div>
+        </td>
+      </tr>
+    </table>
+
+    <h2 style="color: ${EMAIL_BRAND.charcoal}; font-size: 16px; margin: 0 0 12px 0;">Issues Requiring Attention</h2>
     ${criticalIssues.map(issue => `
-      <div class="issue ${escapeHtml(issue.severity)}">
-        <strong>[Layer ${escapeHtml(String(issue.layer))}] ${escapeHtml(issue.code)}</strong>
-        <p>${escapeHtml(issue.message)}</p>
-        ${issue.field ? `<p><em>Field:</em> ${escapeHtml(issue.field)}</p>` : ''}
-        ${issue.currentValue !== undefined ? `<p><em>Current:</em> ${escapeHtml(JSON.stringify(issue.currentValue))}</p>` : ''}
-        ${issue.expectedValue !== undefined ? `<p><em>Expected:</em> ${escapeHtml(JSON.stringify(issue.expectedValue))}</p>` : ''}
-        ${issue.autoFixed ? '<p style="color: green;">Auto-fixed</p>' : ''}
+      <div style="margin: 10px 0; padding: 12px 16px; border-radius: 4px; background: ${issueSeverityColor(issue.severity)}; border-left: 3px solid ${issueBorderColor(issue.severity)};">
+        <strong style="color: ${EMAIL_BRAND.charcoal}; font-size: 14px;">[Layer ${escapeHtml(String(issue.layer))}] ${escapeHtml(issue.code)}</strong>
+        <p style="margin: 6px 0 0 0; color: ${EMAIL_BRAND.darkGray}; font-size: 13px;">${escapeHtml(issue.message)}</p>
+        ${issue.field ? `<p style="margin: 4px 0 0 0; color: ${EMAIL_BRAND.mutedGray}; font-size: 12px;"><em>Field:</em> ${escapeHtml(issue.field)}</p>` : ''}
+        ${issue.currentValue !== undefined ? `<p style="margin: 4px 0 0 0; color: ${EMAIL_BRAND.mutedGray}; font-size: 12px;"><em>Current:</em> ${escapeHtml(JSON.stringify(issue.currentValue))}</p>` : ''}
+        ${issue.expectedValue !== undefined ? `<p style="margin: 4px 0 0 0; color: ${EMAIL_BRAND.mutedGray}; font-size: 12px;"><em>Expected:</em> ${escapeHtml(JSON.stringify(issue.expectedValue))}</p>` : ''}
+        ${issue.autoFixed ? `<p style="margin: 4px 0 0 0; color: ${EMAIL_BRAND.mint}; font-size: 12px; font-weight: 600;">Auto-fixed</p>` : ''}
       </div>
     `).join('')}
-    
+
     ${validationResult.aiAnalysis?.anomaliesDetected && validationResult.aiAnalysis.anomaliesDetected.length > 0 ? `
-      <h2>AI-Detected Anomalies</h2>
-      <ul>
+      <h2 style="color: ${EMAIL_BRAND.charcoal}; font-size: 16px; margin: 20px 0 12px 0;">AI-Detected Anomalies</h2>
+      <ul style="color: ${EMAIL_BRAND.darkGray}; font-size: 14px; line-height: 1.8; margin: 0; padding-left: 20px;">
         ${validationResult.aiAnalysis.anomaliesDetected.map((a: string) => `<li>${escapeHtml(a)}</li>`).join('')}
       </ul>
-      <p><strong>AI Confidence:</strong> ${escapeHtml(String(validationResult.aiAnalysis.confidence))}%</p>
-      <p><strong>Recommendation:</strong> ${escapeHtml(validationResult.aiAnalysis.recommendation.toUpperCase())}</p>
+      <p style="color: ${EMAIL_BRAND.darkGray}; font-size: 14px; margin: 10px 0 4px 0;"><strong>AI Confidence:</strong> ${escapeHtml(String(validationResult.aiAnalysis.confidence))}%</p>
+      <p style="color: ${EMAIL_BRAND.darkGray}; font-size: 14px; margin: 0;"><strong>Recommendation:</strong> ${escapeHtml(validationResult.aiAnalysis.recommendation.toUpperCase())}</p>
     ` : ''}
-    
-    <h2>Suggested Code Updates</h2>
-    <div class="code-suggestion">
-<pre>
-// Potential fixes for assessment: ${validationResult.assessmentId}
 
-${criticalIssues.filter(i => i.code === 'DIMENSION_SCORE_MISMATCH').map(issue => `
-// Fix dimension score mismatch for "${issue.field}"
+    <h2 style="color: ${EMAIL_BRAND.charcoal}; font-size: 16px; margin: 20px 0 12px 0;">Suggested Code Updates</h2>
+    <div style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.6; overflow-x: auto; margin-bottom: 20px;">
+<pre style="margin: 0;">// Potential fixes for assessment: ${validationResult.assessmentId}
+
+${criticalIssues.filter(i => i.code === 'DIMENSION_SCORE_MISMATCH').map(issue => `// Fix dimension score mismatch for "${issue.field}"
 await storage.fcAssessments.update("${validationResult.assessmentId}", {
-  dimensionScores: {
-    ...existingScores,
-    "${issue.field}": ${issue.expectedValue}
-  }
-});
-`).join('\n')}
+  dimensionScores: { ...existingScores, "${issue.field}": ${issue.expectedValue} }
+});`).join('\n\n')}
 
-${criticalIssues.some(i => i.code === 'OVERALL_SCORE_MISMATCH') ? `
-// Fix overall score mismatch
+${criticalIssues.some(i => i.code === 'OVERALL_SCORE_MISMATCH') ? `// Fix overall score mismatch
 await storage.fcAssessments.update("${validationResult.assessmentId}", {
   overallMaturityScore: ${validationResult.calculatedOverallScore}
-});
-` : ''}
+});` : ''}
 
-// Force recalculation endpoint:
-// POST /api/finance-compass/admin/assessments/${validationResult.assessmentId}/recalculate
-</pre>
+// Force recalculation:
+// POST /api/finance-compass/admin/assessments/${validationResult.assessmentId}/recalculate</pre>
     </div>
-    
-    <h2>Assessment Data Summary</h2>
-    <p><strong>Tier:</strong> ${assessment.tier}</p>
-    <p><strong>Status:</strong> ${assessment.status}</p>
-    <p><strong>Stored Overall Score:</strong> ${validationResult.storedOverallScore}</p>
-    <p><strong>Calculated Overall Score:</strong> ${validationResult.calculatedOverallScore}</p>
-    <p><strong>Completion:</strong> ${validationResult.dataCompleteness.completionPercent}%</p>
-    <p><strong>Processing Time:</strong> ${validationResult.processingTimeMs}ms</p>
-  </div>
-  
-  <div class="footer">
-    <p>This is an automated message from the FinanceCompass Validation System</p>
-    <p>© 2026 Constancia Ltd. All rights reserved.</p>
-  </div>
-</body>
-</html>`;
+
+    <h2 style="color: ${EMAIL_BRAND.charcoal}; font-size: 16px; margin: 0 0 12px 0;">Assessment Data Summary</h2>
+    <div style="background: ${EMAIL_BRAND.lightGray}; border: 1px solid ${EMAIL_BRAND.mediumGray}; border-radius: 4px; padding: 16px;">
+      <p style="margin: 0 0 6px 0; color: ${EMAIL_BRAND.darkGray}; font-size: 14px;"><strong>Tier:</strong> ${assessment.tier}</p>
+      <p style="margin: 0 0 6px 0; color: ${EMAIL_BRAND.darkGray}; font-size: 14px;"><strong>Status:</strong> ${assessment.status}</p>
+      <p style="margin: 0 0 6px 0; color: ${EMAIL_BRAND.darkGray}; font-size: 14px;"><strong>Stored Score:</strong> ${validationResult.storedOverallScore}</p>
+      <p style="margin: 0 0 6px 0; color: ${EMAIL_BRAND.darkGray}; font-size: 14px;"><strong>Calculated Score:</strong> ${validationResult.calculatedOverallScore}</p>
+      <p style="margin: 0 0 6px 0; color: ${EMAIL_BRAND.darkGray}; font-size: 14px;"><strong>Completion:</strong> ${validationResult.dataCompleteness.completionPercent}%</p>
+      <p style="margin: 0; color: ${EMAIL_BRAND.darkGray}; font-size: 14px;"><strong>Processing Time:</strong> ${validationResult.processingTimeMs}ms</p>
+    </div>
+  `;
+
+  const htmlContent = wrapEmailContent(`
+    ${generateNotificationHeader({ title: 'FinanceCompass Validation Alert', subtitle: `Assessment: ${escapeHtml(validationResult.assessmentId)}` })}
+    <div style="background-color: ${EMAIL_BRAND.white}; padding: 32px 28px;">
+      ${validationBody}
+    </div>
+    <div style="background-color: ${EMAIL_BRAND.charcoal}; padding: 20px; text-align: center;">
+      <p style="color: ${EMAIL_BRAND.mutedCream}; margin: 0; font-size: 12px;">Automated message from the FinanceCompass Validation System &mdash; &copy; 2026 Constancia Ltd.</p>
+    </div>
+  `);
 
   try {
     for (const recipient of ADMIN_EMAIL_RECIPIENTS) {

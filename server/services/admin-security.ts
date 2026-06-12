@@ -17,6 +17,16 @@ import crypto from "crypto";
 import { authenticator } from "otplib";
 import * as QRCode from "qrcode";
 import { sendEmailViaGraph, SENDER_EMAIL, isEmailConfigured } from "./ms-graph-email";
+import {
+  EMAIL_BRAND,
+  generateEmailHeader,
+  generateEmailFooter,
+  generateEmailWrapper,
+  generateNotificationHeader,
+  generateInfoCard,
+  generateWarningBox,
+  wrapEmailContent,
+} from "../core/email/components";
 
 const log = createChildLogger("admin-security");
 
@@ -63,38 +73,23 @@ const generateRandomCode = (length: number): string => {
 export async function sendTestEmail(toEmail: string): Promise<{ success: boolean; message: string }> {
   const timestamp = new Date().toISOString();
   
-  const htmlContent = `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-        .header { background: #12161D; color: white; padding: 20px; text-align: center; }
-        .content { padding: 20px; background: #f9f9f9; }
-        .footer { text-align: center; padding: 20px; font-size: 12px; color: #666; }
-        .success { color: #7FB8A3; font-weight: bold; }
-      </style>
-    </head>
-    <body>
-      <div class="container">
-        <div class="header">
-          <h2>Constancia Email Configuration Test</h2>
-        </div>
-        <div class="content">
-          <p class="success">Email configuration is working correctly!</p>
-          <p>This is a test email sent from the Constancia Admin system to verify Microsoft Graph API email configuration.</p>
-          <p><strong>Timestamp:</strong> ${timestamp}</p>
-          <p><strong>Recipient:</strong> ${toEmail}</p>
-          <p><strong>Sender:</strong> ${SENDER_EMAIL}</p>
-        </div>
-        <div class="footer">
-          <p>This is an automated test email from Constancia Admin Centre.</p>
-        </div>
-      </div>
-    </body>
-    </html>
+  const body = `
+    <p style="color: ${EMAIL_BRAND.mint}; font-weight: 600; font-size: 15px; margin: 0 0 16px 0;">Email configuration is working correctly.</p>
+    ${generateInfoCard(`
+      <p style="margin: 0 0 8px 0; color: ${EMAIL_BRAND.darkGray}; font-size: 14px;"><strong>Timestamp:</strong> ${timestamp}</p>
+      <p style="margin: 0 0 8px 0; color: ${EMAIL_BRAND.darkGray}; font-size: 14px;"><strong>Recipient:</strong> ${toEmail}</p>
+      <p style="margin: 0; color: ${EMAIL_BRAND.darkGray}; font-size: 14px;"><strong>Sender:</strong> ${SENDER_EMAIL}</p>
+    `)}
+    <p style="color: ${EMAIL_BRAND.mutedGray}; font-size: 13px; margin: 16px 0 0 0;">
+      This is an automated test email from the Constancia Admin Centre verifying Microsoft Graph API configuration.
+    </p>
   `;
+
+  const htmlContent = generateEmailWrapper(
+    generateEmailHeader({ variant: 'dark' }),
+    body,
+    generateEmailFooter({ variant: 'dark' })
+  );
 
   try {
     await sendEmailViaGraph({ to: toEmail, subject: "[Constancia] Email Configuration Test", htmlContent });
@@ -554,41 +549,23 @@ export async function sendLoginNotification(
   const timestamp = new Date().toISOString();
   const browserInfo = parseUserAgent(userAgent);
 
-  const htmlContent = `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-        .header { background: #12161D; color: white; padding: 20px; text-align: center; }
-        .content { padding: 20px; background: #f9f9f9; }
-        .detail { margin: 10px 0; }
-        .label { font-weight: bold; color: #12161D; }
-        .footer { text-align: center; padding: 20px; font-size: 12px; color: #666; }
-      </style>
-    </head>
-    <body>
-      <div class="container">
-        <div class="header">
-          <h2>Admin Login Notification</h2>
-        </div>
-        <div class="content">
-          <p>A new admin login has been detected:</p>
-          <div class="detail"><span class="label">Admin:</span> ${escapeHtml(adminName)} (${escapeHtml(adminEmail)})</div>
-          <div class="detail"><span class="label">Time:</span> ${escapeHtml(timestamp)}</div>
-          <div class="detail"><span class="label">IP Address:</span> ${escapeHtml(ipAddress)}</div>
-          <div class="detail"><span class="label">Browser:</span> ${escapeHtml(browserInfo)}</div>
-          <div class="detail"><span class="label">Method:</span> ${escapeHtml(loginMethod)}</div>
-          <p style="margin-top: 20px;">If this was not you, please take immediate action to secure the admin account.</p>
-        </div>
-        <div class="footer">
-          <p>This is an automated security notification from Constancia Admin Centre.</p>
-        </div>
-      </div>
-    </body>
-    </html>
+  const loginBody = `
+    <p style="color: ${EMAIL_BRAND.darkGray}; font-size: 15px; margin: 0 0 20px 0;">A new admin login has been detected on the Constancia platform.</p>
+    ${generateInfoCard(`
+      <p style="margin: 0 0 8px 0; color: ${EMAIL_BRAND.darkGray}; font-size: 14px;"><strong>Admin:</strong> ${escapeHtml(adminName)} (${escapeHtml(adminEmail)})</p>
+      <p style="margin: 0 0 8px 0; color: ${EMAIL_BRAND.darkGray}; font-size: 14px;"><strong>Time:</strong> ${escapeHtml(timestamp)}</p>
+      <p style="margin: 0 0 8px 0; color: ${EMAIL_BRAND.darkGray}; font-size: 14px;"><strong>IP Address:</strong> ${escapeHtml(ipAddress)}</p>
+      <p style="margin: 0 0 8px 0; color: ${EMAIL_BRAND.darkGray}; font-size: 14px;"><strong>Browser:</strong> ${escapeHtml(browserInfo)}</p>
+      <p style="margin: 0; color: ${EMAIL_BRAND.darkGray}; font-size: 14px;"><strong>Method:</strong> ${escapeHtml(loginMethod)}</p>
+    `)}
+    ${generateWarningBox('If this was not you, please take immediate action to secure the admin account.')}
   `;
+
+  const htmlContent = generateEmailWrapper(
+    generateNotificationHeader({ title: 'Admin Login Notification' }),
+    loginBody,
+    generateEmailFooter({ variant: 'dark' })
+  );
 
   // Send to all active admins (except info@constancia.io)
   for (const admin of admins) {

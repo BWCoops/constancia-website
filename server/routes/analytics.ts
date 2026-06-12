@@ -7,7 +7,15 @@ const log = createChildLogger("analytics");
 import { widgetAnalytics, widgetAbTests, abTestVariantSchema, pageAnalytics, funnelTargets, insertPageAnalyticsSchema, analyticsInsights } from "@shared/schema";
 import { desc, gte, sql, eq, and, isNull, count, avg, between, lte, asc } from "drizzle-orm";
 import { sendEmailViaGraph, isEmailConfigured } from "../services/ms-graph-email";
-import { getEmailLogoHtml } from "../utils/email-logo";
+import {
+  EMAIL_BRAND,
+  generateNotificationHeader,
+  generateInfoCard,
+  generateCtaButton,
+  generateSuccessBox,
+  generateWarningBox,
+  wrapEmailContent,
+} from "../core/email/components";
 import { createOrUpdateContact, isHubSpotConnected, type HubSpotContactResult } from "../services/hubspot";
 import {
   ANALYTICS_EVENTS,
@@ -322,100 +330,89 @@ async function sendWidgetLeadNotification(data: {
     maturityLevel: data.maturityLevel,
   });
   
-  const emailHtml = `
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; background-color: #EFEAE0;">
-  <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-    <div style="background: linear-gradient(135deg, #12161D 0%, #8E4F67 100%); padding: 24px; border-radius: 12px 12px 0 0; text-align: center;">
-      ${getEmailLogoHtml({ variant: 'white' })}
-      <h1 style="color: #7FB8A3; margin: 16px 0 8px 0; font-size: 22px; font-weight: 600;">New Widget Lead</h1>
-      <span style="display: inline-block; background-color: ${priorityColor}; color: #12161D; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600;">${leadPriority}</span>
-    </div>
-    
-    <div style="background-color: #ffffff; padding: 24px; border-radius: 0 0 12px 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-      <h2 style="color: #12161D; margin: 0 0 16px 0; font-size: 18px; border-bottom: 2px solid #7FB8A3; padding-bottom: 8px;">Contact Details</h2>
-      <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
+  const leadBody = `
+    ${generateInfoCard(`
+      <h3 style="color: ${EMAIL_BRAND.charcoal}; margin: 0 0 14px 0; font-size: 15px; font-weight: 600; border-bottom: 1px solid ${EMAIL_BRAND.mediumGray}; padding-bottom: 10px;">Contact Details</h3>
+      <table style="width: 100%; border-collapse: collapse;">
         <tr>
-          <td style="padding: 8px 0; color: #666; width: 140px;">Name:</td>
-          <td style="padding: 8px 0; color: #12161D; font-weight: 500;">${displayName}</td>
+          <td style="padding: 6px 0; color: ${EMAIL_BRAND.mutedGray}; font-size: 14px; width: 130px;">Name</td>
+          <td style="padding: 6px 0; color: ${EMAIL_BRAND.charcoal}; font-size: 14px; font-weight: 500;">${displayName}</td>
         </tr>
         <tr>
-          <td style="padding: 8px 0; color: #666;">Email:</td>
-          <td style="padding: 8px 0; color: #12161D; font-weight: 500;"><a href="mailto:${data.email}" style="color: #8E4F67;">${data.email}</a></td>
+          <td style="padding: 6px 0; color: ${EMAIL_BRAND.mutedGray}; font-size: 14px;">Email</td>
+          <td style="padding: 6px 0; font-size: 14px;"><a href="mailto:${data.email}" style="color: ${EMAIL_BRAND.deepMint}; text-decoration: none;">${data.email}</a></td>
         </tr>
         <tr>
-          <td style="padding: 8px 0; color: #666;">Company:</td>
-          <td style="padding: 8px 0; color: #252826; font-weight: 500;">${company}${needsVerification ? ' <span style="color: #7a6a50; font-size: 11px;">(verify)</span>' : ''}</td>
+          <td style="padding: 6px 0; color: ${EMAIL_BRAND.mutedGray}; font-size: 14px;">Company</td>
+          <td style="padding: 6px 0; color: ${EMAIL_BRAND.charcoal}; font-size: 14px; font-weight: 500;">${company}${needsVerification ? ' <span style="color: ' + EMAIL_BRAND.mutedGray + '; font-size: 11px;">(verify)</span>' : ''}</td>
         </tr>
         <tr>
-          <td style="padding: 8px 0; color: #666;">Role:</td>
-          <td style="padding: 8px 0; color: #12161D; font-weight: 500;">${displayRole}</td>
+          <td style="padding: 6px 0; color: ${EMAIL_BRAND.mutedGray}; font-size: 14px;">Role</td>
+          <td style="padding: 6px 0; color: ${EMAIL_BRAND.charcoal}; font-size: 14px; font-weight: 500;">${displayRole}</td>
         </tr>
       </table>
-      
-      <h2 style="color: #12161D; margin: 0 0 16px 0; font-size: 18px; border-bottom: 2px solid #7FB8A3; padding-bottom: 8px;">Organisation Profile</h2>
-      <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
+    `)}
+
+    ${generateInfoCard(`
+      <h3 style="color: ${EMAIL_BRAND.charcoal}; margin: 0 0 14px 0; font-size: 15px; font-weight: 600; border-bottom: 1px solid ${EMAIL_BRAND.mediumGray}; padding-bottom: 10px;">Organisation Profile</h3>
+      <table style="width: 100%; border-collapse: collapse;">
         <tr>
-          <td style="padding: 8px 0; color: #666; width: 140px;">Industry:</td>
-          <td style="padding: 8px 0; color: #12161D; font-weight: 500;">${displayIndustry}</td>
+          <td style="padding: 6px 0; color: ${EMAIL_BRAND.mutedGray}; font-size: 14px; width: 130px;">Industry</td>
+          <td style="padding: 6px 0; color: ${EMAIL_BRAND.charcoal}; font-size: 14px; font-weight: 500;">${displayIndustry}</td>
         </tr>
         <tr>
-          <td style="padding: 8px 0; color: #666;">Company Size:</td>
-          <td style="padding: 8px 0; color: #12161D; font-weight: 500;">${displaySize}</td>
+          <td style="padding: 6px 0; color: ${EMAIL_BRAND.mutedGray}; font-size: 14px;">Company Size</td>
+          <td style="padding: 6px 0; color: ${EMAIL_BRAND.charcoal}; font-size: 14px; font-weight: 500;">${displaySize}</td>
         </tr>
         <tr>
-          <td style="padding: 8px 0; color: #666;">Revenue:</td>
-          <td style="padding: 8px 0; color: #12161D; font-weight: 500;">${displayRevenue}</td>
+          <td style="padding: 6px 0; color: ${EMAIL_BRAND.mutedGray}; font-size: 14px;">Revenue</td>
+          <td style="padding: 6px 0; color: ${EMAIL_BRAND.charcoal}; font-size: 14px; font-weight: 500;">${displayRevenue}</td>
         </tr>
       </table>
-      
-      <h2 style="color: #12161D; margin: 0 0 16px 0; font-size: 18px; border-bottom: 2px solid #7FB8A3; padding-bottom: 8px;">Assessment Results</h2>
-      <div style="background: linear-gradient(135deg, #12161D 0%, #8E4F67 100%); border-radius: 8px; padding: 16px; margin-bottom: 16px; text-align: center;">
-        <div style="font-size: 36px; font-weight: 700; color: #7FB8A3;">${data.score}%</div>
-        <div style="color: #fff; font-size: 14px;">${data.maturityLevel}</div>
+    `)}
+
+    ${generateInfoCard(`
+      <h3 style="color: ${EMAIL_BRAND.charcoal}; margin: 0 0 14px 0; font-size: 15px; font-weight: 600; border-bottom: 1px solid ${EMAIL_BRAND.mediumGray}; padding-bottom: 10px;">Assessment Results</h3>
+      <div style="background-color: ${EMAIL_BRAND.charcoal}; border-radius: 4px; padding: 20px; text-align: center; margin-bottom: 16px;">
+        <div style="font-size: 40px; font-weight: 700; color: ${EMAIL_BRAND.mint}; line-height: 1;">${data.score}%</div>
+        <div style="color: ${EMAIL_BRAND.cream}; font-size: 14px; margin-top: 6px;">${data.maturityLevel}</div>
       </div>
-      <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
+      <table style="width: 100%; border-collapse: collapse;">
         <tr>
-          <td style="padding: 8px 0; color: #666; width: 140px;">Strongest Area:</td>
-          <td style="padding: 8px 0; color: #12161D; font-weight: 500;">${data.strongestArea.dimension} (${data.strongestArea.maturityLevel})</td>
+          <td style="padding: 6px 0; color: ${EMAIL_BRAND.mutedGray}; font-size: 14px; width: 130px;">Strongest Area</td>
+          <td style="padding: 6px 0; color: ${EMAIL_BRAND.charcoal}; font-size: 14px; font-weight: 500;">${data.strongestArea.dimension} (${data.strongestArea.maturityLevel})</td>
         </tr>
         <tr>
-          <td style="padding: 8px 0; color: #666;">Weakest Area:</td>
-          <td style="padding: 8px 0; color: #12161D; font-weight: 500;">${data.weakestArea.dimension} (${data.weakestArea.maturityLevel})</td>
+          <td style="padding: 6px 0; color: ${EMAIL_BRAND.mutedGray}; font-size: 14px;">Weakest Area</td>
+          <td style="padding: 6px 0; color: ${EMAIL_BRAND.charcoal}; font-size: 14px; font-weight: 500;">${data.weakestArea.dimension} (${data.weakestArea.maturityLevel})</td>
         </tr>
       </table>
-      
-      ${hubspotStatusHtml}
-      
-      ${!hubspotResult.success ? `
-      <div style="text-align: center; margin-top: 16px;">
-        <a href="${hubspotUrl}" style="display: inline-block; background: linear-gradient(135deg, #7FB8A3 0%, #8E4F67 100%); color: #12161D; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 16px;">
-          Add to HubSpot Manually
-        </a>
-      </div>` : `
-      <div style="text-align: center; margin-top: 16px;">
-        <a href="https://app.hubspot.com/contacts" style="display: inline-block; background: linear-gradient(135deg, #8E4F67 0%, #12161D 100%); color: #fff; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 500; font-size: 14px;">
-          View in HubSpot
-        </a>
-      </div>`}
-      
-      <div style="margin-top: 24px; padding: 16px; background-color: #f8f9fa; border-radius: 8px; font-size: 12px; color: #666;">
+    `)}
+
+    ${hubspotStatusHtml}
+
+    ${!hubspotResult.success
+      ? generateCtaButton('Add to HubSpot Manually', hubspotUrl)
+      : generateCtaButton('View in HubSpot', 'https://app.hubspot.com/contacts')
+    }
+
+    ${generateInfoCard(`
+      <p style="margin: 0; color: ${EMAIL_BRAND.mutedGray}; font-size: 12px;">
         <strong>Session ID:</strong> ${data.sessionId}<br>
         <strong>Timestamp:</strong> ${new Date().toISOString()}
-      </div>
+      </p>
+    `)}
+  `;
+
+  const emailHtml = wrapEmailContent(`
+    ${generateNotificationHeader({ title: 'New Widget Lead', subtitle: leadPriority })}
+    <div style="background-color: ${EMAIL_BRAND.white}; padding: 32px 28px;">
+      ${leadBody}
     </div>
-    
-    <div style="text-align: center; padding: 16px; color: #999; font-size: 12px;">
-      This is an automated lead notification from the FinanceCompass Widget.
+    <div style="background-color: ${EMAIL_BRAND.charcoal}; padding: 20px; text-align: center;">
+      <p style="color: ${EMAIL_BRAND.mutedCream}; margin: 0; font-size: 12px;">Automated lead notification from the FinanceCompass Widget</p>
     </div>
-  </div>
-</body>
-</html>`;
+  `);
 
   await sendEmailViaGraph({
     to: LEAD_NOTIFICATION_EMAIL,

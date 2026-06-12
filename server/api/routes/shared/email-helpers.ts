@@ -90,43 +90,31 @@ export async function sendContactFormNotification(submission: {
   }
 }
 
-export async function sendContactVerificationEmail(to: string, firstName: string, token: string): Promise<boolean> {
+export async function sendContactVerificationEmail(to: string, firstName: string, otp: string): Promise<boolean> {
   try {
-    const baseUrl = process.env.BASE_URL || 'https://constancia.com';
-    const verificationLink = `${baseUrl}/api/contact/verify?token=${token}`;
-    
-    const header = generateEmailHeader({ variant: 'dark' });
-    
     const body = `
-      <p style="color: ${EMAIL_BRAND.darkGray}; font-size: 16px; margin: 0 0 20px 0;">Hi ${escapeHtml(firstName)},</p>
-      
-      <p style="color: ${EMAIL_BRAND.darkGray}; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
-        Thank you for contacting Constancia. Please verify your email address to confirm your enquiry.
+      <p style="color: ${EMAIL_BRAND.darkGray}; font-size: 16px; margin: 0 0 16px 0;">Hi ${escapeHtml(firstName)},</p>
+
+      <p style="color: ${EMAIL_BRAND.darkGray}; font-size: 15px; line-height: 1.7; margin: 0 0 24px 0;">
+        Thank you for contacting Constancia. Please use the code below to verify your email address and confirm your enquiry.
       </p>
-      
-      ${generateCtaButton('Verify Email Address', verificationLink)}
-      
-      <p style="color: ${EMAIL_BRAND.mutedGray}; font-size: 14px; margin: 25px 0 10px 0;">
-        If the button above doesn't work, copy and paste this link into your browser:
-      </p>
-      <p style="color: ${EMAIL_BRAND.deepMint}; font-size: 13px; word-break: break-all; background-color: ${EMAIL_BRAND.lightGray}; padding: 12px; border-radius: 4px; margin: 0 0 25px 0;">
-        ${verificationLink}
-      </p>
-      
-      ${generateWarningBox('<strong>Note:</strong> This link expires in 24 hours. After expiration, you\'ll need to submit a new contact request.')}
-      
-      <p style="color: ${EMAIL_BRAND.darkGray}; font-size: 16px; line-height: 1.6; margin: 25px 0 0 0;">
-        Once verified, our team will review your enquiry and get back to you shortly.
+
+      ${generateOtpBox(otp)}
+
+      ${generateWarningBox('This code expires in 10 minutes. If you did not submit a contact form, you can safely ignore this email.')}
+
+      <p style="color: ${EMAIL_BRAND.mutedGray}; font-size: 14px; line-height: 1.7; margin: 24px 0 0 0;">
+        Once verified, our team will review your enquiry and get back to you within 24 hours.
       </p>
     `;
-    
-    const footer = generateEmailFooter({ variant: 'dark', showFinanceCompass: true });
-    
-    await sendEmailViaGraph(
-      to,
-      `Verify your email - Constancia Contact`,
-      generateEmailWrapper(header, body, footer)
+
+    const htmlContent = generateEmailWrapper(
+      generateEmailHeader({ variant: 'dark' }),
+      body,
+      generateEmailFooter({ variant: 'dark', showFinanceCompass: false })
     );
+
+    await sendEmailViaGraph(to, 'Your Constancia verification code', htmlContent);
 
     return true;
   } catch (error) {

@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { storage, generateVerificationToken, getVerificationTokenExpiry } from "../../storage";
+import { storage } from "../../storage";
 import { insertContactSubmissionSchema, isBusinessEmail } from "@shared/schema";
 import { getServerFeatureFlags } from "@shared/feature-flags";
 import { requireContact } from "../../middleware/feature-flags";
@@ -186,39 +186,41 @@ router.post("/", requireContact, async (req: Request, res: Response) => {
     integrationPromises.push(
       (async () => {
         try {
-          const token = generateVerificationToken();
-          const expiresAt = getVerificationTokenExpiry();
-          
+          const otp = Math.floor(100000 + Math.random() * 900000).toString();
+          const tokenKey = `${validatedData.email.toLowerCase()}|${otp}`;
+          const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
+
           await storage.createEmailVerificationToken({
             contactSubmissionId: submission.id,
-            token,
+            token: tokenKey,
             expiresAt,
           });
-          
+
           const emailSent = await sendContactVerificationEmail(
             validatedData.email,
             validatedData.firstName,
-            token
+            otp
           );
-          
+
           if (emailSent) {
-            log.info({ email: redactEmail(validatedData.email) }, "Contact verification email sent");
+            log.info({ email: redactEmail(validatedData.email) }, "Contact verification OTP sent");
           } else {
-            log.error({ email: redactEmail(validatedData.email) }, "Failed to send contact verification email");
+            log.error({ email: redactEmail(validatedData.email) }, "Failed to send contact verification OTP");
           }
-          
+
           return { type: "verification-email", success: emailSent };
         } catch (err) {
-          log.error({ err }, "Contact verification email error");
+          log.error({ err }, "Contact verification OTP error");
           return { type: "verification-email", success: false, error: err };
         }
       })()
     );
-    
-    res.json({ 
-      success: true, 
+
+    res.json({
+      success: true,
       data: submission,
-      message: "Thank you for your enquiry. Please check your email to verify your email address."
+      email: validatedData.email,
+      message: "Thank you for your enquiry. A 6-digit verification code has been sent to your email.",
     });
   } catch (error) {
     log.error({ err: error }, "Contact form error");
@@ -228,40 +230,48 @@ router.post("/", requireContact, async (req: Request, res: Response) => {
 
 router.post("/verify", requireContact, async (req: Request, res: Response) => {
   try {
-    const token = req.body.token || req.query.token;
-    
-    if (!token || typeof token !== "string") {
-      return res.status(400).json({ 
-        success: false, 
-        error: "Verification token is required" 
+    const { email, code } = req.body;
+
+    if (!email || typeof email !== "string" || !code || typeof code !== "string") {
+      return res.status(400).json({
+        success: false,
+        error: "Email and verification code are required",
       });
     }
-    
-    const tokenRecord = await storage.getEmailVerificationToken(token);
-    
+
+    if (!/^\d{6}$/.test(code.trim())) {
+      return res.status(400).json({
+        success: false,
+        error: "Invalid verification code format",
+      });
+    }
+
+    const tokenKey = `${email.toLowerCase().trim()}|${code.trim()}`;
+    const tokenRecord = await storage.getEmailVerificationToken(tokenKey);
+
     if (!tokenRecord) {
-      return res.status(400).json({ 
-        success: false, 
-        error: "Invalid or expired verification token" 
+      return res.status(400).json({
+        success: false,
+        error: "Invalid or expired verification code. Please check your code and try again.",
       });
     }
-    
+
     if (!tokenRecord.contactSubmissionId || tokenRecord.leadId) {
-      return res.status(400).json({ 
-        success: false, 
-        error: "Invalid token type" 
+      return res.status(400).json({
+        success: false,
+        error: "Invalid verification code",
       });
     }
-    
+
     await storage.markEmailVerificationTokenUsed(tokenRecord.id);
     await storage.verifyContactSubmission(tokenRecord.contactSubmissionId);
-    
-    res.json({ 
-      success: true, 
-      message: "Email verified successfully. Thank you for confirming your enquiry." 
+
+    res.json({
+      success: true,
+      message: "Email verified successfully. Thank you — our team will be in touch within 24 hours.",
     });
   } catch (error) {
-    log.error({ err: error }, "Contact verification error");
+    log.error({ err: error }, "Contact OTP verification error");
     res.status(500).json({ success: false, error: "Verification failed. Please try again." });
   }
 });

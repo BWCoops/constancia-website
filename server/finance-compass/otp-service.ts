@@ -8,6 +8,13 @@ import type { Request } from "express";
 import crypto from "crypto";
 import { sendEmailViaGraph } from "../services/ms-graph-email";
 import { createChildLogger } from "../lib/logger";
+import {
+  EMAIL_BRAND,
+  generateEmailHeader,
+  generateEmailFooter,
+  generateEmailWrapper,
+  generateOtpBox,
+} from "../core/email/components";
 
 const log = createChildLogger("fc-otp-service");
 
@@ -168,37 +175,23 @@ setInterval(() => {
 
 export async function sendFcOtpEmail(email: string, firstName: string, otp: string): Promise<boolean> {
   try {
-    const htmlContent = `
-      <div style="font-family: 'Inter', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f8f9fa; padding: 40px;">
-        <div style="background: white; border-radius: 12px; padding: 40px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-          <div style="text-align: center; margin-bottom: 30px;">
-            <h1 style="color: #12161D; margin: 0;">FinanceCompass</h1>
-            <p style="color: #666; margin-top: 8px;">Finance Transformation Assessment</p>
-          </div>
-          
-          <p style="color: #333; font-size: 16px; line-height: 1.6;">Hello ${firstName},</p>
-          <p style="color: #333; font-size: 16px; line-height: 1.6;">
-            Please use the verification code below to access your finance transformation assessment:
-          </p>
-          
-          <div style="background: linear-gradient(135deg, #12161D 0%, #8E4F67 100%); padding: 24px; border-radius: 8px; text-align: center; margin: 24px 0;">
-            <span style="font-size: 36px; font-weight: bold; letter-spacing: 10px; color: #7FB8A3;">${otp}</span>
-          </div>
-          
-          <p style="color: #666; font-size: 14px; text-align: center;">
-            This code expires in ${FC_OTP_EXPIRY_MINUTES} minutes.
-          </p>
-          
-          <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
-          
-          <p style="color: #888; font-size: 12px; text-align: center;">
-            If you didn't request this code, please ignore this email.<br>
-            &copy; Constancia Ltd. All rights reserved.
-          </p>
-        </div>
-      </div>
+    const body = `
+      <p style="color: ${EMAIL_BRAND.darkGray}; font-size: 16px; line-height: 1.7; margin: 0 0 8px 0;">Hello ${firstName},</p>
+      <p style="color: ${EMAIL_BRAND.mutedGray}; font-size: 15px; line-height: 1.7; margin: 0 0 24px 0;">
+        Use the code below to access your FinanceCompass assessment. It expires in ${FC_OTP_EXPIRY_MINUTES} minutes.
+      </p>
+      ${generateOtpBox(otp)}
+      <p style="color: ${EMAIL_BRAND.mutedGray}; font-size: 13px; text-align: center; margin: 0;">
+        If you did not request this code, you can safely ignore this email.
+      </p>
     `;
-    
+
+    const htmlContent = generateEmailWrapper(
+      generateEmailHeader({ variant: 'dark', tagline: 'Finance Transformation Assessment', showTagline: true }),
+      body,
+      generateEmailFooter({ variant: 'dark', showFinanceCompass: false })
+    );
+
     await sendEmailViaGraph({
       to: email,
       subject: "Your FinanceCompass Verification Code",

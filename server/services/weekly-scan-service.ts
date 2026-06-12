@@ -7,6 +7,13 @@ import { eq, desc } from "drizzle-orm";
 import { scanBlogPost, scanForPlagiarism } from "./winston-ai";
 import { createChildLogger } from "../lib/logger";
 import { sendEmailViaGraph } from "./ms-graph-email";
+import {
+  EMAIL_BRAND,
+  generateNotificationHeader,
+  generateInfoCard,
+  generateSuccessBox,
+  wrapEmailContent,
+} from "../core/email/components";
 
 const log = createChildLogger("weekly-scan");
 
@@ -279,59 +286,62 @@ async function sendScanReportEmail(summary: ScanSummary): Promise<{ success: boo
     </div>
   ` : "";
 
-  const htmlContent = `
-    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: 0 auto;">
-      <div style="background: linear-gradient(135deg, #12161D 0%, #8E4F67 100%); padding: 24px; border-radius: 8px 8px 0 0;">
-        <h1 style="color: white; margin: 0; font-size: 24px;">Weekly Content Scan Report</h1>
-        <p style="color: #7FB8A3; margin: 8px 0 0 0;">Automated scan completed on ${new Date().toLocaleString("en-GB")}</p>
-      </div>
-      
-      <div style="background: #F6F3EE; padding: 24px; border: 1px solid #D8D0C6; border-top: none;">
-        <h2 style="color: #1E293B; margin: 0 0 16px 0;">Scan Summary</h2>
-        
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px;">
-          <div style="background: white; padding: 16px; border-radius: 8px; text-align: center; border: 1px solid #D8D0C6;">
-            <div style="font-size: 28px; font-weight: bold; color: #12161D;">${summary.scannedBlogs}</div>
-            <div style="color: #64748B; font-size: 14px;">Blogs Scanned</div>
-          </div>
-          <div style="background: white; padding: 16px; border-radius: 8px; text-align: center; border: 1px solid #D8D0C6;">
-            <div style="font-size: 28px; font-weight: bold; color: #12161D;">${summary.scannedResources}</div>
-            <div style="color: #64748B; font-size: 14px;">Resources Scanned</div>
-          </div>
-          <div style="background: white; padding: 16px; border-radius: 8px; text-align: center; border: 1px solid #D8D0C6;">
-            <div style="font-size: 28px; font-weight: bold; color: ${summary.severeIssues.length > 0 ? '#DC2626' : '#10B981'};">${summary.severeIssues.length}</div>
-            <div style="color: #64748B; font-size: 14px;">Issues Found</div>
-          </div>
-          <div style="background: white; padding: 16px; border-radius: 8px; text-align: center; border: 1px solid #D8D0C6;">
-            <div style="font-size: 28px; font-weight: bold; color: #C77A93;">${summary.failedBlogs + summary.failedResources}</div>
-            <div style="color: #64748B; font-size: 14px;">Scan Failures</div>
-          </div>
-        </div>
-        
-        ${severeIssuesHtml}
-        ${aiDetectionHtml}
-        ${plagiarismHtml}
-        ${seoRecsHtml}
-        
-        <div style="background: #ECFDF5; border-left: 4px solid #10B981; padding: 16px; margin: 16px 0; border-radius: 4px;">
-          <h3 style="color: #065F46; margin: 0 0 8px 0;">Next Steps</h3>
-          <ul style="margin: 0; padding-left: 20px; color: #047857;">
-            ${summary.severeIssues.length > 0 ? '<li>Review and address severe issues immediately</li>' : ''}
-            <li>Review SEO recommendations and update content as needed</li>
-            <li>Access the Admin Centre for detailed scan results</li>
-            <li>Next scan scheduled in 7 days</li>
-          </ul>
-        </div>
-      </div>
-      
-      <div style="background: #12161D; padding: 16px; border-radius: 0 0 8px 8px; text-align: center;">
-        <p style="color: #D8D0C6; margin: 0; font-size: 12px;">
-          This is an automated report from the Constancia Admin Centre.
-          <br />Questions? Contact the development team.
-        </p>
-      </div>
+  const scanMetrics = `
+    <table style="width: 100%; border-collapse: separate; border-spacing: 8px; margin-bottom: 24px;">
+      <tr>
+        <td style="background: ${EMAIL_BRAND.white}; padding: 16px; border-radius: 4px; text-align: center; border: 1px solid ${EMAIL_BRAND.mediumGray};">
+          <div style="font-size: 26px; font-weight: 700; color: ${EMAIL_BRAND.charcoal};">${summary.scannedBlogs}</div>
+          <div style="color: ${EMAIL_BRAND.mutedGray}; font-size: 13px;">Blogs Scanned</div>
+        </td>
+        <td style="background: ${EMAIL_BRAND.white}; padding: 16px; border-radius: 4px; text-align: center; border: 1px solid ${EMAIL_BRAND.mediumGray};">
+          <div style="font-size: 26px; font-weight: 700; color: ${EMAIL_BRAND.charcoal};">${summary.scannedResources}</div>
+          <div style="color: ${EMAIL_BRAND.mutedGray}; font-size: 13px;">Resources Scanned</div>
+        </td>
+        <td style="background: ${EMAIL_BRAND.white}; padding: 16px; border-radius: 4px; text-align: center; border: 1px solid ${EMAIL_BRAND.mediumGray};">
+          <div style="font-size: 26px; font-weight: 700; color: ${summary.severeIssues.length > 0 ? '#DC2626' : EMAIL_BRAND.mint};">${summary.severeIssues.length}</div>
+          <div style="color: ${EMAIL_BRAND.mutedGray}; font-size: 13px;">Issues Found</div>
+        </td>
+        <td style="background: ${EMAIL_BRAND.white}; padding: 16px; border-radius: 4px; text-align: center; border: 1px solid ${EMAIL_BRAND.mediumGray};">
+          <div style="font-size: 26px; font-weight: 700; color: ${EMAIL_BRAND.rose};">${summary.failedBlogs + summary.failedResources}</div>
+          <div style="color: ${EMAIL_BRAND.mutedGray}; font-size: 13px;">Scan Failures</div>
+        </td>
+      </tr>
+    </table>
+  `;
+
+  const nextStepsHtml = `
+    <div style="background: #edf5f1; border: 1px solid ${EMAIL_BRAND.mint}; border-radius: 4px; padding: 16px; margin-top: 20px;">
+      <h3 style="color: ${EMAIL_BRAND.deepMint}; margin: 0 0 10px 0; font-size: 14px; font-weight: 600;">Next Steps</h3>
+      <ul style="margin: 0; padding-left: 20px; color: ${EMAIL_BRAND.deepMint}; font-size: 14px; line-height: 1.8;">
+        ${summary.severeIssues.length > 0 ? '<li>Review and address severe issues immediately</li>' : ''}
+        <li>Review SEO recommendations and update content as needed</li>
+        <li>Access the Admin Centre for detailed scan results</li>
+        <li>Next scan scheduled in 7 days</li>
+      </ul>
     </div>
   `;
+
+  const scanBody = `
+    <h2 style="color: ${EMAIL_BRAND.charcoal}; margin: 0 0 20px 0; font-size: 18px; font-weight: 600;">Scan Summary</h2>
+    ${scanMetrics}
+    ${severeIssuesHtml}
+    ${aiDetectionHtml}
+    ${plagiarismHtml}
+    ${seoRecsHtml}
+    ${nextStepsHtml}
+  `;
+
+  const htmlContent = wrapEmailContent(`
+    ${generateNotificationHeader({ title: 'Weekly Content Scan Report', subtitle: `Completed ${new Date().toLocaleString('en-GB')}` })}
+    <div style="background-color: ${EMAIL_BRAND.white}; padding: 32px 28px;">
+      ${scanBody}
+    </div>
+    <div style="background-color: ${EMAIL_BRAND.charcoal}; padding: 20px; text-align: center;">
+      <p style="color: ${EMAIL_BRAND.mutedCream}; margin: 0; font-size: 12px;">
+        Automated report from the Constancia Admin Centre. Questions? Contact the development team.
+      </p>
+    </div>
+  `);
 
   let successCount = 0;
   let lastError = "";
