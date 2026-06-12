@@ -80,7 +80,7 @@ function NavDropdownMenu({ item, location }: { item: NavDropdown; location: stri
       <button
         onClick={() => setOpen((o) => !o)}
         className={`relative flex items-center gap-1 px-4 py-2 text-sm rounded-lg transition-colors duration-200 ${
-          isChildActive ? "text-[#8E4F67] font-semibold" : "text-[#252826]/70 font-medium hover:text-[#8E4F67]"
+          isChildActive ? "text-[#8E4F67] font-semibold" : "text-[#12161D]/70 font-medium hover:text-[#8E4F67]"
         }`}
         data-testid="button-nav-tools-dropdown"
         aria-expanded={open}
@@ -91,7 +91,7 @@ function NavDropdownMenu({ item, location }: { item: NavDropdown; location: stri
       </button>
 
       <div
-        className={`absolute top-full left-0 mt-1 w-52 rounded-lg border border-[#252826]/[0.08] bg-[#F6F3EE]/85 backdrop-blur-xl shadow-lg py-1 z-50 transition-all duration-150 origin-top ${
+        className={`absolute top-full left-0 mt-1 w-52 rounded-lg border border-[#12161D]/[0.08] bg-[#F6F3EE]/85 backdrop-blur-xl shadow-lg py-1 z-50 transition-all duration-150 origin-top ${
           open
             ? "opacity-100 scale-y-100 pointer-events-auto"
             : "opacity-0 scale-y-95 pointer-events-none"
@@ -107,7 +107,7 @@ function NavDropdownMenu({ item, location }: { item: NavDropdown; location: stri
             className={`block px-4 py-2.5 text-sm transition-colors ${
               location === child.href || location.startsWith(child.href + "/")
                 ? "text-[#8E4F67] bg-[#C77A93]/[0.10]"
-                : "text-[#252826]/70 hover:text-[#8E4F67] hover:bg-[#252826]/[0.04]"
+                : "text-[#12161D]/70 hover:text-[#8E4F67] hover:bg-[#12161D]/[0.04]"
             }`}
             data-testid={`link-nav-dropdown-${child.label.toLowerCase().replace(/\s+/g, "-")}`}
           >
@@ -129,7 +129,7 @@ export function Navigation() {
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 bg-[#F6F3EE]/85 backdrop-blur-xl border-b border-[#252826]/[0.05]"
+      className="fixed top-0 left-0 right-0 z-50 bg-[#F6F3EE]/85 backdrop-blur-xl border-b border-[#12161D]/[0.05]"
       role="banner"
     >
       <nav
@@ -159,7 +159,7 @@ export function Navigation() {
                 className={`relative px-4 py-2 text-sm rounded-lg transition-colors duration-200 group ${
                   location === item.href
                     ? "text-[#8E4F67] font-semibold"
-                    : "text-[#252826]/70 font-medium hover:text-[#8E4F67]"
+                    : "text-[#12161D]/70 font-medium hover:text-[#8E4F67]"
                 }`}
                 data-testid={`link-nav-${item.label.toLowerCase().replace(/\s+/g, "-")}`}
               >
@@ -182,16 +182,16 @@ export function Navigation() {
             data-testid="button-mobile-menu"
           >
             {isMobileMenuOpen ? (
-              <X className="h-5 w-5 text-[#252826]" />
+              <X className="h-5 w-5 text-[#12161D]" />
             ) : (
-              <Menu className="h-5 w-5 text-[#252826]" />
+              <Menu className="h-5 w-5 text-[#12161D]" />
             )}
           </Button>
         </div>
       </nav>
 
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-[#F6F3EE]/85 backdrop-blur-xl border-b border-[#252826]/[0.05] nav-slide-down">
+        <div className="lg:hidden bg-[#F6F3EE]/85 backdrop-blur-xl border-b border-[#12161D]/[0.05] nav-slide-down">
           <div className="px-6 py-4 space-y-1">
             {enabledItems.map((item) => {
               if (isDropdown(item)) {
@@ -203,7 +203,7 @@ export function Navigation() {
                   <div key={item.label}>
                     <button
                       onClick={() => setMobileExpanded(isExpanded ? null : item.label)}
-                      className="flex items-center justify-between w-full px-4 py-3 rounded-lg text-left text-[#252826]/70 hover:text-[#8E4F67] hover:bg-[#252826]/[0.04] transition-colors"
+                      className="flex items-center justify-between w-full px-4 py-3 rounded-lg text-left text-[#12161D]/70 hover:text-[#8E4F67] hover:bg-[#12161D]/[0.04] transition-colors"
                       data-testid="button-mobile-tools-dropdown"
                     >
                       <span>{item.label}</span>
@@ -224,7 +224,7 @@ export function Navigation() {
                             className={`block px-4 py-2.5 rounded-lg text-sm transition-colors ${
                               location === child.href
                                 ? "bg-[#C77A93]/[0.10] text-[#8E4F67]"
-                                : "text-[#252826]/70 hover:text-[#8E4F67] hover:bg-[#252826]/[0.04]"
+                                : "text-[#12161D]/70 hover:text-[#8E4F67] hover:bg-[#12161D]/[0.04]"
                             }`}
                             data-testid={`link-mobile-nav-${child.label.toLowerCase().replace(/\s+/g, "-")}`}
                           >
@@ -246,7 +246,7 @@ export function Navigation() {
                   className={`block w-full text-left px-4 py-3 rounded-lg transition-colors ${
                     location === item.href
                       ? "bg-[#C77A93]/[0.10] text-[#8E4F67]"
-                      : "text-[#252826]/70 hover:text-[#8E4F67] hover:bg-[#252826]/[0.04]"
+                      : "text-[#12161D]/70 hover:text-[#8E4F67] hover:bg-[#12161D]/[0.04]"
                   }`}
                   data-testid={`link-mobile-nav-${item.label.toLowerCase().replace(/\s+/g, "-")}`}
                 >

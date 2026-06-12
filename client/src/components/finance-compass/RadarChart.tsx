@@ -76,8 +76,8 @@ export function FinanceCompassRadarChart({
                 <Radar
                   name="Industry Benchmark"
                   dataKey="benchmark"
-                  stroke="#252826"
-                  fill="#252826"
+                  stroke="#12161D"
+                  fill="#12161D"
                   fillOpacity={0.2}
                   strokeWidth={2}
                   strokeDasharray="5 5"

@@ -205,7 +205,7 @@ export function HeroFabricCanvas({ className }: HeroFabricCanvasProps) {
       DEEPMINT: new THREE.Color("#5E8D7A"),  // Deep mint
       ROSE:     new THREE.Color("#C77A93"),  // Muted rose
       BERRY:    new THREE.Color("#8E4F67"),  // Deep berry
-      SLATE:    new THREE.Color("#252826"),  // Secondary dark (soft graphite charcoal)
+      SLATE:    new THREE.Color("#12161D"),  // Secondary dark (soft graphite charcoal)
       GRAPHITE: new THREE.Color("#1A1B1A"),  // Deeper variant of secondary dark
       STONE:    new THREE.Color("#D8D0C6"),  // Support neutral light (folded into shimmer)
     };

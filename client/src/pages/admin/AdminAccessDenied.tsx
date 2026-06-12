@@ -19,7 +19,7 @@ export default function AdminAccessDenied() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#252826] via-[#5E8D7A] to-[#8E4F67] p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#12161D] via-[#5E8D7A] to-[#8E4F67] p-4">
       <Card className="w-full max-w-md" data-testid="access-denied-card">
         <CardHeader className="text-center space-y-4">
           <div className="flex justify-center">

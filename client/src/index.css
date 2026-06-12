@@ -21,11 +21,11 @@
      primary surface, cream as the primary ink, rose + mint as the
      accents. Every brand-token consumer follows. */
 
-  /* Backgrounds */
-  --brand-bg-primary:       #252826;
-  --brand-bg-secondary:     #1A1B1A;
-  --brand-bg-surface:       rgba(246,243,238,0.04);
-  --brand-bg-surface-hover: rgba(199,122,147,0.10);
+  /* Backgrounds — brand sheet: #12161D primary dark, #1E2630 secondary dark (used more) */
+  --brand-bg-primary:       #12161D;
+  --brand-bg-secondary:     #1E2630;
+  --brand-bg-surface:       rgba(246,243,238,0.05);
+  --brand-bg-surface-hover: rgba(199,122,147,0.12);
 
   /* Borders */
   --brand-border:           rgba(246,243,238,0.10);
@@ -39,15 +39,15 @@
   --brand-text-muted:       rgba(246,243,238,0.48);
   --brand-text-tertiary:    rgba(246,243,238,0.32);
 
-  /* Brand accents — aligned with the official Constancia palette. */
-  --brand-graphite:         #1A1B1A;  /* deeper variant of secondary dark */
-  --brand-slate:            #252826;  /* official Secondary dark — soft graphite charcoal */
-  --brand-cream:            #F6F3EE;  /* official Main light */
-  --brand-stone:            #D8D0C6;  /* official Support neutral light */
-  --brand-rose:             #C77A93;  /* official Muted rose */
-  --brand-berry:            #8E4F67;  /* official Deep berry */
-  --brand-mint:             #7FB8A3;  /* official Mineral green */
-  --brand-deep-mint:        #5E8D7A;  /* official Deep mint */
+  /* Brand accents — exact values from the Constancia brand sheet. */
+  --brand-graphite:         #12161D;  /* Primary dark — deep graphite black */
+  --brand-slate:            #1E2630;  /* Secondary dark — slate charcoal (used more) */
+  --brand-cream:            #F6F3EE;  /* Main light */
+  --brand-stone:            #D8D0C6;  /* Support neutral light */
+  --brand-rose:             #C77A93;  /* Muted rose */
+  --brand-berry:            #8E4F67;  /* Deep berry */
+  --brand-mint:             #7FB8A3;  /* Mineral green */
+  --brand-deep-mint:        #5E8D7A;  /* Deep mint */
 
   /* Translucent overlays */
   --brand-rose-soft:        rgba(199,122,147,0.55);
@@ -57,10 +57,10 @@
   --brand-teal:             #5E8D7A;
   --brand-teal-accessible:  #5E8D7A;
   --brand-cyan:             #7FB8A3;
-  --brand-navy:             #252826;
+  --brand-navy:             #12161D;
 
   /* Gradients */
-  --brand-gradient-banner:  linear-gradient(135deg, #252826 0%, #5E8D7A 60%, #7FB8A3 100%);
+  --brand-gradient-banner:  linear-gradient(135deg, #12161D 0%, #1E2630 40%, #5E8D7A 80%, #7FB8A3 100%);
   --brand-gradient-hero:    linear-gradient(180deg, #F6F3EE 0%, #EFEAE0 100%);
 
   /* Info / callout */
@@ -123,33 +123,33 @@
   --elevate-2:                       rgba(0,0,0,0.08);
 
   /* Palette flipped to dark per the launch holding spec. */
-  --background:         145 4% 15%;       /* ink #252826 */
-  --foreground:         38 33% 95%;       /* cream #F6F3EE */
-  --border:             246 5% 25%;
-  --card:               145 4% 18%;
+  --background:         218 23% 9%;        /* Primary Dark #12161D */
+  --foreground:         38 33% 95%;        /* cream #F6F3EE */
+  --border:             213 15% 22%;
+  --card:               213 23% 15%;       /* Secondary Dark #1E2630 — used more */
   --card-foreground:    38 33% 95%;
-  --card-border:        246 5% 28%;
-  --popover:            145 4% 18%;
+  --card-border:        213 15% 25%;
+  --popover:            213 23% 15%;       /* Secondary Dark #1E2630 */
   --popover-foreground: 38 33% 95%;
-  --popover-border:     246 5% 28%;
-  --primary:            340 41% 63%;      /* rose as primary action (matches launch button) */
+  --popover-border:     213 15% 25%;
+  --primary:            340 41% 63%;       /* rose #C77A93 */
   --primary-foreground: 38 33% 95%;
-  --secondary:          156 23% 61%;      /* mint #7FB8A3 */
-  --secondary-foreground: 145 4% 15%;
-  --muted:              145 4% 22%;
+  --secondary:          156 23% 61%;       /* mint #7FB8A3 */
+  --secondary-foreground: 213 23% 15%;
+  --muted:              213 23% 18%;       /* slightly above Secondary Dark */
   --muted-foreground:   38 20% 75%;
-  --accent:             340 41% 63%;      /* rose #C77A93 */
+  --accent:             340 41% 63%;       /* rose #C77A93 */
   --accent-foreground:  38 33% 95%;
-  --destructive:        340 27% 43%;      /* berry #8E4F67 */
+  --destructive:        340 27% 43%;       /* berry #8E4F67 */
   --destructive-foreground: 38 33% 98%;
-  --input:              145 4% 22%;
+  --input:              213 23% 18%;
   --ring:               340 41% 63%;
-  --sidebar:            145 4% 15%;
+  --sidebar:            218 23% 9%;        /* Primary Dark #12161D */
   --sidebar-foreground: 38 33% 95%;
-  --sidebar-border:     246 5% 25%;
-  --sidebar-primary:    340 41% 63%;      /* rose */
+  --sidebar-border:     213 15% 22%;
+  --sidebar-primary:    340 41% 63%;       /* rose */
   --sidebar-primary-foreground: 38 33% 95%;
-  --sidebar-accent:     145 4% 22%;
+  --sidebar-accent:     213 23% 18%;       /* panels on sidebar use secondary dark */
   --sidebar-accent-foreground: 38 33% 95%;
   --sidebar-ring:       340 41% 63%;
   --chart-1: 340 41% 63%;                  /* rose */
@@ -683,7 +683,7 @@ div[class*="hs-chat"] {
   font-size: 13px;
   letter-spacing: 0.04em;
   cursor: pointer;
-  color: #252826;
+  color: #12161D;
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.55) inset,
     0 8px 24px -10px rgba(37, 40, 38, 0.22);
@@ -778,7 +778,7 @@ div[class*="hs-chat"] {
   height: 100vh;
   width: min(520px, 92vw);
   background: #F6F3EE;
-  color: #252826;
+  color: #12161D;
   z-index: 70;
   padding: 32px 36px 40px;
   display: flex;
@@ -817,7 +817,7 @@ div[class*="hs-chat"] {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #252826;
+  color: #12161D;
   transition: border-color 200ms, color 200ms;
 }
 .library-nav-drawer__close:hover,
@@ -846,7 +846,7 @@ div[class*="hs-chat"] {
   column-gap: 16px;
   row-gap: 4px;
   padding: 18px 4px;
-  color: #252826;
+  color: #12161D;
   text-decoration: none;
   transition: background 220ms ease-out, padding 220ms ease-out;
 }
@@ -868,7 +868,7 @@ div[class*="hs-chat"] {
   font-size: 22px;
   font-weight: 400;
   line-height: 1.1;
-  color: #252826;
+  color: #12161D;
 }
 .library-nav-drawer__desc {
   font-size: 13px;
@@ -896,7 +896,7 @@ div[class*="hs-chat"] {
   border-radius: 0;
   text-align: left;
   cursor: pointer;
-  color: #252826;
+  color: #12161D;
   font: inherit;
   appearance: none;
   -webkit-appearance: none;
@@ -954,7 +954,7 @@ div[class*="hs-chat"] {
   column-gap: 12px;
   row-gap: 3px;
   padding: 12px 6px;
-  color: #252826;
+  color: #12161D;
   text-decoration: none;
   border-radius: 8px;
   transition: background 220ms ease-out, padding 220ms ease-out;
@@ -1179,7 +1179,7 @@ div[class*="hs-chat"] {
   position: relative;
   width: 100%;
   background: #F6F3EE;
-  color: #252826;
+  color: #12161D;
   isolation: isolate;
 }
 /* Scrolly stage is much taller than a normal hero because every
@@ -1479,7 +1479,7 @@ div[class*="hs-chat"] {
   font-weight: 300;
   line-height: 1.18;
   letter-spacing: -0.02em;
-  color: #252826;
+  color: #12161D;
 }
 @media (prefers-reduced-motion: reduce) {
   .landing-hero__mesh,
@@ -1616,7 +1616,7 @@ div[class*="hs-chat"] {
   font-size: clamp(16px, 1.6vw, 20px);
   font-weight: 500;
   line-height: 1.2;
-  color: #252826;
+  color: #12161D;
   margin-bottom: 6px;
 }
 .scrolly-services__body {
@@ -2035,7 +2035,7 @@ div[class*="hs-chat"] {
   flex-direction: column;
   background:
     radial-gradient(ellipse 70% 50% at 50% 28%, rgba(199,122,147,0.07) 0%, rgba(127,184,163,0.04) 45%, rgba(37,40,38,0) 80%),
-    var(--brand-bg-primary, #252826);
+    var(--brand-bg-primary, #12161D);
   color: var(--brand-text-primary, #F6F3EE);
   font-family: 'Noto Sans', system-ui, -apple-system, sans-serif;
 }
@@ -2169,7 +2169,7 @@ div[class*="hs-chat"] {
 .connected-band {
   position: relative;
   background: #F6F3EE;
-  color: #252826;
+  color: #12161D;
   padding: 96px 24px;
   text-align: center;
 }
@@ -2222,7 +2222,7 @@ div[class*="hs-chat"] {
 .services-quadrant {
   position: relative;
   background: #F6F3EE;
-  color: #252826;
+  color: #12161D;
   padding: clamp(72px, 8vw, 104px) 24px;
 }
 .services-quadrant__inner {
@@ -2257,7 +2257,7 @@ div[class*="hs-chat"] {
   font-weight: 400;
   line-height: 1.18;
   letter-spacing: -0.005em;
-  color: #252826;
+  color: #12161D;
   max-width: 24ch;
 }
 .services-quadrant__item-body {
@@ -2273,7 +2273,7 @@ div[class*="hs-chat"] {
 .landing-who,
 .landing-contact {
   background: #F6F3EE;
-  color: #252826;
+  color: #12161D;
   padding: 96px 24px;
 }
 .landing-who__inner,
@@ -2310,7 +2310,7 @@ div[class*="hs-chat"] {
 .landing-contact__link {
   display: inline-block;
   font-size: 16px;
-  color: #252826;
+  color: #12161D;
   text-decoration: underline;
   text-decoration-color: rgba(142, 79, 103, 0.4);
   text-decoration-thickness: 1px;
@@ -2350,7 +2350,7 @@ div[class*="hs-chat"] {
 .partner-section {
   padding: 96px 24px;
   background: #F6F3EE;
-  color: #252826;
+  color: #12161D;
 }
 .partner-section--dark {
   background: #0a0d14;
@@ -2411,7 +2411,7 @@ div[class*="hs-chat"] {
   gap: 12px;
   padding: 14px 20px;
   font-weight: 600;
-  color: #252826;
+  color: #12161D;
   font-size: 17px;
   letter-spacing: 0.02em;
   /* Chip-sized override of the .glass-surface base radius (24px is
@@ -2572,7 +2572,7 @@ div[class*="hs-chat"] {
    Centred, stacked: launch film → wordmark → tagline → email form
    → partners → footer. */
 body.is-holding-page {
-  background: #252826;
+  background: #12161D;
   color: #F6F3EE;
 }
 .holding-page {
@@ -2580,7 +2580,7 @@ body.is-holding-page {
   min-height: 100dvh;
   background:
     radial-gradient(ellipse 65% 50% at 50% 38%, rgba(199,122,147,0.10) 0%, rgba(127,184,163,0.06) 40%, rgba(37,40,38,0) 75%),
-    #252826;
+    #12161D;
   color: #F6F3EE;
   font-family: 'Noto Sans', system-ui, -apple-system, sans-serif;
   display: flex;
@@ -2793,7 +2793,7 @@ body.is-holding-page {
   justify-content: center;
   background:
     radial-gradient(ellipse 70% 50% at 50% 32%, rgba(127,184,163,0.10) 0%, rgba(199,122,147,0.06) 45%, rgba(37,40,38,0) 80%),
-    #252826;
+    #12161D;
   color: #F6F3EE;
   font-family: 'Noto Sans', system-ui, sans-serif;
 }

@@ -1572,7 +1572,7 @@ export function AIBlogGenerator({ isOpen, onClose, onPublishSuccess }: AIBlogGen
                                   status === "in_progress" ? (
                                     retry ? "bg-orange-50 dark:bg-orange-950 border-orange-200 dark:border-orange-800" : 
                                     winston ? "bg-purple-50 dark:bg-purple-950 border-purple-200 dark:border-purple-800" :
-                                    "bg-[#7FB8A3]/10 dark:bg-[#252826] border-[#252826]"
+                                    "bg-[#7FB8A3]/10 dark:bg-[#12161D] border-[#12161D]"
                                   ) :
                                   status === "failed" ? "bg-red-50 dark:bg-red-950 border-red-200 dark:border-red-800" :
                                   "bg-muted/50"
@@ -3145,7 +3145,7 @@ export function AIBlogGenerator({ isOpen, onClose, onPublishSuccess }: AIBlogGen
               {/* Blog Content with Visual Components */}
               <div className="prose prose-lg dark:prose-invert max-w-none
                 prose-headings:text-foreground prose-headings:font-semibold
-                prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4 prose-h2:text-[#252826] dark:prose-h2:text-[#7FB8A3]
+                prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4 prose-h2:text-[#12161D] dark:prose-h2:text-[#7FB8A3]
                 prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3 prose-h3:text-[#8E4F67] dark:prose-h3:text-[#7FB8A3]/80
                 prose-p:text-muted-foreground prose-p:leading-relaxed prose-p:mb-4
                 prose-li:text-muted-foreground prose-li:my-1
@@ -3406,7 +3406,7 @@ export function AIBlogGenerator({ isOpen, onClose, onPublishSuccess }: AIBlogGen
                 data-testid="input-fix-description"
               />
             </div>
-            <div className="p-3 bg-[#7FB8A3]/10 dark:bg-[#252826] border border-[#252826] rounded-lg">
+            <div className="p-3 bg-[#7FB8A3]/10 dark:bg-[#12161D] border border-[#12161D] rounded-lg">
               <p className="text-sm text-[#8E4F67] dark:text-[#7FB8A3] flex items-start gap-2">
                 <Lightbulb className="h-4 w-4 mt-0.5 flex-shrink-0" />
                 <span>This will regenerate just this component, not the entire blog. Quick fix!</span>

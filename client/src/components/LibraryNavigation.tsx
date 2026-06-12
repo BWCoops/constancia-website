@@ -116,7 +116,7 @@ export function LibraryNavigation({ variant = "light" }: LibraryNavigationProps)
     children: item.children?.filter(visible),
   })).filter(item => item.href || (item.children && item.children.length > 0));
 
-  const triggerColor = variant === "dark" ? "#F6F3EE" : "#252826";
+  const triggerColor = variant === "dark" ? "#F6F3EE" : "#12161D";
 
   return (
     <>

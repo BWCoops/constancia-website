@@ -566,7 +566,7 @@ function FunnelAnalysisTab({ data, isLoading }: { data: DimensionAnalysisData | 
   return (
     <div className="space-y-6">
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        <Card className="bg-gradient-to-br from-[#252826]/5 to-[#8E4F67]/5 border-[#8E4F67]/20">
+        <Card className="bg-gradient-to-br from-[#12161D]/5 to-[#8E4F67]/5 border-[#8E4F67]/20">
           <CardContent className="p-3 sm:p-6">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-lg bg-[#8E4F67]/10 shrink-0">
@@ -583,7 +583,7 @@ function FunnelAnalysisTab({ data, isLoading }: { data: DimensionAnalysisData | 
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-[#252826]/5 to-[#7FB8A3]/5 border-[#7FB8A3]/20">
+        <Card className="bg-gradient-to-br from-[#12161D]/5 to-[#7FB8A3]/5 border-[#7FB8A3]/20">
           <CardContent className="p-3 sm:p-6">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-lg bg-[#7FB8A3]/10 shrink-0">
@@ -811,7 +811,7 @@ function FunnelAnalysisTab({ data, isLoading }: { data: DimensionAnalysisData | 
                         </Badge>
                       )}
                       {q.dropoffRate > 10 && q.dropoffRate <= 20 && (
-                        <Badge className="bg-[#7FB8A3]/10 text-[#8E4F67] dark:bg-[#252826]/30 dark:text-[#7FB8A3]">
+                        <Badge className="bg-[#7FB8A3]/10 text-[#8E4F67] dark:bg-[#12161D]/30 dark:text-[#7FB8A3]">
                           Normal
                         </Badge>
                       )}
@@ -1460,7 +1460,7 @@ export default function WidgetAnalytics() {
           <p className="text-sm text-muted-foreground">{pageDescription}</p>
         </div>
 
-        <Card className="mb-6 border-[#7FB8A3]/30 bg-gradient-to-r from-[#252826]/5 to-[#7FB8A3]/5 dark:from-[#252826]/20 dark:to-[#7FB8A3]/10">
+        <Card className="mb-6 border-[#7FB8A3]/30 bg-gradient-to-r from-[#12161D]/5 to-[#7FB8A3]/5 dark:from-[#12161D]/20 dark:to-[#7FB8A3]/10">
           <CardContent className="py-4">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
               <div className="flex items-center gap-3">
@@ -1578,7 +1578,7 @@ export default function WidgetAnalytics() {
               <Card>
                 <CardContent className="p-3 sm:p-6">
                   <div className="flex items-center gap-2 sm:gap-3">
-                    <div className="p-1.5 sm:p-2 rounded-lg bg-[#7FB8A3]/10 dark:bg-[#252826]/30 shrink-0">
+                    <div className="p-1.5 sm:p-2 rounded-lg bg-[#7FB8A3]/10 dark:bg-[#12161D]/30 shrink-0">
                       <Users className="h-4 w-4 sm:h-5 sm:w-5 text-[#8E4F67] dark:text-[#7FB8A3]" />
                     </div>
                     <div className="min-w-0">
@@ -1639,8 +1639,8 @@ export default function WidgetAnalytics() {
               </CardHeader>
               <CardContent>
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-                  <div className="flex items-center gap-3 p-3 rounded-lg border bg-gradient-to-br from-[#7FB8A3]/10 to-[#7FB8A3]/10/50 dark:from-[#252826]/20 dark:to-[#252826]/10 border-[#252826]/30">
-                    <div className="p-2 rounded-lg bg-[#7FB8A3]/10 dark:bg-[#252826]/30">
+                  <div className="flex items-center gap-3 p-3 rounded-lg border bg-gradient-to-br from-[#7FB8A3]/10 to-[#7FB8A3]/10/50 dark:from-[#12161D]/20 dark:to-[#12161D]/10 border-[#12161D]/30">
+                    <div className="p-2 rounded-lg bg-[#7FB8A3]/10 dark:bg-[#12161D]/30">
                       <Activity className="h-5 w-5 text-[#8E4F67] dark:text-[#7FB8A3]" />
                     </div>
                     <div>
@@ -2811,10 +2811,10 @@ export default function WidgetAnalytics() {
                     </CardContent>
                   </Card>
 
-                  <Card className="bg-gradient-to-br from-[#7FB8A3]/10 to-[#7FB8A3]/10/50 dark:from-[#252826]/20 dark:to-[#252826]/10 border-[#252826]/30">
+                  <Card className="bg-gradient-to-br from-[#7FB8A3]/10 to-[#7FB8A3]/10/50 dark:from-[#12161D]/20 dark:to-[#12161D]/10 border-[#12161D]/30">
                     <CardContent className="p-3 sm:p-6">
                       <div className="flex items-center gap-2 sm:gap-3">
-                        <div className="p-1.5 sm:p-2 rounded-lg bg-[#7FB8A3]/10 dark:bg-[#252826]/30 shrink-0">
+                        <div className="p-1.5 sm:p-2 rounded-lg bg-[#7FB8A3]/10 dark:bg-[#12161D]/30 shrink-0">
                           <Target className="h-4 w-4 sm:h-5 sm:w-5 text-[#8E4F67] dark:text-[#7FB8A3]" />
                         </div>
                         <div className="min-w-0">
@@ -3174,7 +3174,7 @@ export default function WidgetAnalytics() {
                 {selectedEvent.finalScore !== null && (
                   <div>
                     <h4 className="text-sm font-medium mb-2">Score</h4>
-                    <p className="text-2xl font-semibold text-[#252826]">{selectedEvent.finalScore}%</p>
+                    <p className="text-2xl font-semibold text-[#12161D]">{selectedEvent.finalScore}%</p>
                   </div>
                 )}
 

@@ -252,7 +252,7 @@ export function MaturityIndicator({
               <h4 className="text-sm font-medium mb-3">Dimension Summary</h4>
               <div className="grid grid-cols-4 gap-2">
                 {Object.entries(dimensionScores).slice(0, 8).map(([dim, dimScore]) => {
-                  const dimColor = dimScore >= 70 ? '#8E4F67' : dimScore >= 50 ? '#252826' : '#C77A93';
+                  const dimColor = dimScore >= 70 ? '#8E4F67' : dimScore >= 50 ? '#12161D' : '#C77A93';
                   return (
                     <div key={dim} className="text-center">
                       <div 

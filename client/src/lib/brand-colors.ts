@@ -11,7 +11,7 @@
  * Keep in sync with the --brand-* CSS variables in client/src/index.css.
  */
 
-export const BRAND_INK        = "#252826"; // primary surface (ink)
+export const BRAND_INK        = "#12161D"; // primary surface (ink)
 export const BRAND_GRAPHITE   = "#1A1B1A"; // secondary surface
 export const BRAND_CREAM      = "#F6F3EE"; // primary text
 export const BRAND_STONE      = "#D8D0C6"; // support neutral

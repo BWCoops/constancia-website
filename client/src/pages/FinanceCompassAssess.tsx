@@ -101,7 +101,7 @@ const DIMENSION_CONFIG: Record<string, { name: string; shortName: string; icon: 
     name: "Organisation Sizing",
     shortName: "Sizing",
     icon: "Building2",
-    color: "#252826",
+    color: "#12161D",
   },
   financial_planning_analysis: {
     name: "Financial Planning & Analysis",
@@ -119,7 +119,7 @@ const DIMENSION_CONFIG: Record<string, { name: string; shortName: string; icon: 
     name: "Consolidation & Close",
     shortName: "Close",
     icon: "RefreshCw",
-    color: "#252826",
+    color: "#12161D",
   },
   financial_controls_compliance: {
     name: "Controls & Compliance",

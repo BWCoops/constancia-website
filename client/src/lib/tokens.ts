@@ -18,8 +18,8 @@
 
 export const COLOR = {
   // Primary brand — Constancia
-  graphite:        '#252826',
-  slate:           '#252826',
+  graphite:        '#12161D',
+  slate:           '#12161D',
   cream:           '#F6F3EE',
   stone:           '#D8D0C6',
   rose:            '#C77A93',
@@ -40,7 +40,7 @@ export const COLOR = {
   borderStrong:     'rgba(37,40,38,0.16)',
 
   // Text
-  textPrimary:      '#252826',
+  textPrimary:      '#12161D',
   textSecondary:    'rgba(37,40,38,0.66)',
   textMuted:        'rgba(37,40,38,0.42)',
   textTertiary:     'rgba(37,40,38,0.30)',
@@ -56,9 +56,9 @@ export const COLOR = {
   // still resolve. Map onto the closest Constancia equivalent.
   teal:             '#5E8D7A',
   cyan:             '#7FB8A3',
-  navy:             '#252826',
+  navy:             '#12161D',
 
-  gradientBannerFrom:   '#252826',
+  gradientBannerFrom:   '#12161D',
   gradientBannerMid:    '#5E8D7A',
   gradientBannerTo:     '#7FB8A3',
   gradientHeroFrom:     '#F6F3EE',

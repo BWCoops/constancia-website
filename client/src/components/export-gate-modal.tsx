@@ -270,7 +270,7 @@ export function ExportGateModal({ exportConfig, open, onOpenChange, onExportAppr
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[480px] max-h-[85vh] overflow-hidden flex flex-col">
         <DialogHeader className="flex-shrink-0">
-          <DialogTitle className="text-xl font-semibold text-[#252826]">
+          <DialogTitle className="text-xl font-semibold text-[#12161D]">
             {step === "form" && "Export Comparison Report"}
             {step === "otp" && "Verify Your Email"}
             {step === "success" && "Export Ready"}
@@ -284,15 +284,15 @@ export function ExportGateModal({ exportConfig, open, onOpenChange, onExportAppr
 
         <div className="flex-1 overflow-y-auto overscroll-contain min-h-0 pr-1" style={{ WebkitOverflowScrolling: 'touch' }}>
           {exportConfig && (
-            <div className="bg-gradient-to-r from-[#252826]/5 to-[#8E4F67]/5 p-4 rounded-lg mb-4">
+            <div className="bg-gradient-to-r from-[#12161D]/5 to-[#8E4F67]/5 p-4 rounded-lg mb-4">
               <div className="flex items-center gap-3">
                 {exportConfig.type === "pdf" ? (
-                  <FileText className="h-8 w-8 text-[#252826]" />
+                  <FileText className="h-8 w-8 text-[#12161D]" />
                 ) : (
                   <FileSpreadsheet className="h-8 w-8 text-[#8E4F67]" />
                 )}
                 <div>
-                  <p className="text-sm font-medium text-[#252826]">
+                  <p className="text-sm font-medium text-[#12161D]">
                     {getCategoryLabel()} Comparison - {exportConfig.type.toUpperCase()}
                   </p>
                   <p className="text-xs text-muted-foreground mt-1">
@@ -458,7 +458,7 @@ export function ExportGateModal({ exportConfig, open, onOpenChange, onExportAppr
 
                   <Button 
                     type="submit" 
-                    className="w-full bg-gradient-to-r from-[#252826] to-[#8E4F67] hover:from-[#252826]/90 hover:to-[#8E4F67]/90"
+                    className="w-full bg-gradient-to-r from-[#12161D] to-[#8E4F67] hover:from-[#12161D]/90 hover:to-[#8E4F67]/90"
                     disabled={submitLeadMutation.isPending || (turnstileConfig?.enabled ? !captchaToken : false)}
                     data-testid="button-export-submit-lead"
                   >
@@ -488,7 +488,7 @@ export function ExportGateModal({ exportConfig, open, onOpenChange, onExportAppr
               transition={{ duration: 0.2 }}
             >
               <div className="flex justify-center mb-6">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#252826] to-[#8E4F67] flex items-center justify-center">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#12161D] to-[#8E4F67] flex items-center justify-center">
                   <Mail className="h-8 w-8 text-white" />
                 </div>
               </div>
@@ -525,7 +525,7 @@ export function ExportGateModal({ exportConfig, open, onOpenChange, onExportAppr
 
                   <Button 
                     type="submit" 
-                    className="w-full bg-gradient-to-r from-[#252826] to-[#8E4F67] hover:from-[#252826]/90 hover:to-[#8E4F67]/90"
+                    className="w-full bg-gradient-to-r from-[#12161D] to-[#8E4F67] hover:from-[#12161D]/90 hover:to-[#8E4F67]/90"
                     disabled={verifyOtpMutation.isPending || otpForm.watch("otp").length !== 6}
                     data-testid="button-export-verify-otp"
                   >
@@ -582,7 +582,7 @@ export function ExportGateModal({ exportConfig, open, onOpenChange, onExportAppr
               transition={{ duration: 0.3 }}
               className="text-center py-6"
             >
-              <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-r from-[#252826] to-[#8E4F67] flex items-center justify-center">
+              <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-r from-[#12161D] to-[#8E4F67] flex items-center justify-center">
                 <CheckCircle className="h-10 w-10 text-[#7FB8A3]" />
               </div>
               <h3 className="text-lg font-semibold text-[#7FB8A3] mb-2">Export Started!</h3>

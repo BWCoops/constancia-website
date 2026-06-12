@@ -580,7 +580,7 @@ function SEOAnalysisSection({ title, excerpt, content, onCopySuggestions }: {
     const styles = {
       high: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
       medium: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400",
-      low: "bg-[#7FB8A3]/10 text-[#8E4F67] dark:bg-[#252826]/30 dark:text-[#7FB8A3]"
+      low: "bg-[#7FB8A3]/10 text-[#8E4F67] dark:bg-[#12161D]/30 dark:text-[#7FB8A3]"
     };
     return styles[priority];
   };

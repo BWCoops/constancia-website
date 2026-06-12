@@ -1860,7 +1860,7 @@ function getImplementationGanttData(platforms: Platform[]): PlatformGanttData[] 
   const phaseColors = {
     discovery: '#7FB8A3',
     design: '#8E4F67',
-    build: '#252826',
+    build: '#12161D',
     testing: '#6366f1',
     deployment: '#7FB8A3',
     training: '#C77A93'
@@ -2511,7 +2511,7 @@ function FeatureCell({ value }: { value: boolean | string }) {
 }
 
 const IMPLEMENTATION_PHASES_TEMPLATE: { name: string; startPct: number; endPct: number; color: string }[] = [
-  { name: "Discovery & Planning", startPct: 0, endPct: 0.17, color: "#252826" },
+  { name: "Discovery & Planning", startPct: 0, endPct: 0.17, color: "#12161D" },
   { name: "Design & Configuration", startPct: 0.17, endPct: 0.50, color: "#5E8D7A" },
   { name: "Data Migration", startPct: 0.33, endPct: 0.67, color: "#8E4F67" },
   { name: "Testing & UAT", startPct: 0.50, endPct: 0.75, color: "#7FB8A3" },
@@ -2617,7 +2617,7 @@ function TimelineVisualization({
       <CardHeader className="pb-3 sm:pb-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
           <div className="flex items-center gap-2 sm:gap-3">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center flex-shrink-0">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-[#12161D] to-[#8E4F67] flex items-center justify-center flex-shrink-0">
               <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-brand-cream" />
             </div>
             <div>
@@ -2642,7 +2642,7 @@ function TimelineVisualization({
                 onClick={() => handleTimelinePlatformToggle(platform.id)}
                 disabled={!selectedTimelinePlatforms.includes(platform.id) && selectedTimelinePlatforms.length >= 4}
                 className={selectedTimelinePlatforms.includes(platform.id) 
-                  ? "bg-[#7FB8A3] text-[#252826] hover:bg-[#7FB8A3]/90" 
+                  ? "bg-[#7FB8A3] text-[#12161D] hover:bg-[#7FB8A3]/90" 
                   : ""
                 }
                 data-testid={`button-timeline-platform-${platform.id}`}
@@ -2939,7 +2939,7 @@ function MobilePlatformCarousel({
                           }}
                           className={`min-h-[44px] min-w-[44px] ${
                             isSelected 
-                              ? "bg-[#7FB8A3] text-[#252826] hover:bg-[#7FB8A3]/90" 
+                              ? "bg-[#7FB8A3] text-[#12161D] hover:bg-[#7FB8A3]/90" 
                               : "border-[#5E8D7A] text-[#5E8D7A]"
                           }`}
                         >
@@ -2960,7 +2960,7 @@ function MobilePlatformCarousel({
                         </div>
                         <div className="h-2 bg-muted rounded-full overflow-hidden">
                           <motion.div
-                            className="h-full bg-gradient-to-r from-[#252826] to-[#7FB8A3] rounded-full"
+                            className="h-full bg-gradient-to-r from-[#12161D] to-[#7FB8A3] rounded-full"
                             initial={{ width: 0 }}
                             animate={{ width: getScoreBarWidth(displayScore) }}
                             transition={{ duration: 0.5, ease: "easeOut" }}
@@ -4035,7 +4035,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                         <div className="flex items-center gap-2 mb-1 flex-wrap">
                           <span className="font-semibold text-sm sm:text-base">{preset.label}</span>
                           {isSelected && (
-                            <Badge variant="secondary" className="text-[10px] sm:text-xs bg-[#7FB8A3] text-[#252826]">
+                            <Badge variant="secondary" className="text-[10px] sm:text-xs bg-[#7FB8A3] text-[#12161D]">
                               Selected
                             </Badge>
                           )}
@@ -4165,7 +4165,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
             </div>
             <Button 
               onClick={handleViewRecommendations} 
-              className="w-full bg-[#7FB8A3] text-[#252826]"
+              className="w-full bg-[#7FB8A3] text-[#12161D]"
               data-testid="button-view-recommendations"
             >
               View Tailored Recommendations
@@ -4180,7 +4180,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
         <>
           {/* Selected Configuration Display for wizard results */}
           {wizardStep === 'results' && (
-            <Card className="mb-6 border-[#7FB8A3]/30 bg-gradient-to-r from-[#252826]/5 to-[#8E4F67]/5 dark:from-[#252826]/20 dark:to-[#8E4F67]/20">
+            <Card className="mb-6 border-[#7FB8A3]/30 bg-gradient-to-r from-[#12161D]/5 to-[#8E4F67]/5 dark:from-[#12161D]/20 dark:to-[#8E4F67]/20">
               <CardHeader className="pb-3">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                   <div className="flex items-center gap-3">
@@ -4341,7 +4341,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                           <li key={idx} className="flex items-start gap-2">
                             <div className={`w-4 h-4 mt-0.5 flex-shrink-0 rounded-full flex items-center justify-center ${(source as any).isPrimary ? 'bg-[#7FB8A3]' : 'bg-[#8E4F67]/20'}`}>
                               {(source as any).isPrimary ? (
-                                <Star className="w-2.5 h-2.5 text-[#252826]" />
+                                <Star className="w-2.5 h-2.5 text-[#12161D]" />
                               ) : (
                                 <ExternalLink className="w-2.5 h-2.5 text-brand-teal" />
                               )}
@@ -4456,7 +4456,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                     >
                       <div className="flex items-start gap-3">
                         <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
-                          index === 0 ? 'bg-[#7FB8A3] text-[#252826]' : index === 1 ? 'bg-[#8E4F67]/20 text-brand-teal' : 'bg-muted text-muted-foreground'
+                          index === 0 ? 'bg-[#7FB8A3] text-[#12161D]' : index === 1 ? 'bg-[#8E4F67]/20 text-brand-teal' : 'bg-muted text-muted-foreground'
                         }`}>
                           <span className="text-sm sm:text-base font-semibold">{index + 1}</span>
                         </div>
@@ -4572,7 +4572,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
 
       {selectedPlatforms.length > 0 && (
         <section className="py-4 sm:py-6">
-          <Card className="border-[#7FB8A3]/30 bg-gradient-to-r from-[#252826]/5 to-[#8E4F67]/5 dark:from-[#252826]/20 dark:to-[#8E4F67]/20">
+          <Card className="border-[#7FB8A3]/30 bg-gradient-to-r from-[#12161D]/5 to-[#8E4F67]/5 dark:from-[#12161D]/20 dark:to-[#8E4F67]/20">
             <CardContent className="py-4 sm:py-6">
               <div className="flex flex-col lg:flex-row lg:items-center gap-4 sm:gap-6">
                 <div className="flex-1">
@@ -4614,7 +4614,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                   <Button
                     onClick={handleExportPDF}
                     disabled={isExportingPDF || selectedPlatforms.length === 0}
-                    className="bg-brand-navy hover:bg-brand-navy/90 text-white dark:bg-[#7FB8A3] dark:text-[#252826] dark:hover:bg-[#7FB8A3]/90"
+                    className="bg-brand-navy hover:bg-brand-navy/90 text-white dark:bg-[#7FB8A3] dark:text-[#12161D] dark:hover:bg-[#7FB8A3]/90"
                     data-testid={`button-export-pdf-cta-${categoryType}`}
                   >
                     {isExportingPDF ? (
@@ -4628,7 +4628,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                     variant="outline"
                     onClick={handleExportExcel}
                     disabled={isExportingExcel || selectedPlatforms.length === 0}
-                    className="border-[#8E4F67] text-brand-teal hover:bg-[#8E4F67] hover:text-white dark:border-[#7FB8A3] dark:text-brand-cyan dark:hover:bg-[#7FB8A3] dark:hover:text-[#252826]"
+                    className="border-[#8E4F67] text-brand-teal hover:bg-[#8E4F67] hover:text-white dark:border-[#7FB8A3] dark:text-brand-cyan dark:hover:bg-[#7FB8A3] dark:hover:text-[#12161D]"
                     data-testid={`button-export-excel-cta-${categoryType}`}
                   >
                     {isExportingExcel ? (
@@ -4731,7 +4731,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
 
       <section className="py-6 sm:py-8">
         <div className="flex items-center gap-2 sm:gap-3 mb-6 sm:mb-8">
-          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center flex-shrink-0">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-[#12161D] to-[#8E4F67] flex items-center justify-center flex-shrink-0">
             <Scale className="w-5 h-5 sm:w-6 sm:h-6 text-brand-cream" />
           </div>
           <div>
@@ -5535,7 +5535,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
       <section className="py-6 sm:py-8 bg-muted/30 rounded-xl comparison-section-lazy">
         <div className="px-3 sm:px-6">
           <div className="flex items-center gap-2 sm:gap-3 mb-6 sm:mb-8">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center flex-shrink-0">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-[#12161D] to-[#8E4F67] flex items-center justify-center flex-shrink-0">
               <BarChart3 className="w-5 h-5 sm:w-6 sm:h-6 text-brand-cream" />
             </div>
             <div>
@@ -5840,7 +5840,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                         <PolarAngleAxis dataKey="category" tick={{ fill: "hsl(var(--muted-foreground))", fontSize: 14 }} />
                         <PolarRadiusAxis angle={30} domain={[0, 10]} tick={false} axisLine={false} />
                         {sortedScores.map((platform, index) => {
-                          const colours = ["#7FB8A3", "#8E4F67", "#5E8D7A", "#252826", "#6366f1", "#5E8D7A"];
+                          const colours = ["#7FB8A3", "#8E4F67", "#5E8D7A", "#12161D", "#6366f1", "#5E8D7A"];
                           return (
                             <Radar
                               key={platform.id}
@@ -5887,7 +5887,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                         <PolarAngleAxis dataKey="category" tick={{ fill: "hsl(var(--muted-foreground))", fontSize: 12 }} />
                         <PolarRadiusAxis angle={30} domain={[0, 10]} tick={false} axisLine={false} />
                         {sortedScores.map((platform, index) => {
-                          const colours = ["#7FB8A3", "#8E4F67", "#5E8D7A", "#252826", "#6366f1", "#5E8D7A"];
+                          const colours = ["#7FB8A3", "#8E4F67", "#5E8D7A", "#12161D", "#6366f1", "#5E8D7A"];
                           return (
                             <Radar
                               key={platform.id}
@@ -5925,7 +5925,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                   <PolarAngleAxis dataKey="category" tick={{ fill: "#374151", fontSize: 12 }} />
                   <PolarRadiusAxis angle={30} domain={[0, 10]} tick={false} axisLine={false} />
                   {sortedScores.map((platform, index) => {
-                    const colours = ["#7FB8A3", "#8E4F67", "#5E8D7A", "#252826", "#6366f1", "#5E8D7A"];
+                    const colours = ["#7FB8A3", "#8E4F67", "#5E8D7A", "#12161D", "#6366f1", "#5E8D7A"];
                     return (
                       <Radar
                         key={platform.id}
@@ -5949,7 +5949,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
         <Collapsible open={showTimeline} onOpenChange={setShowTimeline}>
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#12161D] to-[#8E4F67] flex items-center justify-center">
                 <Clock className="w-5 h-5 text-brand-cream" />
               </div>
               <div>
@@ -5981,7 +5981,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
       <section className="py-8">
         <div className="flex flex-col md:flex-row md:items-center gap-4 mb-8">
           <div className="flex items-center gap-3 flex-1">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#12161D] to-[#8E4F67] flex items-center justify-center">
               <Layers className="w-6 h-6 text-brand-cream" />
             </div>
             <div>
@@ -6012,7 +6012,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                 onClick={() => setDeepDiveModalOpen(true)}
                 disabled={!canCompareSelected}
                 className={`${canCompareSelected 
-                  ? 'bg-gradient-to-r from-[#252826] to-[#8E4F67] hover:from-[#252826]/90 hover:to-[#8E4F67]/90 text-white' 
+                  ? 'bg-gradient-to-r from-[#12161D] to-[#8E4F67] hover:from-[#12161D]/90 hover:to-[#8E4F67]/90 text-white' 
                   : ''
                 }`}
                 data-testid="button-compare-selected"
@@ -6069,7 +6069,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                         />
                       </div>
                     )}
-                    <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center text-white font-semibold text-lg">
+                    <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#12161D] to-[#8E4F67] flex items-center justify-center text-white font-semibold text-lg">
                       {platform.logo}
                     </div>
                     <div>
@@ -6376,7 +6376,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                   <Card key={platform.id} className="border-[#7FB8A3]/30">
                     <CardContent className="p-4">
                       <div className="flex items-center gap-3 mb-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#252826] to-[#8E4F67] flex items-center justify-center text-white font-semibold text-sm">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#12161D] to-[#8E4F67] flex items-center justify-center text-white font-semibold text-sm">
                           {platform.logo}
                         </div>
                         <div>
@@ -6426,7 +6426,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                       <Fragment key={category.category}>
                         {/* Category Header with Verdict */}
                         <TableRow 
-                          className="bg-gradient-to-r from-[#252826]/10 to-[#8E4F67]/10 cursor-pointer hover:from-[#252826]/15 hover:to-[#8E4F67]/15"
+                          className="bg-gradient-to-r from-[#12161D]/10 to-[#8E4F67]/10 cursor-pointer hover:from-[#12161D]/15 hover:to-[#8E4F67]/15"
                           onClick={() => handleCategoryToggle(category.category)}
                         >
                           <TableCell className="font-semibold">
@@ -6583,7 +6583,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
               onClick={handleExportPDF}
               disabled={isExportingPDF}
               size="sm"
-              className="bg-[#7FB8A3] text-[#252826] flex-shrink-0"
+              className="bg-[#7FB8A3] text-[#12161D] flex-shrink-0"
               data-testid="button-sticky-export-pdf"
             >
               {isExportingPDF ? (
@@ -6641,7 +6641,7 @@ export default function TechComparisonPage() {
                   <TabsList className="h-auto p-1 bg-muted/50 flex-wrap">
                     <TabsTrigger 
                       value="epm" 
-                      className="data-[state=active]:bg-[#7FB8A3] data-[state=active]:text-[#252826] px-3 md:px-6 py-2 md:py-3 text-sm md:text-base"
+                      className="data-[state=active]:bg-[#7FB8A3] data-[state=active]:text-[#12161D] px-3 md:px-6 py-2 md:py-3 text-sm md:text-base"
                       data-testid="tab-category-epm"
                     >
                       <Target className="w-4 h-4 mr-1 md:mr-2" />
@@ -6649,7 +6649,7 @@ export default function TechComparisonPage() {
                     </TabsTrigger>
                     <TabsTrigger 
                       value="erp" 
-                      className="data-[state=active]:bg-[#7FB8A3] data-[state=active]:text-[#252826] px-3 md:px-6 py-2 md:py-3 text-sm md:text-base"
+                      className="data-[state=active]:bg-[#7FB8A3] data-[state=active]:text-[#12161D] px-3 md:px-6 py-2 md:py-3 text-sm md:text-base"
                       data-testid="tab-category-erp"
                     >
                       <Database className="w-4 h-4 mr-1 md:mr-2" />
@@ -6657,7 +6657,7 @@ export default function TechComparisonPage() {
                     </TabsTrigger>
                     <TabsTrigger 
                       value="ai" 
-                      className="data-[state=active]:bg-[#7FB8A3] data-[state=active]:text-[#252826] px-3 md:px-6 py-2 md:py-3 text-sm md:text-base"
+                      className="data-[state=active]:bg-[#7FB8A3] data-[state=active]:text-[#12161D] px-3 md:px-6 py-2 md:py-3 text-sm md:text-base"
                       data-testid="tab-category-ai"
                     >
                       <Bot className="w-4 h-4 mr-1 md:mr-2" />

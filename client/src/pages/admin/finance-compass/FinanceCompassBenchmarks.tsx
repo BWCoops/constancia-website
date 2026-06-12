@@ -124,7 +124,7 @@ const DIMENSION_LABELS: Record<string, string> = {
 
 const SCORING_TIERS = [
   { tier: "World Class", range: "P90+", score: "4.5-5.0", color: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400", icon: Award },
-  { tier: "Good", range: "P75-P90", score: "3.5-4.4", color: "bg-[#7FB8A3]/10 text-[#8E4F67] dark:bg-[#252826]/30 dark:text-[#7FB8A3]", icon: CheckCircle },
+  { tier: "Good", range: "P75-P90", score: "3.5-4.4", color: "bg-[#7FB8A3]/10 text-[#8E4F67] dark:bg-[#12161D]/30 dark:text-[#7FB8A3]", icon: CheckCircle },
   { tier: "Average", range: "P50-P75", score: "2.5-3.4", color: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400", icon: MinusCircle },
   { tier: "Below Average", range: "P25-P50", score: "1.5-2.4", color: "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400", icon: ArrowDown },
   { tier: "Poor", range: "Below P25", score: "1.0-1.4", color: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400", icon: AlertTriangle },

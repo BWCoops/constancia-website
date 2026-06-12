@@ -90,7 +90,7 @@ const SEVERITY_ICON = {
 const SEVERITY_BADGE: Record<string, string> = {
   high: "bg-[#8E4F67] text-white",
   medium: "bg-[#C77A93] text-white",
-  low: "bg-[#252826]/60 text-white",
+  low: "bg-[#12161D]/60 text-white",
 };
 
 function ContentQualityContent() {
@@ -342,7 +342,7 @@ function ContentQualityContent() {
                                 <Badge className={SEVERITY_BADGE[issue.severity]}>{issue.severity}</Badge>
                                 <span className="text-xs text-muted-foreground">{issue.kind.replace(/_/g, " ")}</span>
                               </div>
-                              <div className="text-sm text-[#252826]">{issue.message}</div>
+                              <div className="text-sm text-[#12161D]">{issue.message}</div>
                               {issue.excerpt && (
                                 <div className="mt-1.5 text-xs italic text-muted-foreground bg-[#F6F3EE] rounded p-2">
                                   …{issue.excerpt}…

@@ -201,7 +201,7 @@ interface WeeklyComparison {
   };
 }
 
-const COLORS = ['#7FB8A3', '#8E4F67', '#252826', '#4ECDC4', '#45B7D1', '#FF6B6B', '#96CEB4'];
+const COLORS = ['#7FB8A3', '#8E4F67', '#12161D', '#4ECDC4', '#45B7D1', '#FF6B6B', '#96CEB4'];
 
 function TrendIndicator({ change, label }: { change: number; label: string }) {
   const isPositive = change >= 0;

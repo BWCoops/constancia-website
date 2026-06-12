@@ -111,7 +111,7 @@ const teamsStock3 = whiteLogo;
 
 // Brand colors
 const BRAND = {
-  navy: "#252826",
+  navy: "#12161D",
   cyan: "#7FB8A3",
   teal: "#8E4F67",
 };
@@ -185,7 +185,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 90,
     colorStops: [
-      { color: "#252826", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 40 },
       { color: BRAND.teal, position: 100 },
     ],
@@ -234,7 +234,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 45,
     colorStops: [
-      { color: "#252826", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 30 },
       { color: BRAND.teal, position: 70 },
       { color: BRAND.cyan, position: 100 },
@@ -252,9 +252,9 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 90,
     colorStops: [
-      { color: "#252826", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 50 },
-      { color: "#252826", position: 100 },
+      { color: "#12161D", position: 100 },
     ],
     logoPosition: "right",
     taglinePosition: "right",
@@ -286,7 +286,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 180,
     colorStops: [
-      { color: "#252826", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 70 },
       { color: BRAND.teal, position: 100 },
     ],
@@ -460,7 +460,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 90,
     colorStops: [
-      { color: "#252826", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 50 },
       { color: BRAND.teal, position: 100 },
     ],
@@ -529,7 +529,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 90,
     colorStops: [
-      { color: "#252826", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 40 },
       { color: BRAND.cyan, position: 100 },
     ],
@@ -565,7 +565,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 160,
     colorStops: [
-      { color: "#252826", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 60 },
       { color: BRAND.teal, position: 100 },
     ],
@@ -583,7 +583,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientAngle: 135,
     colorStops: [
       { color: BRAND.navy, position: 0 },
-      { color: "#252826", position: 100 },
+      { color: "#12161D", position: 100 },
     ],
     logoPosition: "center",
     taglinePosition: "center",
@@ -599,7 +599,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 180,
     colorStops: [
-      { color: "#252826", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 50 },
       { color: BRAND.teal, position: 100 },
     ],
@@ -652,7 +652,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 135,
     colorStops: [
-      { color: "#252826", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.teal, position: 50 },
       { color: BRAND.cyan, position: 100 },
     ],
@@ -704,7 +704,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 180,
     colorStops: [
-      { color: "#252826", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 70 },
       { color: BRAND.teal, position: 100 },
     ],
@@ -756,7 +756,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 180,
     colorStops: [
-      { color: "#252826", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 50 },
       { color: BRAND.teal, position: 100 },
     ],
@@ -775,7 +775,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientAngle: 135,
     colorStops: [
       { color: BRAND.navy, position: 0 },
-      { color: "#252826", position: 100 },
+      { color: "#12161D", position: 100 },
     ],
     logoPosition: "center",
     taglinePosition: "center",
@@ -809,7 +809,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 160,
     colorStops: [
-      { color: "#252826", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 60 },
       { color: BRAND.teal, position: 100 },
     ],
@@ -826,7 +826,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 45,
     colorStops: [
-      { color: "#252826", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 30 },
       { color: BRAND.teal, position: 70 },
       { color: BRAND.cyan, position: 100 },
@@ -913,7 +913,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 135,
     colorStops: [
-      { color: "#252826", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 60 },
       { color: BRAND.teal, position: 100 },
     ],
@@ -930,9 +930,9 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 90,
     colorStops: [
-      { color: "#252826", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 50 },
-      { color: "#252826", position: 100 },
+      { color: "#12161D", position: 100 },
     ],
     logoPosition: "center",
     taglinePosition: "center",
@@ -948,7 +948,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 135,
     colorStops: [
-      { color: "#252826", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 40 },
       { color: BRAND.teal, position: 85 },
       { color: BRAND.cyan, position: 100 },
@@ -966,9 +966,9 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 180,
     colorStops: [
-      { color: "#252826", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 60 },
-      { color: "#252826", position: 100 },
+      { color: "#12161D", position: 100 },
     ],
     logoPosition: "right",
     taglinePosition: "right",
@@ -1000,7 +1000,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientAngle: 90,
     colorStops: [
       { color: BRAND.navy, position: 0 },
-      { color: "#252826", position: 100 },
+      { color: "#12161D", position: 100 },
     ],
     logoPosition: "right",
     taglinePosition: "right",
@@ -1014,7 +1014,7 @@ const gradientCovers: GradientCoverConfig[] = [
     gradientStyle: "linear",
     gradientAngle: 135,
     colorStops: [
-      { color: "#252826", position: 0 },
+      { color: "#12161D", position: 0 },
       { color: BRAND.navy, position: 40 },
       { color: BRAND.teal, position: 85 },
       { color: BRAND.cyan, position: 100 },
@@ -2407,17 +2407,17 @@ function VideoAssetPreview({
   const getPreviewGradient = () => {
     switch (video.style) {
       case "abstract":
-        return "bg-gradient-to-br from-[#252826] via-[#8E4F67] to-[#7FB8A3]";
+        return "bg-gradient-to-br from-[#12161D] via-[#8E4F67] to-[#7FB8A3]";
       case "corporate":
-        return "bg-gradient-to-br from-[#252826] via-[#0a3d7a] to-[#8E4F67]";
+        return "bg-gradient-to-br from-[#12161D] via-[#0a3d7a] to-[#8E4F67]";
       case "data":
-        return "bg-gradient-to-br from-[#8E4F67] via-[#7FB8A3] to-[#252826]";
+        return "bg-gradient-to-br from-[#8E4F67] via-[#7FB8A3] to-[#12161D]";
       case "technology":
-        return "bg-gradient-to-br from-[#7FB8A3] via-[#8E4F67] to-[#252826]";
+        return "bg-gradient-to-br from-[#7FB8A3] via-[#8E4F67] to-[#12161D]";
       case "people":
         return "";
       default:
-        return "bg-gradient-to-br from-[#252826] to-[#8E4F67]";
+        return "bg-gradient-to-br from-[#12161D] to-[#8E4F67]";
     }
   };
 
@@ -2435,8 +2435,8 @@ function VideoAssetPreview({
                 alt={video.name}
                 className="absolute inset-0 w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#252826]/80 via-[#252826]/40 to-transparent" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#252826]/60 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#12161D]/80 via-[#12161D]/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#12161D]/60 via-transparent to-transparent" />
             </>
           )}
           <div className="absolute inset-0 flex items-center justify-center">
@@ -2696,7 +2696,7 @@ function LibraryTabContent() {
 
   return (
     <>
-      <Card className="bg-gradient-to-r from-[#252826] via-[#8E4F67] to-[#7FB8A3] text-white">
+      <Card className="bg-gradient-to-r from-[#12161D] via-[#8E4F67] to-[#7FB8A3] text-white">
         <CardContent className="py-6">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-4">
@@ -2943,7 +2943,7 @@ function LibraryTabContent() {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#252826] to-[#8E4F67]">
+                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#12161D] to-[#8E4F67]">
                     {typeIcons[asset.type] || <ImageIcon className="h-8 w-8 text-white/50" />}
                   </div>
                 )}
@@ -4101,7 +4101,7 @@ function MarketingAssetsContent() {
         </p>
       </div>
 
-      <Card className="bg-gradient-to-r from-[#252826] to-[#8E4F67] text-white">
+      <Card className="bg-gradient-to-r from-[#12161D] to-[#8E4F67] text-white">
         <CardContent className="py-6">
           <div className="flex items-center gap-4">
             <div className="p-3 rounded-xl bg-white/10">
@@ -4190,7 +4190,7 @@ function MarketingAssetsContent() {
         </TabsList>
 
         <TabsContent value="gradient" className="space-y-6">
-          <Card className="bg-gradient-to-r from-[#252826] via-[#8E4F67] to-[#7FB8A3] text-white">
+          <Card className="bg-gradient-to-r from-[#12161D] via-[#8E4F67] to-[#7FB8A3] text-white">
             <CardContent className="py-6">
               <div className="flex items-center gap-4">
                 <div className="p-3 rounded-xl bg-white/10">
@@ -4242,7 +4242,7 @@ function MarketingAssetsContent() {
           
           <div>
             <h3 className="font-semibold mb-4 flex items-center gap-2">
-              <Globe className="h-5 w-5 text-[#252826]" />
+              <Globe className="h-5 w-5 text-[#12161D]" />
               Website & Email
             </h3>
             <div className="grid gap-6 md:grid-cols-2">
@@ -4261,7 +4261,7 @@ function MarketingAssetsContent() {
             <CardContent className="py-6">
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-lg bg-brand-navy/10">
-                  <Palette className="h-6 w-6 text-[#252826]" />
+                  <Palette className="h-6 w-6 text-[#12161D]" />
                 </div>
                 <div>
                   <h3 className="font-medium mb-1">Your Brand Tagline</h3>
@@ -4486,7 +4486,7 @@ function MarketingAssetsContent() {
             <CardContent className="py-6">
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-lg bg-brand-navy/10">
-                  <Globe className="h-6 w-6 text-[#252826]" />
+                  <Globe className="h-6 w-6 text-[#12161D]" />
                 </div>
                 <div>
                   <h3 className="font-medium mb-1">Website Hero Banner Guidelines</h3>
@@ -4531,7 +4531,7 @@ function MarketingAssetsContent() {
         </TabsContent>
 
         <TabsContent value="videos" className="space-y-6">
-          <Card className="bg-gradient-to-r from-[#252826] via-[#8E4F67] to-[#7FB8A3] text-white">
+          <Card className="bg-gradient-to-r from-[#12161D] via-[#8E4F67] to-[#7FB8A3] text-white">
             <CardContent className="py-6">
               <div className="flex items-center gap-4">
                 <div className="p-3 rounded-xl bg-white/10">
@@ -4601,7 +4601,7 @@ function MarketingAssetsContent() {
 
           <div>
             <h3 className="font-semibold mb-4 flex items-center gap-2">
-              <Globe className="h-5 w-5 text-[#252826]" />
+              <Globe className="h-5 w-5 text-[#12161D]" />
               Website Videos
             </h3>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -4620,7 +4620,7 @@ function MarketingAssetsContent() {
             <CardContent className="py-6">
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-lg bg-brand-navy/10">
-                  <Video className="h-6 w-6 text-[#252826]" />
+                  <Video className="h-6 w-6 text-[#12161D]" />
                 </div>
                 <div>
                   <h3 className="font-medium mb-1">Video Generation Guidelines</h3>
@@ -4636,7 +4636,7 @@ function MarketingAssetsContent() {
         </TabsContent>
 
         <TabsContent value="virtual-backgrounds" className="space-y-6">
-          <Card className="bg-gradient-to-r from-[#252826] via-[#8E4F67] to-[#7FB8A3] text-white">
+          <Card className="bg-gradient-to-r from-[#12161D] via-[#8E4F67] to-[#7FB8A3] text-white">
             <CardContent className="py-6">
               <div className="flex items-center gap-4">
                 <div className="p-3 rounded-xl bg-white/10">
@@ -4671,7 +4671,7 @@ function MarketingAssetsContent() {
                       className="w-full h-full object-cover"
                     />
                     {bg.featured && (
-                      <Badge className="absolute top-2 left-2 bg-[#7FB8A3] text-[#252826]">
+                      <Badge className="absolute top-2 left-2 bg-[#7FB8A3] text-[#12161D]">
                         <Star className="h-3 w-3 mr-1" />
                         Featured
                       </Badge>
@@ -4738,7 +4738,7 @@ function MarketingAssetsContent() {
                       className="w-full h-full object-cover"
                     />
                     {bg.featured && (
-                      <Badge className="absolute top-2 left-2 bg-[#7FB8A3] text-[#252826]">
+                      <Badge className="absolute top-2 left-2 bg-[#7FB8A3] text-[#12161D]">
                         <Star className="h-3 w-3 mr-1" />
                         Featured
                       </Badge>

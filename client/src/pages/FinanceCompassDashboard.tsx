@@ -100,7 +100,7 @@ const DIMENSION_CONFIG: Record<string, {
     name: "Consolidation & Close",
     shortName: "Close",
     icon: RefreshCw,
-    color: "#252826",
+    color: "#12161D",
     description: "Financial close, consolidation, intercompany, and period-end processes",
     tooltipContent: {
       measures: "Assesses financial close efficiency, consolidation automation, intercompany eliminations, and period-end process maturity.",
