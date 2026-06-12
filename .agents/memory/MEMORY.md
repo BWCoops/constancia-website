@@ -1,3 +1,4 @@
 - [Clerk Express middleware scope](clerk-express-scope.md) — clerkMiddleware must be scoped to /api/admin + /api/auth only; global mount causes host_invalid redirects for every page in @clerk/express v2.x
 - [Cookie toggle centering](cookie-toggle-centering.md) — Label(inline)+p(block) mix inside flex rows breaks Switch vertical centering; fix with flex-col on the text wrapper and block on Label.
+- [Switch thumb positioning](switch-thumb-positioning.md) — never drive the shadcn Switch thumb with calc()/CSS-var arbitrary translate-x (won't compile); use fixed h-6 w-11 border-2 + translate-x-0/translate-x-5.
 - [Cookie components must use portal](cookie-portal.md) — CookiePreferencesIcon and CookieConsentBanner must render via createPortal(…, document.body) or framer-motion transforms break fixed positioning and kill pointer events.
