@@ -6,6 +6,7 @@ interface SEOHeadProps {
   keywords?: string[];
   ogImage?: string;
   canonicalUrl?: string;
+  noindex?: boolean;
   type?: "website" | "article" | "service" | "organization";
   article?: {
     author?: string;
@@ -77,6 +78,7 @@ export function SEOHead({
   keywords = [],
   ogImage = "https://constancia.com/og-image.png",
   canonicalUrl,
+  noindex = false,
   type = "website",
   article,
   includeOrganizationSchema = false,
@@ -102,7 +104,7 @@ export function SEOHead({
 
     updateMeta("description", description);
     updateMeta("keywords", keywords.join(", "));
-    updateMeta("robots", "index, follow");
+    updateMeta("robots", noindex ? "noindex, nofollow" : "index, follow");
     updateMeta("author", "Constancia");
 
     updateMeta("og:type", type === "article" ? "article" : "website", true);
@@ -175,7 +177,7 @@ export function SEOHead({
       const scripts = document.querySelectorAll('script[type="application/ld+json"][data-seo-head]');
       scripts.forEach(el => el.remove());
     };
-  }, [fullTitle, description, keywords, ogImage, url, type, article, includeOrganizationSchema, breadcrumbs]);
+  }, [fullTitle, description, keywords, ogImage, url, noindex, type, article, includeOrganizationSchema, breadcrumbs]);
 
   return null;
 }

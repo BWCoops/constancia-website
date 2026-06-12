@@ -37,6 +37,7 @@ const navItems: NavItem[] = [
     children: [
       { href: "/tools/epm-comparison", label: "Comparison Tools", featureKey: "comparisonTools" },
       { href: "/finance-compass", label: "FinanceCompass", featureKey: "financeCompass" },
+      { href: "/finance-compass/methodology", label: "Benchmarking Methodology", featureKey: "financeCompass" },
     ],
   },
   { href: "/blog", label: "Day to Day AI", featureKey: "blog" },

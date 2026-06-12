@@ -6,6 +6,7 @@
 
 import { useEffect, useState } from "react";
 import { ChatbotWidget } from "@/components/finance-compass/ChatbotWidget";
+import { SEOHead } from "@/components/seo-head";
 
 export default function ChatPopupPage() {
   const [assessmentId, setAssessmentId] = useState<string | undefined>();
@@ -17,17 +18,22 @@ export default function ChatPopupPage() {
     if (id) {
       setAssessmentId(id);
     }
-    
-    // Set document title
-    document.title = "Astral - Constancia AI Assistant";
   }, []);
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
-      <div className="w-full max-w-lg">
-        <ChatbotWidgetPopup assessmentId={assessmentId} />
+    <>
+      <SEOHead
+        title="Astral AI Assistant | Constancia"
+        description="Astral is the Constancia AI assistant for FinanceCompass."
+        noindex={true}
+        canonicalUrl="https://constancia.com/finance-compass/chat-popup"
+      />
+      <div className="min-h-screen bg-background flex items-center justify-center p-4">
+        <div className="w-full max-w-lg">
+          <ChatbotWidgetPopup assessmentId={assessmentId} />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

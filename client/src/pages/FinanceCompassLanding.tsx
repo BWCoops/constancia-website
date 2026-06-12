@@ -770,7 +770,8 @@ export default function FinanceCompassLanding() {
                 The diagnostic a consulting firm would charge you<br className="hidden sm:inline" /> <em className="not-italic font-normal text-brand-berry">five figures</em> to run.
               </h2>
               <p className="text-base sm:text-lg text-brand-cream/70 max-w-2xl mx-auto mb-4">
-                74 questions across 7 dimensions. AI-validated against 200+ EPM benchmarks. Done in 12 minutes. Yours, calibrated to your stack and your industry.
+                74 questions across 7 dimensions. AI-validated against 200+ EPM benchmarks. Done in 12 minutes. Yours, calibrated to your stack and your industry.{" "}
+                <Link href="/finance-compass/methodology" className="underline underline-offset-2 text-brand-cream/90 hover:text-brand-cream transition-colors">See the benchmarking methodology</Link>.
               </p>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-mint/10 border border-brand-mint/30">
                 <Zap className="h-4 w-4 text-brand-teal" />
