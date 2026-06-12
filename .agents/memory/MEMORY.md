@@ -2,6 +2,8 @@
 - [Clerk Express middleware scope](clerk-express-scope.md) — clerkMiddleware must be scoped to /api/admin + /api/auth only; global mount causes host_invalid redirects for every page in @clerk/express v2.x
 - [Admin id resolution](admin-id-resolution.md) — admin_users rows are provisioned lazily by getAdminIdFromDb (not at login); use it (not getAdminId) for any audit/admin-FK id.
 - [Production build pipeline](build-pipeline.md) — build is custom `tsx script/build.ts` (vite+esbuild→dist/index.cjs); if publish fails with ERR_MODULE_NOT_FOUND restore that file from git.
+- [Publish fails with zero build output](publish-no-build-output.md) — publish dying right after "Security Scan Complete" with no build output means .replit lost its [deployment] section; fix via deployConfig (NOT a security/scan issue).
+- [viewEnvVars under-reports secrets](viewenvvars-incomplete.md) — viewEnvVars can show a secret as absent when it's actually present at runtime; verify via browser/workflow logs before concluding it's missing.
 - [Cookie toggle centering](cookie-toggle-centering.md) — Label(inline)+p(block) mix inside flex rows breaks Switch vertical centering; fix with flex-col on the text wrapper and block on Label.
 - [Switch thumb positioning](switch-thumb-positioning.md) — never drive the shadcn Switch thumb with calc()/CSS-var arbitrary translate-x (won't compile); use fixed h-6 w-11 border-2 + translate-x-0/translate-x-5.
 - [Cookie components must use portal](cookie-portal.md) — CookiePreferencesIcon and CookieConsentBanner must render via createPortal(…, document.body) or framer-motion transforms break fixed positioning and kill pointer events.
