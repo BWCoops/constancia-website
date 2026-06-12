@@ -13,7 +13,9 @@ const RECAPTCHA_TIMEOUT_MS = 10000;
 
 // ── Key resolution ─────────────────────────────────────────────────────────────
 // Development uses _DEV keys (registered for the Replit domain).
-// Production uses the primary keys (registered for constancia.com).
+// Production uses the primary keys — these MUST be registered for the live
+// production domain constancia.io in the Google reCAPTCHA console, or the
+// client reports "Invalid domain for site key" and verification fails.
 // Once the same v2 key pair is registered for all domains, both can point to
 // the same values and the _DEV distinction can be dropped.
 const isDev = process.env.NODE_ENV === "development";

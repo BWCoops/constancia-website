@@ -4337,7 +4337,7 @@ publicRouter.post("/assessments/:id/narratives/regenerate", async (req: Request,
           try {
             const logoBase64 = getLogoTurquoise();
             const companyName = company?.name || "Your Company";
-            const resultsUrl = `${process.env.REPLIT_DEV_DOMAIN ? `https://${process.env.REPLIT_DEV_DOMAIN}` : 'https://constancia.com'}/finance-compass/results/${id}`;
+            const resultsUrl = `${process.env.REPLIT_DEV_DOMAIN ? `https://${process.env.REPLIT_DEV_DOMAIN}` : 'https://constancia.io'}/finance-compass/results/${id}`;
             
             const emailHtml = `
 <!DOCTYPE html>
@@ -4399,7 +4399,7 @@ publicRouter.post("/assessments/:id/narratives/regenerate", async (req: Request,
                 © ${new Date().getFullYear()} Constancia Group. All rights reserved.
               </p>
               <p style="color: #8E4F67; font-size: 12px; margin: 10px 0 0 0; text-align: center;">
-                <a href="https://constancia.com" style="color: #7FB8A3; text-decoration: none;">constancia.com</a>
+                <a href="https://constancia.io" style="color: #7FB8A3; text-decoration: none;">constancia.io</a>
               </p>
             </td>
           </tr>

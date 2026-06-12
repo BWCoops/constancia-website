@@ -1773,7 +1773,7 @@ describe('Google Lighthouse Performance Checks', () => {
       const indexHtml = join(process.cwd(), 'client/index.html');
       const content = readFileSync(indexHtml, 'utf-8');
       expect(content).toContain('rel="canonical"');
-      expect(content).toContain('https://constancia.com/');
+      expect(content).toContain('https://constancia.io/');
     });
 
     it('should have Open Graph tags', () => {
@@ -1800,7 +1800,7 @@ describe('Google Lighthouse Performance Checks', () => {
       expect(content).toContain('Constancia');
       expect(content).toContain('FinanceCompass');
       expect(content).toContain('EPM');
-      expect(content).toContain('https://constancia.com');
+      expect(content).toContain('https://constancia.io');
     });
 
     it('should reference llms.txt in robots.txt', () => {
@@ -1812,7 +1812,7 @@ describe('Google Lighthouse Performance Checks', () => {
     it('should have sitemap reference in robots.txt', () => {
       const robotsPath = join(process.cwd(), 'client/public/robots.txt');
       const content = readFileSync(robotsPath, 'utf-8');
-      expect(content).toContain('Sitemap: https://constancia.com/sitemap.xml');
+      expect(content).toContain('Sitemap: https://constancia.io/sitemap.xml');
     });
 
     it('should have sitemap generation service', () => {

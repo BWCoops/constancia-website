@@ -443,7 +443,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getSitemapEntries(): Promise<SitemapEntry[]> {
-    const baseUrl = "https://constancia.com";
+    const baseUrl = "https://constancia.io";
     const today = new Date().toISOString().split("T")[0];
     
     const staticEntries: SitemapEntry[] = [

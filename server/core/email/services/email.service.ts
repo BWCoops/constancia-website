@@ -191,7 +191,7 @@ export function createDefaultEmailConfig(overrides?: Partial<EmailConfig>): Emai
   return {
     senderEmail: process.env.SENDER_EMAIL || 'info@constancia.io',
     senderName: 'Constancia',
-    baseUrl: process.env.BASE_URL || 'https://constancia.com',
+    baseUrl: process.env.BASE_URL || 'https://constancia.io',
     otpExpiryMinutes: 10,
     ...overrides,
   };

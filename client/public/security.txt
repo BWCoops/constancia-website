@@ -1,6 +1,6 @@
-# https://constancia.com/.well-known/security.txt
-# https://constancia.com/security.txt
+# https://constancia.io/.well-known/security.txt
+# https://constancia.io/security.txt
 Contact: mailto:info@constancia.io
 Preferred-Languages: en
-Canonical: https://constancia.com/.well-known/security.txt
+Canonical: https://constancia.io/.well-known/security.txt
 Expires: 2027-01-01T00:00:00.000Z

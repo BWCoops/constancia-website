@@ -49,7 +49,7 @@ Use this when a single paragraph is what's asked for (LinkedIn description, part
 >
 > Built by senior practitioners with deep FTSE 100 finance transformation experience. Fixed-fee delivery, AI-augmented from day one.
 >
-> **Start with FinanceCompass — a 12-minute diagnostic that shows where your systems are disconnected. Free. constancia.com**
+> **Start with FinanceCompass — a 12-minute diagnostic that shows where your systems are disconnected. Free. constancia.io**
 
 ---
 
@@ -122,7 +122,7 @@ Use these as slide headlines or section dividers in proposals.
 ### Booth strap (visible from 20 feet)
 
 > **Connected finance intelligence.**
-> Start with the free diagnostic: constancia.com
+> Start with the free diagnostic: constancia.io
 
 ---
 
@@ -131,7 +131,7 @@ Use these as slide headlines or section dividers in proposals.
 ### Boilerplate (for press releases — bottom of release)
 
 > **About Constancia**
-> Constancia is a connected finance intelligence firm headquartered in Telford, UK. We bring disparate finance systems together — ERP, EPM, HRIS, CRM, data warehouse — so finance leaders make decisions on one source of truth. We are the official Abacum partner for mid-market FP&A and the official OneStream partner for enterprise EPM. Constancia Holdings Limited is registered in England and Wales (company number 17227112). More at constancia.com.
+> Constancia is a connected finance intelligence firm headquartered in Telford, UK. We bring disparate finance systems together — ERP, EPM, HRIS, CRM, data warehouse — so finance leaders make decisions on one source of truth. We are the official Abacum partner for mid-market FP&A and the official OneStream partner for enterprise EPM. Constancia Holdings Limited is registered in England and Wales (company number 17227112). More at constancia.io.
 
 ---
 

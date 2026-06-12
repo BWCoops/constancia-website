@@ -87,7 +87,7 @@ function tplContactFormNotification(): string {
 
 // 3. Contact email verification (sent to submitter)
 function tplContactVerification(): string {
-  const verificationLink = "https://constancia.com/api/contact/verify?token=test-token-abc123";
+  const verificationLink = "https://constancia.io/api/contact/verify?token=test-token-abc123";
   const header = generateEmailHeader({ variant: "dark" });
   const body = `
     <p style="color:${EMAIL_BRAND.darkGray};font-size:16px;margin:0 0 20px">Hi ${TEST_NAME},</p>
@@ -163,7 +163,7 @@ function tplLeadVerified(): string {
         <tr><td style="padding:4px 0;color:#5E8D7A"><strong>Timezone:</strong></td><td>Europe/London</td></tr>
         <tr><td style="padding:4px 0;color:#5E8D7A"><strong>Language:</strong></td><td>en-GB</td></tr>
         <tr><td style="padding:4px 0;color:#5E8D7A"><strong>Referrer:</strong></td><td>https://www.linkedin.com/</td></tr>
-        <tr><td style="padding:4px 0;color:#5E8D7A"><strong>Page:</strong></td><td>https://constancia.com/resources</td></tr>
+        <tr><td style="padding:4px 0;color:#5E8D7A"><strong>Page:</strong></td><td>https://constancia.io/resources</td></tr>
       </table>
     </div>`;
   return `

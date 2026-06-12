@@ -1481,7 +1481,7 @@ function buildAppendix(data: ReportData): Content[] {
             stack: [
               { text: "CONTACT CONSTANCIA", style: { fontSize: 10, bold: true, color: BRAND_COLORS.darkNavy } },
               { text: "info@constancia.io", style: { fontSize: 10, color: BRAND_COLORS.teal }, margin: [0, 4, 0, 0] },
-              { text: "https://constancia.com", style: { fontSize: 10, color: BRAND_COLORS.teal } },
+              { text: "https://constancia.io", style: { fontSize: 10, color: BRAND_COLORS.teal } },
               { text: "linkedin.com/company/constancia-group", style: { fontSize: 10, color: BRAND_COLORS.teal } },
               { text: "Blount House, Hall Court, Hall Park Way, Telford, TF3 4NQ, UK", style: { fontSize: 10, color: BRAND_COLORS.darkGray }, margin: [0, 4, 0, 0] },
             ],

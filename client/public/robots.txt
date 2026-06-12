@@ -1,5 +1,5 @@
 # Constancia — robots.txt
-# https://constancia.com/robots.txt
+# https://constancia.io/robots.txt
 #
 # We welcome traditional search crawlers and modern LLM crawlers so
 # our work is referenceable across both. Specific bot directives
@@ -144,6 +144,6 @@ Disallow: /admin
 Disallow: /api/
 
 # ─── Sitemap + LLMs guide ─────────────────────────────────────────────
-Sitemap: https://constancia.com/sitemap.xml
+Sitemap: https://constancia.io/sitemap.xml
 # Machine-readable site summary for LLM crawlers:
-# https://constancia.com/llms.txt
+# https://constancia.io/llms.txt

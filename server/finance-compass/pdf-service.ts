@@ -2804,7 +2804,7 @@ function buildNextStepsSection(doc: jsPDFType, y: number, config: PDFConfig, nar
   doc.setFontSize(10);
   doc.setTextColor(...RGB.cyan);
   doc.text("Contact Constancia to discuss your transformation journey", pageWidth / 2, y + 25, { align: "center" });
-  doc.text("info@constancia.io | www.constancia.com", pageWidth / 2, y + 33, { align: "center" });
+  doc.text("info@constancia.io | www.constancia.io", pageWidth / 2, y + 33, { align: "center" });
   
   return y + 50;
 }

@@ -23,12 +23,18 @@ siteKey: `curl -s http://localhost:5000/api/config/turnstile` vs
 2. **Key not registered for the viewing domain.** reCAPTCHA v2 keys are
    domain-locked in Google's admin console. Dev vs prod key selection keys off
    `NODE_ENV` (dev script sets `development` → `RECAPTCHA_SITE_KEY_DEV`; `start`
-   sets `production` → `RECAPTCHA_SITE_KEY`). The Replit preview (`*.replit.dev`)
-   will show this error unless the served dev key is registered for the current
-   preview domain in Google admin. Production works as long as the prod key is
-   registered for `constancia.io`. Note: in this project both keys currently
-   hold the SAME underlying value (registered for constancia.io only), so the
-   preview fails the domain check regardless.
+   sets `production` → `RECAPTCHA_SITE_KEY`). In this project both keys currently
+   hold the SAME underlying value (`6Lf-cYks…`). **CONFIRMED 2026-06-12 via a
+   live screenshot of https://constancia.io/contact:** that key is NOT registered
+   for constancia.io — the widget renders "ERROR for site owner: Invalid domain
+   for site key" and issues no token, so zero tokens ever reach server-side
+   verification (hence no verify-failure logs). The served prod siteKey is clean
+   (no whitespace), so cause #1 is ruled out. This is purely operational: the
+   owner must add `constancia.io` + `www.constancia.io` to that key's allowed
+   domains at https://www.google.com/recaptcha/admin (or mint a new v2 key pair
+   and update the RECAPTCHA_SITE_KEY/RECAPTCHA_SECRET_KEY secrets). No code change
+   fixes a domain-locked key. (Supersedes an earlier, incorrect note that this
+   key was already registered for .io.)
 
 **Why:** the error text says "domain" but cause #1 is a malformed key, not a
 domain problem — easy to misdiagnose as a Google-admin issue and waste time.

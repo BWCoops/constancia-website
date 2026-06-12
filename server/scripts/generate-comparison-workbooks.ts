@@ -377,10 +377,10 @@ async function generateWorkbook(
     '• Use the Consolidation Focus preset for complex group structures',
     '',
     'For more detailed analysis, visit:',
-    `https://constancia.com/${type}-comparison`,
+    `https://constancia.io/${type}-comparison`,
     '',
     'Contact Constancia for independent advisory:',
-    'info@constancia.io | https://constancia.com',
+    'info@constancia.io | https://constancia.io',
   ];
   
   instructions.forEach(line => {

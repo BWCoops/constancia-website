@@ -474,7 +474,7 @@ export default function FinanceCompassLanding() {
         "operatingSystem": "Web",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "GBP" },
         "description": "Finance function maturity assessment tool for CFOs and finance leaders. Benchmark across 7 dimensions and receive a personalised transformation roadmap.",
-        "url": "https://constancia.com/finance-compass"
+        "url": "https://constancia.io/finance-compass"
       }) }} />
 
       <main className="pt-16 sm:pt-20">

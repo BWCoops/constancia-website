@@ -123,7 +123,7 @@
 
 The following were verified as correctly implemented:
 
-- **CORS** — locked to explicit allow-list (`constancia.com`, `www.constancia.com`, Replit dev domain). No wildcards. Credentials allowed only to listed origins.
+- **CORS** — locked to explicit allow-list (`constancia.io`, `www.constancia.io`, Replit dev domain). No wildcards. Credentials allowed only to listed origins.
 - **HSTS** — `max-age=31536000; includeSubDomains; preload`
 - **CSP** — comprehensive custom policy covering script-src, style-src, img-src, connect-src, frame-src, frame-ancestors, object-src, worker-src, upgrade-insecure-requests, report-uri
 - **X-Content-Type-Options** — `nosniff`

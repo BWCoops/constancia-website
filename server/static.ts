@@ -3,10 +3,11 @@ import fs from "fs";
 import path from "path";
 import { createChildLogger } from "./lib/logger";
 import { storage } from "./storage";
+import { getServerFeatureFlags, isRouteEnabled } from "@shared/feature-flags";
 
 const log = createChildLogger("static");
 
-const SITE_URL = process.env.SITE_URL || "https://constancia.com";
+const SITE_URL = process.env.SITE_URL || "https://constancia.io";
 
 // Known valid frontend routes - used to return proper HTTP 404 for unknown routes
 // This prevents soft 404 issues flagged by Google Search Console
@@ -119,7 +120,7 @@ const ROUTE_METADATA: Record<string, RouteMeta> = {
   },
   "/cookies": {
     title: "Cookie Policy | Constancia",
-    description: "Cookie policy for Constancia. How we use cookies on constancia.com.",
+    description: "Cookie policy for Constancia. How we use cookies on constancia.io.",
   },
 };
 
@@ -436,7 +437,7 @@ Disallow: /*.kml
 Disallow: /wp-admin
 Disallow: /wp-login
 
-Sitemap: https://constancia.com/sitemap.xml
+Sitemap: https://constancia.io/sitemap.xml
 `);
     }
   });
@@ -475,6 +476,25 @@ Sitemap: https://constancia.com/sitemap.xml
     const template = getTemplate(distPath);
     const { slug } = req.params;
     const canonical = `${SITE_URL}/blog/${slug}`;
+
+    // Blog disabled via feature flag → treat all posts as not-found so
+    // disabled content is never served as an indexable 200 response.
+    try {
+      const flags = await getServerFeatureFlags();
+      if (!flags.blog) {
+        const notFoundHtml = injectHeadMetadata(template, {
+          title: "Article Not Found | Constancia",
+          description: "The blog article you are looking for could not be found.",
+          canonical,
+        });
+        return res.status(404).send(notFoundHtml);
+      }
+    } catch (err) {
+      log.error(
+        { err: err instanceof Error ? err : new Error(String(err)) },
+        "Feature-flag check failed in blog SSR handler",
+      );
+    }
 
     try {
       const post = await storage.getBlogPostBySlug(slug);
@@ -543,13 +563,32 @@ Sitemap: https://constancia.com/sitemap.xml
   // ── General SPA fallback with metadata injection ───────────────────────
   // Returns 404 for unknown routes (fixes soft 404 issue for Google Search Console)
   // Returns 200 for known routes, with route-specific metadata injected.
-  app.get("/*", (req, res) => {
+  app.get("/*", async (req, res) => {
     res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
 
     const template = getTemplate(distPath);
     const pathname = req.path.split("?")[0].split("#")[0];
-    const routeMeta = ROUTE_METADATA[pathname];
-    const known = isKnownRoute(req.path);
+    let known = isKnownRoute(req.path);
+
+    // Feature-flag gating: a known route whose feature is disabled is treated
+    // as not-found, so disabled pages are never served as indexable 200s.
+    // This keeps reachable pages in sync with the (already flag-filtered)
+    // sitemap — only active pages are accessible and indexable.
+    if (known) {
+      try {
+        const flags = await getServerFeatureFlags();
+        if (!isRouteEnabled(pathname, flags)) {
+          known = false;
+        }
+      } catch (err) {
+        log.error(
+          { err: err instanceof Error ? err : new Error(String(err)) },
+          "Feature-flag check failed in static route handler",
+        );
+      }
+    }
+
+    const routeMeta = known ? ROUTE_METADATA[pathname] : undefined;
 
     if (routeMeta) {
       const canonical = `${SITE_URL}${pathname === "/" ? "" : pathname}`;
@@ -559,14 +598,10 @@ Sitemap: https://constancia.com/sitemap.xml
         canonical: canonical || SITE_URL,
         ogImage: routeMeta.ogImage,
       });
-      return res.status(known ? 200 : 404).send(html);
+      return res.status(200).send(html);
     }
 
     const indexPath = path.resolve(distPath, "index.html");
-    if (known) {
-      return res.status(200).sendFile(indexPath);
-    } else {
-      return res.status(404).sendFile(indexPath);
-    }
+    return res.status(known ? 200 : 404).sendFile(indexPath);
   });
 }

@@ -183,7 +183,7 @@ async function sendScanReportEmail(summary: ScanSummary): Promise<{ success: boo
     ? `[${criticalCount > 0 ? "CRITICAL" : "WARNING"}] Constancia Weekly Content Scan Report - ${new Date().toLocaleDateString("en-GB")}`
     : `Constancia Weekly Content Scan Report - ${new Date().toLocaleDateString("en-GB")}`;
 
-  const adminBaseUrl = process.env.REPLIT_DOMAINS?.split(",")[0] || "https://constancia.com";
+  const adminBaseUrl = process.env.REPLIT_DOMAINS?.split(",")[0] || "https://constancia.io";
   
   const severeIssuesHtml = summary.severeIssues.length > 0 ? `
     <div style="background: #FEE2E2; border-left: 4px solid #DC2626; padding: 16px; margin: 16px 0; border-radius: 4px;">

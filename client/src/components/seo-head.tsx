@@ -19,7 +19,7 @@ interface SEOHeadProps {
   breadcrumbs?: Array<{ name: string; url: string }>;
 }
 
-const SITE_ORIGIN = "https://constancia.com";
+const SITE_ORIGIN = "https://constancia.io";
 
 const organizationSchema = {
   "@context": "https://schema.org",

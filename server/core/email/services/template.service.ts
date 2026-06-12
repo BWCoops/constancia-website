@@ -37,7 +37,7 @@ const DEFAULT_OTP_EXPIRY_MINUTES = 10;
 export class TemplateService implements IEmailTemplateService {
   private baseUrl: string;
 
-  constructor(baseUrl: string = 'https://constancia.com') {
+  constructor(baseUrl: string = 'https://constancia.io') {
     this.baseUrl = baseUrl;
   }
 

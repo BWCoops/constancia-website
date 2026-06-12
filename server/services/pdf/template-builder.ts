@@ -273,7 +273,7 @@ export function generateAboutSection(): string {
         Use FinanceCompass to baseline your current state, understand TCO/ROI potential, 
         and build a compelling business case for transformation.
       </p>
-      <a href="https://constancia.com/finance-compass" class="cta-link">Try FinanceCompass Free</a>
+      <a href="https://constancia.io/finance-compass" class="cta-link">Try FinanceCompass Free</a>
       <p class="cta-contact">
         For independent selection support: <a href="mailto:${CONTACT_INFO.email}">${CONTACT_INFO.email}</a> | <a href="${CONTACT_INFO.website}">${CONTACT_INFO.website}</a>
       </p>

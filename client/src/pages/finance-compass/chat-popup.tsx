@@ -26,7 +26,7 @@ export default function ChatPopupPage() {
         title="Astral AI Assistant | Constancia"
         description="Astral is the Constancia AI assistant for FinanceCompass."
         noindex={true}
-        canonicalUrl="https://constancia.com/finance-compass/chat-popup"
+        canonicalUrl="https://constancia.io/finance-compass/chat-popup"
       />
       <div className="min-h-screen bg-background flex items-center justify-center p-4">
         <div className="w-full max-w-lg">

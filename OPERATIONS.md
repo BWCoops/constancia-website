@@ -9,7 +9,7 @@ Context for future Claude Code sessions (and the human team) so we don't keep re
 | Git remote | `github.com/BWCoops/constancia-website` (branch `main`) |
 | Replit **editor** (account-gated) | `https://replit.com/t/1qg/repls/httpsconstanciaio` |
 | Replit **preview** (public, dev-server only) | `https://0e426a2a-6c24-4711-b5f0-de15f92850b1-00-gdawors48a0m.worf.replit.dev/` |
-| Production domain | `https://constancia.io` (currently **parked** — redirects to dot-map.org) |
+| Production domain | `https://constancia.io` (**live** — serves the site; this is the canonical/primary domain). `constancia.com` is a third-party **parked "for sale"** domain we do NOT control — never use it as canonical, sitemap base, OG/RSS, or CORS origin. |
 
 The editor URL is **not** something a CI-style Claude session can reach:
 - Cloudflare's bot challenge blocks fresh headless browsers (proven repeatedly — screenshot evidence in chat history)

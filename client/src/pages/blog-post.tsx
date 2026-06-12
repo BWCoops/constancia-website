@@ -779,14 +779,14 @@ export default function BlogPostPage() {
             "name": "Constancia",
             "logo": {
               "@type": "ImageObject",
-              "url": "https://constancia.com/logo.png"
+              "url": "https://constancia.io/logo.png"
             }
           },
           "datePublished": post.publishedAt,
           "dateModified": post.publishedAt,
           "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": `https://constancia.com/blog/${post.slug}`
+            "@id": `https://constancia.io/blog/${post.slug}`
           }
         })
       }} />

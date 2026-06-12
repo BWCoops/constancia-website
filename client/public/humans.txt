@@ -1,5 +1,5 @@
-# humans.txt — the people behind constancia.com
-# https://constancia.com/humans.txt
+# humans.txt — the people behind constancia.io
+# https://constancia.io/humans.txt
 
 /* TEAM */
 Founder, Constancia: Bradley Cooper

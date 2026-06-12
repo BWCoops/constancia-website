@@ -148,8 +148,8 @@ app.use(helmet({
 const ALLOWED_ORIGINS = [
   process.env.REPLIT_DEV_DOMAIN ? `https://${process.env.REPLIT_DEV_DOMAIN}` : null,
   process.env.REPL_SLUG ? `https://${process.env.REPL_SLUG}.${process.env.REPL_OWNER}.repl.co` : null,
-  'https://constancia.com',
-  'https://www.constancia.com',
+  'https://constancia.io',
+  'https://www.constancia.io',
 ].filter(Boolean) as string[];
 
 app.use((req: Request, res: Response, next: NextFunction) => {

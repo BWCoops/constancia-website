@@ -22,7 +22,7 @@ export const PDF_CONTACT_INFO = {
   companyNumber: "17227112",
   address: "Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ, United Kingdom",
   email: "info@constancia.io",
-  website: "https://constancia.com",
+  website: "https://constancia.io",
   linkedin: "linkedin.com/company/constancia-group",
 };
 

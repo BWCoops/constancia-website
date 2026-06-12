@@ -31,10 +31,10 @@ export const EMAIL_CONTACT = {
   legalName: 'Constancia Holdings Limited',
   companyNumber: '17227112',
   email: 'info@constancia.io',
-  website: 'constancia.com',
-  websiteUrl: 'https://constancia.com',
+  website: 'constancia.io',
+  websiteUrl: 'https://constancia.io',
   address: 'Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ',
-  financeCompassUrl: 'https://constancia.com/finance-compass',
+  financeCompassUrl: 'https://constancia.io/finance-compass',
 };
 
 export interface EmailHeaderOptions {

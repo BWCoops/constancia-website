@@ -51,7 +51,7 @@ export default function PrivacyPolicyPage() {
               <section className="mb-12" data-testid="section-about-policy">
                 <h2 className="text-2xl font-semibold text-foreground mb-4">About This Privacy Policy</h2>
                 <p className="text-muted-foreground mb-4">
-                  The website https://constancia.com/ (the Site) is operated by Constancia Holdings Limited ("we", "us", "our"), a company incorporated in England and Wales under company number 17227112. Our registered office is at Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ, United Kingdom.
+                  The website https://constancia.io/ (the Site) is operated by Constancia Holdings Limited ("we", "us", "our"), a company incorporated in England and Wales under company number 17227112. Our registered office is at Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ, United Kingdom.
                 </p>
                 <p className="text-muted-foreground mb-4">
                   We are committed to protecting your privacy and complying with our data protection obligations under the Data Protection Act 2018 (the DPA 2018), the UK General Data Protection Regulation 2016/679 (the UK GDPR) and any other applicable UK legislation (together, Data Protection Law).

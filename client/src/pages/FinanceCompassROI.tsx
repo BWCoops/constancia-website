@@ -37,7 +37,7 @@ export default function FinanceCompassROI() {
       <SEOHead
         title="ROI Analysis | Finance Compass | Constancia"
         description="Review your Finance Compass ROI analysis and investment case for your EPM or ERP transformation."
-        canonicalUrl="https://constancia.com/finance-compass/roi"
+        canonicalUrl="https://constancia.io/finance-compass/roi"
       />
       <div className="mb-6">
         <Button

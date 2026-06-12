@@ -1300,7 +1300,7 @@ function buildWidgetResultsEmailHtml(data: z.infer<typeof widgetEmailResultsSche
                     <p style="margin: 0 0 24px 0; font-size: 14px; color: #ffffff; line-height: 1.6;">
                       Get detailed analysis across 95+ questions with AI-powered recommendations tailored to your organisation.
                     </p>
-                    <a href="https://constancia.com/finance-compass" target="_blank" style="display: inline-block; padding: 16px 40px; background-color: #7FB8A3; color: #12161D; font-size: 16px; font-weight: 600; text-decoration: none; border-radius: 8px;">
+                    <a href="https://constancia.io/finance-compass" target="_blank" style="display: inline-block; padding: 16px 40px; background-color: #7FB8A3; color: #12161D; font-size: 16px; font-weight: 600; text-decoration: none; border-radius: 8px;">
                       Start Your Full Assessment
                     </a>
                   </td>
@@ -1323,7 +1323,7 @@ function buildWidgetResultsEmailHtml(data: z.infer<typeof widgetEmailResultsSche
                     <p style="margin: 0 0 16px 0; font-size: 13px; color: #6b7280;">
                       <a href="mailto:info@constancia.io" style="color: #8E4F67; text-decoration: none;">info@constancia.io</a>
                       &nbsp;|&nbsp;
-                      <a href="https://constancia.com" style="color: #8E4F67; text-decoration: none;">www.constancia.com</a>
+                      <a href="https://constancia.io" style="color: #8E4F67; text-decoration: none;">www.constancia.io</a>
                     </p>
                     <p style="margin: 0; font-size: 11px; color: #6b7280;">
                       © ${new Date().getFullYear()} Constancia Group. All rights reserved.

@@ -30,12 +30,12 @@ sell software; we are platform-independent advisors and implementers.
 
 ## Public pages
 
-- [Home](https://constancia.com/): Connected enterprise intelligence overview.
-- [Contact](https://constancia.com/contact): Direct line to a senior practitioner.
+- [Home](https://constancia.io/): Connected enterprise intelligence overview.
+- [Contact](https://constancia.io/contact): Direct line to a senior practitioner.
 
 ## Functional tools
 
-- [Comparison Tool](https://constancia.com/tools/epm-comparison): Independent EPM platform benchmarks across 11+ vendors and 15+ drivers (Anaplan, OneStream, Planful, Oracle, Workday Adaptive, Board, Vena, etc.).
+- [Comparison Tool](https://constancia.io/tools/epm-comparison): Independent EPM platform benchmarks across 11+ vendors and 15+ drivers (Anaplan, OneStream, Planful, Oracle, Workday Adaptive, Board, Vena, etc.).
 
 ## Partnerships
 
@@ -58,7 +58,7 @@ sell software; we are platform-independent advisors and implementers.
 - Email: info@constancia.io
 - Office: Blount House, Hall Court, Hall Park Way, Telford,
   Shropshire, TF3 4NQ, United Kingdom.
-- Website: https://constancia.com
+- Website: https://constancia.io
 
 ## Topics we have a strong point of view on
 

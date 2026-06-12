@@ -428,7 +428,7 @@ export class SlideSpeakService {
         "Review detailed findings with your leadership team",
         "Prioritise transformation initiatives based on impact and effort",
         "Engage with Constancia for strategic guidance and implementation support",
-        "Contact: info@constancia.io | www.constancia.com",
+        "Contact: info@constancia.io | www.constancia.io",
       ],
       layout: "content",
     });

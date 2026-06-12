@@ -509,7 +509,7 @@ export class DataQualityService {
     if (medium.includes("email") || source.includes("email")) {
       return "email";
     }
-    if (medium.includes("referral") || (ref && !ref.includes("constancia.com") && !ref.includes("financecompass"))) {
+    if (medium.includes("referral") || (ref && !ref.includes("constancia.io") && !ref.includes("financecompass"))) {
       return "referral";
     }
     if (source.includes("google") || source.includes("bing") || medium.includes("organic")) {
