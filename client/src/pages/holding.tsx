@@ -79,6 +79,7 @@ export default function HoldingPage() {
             width={1080}
             height={1350}
             autoPlay
+            muted
             loop
             playsInline
             controls
