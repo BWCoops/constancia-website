@@ -71,7 +71,7 @@ export function CookiePreferencesIcon() {
     <>
       <button
         onClick={() => setShowModal(true)}
-        className="fixed bottom-6 left-6 z-cookie-fab w-12 h-12 rounded-full bg-gradient-to-br from-brand-navy to-brand-teal shadow-md hover-elevate active-elevate-2 flex items-center justify-center"
+        className="fixed bottom-6 left-6 z-cookie-fab w-12 h-12 rounded-full bg-gradient-to-br from-brand-navy to-brand-teal hover-elevate active-elevate-2 flex items-center justify-center animate-cookie-float"
         aria-label="Cookie preferences"
         data-testid="button-cookie-preferences"
       >

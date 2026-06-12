@@ -2839,3 +2839,14 @@ body.is-holding-page {
 @media (prefers-reduced-motion: reduce) {
   .fc-loading__spinner { animation-duration: 2.4s; }
 }
+
+@keyframes cookie-float {
+  0%, 100% { transform: translateY(0px);    box-shadow: 0 6px 20px rgba(0,0,0,0.25); }
+  50%       { transform: translateY(-6px);  box-shadow: 0 12px 28px rgba(0,0,0,0.18); }
+}
+.animate-cookie-float {
+  animation: cookie-float 3s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-cookie-float { animation: none; }
+}
