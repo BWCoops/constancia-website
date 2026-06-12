@@ -1659,6 +1659,99 @@ div[class*="hs-chat"] {
   color: rgba(37, 40, 38, 0.75);
 }
 
+/* Article list — used in the blog hub's "Latest" panel. */
+.scrolly-articles {
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.scrolly-articles__item {
+  border-top: 1px solid rgba(37, 40, 38, 0.14);
+}
+.scrolly-articles__item:last-child {
+  border-bottom: 1px solid rgba(37, 40, 38, 0.14);
+}
+.scrolly-articles__item--skeleton {
+  padding: 18px 0;
+}
+.scrolly-articles__skeleton-title {
+  height: 18px;
+  width: 70%;
+  background: rgba(37, 40, 38, 0.08);
+  border-radius: 3px;
+  margin-bottom: 8px;
+  animation: scrolly-pulse 1.4s ease-in-out infinite;
+}
+.scrolly-articles__skeleton-meta {
+  height: 11px;
+  width: 40%;
+  background: rgba(37, 40, 38, 0.06);
+  border-radius: 3px;
+  margin-bottom: 10px;
+  animation: scrolly-pulse 1.4s ease-in-out 0.2s infinite;
+}
+.scrolly-articles__skeleton-excerpt {
+  height: 13px;
+  width: 90%;
+  background: rgba(37, 40, 38, 0.06);
+  border-radius: 3px;
+  animation: scrolly-pulse 1.4s ease-in-out 0.4s infinite;
+}
+@keyframes scrolly-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+.scrolly-articles__link {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px 0;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 150ms;
+}
+.scrolly-articles__link:hover,
+.scrolly-articles__link:focus-visible {
+  opacity: 0.75;
+  outline: none;
+}
+.scrolly-articles__title {
+  font-size: clamp(15px, 1.5vw, 17px);
+  font-weight: 500;
+  line-height: 1.3;
+  color: #12161D;
+}
+.scrolly-articles__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: rgba(37, 40, 38, 0.55);
+}
+.scrolly-articles__category {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #7FB8A3;
+}
+.scrolly-articles__date::before,
+.scrolly-articles__reading-time::before {
+  content: '·';
+  margin-right: 8px;
+  opacity: 0.5;
+}
+.scrolly-articles__excerpt {
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(37, 40, 38, 0.70);
+  max-width: 64ch;
+}
+
 /* When the wordmark returns in the contact panel, it sits a touch
    smaller than the opening hero (so it reads as a sign-off, not a
    second arrival). Scaled to roughly half the opening size. */
