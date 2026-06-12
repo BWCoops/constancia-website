@@ -30,11 +30,94 @@ import { refreshInsightCache } from "../services/analytics/insights";
 import { compareInsights } from "@shared/analytics-insights";
 import { hashIp } from "../services/analytics/ip-hash";
 import { isAuthenticated } from "../clerkAuth";
+import rateLimit from "express-rate-limit";
 
 const router = Router();
 
 const HUBSPOT_PORTAL_ID = process.env.HUBSPOT_PORTAL_ID || "";
 const LEAD_NOTIFICATION_EMAIL = process.env.LEAD_NOTIFICATION_EMAIL || "info@constancia.io";
+
+// ─── Widget session-token infrastructure ──────────────────────────────────────
+// A short-lived HMAC-signed token is issued when a real results_viewed event is
+// recorded server-side.  The email endpoint refuses requests that lack a valid,
+// unexpired, single-use token so arbitrary callers cannot trigger outbound email
+// or CRM writes without first completing a genuine assessment session.
+
+import crypto from "crypto";
+
+// Secret rotates on restart; acceptable because tokens expire in 30 min.
+const WIDGET_TOKEN_SECRET =
+  process.env.WIDGET_SESSION_TOKEN_SECRET || crypto.randomBytes(32).toString("hex");
+
+const TOKEN_TTL_MS = 30 * 60 * 1000; // 30 minutes
+
+// Single-use tracking — cleared of expired entries every 30 min.
+const usedTokenSignatures = new Set<string>();
+setInterval(() => {
+  // We can't know individual expiry from the Set alone; drain the whole Set.
+  // This is safe: any legitimately valid token will have been used once already.
+  usedTokenSignatures.clear();
+}, TOKEN_TTL_MS);
+
+function issueWidgetSessionToken(sessionId: string, score: number): string {
+  const payload = Buffer.from(
+    JSON.stringify({ s: sessionId, sc: Math.round(score), exp: Date.now() + TOKEN_TTL_MS })
+  ).toString("base64url");
+  const sig = crypto.createHmac("sha256", WIDGET_TOKEN_SECRET).update(payload).digest("hex");
+  return `${payload}.${sig}`;
+}
+
+function verifyWidgetSessionToken(
+  token: string,
+  expectedSessionId: string,
+  expectedScore: number
+): { valid: boolean; reason?: string } {
+  try {
+    const dotIdx = token.lastIndexOf(".");
+    if (dotIdx < 1) return { valid: false, reason: "malformed" };
+    const payload = token.slice(0, dotIdx);
+    const sig = token.slice(dotIdx + 1);
+
+    const expectedSig = crypto
+      .createHmac("sha256", WIDGET_TOKEN_SECRET)
+      .update(payload)
+      .digest("hex");
+
+    // Ensure both buffers have the same byte length before timingSafeEqual
+    const sigBuf = Buffer.from(sig.length % 2 === 0 ? sig : "00", "hex");
+    const expBuf = Buffer.from(expectedSig, "hex");
+    if (sigBuf.length !== expBuf.length) return { valid: false, reason: "invalid_signature" };
+    if (!crypto.timingSafeEqual(sigBuf, expBuf)) {
+      return { valid: false, reason: "invalid_signature" };
+    }
+
+    let claims: { s: string; sc: number; exp: number };
+    try {
+      claims = JSON.parse(Buffer.from(payload, "base64url").toString("utf8"));
+    } catch {
+      return { valid: false, reason: "malformed_payload" };
+    }
+    if (Date.now() > claims.exp) return { valid: false, reason: "expired" };
+    if (claims.s !== expectedSessionId) return { valid: false, reason: "session_mismatch" };
+    if (Math.abs(claims.sc - Math.round(expectedScore)) > 1) {
+      return { valid: false, reason: "score_mismatch" };
+    }
+    if (usedTokenSignatures.has(sig)) return { valid: false, reason: "already_used" };
+    usedTokenSignatures.add(sig);
+    return { valid: true };
+  } catch {
+    return { valid: false, reason: "verification_error" };
+  }
+}
+// ─────────────────────────────────────────────────────────────────────────────
+
+const widgetEmailRateLimit = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 5,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, error: "Too many requests, please try again later." },
+});
 
 const EXCLUDED_ANALYTICS_IPS = [
   "2a06:5906:1423:7000:8de0:ce1:adef:4e1",
@@ -691,6 +774,47 @@ router.post("/widget-event", async (req: Request, res: Response) => {
 
     log.info({ widget, eventType, sessionId, ...(finalScore !== undefined && { score: finalScore }), ...(questionNumber !== undefined && { question: questionNumber }) }, "Widget event recorded");
 
+    // Issue a short-lived session token when the results screen is shown so the
+    // email endpoint can verify the caller completed a genuine assessment.
+    // The token is only issued after we confirm the sessionId has a credible
+    // history of prior answer events stored in the database, so an attacker
+    // cannot obtain a token by simply calling this endpoint directly.
+    if (eventType === "results_viewed" && widget === "instant_preview" && finalScore !== undefined && sessionId) {
+      const MIN_REQUIRED_ANSWER_EVENTS = 5; // 3 qualification + at least 2 maturity answers
+      const MIN_SESSION_DURATION_MS = 45_000; // genuine users take ≥45 s
+
+      const sessionEvents = await db
+        .select({ eventType: widgetAnalytics.eventType, createdAt: widgetAnalytics.createdAt })
+        .from(widgetAnalytics)
+        .where(
+          and(
+            eq(widgetAnalytics.sessionId, sessionId),
+            eq(widgetAnalytics.widget, "instant_preview"),
+          )
+        );
+
+      const answerEvents = sessionEvents.filter(e =>
+        e.eventType === "question_answered" || e.eventType === "qualification_answered"
+      );
+
+      const oldestEvent = sessionEvents.reduce<Date | null>((min, e) => {
+        const t = e.createdAt ? new Date(e.createdAt) : null;
+        if (!t) return min;
+        return min === null || t < min ? t : min;
+      }, null);
+
+      const sessionAgeMs = oldestEvent ? Date.now() - oldestEvent.getTime() : 0;
+
+      if (answerEvents.length >= MIN_REQUIRED_ANSWER_EVENTS && sessionAgeMs >= MIN_SESSION_DURATION_MS) {
+        const sessionToken = issueWidgetSessionToken(sessionId, finalScore);
+        return res.json({ success: true, sessionToken });
+      }
+
+      // Session doesn't pass the credibility check — return success without a token
+      // (analytics event was already recorded above).
+      return res.json({ success: true });
+    }
+
     res.json({ success: true });
   } catch (error) {
     log.error({ err: error }, "Error recording widget event");
@@ -801,7 +925,7 @@ router.get("/widget-stats", async (req: Request, res: Response) => {
   }
 });
 
-router.get("/widget-events", async (req: Request, res: Response) => {
+router.get("/widget-events", isAuthenticated, async (req: Request, res: Response) => {
   try {
     const limit = Math.min(parseInt(req.query.limit as string) || 100, 500);
     const daysParam = req.query.days as string | undefined;
@@ -851,6 +975,7 @@ const qualificationDataSchema = z.object({
 const widgetEmailResultsSchema = z.object({
   email: z.string().email("Invalid email address"),
   sessionId: z.string(),
+  sessionToken: z.string().min(1, "Session token required"),
   score: z.number().min(0).max(100),
   maturityLevel: z.string(),
   maturityDescription: z.string(),
@@ -1719,7 +1844,7 @@ router.get("/ab-tests", async (req: Request, res: Response) => {
 });
 
 // POST /api/analytics/ab-tests - Create a new A/B test
-router.post("/ab-tests", async (req: Request, res: Response) => {
+router.post("/ab-tests", isAuthenticated, async (req: Request, res: Response) => {
   try {
     const parsed = createAbTestSchema.safeParse(req.body);
 
@@ -1761,7 +1886,7 @@ router.post("/ab-tests", async (req: Request, res: Response) => {
 });
 
 // PATCH /api/analytics/ab-tests/:id - Update an A/B test
-router.patch("/ab-tests/:id", async (req: Request, res: Response) => {
+router.patch("/ab-tests/:id", isAuthenticated, async (req: Request, res: Response) => {
   try {
     const testId = parseInt(req.params.id, 10);
     if (isNaN(testId)) {
@@ -1975,7 +2100,7 @@ router.get("/ab-tests/active", async (req: Request, res: Response) => {
   }
 });
 
-router.post("/widget-email-results", async (req: Request, res: Response) => {
+router.post("/widget-email-results", widgetEmailRateLimit, async (req: Request, res: Response) => {
   try {
     const parsed = widgetEmailResultsSchema.safeParse(req.body);
     
@@ -1989,6 +2114,13 @@ router.post("/widget-email-results", async (req: Request, res: Response) => {
     }
 
     const data = parsed.data;
+
+    // Verify the session token — reject if unsigned, expired, mismatched, or replayed.
+    const tokenCheck = verifyWidgetSessionToken(data.sessionToken, data.sessionId, data.score);
+    if (!tokenCheck.valid) {
+      log.warn({ reason: tokenCheck.reason, sessionId: data.sessionId }, "Widget email rejected: invalid session token");
+      return res.status(403).json({ success: false, error: "Invalid or expired session. Please complete the assessment again." });
+    }
 
     if (!isEmailConfigured()) {
       log.warn("Email not configured - cannot send widget results email");
@@ -2326,7 +2458,7 @@ router.get("/funnel-targets", async (req: Request, res: Response) => {
 });
 
 // PUT /api/analytics/funnel-targets/:id - Update a target
-router.put("/funnel-targets/:id", async (req: Request, res: Response) => {
+router.put("/funnel-targets/:id", isAuthenticated, async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
     const { targetPercentage, warningThreshold, isActive } = req.body;

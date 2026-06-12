@@ -420,11 +420,11 @@ function getBrowserFingerprint() {
   }
 }
 
-async function trackWidgetEvent(eventType: string, data: Record<string, any> = {}) {
+async function trackWidgetEvent(eventType: string, data: Record<string, any> = {}): Promise<Record<string, any> | null> {
   try {
     const fingerprint = getBrowserFingerprint();
     
-    await fetch("/api/analytics/widget-event", {
+    const res = await fetch("/api/analytics/widget-event", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -435,8 +435,11 @@ async function trackWidgetEvent(eventType: string, data: Record<string, any> = {
         fingerprint,
       }),
     });
+    if (res.ok) return await res.json();
+    return null;
   } catch (e) {
     // Silent fail for analytics
+    return null;
   }
 }
 
@@ -581,6 +584,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
   const [ctaHoverStart, setCtaHoverStart] = useState<number | null>(null);
   const [benchmarkViewed, setBenchmarkViewed] = useState(false);
   const [resultsViewed, setResultsViewed] = useState(false);
+  const [sessionToken, setSessionToken] = useState<string | null>(null);
   const [sessionStartTime] = useState(() => Date.now());
   const peerComparisonRef = useRef<HTMLDivElement>(null);
   
@@ -613,9 +617,9 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
   const abTestLoadedRef = useRef(false);
 
   // Helper to track events with A/B variant metadata - returns Promise for critical events
-  const trackWithAbVariant = async (eventType: string, data: Record<string, any> = {}): Promise<void> => {
+  const trackWithAbVariant = async (eventType: string, data: Record<string, any> = {}): Promise<Record<string, any> | null> => {
     const metadata = data.metadata || {};
-    await trackWidgetEvent(eventType, {
+    return trackWidgetEvent(eventType, {
       ...data,
       metadata: {
         ...metadata,
@@ -680,7 +684,9 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
         maturityLevel: getMaturityLabel(calculateScore()).label,
         qualificationData,
         timeToComplete: Date.now() - sessionStartTime,
-      });
+      }).then((resp) => {
+        if (resp?.sessionToken) setSessionToken(resp.sessionToken);
+      }).catch(() => {});
     }
   }, [showResults, resultsViewed, sessionId, sessionStartTime, qualificationData, abVariant, activeAbTest]);
 
@@ -930,6 +936,12 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
     const recommendationObjs = getNextStepsRecommendations(dimensionScores, qualificationData);
     const industryData = INDUSTRY_INSIGHTS[qualificationData.industry] || INDUSTRY_INSIGHTS.other;
 
+    if (!sessionToken) {
+      setEmailError("Session expired. Please refresh the page and complete the assessment again.");
+      setEmailStatus("error");
+      return;
+    }
+
     try {
       const response = await fetch("/api/analytics/widget-email-results", {
         method: "POST",
@@ -937,6 +949,7 @@ export function InstantPreview({ onStartFullAssessment, className }: InstantPrev
         body: JSON.stringify({
           email,
           sessionId,
+          sessionToken,
           score,
           maturityLevel: maturity.label,
           maturityDescription: maturity.description,
