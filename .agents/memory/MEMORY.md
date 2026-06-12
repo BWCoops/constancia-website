@@ -1,2 +1,1 @@
-- [Missing DB tables on startup](missing-db-tables.md) — 9 tables in schema weren't in DB; must create via executeSql since db:push requires TTY.
-- [Permissions-Policy bluetooth](permissions-policy.md) — Chrome rejects `bluetooth=()` in Permissions-Policy header as unrecognized; remove it.
+- [Clerk Express middleware scope](clerk-express-scope.md) — clerkMiddleware must be scoped to /api/admin + /api/auth only; global mount causes host_invalid redirects for every page in @clerk/express v2.x

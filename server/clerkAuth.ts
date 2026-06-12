@@ -18,6 +18,21 @@ import pino from "pino";
 import * as AdminSecurity from "./services/admin-security";
 import { getSession } from "./session";
 
+/**
+ * Decode the Clerk frontend API hostname from a publishable key.
+ * pk_test_<base64>$ / pk_live_<base64>$ → the hostname string.
+ * Used for diagnostic logging only.
+ */
+function clerkFrontendHost(pubKey: string): string | null {
+  try {
+    const parts = pubKey.split("_");
+    if (parts.length < 3) return null;
+    return Buffer.from(parts[2], "base64").toString("utf-8").replace(/\$$/, "");
+  } catch {
+    return null;
+  }
+}
+
 const authLog = pino({ name: "clerk-auth" });
 
 function getAuthorizedEmailsFromEnv(): string[] {
@@ -57,8 +72,6 @@ export async function setupAuth(app: Express): Promise<void> {
       "CLERK_SECRET_KEY is not set — Clerk auth disabled. " +
       "Admin routes will return 503 until the secret is added to Replit Secrets."
     );
-    // Install session middleware so req.session still works for non-admin routes,
-    // then bail out — do NOT install clerkMiddleware (it would crash without the key).
     app.use(getSession());
     app.use(["/api/admin", "/api/auth"], (_req: Request, res: Response) => {
       res.status(503).json({ error: "auth_unavailable", message: "CLERK_SECRET_KEY not configured" });
@@ -66,35 +79,37 @@ export async function setupAuth(app: Express): Promise<void> {
     return;
   }
 
-  // Replit-friendly: if only VITE_CLERK_PUBLISHABLE_KEY is set, mirror it
-  // into CLERK_PUBLISHABLE_KEY so @clerk/express picks it up automatically.
+  // Mirror CLERK_PUBLIC_KEY (Replit-managed name) → canonical names
   if (!process.env.CLERK_PUBLISHABLE_KEY && process.env.VITE_CLERK_PUBLISHABLE_KEY) {
     process.env.CLERK_PUBLISHABLE_KEY = process.env.VITE_CLERK_PUBLISHABLE_KEY;
   }
-
   if (!process.env.CLERK_PUBLISHABLE_KEY) {
-    authLog.warn("CLERK_PUBLISHABLE_KEY not set — falling back to secret-only mode (still works, but recommended to set both).");
+    authLog.warn("CLERK_PUBLISHABLE_KEY not set — falling back to secret-only mode.");
   }
 
-  // Session middleware — needed by FinanceCompass OTP flow and any other
-  // route that reads req.session.* directly. Independent of Clerk.
+  // Log the frontend host for diagnostics (decoded from publishable key)
+  const pubKey = process.env.CLERK_PUBLISHABLE_KEY || process.env.CLERK_PUBLIC_KEY || "";
+  const frontendHost = clerkFrontendHost(pubKey);
+  if (frontendHost) {
+    authLog.info({ frontendHost }, "Clerk frontend API host");
+  }
+
   app.use(getSession());
 
-  // Wrap clerkMiddleware so a stale / mismatched session cookie (e.g. left
-  // over from a previous Clerk instance, or after the publishable key
-  // rotated) clears the bad cookie and continues unauthenticated instead
-  // of crashing the request with a 500.
+  // Apply clerkMiddleware ONLY to the API routes that actually need token
+  // validation. Applying it globally causes server-side handshake redirects
+  // for every page request (including public pages), which trips `host_invalid`
+  // on Clerk's handshake endpoint when the workspace domain isn't yet registered
+  // as a trusted origin. The /admin/login page uses the client-side <SignIn />
+  // component exclusively — it doesn't need server Clerk middleware.
   const _clerkMw = clerkMiddleware();
-  app.use((req: Request, res: Response, next: NextFunction) => {
+  const clerkHandler = (req: Request, res: Response, next: NextFunction): void => {
     _clerkMw(req, res, (err?: unknown) => {
       if (err) {
         authLog.warn(
           { reason: (err as Error).message },
           "Clerk middleware error — clearing stale session cookies and continuing unauthenticated"
         );
-        // Clear EVERY cookie Clerk might own. Different Clerk versions and
-        // instance modes (dev vs prod) use different cookie names; nuke them
-        // all so the next request starts clean.
         for (const name of [
           "__session",
           "__client_uat",
@@ -110,12 +125,11 @@ export async function setupAuth(app: Express): Promise<void> {
       }
       next();
     });
-  });
+  };
+  app.use(["/api/admin", "/api/auth"], clerkHandler);
 
-  // Public config endpoint — the client fetches its Clerk publishable key
-  // from here on boot if it's not present in the build-time env (i.e. if
-  // VITE_CLERK_PUBLISHABLE_KEY wasn't set when Vite did its env transform).
-  // The publishable key is safe to expose; the secret is never returned.
+  // Public config endpoint — client fetches publishable key + proxyUrl on
+  // boot when VITE_CLERK_PUBLISHABLE_KEY isn't available at build time.
   app.get("/api/config/clerk", (_req: Request, res: Response) => {
     res.json({
       publishableKey:

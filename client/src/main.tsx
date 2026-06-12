@@ -192,6 +192,7 @@ history.replaceState = function(...args: Parameters<typeof originalReplaceState>
 // Vite never picked it up.
 async function bootstrap() {
   let key = CLERK_PUBLISHABLE_KEY;
+
   if (!key) {
     try {
       const res = await fetch("/api/config/clerk", { credentials: "include" });
