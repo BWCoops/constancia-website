@@ -110,7 +110,7 @@ export async function getSystemHealth(): Promise<SystemHealth> {
     },
     {
       name: "Email Service",
-      status: process.env.MS_GRAPH_CLIENT_ID ? "operational" as const : "degraded" as const,
+      status: process.env.GMAIL_APP_PASSWORD ? "operational" as const : "degraded" as const,
       lastCheck: new Date().toISOString(),
     },
     {

@@ -6,13 +6,10 @@ import { SEO_TRENDS_2025 } from "@shared/seo-trends";
 import { eq, desc } from "drizzle-orm";
 import { scanBlogPost, scanForPlagiarism } from "./winston-ai";
 import { createChildLogger } from "../lib/logger";
+import { sendEmailViaGraph } from "./ms-graph-email";
 
 const log = createChildLogger("weekly-scan");
 
-const MS_GRAPH_CLIENT_ID = process.env.MS_GRAPH_CLIENT_ID;
-const MS_GRAPH_CLIENT_SECRET = process.env.MS_GRAPH_CLIENT_SECRET;
-const MS_GRAPH_TENANT_ID = process.env.MS_GRAPH_TENANT_ID;
-const SENDER_EMAIL = "info@constancia.io";
 const ADMIN_EMAILS = ["grant.vanwyk@1qg.com", "info@constancia.io"];
 
 interface ScanSummary {
@@ -170,45 +167,7 @@ function detectSevereIssues(
   return issues;
 }
 
-async function getGraphAccessToken(): Promise<string | null> {
-  if (!MS_GRAPH_CLIENT_ID || !MS_GRAPH_CLIENT_SECRET || !MS_GRAPH_TENANT_ID) {
-    log.warn("Microsoft Graph credentials not configured");
-    return null;
-  }
-
-  try {
-    const tokenUrl = `https://login.microsoftonline.com/${MS_GRAPH_TENANT_ID}/oauth2/v2.0/token`;
-    const response = await fetch(tokenUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({
-        grant_type: "client_credentials",
-        client_id: MS_GRAPH_CLIENT_ID,
-        client_secret: MS_GRAPH_CLIENT_SECRET,
-        scope: "https://graph.microsoft.com/.default",
-      }),
-    });
-
-    if (!response.ok) {
-      log.error({ statusCode: response.status }, "Failed to get Graph access token");
-      return null;
-    }
-
-    const data = await response.json();
-    return data.access_token;
-  } catch (error: any) {
-    log.error({ err: new Error(error.message) }, "Error getting Graph token");
-    return null;
-  }
-}
-
 async function sendScanReportEmail(summary: ScanSummary): Promise<{ success: boolean; error?: string }> {
-  const accessToken = await getGraphAccessToken();
-  if (!accessToken) {
-    const error = "Cannot send email - Microsoft Graph credentials not configured or token acquisition failed";
-    log.warn(error);
-    return { success: false, error };
-  }
 
   const hasSevereIssues = summary.severeIssues.length > 0;
   const criticalCount = summary.severeIssues.filter(i => i.severity === "critical").length;
@@ -376,44 +335,18 @@ async function sendScanReportEmail(summary: ScanSummary): Promise<{ success: boo
 
   let successCount = 0;
   let lastError = "";
-  
+
   for (const email of ADMIN_EMAILS) {
     try {
-      const response = await fetch(
-        `https://graph.microsoft.com/v1.0/users/${SENDER_EMAIL}/sendMail`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            message: {
-              subject,
-              body: { contentType: "HTML", content: htmlContent },
-              toRecipients: [{ emailAddress: { address: email } }],
-              internetMessageHeaders: [
-                { name: "X-Hide-Contact-Card", value: "true" },
-                { name: "X-Originating-Ip", value: "[]" }
-              ]
-            },
-          }),
-        }
-      );
-
-      if (response.ok) {
-        log.info({ email: redactEmail(email) }, "Scan report email sent");
-        successCount++;
-      } else {
-        lastError = `Failed to send email to ${email}: ${response.status}`;
-        log.error({ email: redactEmail(email), statusCode: response.status }, "Failed to send email");
-      }
+      await sendEmailViaGraph(email, subject, htmlContent);
+      log.info({ email: redactEmail(email) }, "Scan report email sent");
+      successCount++;
     } catch (error: any) {
       lastError = `Error sending email to ${email}: ${error.message}`;
       log.error({ err: new Error(error.message), email: redactEmail(email) }, "Error sending email");
     }
   }
-  
+
   if (successCount > 0) {
     return { success: true };
   }
@@ -421,14 +354,8 @@ async function sendScanReportEmail(summary: ScanSummary): Promise<{ success: boo
 }
 
 async function sendImmediateAlert(issue: SevereIssue): Promise<void> {
-  const accessToken = await getGraphAccessToken();
-  if (!accessToken) {
-    log.warn({ title: issue.title }, "Cannot send immediate alert - no access token");
-    return;
-  }
-
   const subject = `[URGENT] ${issue.issueType === 'high_plagiarism' ? 'Plagiarism' : 'Content Issue'} Detected - ${issue.title}`;
-  
+
   const htmlContent = `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto;">
       <div style="background: #DC2626; padding: 16px; border-radius: 8px 8px 0 0;">
@@ -448,28 +375,7 @@ async function sendImmediateAlert(issue: SevereIssue): Promise<void> {
 
   for (const email of ADMIN_EMAILS) {
     try {
-      await fetch(
-        `https://graph.microsoft.com/v1.0/users/${SENDER_EMAIL}/sendMail`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            message: {
-              subject,
-              body: { contentType: "HTML", content: htmlContent },
-              toRecipients: [{ emailAddress: { address: email } }],
-              importance: "high",
-              internetMessageHeaders: [
-                { name: "X-Hide-Contact-Card", value: "true" },
-                { name: "X-Originating-Ip", value: "[]" }
-              ]
-            },
-          }),
-        }
-      );
+      await sendEmailViaGraph(email, subject, htmlContent);
       log.info({ email: redactEmail(email), title: issue.title }, "Immediate alert sent");
     } catch (error: any) {
       log.error({ err: new Error(error.message) }, "Failed to send immediate alert");

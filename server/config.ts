@@ -26,10 +26,6 @@ const envSchema = z.object({
   
   WINSTON_AI_API_KEY: z.string().optional(),
   
-  MS_GRAPH_CLIENT_ID: z.string().optional(),
-  MS_GRAPH_CLIENT_SECRET: z.string().optional(),
-  MS_GRAPH_TENANT_ID: z.string().optional(),
-  
   HUBSPOT_ACCESS_TOKEN: z.string().optional(),
   
   RECAPTCHA_SECRET_KEY: z.string().optional(),
@@ -103,10 +99,6 @@ export function hasAnthropic(): boolean {
 
 export function hasPerplexity(): boolean {
   return !!config.PERPLEXITY_API_KEY;
-}
-
-export function hasMSGraph(): boolean {
-  return !!(config.MS_GRAPH_CLIENT_ID && config.MS_GRAPH_CLIENT_SECRET && config.MS_GRAPH_TENANT_ID);
 }
 
 export function hasHubSpot(): boolean {

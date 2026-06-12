@@ -48,9 +48,6 @@ interface ConfigWarning {
 }
 
 const CONFIG_CHECKS: ConfigWarning[] = [
-  { key: "MS_GRAPH_CLIENT_ID", required: true, description: "Microsoft Graph API (email sending)" },
-  { key: "MS_GRAPH_CLIENT_SECRET", required: true, description: "Microsoft Graph API (email sending)" },
-  { key: "MS_GRAPH_TENANT_ID", required: true, description: "Microsoft Graph API (email sending)" },
   { key: "SESSION_SECRET", required: true, description: "Session security and encryption" },
   { key: "PII_ENCRYPTION_KEY", required: true, description: "Field-level encryption for GDPR compliance" },
   { key: "HUBSPOT_ACCESS_TOKEN", required: false, description: "CRM lead sync (optional)" },
