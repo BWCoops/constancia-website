@@ -132,7 +132,6 @@ import { useFeatureFlags } from "@/lib/feature-flags";
 import { Footer } from "@/components/footer";
 import { EPM_SCORING, affordabilityPenalty, normaliseWeights, clamp } from "@shared/scoring-engine";
 import { SEOHead } from "@/components/seo-head";
-import { CookiePreferencesIcon } from "@/components/cookie-consent";
 import { DownloadGateModal } from "@/components/download-gate-modal";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -6708,7 +6707,6 @@ export default function TechComparisonPage() {
       </main>
 
       <Footer />
-      <CookiePreferencesIcon />
     </div>
   );
 }

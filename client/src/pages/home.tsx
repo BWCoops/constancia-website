@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { LandingHero } from "@/components/LandingHero";
 import { Footer } from "@/components/footer";
-import { CookiePreferencesIcon } from "@/components/cookie-consent";
 import { SEOHead } from "@/components/seo-head";
 import { trackPageView, setupScrollTracking, setupDwellTimeTracking } from "@/lib/funnel-analytics";
 
@@ -59,7 +58,6 @@ export default function Home() {
       </main>
 
       <Footer />
-      <CookiePreferencesIcon />
     </div>
   );
 }
