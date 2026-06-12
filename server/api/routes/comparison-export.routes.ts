@@ -1,5 +1,6 @@
 import { Router, Request, Response } from "express";
 import { z } from "zod";
+import rateLimit from "express-rate-limit";
 import { generatePDFFromRawHTML } from "../../services/pdf";
 import { generateComparisonHTML } from "../../services/pdf/comparison-template";
 import { createChildLogger } from "../../lib/logger";
@@ -7,6 +8,14 @@ import { createChildLogger } from "../../lib/logger";
 const log = createChildLogger("comparison-export");
 
 const router = Router();
+
+const pdfExportLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15-minute window
+  max: 5,                    // 5 exports per IP per window
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: "Too many export requests. Please try again later." },
+});
 
 const PlatformSchema = z.object({
   id: z.string(),
@@ -67,12 +76,12 @@ const ExportDataSchema = z.object({
   chartImages: z.any().optional(),
 }).passthrough();
 
-router.post("/comparison/export-pdf", async (req: Request, res: Response) => {
+router.post("/comparison/export-pdf", pdfExportLimiter, async (req: Request, res: Response) => {
   try {
-    // Extend timeout to prevent 502 errors during PDF generation
-    // Adobe PDF Services can take 20-30 seconds
-    req.setTimeout(120000); // 2 minutes
-    res.setTimeout(120000);
+    // Adobe PDF Services can take 20-30 seconds; cap at 60s to limit
+    // resource occupation per request
+    req.setTimeout(60000); // 1 minute
+    res.setTimeout(60000);
     
     // Set headers early to prevent proxy timeout
     res.setHeader("X-Accel-Buffering", "no"); // Disable nginx buffering if present
