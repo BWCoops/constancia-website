@@ -13,7 +13,7 @@ import {
   EMAIL_CONTACT,
 } from '../../../core/email/components';
 import { createChildLogger } from '../../../lib/logger';
-import { sendEmailViaGraph, SENDER_EMAIL } from '../../../services/ms-graph-email';
+import { sendEmail, SENDER_EMAIL } from '../../../services/email-sender';
 import { escapeHtml } from '../../../utils/html-escape';
 
 const log = createChildLogger('email-helpers');
@@ -77,7 +77,7 @@ export async function sendContactFormNotification(submission: {
       </div>
     `);
 
-    await sendEmailViaGraph(
+    await sendEmail(
       SENDER_EMAIL,
       `New Contact Form Submission from ${submission.firstName} ${submission.lastName}`,
       html
@@ -114,7 +114,7 @@ export async function sendContactVerificationEmail(to: string, firstName: string
       generateEmailFooter({ variant: 'dark', showFinanceCompass: false })
     );
 
-    await sendEmailViaGraph(to, 'Your Constancia verification code', htmlContent);
+    await sendEmail(to, 'Your Constancia verification code', htmlContent);
 
     return true;
   } catch (error) {
@@ -141,7 +141,7 @@ export async function sendOtpEmail(email: string, firstName: string, otp: string
     
     const footer = generateEmailFooter({ variant: 'dark', showFinanceCompass: true });
     
-    await sendEmailViaGraph(
+    await sendEmail(
       email,
       "Your Constancia Resource Access Code",
       generateEmailWrapper(header, body, footer)
@@ -232,7 +232,7 @@ export async function sendLeadVerificationNotification(lead: {
       </table>
     `;
 
-    await sendEmailViaGraph(
+    await sendEmail(
       SENDER_EMAIL,
       `New Verified Lead: ${lead.firstName} ${lead.lastName} from ${lead.company}`,
       `

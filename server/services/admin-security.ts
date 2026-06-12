@@ -16,7 +16,7 @@ import { eq, and, gt, isNull, or, lt, ne } from "drizzle-orm";
 import crypto from "crypto";
 import { authenticator } from "otplib";
 import * as QRCode from "qrcode";
-import { sendEmailViaGraph, SENDER_EMAIL, isEmailConfigured } from "./ms-graph-email";
+import { sendEmail, SENDER_EMAIL, isEmailConfigured } from "./email-sender";
 import {
   EMAIL_BRAND,
   generateEmailHeader,
@@ -92,7 +92,7 @@ export async function sendTestEmail(toEmail: string): Promise<{ success: boolean
   );
 
   try {
-    await sendEmailViaGraph({ to: toEmail, subject: "[Constancia] Email Configuration Test", htmlContent });
+    await sendEmail({ to: toEmail, subject: "[Constancia] Email Configuration Test", htmlContent });
     log.info({ toEmail: redactEmail(toEmail) }, "Test email sent successfully");
     return { success: true, message: `Test email sent successfully to ${toEmail}` };
   } catch (error: any) {
@@ -470,7 +470,7 @@ export async function requestEmergencyAccess(
   for (const admin of admins) {
     if (!admin.email) continue;
     try {
-      await sendEmailViaGraph({
+      await sendEmail({
         to: admin.email,
         subject: `[Constancia Admin] EMERGENCY ACCESS REQUESTED by ${requestedBy}`,
         htmlContent,
@@ -571,7 +571,7 @@ export async function sendLoginNotification(
   for (const admin of admins) {
     if (!admin.email) continue;
     try {
-      await sendEmailViaGraph({
+      await sendEmail({
         to: admin.email,
         subject: `[Constancia Admin] Login Alert: ${adminName}`,
         htmlContent,

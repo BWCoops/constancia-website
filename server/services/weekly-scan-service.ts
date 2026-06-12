@@ -6,7 +6,7 @@ import { SEO_TRENDS_2025 } from "@shared/seo-trends";
 import { eq, desc } from "drizzle-orm";
 import { scanBlogPost, scanForPlagiarism } from "./winston-ai";
 import { createChildLogger } from "../lib/logger";
-import { sendEmailViaGraph } from "./ms-graph-email";
+import { sendEmail } from "./email-sender";
 import {
   EMAIL_BRAND,
   generateNotificationHeader,
@@ -348,7 +348,7 @@ async function sendScanReportEmail(summary: ScanSummary): Promise<{ success: boo
 
   for (const email of ADMIN_EMAILS) {
     try {
-      await sendEmailViaGraph(email, subject, htmlContent);
+      await sendEmail(email, subject, htmlContent);
       log.info({ email: redactEmail(email) }, "Scan report email sent");
       successCount++;
     } catch (error: any) {
@@ -385,7 +385,7 @@ async function sendImmediateAlert(issue: SevereIssue): Promise<void> {
 
   for (const email of ADMIN_EMAILS) {
     try {
-      await sendEmailViaGraph(email, subject, htmlContent);
+      await sendEmail(email, subject, htmlContent);
       log.info({ email: redactEmail(email), title: issue.title }, "Immediate alert sent");
     } catch (error: any) {
       log.error({ err: new Error(error.message) }, "Failed to send immediate alert");

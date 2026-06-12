@@ -6,7 +6,7 @@
 
 import type { Request } from "express";
 import crypto from "crypto";
-import { sendEmailViaGraph } from "../services/ms-graph-email";
+import { sendEmail } from "../services/email-sender";
 import { createChildLogger } from "../lib/logger";
 import {
   EMAIL_BRAND,
@@ -192,7 +192,7 @@ export async function sendFcOtpEmail(email: string, firstName: string, otp: stri
       generateEmailFooter({ variant: 'dark', showFinanceCompass: false })
     );
 
-    await sendEmailViaGraph({
+    await sendEmail({
       to: email,
       subject: "Your FinanceCompass Verification Code",
       htmlContent,

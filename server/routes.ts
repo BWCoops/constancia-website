@@ -52,7 +52,7 @@ import {
 } from "@shared/feature-flags";
 import { reloadFeatureFlags } from "./middleware/feature-flags";
 
-import { sendEmailViaGraph, SENDER_EMAIL, isEmailConfigured } from "./services/ms-graph-email";
+import { sendEmail, SENDER_EMAIL, isEmailConfigured } from "./services/email-sender";
 import {
   EMAIL_BRAND,
   EMAIL_CONTACT,
@@ -203,7 +203,7 @@ async function sendLeadVerificationNotification(lead: {
       </div>
     `);
 
-    await sendEmailViaGraph(
+    await sendEmail(
       SENDER_EMAIL,
       `New Verified Lead: ${lead.firstName} ${lead.lastName} from ${lead.company}`,
       html
@@ -255,7 +255,7 @@ async function sendContactFormNotification(submission: {
       </div>
     `);
 
-    await sendEmailViaGraph(
+    await sendEmail(
       SENDER_EMAIL,
       `New Contact Form Submission from ${submission.firstName} ${submission.lastName}`,
       html
@@ -286,7 +286,7 @@ async function sendOtpEmail(email: string, firstName: string, otp: string): Prom
       generateEmailFooter()
     );
 
-    await sendEmailViaGraph(
+    await sendEmail(
       email,
       "Your Constancia Resource Access Code",
       html
@@ -331,7 +331,7 @@ async function sendContactVerificationEmail(to: string, firstName: string, token
       generateEmailFooter()
     );
 
-    await sendEmailViaGraph(
+    await sendEmail(
       to,
       `Verify your email - Constancia Contact`,
       html
@@ -900,7 +900,7 @@ export async function registerRoutes(
           </div>
         `);
 
-        await sendEmailViaGraph(
+        await sendEmail(
           SENDER_EMAIL,
           `New Talent Community Submission: ${parsed.firstName} ${parsed.lastName}`,
           talentHtml

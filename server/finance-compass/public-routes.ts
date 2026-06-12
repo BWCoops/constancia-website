@@ -51,7 +51,7 @@ import { getServerFeatureFlags } from "@shared/feature-flags";
 import { generateOtp, hashOtp } from "../storage";
 import { verifyTurnstileToken, getTurnstileSiteKey, isTurnstileConfigured } from "../services/turnstile";
 import { getAuth, clerkClient } from "@clerk/express";
-import { sendEmailViaGraph } from "../services/ms-graph-email";
+import { sendEmail } from "../services/email-sender";
 import { syncLeadToHubSpot, sendLeadVerificationNotification } from "../api/routes/shared/email-helpers";
 import {
   runAssessmentAnalysis,
@@ -967,7 +967,7 @@ publicRouter.post("/verify-otp", checkBetaAccessByContactIdMiddleware, async (re
             ? priorities.join(", ") 
             : "None specified";
             
-          await sendEmailViaGraph({
+          await sendEmail({
             to: "info@constancia.io",
             subject: `New FinanceCompass Lead: ${contact.firstName} ${contact.lastName} from ${companyName}`,
             htmlContent: `
@@ -2641,7 +2641,7 @@ async function runAnalysisAsync(
           </div>
         `;
         
-        await sendEmailViaGraph({
+        await sendEmail({
           to: contact.email,
           subject: `Your FinanceCompass ${tierName} Results Are Ready`,
           htmlContent,
@@ -4323,7 +4323,7 @@ publicRouter.post("/assessments/:id/narratives/regenerate", async (req: Request,
 </body>
 </html>`;
             
-            await sendEmailViaGraph({
+            await sendEmail({
               to: contact.email,
               subject: "Your FinanceCompass AI Report is Ready",
               htmlContent: emailHtml,

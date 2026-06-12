@@ -1,4 +1,4 @@
-// Email Service — sends via Gmail SMTP using a Gmail App Password.
+// Email sender — Gmail SMTP via nodemailer.
 
 import nodemailer from "nodemailer";
 import { createChildLogger } from "../lib/logger";
@@ -35,9 +35,9 @@ export interface SendEmailOptions {
   saveToSentItems?: boolean;
 }
 
-export async function sendEmailViaGraph(options: SendEmailOptions): Promise<void>;
-export async function sendEmailViaGraph(to: string, subject: string, htmlContent: string): Promise<void>;
-export async function sendEmailViaGraph(
+export async function sendEmail(options: SendEmailOptions): Promise<void>;
+export async function sendEmail(to: string, subject: string, htmlContent: string): Promise<void>;
+export async function sendEmail(
   optionsOrTo: SendEmailOptions | string,
   subject?: string,
   htmlContent?: string

@@ -11,7 +11,7 @@ const TEST_RECIPIENT = "info@constancia.io";
 const TEST_NAME      = "Bradley";
 const SENDER         = "info@constancia.io";
 
-import { sendEmailViaGraph } from "../services/ms-graph-email";
+import { sendEmail } from "../services/email-sender";
 import {
   generateEmailHeader,
   generateEmailFooter,
@@ -29,7 +29,7 @@ import {
 async function send(label: string, subject: string, html: string): Promise<boolean> {
   process.stdout.write(`  Sending: ${label.padEnd(38)}`);
   try {
-    await sendEmailViaGraph({ to: TEST_RECIPIENT, subject, htmlContent: html });
+    await sendEmail({ to: TEST_RECIPIENT, subject, htmlContent: html });
     console.log("✓");
     return true;
   } catch (err) {

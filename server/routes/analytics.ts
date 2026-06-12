@@ -6,7 +6,7 @@ import { db } from "../db";
 const log = createChildLogger("analytics");
 import { widgetAnalytics, widgetAbTests, abTestVariantSchema, pageAnalytics, funnelTargets, insertPageAnalyticsSchema, analyticsInsights } from "@shared/schema";
 import { desc, gte, sql, eq, and, isNull, count, avg, between, lte, asc } from "drizzle-orm";
-import { sendEmailViaGraph, isEmailConfigured } from "../services/ms-graph-email";
+import { sendEmail, isEmailConfigured } from "../services/email-sender";
 import {
   EMAIL_BRAND,
   generateNotificationHeader,
@@ -414,7 +414,7 @@ async function sendWidgetLeadNotification(data: {
     </div>
   `);
 
-  await sendEmailViaGraph({
+  await sendEmail({
     to: LEAD_NOTIFICATION_EMAIL,
     subject: `New Widget Lead: ${displayName} (${data.score}% - ${data.maturityLevel})`,
     htmlContent: emailHtml,
@@ -2008,7 +2008,7 @@ router.post("/widget-email-results", async (req: Request, res: Response) => {
     fs.writeFileSync(debugPath, htmlContent);
     log.debug({ debugPath }, "Email HTML saved for debugging");
 
-    await sendEmailViaGraph({
+    await sendEmail({
       to: data.email,
       subject,
       htmlContent,

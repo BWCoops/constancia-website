@@ -139,82 +139,58 @@ router.post("/", requireContact, async (req: Request, res: Response) => {
     const validatedData = insertContactSubmissionSchema.parse(sanitizedContactData);
     const submission = await storage.createContactSubmission(validatedData);
     
-    const integrationPromises: Promise<any>[] = [];
-    
-    integrationPromises.push(
-      sendContactFormNotification({
-        firstName: validatedData.firstName,
-        lastName: validatedData.lastName,
-        email: validatedData.email,
-        company: validatedData.company || "Not provided",
-        jobTitle: validatedData.jobTitle || "Not provided",
-        message: validatedData.message,
-        phone: validatedData.phone || undefined,
-      }).then(async (emailSent) => {
+    // Generate and store OTP before responding so the token is in the DB
+    // when the user enters the code. Email is fired in background.
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const tokenKey = `${validatedData.email.toLowerCase()}|${otp}`;
+    const otpExpiresAt = new Date(Date.now() + 10 * 60 * 1000);
+
+    await storage.createEmailVerificationToken({
+      contactSubmissionId: submission.id,
+      token: tokenKey,
+      expiresAt: otpExpiresAt,
+    });
+
+    // Fire background tasks (email + integrations) without blocking the response
+    sendContactVerificationEmail(validatedData.email, validatedData.firstName, otp)
+      .then((sent) => {
+        if (sent) {
+          log.info({ email: redactEmail(validatedData.email) }, "Contact verification OTP sent");
+        } else {
+          log.error({ email: redactEmail(validatedData.email) }, "Failed to send contact verification OTP");
+        }
+      })
+      .catch((err) => log.error({ err }, "Contact verification OTP error"));
+
+    sendContactFormNotification({
+      firstName: validatedData.firstName,
+      lastName: validatedData.lastName,
+      email: validatedData.email,
+      company: validatedData.company || "Not provided",
+      jobTitle: validatedData.jobTitle || "Not provided",
+      message: validatedData.message,
+      phone: validatedData.phone || undefined,
+    })
+      .then(async (emailSent) => {
         if (emailSent) {
           await storage.updateContactSubmissionStatus(submission.id, { emailSent: true });
         }
-        return { type: "email", success: emailSent };
-      }).catch((err) => {
-        log.error({ err }, "Email notification error");
-        return { type: "email", success: false, error: err };
       })
-    );
-    
-    integrationPromises.push(
-      syncLeadToHubSpot({
-        firstName: validatedData.firstName,
-        lastName: validatedData.lastName,
-        email: validatedData.email,
-        company: validatedData.company || "",
-        jobTitle: validatedData.jobTitle || "",
-      }).then(async (result) => {
+      .catch((err) => log.error({ err }, "Email notification error"));
+
+    syncLeadToHubSpot({
+      firstName: validatedData.firstName,
+      lastName: validatedData.lastName,
+      email: validatedData.email,
+      company: validatedData.company || "",
+      jobTitle: validatedData.jobTitle || "",
+    })
+      .then(async (result) => {
         if (result.success) {
           await storage.updateContactSubmissionStatus(submission.id, { hubspotSynced: true });
         }
-        return { type: "hubspot", ...result };
-      }).catch((err) => {
-        log.error({ err }, "HubSpot sync error");
-        return { type: "hubspot", success: false, error: err };
       })
-    );
-    
-    Promise.allSettled(integrationPromises).then((results) => {
-      log.info({ results: results.map(r => r.status === "fulfilled" ? r.value : r.reason) }, "Contact form integrations completed");
-    });
-    
-    integrationPromises.push(
-      (async () => {
-        try {
-          const otp = Math.floor(100000 + Math.random() * 900000).toString();
-          const tokenKey = `${validatedData.email.toLowerCase()}|${otp}`;
-          const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
-
-          await storage.createEmailVerificationToken({
-            contactSubmissionId: submission.id,
-            token: tokenKey,
-            expiresAt,
-          });
-
-          const emailSent = await sendContactVerificationEmail(
-            validatedData.email,
-            validatedData.firstName,
-            otp
-          );
-
-          if (emailSent) {
-            log.info({ email: redactEmail(validatedData.email) }, "Contact verification OTP sent");
-          } else {
-            log.error({ email: redactEmail(validatedData.email) }, "Failed to send contact verification OTP");
-          }
-
-          return { type: "verification-email", success: emailSent };
-        } catch (err) {
-          log.error({ err }, "Contact verification OTP error");
-          return { type: "verification-email", success: false, error: err };
-        }
-      })()
-    );
+      .catch((err) => log.error({ err }, "HubSpot sync error"));
 
     res.json({
       success: true,

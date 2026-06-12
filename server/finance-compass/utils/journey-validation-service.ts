@@ -15,7 +15,7 @@
 import OpenAI from "openai";
 import { createChildLogger } from "../../lib/logger";
 import { getOpenAIConfig } from "../../config";
-import { sendEmailViaGraph, SENDER_EMAIL } from "../../services/ms-graph-email";
+import { sendEmail, SENDER_EMAIL } from "../../services/email-sender";
 import { escapeHtml } from "../../utils/html-escape";
 import {
   EMAIL_BRAND,
@@ -675,7 +675,7 @@ await storage.fcAssessments.update("${validationResult.assessmentId}", {
 
   try {
     for (const recipient of ADMIN_EMAIL_RECIPIENTS) {
-      await sendEmailViaGraph({
+      await sendEmail({
         to: recipient,
         subject: `[ALERT] FinanceCompass Validation Issues - ${validationResult.assessmentId}`,
         htmlContent,

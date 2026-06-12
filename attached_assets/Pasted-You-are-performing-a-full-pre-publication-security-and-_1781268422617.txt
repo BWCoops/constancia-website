@@ -1,0 +1,48 @@
+You are performing a full pre-publication security and performance hardening pass on this application. The stack is React 18 + TypeScript + Vite + Tailwind on the frontend, an Express/Node backend, Clerk for authentication, Neon Postgres via Drizzle ORM, and the Anthropic API for AI features. Treat this as a production-readiness audit for a company website handling client data.
+
+Work in four phases, in order. Do not skip phases. At the end of each phase, output a written report of what you found, what you changed, and what you could not fix automatically (with a recommendation). Do not delete or rewrite working features. Make minimal, surgical changes. Create a checkpoint before starting.
+
+PHASE 1 — DEPENDENCY & SUPPLY CHAIN AUDIT
+
+1. Run npm audit and report all findings by severity. Fix everything High and Critical via npm audit fix or targeted version bumps. Do NOT use npm audit fix --force without listing the breaking changes first.
+2. Vite version check (critical): Confirm the installed Vite version. CVE-2026-39364 and CVE-2026-39363 (published April 2026) allow server.fs.deny bypass via query parameters (?raw, ?import&raw, ?import&url&inline) and arbitrary file reads via WebSockets. If Vite is between 7.1.0 and 7.3.1, upgrade to >=7.3.2; if on 8.x below 8.0.5, upgrade to >=8.0.5. If on an older major, confirm it is not affected by the earlier server.fs.deny bypass CVEs (CVE-2025-32395, CVE-2025-58751, CVE-2025-58752, CVE-2025-62522) and upgrade to the latest patch of that major.
+3. Supply chain worm check: The Shai-Hulud / Mini Shai-Hulud / Miasma npm worm campaigns (September 2025 through June 2026) compromised hundreds of packages including ones from TanStack, AsyncAPI, PostHog, Postman, Browserbase, Zapier, @antv, and @redhat-cloud-services. Check the lockfile against known-compromised versions: look for suspicious preinstall/postinstall scripts in any dependency, files named setup_bun.js or bun_environment.js, and any dependency that installs or invokes the Bun runtime unexpectedly. Report anything suspicious; do not install new packages to "fix" this.
+4. Ensure package-lock.json exists, is committed, and that all dependency versions are pinned (no loose ^ or ~ on security-sensitive packages: vite, express, drizzle-orm, @clerk/*, @anthropic-ai/*).
+5. Add an .npmrc with ignore-scripts=true if the build still works with it; if it breaks the build, document which packages require install scripts and why, then revert.
+6. Remove every dependency that is not actually imported anywhere. Run a usage check first, list the candidates, then remove.
+
+PHASE 2 — SECRETS, AUTH & ACCESS CONTROL
+
+1. Secrets sweep: Search the entire codebase for hardcoded API keys, tokens, connection strings, and passwords. Patterns to check: sk-ant, sk_live, sk_test, pk_live, postgres://, postgresql://, whsec_, AKIA, and anything assigned to variables named key, secret, token, or password. Anything found must move to Replit Secrets and be referenced via process.env. Confirm .env and .env.* are in .gitignore.
+2. Client bundle leak check: Audit every VITE_-prefixed environment variable. Anything prefixed VITE_ is shipped to the browser. The Anthropic API key, Neon connection string, and Clerk secret key must NEVER be VITE_-prefixed or referenced in any file under the client source tree. The Anthropic API must only ever be called from server-side routes. Confirm there are zero direct calls to api.anthropic.com from client code.
+3. Clerk enforcement: Every API route that reads or writes user or client data must verify the Clerk session server-side (getAuth(req) or Clerk Express middleware) and reject unauthenticated requests with 401. List every route and its auth status in a table. No route may rely on the frontend hiding a button as its only protection.
+4. IDOR / object-level authorisation: For every database query that fetches or mutates a record, confirm the query is scoped to the authenticated user's ID or organisation ID (for example where(eq(table.ownerId, userId))). A user must never be able to access another user's records by changing an ID in a URL or request body. Owner-only data access is a P0 requirement. Report every query that lacks this scoping and fix it.
+5. Clerk webhooks: If any webhook endpoints exist, confirm they verify the Svix signature before processing anything. Unsigned webhook handlers must be fixed.
+6. Session cookies: confirm Secure, HttpOnly, and SameSite=Lax (or Strict) on anything the server sets directly.
+
+PHASE 3 — APPLICATION SECURITY (OWASP TOP 10 ALIGNMENT)
+
+1. SQL injection: Drizzle parameterises queries by default, but audit for any use of sql.raw(), template-literal string concatenation inside sql``, or raw pg/neon client queries built from user input. Every dynamic value must go through Drizzle parameter binding or sql placeholders. Report each instance found and the fix applied.
+2. Input validation: Every API endpoint must validate its body, query params, and route params with Zod before any logic runs. Unknown keys stripped, types enforced, string lengths capped, IDs validated as the correct format. List endpoints that lacked validation and add schemas.
+3. XSS: Search for every use of dangerouslySetInnerHTML. Each instance must either be removed or have its input sanitised with DOMPurify. Confirm no user-supplied or AI-generated content is rendered as raw HTML anywhere.
+4. AI endpoint hardening: For routes calling the Anthropic API: (a) enforce per-user rate limiting; (b) cap max_tokens server-side; (c) cap input length server-side; (d) never interpolate user input into the system prompt — keep user content in the user message only; (e) never return raw error objects or the system prompt to the client; (f) log usage so cost anomalies are visible.
+5. Rate limiting and abuse: Add express-rate-limit globally with a sensible default (100 requests per 15 minutes per IP) and stricter limits on auth-sensitive and AI routes. Add a JSON body size limit of 1mb or lower.
+6. Security headers: Add Helmet with an explicit Content-Security-Policy (script-src restricted to self plus required Clerk domains, no unsafe-eval; document any unsafe-inline that Tailwind or Vite genuinely requires), HSTS with a long max-age, X-Content-Type-Options: nosniff, X-Frame-Options: DENY or frame-ancestors in CSP, Referrer-Policy: strict-origin-when-cross-origin, and a restrictive Permissions-Policy.
+7. CORS: Lock CORS to the production domains explicitly. No wildcard origins on any route that uses credentials.
+8. Error handling: Add a global error handler that returns generic messages to clients and logs detail server-side. No stack traces, SQL errors, or file paths in any production response. Confirm NODE_ENV=production behaviour.
+9. SSRF: If the server fetches any URL derived from user input, validate against an allowlist and block private IP ranges. If no such code exists, state that explicitly.
+10. Production build hygiene: Confirm the published deployment serves the built output, not the Vite dev server. Disable production sourcemaps, strip console.log of sensitive values, and confirm server.fs.strict is enabled in the Vite config for any environment where the dev server runs.
+
+PHASE 4 — PERFORMANCE HARDENING
+
+1. Bundle analysis: Run a production build and report total JS size and the largest chunks. Code-split routes with React.lazy and Suspense. Any single dependency adding more than 100KB gzipped must be justified, replaced, or lazy-loaded.
+2. Compression and caching: Enable gzip/brotli compression on responses. Set long-lived Cache-Control with immutable hashes on static assets, and appropriate no-cache on HTML and API responses.
+3. Images: Serve modern formats (WebP/AVIF) with explicit width and height to prevent layout shift, lazy-load below-the-fold images, and preload the LCP image.
+4. Fonts: Self-host or preconnect, use font-display: swap, subset where possible.
+5. Database: Check Drizzle queries on hot paths for N+1 patterns. Confirm indexes exist on every column used in where clauses of frequent queries, especially the userId/ownerId scoping columns. Use Neon's pooled connection string for request-scoped routes.
+6. React: Eliminate obvious unnecessary re-renders on heavy components (memoisation only where measurable) and confirm no blocking synchronous work on initial render.
+7. Targets: After changes, the production build should achieve Lighthouse 90+ on Performance and 95+ on Best Practices, SEO, and Accessibility for the landing page. Report estimated or actual scores and remaining gaps.
+
+FINAL DELIVERABLE
+
+Produce a single SECURITY_AUDIT.md at the repo root containing: (1) a findings table with issue, severity, file, and status (fixed or open); (2) the route-by-route auth and validation table from Phases 2 and 3; (3) all dependency changes made; (4) anything requiring a human decision before publishing, ranked by risk. Then stop. Do not deploy.

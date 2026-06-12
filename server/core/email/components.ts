@@ -5,7 +5,7 @@
  * Palette: charcoal #252826 · cream #F6F3EE · rose #C77A93 · mint #7FB8A3
  */
 
-import { CONSTANCIA_LOGO_DARK_BASE64 } from '../../utils/constancia-email-logo-b64';
+const LOGO_URL = `${process.env.BASE_URL || 'https://constancia.com'}/constancia-logo-dark.png`;
 
 export const EMAIL_BRAND = {
   // Core Constancia palette
@@ -53,7 +53,7 @@ export function generateEmailHeader(options: EmailHeaderOptions = {}): string {
 
   return `
     <div style="background-color: ${bgColor}; padding: 32px 24px; text-align: center;">
-      <img src="${CONSTANCIA_LOGO_DARK_BASE64}" alt="Constancia" style="height: 38px; max-width: 160px; display: block; margin: 0 auto;" />
+      <img src="${LOGO_URL}" alt="Constancia" style="height: 38px; max-width: 160px; display: block; margin: 0 auto;" />
       ${showTagline ? `
         <p style="color: ${taglineColor}; margin: 12px 0 0 0; font-size: 13px; letter-spacing: 0.04em;">${tagline}</p>
       ` : ''}
@@ -113,7 +113,7 @@ export function generateNotificationHeader(options: NotificationHeaderOptions): 
 
   return `
     <div style="text-align: center; margin-bottom: 28px; padding: 28px 24px; background-color: ${EMAIL_BRAND.charcoal}; border-radius: 4px;">
-      <img src="${CONSTANCIA_LOGO_DARK_BASE64}" alt="Constancia" style="height: 32px; max-width: 140px; display: block; margin: 0 auto 16px;" />
+      <img src="${LOGO_URL}" alt="Constancia" style="height: 32px; max-width: 140px; display: block; margin: 0 auto 16px;" />
       <h1 style="color: ${EMAIL_BRAND.cream}; margin: 0; font-size: 20px; font-weight: 600; letter-spacing: 0.02em;">${title}</h1>
       ${subtitle ? `<p style="color: ${EMAIL_BRAND.mint}; margin: 8px 0 0 0; font-size: 13px; letter-spacing: 0.04em;">${subtitle}</p>` : ''}
     </div>
