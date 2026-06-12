@@ -34,7 +34,6 @@ const routeImports: Record<string, () => Promise<unknown>> = {
   '/terms': () => import('@/pages/terms'),
   '/privacy': () => import('@/pages/privacy'),
   '/cookies': () => import('@/pages/cookies'),
-  '/careers': () => import('@/pages/careers'),
   // /finance-compass is now a tiny gateway that redirects to the
   // pre-assessment, so preloading the marketing landing here would
   // download a chunk that's never rendered. Skip it.

@@ -34,7 +34,7 @@ const DEFAULT_FLAGS: FeatureFlags = {
   comparisonTools: true,
   financeCompass: true,
   blog: false,
-  resources: true,
+  resources: false,
   contact: true,
   requireBusinessEmail: false,
 };

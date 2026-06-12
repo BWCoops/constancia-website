@@ -19,7 +19,6 @@ const KNOWN_ROUTES = new Set([
   "/terms",
   "/privacy",
   "/cookies",
-  "/careers",
   "/export",
   "/tools/epm-comparison",
   "/vendors",

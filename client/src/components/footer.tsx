@@ -18,7 +18,6 @@ const SLIM_LINKS: FooterLink[] = [
   { label: "Services", href: "/services", featureKey: "services" },
   { label: "Insights", href: "/blog", featureKey: "blog" },
   { label: "Resources", href: "/files", featureKey: "resources" },
-  { label: "Careers", href: "/careers", featureKey: null },
   { label: "Contact", href: "/contact", featureKey: "contact" },
   { label: "Privacy", href: "/privacy", featureKey: null },
   { label: "Terms", href: "/terms", featureKey: null },

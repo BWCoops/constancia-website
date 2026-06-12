@@ -29,7 +29,6 @@ const FilesPage = lazy(() => import("@/pages/files"));
 const ExportPage = lazy(() => import("@/pages/export"));
 const EPMComparisonPage = lazy(() => import("@/pages/epm-comparison"));
 const TermsOfUsePage = lazy(() => import("@/pages/terms"));
-const CareersPage = lazy(() => import("@/pages/careers"));
 const PrivacyPolicyPage = lazy(() => import("@/pages/privacy"));
 const CookiePolicyPage = lazy(() => import("@/pages/cookies"));
 
@@ -299,7 +298,6 @@ function Router() {
           <Route path="/terms" component={TermsOfUsePage} />
           <Route path="/privacy" component={PrivacyPolicyPage} />
           <Route path="/cookies" component={CookiePolicyPage} />
-          <Route path="/careers" component={CareersPage} />
           
           {/* FinanceCompass public routes - gated with custom loading.
               The /finance-compass entry skips the old marketing
