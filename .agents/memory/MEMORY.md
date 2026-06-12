@@ -4,6 +4,7 @@
 - [Production build pipeline](build-pipeline.md) — build is custom `tsx script/build.ts` (vite+esbuild→dist/index.cjs); if publish fails with ERR_MODULE_NOT_FOUND restore that file from git.
 - [Publish fails with zero build output](publish-no-build-output.md) — publish dying right after "Security Scan Complete" with no build output means .replit lost its [deployment] section; fix via deployConfig (NOT a security/scan issue).
 - [viewEnvVars under-reports secrets](viewenvvars-incomplete.md) — viewEnvVars can show a secret as absent when it's actually present at runtime; verify via browser/workflow logs before concluding it's missing.
+- [reCAPTCHA "Invalid domain for site key"](recaptcha-invalid-domain.md) — usually stray whitespace in the key secret, or key not registered for the viewing domain; diff /api/config/turnstile dev vs prod first.
 - [Cookie toggle centering](cookie-toggle-centering.md) — Label(inline)+p(block) mix inside flex rows breaks Switch vertical centering; fix with flex-col on the text wrapper and block on Label.
 - [Switch thumb positioning](switch-thumb-positioning.md) — never drive the shadcn Switch thumb with calc()/CSS-var arbitrary translate-x (won't compile); use fixed h-6 w-11 border-2 + translate-x-0/translate-x-5.
 - [Cookie components must use portal](cookie-portal.md) — CookiePreferencesIcon and CookieConsentBanner must render via createPortal(…, document.body) or framer-motion transforms break fixed positioning and kill pointer events.

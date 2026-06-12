@@ -18,16 +18,21 @@ const RECAPTCHA_TIMEOUT_MS = 10000;
 // the same values and the _DEV distinction can be dropped.
 const isDev = process.env.NODE_ENV === "development";
 
+// Env values are trimmed because a stray leading/trailing space in a secret
+// (a common copy-paste artifact) corrupts the key: reCAPTCHA then reports
+// "Invalid domain for site key" on the client and verification fails server-side.
 function getSiteKey(): string | undefined {
-  return isDev
+  const key = isDev
     ? (process.env.RECAPTCHA_SITE_KEY_DEV ?? process.env.RECAPTCHA_SITE_KEY)
     : (process.env.RECAPTCHA_SITE_KEY ?? process.env.RECAPTCHA_SITE_KEY_DEV);
+  return key?.trim() || undefined;
 }
 
 function getSecretKey(): string | undefined {
-  return isDev
+  const key = isDev
     ? (process.env.RECAPTCHA_SECRET_KEY_DEV ?? process.env.RECAPTCHA_SECRET_KEY)
     : (process.env.RECAPTCHA_SECRET_KEY ?? process.env.RECAPTCHA_SECRET_KEY_DEV);
+  return key?.trim() || undefined;
 }
 
 export async function verifyTurnstileToken(
