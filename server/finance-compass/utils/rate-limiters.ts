@@ -82,3 +82,41 @@ export const otpRequestLimiter = rateLimit({
     return false;
   },
 });
+
+/**
+ * Chatbot session creation rate limiter
+ * 20 sessions per hour per IP
+ * Prevents unlimited AI-credit consumption via fresh session minting
+ */
+export const chatbotSessionLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 hour
+  max: 20,
+  message: 'Too many chatbot sessions created. Please try again later.',
+  standardHeaders: true,
+  legacyHeaders: false,
+  skip: (req) => {
+    if (process.env.NODE_ENV === 'development' && req.headers['x-skip-rate-limit']) {
+      return true;
+    }
+    return false;
+  },
+});
+
+/**
+ * Chatbot message rate limiter
+ * 60 messages per 10 minutes per IP
+ * Provides a secondary IP-level guard on top of the per-session guard
+ */
+export const chatbotMessageLimiter = rateLimit({
+  windowMs: 10 * 60 * 1000, // 10 minutes
+  max: 60,
+  message: 'Too many messages. Please slow down and try again shortly.',
+  standardHeaders: true,
+  legacyHeaders: false,
+  skip: (req) => {
+    if (process.env.NODE_ENV === 'development' && req.headers['x-skip-rate-limit']) {
+      return true;
+    }
+    return false;
+  },
+});

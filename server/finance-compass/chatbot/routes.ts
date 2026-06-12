@@ -12,6 +12,8 @@ const log = createChildLogger("fc-chatbot-routes");
 import { getChatbotService } from './chatbot-service';
 import type { ProcessingUpdate } from './types';
 import { promptInjectionGuard } from '../../middleware/prompt-injection';
+import { chatbotSessionLimiter, chatbotMessageLimiter } from '../utils/rate-limiters';
+import { fcStorage } from '../storage';
 
 const router = Router();
 
@@ -28,18 +30,73 @@ const sendMessageSchema = z.object({
 });
 
 /**
+ * Verify the X-Session-Token header matches the stored session token.
+ * Returns the session on success, or sends a 401/403/404 and returns null.
+ */
+async function verifySessionOwnership(req: Request, res: Response): Promise<{ id: string; sessionToken: string; assessmentId: string | null; contactId: string | null; messageCount: number; createdAt: Date } | null> {
+  const token = req.headers['x-session-token'] as string | undefined;
+  if (!token) {
+    res.status(401).json({ success: false, error: 'Session token required' });
+    return null;
+  }
+
+  const service = getChatbotService();
+  const session = await service.getSession(req.params.sessionId);
+
+  if (!session) {
+    res.status(404).json({ success: false, error: 'Session not found' });
+    return null;
+  }
+
+  if (session.sessionToken !== token) {
+    res.status(403).json({ success: false, error: 'Access denied' });
+    return null;
+  }
+
+  return session as any;
+}
+
+/**
  * POST /api/finance-compass/chatbot/sessions
  * Create or get a chat session
  */
-router.post('/sessions', async (req: Request, res: Response) => {
+router.post('/sessions', chatbotSessionLimiter, async (req: Request, res: Response) => {
   try {
     const body = createSessionSchema.parse(req.body);
     const service = getChatbotService();
-    
+
+    // If an assessmentId is supplied, verify the caller's verified session owns it.
+    // An unauthenticated caller (or one whose contactId doesn't match) must not be
+    // allowed to bind a chat session to someone else's assessment context.
+    let verifiedAssessmentId: string | undefined;
+    let verifiedContactId: string | undefined;
+
+    if (body.assessmentId) {
+      const fcSession = (req.session as any)?.fcVerified;
+      if (fcSession?.contactId) {
+        const assessment = await fcStorage.getAssessmentById(body.assessmentId);
+        if (assessment && assessment.contactId === fcSession.contactId) {
+          verifiedAssessmentId = body.assessmentId;
+          // Derive contactId from trusted server-side session, not caller-supplied body
+          verifiedContactId = fcSession.contactId;
+        } else {
+          log.warn(
+            { providedAssessmentId: body.assessmentId, callerContactId: fcSession.contactId },
+            "Chatbot session creation: assessmentId ownership check failed — ignoring"
+          );
+        }
+      } else {
+        log.warn(
+          { providedAssessmentId: body.assessmentId },
+          "Chatbot session creation: no verified session — assessmentId ignored"
+        );
+      }
+    }
+
     const session = await service.createSession(
       body.sessionToken,
-      body.assessmentId,
-      body.contactId
+      verifiedAssessmentId,
+      verifiedContactId
     );
 
     res.json({
@@ -98,6 +155,9 @@ router.get('/sessions/:token', async (req: Request, res: Response) => {
  */
 router.get('/sessions/:sessionId/messages', async (req: Request, res: Response) => {
   try {
+    const session = await verifySessionOwnership(req, res);
+    if (!session) return;
+
     const service = getChatbotService();
     const messages = await service.getConversationHistory(req.params.sessionId, 50);
 
@@ -123,8 +183,11 @@ router.get('/sessions/:sessionId/messages', async (req: Request, res: Response) 
  * POST /api/finance-compass/chatbot/sessions/:sessionId/messages
  * Send a message and get response (non-streaming)
  */
-router.post('/sessions/:sessionId/messages', promptInjectionGuard(['message']), async (req: Request, res: Response) => {
+router.post('/sessions/:sessionId/messages', chatbotMessageLimiter, promptInjectionGuard(['message']), async (req: Request, res: Response) => {
   try {
+    const session = await verifySessionOwnership(req, res);
+    if (!session) return;
+
     const body = sendMessageSchema.parse(req.body);
     const service = getChatbotService();
 
@@ -161,10 +224,14 @@ router.post('/sessions/:sessionId/messages', promptInjectionGuard(['message']), 
  * POST /api/finance-compass/chatbot/sessions/:sessionId/messages/stream
  * Send a message and get response with SSE streaming for progress updates
  */
-router.post('/sessions/:sessionId/messages/stream', promptInjectionGuard(['message']), async (req: Request, res: Response) => {
+router.post('/sessions/:sessionId/messages/stream', chatbotMessageLimiter, promptInjectionGuard(['message']), async (req: Request, res: Response) => {
   log.info({ sessionId: req.params.sessionId }, "Starting stream request");
   
   try {
+    // Verify session ownership before setting up SSE
+    const session = await verifySessionOwnership(req, res);
+    if (!session) return;
+
     const body = sendMessageSchema.parse(req.body);
     const service = getChatbotService();
 
@@ -269,6 +336,9 @@ router.post('/sessions/history', async (req: Request, res: Response) => {
  */
 router.patch('/sessions/:sessionId/title', async (req: Request, res: Response) => {
   try {
+    const session = await verifySessionOwnership(req, res);
+    if (!session) return;
+
     const { title } = req.body;
     
     if (typeof title !== 'string' || title.length > 100) {

@@ -933,7 +933,9 @@ export function ChatbotWidget({ assessmentId: propAssessmentId, contactId, class
     
     // Load messages for this session
     try {
-      const response = await fetch(`/api/finance-compass/public/chatbot/sessions/${session.id}/messages`);
+      const response = await fetch(`/api/finance-compass/public/chatbot/sessions/${session.id}/messages`, {
+        headers: { "X-Session-Token": session.sessionToken },
+      });
       const data = await response.json();
       if (data.success) {
         setMessages(data.data.map((m: any) => ({
@@ -1006,7 +1008,9 @@ export function ChatbotWidget({ assessmentId: propAssessmentId, contactId, class
 
   const loadMessages = async (sid: string) => {
     try {
-      const response = await fetch(`/api/finance-compass/public/chatbot/sessions/${sid}/messages`);
+      const response = await fetch(`/api/finance-compass/public/chatbot/sessions/${sid}/messages`, {
+        headers: { "X-Session-Token": sessionToken.current },
+      });
       const data = await response.json();
       if (data.success) {
         const loadedMessages = data.data.map((m: any) => ({
@@ -1062,7 +1066,10 @@ What would you like to know?`,
         `/api/finance-compass/public/chatbot/sessions/${sessionId}/messages/stream`,
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "X-Session-Token": sessionToken.current,
+          },
           body: JSON.stringify({ 
             message: userMessage.content,
             responseMode: responseMode 

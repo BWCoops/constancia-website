@@ -128,6 +128,18 @@ import {
   type ScoreIntegrityResult,
 } from "./utils/journey-validation-service";
 
+/**
+ * Verify that the current Express session owns the given assessment.
+ * The caller must have a verified FinanceCompass session whose contactId
+ * matches the assessment's contactId.
+ */
+function verifySessionOwnership(req: Request, assessmentContactId: string | null | undefined): boolean {
+  if (!assessmentContactId) return false;
+  const fcSession = (req.session as any)?.fcVerified;
+  if (!fcSession?.contactId) return false;
+  return fcSession.contactId === assessmentContactId;
+}
+
 // Canonical 8 dimensions - must match ASSESSMENT_DIMENSIONS in ai-service.ts
 const CANONICAL_DIMENSIONS = [
   "financial_planning_analysis",
@@ -1542,6 +1554,11 @@ publicRouter.get("/assessments/:id", async (req: Request, res: Response) => {
     }
     
     const { assessment, company, contact } = details;
+
+    // Require the caller to own this assessment
+    if (!verifySessionOwnership(req, assessment.contactId)) {
+      return res.status(403).json({ success: false, error: "Access denied" });
+    }
     
     // Extract pre-assessment data from preAssessmentData field or company data
     const preAssessmentData = assessment.preAssessmentData as Record<string, any> || {};
@@ -1690,6 +1707,11 @@ publicRouter.get("/assessments/:id/questions", async (req: Request, res: Respons
     if (!assessment) {
       return res.status(404).json({ success: false, error: "Assessment not found" });
     }
+
+    // Require the caller to own this assessment
+    if (!verifySessionOwnership(req, assessment.contactId)) {
+      return res.status(403).json({ success: false, error: "Access denied" });
+    }
     
     // Batch independent queries with Promise.all for better performance
     const [questions, responses] = await Promise.all([
@@ -1745,6 +1767,11 @@ publicRouter.post("/assessments/:id/responses", async (req: Request, res: Respon
     
     if (!assessment) {
       return res.status(404).json({ success: false, error: "Assessment not found" });
+    }
+
+    // Require the caller to own this assessment
+    if (!verifySessionOwnership(req, assessment.contactId)) {
+      return res.status(403).json({ success: false, error: "Access denied" });
     }
     
     if (assessment.status === "completed" || assessment.status === "analysed" || assessment.status === "report_generated") {
@@ -1924,6 +1951,17 @@ publicRouter.patch("/assessments/:id/progress", async (req: Request, res: Respon
   try {
     const { id } = req.params;
     const data = updateProgressSchema.parse(req.body);
+
+    // Fetch the assessment first so we can verify ownership
+    const existingAssessment = await fcStorage.getAssessmentById(id);
+    if (!existingAssessment) {
+      return res.status(404).json({ success: false, error: "Assessment not found" });
+    }
+
+    // Require the caller to own this assessment
+    if (!verifySessionOwnership(req, existingAssessment.contactId)) {
+      return res.status(403).json({ success: false, error: "Access denied" });
+    }
     
     const assessment = await fcStorage.updateAssessment(id, {
       currentStep: data.currentStep,
@@ -1996,6 +2034,11 @@ publicRouter.get("/assessments/:id/next-question", async (req: Request, res: Res
     const assessment = await fcStorage.getAssessmentById(id);
     if (!assessment) {
       return res.status(404).json({ success: false, error: "Assessment not found" });
+    }
+
+    // Require the caller to own this assessment
+    if (!verifySessionOwnership(req, assessment.contactId)) {
+      return res.status(403).json({ success: false, error: "Access denied" });
     }
     
     // Handle all "finished" states - completed, analysed, report_generated, and processing (analysis in progress)
@@ -2074,6 +2117,11 @@ publicRouter.get("/assessments/:id/question-by-sequence/:sequence", async (req: 
     if (!assessment) {
       return res.status(404).json({ success: false, error: "Assessment not found" });
     }
+
+    // Require the caller to own this assessment
+    if (!verifySessionOwnership(req, assessment.contactId)) {
+      return res.status(403).json({ success: false, error: "Access denied" });
+    }
     
     // Use the existing getNextQuestion with requestedNextSequence to fetch the question
     const { getNextQuestion } = await import("./adaptive-engine");
@@ -2121,6 +2169,11 @@ publicRouter.get("/assessments/:id/answered-questions", async (req: Request, res
     const assessment = await fcStorage.getAssessmentById(id);
     if (!assessment) {
       return res.status(404).json({ success: false, error: "Assessment not found" });
+    }
+
+    // Require the caller to own this assessment
+    if (!verifySessionOwnership(req, assessment.contactId)) {
+      return res.status(403).json({ success: false, error: "Access denied" });
     }
     
     // Get all responses for this assessment
@@ -2218,28 +2271,16 @@ publicRouter.post("/assessments/:id/adaptive-response", async (req: Request, res
       return res.status(400).json({ success: false, error: "Assessment is already completed" });
     }
     
-    // Session validation - ensure user has verified session
-    const fcSession = (req.session as any)?.fcVerified;
-    
-    // Debug logging for session issues in production
-    if (!fcSession?.contactId) {
+    // Require the caller to own this assessment — no unauthenticated fallback
+    if (!verifySessionOwnership(req, assessment.contactId)) {
       log.info({
         assessmentId: id,
         hasSession: !!req.session,
         sessionId: req.session?.id,
         hasFcVerified: !!(req.session as any)?.fcVerified,
         cookieHeader: req.headers.cookie ? 'present' : 'missing',
-      }, "Session missing for adaptive-response");
-      
-      // Fallback validation: If assessment exists and is in progress, allow the response
-      // This handles production cookie/session issues while maintaining basic security
-      // The assessment ID in the URL + in_progress status provides reasonable assurance
-      if (assessment.status === "in_progress") {
-        log.info({ assessmentId: id }, "Session fallback: allowing response for in_progress assessment");
-        // Continue with the request - validated via assessment state
-      } else {
-        return res.status(401).json({ success: false, error: "Session required. Please verify your email first." });
-      }
+      }, "Access denied for adaptive-response: session missing or does not own assessment");
+      return res.status(403).json({ success: false, error: "Access denied" });
     }
     
     // Validate question exists - try multiple lookup strategies
@@ -2386,6 +2427,11 @@ publicRouter.post("/assessments/:id/complete", async (req: Request, res: Respons
     
     if (!assessment) {
       return res.status(404).json({ success: false, error: "Assessment not found" });
+    }
+
+    // Require the caller to own this assessment
+    if (!verifySessionOwnership(req, assessment.contactId)) {
+      return res.status(403).json({ success: false, error: "Access denied" });
     }
     
     // Validate all required questions are answered
@@ -2764,6 +2810,11 @@ publicRouter.get("/assessments/:id/results", async (req: Request, res: Response)
     }
     
     let { assessment, company, contact, responses } = details;
+
+    // Require the caller to own this assessment
+    if (!verifySessionOwnership(req, assessment.contactId)) {
+      return res.status(403).json({ success: false, error: "Access denied" });
+    }
     
     // Check for stuck processing and auto-reset if needed
     const resetResult = await checkAndResetStuckProcessing(assessment);
@@ -3189,6 +3240,11 @@ publicRouter.get("/assessments/:id/workshops/schedule", async (req: Request, res
     }
     
     const { assessment, company } = details;
+
+    // Require the caller to own this assessment
+    if (!verifySessionOwnership(req, assessment.contactId)) {
+      return res.status(403).json({ success: false, error: "Access denied" });
+    }
     
     // Workshop schedules are static once generated - cache for 5 minutes
     res.set('Cache-Control', 'private, max-age=300');
@@ -3227,6 +3283,11 @@ publicRouter.get("/assessments/:id/status", async (req: Request, res: Response) 
     if (!assessment) {
       return res.status(404).json({ success: false, error: "Assessment not found" });
     }
+
+    // Require the caller to own this assessment
+    if (!verifySessionOwnership(req, assessment.contactId)) {
+      return res.status(403).json({ success: false, error: "Access denied" });
+    }
     
     const isProcessing = assessment.status === "processing";
     const isReady = assessment.status === "analysed" || assessment.status === "report_generated";
@@ -3259,6 +3320,11 @@ publicRouter.get("/assessments/:id/dimensions", async (req: Request, res: Respon
     }
     
     const { assessment, contact, company, responses } = details;
+
+    // Require the caller to own this assessment
+    if (!verifySessionOwnership(req, assessment.contactId)) {
+      return res.status(403).json({ success: false, error: "Access denied" });
+    }
     
     // For processing assessments, return empty dimensions
     if (assessment.status === "processing") {
@@ -3389,6 +3455,11 @@ publicRouter.get("/assessments/:id/maturity-score", async (req: Request, res: Re
     }
     
     const { assessment, contact, company } = details;
+
+    // Require the caller to own this assessment
+    if (!verifySessionOwnership(req, assessment.contactId)) {
+      return res.status(403).json({ success: false, error: "Access denied" });
+    }
     
     // For processing assessments, return null scores
     if (assessment.status === "processing") {
@@ -3477,6 +3548,17 @@ publicRouter.post("/assessments/:id/upgrade", async (req: Request, res: Response
   try {
     const { id } = req.params;
     const { newTier } = z.object({ newTier: z.enum(FC_ASSESSMENT_TIERS) }).parse(req.body);
+
+    // Fetch first so we can verify ownership before mutating
+    const existing = await fcStorage.getAssessmentById(id);
+    if (!existing) {
+      return res.status(404).json({ success: false, error: "Assessment not found" });
+    }
+
+    // Require the caller to own this assessment
+    if (!verifySessionOwnership(req, existing.contactId)) {
+      return res.status(403).json({ success: false, error: "Access denied" });
+    }
     
     const assessment = await fcStorage.upgradeAssessmentTier(id, newTier);
     
@@ -3524,6 +3606,11 @@ publicRouter.post("/assessments/:id/analyse", aiAnalysisLimiter, async (req: Req
     const assessment = await fcStorage.getAssessmentById(id);
     if (!assessment) {
       return res.status(404).json({ success: false, error: "Assessment not found" });
+    }
+
+    // Verify the verified session actually owns this assessment
+    if (fcSession.contactId !== assessment.contactId) {
+      return res.status(403).json({ success: false, error: "Access denied" });
     }
     
     // Check if assessment is completed
