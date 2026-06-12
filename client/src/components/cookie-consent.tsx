@@ -109,35 +109,33 @@ export function CookiePreferencesIcon() {
 
             <div className="space-y-4 mb-6">
               <div className="flex items-center justify-between gap-4 p-3 bg-muted/50 rounded-lg">
-                <div className="min-w-0">
-                  <Label className="font-medium">Essential Cookies</Label>
-                  <p className="text-xs text-muted-foreground">Required for core functionality</p>
+                <div className="min-w-0 flex flex-col justify-center">
+                  <Label className="block font-medium leading-snug">Essential Cookies</Label>
+                  <p className="text-xs text-muted-foreground mt-0.5">Required for core functionality</p>
                 </div>
-                <Switch checked disabled className="flex-shrink-0" />
+                <Switch checked disabled />
               </div>
 
               <div className="flex items-center justify-between gap-4 p-3 bg-muted/50 rounded-lg">
-                <div className="min-w-0">
-                  <Label className="font-medium">Analytics Cookies</Label>
-                  <p className="text-xs text-muted-foreground">Help us improve our website</p>
+                <div className="min-w-0 flex flex-col justify-center">
+                  <Label className="block font-medium leading-snug">Analytics Cookies</Label>
+                  <p className="text-xs text-muted-foreground mt-0.5">Help us improve our website</p>
                 </div>
                 <Switch
                   checked={analytics}
                   onCheckedChange={setAnalytics}
-                  className="flex-shrink-0"
                   data-testid="switch-modal-analytics"
                 />
               </div>
 
               <div className="flex items-center justify-between gap-4 p-3 bg-muted/50 rounded-lg">
-                <div className="min-w-0">
-                  <Label className="font-medium">Marketing Cookies</Label>
-                  <p className="text-xs text-muted-foreground">Used for targeted advertising</p>
+                <div className="min-w-0 flex flex-col justify-center">
+                  <Label className="block font-medium leading-snug">Marketing Cookies</Label>
+                  <p className="text-xs text-muted-foreground mt-0.5">Used for targeted advertising</p>
                 </div>
                 <Switch
                   checked={marketing}
                   onCheckedChange={setMarketing}
-                  className="flex-shrink-0"
                   data-testid="switch-modal-marketing"
                 />
               </div>
@@ -249,35 +247,33 @@ export function CookieConsentBanner() {
                 <div className="space-y-4 mb-4">
                   <div className="p-4 bg-muted/50 rounded-lg space-y-4">
                     <div className="flex items-center justify-between gap-4">
-                      <div className="min-w-0">
-                        <Label className="font-medium">Essential Cookies</Label>
-                        <p className="text-xs text-muted-foreground">Required for the website to function properly</p>
+                      <div className="min-w-0 flex flex-col justify-center">
+                        <Label className="block font-medium leading-snug">Essential Cookies</Label>
+                        <p className="text-xs text-muted-foreground mt-0.5">Required for the website to function properly</p>
                       </div>
-                      <Switch checked disabled className="flex-shrink-0" />
+                      <Switch checked disabled />
                     </div>
 
                     <div className="flex items-center justify-between gap-4">
-                      <div className="min-w-0">
-                        <Label className="font-medium">Analytics Cookies</Label>
-                        <p className="text-xs text-muted-foreground">Help us understand how visitors use our site</p>
+                      <div className="min-w-0 flex flex-col justify-center">
+                        <Label className="block font-medium leading-snug">Analytics Cookies</Label>
+                        <p className="text-xs text-muted-foreground mt-0.5">Help us understand how visitors use our site</p>
                       </div>
                       <Switch
                         checked={analytics}
                         onCheckedChange={setAnalytics}
-                        className="flex-shrink-0"
                         data-testid="switch-analytics"
                       />
                     </div>
 
                     <div className="flex items-center justify-between gap-4">
-                      <div className="min-w-0">
-                        <Label className="font-medium">Marketing Cookies</Label>
-                        <p className="text-xs text-muted-foreground">Used to deliver relevant advertisements</p>
+                      <div className="min-w-0 flex flex-col justify-center">
+                        <Label className="block font-medium leading-snug">Marketing Cookies</Label>
+                        <p className="text-xs text-muted-foreground mt-0.5">Used to deliver relevant advertisements</p>
                       </div>
                       <Switch
                         checked={marketing}
                         onCheckedChange={setMarketing}
-                        className="flex-shrink-0"
                         data-testid="switch-marketing"
                       />
                     </div>
