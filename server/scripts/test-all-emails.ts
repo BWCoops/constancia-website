@@ -60,17 +60,17 @@ function tplConfigTest(): string {
 // 2. Contact form notification (admin alert)
 function tplContactFormNotification(): string {
   const table = `
-    <h2 style="color:${EMAIL_BRAND.navy};margin-top:0">Contact Details</h2>
+    <h2 style="color:${EMAIL_BRAND.charcoal};margin-top:0">Contact Details</h2>
     <table style="width:100%;border-collapse:collapse">
       <tr><td style="padding:8px 0;color:${EMAIL_BRAND.mutedGray};width:120px"><strong>Name:</strong></td><td>Jane Smith (test)</td></tr>
-      <tr><td style="padding:8px 0;color:${EMAIL_BRAND.mutedGray}"><strong>Email:</strong></td><td><a href="mailto:jane.smith@acmecorp.com" style="color:${EMAIL_BRAND.teal}">jane.smith@acmecorp.com</a></td></tr>
+      <tr><td style="padding:8px 0;color:${EMAIL_BRAND.mutedGray}"><strong>Email:</strong></td><td><a href="mailto:jane.smith@acmecorp.com" style="color:${EMAIL_BRAND.deepMint}">jane.smith@acmecorp.com</a></td></tr>
       <tr><td style="padding:8px 0;color:${EMAIL_BRAND.mutedGray}"><strong>Company:</strong></td><td>Acme Corp</td></tr>
       <tr><td style="padding:8px 0;color:${EMAIL_BRAND.mutedGray}"><strong>Job Title:</strong></td><td>Finance Director</td></tr>
       <tr><td style="padding:8px 0;color:${EMAIL_BRAND.mutedGray}"><strong>Phone:</strong></td><td>+44 7700 900123</td></tr>
     </table>`;
   const msg = `
-    <div style="background:#fff;padding:20px;border:1px solid ${EMAIL_BRAND.mediumGray};border-radius:8px;margin-top:20px">
-      <h2 style="color:${EMAIL_BRAND.navy};margin-top:0">Message</h2>
+    <div style="background:#fff;padding:20px;border:1px solid ${EMAIL_BRAND.mediumGray};border-radius:4px;margin-top:20px">
+      <h2 style="color:${EMAIL_BRAND.charcoal};margin-top:0">Message</h2>
       <p style="color:${EMAIL_BRAND.darkGray};line-height:1.6">We are evaluating OneStream vs Anaplan for our FP&amp;A transformation. Could you advise on typical timelines and costs for a 500-user implementation?</p>
     </div>`;
   return `
@@ -98,7 +98,7 @@ function tplContactVerification(): string {
     <p style="color:${EMAIL_BRAND.mutedGray};font-size:14px;margin:25px 0 10px">
       If the button above doesn't work, copy and paste this link into your browser:
     </p>
-    <p style="color:${EMAIL_BRAND.cyan};font-size:13px;word-break:break-all;background:${EMAIL_BRAND.lightGray};padding:12px;border-radius:4px;margin:0 0 25px">
+    <p style="color:${EMAIL_BRAND.deepMint};font-size:13px;word-break:break-all;background:${EMAIL_BRAND.lightGray};padding:12px;border-radius:4px;margin:0 0 25px">
       ${verificationLink}
     </p>
     ${generateWarningBox("<strong>Note:</strong> This link expires in 24 hours.")}
@@ -147,23 +147,23 @@ function tplFinanceCompassOtp(): string {
 // 6. Lead verified notification (admin alert after OTP confirmed)
 function tplLeadVerified(): string {
   const table = `
-    <h2 style="color:${EMAIL_BRAND.navy};margin-top:0">Lead Details</h2>
+    <h2 style="color:${EMAIL_BRAND.charcoal};margin-top:0">Lead Details</h2>
     <table style="width:100%;border-collapse:collapse">
       <tr><td style="padding:8px 0;color:${EMAIL_BRAND.mutedGray};width:120px"><strong>Name:</strong></td><td>${TEST_NAME} Cooper (test)</td></tr>
-      <tr><td style="padding:8px 0;color:${EMAIL_BRAND.mutedGray}"><strong>Email:</strong></td><td><a href="mailto:${TEST_RECIPIENT}" style="color:${EMAIL_BRAND.teal}">${TEST_RECIPIENT}</a></td></tr>
+      <tr><td style="padding:8px 0;color:${EMAIL_BRAND.mutedGray}"><strong>Email:</strong></td><td><a href="mailto:${TEST_RECIPIENT}" style="color:${EMAIL_BRAND.deepMint}">${TEST_RECIPIENT}</a></td></tr>
       <tr><td style="padding:8px 0;color:${EMAIL_BRAND.mutedGray}"><strong>Company:</strong></td><td>Constancia</td></tr>
       <tr><td style="padding:8px 0;color:${EMAIL_BRAND.mutedGray}"><strong>Job Title:</strong></td><td>Director</td></tr>
       <tr><td style="padding:8px 0;color:${EMAIL_BRAND.mutedGray}"><strong>Resource:</strong></td><td>EPM Vendor Comparison Guide 2025</td></tr>
     </table>`;
   const fingerprint = `
-    <div style="background:#fff3cd;padding:15px;border-radius:8px;margin-bottom:20px;border-left:4px solid #ffc107">
-      <h3 style="color:#856404;margin:0 0 10px;font-size:14px">Browser Fingerprint Data</h3>
+    <div style="background:#edf5f1;padding:15px;border-radius:4px;margin-bottom:20px;border:1px solid #7FB8A3">
+      <h3 style="color:#5E8D7A;margin:0 0 10px;font-size:14px;letter-spacing:0.04em">Browser Fingerprint Data</h3>
       <table style="width:100%;border-collapse:collapse;font-size:12px">
-        <tr><td style="padding:4px 0;color:#856404;width:120px"><strong>Screen:</strong></td><td>2560×1440</td></tr>
-        <tr><td style="padding:4px 0;color:#856404"><strong>Timezone:</strong></td><td>Europe/London</td></tr>
-        <tr><td style="padding:4px 0;color:#856404"><strong>Language:</strong></td><td>en-GB</td></tr>
-        <tr><td style="padding:4px 0;color:#856404"><strong>Referrer:</strong></td><td>https://www.linkedin.com/</td></tr>
-        <tr><td style="padding:4px 0;color:#856404"><strong>Page:</strong></td><td>https://constancia.com/resources</td></tr>
+        <tr><td style="padding:4px 0;color:#5E8D7A;width:120px"><strong>Screen:</strong></td><td>2560×1440</td></tr>
+        <tr><td style="padding:4px 0;color:#5E8D7A"><strong>Timezone:</strong></td><td>Europe/London</td></tr>
+        <tr><td style="padding:4px 0;color:#5E8D7A"><strong>Language:</strong></td><td>en-GB</td></tr>
+        <tr><td style="padding:4px 0;color:#5E8D7A"><strong>Referrer:</strong></td><td>https://www.linkedin.com/</td></tr>
+        <tr><td style="padding:4px 0;color:#5E8D7A"><strong>Page:</strong></td><td>https://constancia.com/resources</td></tr>
       </table>
     </div>`;
   return `

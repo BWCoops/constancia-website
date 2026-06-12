@@ -7,7 +7,7 @@
  * needed here.
  */
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { SEOHead } from "@/components/seo-head";
 import { Footer } from "@/components/footer";
 import constanciaLogoDarkWebp from "@assets/constancia-logo-dark.webp";
@@ -29,9 +29,33 @@ const SEO = {
 };
 
 export default function HoldingPage() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
   useEffect(() => {
     document.body.classList.add("is-holding-page");
     return () => document.body.classList.remove("is-holding-page");
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const unmute = () => {
+      video.muted = false;
+      document.removeEventListener("click", unmute);
+      document.removeEventListener("touchstart", unmute);
+      document.removeEventListener("keydown", unmute);
+    };
+
+    document.addEventListener("click", unmute, { once: true });
+    document.addEventListener("touchstart", unmute, { once: true });
+    document.addEventListener("keydown", unmute, { once: true });
+
+    return () => {
+      document.removeEventListener("click", unmute);
+      document.removeEventListener("touchstart", unmute);
+      document.removeEventListener("keydown", unmute);
+    };
   }, []);
 
   return (
@@ -64,6 +88,7 @@ export default function HoldingPage() {
             without waiting on metadata. */}
         <div className="holding-film" aria-label="Constancia launch film">
           <video
+            ref={videoRef}
             className="holding-film__video"
             width={1080}
             height={1350}

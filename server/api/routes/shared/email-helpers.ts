@@ -31,7 +31,7 @@ export async function sendContactFormNotification(submission: {
 }): Promise<boolean> {
   try {
     const contactDetailsTable = `
-      <h2 style="color: ${EMAIL_BRAND.navy}; margin-top: 0;">Contact Details</h2>
+      <h2 style="color: ${EMAIL_BRAND.charcoal}; margin-top: 0;">Contact Details</h2>
       <table style="width: 100%; border-collapse: collapse;">
         <tr>
           <td style="padding: 8px 0; color: ${EMAIL_BRAND.mutedGray}; width: 120px;"><strong>Name:</strong></td>
@@ -39,7 +39,7 @@ export async function sendContactFormNotification(submission: {
         </tr>
         <tr>
           <td style="padding: 8px 0; color: ${EMAIL_BRAND.mutedGray};"><strong>Email:</strong></td>
-          <td style="padding: 8px 0;"><a href="mailto:${escapeHtml(submission.email)}" style="color: ${EMAIL_BRAND.teal};">${escapeHtml(submission.email)}</a></td>
+          <td style="padding: 8px 0;"><a href="mailto:${escapeHtml(submission.email)}" style="color: ${EMAIL_BRAND.deepMint};">${escapeHtml(submission.email)}</a></td>
         </tr>
         <tr>
           <td style="padding: 8px 0; color: ${EMAIL_BRAND.mutedGray};"><strong>Company:</strong></td>
@@ -60,7 +60,7 @@ export async function sendContactFormNotification(submission: {
 
     const messageSection = `
       <div style="background: ${EMAIL_BRAND.white}; padding: 20px; border: 1px solid ${EMAIL_BRAND.mediumGray}; border-radius: 8px; margin-top: 20px;">
-        <h2 style="color: ${EMAIL_BRAND.navy}; margin-top: 0;">Message</h2>
+        <h2 style="color: ${EMAIL_BRAND.charcoal}; margin-top: 0;">Message</h2>
         <p style="color: ${EMAIL_BRAND.darkGray}; line-height: 1.6; white-space: pre-wrap;">${escapeHtml(submission.message)}</p>
       </div>
     `;
@@ -112,7 +112,7 @@ export async function sendContactVerificationEmail(to: string, firstName: string
       <p style="color: ${EMAIL_BRAND.mutedGray}; font-size: 14px; margin: 25px 0 10px 0;">
         If the button above doesn't work, copy and paste this link into your browser:
       </p>
-      <p style="color: ${EMAIL_BRAND.cyan}; font-size: 13px; word-break: break-all; background-color: ${EMAIL_BRAND.lightGray}; padding: 12px; border-radius: 4px; margin: 0 0 25px 0;">
+      <p style="color: ${EMAIL_BRAND.deepMint}; font-size: 13px; word-break: break-all; background-color: ${EMAIL_BRAND.lightGray}; padding: 12px; border-radius: 4px; margin: 0 0 25px 0;">
         ${verificationLink}
       </p>
       
@@ -187,32 +187,32 @@ export async function sendLeadVerificationNotification(lead: {
     const hasFingerprintData = lead.screenResolution || lead.timezone || lead.language || lead.referrer || lead.pageUrl;
     
     const fingerprintSection = hasFingerprintData ? `
-      <div style="background: #fff3cd; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #ffc107;">
-        <h3 style="color: #856404; margin: 0 0 10px 0; font-size: 14px;">Browser Fingerprint Data</h3>
+      <div style="background: #edf5f1; padding: 15px; border-radius: 4px; margin-bottom: 20px; border: 1px solid #7FB8A3;">
+        <h3 style="color: #5E8D7A; margin: 0 0 10px 0; font-size: 14px; letter-spacing: 0.04em;">Browser Fingerprint Data</h3>
         <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
           ${lead.screenResolution ? `
           <tr>
-            <td style="padding: 4px 0; color: #856404; width: 120px;"><strong>Screen:</strong></td>
+            <td style="padding: 4px 0; color: #5E8D7A; width: 120px;"><strong>Screen:</strong></td>
             <td style="padding: 4px 0; color: ${EMAIL_BRAND.darkGray};">${lead.screenResolution}</td>
           </tr>` : ''}
           ${lead.timezone ? `
           <tr>
-            <td style="padding: 4px 0; color: #856404;"><strong>Timezone:</strong></td>
+            <td style="padding: 4px 0; color: #5E8D7A;"><strong>Timezone:</strong></td>
             <td style="padding: 4px 0; color: ${EMAIL_BRAND.darkGray};">${lead.timezone}</td>
           </tr>` : ''}
           ${lead.language ? `
           <tr>
-            <td style="padding: 4px 0; color: #856404;"><strong>Language:</strong></td>
+            <td style="padding: 4px 0; color: #5E8D7A;"><strong>Language:</strong></td>
             <td style="padding: 4px 0; color: ${EMAIL_BRAND.darkGray};">${lead.language}</td>
           </tr>` : ''}
           ${lead.referrer ? `
           <tr>
-            <td style="padding: 4px 0; color: #856404;"><strong>Referrer:</strong></td>
+            <td style="padding: 4px 0; color: #5E8D7A;"><strong>Referrer:</strong></td>
             <td style="padding: 4px 0; color: ${EMAIL_BRAND.darkGray};">${lead.referrer}</td>
           </tr>` : ''}
           ${lead.pageUrl ? `
           <tr>
-            <td style="padding: 4px 0; color: #856404;"><strong>Page URL:</strong></td>
+            <td style="padding: 4px 0; color: #5E8D7A;"><strong>Page URL:</strong></td>
             <td style="padding: 4px 0; color: ${EMAIL_BRAND.darkGray};">${lead.pageUrl}</td>
           </tr>` : ''}
         </table>
@@ -220,7 +220,7 @@ export async function sendLeadVerificationNotification(lead: {
     ` : '';
 
     const leadDetailsTable = `
-      <h2 style="color: ${EMAIL_BRAND.navy}; margin-top: 0;">Lead Details</h2>
+      <h2 style="color: ${EMAIL_BRAND.charcoal}; margin-top: 0;">Lead Details</h2>
       <table style="width: 100%; border-collapse: collapse;">
         <tr>
           <td style="padding: 8px 0; color: ${EMAIL_BRAND.mutedGray}; width: 120px;"><strong>Name:</strong></td>
@@ -228,7 +228,7 @@ export async function sendLeadVerificationNotification(lead: {
         </tr>
         <tr>
           <td style="padding: 8px 0; color: ${EMAIL_BRAND.mutedGray};"><strong>Email:</strong></td>
-          <td style="padding: 8px 0;"><a href="mailto:${lead.email}" style="color: ${EMAIL_BRAND.teal};">${lead.email}</a></td>
+          <td style="padding: 8px 0;"><a href="mailto:${lead.email}" style="color: ${EMAIL_BRAND.deepMint};">${lead.email}</a></td>
         </tr>
         <tr>
           <td style="padding: 8px 0; color: ${EMAIL_BRAND.mutedGray};"><strong>Company:</strong></td>

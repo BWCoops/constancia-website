@@ -296,15 +296,15 @@ async function sendWidgetLeadNotification(data: {
   if (hubspotResult.success) {
     const action = hubspotResult.isNew ? "created" : "updated";
     hubspotStatusHtml = `
-      <div style="background-color: #d4edda; border: 1px solid #c3e6cb; border-radius: 8px; padding: 12px; margin-bottom: 16px; text-align: center;">
-        <span style="color: #155724; font-weight: 500;">Contact ${action} in HubSpot</span>
-        ${hubspotResult.contactId ? `<br><span style="color: #666; font-size: 12px;">ID: ${hubspotResult.contactId}</span>` : ""}
+      <div style="background-color: #edf5f1; border: 1px solid #7FB8A3; border-radius: 4px; padding: 12px; margin-bottom: 16px; text-align: center;">
+        <span style="color: #5E8D7A; font-weight: 500;">Contact ${action} in HubSpot</span>
+        ${hubspotResult.contactId ? `<br><span style="color: #7a7773; font-size: 12px;">ID: ${hubspotResult.contactId}</span>` : ""}
       </div>`;
   } else {
     hubspotStatusHtml = `
-      <div style="background-color: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; padding: 12px; margin-bottom: 16px; text-align: center;">
-        <span style="color: #856404; font-weight: 500;">Manual HubSpot action required</span>
-        <br><span style="color: #666; font-size: 12px;">${hubspotResult.error || "API connection unavailable"}</span>
+      <div style="background-color: #f9f3e8; border: 1px solid #dedad2; border-radius: 4px; padding: 12px; margin-bottom: 16px; text-align: center;">
+        <span style="color: #7a6a50; font-weight: 500;">Manual HubSpot action required</span>
+        <br><span style="color: #7a7773; font-size: 12px;">${hubspotResult.error || "API connection unavailable"}</span>
       </div>`;
   }
   
@@ -350,7 +350,7 @@ async function sendWidgetLeadNotification(data: {
         </tr>
         <tr>
           <td style="padding: 8px 0; color: #666;">Company:</td>
-          <td style="padding: 8px 0; color: #12161D; font-weight: 500;">${company}${needsVerification ? ' <span style="color: #856404; font-size: 11px;">(verify)</span>' : ''}</td>
+          <td style="padding: 8px 0; color: #252826; font-weight: 500;">${company}${needsVerification ? ' <span style="color: #7a6a50; font-size: 11px;">(verify)</span>' : ''}</td>
         </tr>
         <tr>
           <td style="padding: 8px 0; color: #666;">Role:</td>

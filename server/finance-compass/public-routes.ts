@@ -1024,8 +1024,8 @@ publicRouter.post("/verify-otp", checkBetaAccessByContactIdMiddleware, async (re
                   <p style="color: #333; margin: 0;">${escapeHtml(prioritiesText)}</p>
                 </div>
                 
-                <div style="background: ${hubspotSuccess ? '#e8f4e8' : '#fff3cd'}; padding: 15px; border-radius: 8px; border-left: 4px solid ${hubspotSuccess ? '#28a745' : '#ffc107'};">
-                  <p style="color: ${hubspotSuccess ? '#155724' : '#856404'}; margin: 0; font-weight: 500;">
+                <div style="background: ${hubspotSuccess ? '#edf5f1' : '#f9f3e8'}; padding: 15px; border-radius: 4px; border: 1px solid ${hubspotSuccess ? '#7FB8A3' : '#dedad2'};">
+                  <p style="color: ${hubspotSuccess ? '#5E8D7A' : '#7a6a50'}; margin: 0; font-weight: 500; font-size: 14px;">
                     ${hubspotSuccess 
                       ? 'HubSpot Status: This lead has been synced to HubSpot successfully.' 
                       : 'HubSpot Status: Sync failed - please add this lead manually.'}

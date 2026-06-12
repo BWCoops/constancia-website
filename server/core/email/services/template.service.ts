@@ -131,7 +131,7 @@ export class TemplateService implements IEmailTemplateService {
     const header = generateNotificationHeader({ title: 'New Contact Form Submission', subtitle: 'Constancia Website' });
     
     const contactTable = `
-      <h2 style="color: ${EMAIL_BRAND.navy}; margin-top: 0;">Contact Details</h2>
+      <h2 style="color: ${EMAIL_BRAND.charcoal}; margin-top: 0;">Contact Details</h2>
       <table style="width: 100%; border-collapse: collapse;">
         <tr>
           <td style="padding: 8px 0; color: ${EMAIL_BRAND.mutedGray}; width: 120px;"><strong>Name:</strong></td>
@@ -139,7 +139,7 @@ export class TemplateService implements IEmailTemplateService {
         </tr>
         <tr>
           <td style="padding: 8px 0; color: ${EMAIL_BRAND.mutedGray};"><strong>Email:</strong></td>
-          <td style="padding: 8px 0;"><a href="mailto:${this.escapeHtml(data.email)}" style="color: ${EMAIL_BRAND.teal};">${this.escapeHtml(data.email)}</a></td>
+          <td style="padding: 8px 0;"><a href="mailto:${this.escapeHtml(data.email)}" style="color: ${EMAIL_BRAND.deepMint};">${this.escapeHtml(data.email)}</a></td>
         </tr>
         <tr>
           <td style="padding: 8px 0; color: ${EMAIL_BRAND.mutedGray};"><strong>Company:</strong></td>
@@ -160,7 +160,7 @@ export class TemplateService implements IEmailTemplateService {
     
     const messageSection = data.message ? `
       <div style="background: ${EMAIL_BRAND.white}; padding: 20px; border: 1px solid ${EMAIL_BRAND.mediumGray}; border-radius: 8px; margin-top: 20px;">
-        <h2 style="color: ${EMAIL_BRAND.navy}; margin-top: 0;">Message</h2>
+        <h2 style="color: ${EMAIL_BRAND.charcoal}; margin-top: 0;">Message</h2>
         <p style="color: ${EMAIL_BRAND.darkGray}; line-height: 1.6; white-space: pre-wrap;">${this.escapeHtml(data.message)}</p>
       </div>
     ` : '';
@@ -200,7 +200,7 @@ export class TemplateService implements IEmailTemplateService {
       <p style="color: ${EMAIL_BRAND.mutedGray}; font-size: 14px; margin: 25px 0 10px 0;">
         If the button above doesn't work, copy and paste this link into your browser:
       </p>
-      <p style="color: ${EMAIL_BRAND.cyan}; font-size: 13px; word-break: break-all; background-color: ${EMAIL_BRAND.lightGray}; padding: 12px; border-radius: 4px; margin: 0 0 25px 0;">
+      <p style="color: ${EMAIL_BRAND.deepMint}; font-size: 13px; word-break: break-all; background-color: ${EMAIL_BRAND.lightGray}; padding: 12px; border-radius: 4px; margin: 0 0 25px 0;">
         ${verificationLink}
       </p>
       
@@ -223,32 +223,32 @@ export class TemplateService implements IEmailTemplateService {
     const hasFingerprintData = data.screenResolution || data.timezone || data.language || data.referrer || data.pageUrl;
     
     const fingerprintSection = hasFingerprintData ? `
-      <div style="background: #fff3cd; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #ffc107;">
-        <h3 style="color: #856404; margin: 0 0 10px 0; font-size: 14px;">Browser Fingerprint Data</h3>
+      <div style="background: #edf5f1; padding: 15px; border-radius: 4px; margin-bottom: 20px; border: 1px solid #7FB8A3;">
+        <h3 style="color: #5E8D7A; margin: 0 0 10px 0; font-size: 14px; letter-spacing: 0.04em;">Browser Fingerprint Data</h3>
         <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
           ${data.screenResolution ? `
           <tr>
-            <td style="padding: 4px 0; color: #856404; width: 120px;"><strong>Screen:</strong></td>
+            <td style="padding: 4px 0; color: #5E8D7A; width: 120px;"><strong>Screen:</strong></td>
             <td style="padding: 4px 0; color: ${EMAIL_BRAND.darkGray};">${this.escapeHtml(data.screenResolution)}</td>
           </tr>` : ''}
           ${data.timezone ? `
           <tr>
-            <td style="padding: 4px 0; color: #856404;"><strong>Timezone:</strong></td>
+            <td style="padding: 4px 0; color: #5E8D7A;"><strong>Timezone:</strong></td>
             <td style="padding: 4px 0; color: ${EMAIL_BRAND.darkGray};">${this.escapeHtml(data.timezone)}</td>
           </tr>` : ''}
           ${data.language ? `
           <tr>
-            <td style="padding: 4px 0; color: #856404;"><strong>Language:</strong></td>
+            <td style="padding: 4px 0; color: #5E8D7A;"><strong>Language:</strong></td>
             <td style="padding: 4px 0; color: ${EMAIL_BRAND.darkGray};">${this.escapeHtml(data.language)}</td>
           </tr>` : ''}
           ${data.referrer ? `
           <tr>
-            <td style="padding: 4px 0; color: #856404;"><strong>Referrer:</strong></td>
+            <td style="padding: 4px 0; color: #5E8D7A;"><strong>Referrer:</strong></td>
             <td style="padding: 4px 0; color: ${EMAIL_BRAND.darkGray};">${this.escapeHtml(data.referrer)}</td>
           </tr>` : ''}
           ${data.pageUrl ? `
           <tr>
-            <td style="padding: 4px 0; color: #856404;"><strong>Page URL:</strong></td>
+            <td style="padding: 4px 0; color: #5E8D7A;"><strong>Page URL:</strong></td>
             <td style="padding: 4px 0; color: ${EMAIL_BRAND.darkGray};">${this.escapeHtml(data.pageUrl)}</td>
           </tr>` : ''}
         </table>
@@ -256,7 +256,7 @@ export class TemplateService implements IEmailTemplateService {
     ` : '';
 
     const leadDetailsTable = `
-      <h2 style="color: ${EMAIL_BRAND.navy}; margin-top: 0;">Lead Details</h2>
+      <h2 style="color: ${EMAIL_BRAND.charcoal}; margin-top: 0;">Lead Details</h2>
       <table style="width: 100%; border-collapse: collapse;">
         <tr>
           <td style="padding: 8px 0; color: ${EMAIL_BRAND.mutedGray}; width: 120px;"><strong>Name:</strong></td>
@@ -264,7 +264,7 @@ export class TemplateService implements IEmailTemplateService {
         </tr>
         <tr>
           <td style="padding: 8px 0; color: ${EMAIL_BRAND.mutedGray};"><strong>Email:</strong></td>
-          <td style="padding: 8px 0;"><a href="mailto:${this.escapeHtml(data.email)}" style="color: ${EMAIL_BRAND.teal};">${this.escapeHtml(data.email)}</a></td>
+          <td style="padding: 8px 0;"><a href="mailto:${this.escapeHtml(data.email)}" style="color: ${EMAIL_BRAND.deepMint};">${this.escapeHtml(data.email)}</a></td>
         </tr>
         <tr>
           <td style="padding: 8px 0; color: ${EMAIL_BRAND.mutedGray};"><strong>Company:</strong></td>

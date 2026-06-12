@@ -2,21 +2,26 @@
  * Modular Email Components
  *
  * Reusable HTML components for email templates with Constancia branding.
- * Includes headers with logo, footers, and common styling.
+ * Palette: charcoal #252826 · cream #F6F3EE · rose #C77A93 · mint #7FB8A3
  */
 
-import { TYPE_LOGO_TURQUOISE_SMALL_BASE64, TYPE_LOGO_WHITE_SMALL_BASE64 } from '../../pdf-logo-base64';
+import { CONSTANCIA_LOGO_DARK_BASE64 } from '../../utils/constancia-email-logo-b64';
 
 export const EMAIL_BRAND = {
-  navy: '#02205B',
-  cyan: '#12EBFC',
-  teal: '#0884AA',
-  cream: '#FEFFF3',
+  // Core Constancia palette
+  charcoal: '#252826',    // brand-slate — dark headers / footers
+  cream: '#F6F3EE',       // brand-cream — primary light ink
+  warmCream: '#EFEAE0',   // outer wrapper background
+  rose: '#C77A93',        // brand-rose — CTA buttons / accents
+  mint: '#7FB8A3',        // brand-mint — secondary accent
+  deepMint: '#5E8D7A',    // brand-teal — links / deep accent
+  // Utility
   white: '#FFFFFF',
-  lightGray: '#f8f9fa',
-  mediumGray: '#e5e7eb',
-  darkGray: '#252826',
-  mutedGray: '#666666',
+  lightGray: '#f5f2ec',   // warm light card surface
+  mediumGray: '#dedad2',  // warm border colour
+  darkGray: '#252826',    // alias for charcoal (used in body text)
+  mutedGray: '#7a7773',   // muted body text on light backgrounds
+  mutedCream: '#b8b4ae',  // muted text on dark backgrounds
 };
 
 export const EMAIL_CONTACT = {
@@ -36,22 +41,21 @@ export interface EmailHeaderOptions {
 }
 
 export function generateEmailHeader(options: EmailHeaderOptions = {}): string {
-  const { 
+  const {
     variant = 'dark',
     tagline = '',
-    showTagline = false 
+    showTagline = false,
   } = options;
 
   const isDark = variant === 'dark';
-  const logo = isDark ? TYPE_LOGO_WHITE_SMALL_BASE64 : TYPE_LOGO_TURQUOISE_SMALL_BASE64;
-  const bgColor = isDark ? EMAIL_BRAND.navy : EMAIL_BRAND.white;
-  const taglineColor = isDark ? EMAIL_BRAND.white : EMAIL_BRAND.teal;
+  const bgColor = isDark ? EMAIL_BRAND.charcoal : EMAIL_BRAND.warmCream;
+  const taglineColor = isDark ? EMAIL_BRAND.mint : EMAIL_BRAND.deepMint;
 
   return `
-    <div style="background-color: ${bgColor}; padding: 30px 20px; text-align: center;">
-      <img src="${logo}" alt="Constancia" style="height: 36px; max-width: 140px;" />
+    <div style="background-color: ${bgColor}; padding: 32px 24px; text-align: center;">
+      <img src="${CONSTANCIA_LOGO_DARK_BASE64}" alt="Constancia" style="height: 38px; max-width: 160px; display: block; margin: 0 auto;" />
       ${showTagline ? `
-        <p style="color: ${taglineColor}; margin: 12px 0 0 0; font-size: 13px; opacity: 0.9;">${tagline}</p>
+        <p style="color: ${taglineColor}; margin: 12px 0 0 0; font-size: 13px; letter-spacing: 0.04em;">${tagline}</p>
       ` : ''}
     </div>
   `;
@@ -64,38 +68,37 @@ export interface EmailFooterOptions {
 }
 
 export function generateEmailFooter(options: EmailFooterOptions = {}): string {
-  const { 
+  const {
     variant = 'dark',
     showFinanceCompass = false,
-    disclaimer = 'Constancia delivers connected finance intelligence — bringing ERP, EPM, HRIS, CRM and your data warehouse into one source of truth. Official Abacum partner for mid-market FP&A. OneStream partner for enterprise EPM.'
+    disclaimer = 'Constancia delivers connected finance intelligence — bringing ERP, EPM, HRIS, CRM and your data warehouse into one source of truth. Official Abacum partner for mid-market FP&A. OneStream partner for enterprise EPM.',
   } = options;
 
   const isDark = variant === 'dark';
-  const bgColor = isDark ? EMAIL_BRAND.navy : EMAIL_BRAND.lightGray;
-  const textColor = isDark ? EMAIL_BRAND.white : EMAIL_BRAND.darkGray;
-  const mutedColor = isDark ? '#aaaaaa' : EMAIL_BRAND.mutedGray;
-  const linkColor = isDark ? EMAIL_BRAND.cyan : EMAIL_BRAND.teal;
+  const bgColor = isDark ? EMAIL_BRAND.charcoal : EMAIL_BRAND.warmCream;
+  const textColor = isDark ? EMAIL_BRAND.mutedCream : EMAIL_BRAND.mutedGray;
+  const linkColor = isDark ? EMAIL_BRAND.mint : EMAIL_BRAND.deepMint;
 
   const financeCompassCta = showFinanceCompass ? `
-    <div style="margin-bottom: 16px;">
-      <a href="${EMAIL_CONTACT.financeCompassUrl}" 
-         style="display: inline-block; background-color: ${EMAIL_BRAND.cyan}; color: ${EMAIL_BRAND.navy}; 
-                padding: 12px 28px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">
+    <div style="margin-bottom: 20px;">
+      <a href="${EMAIL_CONTACT.financeCompassUrl}"
+         style="display: inline-block; background-color: ${EMAIL_BRAND.rose}; color: ${EMAIL_BRAND.cream};
+                padding: 12px 28px; border-radius: 4px; text-decoration: none; font-weight: 600; font-size: 14px; letter-spacing: 0.02em;">
         Try FinanceCompass Free
       </a>
     </div>
   ` : '';
 
   return `
-    <div style="background-color: ${bgColor}; padding: 25px 20px; text-align: center;">
+    <div style="background-color: ${bgColor}; padding: 28px 24px; text-align: center;">
       ${financeCompassCta}
-      <p style="color: ${textColor}; font-size: 12px; margin: 0 0 10px 0; line-height: 1.6;">
+      <p style="color: ${textColor}; font-size: 12px; margin: 0 0 10px 0; line-height: 1.7;">
         ${disclaimer}
       </p>
-      <p style="color: ${mutedColor}; font-size: 12px; margin: 0 0 10px 0;">
+      <p style="color: ${textColor}; font-size: 12px; margin: 0 0 10px 0;">
         ${EMAIL_CONTACT.address}
       </p>
-      <a href="${EMAIL_CONTACT.websiteUrl}" style="color: ${linkColor}; font-size: 12px; text-decoration: none;">${EMAIL_CONTACT.website}</a>
+      <a href="${EMAIL_CONTACT.websiteUrl}" style="color: ${linkColor}; font-size: 12px; text-decoration: none; letter-spacing: 0.03em;">${EMAIL_CONTACT.website}</a>
     </div>
   `;
 }
@@ -109,27 +112,29 @@ export function generateNotificationHeader(options: NotificationHeaderOptions): 
   const { title, subtitle } = options;
 
   return `
-    <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, ${EMAIL_BRAND.navy} 0%, ${EMAIL_BRAND.teal} 100%); border-radius: 8px;">
-      <h1 style="color: ${EMAIL_BRAND.cyan}; margin: 0; font-size: 22px;">${title}</h1>
-      ${subtitle ? `<p style="color: ${EMAIL_BRAND.white}; margin: 8px 0 0 0; font-size: 13px;">${subtitle}</p>` : ''}
+    <div style="text-align: center; margin-bottom: 28px; padding: 28px 24px; background-color: ${EMAIL_BRAND.charcoal}; border-radius: 4px;">
+      <img src="${CONSTANCIA_LOGO_DARK_BASE64}" alt="Constancia" style="height: 32px; max-width: 140px; display: block; margin: 0 auto 16px;" />
+      <h1 style="color: ${EMAIL_BRAND.cream}; margin: 0; font-size: 20px; font-weight: 600; letter-spacing: 0.02em;">${title}</h1>
+      ${subtitle ? `<p style="color: ${EMAIL_BRAND.mint}; margin: 8px 0 0 0; font-size: 13px; letter-spacing: 0.04em;">${subtitle}</p>` : ''}
     </div>
   `;
 }
 
 export function generateOtpBox(otp: string): string {
   return `
-    <div style="background: linear-gradient(135deg, ${EMAIL_BRAND.navy} 0%, ${EMAIL_BRAND.teal} 100%); padding: 24px; border-radius: 8px; text-align: center; margin: 30px 0;">
-      <span style="font-size: 36px; font-weight: bold; letter-spacing: 10px; color: ${EMAIL_BRAND.cyan};">${otp}</span>
+    <div style="background-color: ${EMAIL_BRAND.charcoal}; padding: 28px 24px; border-radius: 4px; text-align: center; margin: 28px 0;">
+      <p style="color: ${EMAIL_BRAND.mint}; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 12px 0;">Your access code</p>
+      <span style="font-size: 38px; font-weight: 700; letter-spacing: 12px; color: ${EMAIL_BRAND.cream}; font-family: 'Courier New', monospace;">${otp}</span>
     </div>
   `;
 }
 
 export function generateCtaButton(text: string, href: string): string {
   return `
-    <div style="text-align: center; margin: 35px 0;">
-      <a href="${href}" 
-         style="display: inline-block; background-color: ${EMAIL_BRAND.cyan}; color: ${EMAIL_BRAND.navy}; 
-                padding: 16px 40px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 16px;">
+    <div style="text-align: center; margin: 32px 0;">
+      <a href="${href}"
+         style="display: inline-block; background-color: ${EMAIL_BRAND.rose}; color: ${EMAIL_BRAND.cream};
+                padding: 15px 40px; border-radius: 4px; text-decoration: none; font-weight: 600; font-size: 15px; letter-spacing: 0.03em;">
         ${text}
       </a>
     </div>
@@ -138,8 +143,8 @@ export function generateCtaButton(text: string, href: string): string {
 
 export function generateWarningBox(message: string): string {
   return `
-    <div style="background-color: #fff8e6; border-left: 4px solid #f0b429; padding: 12px 16px; margin: 25px 0;">
-      <p style="color: #8a6d3b; font-size: 14px; margin: 0;">
+    <div style="background-color: #f9f3e8; border: 1px solid #dedad2; border-radius: 4px; padding: 14px 18px; margin: 24px 0;">
+      <p style="color: #7a6a50; font-size: 14px; margin: 0; line-height: 1.6;">
         ${message}
       </p>
     </div>
@@ -148,8 +153,8 @@ export function generateWarningBox(message: string): string {
 
 export function generateSuccessBox(message: string): string {
   return `
-    <div style="background: #e8f4e8; padding: 15px; border-radius: 8px; border-left: 4px solid #28a745;">
-      <p style="color: #155724; margin: 0; font-weight: 500;">
+    <div style="background-color: #edf5f1; border: 1px solid ${EMAIL_BRAND.mint}; border-radius: 4px; padding: 14px 18px; margin: 24px 0;">
+      <p style="color: ${EMAIL_BRAND.deepMint}; margin: 0; font-weight: 500; font-size: 14px; line-height: 1.6;">
         ${message}
       </p>
     </div>
@@ -158,7 +163,7 @@ export function generateSuccessBox(message: string): string {
 
 export function generateInfoCard(content: string): string {
   return `
-    <div style="background: ${EMAIL_BRAND.lightGray}; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+    <div style="background: ${EMAIL_BRAND.lightGray}; padding: 22px; border-radius: 4px; margin-bottom: 20px; border: 1px solid ${EMAIL_BRAND.mediumGray};">
       ${content}
     </div>
   `;
@@ -166,7 +171,7 @@ export function generateInfoCard(content: string): string {
 
 export function wrapEmailContent(content: string): string {
   return `
-    <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 0; background-color: #EFEAE0;">
+    <div style="font-family: Georgia, 'Times New Roman', serif; max-width: 600px; margin: 0 auto; padding: 0; background-color: ${EMAIL_BRAND.warmCream};">
       ${content}
     </div>
   `;
@@ -175,7 +180,7 @@ export function wrapEmailContent(content: string): string {
 export function generateEmailWrapper(header: string, body: string, footer: string): string {
   return wrapEmailContent(`
     ${header}
-    <div style="background-color: ${EMAIL_BRAND.white}; padding: 40px 30px;">
+    <div style="background-color: ${EMAIL_BRAND.white}; padding: 40px 32px;">
       ${body}
     </div>
     ${footer}

@@ -156,33 +156,33 @@ async function sendLeadVerificationNotification(lead: {
 }): Promise<boolean> {
   try {
     const fingerprintSection = (lead.screenResolution || lead.timezone || lead.language || lead.referrer || lead.pageUrl) ? `
-          <div style="background: #fff3cd; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #ffc107;">
-            <h3 style="color: #856404; margin: 0 0 10px 0; font-size: 14px;">Browser Fingerprint Data</h3>
+          <div style="background: #edf5f1; padding: 15px; border-radius: 4px; margin-bottom: 20px; border: 1px solid #7FB8A3;">
+            <h3 style="color: #5E8D7A; margin: 0 0 10px 0; font-size: 14px; letter-spacing: 0.04em;">Browser Fingerprint Data</h3>
             <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
               ${lead.screenResolution ? `
               <tr>
-                <td style="padding: 4px 0; color: #856404; width: 120px;"><strong>Screen:</strong></td>
-                <td style="padding: 4px 0; color: #333;">${lead.screenResolution}</td>
+                <td style="padding: 4px 0; color: #5E8D7A; width: 120px;"><strong>Screen:</strong></td>
+                <td style="padding: 4px 0; color: #252826;">${lead.screenResolution}</td>
               </tr>` : ''}
               ${lead.timezone ? `
               <tr>
-                <td style="padding: 4px 0; color: #856404;"><strong>Timezone:</strong></td>
-                <td style="padding: 4px 0; color: #333;">${lead.timezone}</td>
+                <td style="padding: 4px 0; color: #5E8D7A;"><strong>Timezone:</strong></td>
+                <td style="padding: 4px 0; color: #252826;">${lead.timezone}</td>
               </tr>` : ''}
               ${lead.language ? `
               <tr>
-                <td style="padding: 4px 0; color: #856404;"><strong>Language:</strong></td>
-                <td style="padding: 4px 0; color: #333;">${lead.language}</td>
+                <td style="padding: 4px 0; color: #5E8D7A;"><strong>Language:</strong></td>
+                <td style="padding: 4px 0; color: #252826;">${lead.language}</td>
               </tr>` : ''}
               ${lead.referrer ? `
               <tr>
-                <td style="padding: 4px 0; color: #856404;"><strong>Referrer:</strong></td>
-                <td style="padding: 4px 0; color: #333;">${lead.referrer}</td>
+                <td style="padding: 4px 0; color: #5E8D7A;"><strong>Referrer:</strong></td>
+                <td style="padding: 4px 0; color: #252826;">${lead.referrer}</td>
               </tr>` : ''}
               ${lead.pageUrl ? `
               <tr>
-                <td style="padding: 4px 0; color: #856404;"><strong>Page URL:</strong></td>
-                <td style="padding: 4px 0; color: #333;">${lead.pageUrl}</td>
+                <td style="padding: 4px 0; color: #5E8D7A;"><strong>Page URL:</strong></td>
+                <td style="padding: 4px 0; color: #252826;">${lead.pageUrl}</td>
               </tr>` : ''}
             </table>
           </div>
@@ -228,8 +228,8 @@ async function sendLeadVerificationNotification(lead: {
           
           ${fingerprintSection}
           
-          <div style="background: #e8f4e8; padding: 15px; border-radius: 8px; border-left: 4px solid #28a745;">
-            <p style="color: #155724; margin: 0; font-weight: 500;">
+          <div style="background: #edf5f1; border: 1px solid #7FB8A3; border-radius: 4px; padding: 14px 18px; margin: 24px 0;">
+            <p style="color: #5E8D7A; margin: 0; font-weight: 500; font-size: 14px; line-height: 1.6;">
               This lead has verified their email address via OTP and downloaded a resource.
             </p>
           </div>
@@ -419,8 +419,8 @@ async function sendContactVerificationEmail(to: string, firstName: string, token
             </p>
             
             <!-- Expiry notice -->
-            <div style="background-color: #fff8e6; border-left: 4px solid #f0b429; padding: 12px 16px; margin: 25px 0;">
-              <p style="color: #8a6d3b; font-size: 14px; margin: 0;">
+            <div style="background-color: #f9f3e8; border: 1px solid #dedad2; border-radius: 4px; padding: 14px 18px; margin: 25px 0;">
+              <p style="color: #7a6a50; font-size: 14px; margin: 0; line-height: 1.6;">
                 <strong>Note:</strong> This link expires in 24 hours. After expiration, you'll need to submit a new contact request.
               </p>
             </div>
