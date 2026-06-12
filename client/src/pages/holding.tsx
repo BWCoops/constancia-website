@@ -39,8 +39,10 @@ export default function HoldingPage() {
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    // Play unmuted. Browsers that block unmuted autoplay will show the
-    // poster + controls so the visitor can tap/click to start manually.
+    // Muted + playsInline autoplay is permitted on mobile; this kick
+    // covers browsers that don't honor the autoPlay attribute. If a
+    // browser still blocks it, the poster + controls let the visitor
+    // tap to start.
     video.play().catch(() => {});
   }, []);
 
@@ -67,11 +69,14 @@ export default function HoldingPage() {
 
         {/* Launch film — 4:5 vertical intro at 1080×1350. Explicit
             width/height attributes match the source so the browser
-            reserves the slot before any bytes arrive (no CLS). AV1
-            WebM for modern browsers, H.264 MP4 fallback with
-            +faststart for progressive playback. The poster JPEG is
-            preloaded in index.html so it lights up the LCP slot
-            without waiting on metadata. */}
+            reserves the slot before any bytes arrive (no CLS). A single
+            H.264 (High / yuv420p) MP4 with +faststart for progressive
+            playback — universally decodable on iOS, Android, and
+            desktop. (A previous VP9 Profile 1 / 4:4:4 WebM was dropped
+            because mobile decoders can't play it and browsers wouldn't
+            fall back to the MP4.) The poster JPEG is preloaded in
+            index.html so it lights up the LCP slot without waiting on
+            metadata. */}
         <div className="holding-film" aria-label="Constancia launch film">
           <video
             ref={videoRef}
@@ -88,7 +93,6 @@ export default function HoldingPage() {
             disablePictureInPicture
             disableRemotePlayback
           >
-            <source src="/launch-film.webm" type="video/webm" />
             <source src="/launch-film.mp4" type="video/mp4" />
           </video>
         </div>
