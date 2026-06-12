@@ -70,6 +70,7 @@ export default function HoldingPage() {
             autoPlay
             loop
             playsInline
+            muted
             controls
             preload="auto"
             poster="/launch-film-poster.jpg"
