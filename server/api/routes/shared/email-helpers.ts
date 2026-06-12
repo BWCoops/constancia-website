@@ -8,6 +8,7 @@ import {
   generateWarningBox,
   generateSuccessBox,
   generateInfoCard,
+  wrapEmailContent,
   EMAIL_BRAND,
   EMAIL_CONTACT,
 } from '../../../core/email/components';
@@ -65,25 +66,21 @@ export async function sendContactFormNotification(submission: {
       </div>
     `;
 
+    const html = wrapEmailContent(`
+      ${generateNotificationHeader({ title: 'New Contact Form Submission', subtitle: 'Constancia Website' })}
+      <div style="background-color: ${EMAIL_BRAND.white}; padding: 32px;">
+        ${generateInfoCard(contactDetailsTable)}
+        ${messageSection}
+        <p style="color: ${EMAIL_BRAND.mutedGray}; font-size: 12px; text-align: center; margin: 24px 0 0 0;">
+          Submitted: ${new Date().toLocaleString('en-GB', { dateStyle: 'full', timeStyle: 'short' })}
+        </p>
+      </div>
+    `);
+
     await sendEmailViaGraph(
       SENDER_EMAIL,
       `New Contact Form Submission from ${submission.firstName} ${submission.lastName}`,
-      `
-        <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          ${generateNotificationHeader({ title: 'New Contact Form Submission', subtitle: 'Constancia Website' })}
-          
-          ${generateInfoCard(contactDetailsTable)}
-          ${messageSection}
-          
-          <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
-          
-          <p style="color: ${EMAIL_BRAND.mutedGray}; font-size: 12px; text-align: center;">
-            This notification was sent from the Constancia website contact form.
-            <br>
-            Submitted: ${new Date().toLocaleString('en-GB', { dateStyle: 'full', timeStyle: 'short' })}
-          </p>
-        </div>
-      `
+      html
     );
 
     return true;

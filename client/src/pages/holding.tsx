@@ -96,10 +96,8 @@ export default function HoldingPage() {
             className="holding-film__video"
             width={1080}
             height={1350}
-            autoPlay
             loop
             playsInline
-            muted
             controls
             preload="auto"
             poster="/launch-film-poster.jpg"
