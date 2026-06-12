@@ -1,0 +1,1438 @@
+================================================================================
+CONSTANCIA — FULL WEBSITE CONTENT BACKUP
+Generated: June 2026
+================================================================================
+
+COMPANY INFORMATION
+-------------------
+Company:          Constancia Holdings Limited
+Registration No:  17227112 (England and Wales)
+Registered Office: Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ, UK
+Email:            info@constancia.io
+LinkedIn:         https://www.linkedin.com/company/constancia-group/
+Website:          https://constancia.com/
+
+
+================================================================================
+HOME PAGE (/)
+================================================================================
+
+SEO Title:       Constancia — Enterprise Intelligence · Abacum + OneStream Partner
+SEO Description: Constancia is an enterprise intelligence company combining AI, advisory and
+                 development to deliver real-time insight from organisational data. Official
+                 Abacum and OneStream partner.
+SEO Keywords:    enterprise intelligence, AI advisory, Abacum partner, OneStream partner,
+                 Enterprise Performance Management, business transformation, AI development
+                 partner, finance systems integration
+
+[Note: The home page renders the LandingHero scrollytelling component. Full copy is
+contained in the About, Services and Solutions pages which replicate the key panel content.]
+
+
+================================================================================
+HOLDING PAGE (/holding)
+================================================================================
+
+SEO Title:       Constancia — Building Intelligent Agentic Enterprise
+SEO Description: Constancia is launching. Building Intelligent Agentic Enterprise.
+                 Official OneStream and Abacum partner.
+
+Tagline (h1):    Building Intelligent Agentic Enterprise
+                 ("Intelligent" in mint, "Agentic" in rose)
+
+Partners listed: OneStream · Abacum
+
+[Includes launch film video player - /launch-film.webm / /launch-film.mp4]
+
+
+================================================================================
+ABOUT PAGE (/about)
+================================================================================
+
+SEO Title:       About Constancia — Enterprise Intelligence Company
+SEO Description: Constancia is an enterprise intelligence company that helps leaders move from
+                 debate to outcomes. Real-time visibility across organisational data, delivered
+                 by senior practitioners. Official Abacum and OneStream partner.
+
+--- HERO PANEL ---
+Eyebrow: About
+Heading: An enterprise intelligence company.
+Body:    We help leaders move from debate to outcomes. Real-time visibility across your data,
+         without the manual rework.
+
+--- OUR PERSPECTIVE PANEL ---
+Eyebrow: Our perspective
+Heading: From debate to outcomes.
+Body:    Our focus is giving finance and operations teams real-time visibility across their
+         data, without the manual rework in Excel and PowerPoint. We work with enterprise
+         software and AI partners so you stay in the driver's seat of your company's health.
+Sub:     You're the expert on your business. Technology should work that way too.
+
+--- THE FOUNDERS PANEL ---
+Eyebrow: The founders
+Heading: The senior people you'd actually want in the room.
+
+Founder 1:
+  Eyebrow: Founder, Constancia
+  Title:   Bradley Cooper
+  Body:    Twenty years inside enterprise finance transformation. Worked on the buy side and
+           the consulting side, ran EPM and AI programmes at scale, started Constancia to do
+           it without the agenda.
+
+Founder 2:
+  Eyebrow: Co-Founder
+  Title:   Alex
+  Body:    Operating model and value realisation specialist. Spent his career inside the
+           consultancy model that overcharges finance leaders and walked out to build
+           something better.
+
+--- PHOTO PANEL ---
+Eyebrow: Off-duty
+Heading: Bradley, Alex, and the team mascots Georgie and Sammy.
+Alt:     Founders Bradley and Alex with Labrador Retrievers Georgie and Sammy
+Caption: Founders with Georgie and Sammy
+
+--- CTA PANEL ---
+Eyebrow: No pitch. No deck.
+Heading: When you're ready, start the conversation.
+CTA:     Talk to a partner → /contact
+
+
+================================================================================
+SERVICES PAGE (/services)
+================================================================================
+
+SEO Title:       Services — Abacum, OneStream, AI Development Partner | Constancia
+SEO Description: Official Abacum partner for mid-market FP&A, OneStream partner for enterprise
+                 EPM, and an AI development partner for custom build. Senior practitioners,
+                 fixed-fee delivery.
+
+--- HERO PANEL ---
+Eyebrow: Services
+Heading: Three ways we deliver enterprise intelligence.
+Body:    A senior team, two declared platform partners, and a development practice for
+         everything in between.
+
+--- ABACUM SECTION ---
+Eyebrow: Mid-market FP&A · Abacum partner
+Heading: FP&A that finally keeps up with the business.
+Body:    AI-augmented planning that connects to your ERP, HRIS and CRM — without months of
+         consultancy overhead.
+
+What we deliver — Abacum:
+  01  Implementation, end to end       Scoping, build, migration, hypercare.
+  02  Data model design                Integration with your ERP, HRIS and CRM.
+  03  Driver-based planning            Configured around how your business actually runs.
+  04  Workforce planning               Headcount modelling and labour cost.
+  05  Reporting design                 Management packs and live dashboards.
+  06  Team enablement                  Admin handover so your team owns it.
+
+--- ONESTREAM SECTION ---
+Eyebrow: Enterprise EPM · OneStream partner
+Heading: OneStream, integrated and adopted.
+Body:    Consolidation, planning, narrative reporting and account reconciliations on a
+         single, governed platform — built by the senior people who scoped it.
+
+What we deliver — OneStream:
+  01  Close and consolidation          Financial close on a single governed platform.
+  02  Statutory + management reporting Two books from one source of truth.
+  03  Driver-based planning            Rolling forecasts and scenario modelling.
+  04  Account reconciliations          Certifications and audit-ready trails.
+  05  Narrative reporting              Disclosure management and board narrative.
+  06  Hypercare + handover             Optimisation and capability transfer.
+
+--- AI DEVELOPMENT PARTNER SECTION ---
+Eyebrow: AI Development Partner
+Heading: When the off-the-shelf tool doesn't fit, we build the one that does.
+Body:    Edge-case AI use cases, custom model build, and applications that sit on top of
+         your existing systems. Connected to your data, owned by your team.
+
+What we deliver — AI Engineering:
+  01  Use case scoping                 ROI modelling and prioritisation.
+  02  Custom model build               Fine-tuning, eval harnesses, guardrails.
+  03  Retrieval + grounding            RAG architecture on your data.
+  04  Application development          Apps that sit on top of your stack.
+  05  Integration                      ERP, EPM, CRM, warehouse, file shares.
+  06  Production + monitoring          Deployment, drift detection, evals.
+
+--- CTA PANEL ---
+Eyebrow: Three ways to start
+Heading: Tell us about your programme.
+Body:    A 30-minute conversation with a senior practitioner. No pitch, no deck.
+CTA:     Start the conversation → /contact
+
+
+================================================================================
+SOLUTIONS PAGE (/solutions)
+================================================================================
+
+SEO Title:       Solutions — Productised Intelligence for Finance + Operations | Constancia
+SEO Description: Explore, Assess, Plan, Implement — Constancia's four-stage methodology for
+                 taking a finance function from debate to outcomes.
+
+--- HERO PANEL ---
+Eyebrow: Solutions
+Heading: Productised intelligence for finance and operations.
+Body:    A four-stage methodology that takes a finance function from debate to outcomes —
+         without the manual rework in Excel and PowerPoint.
+
+--- METHODOLOGY PANEL ---
+Eyebrow: Methodology
+Heading: Explore. Assess. Plan. Implement.
+
+  Stage 01 — Explore
+  Understand your options. Before committing budget, see which platforms align with your
+  finance strategy. Independent comparison across EPM, ERP and AI for finance.
+
+  Stage 02 — Assess
+  Benchmark your finance function. Quantify the current state across planning, consolidation,
+  reporting, and governance. Clear view of transformation readiness.
+
+  Stage 03 — Plan
+  Build the business case. Translate assessment insights into a board-ready case with ROI
+  projections, success metrics, and implementation roadmaps.
+
+  Stage 04 — Implement
+  Execute with confidence. Structured methodologies and proven templates so you deliver on
+  time, on budget, with quick wins for the board.
+
+--- INDEPENDENT COMPARISON PANEL ---
+Eyebrow: Independent comparison
+Heading: Choose your platform with eyes open.
+Body:    Constancia's comparison engines score the leading EPM, ERP and AI-for-finance
+         platforms across the criteria that actually move the needle — not the marketing
+         surface area.
+
+What we compare:
+  Compare  Enterprise Performance Management
+           Anaplan, OneStream, Planful, Oracle and 8 more, scored across 15 key drivers.
+  Compare  ERP Platforms
+           Leading ERPs evaluated for integration requirements and finance-function fit.
+  Compare  AI for Finance
+           AI capability assessment across platforms — what's real, what's marketing.
+
+--- OUTCOMES PANEL ---
+Eyebrow: Outcomes
+Heading: What this looks like six months in.
+
+  Outcome  Efficiency
+           Eliminate manual bottlenecks. Faster planning cycles so the team can focus on
+           strategy, not spreadsheets.
+  Outcome  Insight
+           Real-time visibility across every system you own. One source of truth for finance
+           and operations.
+  Outcome  Confidence
+           Audit-ready close, governed reporting, evidence trails. The board sees the numbers;
+           you sleep at night.
+  Outcome  Speed
+           Forecasts that move with the business — not three months behind it.
+
+--- CTA PANEL ---
+Eyebrow: No deck. No pitch.
+Heading: Ready to start with Explore?
+Body:    A 30-minute conversation with a senior practitioner to scope where you are and where
+         you want to be.
+CTA:     Start the conversation → /contact
+
+
+================================================================================
+CONTACT PAGE (/contact)
+================================================================================
+
+SEO Title:       Contact Us | Constancia
+SEO Description: Talk to Constancia about enterprise intelligence — platform selection,
+                 integration, transformation planning, and senior-level guidance.
+
+--- HEADER ---
+Eyebrow: Get in touch
+Heading: Talk to us about enterprise intelligence.
+Body:    Whether you are scoping a programme, evaluating platforms, or want a second opinion
+         on something already in motion, we are happy to talk. Drop us a line and we will
+         get back to you within 24 hours.
+
+--- CONTACT CHANNELS ---
+Email:   info@constancia.io
+Address: Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ, UK
+
+--- CONTACT FORM ---
+Fields:  First name * | Last name | Email * | Phone | Message *
+Submit:  Send message
+
+--- VERIFICATION STEP (after form submit) ---
+Text:    We sent a 6-digit code to [email]. Enter it below to confirm your enquiry.
+         The code expires in 10 minutes. Check your spam folder if you don't see it.
+Submit:  Confirm code
+
+--- SUCCESS STATE ---
+Heading: All confirmed
+Body:    Your enquiry is verified and in our inbox. We will get back to you within 24 hours.
+
+
+================================================================================
+CAREERS PAGE (/careers)
+================================================================================
+
+SEO Title:       Careers at Constancia — Senior Practitioners Only
+SEO Description: We hire senior practitioners and give them autonomy. EPM consultants, FP&A
+                 analysts, transformation advisors. Fixed-fee delivery, direct client
+                 relationships, no juniors staffed to protect margin.
+
+--- HERO PANEL ---
+Eyebrow: Careers
+Heading: Senior practitioners, given real autonomy.
+Body:    We hire senior people, give them real client access, and trust them to deliver.
+         No juniors staffed to protect margin. No bill-shock. No pipeline pressure that
+         bends the recommendation.
+
+--- WHY JOIN PANEL ---
+Eyebrow: Why join
+Heading: A practice you can shape.
+
+  Why 01  We recommend what fits, not what pays
+           No vendor targets. No pipeline pressure. The right answer for the client, full stop.
+  Why 02  Senior delivery, always
+           Every engagement is delivered by a senior practitioner. We don't staff juniors to
+           protect margin.
+  Why 03  Fixed fee, scoped properly
+           No time-and-materials, no pressure to extend. We price it right and we deliver it.
+  Why 04  AI-powered delivery tools
+           Our methodology is built on tools we've designed ourselves. You're not starting from
+           scratch on every engagement.
+  Why 05  Direct client relationships
+           You're not account-managed out of the room. You're the practitioner the client trusts.
+
+--- WHO WE HIRE PANEL ---
+Eyebrow: Who we hire
+Heading: Three profiles, senior-led every time.
+
+  Profile 01  EPM Consultants & Architects
+              You've delivered OneStream, Pigment, Anaplan, or IBM Planning Analytics on real
+              programmes. You can navigate a CFO's budget and a complex data model in the same
+              afternoon. Done doing good work inside a bad structure.
+
+  Profile 02  Finance Analysts & Associates
+              FP&A or management accounting background, hitting the ceiling of what Excel and
+              manual process can do. You want to understand what better looks like. We develop
+              people properly.
+
+  Profile 03  Finance Transformation Advisors
+              You've helped finance leaders choose platforms, build business cases, and manage
+              the people side of change. You know why transformations fail and it's rarely the
+              technology.
+
+--- WHAT YOU CAN EXPECT PANEL ---
+Eyebrow: What you can expect
+Heading: The shape of the role.
+
+  Expect 01  Genuine autonomy
+              You'll own your workstreams. We hire people we trust, and we treat them accordingly.
+  Expect 02  Real client access
+              Direct work with CFOs, Finance Directors, Group FP&A leads. No layers between you
+              and the brief.
+  Expect 03  Breadth of exposure
+              EPM architecture, business rule design, vendor selection, board-ready output.
+              Deliberately wide.
+  Expect 04  Remote-first
+              We operate across the UK, South Africa, and the Middle East. We judge output, not
+              hours on camera.
+  Expect 05  Transparent pay
+              We pay to market and we're direct about it. Your rate moves when your contribution
+              does.
+  Expect 06  A firm worth building
+              Growing practice; people who join now will shape how we work and where we go.
+
+--- BY THE NUMBERS PANEL ---
+Eyebrow: By the numbers
+Heading: A small practice with the depth that matters.
+
+  Experience  40+ years  Combined EPM delivery experience across the founding team.
+  Platforms   3 platforms  Abacum, OneStream and a custom AI development practice — known cold.
+  Delivery    100% senior  Every engagement is delivered by a senior practitioner. No juniors
+                           to protect margin.
+  Pricing     Fixed fee  Scoped properly, priced once. No bill-shock and no scope-creep games.
+
+--- APPLICATION FORM ---
+Fields:       First name * | Last name * | Email * | LinkedIn | Area of interest * | Message *
+Consent:      I'm happy for Constancia to retain my details so they can come back to me if
+              there's a fit.
+Submit:       Submit application
+
+Areas of interest (dropdown options):
+  - EPM Consultant / Architect
+  - Finance Analyst / Associate
+  - Finance Transformation Advisor
+  - Business Development
+  - Other
+
+Success message: Thank you for reaching out. We'll review your details and be in touch if
+                 there's a fit.
+
+--- CTA PANEL ---
+Eyebrow: Not the right role today?
+Heading: Stay in touch anyway.
+Body:    If you're senior in the EPM or finance transformation space, we always want to know
+         who's around.
+CTA:     Email info@constancia.io → mailto:info@constancia.io
+
+
+================================================================================
+BLOG PAGE — DAY TO DAY AI (/blog)
+================================================================================
+
+SEO Title:       Day to Day AI — Practical Notes on Finance + AI | Constancia
+SEO Description: Short, practical writing on running AI inside finance — what works, what
+                 fails, and how to choose between platforms.
+
+--- HERO PANEL ---
+Eyebrow: Day to Day AI
+Heading: Practical notes on running AI inside finance.
+Body:    Short reads from senior practitioners. No hype, no jargon — what we'd actually
+         tell a peer.
+
+--- TOPICS PANEL ---
+Eyebrow: What we write about
+Heading: Four lenses, one job.
+
+  Topic  Platforms
+         Honest takes on Abacum, OneStream, Anaplan, Planful, Oracle, and where each one
+         actually fits.
+  Topic  AI in practice
+         What survives contact with a real finance team — and what doesn't.
+  Topic  Programmes
+         Lessons from real EPM and AI delivery, including the bits we got wrong.
+  Topic  Selection
+         How to scope, demo and pick a platform without losing six months.
+
+--- LATEST PANEL ---
+Eyebrow: Latest
+Heading: The archive is coming.
+Body:    We're curating the first set of pieces now. In the meantime, if you'd like a
+         specific take — platform choice, programme post-mortem, AI use case shape — drop
+         us a line and we'll write it next.
+
+--- CTA PANEL ---
+Eyebrow: Coming soon
+Heading: Want a piece on a specific platform or programme?
+Body:    Tell us what you want to read about. We'll write it.
+CTA:     Ask for a piece → /contact
+
+
+================================================================================
+FINANCECOMPASS LANDING PAGE (/finance-compass)
+================================================================================
+
+SEO Title:       FinanceCompass | Map every finance system you own | Constancia
+SEO Description: Where are your finance systems disconnected? FinanceCompass scores your
+                 finance function against 200+ benchmarks in 12 minutes and shows where the
+                 gaps cost you most. Free, no call required.
+
+--- HERO SECTION ---
+Product label:   FinanceCompass by Constancia
+
+H1: See where your finance systems are disconnected
+
+Stats bar:
+  12 min    to a score
+  200+      EPM benchmarks
+  £0        no call required
+
+Subtext: Run the diagnostic. See where your finance systems disagree with each other.
+         Walk away with a sequenced roadmap, not a sales pitch.
+
+Why Finance Leaders Choose FinanceCompass:
+  AI-Powered Insights   Benchmarks your finance function against industry standards
+  Actionable Roadmap    Prioritised plan tailored to your organisation
+  Expert Guidance       Consultant support to execute your transformation
+
+Stats grid:
+  £20k+     Analysis Value
+  7         Dimensions
+  20 min    Full Assessment
+  60sec     Quick Preview
+
+--- PROGRESSION STEPS ---
+Step 1: Quick Preview     60 sec   / Instant score
+Step 2: Pre-Assessment    20 min   / 74 questions
+Step 3: Full Assessment   Guided   / Expert insights
+
+Sign-in card heading: Get Your Finance Score
+Sign-in card body:    Sign in with Google to run the full 74-question assessment and get
+                      your personalised roadmap — no call required.
+Guarantee:            Your data is protected under GDPR. No card required.
+
+--- ASSESSMENT TIERS ---
+
+TIER 1 — Pre-Assessment:
+  Name:      Pre-Assessment
+  Tagline:   AI-Powered Strategic Analysis
+  Badge:     Open Access
+  Duration:  20-25 minutes
+  Description: Forward-looking Finance Transformation readiness evaluation with AI-powered
+               insights, peer benchmarking, and autonomous finance capability gaps
+  Why choose: Ideal for finance leaders preparing for the AI-driven future of finance
+  Benefits:
+    - AI-powered insights and recommendations
+    - Finance function readiness scoring across 7 dimensions
+    - Forward-looking capability gap analysis
+    - Peer benchmarking and industry comparisons
+    - Autonomous finance readiness indicators
+  CTA: Start Pre-Assessment
+
+TIER 2 — Full Assessment:
+  Name:      Full Assessment
+  Tagline:   Complete AI-Ready Transformation
+  Badge:     Premium
+  Duration:  35-45 minutes
+  Description: 74 questions across 7 dimensions. AI-validated insights, execution tracking,
+               and a sequenced roadmap. Built for finance leaders who want depth.
+  Why choose: For organisations ready to transform with expert consultant support and AI
+              enablement
+  Benefits:
+    - 74 questions covering 7 dimensions
+    - In-depth analysis with AI-powered insights
+    - AI maturity and agentic readiness assessment
+    - Execution tracking with AI monitoring
+    - Executive-ready PDF roadmap report
+    - Dedicated consultant support
+  CTA: Contact Us to Begin
+
+--- THE AI IMPERATIVE SECTION ---
+Badge: The AI Imperative
+H2:   Finance is Transforming. Are You Ready?
+Body: The rise of Agentic AI is reshaping the CFO agenda. Organisations that prepare now
+     will lead the autonomous finance revolution.
+
+Stats:
+  90%       AI Adoption by 2026 — Finance functions expected to deploy AI capabilities
+            (Source: Gartner)
+  47%       GenAI in FP&A — Organisations using GenAI in 2025, up from 6% in 2024
+            (Source: Gartner Survey)
+  40-60%    Planning Cycle Reduction — Time savings achieved through AI-powered forecasting
+            (Source: Industry Analysis)
+  Agentic AI  CFO Role Evolution — Autonomous agents transforming finance operations
+            (Source: 2025 Trend)
+
+--- SAMPLE REPORT SECTION ---
+Label: Your report
+H2:   In plain English. No scorecard theatre.
+Body: Finish the assessment and you get a scored breakdown across 7 dimensions, the gaps
+     that matter most, and a sequenced roadmap that names the systems involved.
+
+--- REGISTRATION / START ASSESSMENT SECTION ---
+Label: Start the assessment
+H2:   The diagnostic a consulting firm would charge you five figures to run.
+Body: 74 questions across 7 dimensions. AI-validated against 200+ EPM benchmarks. Done in
+     12 minutes. Yours, calibrated to your stack and your industry.
+Badge: Enterprise-grade analysis | Months of work in 20 minutes
+
+Benefits bar:
+  10-15 min    Quick assessment
+  7 Dimensions Full diagnostic
+  AI-Powered   Smart insights
+  Secure       GDPR compliant
+
+What you walk out with:
+  01  Readiness score
+  02  Dimension breakdown
+  03  AI-validated insights
+  04  Peer benchmarks
+  05  Sequenced roadmap
+
+--- HOW IT WORKS SECTION ---
+H2:   How It Works
+Sub:  Your Path to Finance Excellence
+Body: Our assessment platform evaluates your finance function across seven key dimensions,
+     including Financial Planning & Analysis, Management Reporting, Technology Systems, and
+     Data Analytics. You leave with a Finance Readiness score, the dimensions where you're
+     disconnected, and a sequenced roadmap. Minutes, not weeks.
+
+Step 1: Quick Verification
+  Title: Quick Verification
+  Desc:  Verify your business email to unlock all assessments and ensure a secure experience.
+  Details:
+    - One-time verification process
+    - Secure OTP sent to your email
+    - Takes less than 30 seconds
+
+Step 2: Pre-Assessment (Open Access)
+  Title: Pre-Assessment
+  Desc:  Dive deeper into your finance function with AI-powered strategic analysis and
+         actionable recommendations.
+  Details:
+    - Detailed finance transformation readiness analysis
+
+
+================================================================================
+FINANCECOMPASS METHODOLOGY PAGE (/finance-compass/methodology)
+================================================================================
+
+SEO Title:       Benchmarking Methodology | FinanceCompass | Constancia
+SEO Description: How Constancia builds accurate finance benchmarks using UK government data.
+                 Full transparency into our scoring methodology, data sources, and calculations.
+Badge:           Complete Transparency
+
+H1: Our Benchmarking Methodology
+
+Subtext: Built on UK open source government data and 40+ years of combined consulting
+         experience. We believe in complete transparency - here's exactly how we calculate
+         your benchmarks.
+
+Stats: [X] Data Sources · [X] Metrics · [X] Industries
+
+--- DATA SOURCES SECTION ---
+H2: Our Data Sources
+Body: We exclusively use UK open source government data to build our benchmarks.
+     No proprietary third-party data - just transparent, verifiable public information.
+
+Category 1: UK Government Open Data
+  Primary authoritative sources from UK government departments and agencies
+
+Category 2: Constancia Analysis & Methodology
+  Our proprietary analysis built on 40+ years of combined consulting experience
+
+--- SCORING METHODOLOGY SECTION ---
+H2: Scoring Methodology
+Body: Every assessment question contributes to your overall score using transparent,
+     consistent calculations. Here are detailed examples of how we calculate each
+     question type.
+
+Question Types:
+
+1. Slider Questions — Continuous scale scoring from 0-10
+   Formula: Score = (User Value / Maximum Value) × Weight
+   Example:
+     Question:    How would you rate your current forecast accuracy?
+     User Input:  7 out of 10
+     Weight:      15
+     Calculation: (7 / 10) × 15 = 10.5 points
+     Max Possible: 15 points
+
+2. Weighted Multiple Choice — Options with different point values based on maturity
+   Formula: Score = Selected Option Value × Weight Multiplier
+   Example:
+     Question: What planning tools do you use?
+     Options:
+       Spreadsheets only                (0.2)
+       Basic planning software          (0.5)
+       Integrated EPM platform          (0.8)
+       AI-augmented planning            (1.0)
+     User Selection: Integrated EPM platform (0.8)
+     Weight:         20
+     Calculation:    0.8 × 20 = 16 points
+     Max Possible:   20 points
+
+3. Single Select — Binary or categorical scoring
+   Formula: Score = (Selected = Target) ? Weight : 0
+   Example:
+     Question: Do you have a dedicated FP&A team?
+     Options:  Yes / No
+     User Selection: Yes
+     Weight:    10
+     Calculation: Yes = 10 points (full weight)
+     Max Possible: 10 points
+
+4. Multi-Select — Cumulative scoring for multiple selections
+   Formula: Score = (Count Selected / Total Options) × Weight
+   Example:
+     Question: Which reporting capabilities do you have?
+     Options:  Real-time dashboards, Self-service analytics, Mobile reporting,
+               Automated distribution, Exception alerts
+     User Selections: Real-time dashboards, Self-service analytics, Mobile reporting
+     Weight:    15
+     Calculation: (3 / 5) × 15 = 9 points
+     Max Possible: 15 points
+
+--- MATURITY FRAMEWORK SECTION ---
+H2: Maturity Framework
+Body: Your scores map to our 4-level maturity framework, helping you understand where you
+     are and what's needed to advance to the next level.
+
+Level 1  Foundation    0-25%     Manual processes, spreadsheet-based, reactive
+                                  decision-making
+Level 2  Developing    26-50%    Some automation, basic systems in place, limited integration
+Level 3  Established   51-75%    Integrated systems, standardised processes, proactive
+                                  insights
+Level 4  Advanced      76-100%   AI-augmented, real-time analytics, predictive capabilities
+
+Benchmark Tiers:
+  Typical        Median performance (P50) - where most organisations operate
+  Above Average  Top quartile (P75) - what good looks like in modern finance
+  Best in Class  Digital world class (P90+) - aspirational excellence
+
+--- METRIC TRANSPARENCY SECTION ---
+H2: Metric Transparency
+Body: We believe in complete transparency. Each benchmark metric is clearly labelled by how
+     it was derived. As we collect more assessment data, we'll transition expert estimates
+     to data-driven benchmarks.
+
+Data-Derived (from ONS and Companies House):
+  - Employment counts by sector (ONS EMP13)
+  - Labour productivity by industry
+  - Average wages by sector
+
+Constancia Insights + APQC:
+  Benchmarks enriched with APQC Open Standards Benchmarking data (2024), covering 47
+  industries with top performer, median, and laggard bands.
+  - Budget cycle duration (APQC: top ~25 days, median ~32 days)
+  - Days to close monthly books
+  - Forecast accuracy and cycle duration
+  - Industry-specific adjustments (47 industries)
+  Source: APQC Open Standards Benchmarking, accessed December 2024.
+
+Continuous Improvement:
+  As organisations complete FinanceCompass assessments, we aggregate anonymised responses to
+  continuously refine our benchmarks.
+  - Statistically validated over time
+  - Industry-specific refinements
+
+Our Commitment: As organisations complete FinanceCompass assessments, we'll aggregate
+anonymised responses to build proprietary benchmarks - following the same rigorous methodology
+used by organisations like APQC. Expert estimates will be progressively replaced with
+statistically validated, data-driven benchmarks.
+
+--- 7 ASSESSMENT DIMENSIONS SECTION ---
+H2: 7 Assessment Dimensions
+Body: The Constancia Finance Transformation Framework assesses your organisation across 7 key
+     dimensions, each contributing to your overall finance transformation readiness score.
+
+D1  Data & Master Data
+    Quality, governance, and integration of financial data across systems
+
+D2  Process Maturity
+    Standardisation, automation, and efficiency of finance processes
+
+D3  Planning & Forecasting
+    Budgeting, forecasting, and scenario planning capabilities
+
+D4  Reporting & Analytics
+    Management reporting, dashboards, and analytical capabilities
+
+D5  Technology & Integration
+    Systems landscape, integration, and technology enablement
+
+D6  Governance & Controls
+    Financial controls, compliance, and governance frameworks
+
+D7  People & Skills
+    Team capabilities, skills development, and organisational structure
+
+--- FAQ SECTION ---
+H2: Frequently Asked Questions
+
+Q: Where does your benchmark data come from?
+A: All our benchmarks are derived from UK open source government data including ONS (Office
+   for National Statistics), Companies House filings, NAO (National Audit Office) studies,
+   LG Inform local authority data, and other publicly available government statistics. We do
+   not use proprietary third-party research data - ensuring complete transparency and
+   verifiability.
+
+Q: How do you calculate the benchmark ranges?
+A: Our Constancia analysis team aggregates data from multiple government sources, applying
+   statistical analysis to derive percentile ranges. "Typical" represents median (P50)
+   performance, "Above Average" represents top quartile (P75), and "Best in Class" represents
+   digital world class (P90+). These ranges are validated against our 40+ years of combined
+   consulting experience working with UK enterprises.
+
+Q: How do industry-specific benchmarks work?
+A: We maintain cross-industry baseline benchmarks that apply to all organisations. For
+   specific industries, we apply statistically-derived overrides based on sector-specific
+   government data (ONS industrial breakdowns, sector productivity indices). Industries with
+   sufficient data receive statistically-derived overrides; others use cross-industry
+   baselines adjusted for known sector characteristics.
+
+
+================================================================================
+EPM COMPARISON TOOL (/epm-comparison)
+================================================================================
+
+[The EPM Comparison Tool is a dynamic scored comparison engine. Content below covers all
+platform data verbatim from the source data files.]
+
+--- SCORING CATEGORIES (11 dimensions) ---
+  consolidationClose         Consolidation & Close
+  planningForecasting        Planning & Forecasting
+  aiAutomation               AI & Automation
+  modellingExtensibility     Modelling & Extensibility
+  integrationDataFabric      Integration & Data Fabric
+  reportingVisualization     Reporting & Visualization
+  governanceCompliance       Governance & Compliance
+  regulatoryCompliance       Regulatory Compliance
+  timeToValue                Time to Value
+  totalCostOwnership         Total Cost of Ownership
+  supportEcosystem           Support & Ecosystem
+
+========================================
+EPM PLATFORMS (20 platforms)
+========================================
+
+------------------------------------------------------------
+1. ONESTREAM
+------------------------------------------------------------
+ID:                  onestream
+Short Name:          OneStream
+Market Position:     Leader
+ROI Potential:       High
+Implementation Time: 9-18 months
+Price Range:         £150K-£500K+/year
+Price Tier:          4 (out of 5)
+Best For:            Large enterprises with complex consolidation needs
+
+Scores:
+  Consolidation & Close:       9.5
+  Planning & Forecasting:      9.0
+  AI & Automation:             8.8
+  Modelling & Extensibility:   9.0
+  Integration & Data Fabric:   9.0
+  Reporting & Visualization:   6.0
+  Governance & Compliance:     9.2
+  Regulatory Compliance:       8.5
+  Time to Value:               5.5
+  Total Cost of Ownership:     5.5
+  Support & Ecosystem:         8.8
+
+Description: OneStream is a unified CPM platform with SensibleAI for transparent, auditable
+AI. Platform 9.x (2025) introduces productivity tools, enhanced Microsoft integration, and
+30+ AI routines for forecasting, anomaly detection, and more.
+
+Strengths:
+  - Unified CPM platform - single data model eliminates silos
+  - XF Marketplace with 100+ no-code pre-built solutions
+  - SensibleAI Studio with 30+ plug-and-play AI routines (2025)
+  - 1,600+ customers including 17% of Fortune 500
+  - Platform 9.x with enhanced performance and scalability
+
+Limitations:
+  - Higher price point for mid-market
+  - Steeper learning curve
+  - Requires dedicated implementation partner
+
+Key Features:
+  SensibleAI Platform, XF Marketplace Extensions, CPM Express Rapid Deployment,
+  Multi-currency Consolidation, Power BI Fabric Integration
+
+------------------------------------------------------------
+2. ABACUM
+------------------------------------------------------------
+ID:                  abacum
+Short Name:          Abacum
+Market Position:     Mid-Market FP&A Leader
+ROI Potential:       High
+Implementation Time: 4-6 weeks
+Price Range:         £40K-£60K/year
+Price Tier:          1 (out of 5)
+Best For:            Mid-market finance teams seeking rapid time-to-value FP&A with
+                     intelligent forecasting built in from day one, also well suited to
+                     growth-stage companies scaling beyond spreadsheets
+
+Scores:
+  Consolidation & Close:       3.5
+  Planning & Forecasting:      9.0
+  AI & Automation:             9.0
+  Modelling & Extensibility:   7.5
+  Integration & Data Fabric:   9.0
+  Reporting & Visualization:   7.5
+  Governance & Compliance:     6.0
+  Regulatory Compliance:       3.0
+  Time to Value:               9.5
+  Total Cost of Ownership:     9.0
+  Support & Ecosystem:         7.0
+
+Description: Abacum is a modern FP&A platform built for mid-market finance teams. Forecasting,
+anomaly detection, and automated variance analysis are embedded in the core platform from day
+one, not available as optional add-ons after configuration. It deploys in 4-6 weeks with 700+
+native integrations and finance-owned administration, keeping IT dependency low. Growth-stage
+companies benefit from its low total cost of ownership and rapid time-to-value. Consolidation
+is intentionally scoped to management reporting and is not suited to statutory close or complex
+group structures.
+
+Strengths:
+  - Forecasting, anomaly detection, and variance analysis built into the core platform from
+    day one
+  - Industry-fastest deployment at 4-6 weeks, versus 3-18 months for comparable platforms
+  - 700+ native integrations including Rippling, NetSuite, Xero, and QuickBooks
+  - Finance-owned administration with no IT dependency or dedicated modellers required
+  - 50-70% lower Year 1 TCO than Pigment, with minimal consulting spend
+
+Limitations:
+  - Management reporting only, with no statutory consolidation or intercompany eliminations
+  - Not suited to complex group structures requiring regulatory or statutory reporting
+  - Designed for mid-market organisations; large enterprises with multi-entity requirements
+    should look elsewhere
+
+Key Features:
+  Integrated Forecasting and Anomaly Detection, Rapid 4-6 Week Deployment, Headcount &
+  Workforce Planning, 700+ Native Integrations, Collaborative Scenario Planning
+
+------------------------------------------------------------
+3. ONESTREAM CPM EXPRESS
+------------------------------------------------------------
+ID:                  onestream-cpm-express
+Short Name:          OneStream CPM Express
+Market Position:     Mid-Market Leader
+ROI Potential:       High
+Implementation Time: 3-6 months
+Price Range:         £50K-£200K/year
+Price Tier:          3 (out of 5)
+Best For:            Mid-market organisations (£50M-£250M revenue) wanting OneStream
+                     capabilities with faster deployment
+
+Scores:
+  Consolidation & Close:       9.5
+  Planning & Forecasting:      9.0
+  AI & Automation:             8.8
+  Modelling & Extensibility:   9.0
+  Integration & Data Fabric:   9.0
+  Reporting & Visualization:   6.0
+  Governance & Compliance:     9.2
+  Regulatory Compliance:       8.5
+  Time to Value:               8.5
+  Total Cost of Ownership:     7.5
+  Support & Ecosystem:         8.8
+
+Description: OneStream CPM Express delivers the identical core OneStream platform, optimised
+for mid-market deployment. All consolidation, planning, AI, and compliance capabilities are
+the same as enterprise OneStream - the difference is faster implementation (3-6 months),
+pre-built templates, and predictable pricing. Costs vary depending on company size, number of
+users, and module requirements.
+
+Strengths:
+  - Identical core platform to OneStream - same consolidation, planning, and AI capabilities
+  - 3-6 month deployment vs 9-18 months for enterprise OneStream
+  - Pre-built templates accelerate implementation without sacrificing functionality
+  - Same SensibleAI, data fabric, and compliance frameworks as enterprise edition
+  - Flexible mid-market pricing dependent on company size and modules, with upgrade path to
+    full enterprise
+
+Limitations:
+  - Optimised for mid-market scale (under 50 users)
+  - Pre-configured approach may require adjustment for highly complex scenarios
+  - Same learning curve as OneStream once deployed
+
+Key Features:
+  Pre-built Close & Planning Templates, GAAP/IFRS Compliance Framework, Self-service
+  Reporting & Analysis, Excel Integration for Flexibility, Scalable to Full OneStream Platform
+
+------------------------------------------------------------
+4. PIGMENT
+------------------------------------------------------------
+ID:                  pigment
+Short Name:          Pigment
+Market Position:     Visionary (Gartner 2025)
+ROI Potential:       High
+Implementation Time: 4-8 months
+Price Range:         £50K-£200K/year
+Price Tier:          2 (out of 5)
+Best For:            Mid-market organisations and scaling enterprises seeking modern
+                     AI-driven planning and forecasting
+
+Scores:
+  Consolidation & Close:       3.5
+  Planning & Forecasting:      9.2
+  AI & Automation:             9.2
+  Modelling & Extensibility:   9.0
+  Integration & Data Fabric:   7.2
+  Reporting & Visualization:   8.0
+  Governance & Compliance:     6.5
+  Regulatory Compliance:       4.0
+  Time to Value:               9.0
+  Total Cost of Ownership:     8.0
+  Support & Ecosystem:         6.5
+
+Description: Pigment is a next-generation business planning platform with native financial
+consolidation capabilities (launched 2025). Its intuitive interface and agentic AI enable
+rapid scenario planning and collaborative decision-making.
+
+Strengths:
+  - Agentic AI with Analyst Agent for automated analysis
+  - Native Financial Consolidation with IFRS starter kit (2025)
+  - Real-time scenario planning in clicks
+  - Cross-functional collaboration (Finance, Sales, HR)
+  - Modern UX reduces adoption friction
+
+Limitations:
+  - Consolidation newer - not suited for complex statutory requirements
+  - Newer vendor with smaller partner ecosystem
+  - Limited regulatory reporting features
+
+Key Features:
+  Financial Consolidation, Agentic AI Analysts, Real-time Collaboration, Scenario Planning,
+  30+ Native Connectors
+
+------------------------------------------------------------
+5. ORACLE CLOUD EPM
+------------------------------------------------------------
+ID:                  oracle
+Short Name:          Oracle EPM
+Market Position:     Leader
+ROI Potential:       High
+Implementation Time: 12-24 months
+Price Range:         £200K-£800K+/year
+Price Tier:          5 (out of 5)
+Best For:            Large enterprises with Oracle ERP ecosystem
+
+Scores:
+  Consolidation & Close:       9.2
+  Planning & Forecasting:      9.0
+  AI & Automation:             8.5
+  Modelling & Extensibility:   7.8
+  Integration & Data Fabric:   9.2
+  Reporting & Visualization:   8.0
+  Governance & Compliance:     9.0
+  Regulatory Compliance:       9.0
+  Time to Value:               5.0
+  Total Cost of Ownership:     5.0
+  Support & Ecosystem:         9.0
+
+Description: Oracle Cloud EPM provides a complete, connected EPM solution with monthly feature
+releases. 2025 updates include Forms 2.0, GenAI summarisation, advanced ML predictions, and
+enhanced Data Exchange capabilities.
+
+Strengths:
+  - Native Oracle ERP integration - unified data flow
+  - Enterprise-grade scalability (unlimited users)
+  - Forms 2.0 and Dashboards 2.0 with modern UX (2025)
+  - GenAI summarisation for Narrative Reporting
+  - Monthly release cycle with continuous innovation
+
+Limitations:
+  - Complex implementation process
+  - Higher total cost of ownership
+  - Best value within Oracle ecosystem
+
+Key Features:
+  Oracle ERP Integration, Forms 2.0 & Dashboards 2.0, Financial Close Management,
+  GenAI Narrative Reporting, Data Exchange Pipelines
+
+------------------------------------------------------------
+6. ANAPLAN
+------------------------------------------------------------
+ID:                  anaplan
+Short Name:          Anaplan
+Market Position:     Leader
+ROI Potential:       High
+Implementation Time: 6-15 months
+Price Range:         £150K-£600K+/year
+Price Tier:          4 (out of 5)
+Best For:            Connected planning across finance, supply chain, and sales
+
+Scores:
+  Consolidation & Close:       4.0
+  Planning & Forecasting:      9.5
+  AI & Automation:             9.0
+  Modelling & Extensibility:   9.5
+  Integration & Data Fabric:   7.5
+  Reporting & Visualization:   7.5
+  Governance & Compliance:     7.0
+  Regulatory Compliance:       5.5
+  Time to Value:               6.5
+  Total Cost of Ownership:     6.0
+  Support & Ecosystem:         8.5
+
+Description: Anaplan is a cloud-native connected planning platform with Anaplan Intelligence
+AI. CoPlanner provides conversational AI, CoModeler auto-generates models, and the Polaris
+engine enables enterprise-wide planning at scale.
+
+Strengths:
+  - Anaplan Intelligence: CoPlanner (GenAI) and CoModeler (Agentic AI)
+  - Polaris engine processes quintillions of data points in real-time
+  - £400M multi-year AI roadmap investment
+  - Connected planning breaks departmental silos
+  - Data Orchestrator for no-code ERP/CRM integration
+
+Limitations:
+  - Not designed for statutory consolidation
+  - Significant implementation investment
+  - Model complexity can increase over time
+
+Key Features:
+  Anaplan Intelligence AI, CoPlanner & CoModeler, Polaris Calculation Engine,
+  Data Orchestrator, Role-Based AI Agents
+
+------------------------------------------------------------
+7. BOARD INTERNATIONAL
+------------------------------------------------------------
+ID:                  board
+Short Name:          Board
+Market Position:     Leader (Gartner 2025)
+ROI Potential:       High
+Implementation Time: 4-10 months
+Price Range:         £80K-£300K/year
+Price Tier:          3 (out of 5)
+Best For:            Unified BI + EPM - organisations wanting analytics and planning in
+                     one platform
+
+Scores:
+  Consolidation & Close:       6.0
+  Planning & Forecasting:      8.2
+  AI & Automation:             7.5
+  Modelling & Extensibility:   8.0
+  Integration & Data Fabric:   7.5
+  Reporting & Visualization:   9.5
+  Governance & Compliance:     7.0
+  Regulatory Compliance:       5.5
+  Time to Value:               8.5
+  Total Cost of Ownership:     6.0
+  Support & Ecosystem:         7.5
+
+[Note: Remaining EPM platforms — SAP BPC, SAP SAC+GR, CCH Tagetik, Jedox, IBM TM1, Vena,
+Workday Adaptive, Planful, Prophix, Runway, Datarails, Cube, Mosaic/Drivetrain — are in the
+source file client/src/data/comparison-platforms/epm-platforms.ts. Each follows identical
+schema: id, name, scores{}, marketPosition, roiPotential, implementationTime, priceRange,
+priceTier, bestFor, strengths[], limitations[], description, keyFeatures[].]
+
+
+================================================================================
+PRIVACY POLICY (/privacy)
+================================================================================
+
+SEO Title:  Privacy Policy | Constancia
+Last updated: 1 May 2025
+
+--- ABOUT THIS PRIVACY POLICY ---
+The website https://constancia.com/ (the Site) is operated by Constancia Holdings Limited
+("we", "us", "our"), a company incorporated in England and Wales under company number
+17227112. Our registered office is at Blount House, Hall Court, Hall Park Way, Telford,
+Shropshire, TF3 4NQ, United Kingdom.
+
+We are committed to protecting your privacy and complying with our data protection obligations
+under the Data Protection Act 2018 (the DPA 2018), the UK General Data Protection Regulation
+2016/679 (the UK GDPR) and any other applicable UK legislation (together, Data Protection Law).
+
+When you interact with us or use the Site, we act as the data controller of your personal
+data. This means that we are responsible for processing your personal data and deciding how
+to use it. This privacy policy explains the types of personal data we may collect about you
+when you interact with us, why we collect it, what we use it for and what rights you have
+over that data. Personal data is any information about an identifiable person. Processing is
+anything we do with your personal data, including using, storing, sharing and deleting it.
+
+This policy was last updated on the date shown at the top. We may change this policy at any
+time by posting an updated version on the Site and will make reasonable efforts to bring any
+material changes to your attention. You may wish to check it before using the Site as any
+changes will be effective from the date that they are made.
+
+--- CONTACT INFORMATION ---
+If you have any concerns or would like further information about our use of data or this
+policy in general, you can contact us at info@constancia.io.
+
+--- WHAT INFORMATION DO WE COLLECT? ---
+We collect, store and use the types of personal data set out in the table at the end of this
+policy.
+
+--- HOW WILL WE USE YOUR PERSONAL DATA? ---
+We will use your personal data for the purposes set out in the table at the end of this
+policy.
+
+--- HOW DO WE SHARE YOUR PERSONAL DATA? ---
+When we share personal data, we do so in accordance with Data Protection Law. We may share
+certain personal data, where necessary, with employees, contractors, consultants or advisers,
+to facilitate sales and for general commercial purposes.
+
+We may also provide third parties with aggregated but anonymised information and analytics
+about our customers. Before we do so we will make sure that it does not identify you.
+
+--- THIRD PARTY LINKS ---
+This Site may contain links to other websites over which we have no control. We are not
+responsible for and do not review or endorse the privacy policies or practices of other
+websites which you choose to access from this Site. We encourage you to review the privacy
+policies of those other websites, so you can understand how they collect, use and share your
+personal information.
+
+--- YOUR RIGHTS ---
+We respect your rights to privacy and will respond to requests for access or control over
+information about you in accordance with Data Protection Law. We may require you to verify
+your identity before we take any action.
+
+Depending on the reason we have your personal data, you have a right to:
+  - Access the personal information we hold about you (commonly known as subject access)
+  - Request that we correct or complete personal information we hold about you that is
+    inaccurate or incomplete
+  - Request that we erase your personal information in some circumstances, or object to our
+    processing it
+  - Restrict how we use your personal information, in certain circumstances
+  - Request that we provide you with copies of your personal information in a machine-readable
+    format or transfer it across different services
+  - Where we have asked for your consent to process your data, to withdraw this consent
+
+These rights are limited in some situations under Data Protection Law - for example, where we
+can demonstrate that we are under a legal obligation to process your data.
+
+If you wish to exercise any of these rights, please contact us using the details above.
+
+Your Right to Object:
+You have a right to object to our processing of your personal data and ask us to stop doing
+so. If we are processing your personal data for direct marketing purposes (which includes
+profiling to the extent that it is related to such direct marketing) and you object to this,
+we will stop processing your personal data immediately.
+
+If our processing of your personal data is in the public interest or pursuant to our
+legitimate interests and you object to this, we will stop processing your personal data unless
+we have compelling reasons which override your interests, or our use of your personal data is
+for the establishment, exercise or defence of legal claims.
+
+We hope that we can satisfy any queries you may have about the way we process your data.
+However, if you have unresolved concerns you also have the right to complain to data
+protection authorities (in the UK, the Information Commissioner's Office). You can call the
+ICO on 0303 123 1113 or go to their website: https://ico.org.uk/make-a-complaint/
+
+--- DATA RETENTION ---
+Your personal data will only be kept for as long as necessary for our purposes. Specific
+retention periods are set out in the table at the end of this policy.
+
+At the end of the specified retention periods, your personal data will either be securely
+destroyed or anonymised, unless we are required to keep it to comply with our legal
+obligations.
+
+--- DATA PROTECTION PRINCIPLES ---
+We process your personal data in accordance with the following principles:
+  - We process your personal data lawfully, fairly and in a transparent way
+  - We collect your personal data for specified, explicit and legitimate purposes; any further
+    processing we do is compatible with the original purposes for which we collected it
+  - We only process personal data that is adequate, relevant and limited to what is necessary
+    to achieve the purpose for which it is processed
+  - We take reasonable steps to ensure that all personal data is accurate and kept up to date
+    where necessary
+  - We do not store personal data in a form that identifies you for any longer than is
+    necessary for the purposes of our processing
+  - We process personal data securely and in a way that protects against unauthorised or
+    unlawful processing, accidental loss, destruction or damage
+
+When we ask for your personal data we will tell you whether you are required by law or
+contract to provide it, and what will happen if you do not provide the data.
+
+Any request for consent to the processing of your personal data will be made directly to you
+and will include information about why we require the personal data and what will be done
+with it.
+
+--- WHAT IS OUR LAWFUL BASIS FOR PROCESSING? ---
+We will only process personal data when we have a lawful basis for doing that processing. The
+table at the end of this policy sets out the lawful basis we rely on for each type of data we
+process.
+
+We will choose one of the lawful bases in the UK GDPR to justify how we use your personal
+data. These are:
+
+  Consent: You have given consent to the processing of your personal data for one or more
+  specific purposes. You have the right to withdraw your consent at any time.
+
+  Contract: The processing is necessary for the performance of a contract with you or to take
+  steps at your request before entering into a contract.
+
+  Legal obligation: We need to process your personal data to comply with a legal obligation.
+
+  Vital interests: The processing is necessary to protect the vital interests of you or
+  another person.
+
+  Public interest: Processing is necessary for the performance of a task carried out in the
+  public interest or in the exercise of some official authority.
+
+  Legitimate interests: Processing is necessary for the purposes of legitimate interests
+  pursued by us or someone else, except where such interests are overridden by your interests
+  or fundamental rights and freedoms requiring the protection of your personal data.
+
+--- TABLE OF PERSONAL INFORMATION WE USE ---
+
+Category: Name and contact details
+  Purpose:  To provide consultancy services
+  Basis:    Performance of contract; Compliance with legal obligation
+  Retention: For three years since you last logged on to the Site
+
+Category: Browser, device and Site usage information
+  Purpose:  To improve the site; To protect the Site against fraud; To set default options
+            for you, such as language and currency
+  Basis:    Performance of contract; Legitimate interest in maintaining our Site
+  Retention: For three years since you last logged on to the Site
+
+Category: Information generated in the course of the use of our products and services
+  Purpose:  For internal research and development purposes
+  Basis:    Performance of contract; Legitimate interest in maintaining our Site and
+            improving our products and/or services generally
+  Retention: For four years
+
+Category: Information collected through cookies and similar technologies
+  Purpose:  To conduct and store Site usage analytics, statistical and trend analysis and
+            market research; To generate customer profiles to facilitate marketing initiatives
+  Basis:    Consent
+  Retention: For three years since you gave consent, or until you withdraw consent if earlier
+
+
+================================================================================
+TERMS OF USE (/terms)
+================================================================================
+
+SEO Title:  Terms of Use | Constancia
+Last updated: 1 May 2025
+
+--- ABOUT THESE TERMS OF USE ---
+We are Constancia Holdings Limited, incorporated in England and Wales under company
+registration number 17227112. Our registered office is at Blount House, Hall Court, Hall
+Park Way, Telford, Shropshire, TF3 4NQ, United Kingdom.
+
+These Terms of Use apply to the use of this website, regardless of how you access it. Please
+read these Terms of Use carefully before you proceed.
+
+We may, at any time and without notice, terminate your access to or use of this website. If
+we do so, you do not have the right to bring any claim or claims against us.
+
+--- CONSENT TO TERMS OF USE ---
+By using this website you agree to these Terms of Use.
+
+If you do not agree to these Terms of Use, please do not use this website. These Terms of
+Use were last updated on the date shown above. We may change these Terms of Use at any time
+by posting an updated version on our website, so you should check the latest version before
+using this website. You may only use this website for lawful purposes.
+
+--- COPYRIGHT NOTICE ---
+Unless we expressly state otherwise, the copyright and any other intellectual property rights,
+including but not limited to design rights, trade marks and patents appearing anywhere on this
+website remain our property, whether owned by or licensed to us.
+
+You may not use any of the material on this website without our prior written permission for
+your own commercial purposes, whether by reproducing, copying, downloading, printing, linking
+to, editing, broadcasting, distributing or otherwise. You may use it for your own personal
+non-commercial use.
+
+--- DISCLAIMER ---
+Accessing or using this website or its content in any way is done entirely at your own risk.
+You will be responsible for any loss or damage to any computer, device, software, systems or
+data resulting directly or indirectly from the use or inability to use this website or its
+content.
+
+We are under no obligation to provide uninterrupted access to this website. We reserve the
+right to restrict your access to this website at any time and for any reason.
+
+We do not guarantee that the contents of this website will be free of errors, bugs, worms,
+trojans or viruses or otherwise make any representations as to the quality or accuracy or
+completeness of the content available on the website including, but not limited to any price
+quotes, stock availability data or non-fraudulent representations. You are responsible for
+maintaining appropriate software on your computer or device to protect you from any such
+errors, bugs, worms, trojans or viruses.
+
+To the fullest extent permissible by law, we exclude any and all liability to you resulting
+from your use of the website or connected to these Terms of Use. This exclusion includes but
+is not limited to any type of damages, loss of data, income or profit or loss or damage to
+property belonging to you or third parties arising from the use of this website or its
+contents.
+
+Nothing in these Terms of Use is intended to limit our liability to you for death or personal
+injury resulting from our negligence or that of our employees or agents.
+
+--- LINKS TO THIRD PARTY WEBSITES ---
+This website may provide links out to websites or other online resources under the control of
+third parties. Any such links are provided solely for your convenience. We have no control
+over the contents of these third-party resources. We are not responsible for the contents of
+any linked websites and do not endorse them in any way.
+
+--- LINKS FROM THIRD PARTY WEBSITES ---
+You can link to this website, so long as you do so fairly and without suggesting any
+affiliation, endorsement, approval or association with Constancia Holdings Limited if there
+is none. We reserve the right to withdraw permission to link to our site at any time.
+
+--- PRIVACY POLICY ---
+We take your privacy and the protection of your data very seriously. We may gather and/or use
+certain information about you in accordance with our privacy policy. Please see our separate
+privacy policy for more information. (/privacy)
+
+--- ENTIRE AGREEMENT ---
+These Terms of Use are the entire agreement between us and you, and supersede any and all
+prior terms, conditions, warranties or representations to the fullest extent permitted by law.
+
+--- APPLICABLE LAW ---
+This Agreement shall be governed by the law of England and courts of England and Wales will
+have exclusive jurisdiction in relation to these Terms of Use.
+
+
+================================================================================
+COOKIE POLICY (/cookies)
+================================================================================
+
+SEO Title:  Cookie Policy | Constancia
+Last updated: 1 May 2025
+
+--- ABOUT THIS COOKIE POLICY ---
+The website https://constancia.com/ (the Site) is operated by Constancia Holdings Limited
+(we, us, our), a company incorporated in England and Wales under company number 17227112.
+Our registered office is at Blount House, Hall Court, Hall Park Way, Telford, Shropshire,
+TF3 4NQ, United Kingdom.
+
+We are committed to protecting your privacy and complying with our data protection obligations
+under the Data Protection Act 2018 (the DPA 2018), the UK General Data Protection Regulation
+2016/679 (the UK GDPR) and any other applicable UK legislation (together, Data Protection Law).
+
+This policy was last updated on the date shown at the top. We may change this policy at any
+time by posting an updated version on the Site and will make reasonable efforts to bring any
+material changes to your attention. You may wish to check it before using the Site as any
+changes will be effective from the date that they are made.
+
+--- CONTACT INFORMATION ---
+If you have any concerns or would like further information about this policy in general, you
+can contact us at info@constancia.io.
+
+--- WHAT ARE COOKIES? ---
+Cookies are small text files that are stored on your computer when you visit the Site. It is
+standard practice to use cookies to make your experience better when using a website. We and
+our third-party service providers use cookies and similar technologies to collect information
+about, and relevant to, your usage of the Site.
+
+--- USE OF COOKIES AND SIMILAR TECHNOLOGIES ---
+We use the following categories of cookies and similar technologies on this Site:
+
+Strictly Necessary Cookies:
+  These cookies are essential to enable you to move around the Site and use its features, and
+  to keep the Site secure. Without these cookies, services you have asked for (such as
+  remembering your login details or the items you placed in your basket) cannot be provided.
+
+Analytics Cookies:
+  These cookies collect information about how you use the Site, for instance which pages you
+  go to most often, what searches you perform and if you get error messages from web pages.
+  Information these cookies collect can be used to improve how the Site works.
+
+Customisation Cookies:
+  These cookies allow the Site to remember choices you make (such as your user name) and
+  provide enhanced, more personal features. These cookies cannot track your browsing activity
+  on other websites.
+
+Social Media Cookies:
+  These cookies allow you to share your activity on the Site on social media such as Facebook
+  and Twitter. These cookies are not within our control. Please refer to the privacy policies
+  of the social networks in question for information regarding how their cookies work.
+
+Targeting or Advertising Cookies:
+  These cookies record your visit to the Site, the pages you have visited and the links you
+  have followed. We use this information to make our Site and the advertising displayed on it
+  more relevant to your interests. We may also share this information with third parties for
+  this purpose.
+
+--- COOKIE CONSENT ---
+When you visit the Site for the first time (and periodically after that), we will request
+your consent to the setting of all cookies other than strictly necessary cookies.
+
+--- HOW TO MANAGE COOKIES ---
+You can delete existing cookies and disable some or all types of cookies in future if you
+wish. To disable some or all types of cookies, you will have to either change the settings
+on your browser or use the cookie manager tool on the Site.
+
+See https://www.allaboutcookies.org/manage-cookies/ for information on how to change your
+browser settings. If you change your mind, you can enable cookies again at any time.
+Disabling cookies on your browser may stop the Site from working properly.
+
+To find out more about cookies please visit www.allaboutcookies.org.
+
+
+================================================================================
+FOOTER (all pages)
+================================================================================
+
+Navigation links (feature-gated — full set):
+  About · Services · Insights · Resources · Careers · Contact
+  Privacy · Terms · Cookies · Operations
+
+Bottom row:
+  © [year] Constancia Holdings Limited. All rights reserved.
+  LinkedIn: https://www.linkedin.com/company/constancia-group/
+  Email: info@constancia.io
+  Address: Blount House, Hall Court, Hall Park Way, Telford, Shropshire, TF3 4NQ, UK
+
+
+================================================================================
+END OF BACKUP
+================================================================================

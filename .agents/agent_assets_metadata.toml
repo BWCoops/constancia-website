@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "k8BSUmcZ78Ehf3Qq1L8Gw"
+uri = "file://constancia-content-backup.txt"
+type = "text"
+title = "Constancia Website Content Backup"
