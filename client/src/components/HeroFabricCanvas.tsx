@@ -310,7 +310,9 @@ export function HeroFabricCanvas({ className }: HeroFabricCanvasProps) {
     readScrollProgress();
     window.addEventListener("scroll", readScrollProgress, { passive: true });
 
-    const clock = new THREE.Clock();
+    const startTime = performance.now();
+    let pausedDuration = 0;
+    let pauseStart = -1;
     let rafId = 0;
     let pSmooth = 0;
     // The ScrollyStage IntersectionObserver toggles data-paused on
@@ -325,11 +327,15 @@ export function HeroFabricCanvas({ className }: HeroFabricCanvasProps) {
       if (isPaused()) {
         // Don't advance uTime while paused so the wave doesn't snap
         // when we come back.
-        clock.getDelta();
+        if (pauseStart < 0) pauseStart = performance.now();
         rafId = requestAnimationFrame(tick);
         return;
       }
-      const t = clock.getElapsedTime();
+      if (pauseStart >= 0) {
+        pausedDuration += performance.now() - pauseStart;
+        pauseStart = -1;
+      }
+      const t = (performance.now() - startTime - pausedDuration) / 1000;
       // Smooth the scroll progress so jumps don't snap.
       pSmooth += (scrollProgress - pSmooth) * 0.08;
       // Map 0..1 to a -0.5..0.5 range for symmetric tilt about the

@@ -1,3 +1,2 @@
-- [react-icons v5 crash](react-icons-crash.md) — react-icons v5 ESM format corrupts Vite dep optimization and causes React "Invalid hook call" crash; use inline SVG instead
-- [FC Clerk rewire pattern](fc-clerk-rewire.md) — two-phase effect pattern for FC login: effect 1 checks FC session, effect 2 gates on fcChecked+isClerkLoaded to set step
-- [Vite 504 three.js cold-start](vite-504-threejs.md) — three.js lazy discovery causes 504 on first /finance-compass load; self-resolves after Vite-forced reload; three.js is now in .vite/deps cache
+- [Missing DB tables on startup](missing-db-tables.md) — 9 tables in schema weren't in DB; must create via executeSql since db:push requires TTY.
+- [Permissions-Policy bluetooth](permissions-policy.md) — Chrome rejects `bluetooth=()` in Permissions-Policy header as unrecognized; remove it.

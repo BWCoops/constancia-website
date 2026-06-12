@@ -32,7 +32,7 @@ export function WordmarkIntro({ className }: WordmarkIntroProps) {
         src={constanciaLogoDark}
         alt="Constancia"
         decoding="async"
-        fetchPriority="high"
+        fetchpriority="high"
       />
     </div>
   );

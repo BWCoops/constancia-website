@@ -34,7 +34,7 @@ const DEFAULT_FLAGS: FeatureFlags = {
   comparisonTools: true,
   financeCompass: true,
   blog: false,
-  resources: false,
+  resources: true,
   contact: true,
   requireBusinessEmail: false,
 };
@@ -169,7 +169,7 @@ export function FeatureLink({
 }
 
 // Map routes to their feature keys for easy lookup
-export const ROUTE_TO_FEATURE: Record<string, keyof FeatureFlags> = {
+const ROUTE_TO_FEATURE: Record<string, keyof FeatureFlags> = {
   "/": "home",
   "/about": "about",
   "/services": "services",
@@ -185,7 +185,7 @@ export const ROUTE_TO_FEATURE: Record<string, keyof FeatureFlags> = {
 };
 
 // Get feature key for a route
-export function getFeatureForRoute(path: string): keyof FeatureFlags | null {
+function getFeatureForRoute(path: string): keyof FeatureFlags | null {
   // Check exact match first
   if (ROUTE_TO_FEATURE[path]) {
     return ROUTE_TO_FEATURE[path];

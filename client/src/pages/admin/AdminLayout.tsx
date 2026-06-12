@@ -1,4 +1,5 @@
 import { useEffect, useState, Fragment, useCallback } from "react";
+import { useClerk } from "@clerk/clerk-react";
 import { useLocation, Link } from "wouter";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
@@ -169,8 +170,10 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     }
   }, [session, isLoading, setLocation, location]);
 
-  const handleLogout = () => {
-    window.location.href = "/api/logout";
+  const { signOut } = useClerk();
+  const handleLogout = async () => {
+    await signOut();
+    window.location.href = "/admin/login";
   };
 
   if (!isClient || isLoading) {

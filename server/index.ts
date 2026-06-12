@@ -270,7 +270,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     "geolocation=(), microphone=(), camera=(), payment=(), " +
     "display-capture=(), fullscreen=(self), " +
     "accelerometer=(), gyroscope=(), magnetometer=(), " +
-    "usb=(), bluetooth=(), serial=(), hid=()"
+    "usb=(), serial=(), hid=()"
   );
   
   // PREVENT PWA/APP INSTALLATION - This is a website only
