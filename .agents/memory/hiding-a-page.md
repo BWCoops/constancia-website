@@ -15,7 +15,8 @@ sitemap exposing it.
 - Routes: `client/src/App.tsx` (`<Route>` + the lazy import)
 - Preload map: `client/src/lib/preload.ts`
 - Server SPA known routes: `server/static.ts` (`KNOWN_ROUTES`)
-- Sitemap: `server/services/seo.ts` (`allStaticPages`)
+- Sitemap: `server/services/seo.ts` (`allStaticPages`) — dynamic + flag-filtered, self-corrects.
+- AI/LLM surface: `client/public/llms.txt` — **static, hand-curated, NOT flag-aware.** Must be edited manually to list only live routes (every URL there must be a real `<Route>` in App.tsx). `server/__tests__/pre-deployment.test.ts` pins that it exists and contains the literal strings `Constancia`, `FinanceCompass`, `EPM`, `https://constancia.com` — keep those present even when trimming pages (e.g. mention FinanceCompass as a product without linking a gated page). robots.txt is generic and needs no per-page edits.
 
 **Feature-flag vs. unflagged pages:**
 - Flag-gated pages (about/services/blog/resources/etc.) hide automatically across

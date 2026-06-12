@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useFeatureFlags } from "@/lib/feature-flags";
 import { Lightbulb, TrendingUp, HelpCircle, BarChart3, CheckCircle2, PieChart, Target, Clock, ArrowRight, Milestone, ImageIcon, ZoomIn, Settings, Users, FileSearch, Rocket, Shield, Database, Cog, Play, Flag, Wrench, Layers, Building2, Compass, Zap, ClipboardCheck } from "lucide-react";
 import {
   Accordion,
@@ -974,6 +975,8 @@ function BlogPieChart({ data, width, height }: { data: Record<string, unknown>[]
 }
 
 export function ResourceDownload({ slug, label, description }: { slug: string; label: string; description?: string }) {
+  const { flags } = useFeatureFlags();
+  if (!flags.resources) return null;
   return (
     <div className="my-8 relative overflow-visible" data-testid={`resource-download-${slug}`}>
       <div className="absolute -left-3 top-0 bottom-0 w-1 bg-gradient-to-b from-[#7FB8A3] via-[#8E4F67] to-[#12161D] rounded-full" />

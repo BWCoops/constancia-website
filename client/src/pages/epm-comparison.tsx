@@ -189,8 +189,6 @@ import {
   PolarRadiusAxis,
 } from "recharts";
 import { epmPlatforms } from "@/data/comparison-platforms/epm-platforms";
-import { erpPlatforms } from "@/data/comparison-platforms/erp-platforms";
-import { aiPlatforms } from "@/data/comparison-platforms/ai-platforms";
 import {
   aiPlatformContextMap,
   erpStackAlignmentMap,
@@ -237,6 +235,83 @@ interface PlatformTimeline {
   platformName: string;
   totalMonths: { min: number; max: number };
   phases: ImplementationPhase[];
+}
+
+// The ERP and AI datasets are only needed when their tabs are opened.
+// Loading them on demand keeps them out of the initial comparison-page
+// chunk, so the default (EPM) view paints faster.
+const loadErpPlatforms = () =>
+  import("@/data/comparison-platforms/erp-platforms").then((m) => m.erpPlatforms);
+const loadAiPlatforms = () =>
+  import("@/data/comparison-platforms/ai-platforms").then((m) => m.aiPlatforms);
+
+function LazyComparisonSection({
+  loadPlatforms,
+  categories,
+  featureComparison,
+  categoryType,
+}: {
+  loadPlatforms: () => Promise<Platform[]>;
+  categories: Category[];
+  featureComparison: FeatureCategory[];
+  categoryType: "epm" | "erp" | "ai";
+}) {
+  const [platforms, setPlatforms] = useState<Platform[] | null>(null);
+  const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+    setFailed(false);
+    loadPlatforms()
+      .then((data) => {
+        if (active) setPlatforms(data);
+      })
+      .catch(() => {
+        if (active) setFailed(true);
+      });
+    return () => {
+      active = false;
+    };
+  }, [loadPlatforms]);
+
+  if (failed) {
+    return (
+      <div
+        className="flex flex-col items-center justify-center gap-3 py-20 text-muted-foreground"
+        data-testid={`error-comparison-${categoryType}`}
+      >
+        <p>We couldn’t load this comparison. Please try again.</p>
+        <Button
+          variant="outline"
+          onClick={() => window.location.reload()}
+          data-testid={`button-retry-comparison-${categoryType}`}
+        >
+          Retry
+        </Button>
+      </div>
+    );
+  }
+
+  if (!platforms) {
+    return (
+      <div
+        className="flex items-center justify-center py-20 text-muted-foreground"
+        data-testid={`loading-comparison-${categoryType}`}
+      >
+        <div className="h-5 w-5 mr-3 rounded-full border-2 border-muted-foreground/30 border-t-muted-foreground animate-spin" />
+        Loading comparison data…
+      </div>
+    );
+  }
+
+  return (
+    <ComparisonSection
+      platforms={platforms}
+      categories={categories}
+      featureComparison={featureComparison}
+      categoryType={categoryType}
+    />
+  );
 }
 
 const revenueRanges = [
@@ -6684,18 +6759,18 @@ export default function TechComparisonPage() {
                 </TabsContent>
 
                 <TabsContent value="erp" className="mt-8">
-                  <ComparisonSection 
-                    platforms={erpPlatforms} 
-                    categories={erpCategories} 
+                  <LazyComparisonSection
+                    loadPlatforms={loadErpPlatforms}
+                    categories={erpCategories}
                     featureComparison={erpFeatureComparison}
                     categoryType="erp"
                   />
                 </TabsContent>
 
                 <TabsContent value="ai" className="mt-8">
-                  <ComparisonSection 
-                    platforms={aiPlatforms} 
-                    categories={aiCategories} 
+                  <LazyComparisonSection
+                    loadPlatforms={loadAiPlatforms}
+                    categories={aiCategories}
                     featureComparison={aiFeatureComparison}
                     categoryType="ai"
                   />
