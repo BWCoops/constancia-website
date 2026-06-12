@@ -97,7 +97,7 @@
 
 | # | Item | Risk | Recommendation |
 |---|------|------|---------------|
-| OI-1 | **`ignore-scripts=true` in `.npmrc` breaks fresh installs for `sharp`, `esbuild`, and `puppeteer`** — these packages require their postinstall scripts to download native binaries. Currently installed packages are unaffected. | Build will fail on fresh `npm install` in CI/CD or new environments | Either (a) remove `.npmrc` and accept supply-chain risk, or (b) use `npm install --ignore-scripts` only in production and allow scripts only for the listed dev tools, or (c) use `ci --ignore-scripts` and pre-install native binaries separately. Choose before setting up any CI pipeline. |
+| OI-1 | **`.npmrc` `ignore-scripts=true` breaks fresh installs for `sharp`, `esbuild`, and `puppeteer`** | N/A | **RESOLVED** — `.npmrc` removed. No CI pipeline exists yet; revisit when one is set up. Consider `--ignore-scripts` as a CI flag rather than a global `.npmrc` setting. |
 | OI-2 | **`/api/admin/guardrails/*` routes now require Clerk auth** — if any internal tooling or scripts call these endpoints without a session token, they will now receive `401`. | Potential breakage of any internal CLI or seeding scripts | Verify `POST /api/admin/guardrails/seed` is only called from the admin UI (not a deployment script) before going live. |
 
 ### P1 — Fix before public traffic
@@ -106,7 +106,7 @@
 |---|------|------|---------------|
 | OI-3 | **3 HIGH transitive vulnerabilities** (`@clerk/shared`, `js-cookie`, `tmp`) cannot be resolved without upstream releases | Dependant on how the vulnerable code paths are reached by the running app | Monitor Clerk's changelog and upgrade `@clerk/express` as soon as a clean version ships. For `js-cookie` and `tmp`, identify which transitive dep introduces them and assess exploitability. |
 | OI-4 | **`unsafe-inline` in `script-src` CSP** is required by the React/Vite SPA (inline scripts injected at runtime). This weakens XSS protection materially. | An XSS vector that injects an inline script would not be blocked by CSP | Long-term: migrate to CSP nonce injection once Vite supports per-request HTML transforms. Short-term mitigation already in place: comprehensive allow-listed origins + `report-uri` monitoring. |
-| OI-5 | **Guardrail admin routes lack Zod body validation** on POST/PATCH mutations (added auth in this pass; validation was not added) | Malformed or over-sized payloads from authenticated admins could cause unexpected behaviour | Add Zod schemas to `POST /api/admin/guardrails/rules`, `PATCH .../rules/:id`, `POST .../categories`, `PATCH .../categories/:id` in `server/routes.ts`. |
+| OI-5 | **Guardrail admin routes lacked Zod body validation** on POST/PATCH mutations | N/A | **FIXED** — Added `createRuleSchema`, `updateRuleSchema`, `createCategorySchema`, `updateCategorySchema` with field-level length caps and enum constraints; route param IDs validated for length. |
 
 ### P2 — Improve before scale
 
@@ -114,7 +114,7 @@
 |---|------|------|---------------|
 | OI-6 | **Production sourcemaps** — Vite default is `false` for production builds; however this has not been explicitly set. If the build script changes, sourcemaps could leak. | Low until build pipeline changes | Add `build: { sourcemap: false }` to `vite.config.ts` explicitly when the constraint on modifying that file is lifted. |
 | OI-7 | **Bundle size not formally measured** — Phase 4 bundle analysis could not run (production build not triggered in this pass) | Unknown; no Lighthouse scores captured | Run `npm run build` in a staging environment and inspect chunk sizes with `npx vite-bundle-visualizer` before the first public launch. Target: no single chunk >200KB gzipped. |
-| OI-8 | **Per-user AI rate limiting** — all AI endpoints (blog generation, finance compass scoring, chatbot) are behind admin auth or the finance compass public rate limiter, but there is no explicit per-Clerk-user token quota | A single admin user could run up significant API costs | Add a per-userId rate limit on `POST /api/admin/blog/generate` and finance compass AI scoring paths (e.g. 20 blog generates per hour per user). |
+| OI-8 | **No per-Clerk-user rate limit on AI blog generation** | N/A | **FIXED** — Added `blogGenerateUserRateLimit` (20 jobs/hr per `userId`, falls back to IP) on `POST /api/admin/blog/generate` via `express-rate-limit` with custom `keyGenerator`. |
 | OI-9 | **`isomorphic-dompurify` is in `dependencies` but is only called server-side** — if any future feature renders AI-generated HTML on the client, DOMPurify must be called before `dangerouslySetInnerHTML`. | No current exposure | Document the policy: any client component rendering AI/user-generated HTML must sanitise with `DOMPurify.sanitize()` first. |
 
 ---

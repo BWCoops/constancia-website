@@ -1,6 +1,8 @@
 import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import { createChildLogger } from "./lib/logger";
+import rateLimit from "express-rate-limit";
+import { getAuth } from "@clerk/express";
 
 const log = createChildLogger("routes");
 import { storage, generateOtp, hashOtp, verifyOtp, generateVerificationToken, getVerificationTokenExpiry } from "./storage";
@@ -1096,27 +1098,82 @@ export async function registerRoutes(
     }
   });
 
+  const createRuleSchema = z.object({
+    categoryId: z.string().min(1).max(100),
+    name: z.string().min(1).max(200),
+    ruleType: z.string().min(1).max(100),
+    description: z.string().max(1000).optional().default(""),
+    severity: z.enum(["info", "warning", "error"]).optional().default("warning"),
+    ruleConfig: z.record(z.unknown()).optional(),
+    errorMessage: z.string().max(500).optional().default(""),
+    suggestedFix: z.string().max(1000).optional().default(""),
+    appliesToStage: z.array(z.string().max(50)).max(10).optional(),
+    sortOrder: z.number().int().min(1).max(9999).optional().default(1),
+    isActive: z.boolean().optional().default(true),
+  });
+
+  const updateRuleSchema = z.object({
+    categoryId: z.string().min(1).max(100).optional(),
+    name: z.string().min(1).max(200).optional(),
+    ruleType: z.string().min(1).max(100).optional(),
+    description: z.string().max(1000).optional(),
+    severity: z.enum(["info", "warning", "error"]).optional(),
+    ruleConfig: z.record(z.unknown()).optional(),
+    errorMessage: z.string().max(500).optional(),
+    suggestedFix: z.string().max(1000).optional(),
+    appliesToStage: z.array(z.string().max(50)).max(10).optional(),
+    sortOrder: z.number().int().min(1).max(9999).optional(),
+    isActive: z.boolean().optional(),
+  });
+
+  const createCategorySchema = z.object({
+    name: z.string().min(1).max(200),
+    description: z.string().max(1000).optional().default(""),
+    sortOrder: z.number().int().min(1).max(9999).optional().default(1),
+  });
+
+  const updateCategorySchema = z.object({
+    name: z.string().min(1).max(200).optional(),
+    description: z.string().max(1000).optional(),
+    sortOrder: z.number().int().min(1).max(9999).optional(),
+    enabled: z.boolean().optional(),
+  });
+
+  // Per-Clerk-user rate limit for the AI blog generation endpoint.
+  // 20 generation jobs per hour per authenticated user to cap API cost exposure.
+  const blogGenerateUserRateLimit = rateLimit({
+    windowMs: 60 * 60 * 1000,
+    max: 20,
+    standardHeaders: true,
+    legacyHeaders: false,
+    keyGenerator: (req) => {
+      const { userId } = getAuth(req);
+      return userId ?? (req.ip ?? "unknown");
+    },
+    message: { error: "Too many blog generation requests. Please try again in an hour." },
+  });
+
   // Create guardrail rule
   app.post("/api/admin/guardrails/rules", async (req: Request, res: Response) => {
     try {
-      const { categoryId, name, description, severity, ruleType, ruleConfig, errorMessage, suggestedFix, appliesToStage, sortOrder, isActive } = req.body;
-      
-      if (!categoryId || !name || !ruleType) {
-        return res.status(400).json({ error: "Missing required fields" });
+      const parsed = createRuleSchema.safeParse(req.body);
+      if (!parsed.success) {
+        return res.status(400).json({ error: "Validation failed", details: parsed.error.flatten().fieldErrors });
       }
+      const { categoryId, name, ruleType, description, severity, ruleConfig, errorMessage, suggestedFix, appliesToStage, sortOrder, isActive } = parsed.data;
 
-      const configWithStage = { ...ruleConfig, appliesToStage: appliesToStage || ["draft", "outline"] };
+      const configWithStage = { ...ruleConfig, appliesToStage: appliesToStage ?? ["draft", "outline"] };
       const rule = await storage.createGuardrailRule({
         categoryId,
         name,
-        description: description || "",
-        severity: severity || "warning",
+        description,
+        severity,
         validationType: ruleType,
         validationParams: JSON.stringify(configWithStage),
-        errorMessage: errorMessage || "",
-        suggestion: suggestedFix || "",
-        sortOrder: sortOrder || 1,
-        enabled: isActive !== false,
+        errorMessage,
+        suggestion: suggestedFix,
+        sortOrder,
+        enabled: isActive,
       });
 
       res.json(formatGuardrailRule(rule));
@@ -1130,9 +1187,16 @@ export async function registerRoutes(
   app.patch("/api/admin/guardrails/rules/:id", async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
-      const { categoryId, name, description, severity, ruleType, ruleConfig, errorMessage, suggestedFix, appliesToStage, sortOrder, isActive } = req.body;
+      if (!id || typeof id !== "string" || id.length > 100) {
+        return res.status(400).json({ error: "Invalid rule ID" });
+      }
+      const parsed = updateRuleSchema.safeParse(req.body);
+      if (!parsed.success) {
+        return res.status(400).json({ error: "Validation failed", details: parsed.error.flatten().fieldErrors });
+      }
+      const { categoryId, name, description, severity, ruleType, ruleConfig, errorMessage, suggestedFix, appliesToStage, sortOrder, isActive } = parsed.data;
 
-      const configWithStage = ruleConfig ? { ...ruleConfig, appliesToStage: appliesToStage || ["draft", "outline"] } : undefined;
+      const configWithStage = ruleConfig ? { ...ruleConfig, appliesToStage: appliesToStage ?? ["draft", "outline"] } : undefined;
       const rule = await storage.updateGuardrailRule(id, {
         categoryId,
         name,
@@ -1195,16 +1259,16 @@ export async function registerRoutes(
   // Create guardrail category
   app.post("/api/admin/guardrails/categories", async (req: Request, res: Response) => {
     try {
-      const { name, description, sortOrder } = req.body;
-      
-      if (!name) {
-        return res.status(400).json({ error: "Name is required" });
+      const parsed = createCategorySchema.safeParse(req.body);
+      if (!parsed.success) {
+        return res.status(400).json({ error: "Validation failed", details: parsed.error.flatten().fieldErrors });
       }
+      const { name, description, sortOrder } = parsed.data;
 
       const category = await storage.createGuardrailCategory({
         name,
-        description: description || "",
-        sortOrder: sortOrder || 1,
+        description,
+        sortOrder,
         enabled: true,
       });
 
@@ -1220,10 +1284,15 @@ export async function registerRoutes(
   app.patch("/api/admin/guardrails/categories/:id", async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
-      const { name, description, sortOrder, enabled } = req.body;
+      if (!id || typeof id !== "string" || id.length > 100) {
+        return res.status(400).json({ error: "Invalid category ID" });
+      }
+      const parsed = updateCategorySchema.safeParse(req.body);
+      if (!parsed.success) {
+        return res.status(400).json({ error: "Validation failed", details: parsed.error.flatten().fieldErrors });
+      }
+      const { name, description, sortOrder, enabled } = parsed.data;
 
-      // For now, return a placeholder since updateGuardrailCategory is not implemented
-      // Delete and recreate as a workaround
       const categories = await storage.getGuardrailCategories();
       const existingCategory = categories.find((c: { id: string }) => c.id === id);
       
@@ -1381,7 +1450,7 @@ export async function registerRoutes(
   });
   
   // Start a new blog generation job
-  app.post("/api/admin/blog/generate", requireBlog, async (req: Request, res: Response) => {
+  app.post("/api/admin/blog/generate", requireBlog, blogGenerateUserRateLimit, async (req: Request, res: Response) => {
     try {
       const { title, brief, targetKeywords, targetAudience, categoryId, useDeepResearch } = req.body;
       
