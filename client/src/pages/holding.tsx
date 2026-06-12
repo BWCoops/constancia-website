@@ -39,11 +39,75 @@ export default function HoldingPage() {
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    // Muted + playsInline autoplay is permitted on mobile; this kick
-    // covers browsers that don't honor the autoPlay attribute. If a
-    // browser still blocks it, the poster + controls let the visitor
-    // tap to start.
-    video.play().catch(() => {});
+
+    // We want sound-on autoplay. Browsers — especially on mobile — block
+    // autoplay WITH audio until the user has interacted with the origin,
+    // so this is best-effort and cannot be forced:
+    //   1. Try to play unmuted immediately (works on desktop / repeat
+    //      visitors with media engagement).
+    //   2. If blocked, fall back to muted autoplay so the film still runs,
+    //      then unmute on the first user gesture elsewhere on the page
+    //      (tap, scroll-release, key, click) — no dedicated "play" click
+    //      required. We listen on activation-GRANTING events only
+    //      (touchend/pointerup/keydown/click): touchstart/pointerdown fire
+    //      before the browser grants the user-activation that an unmuted
+    //      play() requires, so unmuting from those is silently blocked.
+    let disposed = false;
+    const gestureEvents = [
+      "pointerup",
+      "touchend",
+      "keydown",
+      "click",
+    ] as const;
+
+    const removeGestureListeners = () => {
+      gestureEvents.forEach((ev) =>
+        window.removeEventListener(ev, unmuteOnGesture),
+      );
+    };
+
+    const unmuteOnGesture = (event: Event) => {
+      // Ignore interactions with the film's own native controls
+      // (pause / mute) so we never fight an explicit pause — only ambient
+      // gestures elsewhere on the page enable sound.
+      const target = event.target as Node | null;
+      if (target && (target === video || video.contains(target))) return;
+      video.muted = false;
+      video.volume = 1;
+      video.play().then(
+        () => removeGestureListeners(), // sound is on — stop listening
+        () => {
+          // Still blocked: stay muted and keep the listeners attached so a
+          // later gesture can retry.
+          video.muted = true;
+          video.play().catch(() => {});
+        },
+      );
+    };
+
+    const start = async () => {
+      video.muted = false;
+      video.volume = 1;
+      try {
+        await video.play();
+        return; // Browser allowed sound-on autoplay.
+      } catch {
+        // Blocked: play muted now, unmute on first interaction.
+      }
+      if (disposed) return;
+      video.muted = true;
+      video.play().catch(() => {});
+      gestureEvents.forEach((ev) =>
+        window.addEventListener(ev, unmuteOnGesture, { passive: true }),
+      );
+    };
+
+    void start();
+
+    return () => {
+      disposed = true;
+      removeGestureListeners();
+    };
   }, []);
 
   return (
