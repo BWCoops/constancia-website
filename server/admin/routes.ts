@@ -183,16 +183,62 @@ async function auditLog(
 }
 
 async function getAdminIdFromDb(req: any): Promise<string> {
-  const replitId = req.user?.claims?.sub;
+  const claims = req.user?.claims;
+  const replitId = claims?.sub;
   if (!replitId) throw new Error("No user in session");
-  
+
   const [admin] = await db.select({ id: adminUsers.id })
     .from(adminUsers)
     .where(eq(adminUsers.replitId, replitId))
     .limit(1);
-  
-  if (!admin) throw new Error("Admin user not found");
-  return admin.id;
+
+  if (admin) return admin.id;
+
+  // First privileged action for this verified admin: provision their
+  // admin_users record from the (already-authorized) Clerk claims so audit
+  // logging and security management have a stable internal id to reference.
+  const email = claims?.email ?? null;
+  const displayName =
+    [claims?.first_name, claims?.last_name].filter(Boolean).join(" ") || email || null;
+  const profileImageUrl = claims?.profile_image_url ?? null;
+
+  try {
+    const [created] = await db.insert(adminUsers)
+      .values({ replitId, email, displayName, profileImageUrl })
+      .onConflictDoUpdate({
+        target: adminUsers.replitId,
+        set: { email, displayName, profileImageUrl, updatedAt: new Date() },
+      })
+      .returning({ id: adminUsers.id });
+
+    if (created) return created.id;
+  } catch (err) {
+    // Falls through to recovery below (e.g. a legacy row already uses this
+    // email with a different/null replit_id, tripping the unique-email index).
+    log.warn({ err }, "admin_users provisioning insert failed; attempting recovery");
+  }
+
+  // Recover by claiming a preexisting row that matches this verified email.
+  if (email) {
+    const [byEmail] = await db.select({ id: adminUsers.id })
+      .from(adminUsers)
+      .where(eq(adminUsers.email, email))
+      .limit(1);
+    if (byEmail) {
+      await db.update(adminUsers)
+        .set({ replitId, displayName, profileImageUrl, updatedAt: new Date() })
+        .where(eq(adminUsers.id, byEmail.id));
+      return byEmail.id;
+    }
+  }
+
+  const [row] = await db.select({ id: adminUsers.id })
+    .from(adminUsers)
+    .where(eq(adminUsers.replitId, replitId))
+    .limit(1);
+
+  if (!row) throw new Error("Admin user not found");
+  return row.id;
 }
 
 router.get("/auth/session", (req: any, res: Response) => {
