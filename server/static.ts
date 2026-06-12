@@ -21,7 +21,6 @@ const KNOWN_ROUTES = new Set([
   "/cookies",
   "/export",
   "/tools/epm-comparison",
-  "/vendors",
   "/finance-compass",
   "/finance-compass/dashboard",
   "/finance-compass/methodology",

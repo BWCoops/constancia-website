@@ -27,7 +27,6 @@ const allStaticPages: Array<SitemapUrl & { featureKey?: keyof FeatureFlags }> = 
   { loc: "/finance-compass", lastmod: "2026-02-02", changefreq: "monthly", priority: 0.9, featureKey: "financeCompass" },
   { loc: "/finance-compass/methodology", lastmod: "2026-01-20", changefreq: "monthly", priority: 0.7, featureKey: "financeCompass" },
   { loc: "/files", lastmod: "2026-02-01", changefreq: "weekly", priority: 0.8, featureKey: "resources" },
-  { loc: "/vendors", lastmod: "2026-02-01", changefreq: "weekly", priority: 0.7, featureKey: "comparisonTools" },
   { loc: "/terms", lastmod: "2025-12-01", changefreq: "yearly", priority: 0.3 },
   { loc: "/privacy", lastmod: "2025-12-01", changefreq: "yearly", priority: 0.3 },
   { loc: "/cookies", lastmod: "2025-12-01", changefreq: "yearly", priority: 0.3 },
