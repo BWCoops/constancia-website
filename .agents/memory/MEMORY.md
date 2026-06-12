@@ -8,4 +8,5 @@
 - [Cookie toggle centering](cookie-toggle-centering.md) — Label(inline)+p(block) mix inside flex rows breaks Switch vertical centering; fix with flex-col on the text wrapper and block on Label.
 - [Switch thumb positioning](switch-thumb-positioning.md) — never drive the shadcn Switch thumb with calc()/CSS-var arbitrary translate-x (won't compile); use fixed h-6 w-11 border-2 + translate-x-0/translate-x-5.
 - [Cookie components must use portal](cookie-portal.md) — CookiePreferencesIcon and CookieConsentBanner must render via createPortal(…, document.body) or framer-motion transforms break fixed positioning and kill pointer events.
+- [Admin allowlist precedence](admin-allowlist-precedence.md) — admin_authorized_emails DB table wins when non-empty; AUTHORIZED_ADMIN_EMAILS env is fallback only when table empty. Empty prod table + unset env = full admin lockout (403 email_not_authorized).
 - [Cookie consent controls & access point](cookie-consent-controls.md) — cookie rows use a green-tick checkbox (not Switch); prefs dialog opens via OPEN_COOKIE_PREFERENCES_EVENT from the nav drawer, no floating FAB.
