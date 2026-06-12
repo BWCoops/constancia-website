@@ -19,14 +19,16 @@ interface SEOHeadProps {
   breadcrumbs?: Array<{ name: string; url: string }>;
 }
 
+const SITE_ORIGIN = "https://constancia.com";
+
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "Constancia",
   "legalName": "Constancia Holdings Limited",
   "alternateName": "Constancia Holdings",
-  "url": "https://constancia.com",
-  "logo": "https://constancia.com/logo.png",
+  "url": SITE_ORIGIN,
+  "logo": `${SITE_ORIGIN}/logo.png`,
   "description": "Connected finance intelligence. Make sense of your finance data — from ERP to EPM, and everything in between. Official Abacum partner for mid-market FP&A. OneStream partner for enterprise EPM.",
   "address": {
     "@type": "PostalAddress",
@@ -64,7 +66,7 @@ const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "Constancia",
-  "url": "https://constancia.com",
+  "url": SITE_ORIGIN,
   "description": "Connected finance intelligence. One source of truth across every system you own.",
   "publisher": {
     "@type": "Organization",
@@ -76,7 +78,7 @@ export function SEOHead({
   title,
   description,
   keywords = [],
-  ogImage = "https://constancia.com/og-image.png",
+  ogImage = `${SITE_ORIGIN}/og-image.png`,
   canonicalUrl,
   noindex = false,
   type = "website",
@@ -85,7 +87,9 @@ export function SEOHead({
   breadcrumbs,
 }: SEOHeadProps) {
   const fullTitle = title.includes("Constancia") ? title : `${title} | Constancia`;
-  const url = canonicalUrl || (typeof window !== "undefined" ? window.location.href : "https://constancia.com");
+  const url = canonicalUrl || (typeof window !== "undefined"
+    ? `${SITE_ORIGIN}${window.location.pathname}`
+    : SITE_ORIGIN);
 
   useEffect(() => {
     document.title = fullTitle;
