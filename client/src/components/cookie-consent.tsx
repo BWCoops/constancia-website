@@ -15,11 +15,12 @@ const CONSENT_KEY = "cookie-consent";
 
 export function getCookieConsent(): CookieConsent | null {
   if (typeof window === "undefined") return null;
-  const stored = localStorage.getItem(CONSENT_KEY);
-  if (!stored) return null;
   try {
+    const stored = localStorage.getItem(CONSENT_KEY);
+    if (!stored) return null;
     return JSON.parse(stored);
   } catch {
+    // localStorage throws in iOS Private Browsing mode — treat as no consent
     return null;
   }
 }
@@ -51,7 +52,11 @@ export function CookiePreferencesIcon() {
   }, []);
 
   const saveConsent = (consent: CookieConsent) => {
-    localStorage.setItem(CONSENT_KEY, JSON.stringify(consent));
+    try {
+      localStorage.setItem(CONSENT_KEY, JSON.stringify(consent));
+    } catch {
+      // Silently ignore — Private Browsing or storage quota exceeded
+    }
     window.dispatchEvent(new CustomEvent("consent-updated", { detail: consent }));
     setShowModal(false);
   };
@@ -188,7 +193,11 @@ export function CookieConsentBanner() {
   }, []);
 
   const saveConsent = (consent: CookieConsent) => {
-    localStorage.setItem(CONSENT_KEY, JSON.stringify(consent));
+    try {
+      localStorage.setItem(CONSENT_KEY, JSON.stringify(consent));
+    } catch {
+      // Silently ignore — Private Browsing or storage quota exceeded
+    }
     window.dispatchEvent(new CustomEvent("consent-updated", { detail: consent }));
     setShowBanner(false);
     setShowPreferences(false);
