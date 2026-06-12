@@ -4570,7 +4570,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
         </section>
       )}
 
-      {selectedPlatforms.length > 0 && (
+      {false && selectedPlatforms.length > 0 && (
         <section className="py-4 sm:py-6">
           <Card className="border-[#7FB8A3]/30 bg-gradient-to-r from-[#12161D]/5 to-[#8E4F67]/5 dark:from-[#12161D]/20 dark:to-[#8E4F67]/20">
             <CardContent className="py-4 sm:py-6">
@@ -6570,7 +6570,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
       </Dialog>
 
       {/* Sticky bottom CTA for mobile */}
-      {selectedPlatforms.length > 0 && (
+      {false && selectedPlatforms.length > 0 && (
         <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-background/95 backdrop-blur-sm border-t border-border p-3 safe-bottom">
           <div className="flex items-center justify-between gap-3 max-w-lg mx-auto">
             <div className="flex-1 min-w-0">
