@@ -6,3 +6,9 @@ id = "k8BSUmcZ78Ehf3Qq1L8Gw"
 uri = "file://constancia-content-backup.txt"
 type = "text"
 title = "Constancia Website Content Backup"
+
+[[outputs]]
+id = "TKlQJvpBR5sKFH5hLhyd8"
+uri = "file://constancia-full-backup.txt"
+type = "text"
+title = "Constancia Full Codebase Backup"
