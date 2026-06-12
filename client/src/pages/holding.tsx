@@ -39,27 +39,9 @@ export default function HoldingPage() {
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-
-    // React's `muted` JSX prop doesn't reliably set the DOM attribute that
-    // mobile browsers check for autoplay policy — set it directly on the node.
-    video.muted = true;
-    video.play().catch(() => {
-      // Autoplay blocked even with muted — do nothing, poster will show.
-    });
-
-    const unmute = () => {
-      video.muted = false;
-      // Re-trigger play in case it stalled waiting for interaction.
-      video.play().catch(() => {});
-    };
-
-    document.addEventListener("click", unmute, { once: true });
-    document.addEventListener("touchstart", unmute, { once: true });
-
-    return () => {
-      document.removeEventListener("click", unmute);
-      document.removeEventListener("touchstart", unmute);
-    };
+    // Play unmuted. Browsers that block unmuted autoplay will show the
+    // poster + controls so the visitor can tap/click to start manually.
+    video.play().catch(() => {});
   }, []);
 
   return (
@@ -96,6 +78,7 @@ export default function HoldingPage() {
             className="holding-film__video"
             width={1080}
             height={1350}
+            autoPlay
             loop
             playsInline
             controls
