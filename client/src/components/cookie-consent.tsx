@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { Cookie, Settings, Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
@@ -67,7 +68,7 @@ export function CookiePreferencesIcon() {
     });
   };
 
-  return (
+  return createPortal(
     <>
       <button
         onClick={() => setShowModal(true)}
@@ -162,7 +163,8 @@ export function CookiePreferencesIcon() {
           </div>
         </div>
       )}
-    </>
+    </>,
+    document.body
   );
 }
 
@@ -222,7 +224,7 @@ export function CookieConsentBanner() {
 
   if (!showBanner) return null;
 
-  return (
+  return createPortal(
     <div
       className="fixed bottom-0 left-0 right-0 z-cookie-banner p-4 md:p-6"
       data-testid="cookie-consent-banner"
@@ -332,6 +334,7 @@ export function CookieConsentBanner() {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
