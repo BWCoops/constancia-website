@@ -5,9 +5,9 @@ import { createChildLogger } from "../lib/logger";
 
 const log = createChildLogger("email-service");
 
-export const SENDER_EMAIL = "info@constancia.io";
+export const SENDER_EMAIL = process.env.GMAIL_USER || "";
 
-const GMAIL_USER = process.env.GMAIL_USER || SENDER_EMAIL;
+const GMAIL_USER = process.env.GMAIL_USER;
 const GMAIL_APP_PASSWORD = process.env.GMAIL_APP_PASSWORD;
 
 let _transporter: nodemailer.Transporter | null = null;
@@ -56,8 +56,10 @@ export async function sendEmailViaGraph(
     html = optionsOrTo.htmlContent;
   }
 
-  if (!GMAIL_APP_PASSWORD) {
-    throw new Error("Email not configured: GMAIL_APP_PASSWORD secret is not set");
+  if (!GMAIL_USER || !GMAIL_APP_PASSWORD) {
+    throw new Error(
+      `Email not configured: missing secret(s) — ${!GMAIL_USER ? "GMAIL_USER " : ""}${!GMAIL_APP_PASSWORD ? "GMAIL_APP_PASSWORD" : ""}`.trim()
+    );
   }
 
   const transporter = getTransporter();
@@ -71,5 +73,5 @@ export async function sendEmailViaGraph(
 }
 
 export function isEmailConfigured(): boolean {
-  return !!(GMAIL_APP_PASSWORD);
+  return !!(GMAIL_USER && GMAIL_APP_PASSWORD);
 }
