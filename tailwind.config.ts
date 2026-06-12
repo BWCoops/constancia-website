@@ -136,6 +136,15 @@ export default {
         nav:          "var(--brand-nav-height)",
       },
 
+      zIndex: {
+        nav:          "var(--z-nav)",
+        modal:        "var(--z-modal)",
+        overlay:      "var(--z-overlay)",
+        toast:        "var(--z-toast)",
+        "cookie-fab": "var(--z-cookie-fab)",
+        "cookie-banner": "var(--z-cookie-banner)",
+      },
+
       maxWidth: {
         site: "var(--brand-max-width, 80rem)",
       },

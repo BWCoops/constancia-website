@@ -74,11 +74,12 @@ export function CookiePreferencesIcon() {
     <>
       <button
         onClick={() => setShowModal(true)}
-        className="fixed bottom-6 left-6 z-[90] w-12 h-12 rounded-full bg-gradient-to-br from-brand-navy to-brand-teal shadow-lg flex items-center justify-center hover:shadow-xl transition-all duration-300"
+        className="fixed bottom-6 left-6 z-cookie-fab w-12 h-12 rounded-full bg-gradient-to-br from-brand-navy to-brand-teal shadow-md hover-elevate active-elevate-2 flex items-center justify-center"
         style={{
           opacity: visible ? 1 : 0,
           transform: visible ? "scale(1)" : "scale(0.8)",
           pointerEvents: visible ? "auto" : "none",
+          transition: "opacity 0.3s ease, transform 0.3s ease",
         }}
         aria-label="Cookie preferences"
         data-testid="button-cookie-preferences"
@@ -88,7 +89,7 @@ export function CookiePreferencesIcon() {
 
       {showModal && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/50"
+          className="fixed inset-0 z-modal flex items-center justify-center p-4 bg-black/50"
           onClick={() => setShowModal(false)}
         >
           <div
@@ -234,7 +235,7 @@ export function CookieConsentBanner() {
 
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 z-[100] p-4 md:p-6"
+      className="fixed bottom-0 left-0 right-0 z-cookie-banner p-4 md:p-6"
       data-testid="cookie-consent-banner"
     >
       <div className="max-w-4xl mx-auto bg-card border border-border rounded-2xl shadow-2xl overflow-hidden">

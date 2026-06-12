@@ -1,7 +1,7 @@
 import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import { createChildLogger } from "./lib/logger";
-import rateLimit from "express-rate-limit";
+import rateLimit, { ipKeyGenerator } from "express-rate-limit";
 import { getAuth } from "@clerk/express";
 
 const log = createChildLogger("routes");
@@ -1148,7 +1148,7 @@ export async function registerRoutes(
     legacyHeaders: false,
     keyGenerator: (req) => {
       const { userId } = getAuth(req);
-      return userId ?? (req.ip ?? "unknown");
+      return userId ?? ipKeyGenerator(req);
     },
     message: { error: "Too many blog generation requests. Please try again in an hour." },
   });

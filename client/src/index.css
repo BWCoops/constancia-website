@@ -77,6 +77,14 @@
   --brand-nav-height:       72px;
   --brand-max-width:        80rem;
 
+  /* Z-index scale — use these tokens; never write z-[N] inline */
+  --z-nav:            50;
+  --z-overlay:        80;
+  --z-cookie-fab:     90;
+  --z-cookie-banner: 100;
+  --z-modal:         110;
+  --z-toast:         120;
+
   /* Border radius */
   --brand-radius-sm:        4px;
   --brand-radius-md:        8px;
