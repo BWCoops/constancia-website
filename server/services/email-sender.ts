@@ -1,6 +1,7 @@
 // Email sender — Gmail SMTP via nodemailer.
 
 import nodemailer from "nodemailer";
+import path from "path";
 import { createChildLogger } from "../lib/logger";
 
 const log = createChildLogger("email-service");
@@ -24,6 +25,14 @@ function getTransporter(): nodemailer.Transporter {
   }
   return _transporter;
 }
+
+// Resolved once at module load — works in dev and in any deployment because
+// the logo lives at client/public/logo.png relative to the project root.
+const LOGO_ATTACHMENT = {
+  filename: "logo.png",
+  path: path.join(process.cwd(), "client", "public", "logo.png"),
+  cid: "constancia-logo",
+};
 
 // ─── Public API ──────────────────────────────────────────────────────────────
 
@@ -68,6 +77,7 @@ export async function sendEmail(
     to,
     subject: sub,
     html,
+    attachments: [LOGO_ATTACHMENT],
   });
   log.info({ to, subject: sub }, "Email sent via Gmail");
 }

@@ -5,7 +5,10 @@
  * Palette: charcoal #252826 · cream #F6F3EE · rose #C77A93 · mint #7FB8A3
  */
 
-const LOGO_URL = `${process.env.BASE_URL || 'https://constancia.com'}/constancia-logo-dark.png`;
+// CID reference — logo.png is attached as a MIME part by email-sender.ts on
+// every outgoing email, so this renders correctly in Gmail and all major clients
+// without any external URL or base64 bloat.
+const LOGO_URL = "cid:constancia-logo";
 
 export const EMAIL_BRAND = {
   // Core Constancia palette
