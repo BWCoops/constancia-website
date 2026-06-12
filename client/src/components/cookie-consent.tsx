@@ -37,18 +37,15 @@ export function hasMarketingConsent(): boolean {
 
 export function CookiePreferencesIcon() {
   const [showModal, setShowModal] = useState(false);
-  const [visible, setVisible] = useState(false);
   const [analytics, setAnalytics] = useState(false);
   const [marketing, setMarketing] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setVisible(true), 2000);
     const consent = getCookieConsent();
     if (consent) {
       setAnalytics(consent.analytics);
       setMarketing(consent.marketing);
     }
-    return () => clearTimeout(timer);
   }, []);
 
   const saveConsent = (consent: CookieConsent) => {
@@ -75,12 +72,6 @@ export function CookiePreferencesIcon() {
       <button
         onClick={() => setShowModal(true)}
         className="fixed bottom-6 left-6 z-cookie-fab w-12 h-12 rounded-full bg-gradient-to-br from-brand-navy to-brand-teal shadow-md hover-elevate active-elevate-2 flex items-center justify-center"
-        style={{
-          opacity: visible ? 1 : 0,
-          transform: visible ? "scale(1)" : "scale(0.8)",
-          pointerEvents: visible ? "auto" : "none",
-          transition: "opacity 0.3s ease, transform 0.3s ease",
-        }}
         aria-label="Cookie preferences"
         data-testid="button-cookie-preferences"
       >

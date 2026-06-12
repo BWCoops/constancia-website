@@ -80,10 +80,10 @@
   /* Z-index scale — use these tokens; never write z-[N] inline */
   --z-nav:            50;
   --z-overlay:        80;
-  --z-cookie-fab:     90;
-  --z-cookie-banner: 100;
-  --z-modal:         110;
-  --z-toast:         120;
+  --z-cookie-fab:   9990;
+  --z-cookie-banner: 9992;
+  --z-modal:         9995;
+  --z-toast:         9999;
 
   /* Border radius */
   --brand-radius-sm:        4px;
