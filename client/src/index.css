@@ -847,6 +847,32 @@ div[class*="hs-chat"] {
 .library-nav-drawer__nav li:last-child {
   border-bottom: 1px solid rgba(37, 40, 38, 0.08);
 }
+.library-nav-drawer__footer {
+  margin-top: auto;
+  padding-top: 24px;
+}
+.library-nav-drawer__cookie {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: transparent;
+  border: 1px solid rgba(37, 40, 38, 0.18);
+  border-radius: 999px;
+  cursor: pointer;
+  color: #12161D;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: border-color 200ms, color 200ms;
+}
+.library-nav-drawer__cookie:hover,
+.library-nav-drawer__cookie:focus-visible {
+  border-color: #8E4F67;
+  color: #8E4F67;
+  outline: none;
+}
 .library-nav-drawer__nav a {
   display: grid;
   grid-template-columns: 36px 1fr;

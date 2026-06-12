@@ -2,8 +2,48 @@ import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { Cookie, Settings, Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
+
+/**
+ * ConsentTick — a simple checkbox-style control that fills green with a
+ * tick when enabled. Replaces the sliding Switch in cookie rows: there
+ * is no moving thumb to centre, so it can't drift out of alignment.
+ */
+function ConsentTick({
+  checked,
+  onChange,
+  disabled = false,
+  label,
+  testId,
+}: {
+  checked: boolean;
+  onChange?: (value: boolean) => void;
+  disabled?: boolean;
+  label: string;
+  testId?: string;
+}) {
+  return (
+    <button
+      type="button"
+      role="checkbox"
+      aria-checked={checked}
+      aria-label={label}
+      disabled={disabled}
+      onClick={() => !disabled && onChange?.(!checked)}
+      data-testid={testId}
+      className={cn(
+        "flex h-7 w-7 shrink-0 items-center justify-center rounded-md border transition-colors",
+        checked
+          ? "border-transparent bg-[color:var(--brand-deep-mint)]"
+          : "border-border bg-transparent",
+        disabled ? "cursor-not-allowed opacity-60" : "cursor-pointer hover-elevate active-elevate-2"
+      )}
+    >
+      {checked && <Check className="h-4 w-4 text-[color:var(--brand-cream)]" strokeWidth={3} />}
+    </button>
+  );
+}
 
 export interface CookieConsent {
   essential: boolean;
@@ -36,7 +76,25 @@ export function hasMarketingConsent(): boolean {
   return consent?.marketing ?? false;
 }
 
-export function CookiePreferencesIcon() {
+/**
+ * Event other components (e.g. the nav drawer) dispatch to open the
+ * cookie preferences modal:
+ *
+ *   window.dispatchEvent(new CustomEvent(OPEN_COOKIE_PREFERENCES_EVENT))
+ *
+ * Exported so callers don't hard-code the string.
+ */
+export const OPEN_COOKIE_PREFERENCES_EVENT = "open-cookie-preferences";
+
+/**
+ * CookiePreferencesModal — the cookie preferences dialog. It has no
+ * trigger of its own; it opens when it receives the
+ * `open-cookie-preferences` window event, which the navigation drawer
+ * fires. The full-screen overlay portals to <body> (correct for a
+ * modal) while the *trigger* now lives inside the nav drawer, so it is
+ * never clipped by a page-level container.
+ */
+export function CookiePreferencesModal() {
   const [showModal, setShowModal] = useState(false);
   const [analytics, setAnalytics] = useState(false);
   const [marketing, setMarketing] = useState(false);
@@ -47,6 +105,19 @@ export function CookiePreferencesIcon() {
       setAnalytics(consent.analytics);
       setMarketing(consent.marketing);
     }
+  }, []);
+
+  useEffect(() => {
+    const open = () => {
+      // Re-sync from storage each time it opens so the toggles reflect
+      // the latest saved choice.
+      const consent = getCookieConsent();
+      setAnalytics(consent?.analytics ?? false);
+      setMarketing(consent?.marketing ?? false);
+      setShowModal(true);
+    };
+    window.addEventListener(OPEN_COOKIE_PREFERENCES_EVENT, open);
+    return () => window.removeEventListener(OPEN_COOKIE_PREFERENCES_EVENT, open);
   }, []);
 
   const saveConsent = (consent: CookieConsent) => {
@@ -70,15 +141,6 @@ export function CookiePreferencesIcon() {
 
   return createPortal(
     <>
-      <button
-        onClick={() => setShowModal(true)}
-        className="fixed bottom-6 left-6 z-cookie-fab w-12 h-12 rounded-full bg-gradient-to-br from-brand-navy to-brand-teal hover-elevate active-elevate-2 flex items-center justify-center animate-cookie-float"
-        aria-label="Cookie preferences"
-        data-testid="button-cookie-preferences"
-      >
-        <Cookie className="w-5 h-5 text-brand-cyan" />
-      </button>
-
       {showModal && (
         <div
           className="fixed inset-0 z-modal flex items-center justify-center p-4 bg-black/50"
@@ -114,7 +176,7 @@ export function CookiePreferencesIcon() {
                   <Label className="block font-medium leading-snug">Essential Cookies</Label>
                   <p className="text-xs text-muted-foreground mt-0.5">Required for core functionality</p>
                 </div>
-                <Switch checked disabled />
+                <ConsentTick checked disabled label="Essential cookies (always on)" />
               </div>
 
               <div className="flex items-center justify-between gap-4 p-3 bg-muted/50 rounded-lg">
@@ -122,10 +184,11 @@ export function CookiePreferencesIcon() {
                   <Label className="block font-medium leading-snug">Analytics Cookies</Label>
                   <p className="text-xs text-muted-foreground mt-0.5">Help us improve our website</p>
                 </div>
-                <Switch
+                <ConsentTick
                   checked={analytics}
-                  onCheckedChange={setAnalytics}
-                  data-testid="switch-modal-analytics"
+                  onChange={setAnalytics}
+                  label="Analytics cookies"
+                  testId="tick-modal-analytics"
                 />
               </div>
 
@@ -134,10 +197,11 @@ export function CookiePreferencesIcon() {
                   <Label className="block font-medium leading-snug">Marketing Cookies</Label>
                   <p className="text-xs text-muted-foreground mt-0.5">Used for targeted advertising</p>
                 </div>
-                <Switch
+                <ConsentTick
                   checked={marketing}
-                  onCheckedChange={setMarketing}
-                  data-testid="switch-modal-marketing"
+                  onChange={setMarketing}
+                  label="Marketing cookies"
+                  testId="tick-modal-marketing"
                 />
               </div>
             </div>
@@ -253,7 +317,7 @@ export function CookieConsentBanner() {
                         <Label className="block font-medium leading-snug">Essential Cookies</Label>
                         <p className="text-xs text-muted-foreground mt-0.5">Required for the website to function properly</p>
                       </div>
-                      <Switch checked disabled />
+                      <ConsentTick checked disabled label="Essential cookies (always on)" />
                     </div>
 
                     <div className="flex items-center justify-between gap-4">
@@ -261,10 +325,11 @@ export function CookieConsentBanner() {
                         <Label className="block font-medium leading-snug">Analytics Cookies</Label>
                         <p className="text-xs text-muted-foreground mt-0.5">Help us understand how visitors use our site</p>
                       </div>
-                      <Switch
+                      <ConsentTick
                         checked={analytics}
-                        onCheckedChange={setAnalytics}
-                        data-testid="switch-analytics"
+                        onChange={setAnalytics}
+                        label="Analytics cookies"
+                        testId="tick-analytics"
                       />
                     </div>
 
@@ -273,10 +338,11 @@ export function CookieConsentBanner() {
                         <Label className="block font-medium leading-snug">Marketing Cookies</Label>
                         <p className="text-xs text-muted-foreground mt-0.5">Used to deliver relevant advertisements</p>
                       </div>
-                      <Switch
+                      <ConsentTick
                         checked={marketing}
-                        onCheckedChange={setMarketing}
-                        data-testid="switch-marketing"
+                        onChange={setMarketing}
+                        label="Marketing cookies"
+                        testId="tick-marketing"
                       />
                     </div>
                   </div>

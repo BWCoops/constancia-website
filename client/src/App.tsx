@@ -5,7 +5,7 @@ import { QueryClientProvider, useQuery } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { LazyMotionProvider } from "@/components/lazy-motion-provider";
-import { CookieConsentBanner, CookiePreferencesIcon } from "@/components/cookie-consent";
+import { CookieConsentBanner, CookiePreferencesModal } from "@/components/cookie-consent";
 import { LibraryNavigation } from "@/components/LibraryNavigation";
 import { GlassFilterDef } from "@/components/ui/GlassSurface";
 import { VisitorProvider } from "@/contexts/VisitorContext";
@@ -487,7 +487,7 @@ function App() {
               <GlobalNav />
               <Router />
               <CookieConsentBanner />
-              <CookiePreferencesIcon />
+              <CookiePreferencesModal />
             </TooltipProvider>
           </VisitorProvider>
         </FeatureFlagProvider>

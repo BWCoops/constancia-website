@@ -17,8 +17,9 @@ import { useEffect, useRef, useState, lazy, Suspense } from "react";
 import { useLocation } from "wouter";
 import { useFeatureFlags } from "@/lib/feature-flags";
 import { preloadRoute } from "@/lib/preload";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, Cookie } from "lucide-react";
 import type { FeatureFlags } from "@shared/feature-flags";
+import { OPEN_COOKIE_PREFERENCES_EVENT } from "@/components/cookie-consent";
 
 // HeroFabricCanvas drags in three.js (~733 KB / ~190 KB gzip). It
 // only renders while the drawer is open, so lazy-load it — every
@@ -249,6 +250,21 @@ export function LibraryNavigation({ variant = "light" }: LibraryNavigationProps)
             })}
           </ol>
         </nav>
+
+        <div className="library-nav-drawer__footer">
+          <button
+            type="button"
+            className="library-nav-drawer__cookie"
+            onClick={() => {
+              setOpen(false);
+              window.dispatchEvent(new CustomEvent(OPEN_COOKIE_PREFERENCES_EVENT));
+            }}
+            data-testid="button-cookie-preferences"
+          >
+            <Cookie size={18} strokeWidth={1.6} aria-hidden="true" />
+            <span>Cookie Preferences</span>
+          </button>
+        </div>
       </aside>
     </>
   );
