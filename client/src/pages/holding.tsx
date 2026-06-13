@@ -163,6 +163,8 @@ export default function HoldingPage() {
 
         {/* Partners */}
         <div className="holding-partners" aria-label="Partners">
+          <span>AI Advisory</span>
+          <span className="holding-partners__sep" aria-hidden="true" />
           <span>OneStream</span>
           <span className="holding-partners__sep" aria-hidden="true" />
           <span>Abacum</span>

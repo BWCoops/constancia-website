@@ -784,6 +784,8 @@ div[class*="hs-chat"] {
   position: fixed;
   top: 0; right: 0;
   height: 100vh;
+  height: 100svh;
+  height: 100dvh;
   width: min(520px, 92vw);
   background: #F6F3EE;
   color: #12161D;
@@ -1772,11 +1774,23 @@ div[class*="hs-chat"] {
      bottom of the page, never overlapping the sticky inner. */
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
   position: relative;
 }
 .marketing-page > main { flex: 1 0 auto; }
 .marketing-page > footer { flex-shrink: 0; position: relative; z-index: 1; }
+
+/* iOS Safari fix: a plain 100vh reserves the *large* viewport (the
+   height with the toolbar hidden), so short pages render taller than
+   what's actually visible and leave a blank strip at the bottom once
+   the toolbar shows on newer iPhones. Re-map Tailwind's min-h-screen
+   utility to the dynamic viewport height so full-height pages match
+   the visible area. svh is the fallback for browsers without dvh. */
+.min-h-screen {
+  min-height: 100svh;
+  min-height: 100dvh;
+}
 .page-hero {
   position: relative;
   isolation: isolate;
@@ -1874,7 +1888,8 @@ div[class*="hs-chat"] {
   position: sticky;
   top: 0;
   width: 100%;
-  height: 100vh;
+  height: 100svh;
+  height: 100dvh;
   overflow: hidden;
   isolation: isolate;
 }
