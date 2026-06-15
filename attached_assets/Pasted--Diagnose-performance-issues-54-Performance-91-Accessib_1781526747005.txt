@@ -1,0 +1,228 @@
+
+Diagnose performance issues
+54
+Performance
+91
+Accessibility
+96
+Best Practices
+100
+SEO
+54
+FCP
++2
+LCP
++3
+TBT
++21
+CLS
++19
+SI
++8
+Performance
+Values are estimated and may vary. The performance score is calculated directly from these metrics.See calculator.
+0–49
+50–89
+90–100
+Final Screenshot
+
+Metrics
+Expand view
+First Contentful Paint
+4.0 s
+Largest Contentful Paint
+6.1 s
+Total Blocking Time
+370 ms
+Cumulative Layout Shift
+0.148
+Speed Index
+4.0 s
+Captured at Jun 15, 2026, 2:26 PM GMT+2
+Emulated Moto G Power with Lighthouse 13.3.0
+Single page session
+Initial page load
+Slow 4G throttling
+Using HeadlessChromium 146.0.7680.177 with lr
+View Treemap
+Screenshot
+Screenshot
+Screenshot
+Screenshot
+Screenshot
+Screenshot
+Screenshot
+Screenshot
+Show audits relevant to:
+
+All
+
+FCP
+
+LCP
+
+TBT
+
+CLS
+Insights
+Render-blocking requests Est savings of 150 ms
+Requests are blocking the page's initial render, which may delay LCP. Deferring or inlining can move these network requests out of the critical path.LCPFCPUnscored
+URL
+Transfer Size
+Duration
+constancia.io 1st party
+41.3 KiB	1,370 ms
+/assets/index-DCTPaq6I.css(constancia.io)
+41.3 KiB
+1,370 ms
+Improve image delivery Est savings of 40 KiB
+Reducing the download time of images can improve the perceived load time of the page and LCP. Learn more about optimizing image sizeLCPFCPUnscored
+URL
+Resource Size
+Est Savings
+constancia.io 1st party
+48.9 KiB	39.7 KiB
+Constancia
+<img src="https://constancia.io/assets/constancia-logo-dark-KApyFIZJ.webp" alt="Constancia">
+/assets/constancia-logo-dark-KApyFIZJ.webp(constancia.io)
+29.6 KiB
+25.4 KiB
+This image file is larger than it needs to be (1000x462) for its displayed dimensions (375x173). Use responsive images to reduce the image download size.
+25.4 KiB
+div.holding-page > main.holding-page__main > div.holding-film > video.holding-film__video
+<video class="holding-film__video" width="1080" height="1350" autoplay="" loop="" playsinline="" controls="" preload="auto" poster="/launch-film-poster.jpg" disablepictureinpicture="" disableremoteplayback="">
+/launch-film-poster.jpg(constancia.io)
+19.3 KiB
+14.3 KiB
+This image file is larger than it needs to be (1080x1350) for its displayed dimensions (548x685). Use responsive images to reduce the image download size.
+14.3 KiB
+These insights are also available in the Chrome DevTools Performance Panel - record a trace to view more detailed information.
+Diagnostics
+Reduce unused JavaScript Est savings of 440 KiB
+Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. Learn how to reduce unused JavaScript.LCPFCPUnscored
+URL
+Transfer Size
+Est Savings
+constancia.io 1st party
+293.0 KiB	201.9 KiB
+/assets/charts-oje0FMLI.js(constancia.io)
+111.4 KiB
+87.4 KiB
+/assets/radix-BwUT6vmX.js(constancia.io)
+93.5 KiB
+57.0 KiB
+/assets/motion-DbYU0XVC.js(constancia.io)
+38.1 KiB
+34.3 KiB
+/assets/index-NlsMF4KC.js(constancia.io)
+50.0 KiB
+23.1 KiB
+accounts.dev
+249.8 KiB	185.7 KiB
+…dist/ui-common_clerk.browser_dc50cf_5.125.13.js(skilled-rodent-33.clerk.accounts.dev)
+118.0 KiB
+84.2 KiB
+…dist/clerk.browser.js(skilled-rodent-33.clerk.accounts.dev)
+85.1 KiB
+57.3 KiB
+…dist/vendors_clerk.browser_dc50cf_5.125.13.js(skilled-rodent-33.clerk.accounts.dev)
+46.8 KiB
+44.2 KiB
+Google Tag Manager tag-manager 
+178.8 KiB	52.5 KiB
+/gtag/js?id=G-4YK3EC0B5Q(www.googletagmanager.com)
+178.8 KiB
+52.5 KiB
+Reduce unused CSS Est savings of 35 KiB
+Reduce unused rules from stylesheets and defer CSS not used for above-the-fold content to decrease bytes consumed by network activity. Learn how to reduce unused CSS.LCPFCPUnscored
+URL
+Transfer Size
+Est Savings
+constancia.io 1st party
+37.6 KiB	34.6 KiB
+/assets/index-DCTPaq6I.css(constancia.io)
+37.6 KiB
+34.6 KiB
+Minify JavaScript Est savings of 6 KiB
+Minifying JavaScript files can reduce payload sizes and script parse time. Learn how to minify JavaScript.LCPFCPUnscored
+URL
+Transfer Size
+Est Savings
+constancia.io 1st party
+14.4 KiB	6.0 KiB
+/assets/icons-6531Gy8B.js(constancia.io)
+14.4 KiB
+6.0 KiB
+More information about the performance of your application. These numbers don't directly affect the Performance score.
+Passed audits
+Show
+91
+Accessibility
+These checks highlight opportunities to improve the accessibility of your web app. Automatic detection can only detect a subset of issues and does not guarantee the accessibility of your web app, so manual testing is also encouraged.
+ARIA
+Elements use prohibited ARIA attributes
+Using ARIA attributes in roles where they are prohibited can mean that important information is not communicated to users of assistive technologies. Learn more about prohibited ARIA roles.
+Failing Elements
+Constancia launch film
+<div class="holding-film" aria-label="Constancia launch film">
+These are opportunities to improve the usage of ARIA in your application which may enhance the experience for users of assistive technology, like a screen reader.
+Contrast
+Background and foreground colors do not have a sufficient contrast ratio.
+Low-contrast text is difficult or impossible for many users to read. Learn how to provide sufficient color contrast.
+Failing Elements
+Accept All
+<button class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm fo…" data-testid="button-accept-all">
+These are opportunities to improve the legibility of your content.
+Navigation
+Heading elements are not in a sequentially-descending order
+Properly ordered headings that do not skip levels convey the semantic structure of the page, making it easier to navigate and understand when using assistive technologies. Learn more about heading order.
+Failing Elements
+We value your privacy
+<h3 class="text-lg font-semibold text-foreground mb-2">
+These are opportunities to improve keyboard navigation in your application.
+Audio and video
+<video> elements contain a <track> element with [kind="captions"]
+When a video provides a caption it is easier for deaf and hearing impaired users to access its information. Learn more about video captions.Unscored
+Failing Elements
+div.holding-page > main.holding-page__main > div.holding-film > video.holding-film__video
+<video class="holding-film__video" width="1080" height="1350" autoplay="" loop="" playsinline="" controls="" preload="auto" poster="/launch-film-poster.jpg" disablepictureinpicture="" disableremoteplayback="">
+These are opportunities to provide alternative content for audio and video. This may improve the experience for users with hearing or vision impairments.
+Best practices
+Uses ARIA roles only on compatible elements
+Many HTML elements can only be assigned certain ARIA roles. Using ARIA roles where they are not allowed can interfere with the accessibility of the web page. Learn more about ARIA roles.Unscored
+Failing Elements
+LIBRARY 00 Home Launch holding page. 01 Tools Comparison engine and Finance Com…
+<aside id="library-nav-drawer" class="library-nav-drawer " role="dialog" aria-modal="true" aria-label="Site navigation">
+These items highlight common accessibility best practices.
+Additional items to manually check (10)
+Show
+These items address areas which an automated testing tool cannot cover. Learn more in our guide on conducting an accessibility review.
+Passed audits (22)
+Show
+Not applicable (36)
+Show
+96
+Best Practices
+General
+Browser errors were logged to the console
+Trust and Safety
+Ensure CSP is effective against XSS attacks
+A strong Content Security Policy (CSP) significantly reduces the risk of cross-site scripting (XSS) attacks. Learn how to use a CSP to prevent XSSUnscored
+Description
+Directive
+Severity
+Host allowlists can frequently be bypassed. Consider using CSP nonces or hashes instead, along with `'strict-dynamic'` if necessary.
+script-src
+High
+`'unsafe-inline'` allows the execution of unsafe in-page scripts and event handlers. Consider using CSP nonces or hashes to allow scripts individually.
+script-src
+High
+Mitigate DOM-based XSS with Trusted Types
+The require-trusted-types-for directive in the Content-Security-Policy (CSP) header instructs user agents to control the data passed to DOM XSS sink functions. Learn more about mitigating DOM-based XSS with Trusted Types.Unscored
+Description
+Severity
+No `Content-Security-Policy` header with Trusted Types directive found
+High
+Browser Compatibility
+Baseline Features
+Lists web features used on the page and their Baseline status as of 2026-05-01. Learn more about Baseline.Unscored

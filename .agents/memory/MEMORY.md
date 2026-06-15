@@ -14,3 +14,4 @@
 - [Sound-on autoplay & unmute-on-gesture](autoplay-sound-user-activation.md) — unmuted autoplay can't be forced; unmute on first gesture, but bind to touchend/pointerup (NOT touchstart/pointerdown — they precede user-activation).
 - [Cookie consent controls & access point](cookie-consent-controls.md) — cookie rows use a green-tick checkbox (not Switch); prefs dialog opens via OPEN_COOKIE_PREFERENCES_EVENT from the nav drawer (LibraryNavigation), no floating FAB.
 - [iOS dynamic viewport](ios-dynamic-viewport.md) — plain 100vh hides bottom-anchored content (drawer cookie trigger, page footers) behind iOS chrome; use svh/dvh. Real menu = LibraryNavigation; navigation.tsx & HomeTicker are orphaned; / → holding.tsx.
+- [Holding page perf](holding-page-perf.md) — home LCP = preloaded launch-film poster; wordmark caps at 320px (asset only needs ~640px); recharts is code-split (charts chunk), NOT in home graph — charts.js on home = stale deploy/preload, not a leak.

@@ -119,7 +119,7 @@ export default function HoldingPage() {
         <div className="holding-wordmark">
           <picture>
             <source srcSet={constanciaLogoDarkWebp} type="image/webp" />
-            <img src={constanciaLogoDarkPng} alt="Constancia" />
+            <img src={constanciaLogoDarkPng} alt="Constancia" width={640} height={296} />
           </picture>
         </div>
 
@@ -141,7 +141,7 @@ export default function HoldingPage() {
             fall back to the MP4.) The poster JPEG is preloaded in
             index.html so it lights up the LCP slot without waiting on
             metadata. */}
-        <div className="holding-film" aria-label="Constancia launch film">
+        <div className="holding-film">
           <video
             ref={videoRef}
             className="holding-film__video"
@@ -154,15 +154,17 @@ export default function HoldingPage() {
             controls
             preload="auto"
             poster="/launch-film-poster.jpg"
+            aria-label="Constancia launch film"
             disablePictureInPicture
             disableRemotePlayback
           >
             <source src="/launch-film.mp4" type="video/mp4" />
+            <track kind="captions" src="/launch-film.vtt" srcLang="en" label="English" default />
           </video>
         </div>
 
         {/* Partners */}
-        <div className="holding-partners" aria-label="Partners">
+        <div className="holding-partners" role="group" aria-label="Partners">
           <span>AI Advisory</span>
           <span className="holding-partners__sep" aria-hidden="true" />
           <span>OneStream</span>

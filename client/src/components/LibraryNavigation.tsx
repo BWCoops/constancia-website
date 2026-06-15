@@ -68,7 +68,7 @@ export function LibraryNavigation({ variant = "light" }: LibraryNavigationProps)
   const [, navigate] = useLocation();
   const { flags } = useFeatureFlags();
   const triggerRef = useRef<HTMLButtonElement | null>(null);
-  const drawerRef = useRef<HTMLElement | null>(null);
+  const drawerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (!open) return;
@@ -155,7 +155,7 @@ export function LibraryNavigation({ variant = "light" }: LibraryNavigationProps)
           </Suspense>
         )}
       </div>
-      <aside
+      <div
         ref={drawerRef}
         id="library-nav-drawer"
         className={`library-nav-drawer ${open ? "is-open" : ""}`}
@@ -265,7 +265,7 @@ export function LibraryNavigation({ variant = "light" }: LibraryNavigationProps)
             <span>Cookie Preferences</span>
           </button>
         </div>
-      </aside>
+      </div>
     </>
   );
 }

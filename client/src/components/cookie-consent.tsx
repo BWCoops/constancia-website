@@ -155,7 +155,7 @@ export function CookiePreferencesModal() {
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-navy to-brand-teal flex items-center justify-center">
                   <Cookie className="w-5 h-5 text-brand-cyan" />
                 </div>
-                <h3 className="text-lg font-semibold text-foreground">Cookie Preferences</h3>
+                <h2 className="text-lg font-semibold text-foreground">Cookie Preferences</h2>
               </div>
               <button
                 onClick={() => setShowModal(false)}
@@ -301,9 +301,9 @@ export function CookieConsentBanner() {
             </div>
 
             <div className="flex-1">
-              <h3 className="text-lg font-semibold text-foreground mb-2">
+              <h2 className="text-lg font-semibold text-foreground mb-2">
                 We value your privacy
-              </h3>
+              </h2>
               <p className="text-sm text-muted-foreground mb-4">
                 We use cookies to enhance your browsing experience, analyse site traffic, and personalise content.
                 By clicking "Accept All", you consent to our use of cookies. You can manage your preferences below.
