@@ -83,7 +83,7 @@
 
     <!-- Font preloading removed: Google Fonts rotates CDN URLs across versions,
          causing stale preload links to 404 in production. The CSS stylesheet
-         handles font loading via display=swap which is sufficient. -->
+         handles font loading via display=optional (see below). -->
 
     <!-- Single sans family across the entire site: Noto Sans, weights
          300 (light body), 400 (regular), 500 (medium for accents and
@@ -91,9 +91,13 @@
          400 is kept for the small uppercase eyebrow labels — that's
          the only non-Noto family on the site. Inter and DM Sans have
          been dropped. Non-blocking via the media="print" / onload
-         swap so fonts never block first paint. -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet"></noscript>
+         swap so fonts never block first paint. display=optional (not
+         swap) so the fallback is locked in for the initial uncached
+         load instead of swapping mid-paint — that font swap was the
+         dominant source of CLS on the holding page. Cached repeat
+         visits still get Noto Sans. -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400&display=optional" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400&display=optional" rel="stylesheet"></noscript>
     
     <!-- Critical CSS for initial paint - prevents FOUC and improves FCP.
          Includes root variables, navigation, hero, and button styles

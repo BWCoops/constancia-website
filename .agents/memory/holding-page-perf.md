@@ -19,6 +19,17 @@ For perf work on the public home page (`/` → `client/src/pages/holding.tsx`):
   delayed route preload — not a missing split. `preloadHeavyRoutes()` is already a
   deliberate no-op; `preloadPriorityRoutes()` only warms `/contact` after ~8s.
 
+- **Holding-page CLS came from the web-font swap, not unsized elements.** The
+  wordmark has width/height, `.holding-film` has `aspect-ratio: 4/5`, the nav bar
+  (`.library-nav-bar`) and the cookie banner are `position: fixed`, and the footer
+  is text-only — all reserve space. The shift was Noto Sans loading async (via the
+  `media="print"`/onload trick) and reflowing the tagline/partners below first
+  paint. Fix: Google Fonts URL uses `display=optional` (NOT swap), so the fallback
+  is locked in for the initial uncached load. Don't flip it back to swap to "show
+  the brand font sooner" — that reintroduces the CLS. Cached visits still get Noto.
+
 **Why:** these saved repeated re-investigation during a Lighthouse pass.
-**How to apply:** start perf work from the poster + logo sizing; don't chase
-charts.js as if recharts leaked into the entry bundle.
+**How to apply:** start perf work from the poster + logo sizing; for CLS suspect
+the font swap first; don't chase charts.js as if recharts leaked into the entry
+bundle. Remember FCP/LCP are JS-gated (CSR SPA) — the preloaded poster can't paint
+until React mounts, so big LCP wins need SSR/prerender, not asset tweaks.
