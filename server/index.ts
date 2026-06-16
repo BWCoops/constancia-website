@@ -233,6 +233,19 @@ app.get("/sitemap.xml", async (req: Request, res: Response) => {
 // (comprehensive AI-bot rules, per-agent directives, and LLMs.txt pointer are maintained there)
 // Cloudflare additionally manages crawl policy at the edge.
 
+// Canonical host: redirect the www subdomain to the apex domain (301).
+// constancia.io is the canonical site; www.constancia.io must permanently
+// redirect there to avoid duplicate content and keep one canonical origin.
+// `trust proxy` is enabled, so req.hostname reflects the X-Forwarded-Host set
+// by Cloudflare/Replit; we still fall back to the Host header defensively.
+app.use((req: Request, res: Response, next: NextFunction) => {
+  const host = (req.hostname || req.headers.host || "").toLowerCase();
+  if (host === "www.constancia.io") {
+    return res.redirect(301, `https://constancia.io${req.originalUrl}`);
+  }
+  next();
+});
+
 // Trailing slash normalization - prevents duplicate content (SEO)
 // Redirects /about/ to /about (removes trailing slash)
 app.use((req: Request, res: Response, next: NextFunction) => {
