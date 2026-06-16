@@ -67,6 +67,9 @@ export default function HoldingPage() {
     };
 
     const unmuteOnGesture = (event: Event) => {
+      // The page is being torn down (e.g. the Clerk error boundary swapped
+      // the tree, or the route changed). Never resume a detached element.
+      if (disposed) return;
       // Ignore interactions with the film's own native controls
       // (pause / mute) so we never fight an explicit pause — only ambient
       // gestures elsewhere on the page enable sound.
@@ -107,6 +110,20 @@ export default function HoldingPage() {
     return () => {
       disposed = true;
       removeGestureListeners();
+      // Stop playback when this page unmounts. A <video> that is detached
+      // from the DOM can keep playing its audio until it is garbage
+      // collected in several browsers. If the tree is ever remounted — most
+      // notably when the Clerk error boundary fails over to its fallback
+      // <App /> for users whose browser blocks Clerk's JS — the old, still-
+      // playing soundtrack overlaps the new instance, producing a doubled,
+      // slightly-offset "overlay" of the launch film audio. Pausing here
+      // guarantees the audio stops with the element.
+      try {
+        video.pause();
+        video.muted = true;
+      } catch {
+        /* element already torn down */
+      }
     };
   }, []);
 
