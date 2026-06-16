@@ -3185,6 +3185,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
   });
   const userHasCustomWeights = useRef(false);
   const [expandedPlatform, setExpandedPlatform] = useState<string | null>(null);
+  const deepDivesRef = useRef<HTMLElement>(null);
   const [isExportingPDF, setIsExportingPDF] = useState(false);
   const [isExportingExcel, setIsExportingExcel] = useState(false);
   const [exportModalOpen, setExportModalOpen] = useState(false);
@@ -3292,6 +3293,31 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
         ? prev.filter((id) => id !== platformId)
         : [...prev, platformId];
     });
+  }, [categoryType, trackComparisonEvent]);
+
+  // "View Details" (mobile carousel) reveals a platform's analysis in the
+  // Platform Deep Dives section. That section only renders SELECTED platforms,
+  // so we must ensure the platform is selected before expanding it — otherwise
+  // tapping "View Details" on an unselected platform does nothing visible.
+  const handleViewDetails = useCallback((platformId: string) => {
+    setSelectedPlatforms((prev) => {
+      if (prev.includes(platformId)) return prev;
+      // Keep selection analytics consistent with handlePlatformToggle.
+      trackComparisonEvent("vendor_toggled", {
+        category: categoryType,
+        vendorId: platformId,
+        action: "added",
+      });
+      return [...prev, platformId];
+    });
+    setExpandedPlatform(platformId);
+    // Wait for the (possibly newly added) deep-dive card to render, then
+    // bring the section into view so the user sees the details appear.
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => {
+        deepDivesRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }),
+    );
   }, [categoryType, trackComparisonEvent]);
 
   const handleWeightChange = useCallback((categoryId: string, value: number[]) => {
@@ -4729,7 +4755,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
             platforms={platforms}
             selectedPlatforms={selectedPlatforms}
             onPlatformToggle={handlePlatformToggle}
-            onViewDetails={(platformId) => setExpandedPlatform(expandedPlatform === platformId ? null : platformId)}
+            onViewDetails={handleViewDetails}
             fitResults={fitResults ?? undefined}
             bestFitPlatform={bestFitPlatform}
             calculatedScores={calculatedScores}
@@ -6052,7 +6078,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
         </Collapsible>
       </section>
 
-      <section className="py-8">
+      <section className="py-8 scroll-mt-20" ref={deepDivesRef}>
         <div className="flex flex-col md:flex-row md:items-center gap-4 mb-8">
           <div className="flex items-center gap-3 flex-1">
             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#12161D] to-[#8E4F67] flex items-center justify-center">
