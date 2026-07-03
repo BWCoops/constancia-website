@@ -4188,6 +4188,107 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
               </div>
             </div>
             
+            {categoryType === 'ai' ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+                <div className="space-y-1.5 sm:space-y-2">
+                  <label className="text-xs sm:text-sm font-medium flex items-center gap-2">
+                    <Database className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand-teal" />
+                    Current ERP / Finance System
+                    <span className="text-red-500">*</span>
+                  </label>
+                  <Select
+                    value={aiCompanyProfile.erpLandscape || ""}
+                    onValueChange={(value) => setAICompanyProfile(prev => ({ ...prev, erpLandscape: (value || null) as AICompanyProfile['erpLandscape'] }))}
+                  >
+                    <SelectTrigger className="w-full h-9 sm:h-10 text-sm" data-testid="wizard-select-ai-erp">
+                      <SelectValue placeholder="Select ERP" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {erpLandscapeOptions.map(option => (
+                        <SelectItem key={option.id} value={option.id}>{option.label}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-1.5 sm:space-y-2">
+                  <label className="text-xs sm:text-sm font-medium flex items-center gap-2">
+                    <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand-teal" />
+                    Company Size
+                    <span className="text-red-500">*</span>
+                  </label>
+                  <Select
+                    value={aiCompanyProfile.companySize || ""}
+                    onValueChange={(value) => setAICompanyProfile(prev => ({ ...prev, companySize: (value || null) as AICompanyProfile['companySize'] }))}
+                  >
+                    <SelectTrigger className="w-full h-9 sm:h-10 text-sm" data-testid="wizard-select-ai-size">
+                      <SelectValue placeholder="Select size" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {companySizeOptions.map(option => (
+                        <SelectItem key={option.id} value={option.id}>{option.label}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-1.5 sm:space-y-2">
+                  <label className="text-xs sm:text-sm font-medium flex items-center gap-2">
+                    <Globe className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand-teal" />
+                    Primary Industry
+                    <span className="text-red-500">*</span>
+                  </label>
+                  <Select
+                    value={aiCompanyProfile.industry || ""}
+                    onValueChange={(value) => setAICompanyProfile(prev => ({ ...prev, industry: value || null }))}
+                  >
+                    <SelectTrigger className="w-full h-9 sm:h-10 text-sm" data-testid="wizard-select-ai-industry">
+                      <SelectValue placeholder="Select industry" />
+                    </SelectTrigger>
+                    <SelectContent className="max-h-[300px]">
+                      {industries.map((ind) => (
+                        <SelectItem key={ind.id} value={ind.id}>{ind.label}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-1.5 sm:space-y-2">
+                  <label className="text-xs sm:text-sm font-medium flex items-center gap-2">
+                    <Layers className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand-teal" />
+                    Technology Stack
+                  </label>
+                  <Select
+                    value={aiCompanyProfile.techStack || ""}
+                    onValueChange={(value) => setAICompanyProfile(prev => ({ ...prev, techStack: (value || null) as AICompanyProfile['techStack'] }))}
+                  >
+                    <SelectTrigger className="w-full h-9 sm:h-10 text-sm" data-testid="wizard-select-ai-stack">
+                      <SelectValue placeholder="Select stack (optional)" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {techStackOptions.map(option => (
+                        <SelectItem key={option.id} value={option.id}>{option.label}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-1.5 sm:space-y-2">
+                  <label className="text-xs sm:text-sm font-medium flex items-center gap-2">
+                    <Target className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand-teal" />
+                    Finance Focus
+                  </label>
+                  <Select
+                    value={aiCompanyProfile.financeFocus || ""}
+                    onValueChange={(value) => setAICompanyProfile(prev => ({ ...prev, financeFocus: (value || null) as AICompanyProfile['financeFocus'] }))}
+                  >
+                    <SelectTrigger className="w-full h-9 sm:h-10 text-sm" data-testid="wizard-select-ai-focus">
+                      <SelectValue placeholder="Select focus (optional)" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="high">High (Finance-first AI)</SelectItem>
+                      <SelectItem value="balanced">Balanced (General purpose)</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
               <div className="space-y-1.5 sm:space-y-2">
                 <label className="text-xs sm:text-sm font-medium flex items-center gap-2">
@@ -4263,6 +4364,7 @@ function ComparisonSection({ platforms, categories, featureComparison, categoryT
                 </Select>
               </div>
             </div>
+            )}
             <Button 
               onClick={handleViewRecommendations} 
               className="w-full bg-[#7FB8A3] text-[#12161D]"
