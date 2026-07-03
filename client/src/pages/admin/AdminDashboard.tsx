@@ -196,7 +196,7 @@ function StatsCard({
           </div>
         )}
         {description && (
-          <p className="text-xs text-muted-foreground mt-1">{description}</p>
+          <p className="text-sm text-muted-foreground mt-1">{description}</p>
         )}
       </CardContent>
     </Card>

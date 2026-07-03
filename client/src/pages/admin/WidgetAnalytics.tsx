@@ -3174,7 +3174,7 @@ export default function WidgetAnalytics() {
                 {selectedEvent.finalScore !== null && (
                   <div>
                     <h4 className="text-sm font-medium mb-2">Score</h4>
-                    <p className="text-2xl font-semibold text-[#12161D]">{selectedEvent.finalScore}%</p>
+                    <p className="text-2xl font-semibold text-foreground">{selectedEvent.finalScore}%</p>
                   </div>
                 )}
 

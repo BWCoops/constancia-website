@@ -50,7 +50,7 @@ export function FCAdminTopNav() {
           data-testid="link-back-admin-hub"
         >
           <ChevronLeft className="h-4 w-4" />
-          <span className="text-xs hidden sm:inline">Hub</span>
+          <span className="text-sm hidden sm:inline">Hub</span>
         </Link>
         <div className="flex items-center gap-1.5 sm:gap-2 py-3 pr-2 sm:pr-4 border-r mr-1 sm:mr-2 shrink-0">
           <motion.div
@@ -76,7 +76,7 @@ export function FCAdminTopNav() {
                 key={item.url}
                 href={item.url}
                 className={`
-                  flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium
+                  flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 rounded-md text-sm font-medium
                   transition-colors whitespace-nowrap shrink-0
                   ${isActive 
                     ? "bg-[#7FB8A3]/10 text-[#7FB8A3] border border-[#7FB8A3]/20" 

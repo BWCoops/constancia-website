@@ -46,8 +46,8 @@ const SEVERITY_CONFIG: Record<InsightSeverity, {
     label: "Working well",
   },
   [INSIGHT_SEVERITY.INFO]: {
-    borderClass: "border-l-4 border-l-[#12161D]/40",
-    badgeClass: "bg-[#12161D]/60 text-white",
+    borderClass: "border-l-4 border-l-[#D8D0C6]/50",
+    badgeClass: "bg-muted text-foreground",
     icon: Info,
     label: "Info",
   },
@@ -73,7 +73,7 @@ function InsightCard({ insight, onAcknowledge, onDismiss }: InsightCardProps) {
               <Badge className={config.badgeClass} variant="default">
                 {config.label}
               </Badge>
-              <h3 className="text-base font-medium text-[#12161D] mt-1.5">{insight.headline}</h3>
+              <h3 className="text-base font-medium text-foreground mt-1.5">{insight.headline}</h3>
             </div>
           </div>
           <div className="flex gap-1 flex-shrink-0">
@@ -100,21 +100,21 @@ function InsightCard({ insight, onAcknowledge, onDismiss }: InsightCardProps) {
           </div>
         </div>
 
-        <p className="text-sm text-[#12161D] leading-relaxed">{insight.detail}</p>
+        <p className="text-sm text-foreground leading-relaxed">{insight.detail}</p>
 
-        <div className="bg-[#F6F3EE] rounded p-3 text-sm">
-          <div className="font-medium text-[#12161D] mb-1">Recommended action</div>
-          <div className="text-[#12161D] leading-relaxed">{insight.recommendedAction}</div>
+        <div className="bg-muted rounded p-3 text-sm">
+          <div className="font-medium text-foreground mb-1">Recommended action</div>
+          <div className="text-foreground leading-relaxed">{insight.recommendedAction}</div>
         </div>
 
         {Object.keys(insight.metrics).length > 0 && (
-          <details className="text-xs">
-            <summary className="cursor-pointer text-[#12161D]/70 hover:text-[#12161D]">Underlying metrics</summary>
+          <details className="text-sm">
+            <summary className="cursor-pointer text-muted-foreground hover:text-foreground">Underlying metrics</summary>
             <dl className="mt-2 grid grid-cols-2 gap-x-4 gap-y-1">
               {Object.entries(insight.metrics).map(([k, v]) => (
                 <div key={k} className="contents">
-                  <dt className="text-[#12161D]/60 truncate">{k}</dt>
-                  <dd className="text-[#12161D] font-mono">{String(v)}</dd>
+                  <dt className="text-muted-foreground truncate">{k}</dt>
+                  <dd className="text-foreground font-mono">{String(v)}</dd>
                 </div>
               ))}
             </dl>
@@ -124,7 +124,7 @@ function InsightCard({ insight, onAcknowledge, onDismiss }: InsightCardProps) {
         {insight.link && (
           <a
             href={insight.link.href}
-            className="inline-flex items-center gap-1 text-sm text-[#8E4F67] hover:underline"
+            className="inline-flex items-center gap-1 text-sm text-[#C77A93] hover:underline"
           >
             {insight.link.label}
             <ArrowRight className="h-3.5 w-3.5" />
@@ -184,7 +184,7 @@ export function InsightsPanel({ filterByHref, limit = 6 }: InsightsPanelProps) {
       <CardHeader className="flex flex-row items-center justify-between space-y-0">
         <div>
           <CardTitle className="text-lg">What needs your attention</CardTitle>
-          <p className="text-xs text-[#12161D]/60 mt-0.5">
+          <p className="text-sm text-muted-foreground mt-0.5">
             Ranked by severity. Refreshed nightly at 02:30 UTC and on demand.
           </p>
         </div>
@@ -200,9 +200,9 @@ export function InsightsPanel({ filterByHref, limit = 6 }: InsightsPanelProps) {
         </Button>
       </CardHeader>
       <CardContent className="space-y-3">
-        {isLoading && <p className="text-sm text-[#12161D]/60">Loading insights…</p>}
+        {isLoading && <p className="text-sm text-muted-foreground">Loading insights…</p>}
         {!isLoading && visible.length === 0 && (
-          <p className="text-sm text-[#12161D]/60">
+          <p className="text-sm text-muted-foreground">
             No active insights. Either everything's healthy or we're still gathering enough
             data to generate signals. Insights refresh nightly.
           </p>
@@ -216,7 +216,7 @@ export function InsightsPanel({ filterByHref, limit = 6 }: InsightsPanelProps) {
           />
         ))}
         {overflow > 0 && (
-          <p className="text-xs text-[#12161D]/60 text-center pt-1">
+          <p className="text-sm text-muted-foreground text-center pt-1">
             +{overflow} more insight{overflow === 1 ? "" : "s"} below the fold (refresh page to load more).
           </p>
         )}

@@ -4242,7 +4242,7 @@ function MarketingAssetsContent() {
           
           <div>
             <h3 className="font-semibold mb-4 flex items-center gap-2">
-              <Globe className="h-5 w-5 text-[#12161D]" />
+              <Globe className="h-5 w-5 text-foreground" />
               Website & Email
             </h3>
             <div className="grid gap-6 md:grid-cols-2">
@@ -4261,7 +4261,7 @@ function MarketingAssetsContent() {
             <CardContent className="py-6">
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-lg bg-brand-navy/10">
-                  <Palette className="h-6 w-6 text-[#12161D]" />
+                  <Palette className="h-6 w-6 text-foreground" />
                 </div>
                 <div>
                   <h3 className="font-medium mb-1">Your Brand Tagline</h3>
@@ -4486,7 +4486,7 @@ function MarketingAssetsContent() {
             <CardContent className="py-6">
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-lg bg-brand-navy/10">
-                  <Globe className="h-6 w-6 text-[#12161D]" />
+                  <Globe className="h-6 w-6 text-foreground" />
                 </div>
                 <div>
                   <h3 className="font-medium mb-1">Website Hero Banner Guidelines</h3>
@@ -4601,7 +4601,7 @@ function MarketingAssetsContent() {
 
           <div>
             <h3 className="font-semibold mb-4 flex items-center gap-2">
-              <Globe className="h-5 w-5 text-[#12161D]" />
+              <Globe className="h-5 w-5 text-foreground" />
               Website Videos
             </h3>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -4620,7 +4620,7 @@ function MarketingAssetsContent() {
             <CardContent className="py-6">
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-lg bg-brand-navy/10">
-                  <Video className="h-6 w-6 text-[#12161D]" />
+                  <Video className="h-6 w-6 text-foreground" />
                 </div>
                 <div>
                   <h3 className="font-medium mb-1">Video Generation Guidelines</h3>

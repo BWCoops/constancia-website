@@ -342,9 +342,9 @@ function ContentQualityContent() {
                                 <Badge className={SEVERITY_BADGE[issue.severity]}>{issue.severity}</Badge>
                                 <span className="text-xs text-muted-foreground">{issue.kind.replace(/_/g, " ")}</span>
                               </div>
-                              <div className="text-sm text-[#12161D]">{issue.message}</div>
+                              <div className="text-sm text-foreground">{issue.message}</div>
                               {issue.excerpt && (
-                                <div className="mt-1.5 text-xs italic text-muted-foreground bg-[#F6F3EE] rounded p-2">
+                                <div className="mt-1.5 text-sm italic text-[#12161D]/70 bg-[#F6F3EE] rounded p-2">
                                   …{issue.excerpt}…
                                 </div>
                               )}

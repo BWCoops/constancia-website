@@ -188,7 +188,6 @@ export default function ComparisonToolsAnalytics() {
             <TabsTrigger 
               value="EPM" 
               data-testid="tab-epm"
-              className="data-[state=active]:text-[#12161D]"
               style={{ "--tw-ring-color": "#7FB8A3" } as React.CSSProperties}
             >
               <span className="flex items-center gap-1.5">
@@ -199,7 +198,6 @@ export default function ComparisonToolsAnalytics() {
             <TabsTrigger 
               value="ERP" 
               data-testid="tab-erp"
-              className="data-[state=active]:text-[#12161D]"
               style={{ "--tw-ring-color": "#8E4F67" } as React.CSSProperties}
             >
               <span className="flex items-center gap-1.5">

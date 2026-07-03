@@ -391,7 +391,7 @@ function LeadsContent() {
                       {lead.firstName} {lead.lastName}
                     </TableCell>
                     <TableCell data-testid={`text-lead-email-${lead.id}`}>
-                      <span className="font-mono text-sm">{lead.email}</span>
+                      <span className="text-sm">{lead.email}</span>
                     </TableCell>
                     <TableCell data-testid={`text-lead-company-${lead.id}`}>
                       {lead.company || <span className="text-muted-foreground">-</span>}
@@ -521,7 +521,7 @@ function LeadsContent() {
                   <Mail className="h-4 w-4 mt-1 text-muted-foreground" />
                   <div>
                     <p className="text-sm text-muted-foreground">Email</p>
-                    <p className="font-medium font-mono text-sm" data-testid="text-detail-email">
+                    <p className="font-medium text-sm" data-testid="text-detail-email">
                       {selectedLead.email}
                     </p>
                   </div>
