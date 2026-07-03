@@ -15,4 +15,5 @@
 - [Cookie consent controls & access point](cookie-consent-controls.md) — cookie rows use a green-tick checkbox (not Switch); prefs dialog opens via OPEN_COOKIE_PREFERENCES_EVENT from the nav drawer (LibraryNavigation), no floating FAB.
 - [iOS dynamic viewport](ios-dynamic-viewport.md) — plain 100vh hides bottom-anchored content (drawer cookie trigger, page footers) behind iOS chrome; use svh/dvh. Real menu = LibraryNavigation; navigation.tsx & HomeTicker are orphaned; / → holding.tsx.
 - [Video edge blending](video-edge-blending.md) — frameless video = alpha-mask the video's own pixels (radial mask-image); ink-coloured inset shadows over a mismatched navy cause banding/rings.
+- [Launch film versioning](launch-film-versioning.md) — film mp4 is cached immutable 1y; every edit needs a new launch-film-vN.mp4 filename; current v4 ends on logo+wordmark (caption removed, its wipe reveal clipped letters).
 - [Holding page perf](holding-page-perf.md) — home LCP = preloaded launch-film poster; wordmark caps at 320px (asset only needs ~640px); recharts is code-split (charts chunk), NOT in home graph — charts.js on home = stale deploy/preload, not a leak.

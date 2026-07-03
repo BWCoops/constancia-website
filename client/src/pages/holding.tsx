@@ -221,7 +221,7 @@ export default function HoldingPage() {
             }}
             data-testid="video-launch-film"
           >
-            <source src="/launch-film.mp4" type="video/mp4" />
+            <source src="/launch-film-v4.mp4" type="video/mp4" />
             <track kind="captions" src="/launch-film.vtt" srcLang="en" label="English" default />
           </video>
           <div className="holding-film__controls">

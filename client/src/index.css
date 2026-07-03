@@ -2781,10 +2781,11 @@ body.is-holding-page {
   display: block;
   cursor: pointer;
   /* Smooth two-stop radial alpha fade — fully opaque through the
-     middle 68%, then one continuous dissolve to transparent at the
-     rectangle's edges/corners. */
-  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 55%, transparent 99%);
-  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 55%, transparent 99%);
+     centre (covering the end-card caption low in the frame), with a
+     dissolve confined to the outer edges/corners so no lettering is
+     ever dimmed or cut off. */
+  -webkit-mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, #000 78%, transparent 100%);
+  mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, #000 78%, transparent 100%);
 }
 /* Minimal play/pause + sound toggles — replace the native control bar.
    Keyboard-focusable buttons above the edge feather; 44px hit areas. */
