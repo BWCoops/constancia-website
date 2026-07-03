@@ -2745,22 +2745,18 @@ body.is-holding-page {
   padding: clamp(32px, 6vh, 72px) clamp(16px, 4vw, 28px);
 }
 
-/* Launch film — sits between tagline and email form. Slight frame +
-   soft outer glow so it reads as a deliberate inset rather than a
-   pasted-on rectangle. */
-/* Launch film — sit it into the page rather than pasting on top.
-   No padded frame, no hard rim. The video has its own corner
-   radius and gets a wide, diffused halo behind it (rose + mint at
-   low opacity) that bleeds into the page background, so the eye
-   reads the film as part of the canvas. The drop-shadow is large
-   and very soft — enough to lift it without making it feel like a
-   sticker. */
+/* Launch film — frameless. No native controls, no corner radius, no
+   drop shadow: the film is treated as ambient page content, not a
+   player. A wide diffused halo (rose + mint) sits behind it, and an
+   ::after overlay feathers the film's edges with an inset shadow in
+   the page ink (#12161D), so the rectangle melts into the canvas.
+   Inset box-shadow is used (rather than CSS masks) because it works
+   on every browser/device with zero prefixes or fallbacks. */
 .holding-film {
   position: relative;
   width: 100%;
   max-width: clamp(280px, 76vw, 440px);
   aspect-ratio: 4 / 5;
-  border-radius: 22px;
   margin: clamp(8px, 1.6vh, 18px) auto;
   isolation: isolate;
 }
@@ -2775,15 +2771,53 @@ body.is-holding-page {
   filter: blur(34px);
   pointer-events: none;
 }
+/* Edge feather: melts the film's rectangle into the page background. */
+.holding-film::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  box-shadow:
+    inset 0 0 clamp(24px, 6vw, 44px) clamp(10px, 2.5vw, 18px) #12161D,
+    inset 0 0 clamp(56px, 13vw, 110px) clamp(20px, 5vw, 38px) rgba(18, 22, 29, 0.72);
+}
 .holding-film__video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  border-radius: 22px;
-  box-shadow:
-    0 30px 80px -28px rgba(0,0,0,0.55),
-    0 12px 30px -18px rgba(0,0,0,0.35);
+  cursor: pointer;
+}
+/* Minimal play/pause + sound toggles — replace the native control bar.
+   Keyboard-focusable buttons above the edge feather; 44px hit areas. */
+.holding-film__controls {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 2;
+  display: flex;
+  gap: 8px;
+}
+.holding-film__control {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(246, 243, 238, 0.18);
+  background: rgba(18, 22, 29, 0.55);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: #F6F3EE;
+  cursor: pointer;
+  opacity: 0.75;
+  transition: opacity 160ms ease;
+}
+.holding-film__control:hover,
+.holding-film__control:focus-visible {
+  opacity: 1;
 }
 
 .holding-wordmark { display: flex; justify-content: center; }

@@ -7,7 +7,8 @@
  * needed here.
  */
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Pause, Play, Volume2, VolumeX } from "lucide-react";
 import { SEOHead } from "@/components/seo-head";
 import { Footer } from "@/components/footer";
 import constanciaLogoDarkWebp from "@assets/constancia-logo-dark.webp";
@@ -30,6 +31,11 @@ const SEO = {
 
 export default function HoldingPage() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [muted, setMuted] = useState(true);
+  const [playing, setPlaying] = useState(true);
+  // Once the user touches the sound toggle, sound is theirs: ambient
+  // gesture-unmute must never fight an explicit mute afterwards.
+  const userSoundIntentRef = useRef(false);
 
   useEffect(() => {
     document.body.classList.add("is-holding-page");
@@ -70,11 +76,23 @@ export default function HoldingPage() {
       // The page is being torn down (e.g. the Clerk error boundary swapped
       // the tree, or the route changed). Never resume a detached element.
       if (disposed) return;
-      // Ignore interactions with the film's own native controls
-      // (pause / mute) so we never fight an explicit pause — only ambient
-      // gestures elsewhere on the page enable sound.
+      // Ignore interactions with the film itself (tap = play/pause) and
+      // the sound toggle (explicit mute control) so we never fight an
+      // explicit user choice — only ambient gestures elsewhere on the
+      // page enable sound.
+      if (userSoundIntentRef.current) {
+        // User has taken explicit control of sound — retire ambient
+        // unmute entirely for this page session.
+        removeGestureListeners();
+        return;
+      }
       const target = event.target as Node | null;
       if (target && (target === video || video.contains(target))) return;
+      if (
+        target instanceof Element &&
+        target.closest(".holding-film__controls")
+      )
+        return;
       video.muted = false;
       video.volume = 1;
       video.play().then(
@@ -105,11 +123,28 @@ export default function HoldingPage() {
       );
     };
 
+    // Keep the sound-toggle icon in sync with the element's real state,
+    // regardless of whether mute changes came from autoplay fallback,
+    // ambient-gesture unmute, or the button itself.
+    const onVolumeChange = () => setMuted(video.muted);
+    const onPlay = () => setPlaying(true);
+    const onPause = () => setPlaying(false);
+    video.addEventListener("volumechange", onVolumeChange);
+    video.addEventListener("play", onPlay);
+    video.addEventListener("pause", onPause);
+    // Reflect the real element state on mount (e.g. autoplay blocked
+    // entirely → film starts paused and the button must show "Play").
+    setMuted(video.muted);
+    setPlaying(!video.paused);
+
     void start();
 
     return () => {
       disposed = true;
       removeGestureListeners();
+      video.removeEventListener("volumechange", onVolumeChange);
+      video.removeEventListener("play", onPlay);
+      video.removeEventListener("pause", onPause);
       // Stop playback when this page unmounts. A <video> that is detached
       // from the DOM can keep playing its audio until it is garbage
       // collected in several browsers. If the tree is ever remounted — most
@@ -157,7 +192,12 @@ export default function HoldingPage() {
             because mobile decoders can't play it and browsers wouldn't
             fall back to the MP4.) The poster JPEG is preloaded in
             index.html so it lights up the LCP slot without waiting on
-            metadata. */}
+            metadata.
+
+            Frameless: native controls are removed so no browser player
+            chrome is drawn. Tapping the film toggles play/pause (WCAG
+            2.2.2 pause control) and a minimal overlay button toggles
+            sound. */}
         <div className="holding-film">
           <video
             ref={videoRef}
@@ -168,16 +208,73 @@ export default function HoldingPage() {
             muted
             loop
             playsInline
-            controls
             preload="auto"
             poster="/launch-film-poster.jpg"
-            aria-label="Constancia launch film"
+            aria-label="Constancia launch film — tap to play or pause"
             disablePictureInPicture
             disableRemotePlayback
+            onClick={() => {
+              const v = videoRef.current;
+              if (!v) return;
+              if (v.paused) v.play().catch(() => {});
+              else v.pause();
+            }}
+            data-testid="video-launch-film"
           >
             <source src="/launch-film.mp4" type="video/mp4" />
             <track kind="captions" src="/launch-film.vtt" srcLang="en" label="English" default />
           </video>
+          <div className="holding-film__controls">
+            <button
+              type="button"
+              className="holding-film__control"
+              aria-label={playing ? "Pause launch film" : "Play launch film"}
+              data-testid="button-play-toggle"
+              onClick={() => {
+                const v = videoRef.current;
+                if (!v) return;
+                if (v.paused) v.play().catch(() => {});
+                else v.pause();
+              }}
+            >
+              {playing ? (
+                <Pause size={18} aria-hidden="true" />
+              ) : (
+                <Play size={18} aria-hidden="true" />
+              )}
+            </button>
+            <button
+              type="button"
+              className="holding-film__control"
+              aria-label={muted ? "Unmute launch film" : "Mute launch film"}
+              data-testid="button-sound-toggle"
+              onClick={() => {
+                const v = videoRef.current;
+                if (!v) return;
+                // Sound is now under explicit user control — ambient
+                // gesture-unmute is retired for this session.
+                userSoundIntentRef.current = true;
+                if (v.muted) {
+                  v.muted = false;
+                  v.volume = 1;
+                  v.play().catch(() => {
+                    // Browser refused unmuted playback (no user activation
+                    // yet, e.g. programmatic click) — stay muted.
+                    v.muted = true;
+                    v.play().catch(() => {});
+                  });
+                } else {
+                  v.muted = true;
+                }
+              }}
+            >
+              {muted ? (
+                <VolumeX size={18} aria-hidden="true" />
+              ) : (
+                <Volume2 size={18} aria-hidden="true" />
+              )}
+            </button>
+          </div>
         </div>
 
         {/* Partners */}
