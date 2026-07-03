@@ -56,7 +56,7 @@ export const aiPlatformContextMap: Record<string, AIPlatformContext> = {
     deploymentEase: "plug-and-play",
   },
   "claude-enterprise": {
-    stackAffinity: { microsoft: "neutral", google: "neutral", aws: "neutral", linux: "neutral" },
+    stackAffinity: { microsoft: "neutral", google: "strong", aws: "strong", linux: "neutral" },
     erpAffinity: { oracle: "custom", sap: "custom", dynamics365: "custom", netsuite: "custom", workday: "custom", sage: "custom" },
     industryFit: { manufacturing: "medium", financial: "high", retail: "medium", healthcare: "high", services: "high", technology: "high" },
     scaleFit: { sme: "high", midmarket: "high", enterprise: "high" },
